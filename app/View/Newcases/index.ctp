@@ -6,25 +6,14 @@
 				         	
 				            <!-- Upload image -->
 				        	<div class="qbox">
-				            	<h3><i class="icon-eye-open pull-right"></i>Upload image</h3>
-				                <p>Register your criteria and Property Alert will let you know when properties are listed.</p>
-				                <div>
-				                	<form class="image-upload">
-										<fieldset>
-
-										<!-- image upload -->
-
-										<!-- File Button --> 
-										<div class="control-group">
-										  <label class="control-label" for="img-upload"></label>
-										  <div class="controls">
-										    <input id="img-upload" name="img-upload" class="input-file" type="file">
-										  </div>
-										</div>
-										</fieldset>
-										</form>
-									<img src='http://placehold.it/148x129/E37F14/FFFFFF' alt='Placeholder Image'>	
-				                    <button class="btn btn-small">Add to Canvas</button>
+				            	<h3><i class="icon-eye-open pull-right"></i>IMAGE TOOLS</h3>
+				                
+				                <div class="tools">
+						    <div id="uploader">
+							<div id="filelist"></div>
+							<a href="javascript:" id="pickfiles" class="btn btn-small">Add Your Picture</a> 
+							<a id="uploadfiles" class="btn" href="javascript:;">Start</a>
+						    </div>
 				                </div>
 				            </div>
 				            <!-- end zone alert -->
@@ -257,3 +246,78 @@
 			<!-- end body-text -->
 		</section>
 		<!-- end section -->
+		
+<!-- plupload -->
+<script type="text/javascript" src="http://bp.yahooapis.com/2.4.21/browserplus-min.js"></script>
+
+<script type="text/javascript" src="js/pluploader/plupload.js"></script>
+<script type="text/javascript" src="js/pluploader/plupload.gears.js"></script>
+<script type="text/javascript" src="js/pluploader/plupload.silverlight.js"></script>
+<script type="text/javascript" src="js/pluploader/plupload.flash.js"></script>
+<script type="text/javascript" src="js/pluploader/plupload.browserplus.js"></script>
+<script type="text/javascript" src="js/pluploader/plupload.html4.js"></script>
+<script type="text/javascript" src="js/pluploader/plupload.html5.js"></script>
+
+<script type="text/javascript">
+            // Custom example logic
+    function $(id) {
+	return document.getElementById(id);
+    }
+    
+    var uploader = new plupload.Uploader({
+	runtimes: 'gears,html5,flash,browserplus',
+	browse_button: 'pickfiles',
+	container: 'uploader',
+	max_file_size: '100mb',
+	url: 'upload.php',
+	multi_selection: false,
+	resize: {width: 320, height: 240, quality: 90},
+	flash_swf_url: 'js/uploader/plupload.flash.swf',
+	//silverlight_xap_url : 'js/uploader/plupload.silverlight.xap',
+	filters: [
+	    {title: "Excel files", extensions: "png,jpeg,jpg,gif,bmp"}
+	]
+    });
+    
+    uploader.bind('Init', function(up, params) {
+	//$('filelist').innerHTML = "<div>Current runtime: " + params.runtime + "</div>";
+    });
+    
+    uploader.init();
+    
+    uploader.bind('FilesAdded', function(up, files) {
+    
+	console.log ("hello");
+	if (uploader.files.length == 2) {
+	    uploader.removeFile(uploader.files[0]);
+	}
+	
+	for (var i in files) {
+	    document.getElementById('filelist').innerHTML = '<div id="' + files[i].id + '">' + files[i].name + ' (' + plupload.formatSize(files[i].size) + ') <b></b></div><div class="progress"><div class="bar" id="progress-bar" style="width: 0%;"></div></div>';
+	}
+    });
+    
+    uploader.bind('UploadProgress', function(up, file) {
+	//$(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
+	jQuery('#progress-bar').css('width', file.percent + "%");
+    });
+    
+    uploader.bind('FileUploaded', function(up, file, response) {
+	plupload.each(response, function(value, key) {
+    
+	    if (key == 'response') {
+		if (value == "0") {
+		} else {
+		    ajax_process ("process.php", value);
+		}
+	    }
+	});
+    
+	//alert($.parseJSON(response.response).result);
+    });
+    
+    $('uploadfiles').onclick = function() {
+	uploader.start();
+	return false;
+    };	
+</script>
