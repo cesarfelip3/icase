@@ -60,17 +60,17 @@
 							<!-- end page title -->
 							
 							<!--start Canvas-->
-							<canvas class="upper-canvas " style="border: 1px solid rgb(170, 170, 170); width: 453px; height: 500px; left: 0px; top: 0px; -moz-user-select: none; cursor: crosshair;" width="500" height="500"></canvas>							
+							<canvas class="upper-canvas " style="border: 1px solid rgb(170, 170, 170); left: 0px; top: 0px; -moz-user-select: none; cursor: crosshair;" width="450" height="450" id="c1"></canvas>							
 							<!--end Canvas-->	
-							<button id="singlebutton" name="singlebutton" class="btn btn-info">Add Text</button>
-							<button id="singlebutton" name="singlebutton" class="btn btn-danger">Clear Canvas</button><br><br>
+							<button id="text" name="singlebutton" class="btn btn-info tools" data-action="newtext">Add Text</button>
+							<button id="singlebutton" name="singlebutton" class="btn btn-danger tools" data-action="new">Clear Canvas</button><br><br>
 
 							<!-- Form Name -->
 <!-- Textarea -->
 <div class="control-group">
   
   <div class="controls">                     
-    <textarea id="textarea" name="textarea">Enter your text</textarea>
+    <textarea name="textarea" id="text-content" placeholder="Enter your text"></textarea>
   </div>
 </div>
 
@@ -78,10 +78,11 @@
 <div class="control-group">
   <label class="control-label" for="selectbasic">Font</label>
   <div class="controls">
-    <select id="selectbasic" name="selectbasic" class="input-large">
-      <option>Helvitica</option>
-      <option>Arial</option>
-      <option>Verdana</option>
+    <select id="text-font-family" name="selectbasic" class="input-large">
+      <option value="Impact">Impact</option>
+      <option value="Helvitica">Helvitica</option>
+      <option value="Arial">Arial</option>
+      <option value="Verdana">Verdana</option>
     </select>
   </div>
 </div>
