@@ -265,14 +265,14 @@
     }
     
     var uploader = new plupload.Uploader({
-	runtimes: 'gears,html5,flash,browserplus',
+	runtimes: 'gears,html5,browserplus',
 	browse_button: 'pickfiles',
 	container: 'uploader',
-	max_file_size: '100mb',
+	max_file_size: '10mb',
 	url: 'media/upload',
 	multi_selection: false,
 	resize: {width: 320, height: 240, quality: 90},
-	flash_swf_url: 'js/uploader/plupload.flash.swf',
+	//flash_swf_url: 'js/uploader/plupload.flash.swf',
 	//silverlight_xap_url : 'js/uploader/plupload.silverlight.xap',
 	filters: [
 	    {title: "Excel files", extensions: "png,jpeg,jpg,gif,bmp"}
