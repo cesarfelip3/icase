@@ -166,7 +166,7 @@ class MediaController extends AppController {
     
     protected function _json ($data=array())
     {
-        return json_encode ($data, JSON_UNESCAPED_SLASHES);
+        return json_encode ($data);//, JSON_UNESCAPED_SLASHES);
     }
 
 }
