@@ -269,7 +269,7 @@
 	browse_button: 'pickfiles',
 	container: 'uploader',
 	max_file_size: '100mb',
-	url: 'upload.php',
+	url: 'media/upload',
 	multi_selection: false,
 	resize: {width: 320, height: 240, quality: 90},
 	flash_swf_url: 'js/uploader/plupload.flash.swf',
@@ -305,10 +305,15 @@
     uploader.bind('FileUploaded', function(up, file, response) {
 	plupload.each(response, function(value, key) {
     
-	    if (key == 'response') {
-		if (value == "0") {
-		} else {
-		    ajax_process ("process.php", value);
+	    console.log(key);
+	    console.log(value);
+	    
+	    if (key == "response") {
+		var result = jQuery.parseJSON (value);
+		console.log(result);
+		if (result.error == 0) {
+		    console.log (result.files.url);
+		    mememaker.tools.addpic (result.files.url);
 		}
 	    }
 	});
