@@ -20,7 +20,7 @@
 									<a href="<? $this->Html->url( '/', true );?>">Home</a>
 								</li>
 								<li class="active">
-									<a href="<? $this->Html->url( '/', true );?>newcases">Create your case</a>
+									<a href="<? $this->Html->url( '/', true );?>createcase">Create your case</a>
 								</li>
 
 								

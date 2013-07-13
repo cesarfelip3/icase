@@ -47,12 +47,16 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 
 	<!--begin body-->
 	<body>
+	
 	<?php echo $this->element('header') ?>	
-		
+	<section id="main">
+
 	<?php echo $this->fetch('content'); ?>
-		
+	</section>	
 	<?php echo $this->element('footer') ?>
 		
 	<?php echo $this->element('js') ?>
+	
 	</body>
+
 </html>
