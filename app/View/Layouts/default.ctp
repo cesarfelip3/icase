@@ -39,7 +39,8 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 		<!--
 			NOTE: All the javascripts have been moved to the bottom of the page to load the content faster.
 		-->
-
+		<link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+        
 		
 	</head><!--end head-->
 

@@ -30,8 +30,26 @@
 				            <!-- end zone alert -->
 				            <!-- add text -->
 				            <div class="qbox">
-				            	<h3><i class="icon-eye-open pull-right"></i>Free drawing</h3>
-				           <button id="singlebutton" name="singlebutton" class="btn btn-default">Enter Drawing mode</button>
+				            	<h3><i class="icon-eye-open pull-right"></i>BASIC TOOLS</h3>
+				           <!--<button id="singlebutton" name="singlebutton" class="btn btn-default">Enter Drawing mode</button>-->
+					   <style>
+						.tools a {text-decoration:none;}
+					   </style>
+					   <div style="padding:20px" class="tools">
+					   <p>
+						<a href="javascript:" data-action="info" title="info"><i class="icon-info-sign icon-3x"></i></a>&nbsp;&nbsp;
+						<a href="javascript:" data-action="remove" title="remove"><i class="icon-remove-sign icon-3x"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+						<a href="javascript:" data-action="group" title="group"><i class="icon-resize-small icon-3x"></i></a>&nbsp;&nbsp;
+						<a href="javascript:" data-action="lock" title="lock/unlock"><i class="icon-lock icon-3x"></i></a>&nbsp;&nbsp;
+					   </p>
+					   <p>
+			    <a href="javascript:" data-action="backward" title="backward"><i class="icon-chevron-down icon-3x"></i></a>&nbsp;&nbsp;
+                            <a href="javascript:" data-action="forward" title="forward"><i class="icon-chevron-up icon-3x"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="javascript:" data-action="back" title="bottom"><i class="icon-circle-arrow-down icon-3x"></i></a>&nbsp;&nbsp;
+                            <a href="javascript:" data-action="front" title="top"><i class="icon-circle-arrow-up icon-3x"></i></a>
+					  </p>
+					   <hr/>
+					   </div><!-- tools -->
 				            </div>
 
 
@@ -60,10 +78,12 @@
 							<!-- end page title -->
 							
 							<!--start Canvas-->
-							<canvas class="upper-canvas " style="border: 1px solid rgb(170, 170, 170); left: 0px; top: 0px; -moz-user-select: none; cursor: crosshair;" width="450" height="450" id="c1"></canvas>							
-							<!--end Canvas-->	
-							<button id="text" name="singlebutton" class="btn btn-info tools" data-action="newtext">Add Text</button>
-							<button id="singlebutton" name="singlebutton" class="btn btn-danger tools" data-action="new">Clear Canvas</button><br><br>
+							<canvas class="upper-canvas " style="border: 1px solid rgb(170, 170, 170); -moz-user-select: none; cursor: crosshair;" width="450" height="450" id="c1"></canvas>							
+							<!--end Canvas-->
+							<div class="tools">
+							<a id="text" name="singlebutton" class="btn btn-info tools" data-action="newtext">Add Text</a>
+							<a id="singlebutton" name="singlebutton" class="btn btn-danger tools" data-action="new">Clear Canvas</a><br><br>
+							</div>
 
 							<!-- Form Name -->
 <!-- Textarea -->

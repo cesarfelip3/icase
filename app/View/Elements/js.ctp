@@ -163,7 +163,7 @@
                  $("#resize-color").colorpicker().on('changeColor', function(ev){
                          mememaker.tools.backgroundcolor (ev.color.toHex());
                  });*/
-                 $(mememaker.tools.container).click (
+                 $(mememaker.tools.container + " a").click (
                      function (evt) {
                          var action = $(this).data('action');
                          
@@ -415,7 +415,7 @@
                  text.on (
                      'selected',
                      function (options) {
-                         mememaker.texteditor.textselected (options);
+                         //mememaker.texteditor.textselected (options);
                      }
                  )
              }
@@ -502,7 +502,7 @@
                      function () {
                          console.log (url);
                          mememaker.canvas.renderAll();
-                     }, {'originX':'left','originY':'top','left':100,'top':100}
+                     }, {'originX':'left','originY':'top','left':0,'top':0}
                  )
              }
              
@@ -516,6 +516,7 @@
                      //alert ("hello");
                      mememaker.init ('c1');
                      mememaker.tools.init (".tools");
+                     mememaker.tools.backgroundimage ("<?php echo $this->webroot . "img/template/iphone.png"; ?>");
                      
                      $(".thumbnail-list a").click (
                          function () {
