@@ -17,10 +17,10 @@
 						<div class="nav-collapse">
 							<ul class="nav">
 								<li>
-									<a href="index.html">Home</a>
+									<a href="<? $this->Html->url( '/', true );?>">Home</a>
 								</li>
 								<li class="active">
-									<a href="buying.html">Create your case</a>
+									<a href="<? $this->Html->url( '/', true );?>newcases">Create your case</a>
 								</li>
 
 								
