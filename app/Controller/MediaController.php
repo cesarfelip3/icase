@@ -1,6 +1,7 @@
 <?php
 
 class MediaController extends AppController {
+
     protected $_targetDir = null;
     protected $_error = array(
         "error" => 0,
@@ -17,7 +18,7 @@ class MediaController extends AppController {
         header("Pragma: no-cache");
 
         $targetDir = $this->_targetDir = ROOT . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'uploads';
-        
+
         $cleanupTargetDir = true; // Remove old files
         $maxFileAge = 5 * 3600; // Temp file age in seconds
         @set_time_limit(0);
@@ -136,7 +137,7 @@ class MediaController extends AppController {
 
         $name = pathinfo($fileName, PATHINFO_FILENAME);
         $extension = pathinfo($fileName, PATHINFO_EXTENSION);
-        
+
         $original = $name . "." . $extension;
         $name .= "_" . time() . "." . $extension;
 
@@ -150,23 +151,22 @@ class MediaController extends AppController {
         $finfo = finfo_open(FILEINFO_MIME_TYPE);
         $mime = finfo_file($finfo, $target);
         finfo_close($finfo);
-        
+
         $this->_error['error'] = 0;
         $this->_error['message'] = 'Success';
-        $this->_error['files'] = array (
+        $this->_error['files'] = array(
             'original' => $original,
             'target' => $name,
-            'url' => $this->base . "/uploads/". $name,
+            'url' => $this->base . "/uploads/" . $name,
             'extension' => $extension,
             'mime' => $mime
         );
-        
+
         die($this->_json($this->_error));
     }
-    
-    protected function _json ($data=array())
-    {
-        return json_encode ($data);//, JSON_UNESCAPED_SLASHES);
+
+    protected function _json($data = array()) {
+        return json_encode($data); //, JSON_UNESCAPED_SLASHES);
     }
 
 }

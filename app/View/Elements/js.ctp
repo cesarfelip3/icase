@@ -50,6 +50,7 @@ var $ = jQuery.noConflict ();
 var mememaker = {
     canvasId: 'c1',
     activeObject: null,
+    template: null,
     objects: [],
     canvas: null,
     lastImageX: 10,
@@ -83,7 +84,8 @@ var mememaker = {
         addpic: null,
         resize: null,
         preview: null,
-        backgroundcolor: null
+        backgroundcolor: null,
+        newtemplate: null,
     },
     texteditor: {
         id: null,
@@ -411,6 +413,9 @@ mememaker.tools.newtext = function() {
         mememaker.lastTextX = mememaker.textTotal * 10;
         mememaker.lastTextY = mememaker.textTotal * 10;
     }
+    
+    //
+    mememaker.template.bringToFront ();
 
     text.on(
             'selected',
@@ -421,8 +426,8 @@ mememaker.tools.newtext = function() {
 }
 
 mememaker.tools.addpic = function(url) {
-
-    fabric.Image.fromURL(url, function(oImg) {
+   
+   fabric.Image.fromURL(url, function(oImg) {
         // scale image down, and flip it, before adding it onto canvas
         oImg.set('originX', 'left');
         oImg.set('originY', 'top');
@@ -438,7 +443,26 @@ mememaker.tools.addpic = function(url) {
             mememaker.lastImageX = mememaker.textTotal * 10;
             mememaker.lastImageY = mememaker.textTotal * 10;
         }
+        
+        //
+        mememaker.template.bringToFront ();
     });
+}
+
+mememaker.tools.newtemplate = function (url) {
+    
+   mememaker.canvas.setOverlayImage(url, mememaker.canvas.renderAll.bind(mememaker.canvas));
+                                /*    
+                                    , function(oImg) {
+        // scale image down, and flip it, before adding it onto canvas
+        oImg.set('originX', 'left');
+        oImg.set('originY', 'top');
+        oImg.left = 0;
+        oImg.top = 0;
+        oImg.selectable = false;
+        mememaker.template = oImg;
+        mememaker.canvas.add(oImg);
+    });   */
 }
 
 mememaker.tools.resize = function(plus, evt) {
@@ -516,7 +540,7 @@ $(document).ready(
             //alert ("hello");
             mememaker.init('c1');
             mememaker.tools.init(".tools");
-            mememaker.tools.backgroundimage("<?php echo $this->webroot . "img/template/iphone.png"; ?>");
+            mememaker.tools.newtemplate("<?php echo $this->webroot . "img/template/iphone.png"; ?>");
 
             $(".thumbnail-list a").click(
                     function() {
