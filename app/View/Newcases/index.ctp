@@ -63,7 +63,8 @@
                     <!-- end page title -->
 
                     <!--start Canvas-->
-                    <canvas class="upper-canvas " style="border: 1px solid rgb(170, 170, 170); -moz-user-select: none; cursor: crosshair;" width="450" height="450" id="c1"></canvas>							
+                    <div>
+                      <canvas class="upper-canvas " style="border: 1px solid rgb(170, 170, 170); -moz-user-select: none; cursor: crosshair;" width="450" height="450" id="c1"></canvas>						    </div>
                     <!--end Canvas-->
                     <div class="tools">
                         <a id="text" name="singlebutton" class="btn btn-info tools" data-action="newtext">Add Text</a>

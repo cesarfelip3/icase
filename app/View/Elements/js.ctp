@@ -1,6 +1,6 @@
 <!--[if !lte IE 6]><!-->
 <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/libs/jquery.min.js"><\/script>')</script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 <script>window.jQuery.ui || document.write('<script src="js/libs/jquery.ui.min.js"><\/script>')</script>
@@ -55,8 +55,8 @@ var mememaker = {
     canvas: null,
     lastImageX: 10,
     lastImageY: 10,
-    lastTextX: 10,
-    lastTextY: 20,
+    lastTextX: 150,
+    lastTextY: 10,
     textTotal: 0,
     imageTotal: 0,
     backgroundColor: 'white',
@@ -140,6 +140,7 @@ mememaker.init = function (id) {
     mememaker.canvas.selection = true;
     mememaker.canvas.clear ();
 
+    /*
     mememaker.canvas.on (
         'mouse:down',
         function (options) {
@@ -152,7 +153,7 @@ mememaker.init = function (id) {
         function (options) {
 
         }
-     )
+     )*/
 }
 
 // tools
@@ -393,19 +394,19 @@ mememaker.tools.newtext = function() {
     var text = new fabric.Text(mememaker.defaultText.text, mememaker.defaultText.property);
 
     var content = $("#text-content").val();
-    console.log(content);
     if ($.trim(content) == "") {
         return;
     }
 
     text.text = content;
     text.fontFamily = $("#text-font-family").val();
-
+    text.originX = "left";
+    text.originY = "top";
     text.left = mememaker.lastTextX;
     text.top = mememaker.lastTextY;
 
     mememaker.canvas.add(text);
-    mememaker.lastTextX += 10;
+    //mememaker.lastTextX += 10;
     mememaker.lastTextY += 10;
 
     if (mememaker.lastTextX >= 400) {
@@ -413,21 +414,20 @@ mememaker.tools.newtext = function() {
         mememaker.lastTextX = mememaker.textTotal * 10;
         mememaker.lastTextY = mememaker.textTotal * 10;
     }
-    
-    //
-    mememaker.template.bringToFront ();
 
+    mememaker.canvas.renderAll();
+    /*
     text.on(
             'selected',
             function(options) {
                 //mememaker.texteditor.textselected (options);
             }
-    )
+    )*/
 }
 
 mememaker.tools.addpic = function(url) {
    
-   fabric.Image.fromURL(url, function(oImg) {
+    fabric.Image.fromURL(url, function(oImg) {
         // scale image down, and flip it, before adding it onto canvas
         oImg.set('originX', 'left');
         oImg.set('originY', 'top');
@@ -444,25 +444,13 @@ mememaker.tools.addpic = function(url) {
             mememaker.lastImageY = mememaker.textTotal * 10;
         }
         
-        //
-        mememaker.template.bringToFront ();
     });
 }
 
 mememaker.tools.newtemplate = function (url) {
     
-   mememaker.canvas.setOverlayImage(url, mememaker.canvas.renderAll.bind(mememaker.canvas));
-                                /*    
-                                    , function(oImg) {
-        // scale image down, and flip it, before adding it onto canvas
-        oImg.set('originX', 'left');
-        oImg.set('originY', 'top');
-        oImg.left = 0;
-        oImg.top = 0;
-        oImg.selectable = false;
-        mememaker.template = oImg;
-        mememaker.canvas.add(oImg);
-    });   */
+    mememaker.canvas.setOverlayImage(url, mememaker.canvas.renderAll.bind(mememaker.canvas));
+
 }
 
 mememaker.tools.resize = function(plus, evt) {
