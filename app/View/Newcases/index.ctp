@@ -29,7 +29,7 @@
                     <div class="qbox">
                         <h3><i class="icon-eye-open pull-right"></i>BASIC TOOLS</h3>
                         <!--<button id="singlebutton" name="singlebutton" class="btn btn-default">Enter Drawing mode</button>-->
-                        <div style="padding:10px" class="tools">
+                        <div style="padding-top:5px;" class="tools">
                             <p>
                                 <a href="javascript:" data-action="backward" title="backward"><i class="icon-chevron-down icon-3x"></i></a>&nbsp;&nbsp;
                                 <a href="javascript:" data-action="forward" title="forward"><i class="icon-chevron-up icon-3x"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
