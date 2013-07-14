@@ -223,8 +223,10 @@ mememaker.tools.init = function (id) {
 
 mememaker.tools.new = function() {
     mememaker.backgroundColor = 'white';
-    mememaker.lastTextX = 10;
+    mememaker.lastTextX = 150;
     mememaker.lastTextY = 10;
+    mememaker.lastImageX = 10;
+    mememaker.lastImageY = 10;
     mememaker.canvas.backgroundColor = mememaker.backgroundColor;
     //mememaker.canvas.backgroundImage = null;
     mememaker.canvas.clear();
