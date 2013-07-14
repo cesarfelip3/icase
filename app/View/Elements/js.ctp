@@ -40,6 +40,10 @@ $(function() {
 <!-- DO NOT REMOVE: Contains major plugin initiations and functions -->
 <!--<![endif]-->
 
+<!-- colorpicker -->
+<link rel="stylesheet" href="js/colorpicker2/css/bootstrap-colorpicker.css">
+<script type="text/javascript" src="js/colorpicker2/js/bootstrap-colorpicker.js"></script>
+<script type="text/javascript" src="js/colorpicker2/js/docs.js"></script>
 <!-- fabric.js -->
 <script src="http://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.2.0/fabric.all.min.js"></script>
     <!--<script src="js/fabric.js"></script>-->
@@ -161,11 +165,15 @@ mememaker.tools.init = function (id) {
     if (id != null) {
         mememaker.tools.container = id;
     }
-
-    /*
-     $("#resize-color").colorpicker().on('changeColor', function(ev){
-     mememaker.tools.backgroundcolor (ev.color.toHex());
-     });*/
+    
+    $("#text-fill").colorpicker().on('changeColor', function(ev){
+        //mememaker.tools.backgroundcolor (ev.color.toHex());
+    });
+    
+    $("#canvas-background-color").colorpicker().on('changeColor', function (ev) {
+        mememaker.tools.backgroundcolor (ev.color.toHex());    
+    });
+    
     $(mememaker.tools.container + " a").click(
             function(evt) {
                 var action = $(this).data('action');

@@ -1,3 +1,6 @@
+<style>
+    .tools a {text-decoration:none;}
+</style>
 <section id="main">
     <div class="body-text">
         <div class="container-fluid">
@@ -9,11 +12,16 @@
                         <h3><i class="icon-eye-open pull-right"></i>IMAGE TOOLS</h3>
 
                         <div class="tools">
-                            <div id="uploader">
-                                <div id="filelist"></div>
-                                <a href="javascript:" id="pickfiles" class="btn btn-small">Add Your Picture</a> 
-                                <a id="uploadfiles" class="btn" href="javascript:;">Start</a>
+                            <div id="uploader" style="padding:0px;margin:0px;">
+                                <div id="filelist" style="display:none;padding:0px;margin:0px;"></div>
+                                <a href="javascript:" id="pickfiles" class="btn btn-block">Upload From Computer</a> 
+                                <a href="javascript:" id="" class="btn btn-block">Upload From Photo Service</a>
                             </div>
+                            <hr/>
+                            <p>
+                                <a href="javascript:" data-action="new" title="remove"><i class="icon-remove-sign icon-3x"></i> clear canvas</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input id="canvas-background-color" type="text" readonly="readonly" class="input-mini" placeholder="#ffffff"/>
+                            </p>
                         </div>
                     </div>
                     <!-- end zone alert -->
@@ -21,16 +29,7 @@
                     <div class="qbox">
                         <h3><i class="icon-eye-open pull-right"></i>BASIC TOOLS</h3>
                         <!--<button id="singlebutton" name="singlebutton" class="btn btn-default">Enter Drawing mode</button>-->
-                        <style>
-                            .tools a {text-decoration:none;}
-                        </style>
-                        <div style="padding:20px" class="tools">
-                            <p>
-                                <a href="javascript:" data-action="info" title="info"><i class="icon-info-sign icon-3x"></i></a>&nbsp;&nbsp;
-                                <a href="javascript:" data-action="remove" title="remove"><i class="icon-remove-sign icon-3x"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
-                                <a href="javascript:" data-action="group" title="group"><i class="icon-resize-small icon-3x"></i></a>&nbsp;&nbsp;
-                                <a href="javascript:" data-action="lock" title="lock/unlock"><i class="icon-lock icon-3x"></i></a>&nbsp;&nbsp;
-                            </p>
+                        <div style="padding:10px" class="tools">
                             <p>
                                 <a href="javascript:" data-action="backward" title="backward"><i class="icon-chevron-down icon-3x"></i></a>&nbsp;&nbsp;
                                 <a href="javascript:" data-action="forward" title="forward"><i class="icon-chevron-up icon-3x"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -38,13 +37,17 @@
                                 <a href="javascript:" data-action="front" title="top"><i class="icon-circle-arrow-up icon-3x"></i></a>
                             </p>
                             <hr/>
+                            <p>
+                                <a href="javascript:" data-action="remove" title="remove"><i class="icon-remove-sign icon-3x"></i> remove</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a href="javascript:" data-action="group" title="group"><i class="icon-resize-small icon-3x"></i> group</a>&nbsp;&nbsp;
+                            </p>
                         </div><!-- tools -->
                     </div>
                 </div>
                 <div class="span6 listing-js">
 
                     <!-- page title with dropdown -->
-                    <h1>Create Your Case</h1>
+<!--                    <h1>Create Your Case</h1>
                     <div class="container-fluid">
                         <div class="row-fluid">
                             <div class="span7 dropdown-results">
@@ -59,29 +62,43 @@
                                 </select>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                     <!-- end page title -->
 
                     <!--start Canvas-->
                     <div>
                       <canvas class="upper-canvas " style="border: 1px solid rgb(170, 170, 170); -moz-user-select: none; cursor: crosshair;" width="450" height="450" id="c1"></canvas>						    </div>
                     <!--end Canvas-->
+                    <div class="row-fluid" style="width:100%;border:1px solid #ccc;background-color:white;margin-top:10px;padding:5px;">
+                      <div class="span12">
+                        <form class="form-inline">
+                        <input type="text" class="input-medium" id="text-content" placeholder="text" />
+                        <input id="text-fill" type="text" class="input-mini" readonly="readonly" placeholder="font color" />
+                        <select id="text-font-family" style="width:auto !important;margin-top:1px;">
+                                <option value="Impact">Impact</option>
+                                <option value="Helvitica">Helvitica</option>
+                                <option value="Arial">Arial</option>
+                                <option value="Verdana">Verdana</option>
+                        </select>
+                        </form>
+                      </div>
+                    </div>
                     <div class="tools">
                         <a id="text" name="singlebutton" class="btn btn-info tools" data-action="newtext">Add Text</a>
-                        <a id="singlebutton" name="singlebutton" class="btn btn-danger tools" data-action="new">Clear Canvas</a><br><br>
+                        <!--<a id="singlebutton" name="singlebutton" class="btn btn-danger tools" data-action="new">Clear Canvas</a><br><br-->
                     </div>
 
                     <!-- Form Name -->
                     <!-- Textarea -->
-                    <div class="control-group">
+                    <!--<div class="control-group">
 
                         <div class="controls">                     
-                            <textarea name="textarea" id="text-content" placeholder="Enter your text"></textarea>
+                            <textarea name="textarea"  placeholder="Enter your text"></textarea>
                         </div>
-                    </div>
+                    </div>-->
 
                     <!-- Select Basic -->
-                    <div class="control-group">
+                    <!--<div class="control-group">
                         <label class="control-label" for="selectbasic">Font</label>
                         <div class="controls">
                             <select id="text-font-family" name="selectbasic" class="input-large">
@@ -91,10 +108,10 @@
                                 <option value="Verdana">Verdana</option>
                             </select>
                         </div>
-                    </div>
+                    </div>-->
 
                     <!-- Select Basic -->
-                    <div class="control-group">
+                    <!--<div class="control-group">
                         <label class="control-label" for="selectbasic">Text Align</label>
                         <div class="controls">
                             <select id="selectbasic" name="selectbasic" class="input-xlarge">
@@ -103,7 +120,7 @@
                                 <option>Center</option>
                             </select>
                         </div>
-                    </div>
+                    </div>-->
                     <!--</form>		-->
                 </div>
                 <!-- end listing-js -->
@@ -263,6 +280,8 @@
         for (var i in files) {
             document.getElementById('filelist').innerHTML = '<div id="' + files[i].id + '">' + files[i].name + ' (' + plupload.formatSize(files[i].size) + ') <b></b></div><div class="progress"><div class="bar" id="progress-bar" style="width: 0%;"></div></div>';
         }
+        
+        uploader.start();
     });
 
     uploader.bind('UploadProgress', function(up, file) {
@@ -289,8 +308,9 @@
         //alert($.parseJSON(response.response).result);
     });
 
+    /*
     $('uploadfiles').onclick = function() {
         uploader.start();
         return false;
-    };
+    };*/
 </script>
