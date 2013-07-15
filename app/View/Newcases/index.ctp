@@ -67,19 +67,22 @@
 
                     <!--start Canvas-->
                     <div>
+                      <div class="progress" style="height:2px"><div class="bar bar-warning" id="progress-bar" style="width: 0%; height:2px;"></div></div>
                       <canvas class="upper-canvas " style="border: 1px solid rgb(170, 170, 170); -moz-user-select: none; cursor: crosshair;" width="450" height="450" id="c1"></canvas>						    </div>
                     <!--end Canvas-->
                     <div class="row-fluid" style="width:100%;border:1px solid #ccc;background-color:white;margin-top:10px;padding:5px;">
-                      <div class="span12">
+                      <div class="span12 text-editor">
                         <form class="form-inline">
-                        <input type="text" class="input-medium" id="text-content" placeholder="text" />
+                        <input type="text" class="input-medium" id="text-text" placeholder="text" />
                         <input id="text-fill" type="text" class="input-mini" readonly="readonly" placeholder="font color" />
                         <select id="text-font-family" style="width:auto !important;margin-top:1px;">
-                                <option value="Impact">Impact</option>
-                                <option value="Helvitica">Helvitica</option>
-                                <option value="Arial">Arial</option>
-                                <option value="Verdana">Verdana</option>
+                            <option value="Impact">Impact</option>
+                            <option value="Helvitica">Helvitica</option>
+                            <option value="Arial">Arial</option>
+                            <option value="Verdana">Verdana</option>
                         </select>
+                        <a href="javascript:" class="btn btn-small" data-action="bold" data-toggle="button"><i class="icon-bold"></i></a>
+                        <a href="javascript:" class="btn btn-small" data-action="italic" data-toggle="button"><i class="icon-italic"></i></a>
                         </form>
                       </div>
                     </div>
@@ -256,11 +259,11 @@
         max_file_size: '10mb',
         url: 'media/upload',
         multi_selection: false,
-        resize: {width: 320, height: 240, quality: 90},
+        //resize: {width: 640, height: 240, quality: 100},
         //flash_swf_url: 'js/uploader/plupload.flash.swf',
         //silverlight_xap_url : 'js/uploader/plupload.silverlight.xap',
         filters: [
-            {title: "Excel files", extensions: "png,jpeg,jpg,gif,bmp"}
+            {title: "Excel files", extensions: "png,jpeg,jpg,gif"}
         ]
     });
 
@@ -278,15 +281,16 @@
         }
 
         for (var i in files) {
-            document.getElementById('filelist').innerHTML = '<div id="' + files[i].id + '">' + files[i].name + ' (' + plupload.formatSize(files[i].size) + ') <b></b></div><div class="progress"><div class="bar" id="progress-bar" style="width: 0%;"></div></div>';
+            //document.getElementById('filelist').innerHTML = '<div id="' + files[i].id + '">' + files[i].name + ' (' + plupload.formatSize(files[i].size) + ') <b></b></div>';
         }
-        
+        jQuery('#progress-bar').css('width', "0%");
         uploader.start();
     });
 
     uploader.bind('UploadProgress', function(up, file) {
         //$(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
         jQuery('#progress-bar').css('width', file.percent + "%");
+        
     });
 
     uploader.bind('FileUploaded', function(up, file, response) {
@@ -294,7 +298,7 @@
 
             console.log(key);
             console.log(value);
-
+            
             if (key == "response") {
                 var result = jQuery.parseJSON(value);
                 console.log(result);
@@ -302,6 +306,7 @@
                     console.log(result.files.url);
                     mememaker.tools.addpic(result.files.url);
                 }
+                //jQuery('#progress-bar').css('width', "0%");
             }
         });
 
