@@ -43,7 +43,7 @@ $(function() {
 <!-- colorpicker -->
 <link rel="stylesheet" href="js/colorpicker2/css/bootstrap-colorpicker.css">
 <script type="text/javascript" src="js/colorpicker2/js/bootstrap-colorpicker.js"></script>
-<script type="text/javascript" src="js/colorpicker2/js/docs.js"></script>
+<!--<script type="text/javascript" src="js/colorpicker2/js/docs.js"></script>-->
 <!-- fabric.js -->
 <script src="http://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.2.0/fabric.all.min.js"></script>
     <!--<script src="js/fabric.js"></script>-->
@@ -93,8 +93,11 @@ var mememaker = {
     },
     texteditor: {
         id: null,
+        current: null,
         init: null,
         fill: null,
+        changeFontFamily: null,
+        changeText: null,
         textselected: null,
     },
     imageeditor: {
@@ -165,10 +168,6 @@ mememaker.tools.init = function (id) {
     if (id != null) {
         mememaker.tools.container = id;
     }
-    
-    $("#text-fill").colorpicker().on('changeColor', function(ev){
-        //mememaker.tools.backgroundcolor (ev.color.toHex());
-    });
     
     $("#canvas-background-color").colorpicker().on('changeColor', function (ev) {
         mememaker.tools.backgroundcolor (ev.color.toHex());    
@@ -403,11 +402,12 @@ mememaker.tools.toFront = function() {
 mememaker.tools.newtext = function() {
     var text = new fabric.Text(mememaker.defaultText.text, mememaker.defaultText.property);
 
-    var content = $("#text-content").val();
+    var content = $("#text-text").val();
     if ($.trim(content) == "") {
         return;
     }
-
+    //$("#text-text").val ("");
+    
     text.text = content;
     text.fontFamily = $("#text-font-family").val();
     text.originX = "left";
@@ -426,13 +426,13 @@ mememaker.tools.newtext = function() {
     }
 
     mememaker.canvas.renderAll();
-    /*
+    
     text.on(
             'selected',
             function(options) {
-                //mememaker.texteditor.textselected (options);
+                mememaker.texteditor.textselected ();
             }
-    )*/
+    )
 }
 
 mememaker.tools.addpic = function(url) {
@@ -529,8 +529,143 @@ mememaker.tools.backgroundimage = function(url) {
 }
 
 // text editor
+
+mememaker.texteditor.init = function (id) {
+   if (id !== null) {
+      mememaker.texteditor.id = id;
+   }
+   
+   $("#text-font-family").change (
+      function () {
+         mememaker.texteditor.changeFontFamily ($(this).val());
+      }
+   )  
+    
+    $("#text-fill").colorpicker().on('changeColor', function(ev){
+        mememaker.texteditor.fill (ev.color.toHex());
+    });
+    
+    $("#text-text").keyup (
+        function (evt) {
+            if ( evt.which == 13 ) {
+                evt.preventDefault();
+                mememaker.texteditor.changeText ();
+                return;
+            }
+            
+            mememaker.texteditor.changeText ();
+        }
+    )
+    
+    $(mememaker.texteditor.id + " a").click (
+        function () {
+            switch ($(this).data('action')) {
+                case "bold":
+                    mememaker.texteditor.changeFontProperty ("weight");
+                    break;
+                case "italic":
+                    mememaker.texteditor.changeFontProperty ("italic");
+                    break;
+            }
+        }
+    )
+}
+
 mememaker.texteditor.textselected = function(options) {
-    console.log(options);
+    
+    var el = mememaker.canvas.getActiveObject();
+    
+    if (el == null || el == undefined) {
+        return;
+    }
+
+    if (el.type != "text") {
+        return;
+    }
+    
+    console.log(el);
+    $("#text-text").val (el.text);
+    $("#text-font-family").val (el.fontFamily);
+    $("#text-fill").val (el.fill);
+}
+
+mememaker.texteditor.fill = function (color) {
+    var el = mememaker.canvas.getActiveObject();
+    
+    if (el == null || el == undefined) {
+        return;
+    }
+
+    if (el.type != "text") {
+        return;
+    }
+    
+    el.fill = color;
+    mememaker.canvas.renderAll();
+}
+
+mememaker.texteditor.changeFontFamily = function (fontFamily) {
+    var el = mememaker.canvas.getActiveObject();
+    
+    if (el == null || el == undefined) {
+        return;
+    }
+
+    if (el.type != "text") {
+        return;
+    }
+    
+    el.fontFamily = fontFamily;
+    mememaker.canvas.renderAll();    
+}
+
+mememaker.texteditor.changeText = function (fontFamily) {
+    var el = mememaker.canvas.getActiveObject();
+    
+    if (el == null || el == undefined) {
+        return;
+    }
+
+    if (el.type != "text") {
+        return;
+    }
+    
+    el.text = $("#text-text").val ();
+    if (el.text == "") {
+        mememaker.canvas.remove (el);
+    }
+    mememaker.canvas.renderAll();    
+}
+
+mememaker.texteditor.changeFontProperty = function (property) {
+    
+    var el = mememaker.canvas.getActiveObject();
+    
+    if (el == null || el == undefined) {
+        return;
+    }
+
+    if (el.type != "text") {
+        return;
+    }
+    
+    console.log (property + ":" + el.fontWeight);
+    if (property == "weight") {
+        if (el.fontWeight == "normal") {
+            el.fontWeight = "bold";
+        } else if (el.fontWeight == "bold") {
+            el.fontWeight = "normal";
+        }
+    }
+    
+    if (property == "italic") {
+        if (el.fontStyle == "italic") {
+            el.fontStyle = "";
+        } else {
+            el.fontStyle = "italic";
+        }
+    }
+    mememaker.canvas.renderAll();
 }
 
 $(document).ready(
@@ -539,6 +674,7 @@ $(document).ready(
             mememaker.init('c1');
             mememaker.tools.init(".tools");
             mememaker.tools.newtemplate("<?php echo $this->webroot . "img/template/iphone.png"; ?>");
+            mememaker.texteditor.init (".text-editor");
 
             $(".thumbnail-list a").click(
                     function() {
