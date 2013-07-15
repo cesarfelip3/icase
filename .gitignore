@@ -2,5 +2,7 @@ tmp/*
 app/config/core.php
 app/config/database.php
 app/tmp/*
+app/tmp/cache/*
+app/tmp/persistent/*
 app/webroot/uploaads/*
 !empty
