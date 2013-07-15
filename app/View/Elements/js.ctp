@@ -33,7 +33,7 @@
 <script src="js/config.js"></script>
 <script type="text/javascript"></script>
 $(function() {
-    $( "#slider" ).slider();
+    //$( "#slider" ).slider();
 });
 </script>   
 
@@ -42,6 +42,8 @@ $(function() {
 
 <!-- jquery range -->
 <!--<script type="text/javascript" src = "js/tools/jquery.tools.min.js"></script>-->
+<link rel="stylesheet" href="js/bootstrapslider/css/slider.css">
+<script type="text/javascript" src="js/bootstrapslider/js/bootstrap-slider.js"></script>
 <!-- colorpicker -->
 <link rel="stylesheet" href="js/colorpicker2/css/bootstrap-colorpicker.css">
 <script type="text/javascript" src="js/colorpicker2/js/bootstrap-colorpicker.js"></script>
@@ -50,6 +52,7 @@ $(function() {
 <script src="http://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.2.0/fabric.all.min.js"></script>
     <!--<script src="js/fabric.js"></script>-->
 <script>
+    
 var $ = jQuery.noConflict ();
 
 var mememaker = {
@@ -106,6 +109,8 @@ var mememaker = {
     imageeditor: {
         id: null,
         current: null,
+        zoomValue: null,
+        rotateValue: null,
         init: null,
         zoom: null,
         rotate: null,
@@ -457,10 +462,10 @@ mememaker.tools.newtext = function() {
     
     text.text = "CLICK TO EDIT";
     text.fontFamily = $("#text-font-family").val();
-    text.originX = "left";
-    text.originY = "top";
-    text.left = mememaker.lastTextX;
-    text.top = mememaker.lastTextY;
+    text.originX = "center";
+    text.originY = "center";
+    text.left = mememaker.lastTextX + text.getWidth() / 2;
+    text.top = mememaker.lastTextY + text.getHeight() / 2;
 
     mememaker.canvas.add(text);
     //mememaker.lastTextX += 10;
@@ -486,10 +491,10 @@ mememaker.tools.addpic = function(url) {
    
     fabric.Image.fromURL(url, function(oImg) {
         // scale image down, and flip it, before adding it onto canvas
-        oImg.set('originX', 'left');
-        oImg.set('originY', 'top');
-        oImg.left = mememaker.lastImageX;
-        oImg.top = mememaker.lastImageY;
+        //oImg.set('originX', 'left');
+        //oImg.set('originY', 'top');
+        oImg.left = mememaker.lastImageX + oImg.getWidth() / 2;
+        oImg.top = mememaker.lastImageY + oImg.getHeight() / 2;
 
         mememaker.canvas.add(oImg);
         mememaker.lastImageX += 10;
@@ -521,7 +526,6 @@ mememaker.tools.resize = function(plus, evt) {
 
     var height = $('#' + $(evt).data('prefix') + '-height').val();
 
-    console.log(height);
     height = $.trim(height);
     if (height == '') {
         height = '0';
@@ -576,7 +580,6 @@ mememaker.tools.backgroundimage = function(url) {
     mememaker.canvas.setBackgroundImage(
             url,
             function() {
-                console.log(url);
                 mememaker.canvas.renderAll();
             }, {'originX': 'left', 'originY': 'top', 'left': 0, 'top': 0}
     )
@@ -704,7 +707,6 @@ mememaker.texteditor.changeFontProperty = function (property) {
         return;
     }
     
-    console.log (property + ":" + el.fontWeight);
     if (property == "weight") {
         if (el.fontWeight == "normal") {
             el.fontWeight = "bold";
@@ -731,13 +733,32 @@ mememaker.imageeditor.init = function (id) {
         mememaker.imageeditor.id = id;
     }
     
-    document.getElementById ("image-zoom").onchange = function () {
-        mememaker.imageeditor.zoom (this.value);
-    }
+    //http://www.eyecon.ro/bootstrap-slider/
+    mememaker.imageeditor.zoomValue = $("#image-zoom").slider(
+        {
+            formater: function(value) {
+                return '' + value / 100;
+            }
+        }
+    ).on (   
+        "slide",
+        function () {
+            mememaker.imageeditor.zoom (mememaker.imageeditor.zoomValue.getValue());
+        }
+    ).data('slider');
     
-    document.getElementById("image-rotation").onchange = function(evt, value) {
-        mememaker.imageeditor.rotate (this.value);
-    };
+    mememaker.imageeditor.rotateValue = $("#image-rotation").slider(
+        {
+            formater: function(value) {
+                return '' + value;
+            }
+        }
+    ).on (
+        "slide",
+        function () {
+            mememaker.imageeditor.rotate (mememaker.imageeditor.rotateValue.getValue());
+        }
+    ).data('slider');
 }
 
 mememaker.imageeditor.imageselected = function () {
@@ -785,6 +806,11 @@ mememaker.imageeditor.rotate = function (value) {
         return;
     }
     
+    el.originX = "center";
+    el.originY = "center";
+    
+    //el.left = el.left + el.getWidth () / 2;
+    //el.top = el.top + el.getHeight () / 2;
     el.angle = value;
     mememaker.canvas.renderAll();
     

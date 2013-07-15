@@ -94,11 +94,11 @@
                     <div class="row-fluid image-editor hide editor" style="width:100%;border:1px solid #ccc;background-color:white;margin-top:10px;padding:5px;">
                         <div class="span6">
                             <div><b>Zoom</b></div>
-                            <div><input id="image-zoom" type="range" value="100" min="50" max="200" class="input-range"></div>
+                            <div><input type="text" value="" data-slider-min="50" data-slider-max="300" data-slider-step="1" data-slider-value="100" data-slider-id="RC" id="image-zoom" data-slider-selection="none" data-slider-tooltip="show" data-slider-handle="square" style="width:150px"></div>
                         </div>
                         <div class="span6">
                             <div style="clear:both;display:block;"><b>Rotation</b></div>
-                            <div><input id="image-rotation" type="range" value="0" min="0" max="360" class="input-range"></div>
+                            <div><input type="text" value="" data-slider-min="0" data-slider-max="360" data-slider-step="1" data-slider-value="0" data-slider-id="RC" id="image-rotation" data-slider-selection="none" data-slider-tooltip="show" data-slider-handle="square" style="width:150px" ></div>
                         </div>
                     </div><!-- Image Editor -->
                     <div class="row-fluid draw-editor" style="width:100%;border:1px solid #ccc;background-color:white;margin-top:10px;padding:5px;">
