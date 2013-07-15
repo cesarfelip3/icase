@@ -41,7 +41,7 @@ $(function() {
 <!--<![endif]-->
 
 <!-- jquery range -->
-<script type="text/javascript" src = "js/tools/jquery.tools.min.js"></script>
+<!--<script type="text/javascript" src = "js/tools/jquery.tools.min.js"></script>-->
 <!-- colorpicker -->
 <link rel="stylesheet" href="js/colorpicker2/css/bootstrap-colorpicker.css">
 <script type="text/javascript" src="js/colorpicker2/js/bootstrap-colorpicker.js"></script>
@@ -50,8 +50,6 @@ $(function() {
 <script src="http://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.2.0/fabric.all.min.js"></script>
     <!--<script src="js/fabric.js"></script>-->
 <script>
-$(".input-range").rangeinput();
-
 var $ = jQuery.noConflict ();
 
 var mememaker = {
@@ -642,7 +640,7 @@ mememaker.texteditor.textselected = function(options) {
     $("#text-text").val (el.text);
     $("#text-font-family").val (el.fontFamily);
     $("#text-fill").val (el.fill);
-    $(".image-editor").hide(0);
+    $(".editor").hide (0);
     $(".text-editor").show(0);
 }
 
@@ -733,13 +731,13 @@ mememaker.imageeditor.init = function (id) {
         mememaker.imageeditor.id = id;
     }
     
-    $("#image-zoom").change(function(evt, value) {
-        mememaker.imageeditor.zoom (value);
-    });
+    document.getElementById ("image-zoom").onchange = function () {
+        mememaker.imageeditor.zoom (this.value);
+    }
     
-    $("#image-rotation").change(function(evt, value) {
-        mememaker.imageeditor.rotate (value);
-    });
+    document.getElementById("image-rotation").onchange = function(evt, value) {
+        mememaker.imageeditor.rotate (this.value);
+    };
 }
 
 mememaker.imageeditor.imageselected = function () {
@@ -753,7 +751,7 @@ mememaker.imageeditor.imageselected = function () {
         return;
     }
     
-    $(".text-editor").hide(0);  
+    $(".editor").hide (0); 
     $(".image-editor").show(0);  
 }
 
@@ -799,7 +797,10 @@ mememaker.draweditor.init = function (id) {
     if (id !== null) {
         mememaker.draweditor.id = id;
     }
-       
+    
+    $("#draw-fill").colorpicker().on('changeColor', function(ev){
+        mememaker.canvas.freeDrawingBrush.color = ev.color.toHex();
+    });
 }
 
 mememaker.draweditor.enable = function (obj) {
@@ -808,7 +809,22 @@ mememaker.draweditor.enable = function (obj) {
         $(obj).css('color', 'green');
         mememaker.canvas.discardActiveObject();
         mememaker.canvas.discardActiveGroup();
+        
+        var width = $("#draw-width").val ();
+        if (width != "") {
+            width = parseInt(width);    
+        }
+        
+        //mememaker.canvas.freeDrawingLineWidth = width;
+        //mememaker.canvas.freeDrawingColor = $("#draw-fill").val();
         mememaker.canvas.isDrawingMode = true;
+        mememaker.canvas.freeDrawingBrush.width = width;
+        mememaker.canvas.freeDrawingBrush.color = $("#draw-fill").val ();
+        
+        //mememaker.canvas.renderAll();
+        
+        $(".editor").hide (0);
+        $(".draw-editor").show(0);
     } else {
         $(obj).css('color', '#c24f19');
         mememaker.canvas.discardActiveObject();
@@ -825,6 +841,7 @@ $(document).ready(
             mememaker.tools.newtemplate("<?php echo $this->webroot . "img/template/iphone.png"; ?>");
             mememaker.texteditor.init (".text-editor");
             mememaker.imageeditor.init (".image-editor");
+            mememaker.draweditor.init (".draw-editor");
 
             $(".thumbnail-list a").click(
                     function() {
