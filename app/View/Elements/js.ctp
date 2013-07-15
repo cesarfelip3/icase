@@ -1,5 +1,5 @@
 <!--[if !lte IE 6]><!-->
-<!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+<!-- Link to Google CDN jQuery + jQueryUI; fall back to local -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/libs/jquery.min.js"><\/script>')</script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
