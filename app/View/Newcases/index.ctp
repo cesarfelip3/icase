@@ -36,10 +36,15 @@
                                 <a href="javascript:" data-action="back" title="bottom"><i class="icon-circle-arrow-down icon-3x"></i></a>&nbsp;&nbsp;
                                 <a href="javascript:" data-action="front" title="top"><i class="icon-circle-arrow-up icon-3x"></i></a>
                             </p>
+                            <p style="margin-top:15px;display:block;"><a href="javascript:" data-action="flipx"><i class="icon-resize-horizontal icon-2x"></i> <b>flip horizontal</b></a><a href="javascript:" data-action="flipy" style="margin-left:10px;"><i class="icon-resize-vertical icon-2x"></i> <b>flip vertical</b></a></p>
                             <hr/>
                             <p>
                                 <a href="javascript:" data-action="remove" title="remove"><i class="icon-remove-sign icon-3x"></i> remove</a>&nbsp;&nbsp;&nbsp;&nbsp;
                                 <a href="javascript:" data-action="group" title="group"><i class="icon-resize-small icon-3x"></i> group</a>&nbsp;&nbsp;
+                            </p>
+                            <p style="margin-top:15px;display:block;">
+                                <a href="javascript:" data-action="newtext" title="remove"><i class="icon-font icon-3x"></i> new text</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a href="javascript:" data-action="draw" title="remove"><i class="icon-pencil icon-3x"></i> draw</a>
                             </p>
                         </div><!-- tools -->
                     </div>
@@ -70,26 +75,104 @@
                       <div class="progress" style="height:2px"><div class="bar bar-warning" id="progress-bar" style="width: 0%; height:2px;"></div></div>
                       <canvas class="upper-canvas " style="border: 1px solid rgb(170, 170, 170); -moz-user-select: none; cursor: crosshair;" width="450" height="450" id="c1"></canvas>						    </div>
                     <!--end Canvas-->
-                    <div class="row-fluid" style="width:100%;border:1px solid #ccc;background-color:white;margin-top:10px;padding:5px;">
-                      <div class="span12 text-editor">
+                    <div class="row-fluid text-editor hide" style="width:100%;border:1px solid #ccc;background-color:white;margin-top:10px;padding:5px;">
+                      <div class="span12">
                         <form class="form-inline">
-                        <input type="text" class="input-medium" id="text-text" placeholder="text" />
-                        <input id="text-fill" type="text" class="input-mini" readonly="readonly" placeholder="font color" />
-                        <select id="text-font-family" style="width:auto !important;margin-top:1px;">
-                            <option value="Impact">Impact</option>
-                            <option value="Helvitica">Helvitica</option>
-                            <option value="Arial">Arial</option>
-                            <option value="Verdana">Verdana</option>
-                        </select>
-                        <a href="javascript:" class="btn btn-small" data-action="bold" data-toggle="button"><i class="icon-bold"></i></a>
-                        <a href="javascript:" class="btn btn-small" data-action="italic" data-toggle="button"><i class="icon-italic"></i></a>
+                            <input type="text" class="input-medium" id="text-text" placeholder="text" />
+                            <input id="text-fill" type="text" class="input-mini" readonly="readonly" placeholder="font color" />
+                            <select id="text-font-family" style="width:auto !important;margin-top:1px;">
+                                <option value="Impact">Impact</option>
+                                <option value="Helvitica">Helvitica</option>
+                                <option value="Arial">Arial</option>
+                                <option value="Verdana">Verdana</option>
+                            </select>
+                            <a href="javascript:" class="btn btn-small" data-action="bold" data-toggle="button"><i class="icon-bold"></i></a>
+                            <a href="javascript:" class="btn btn-small" data-action="italic" data-toggle="button"><i class="icon-italic"></i></a>
                         </form>
                       </div>
-                    </div>
-                    <div class="tools">
-                        <a id="text" name="singlebutton" class="btn btn-info tools" data-action="newtext">Add Text</a>
-                        <!--<a id="singlebutton" name="singlebutton" class="btn btn-danger tools" data-action="new">Clear Canvas</a><br><br-->
-                    </div>
+                    </div><!-- end of text editor -->
+                    <style type="text/css">
+                    .slider {
+                        background:#888;
+                        height:2px;
+                        position:relative;
+                        cursor:pointer;
+                        border:1px solid #333;
+                        width:200px;
+                        float:left;
+                        clear:right;
+                        margin-top:10px;
+                        border-radius:5px;
+                        -moz-border-radius:5px;
+                        -webkit-border-radius:5px;
+                        -moz-box-shadow:inset 0 0 8px #000;
+                    }
+                    
+                    /* progress bar (enabled with progress: true) 
+                    .progress {
+                        height:2px;
+                        background-color:#C5FF00;
+                        display:none;
+                        opacity:0.6;
+                    }*/
+                    
+                    /* drag handle */
+                    .handle {
+                        background:#fff;
+                        height:8px;
+                        width:8px;
+                        top:-5px;
+                        position:absolute;
+                        display:block;
+                        margin-top:1px;
+                        border:1px solid #000;
+                        cursor:move;
+                        -moz-box-shadow:0 0 6px #000;
+                        -webkit-box-shadow:0 0 6px #000;
+                        -moz-border-radius:14px;
+                        -webkit-border-radius:14px;
+                    
+                    }
+                    
+                    /* the input field */
+                    .range {
+                        border:1px inset #ddd;
+                        float:left;
+                        font-size:10px;
+                        margin:0 0 0 15px;
+                        padding:0px 0;
+                        text-align:center;
+                        width:30px;
+                        border-radius:5px;
+                        -moz-border-radius:5px;
+                        -webkit-border-radius:5px;
+                    }
+
+                    </style>
+                    <div class="row-fluid image-editor hide" style="width:100%;border:1px solid #ccc;background-color:white;margin-top:10px;padding:5px;">
+                        <div class="span8">
+                            <div><b>Zoom</b></div>
+                            <div><input id="image-zoom" type="range" value="100" min="50" max="200" class="input-range"></div>
+                            <div style="clear:both;display:block;"><b>Rotation</b></div>
+                            <div><input id="image-rotation" type="range" value="0" min="0" max="360" class="input-range"></div>
+                        </div>
+                    </div><!-- Image Editor -->
+                    <div class="row-fluid draw-editor hide" style="width:100%;border:1px solid #ccc;background-color:white;margin-top:10px;padding:5px;">
+                      <div class="span12">
+                        <form class="form-inline">
+                            <input type="text" class="input-medium" id="text-text" placeholder="text" />
+                            <input id="text-fill" type="text" class="input-mini" readonly="readonly" placeholder="font color" />
+                            <select id="text-font-family" style="width:auto !important;margin-top:1px;">
+                                <option value="Impact">Impact</option>
+                                <option value="Helvitica">Helvitica</option>
+                                <option value="Arial">Arial</option>
+                                <option value="Verdana">Verdana</option>
+                            </select>
+                            <a href="javascript:" class="btn btn-small" data-action="bold" data-toggle="button"><i class="icon-bold"></i></a>
+                            <a href="javascript:" class="btn btn-small" data-action="italic" data-toggle="button"><i class="icon-italic"></i></a>
+                        </form>
+                      </div>
+                    </div><!-- draw editor -->
 
                     <!-- Form Name -->
                     <!-- Textarea -->

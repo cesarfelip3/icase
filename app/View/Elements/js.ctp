@@ -40,6 +40,8 @@ $(function() {
 <!-- DO NOT REMOVE: Contains major plugin initiations and functions -->
 <!--<![endif]-->
 
+<!-- jquery range -->
+<script type="text/javascript" src = "js/tools/jquery.tools.min.js"></script>
 <!-- colorpicker -->
 <link rel="stylesheet" href="js/colorpicker2/css/bootstrap-colorpicker.css">
 <script type="text/javascript" src="js/colorpicker2/js/bootstrap-colorpicker.js"></script>
@@ -48,6 +50,7 @@ $(function() {
 <script src="http://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.2.0/fabric.all.min.js"></script>
     <!--<script src="js/fabric.js"></script>-->
 <script>
+$(".input-range").rangeinput();
 
 var $ = jQuery.noConflict ();
 
@@ -83,6 +86,7 @@ var mememaker = {
         forward: null,
         toBack: null,
         toFront: null,
+        flip: null,
         newtext: null,
         newpic: null,
         addpic: null,
@@ -98,13 +102,25 @@ var mememaker = {
         fill: null,
         changeFontFamily: null,
         changeText: null,
+        changeFontProperty: null,
         textselected: null,
     },
     imageeditor: {
-
+        id: null,
+        current: null,
+        init: null,
+        zoom: null,
+        rotate: null,
+        flipX: null,
+        flipY: null,
+        imageselected: null,
     },
-    groupeditor: {
-
+    draweditor: {
+        id: null,
+        current: null,
+        init: null,
+        fill: null,
+        enable: null
     }
 };
 
@@ -201,6 +217,12 @@ mememaker.tools.init = function (id) {
                     case 'front':
                         mememaker.tools.toFront();
                         break;
+                    case 'flipx':
+                        mememaker.tools.flip (0);
+                        break;
+                    case 'flipy':
+                        mememaker.tools.flip (1);
+                        break;
                     case 'newtext':
                         mememaker.tools.newtext();
                         break;
@@ -221,6 +243,9 @@ mememaker.tools.init = function (id) {
                     case 'backgroundimage':
                         mememaker.tools.backgroundimage("img/muffin.png");
                         break;
+                    case 'draw':
+                        mememaker.draweditor.enable ($(this));
+                        break;
                     default:
                         break;
                 }
@@ -237,10 +262,6 @@ mememaker.tools.new = function() {
     mememaker.canvas.backgroundColor = mememaker.backgroundColor;
     //mememaker.canvas.backgroundImage = null;
     mememaker.canvas.clear();
-}
-
-mememaker.tools.info = function(type) {
-
 }
 
 mememaker.tools.remove = function() {
@@ -399,16 +420,44 @@ mememaker.tools.toFront = function() {
     el.bringToFront();
 }
 
+mememaker.tools.flip = function (x) {
+    var el = mememaker.canvas.getActiveObject();
+
+    if (el == null || el == undefined) {
+        el = mememaker.canvas.getActiveGroup();
+        if (el == null || el == undefined) {
+            return;
+        }
+
+        if (x == 0) {
+            el.flipX = el.flipX == true ? false : true;
+        } else {
+            el.flipY = el.flipY == true ? false : true;
+        }
+
+        mememaker.canvas.renderAll();
+        return;
+    }
+
+    if (x == 0) {
+        el.flipX = el.flipX == true ? false : true;
+    } else {
+        el.flipY = el.flipY == true ? false : true;
+    }
+
+    mememaker.canvas.renderAll();   
+}
+
 mememaker.tools.newtext = function() {
     var text = new fabric.Text(mememaker.defaultText.text, mememaker.defaultText.property);
 
-    var content = $("#text-text").val();
-    if ($.trim(content) == "") {
-        return;
-    }
+    //var content = $("#text-text").val();
+    //if ($.trim(content) == "") {
+        //return;
+    //}
     //$("#text-text").val ("");
     
-    text.text = content;
+    text.text = "CLICK TO EDIT";
     text.fontFamily = $("#text-font-family").val();
     text.originX = "left";
     text.originY = "top";
@@ -453,6 +502,13 @@ mememaker.tools.addpic = function(url) {
             mememaker.lastImageX = mememaker.textTotal * 10;
             mememaker.lastImageY = mememaker.textTotal * 10;
         }
+        
+        oImg.on(
+            'selected',
+            function(options) {
+                mememaker.imageeditor.imageselected ();
+            }
+        );
         
     });
 }
@@ -583,10 +639,11 @@ mememaker.texteditor.textselected = function(options) {
         return;
     }
     
-    console.log(el);
     $("#text-text").val (el.text);
     $("#text-font-family").val (el.fontFamily);
     $("#text-fill").val (el.fill);
+    $(".image-editor").hide(0);
+    $(".text-editor").show(0);
 }
 
 mememaker.texteditor.fill = function (color) {
@@ -668,6 +725,98 @@ mememaker.texteditor.changeFontProperty = function (property) {
     mememaker.canvas.renderAll();
 }
 
+// image editor
+
+mememaker.imageeditor.init = function (id) {
+    
+    if (id !== null) {
+        mememaker.imageeditor.id = id;
+    }
+    
+    $("#image-zoom").change(function(evt, value) {
+        mememaker.imageeditor.zoom (value);
+    });
+    
+    $("#image-rotation").change(function(evt, value) {
+        mememaker.imageeditor.rotate (value);
+    });
+}
+
+mememaker.imageeditor.imageselected = function () {
+    var el = mememaker.canvas.getActiveObject();
+    
+    if (el == null || el == undefined) {
+        return;
+    }
+
+    if (el.type != "image") {
+        return;
+    }
+    
+    $(".text-editor").hide(0);  
+    $(".image-editor").show(0);  
+}
+
+mememaker.imageeditor.zoom = function (value) {
+     var el = mememaker.canvas.getActiveObject();
+    
+    if (el == null || el == undefined) {
+        return;
+    }
+
+    if (el.type != "image") {
+        return;
+    }
+    
+    var scale = value / 100;
+    el.scale (scale);
+    mememaker.canvas.renderAll();
+    
+    //$(".text-editor").hide(10);  
+    //$(".image-editor").show(10);    
+}
+
+mememaker.imageeditor.rotate = function (value) {
+     var el = mememaker.canvas.getActiveObject();
+    
+    if (el == null || el == undefined) {
+        return;
+    }
+
+    if (el.type != "image") {
+        return;
+    }
+    
+    el.angle = value;
+    mememaker.canvas.renderAll();
+    
+    //$(".text-editor").hide(10);  
+    //$(".image-editor").show(10);    
+}
+
+//
+mememaker.draweditor.init = function (id) {
+    if (id !== null) {
+        mememaker.draweditor.id = id;
+    }
+       
+}
+
+mememaker.draweditor.enable = function (obj) {
+    enable = mememaker.canvas.isDrawingMode == true ? false : true;
+    if (enable) {
+        $(obj).css('color', 'green');
+        mememaker.canvas.discardActiveObject();
+        mememaker.canvas.discardActiveGroup();
+        mememaker.canvas.isDrawingMode = true;
+    } else {
+        $(obj).css('color', '#c24f19');
+        mememaker.canvas.discardActiveObject();
+        mememaker.canvas.discardActiveGroup();
+        mememaker.canvas.isDrawingMode = false;
+    }
+}
+//
 $(document).ready(
         function() {
             //alert ("hello");
@@ -675,6 +824,7 @@ $(document).ready(
             mememaker.tools.init(".tools");
             mememaker.tools.newtemplate("<?php echo $this->webroot . "img/template/iphone.png"; ?>");
             mememaker.texteditor.init (".text-editor");
+            mememaker.imageeditor.init (".image-editor");
 
             $(".thumbnail-list a").click(
                     function() {
