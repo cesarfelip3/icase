@@ -25,3 +25,5 @@ I think commicate in this will create a problem with our commit log, because we 
 
 thanks
 felpe
+
+I am working right now too please open skype!
