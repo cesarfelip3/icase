@@ -152,9 +152,9 @@ class MediaController extends AppController {
             rename("{$filePath}.part", $target);
         }
 
-        $finfo = finfo_open(FILEINFO_MIME_TYPE);
-        $mime = finfo_file($finfo, $target);
-        finfo_close($finfo);
+        //$finfo = finfo_open(FILEINFO_MIME_TYPE);
+       // $mime = finfo_file($finfo, $target);
+        //finfo_close($finfo);
 
         $this->_error['error'] = 0;
         $this->_error['message'] = 'Success';
@@ -163,7 +163,7 @@ class MediaController extends AppController {
             'target' => $name,
             'url' => $this->base . "/uploads/" . $name,
             'extension' => $extension,
-            'mime' => $mime
+            //'mime' => $mime
         );
 
         die($this->_json($this->_error));
