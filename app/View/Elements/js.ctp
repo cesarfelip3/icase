@@ -121,6 +121,8 @@ var mememaker = {
     draweditor: {
         id: null,
         current: null,
+        lineWidth: null,
+        shadowWidth: null,
         init: null,
         fill: null,
         enable: null
@@ -188,9 +190,9 @@ mememaker.tools.init = function (id) {
         mememaker.tools.container = id;
     }
     
-    $("#canvas-background-color").colorpicker().on('changeColor', function (ev) {
-        mememaker.tools.backgroundcolor (ev.color.toHex());    
-    });
+    //$("#canvas-background-color").colorpicker().on('changeColor', function (ev) {
+    //    mememaker.tools.backgroundcolor (ev.color.toHex());    
+    //});
     
     $(mememaker.tools.container + " a").click(
             function(evt) {
@@ -824,9 +826,152 @@ mememaker.draweditor.init = function (id) {
         mememaker.draweditor.id = id;
     }
     
+    mememaker.draweditor.lineWidth = $("#draw-width").slider(
+        {
+            formater: function(value) {
+                return '' + value;
+            }
+        }
+    ).on (   
+        "slide",
+        function () {
+            mememaker.canvas.freeDrawingBrush.width =  mememaker.draweditor.lineWidth.getValue();
+        }
+    ).data('slider');
+    
+    mememaker.draweditor.shadowWidth = $("#draw-shadow-width").slider(
+        {
+            formater: function(value) {
+                return '' + value;
+            }
+        }
+    ).on (
+        "slide",
+        function () {
+            mememaker.canvas.freeDrawingBrush.shadowBlur = mememaker.draweditor.shadowWidth.getValue();
+        }
+    ).data('slider');
+    
     $("#draw-fill").colorpicker().on('changeColor', function(ev){
         mememaker.canvas.freeDrawingBrush.color = ev.color.toHex();
     });
+    
+    $('#draw-mode-selector').on('change', function() {
+        
+        console.log (this.value);
+        if (this.value === 'hline') {
+            if (fabric.PatternBrush) {
+               var vLinePatternBrush = new fabric.PatternBrush(mememaker.canvas);
+               vLinePatternBrush.getPatternSrc = function() {
+           
+                 var patternCanvas = fabric.document.createElement('canvas');
+                 patternCanvas.width = patternCanvas.height = 10;
+                 var ctx = patternCanvas.getContext('2d');
+           
+                 ctx.strokeStyle = this.color;
+                 ctx.lineWidth = 5;
+                 ctx.beginPath();
+                 ctx.moveTo(0, 5);
+                 ctx.lineTo(10, 5);
+                 ctx.closePath();
+                 ctx.stroke();
+           
+                 return patternCanvas;
+               };
+            }
+            console.log (vLinePatternBrush);
+            mememaker.canvas.freeDrawingBrush = vLinePatternBrush;
+        }
+        else if (this.value === 'vline') {
+            if (fabric.PatternBrush) {
+           
+                var hLinePatternBrush = new fabric.PatternBrush(mememaker.canvas);
+                hLinePatternBrush.getPatternSrc = function() {
+            
+                  var patternCanvas = fabric.document.createElement('canvas');
+                  patternCanvas.width = patternCanvas.height = 10;
+                  var ctx = patternCanvas.getContext('2d');
+            
+                  ctx.strokeStyle = this.color;
+                  ctx.lineWidth = 5;
+                  ctx.beginPath();
+                  ctx.moveTo(5, 0);
+                  ctx.lineTo(5, 10);
+                  ctx.closePath();
+                  ctx.stroke();
+            
+                  return patternCanvas;
+                };
+            }
+            mememaker.canvas.freeDrawingBrush = hLinePatternBrush;
+        }
+        else if (this.value === 'square') {
+            if (fabric.PatternBrush) {
+           
+                var squarePatternBrush = new fabric.PatternBrush(mememaker.canvas);
+                squarePatternBrush.getPatternSrc = function() {
+                
+                    var squareWidth = 10, squareDistance = 2;
+              
+                    var patternCanvas = fabric.document.createElement('canvas');
+                    patternCanvas.width = patternCanvas.height = squareWidth + squareDistance;
+                    var ctx = patternCanvas.getContext('2d');
+              
+                    ctx.fillStyle = this.color;
+                    ctx.fillRect(0, 0, squareWidth, squareWidth);
+              
+                    return patternCanvas;
+                  };
+            }
+            mememaker.canvas.freeDrawingBrush = squarePatternBrush;
+        }
+        else if (this.value === 'diamond') {
+            if (fabric.PatternBrush) {
+           
+                 var diamondPatternBrush = new fabric.PatternBrush(mememaker.canvas);
+                diamondPatternBrush.getPatternSrc = function() {
+                
+                      var squareWidth = 10, squareDistance = 5;
+                      var patternCanvas = fabric.document.createElement('canvas');
+                      var rect = new fabric.Rect({
+                        width: squareWidth,
+                        height: squareWidth,
+                        angle: 45,
+                        fill: this.color
+                      });
+                      var canvasWidth = rect.getBoundingRectWidth();
+
+                        patternCanvas.width = patternCanvas.height = canvasWidth + squareDistance;
+                        rect.set({ left: canvasWidth / 2, top: canvasWidth / 2 });
+                  
+                        var ctx = patternCanvas.getContext('2d');
+                        rect.render(ctx);
+                  
+                        return patternCanvas;
+                }
+            }
+            mememaker.canvas.freeDrawingBrush = diamondPatternBrush;
+        }
+        else if (this.value === 'texture') {
+            if (fabric.PatternBrush) {
+                var img = new Image();
+                img.src = 'img/texture/texture_honey.png';
+            
+                var texturePatternBrush = new fabric.PatternBrush(mememaker.canvas);
+                texturePatternBrush.source = img;
+            }
+            mememaker.canvas.freeDrawingBrush = texturePatternBrush;
+        }
+        else {
+            mememaker.canvas.freeDrawingBrush = new fabric[this.value + 'Brush'](mememaker.canvas);
+        }
+    
+        if (mememaker.canvas.freeDrawingBrush) {
+            mememaker.canvas.freeDrawingBrush.color = $("#draw-fill").val ();
+            mememaker.canvas.freeDrawingBrush.width = mememaker.draweditor.lineWidth.getValue();
+            mememaker.canvas.freeDrawingBrush.shadowBlur = mememaker.draweditor.shadowWidth.getValue();
+        }
+  });
 }
 
 mememaker.draweditor.enable = function (obj) {
