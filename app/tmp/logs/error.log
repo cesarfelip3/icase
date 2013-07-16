@@ -1880,3 +1880,501 @@ Stack Trace:
 #1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(ShopController), Object(CakeRequest), Object(CakeResponse))
 #2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #3 {main}
+2013-07-16 00:54:45 Error: [MissingActionException] Action ShopController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'ShopController',
+  'action' => 'js',
+)
+Request URL: /icase/shop/js/bootstrapslider/css/slider.css
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(ShopController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 00:54:45 Error: [MissingActionException] Action ShopController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'ShopController',
+  'action' => 'js',
+)
+Request URL: /icase/shop/js/colorpicker2/css/bootstrap-colorpicker.css
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(ShopController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 00:54:45 Error: [MissingActionException] Action ShopController::css() could not be found.
+Exception Attributes: array (
+  'controller' => 'ShopController',
+  'action' => 'css',
+)
+Request URL: /icase/shop/css/style.css
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(ShopController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 00:54:46 Error: [MissingActionException] Action ShopController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'ShopController',
+  'action' => 'js',
+)
+Request URL: /icase/shop/js/slider/jquery.responsivethumbnailgallery.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(ShopController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 00:54:46 Error: [MissingActionException] Action ShopController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'ShopController',
+  'action' => 'js',
+)
+Request URL: /icase/shop/js/libs/jquery.ui.touch-punch.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(ShopController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 00:54:46 Error: [MissingActionException] Action ShopController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'ShopController',
+  'action' => 'js',
+)
+Request URL: /icase/shop/js/menu/jquery.ct.3LevelAccordion.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(ShopController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 00:54:46 Error: [MissingActionException] Action ShopController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'ShopController',
+  'action' => 'js',
+)
+Request URL: /icase/shop/js/slider/jquery.onebyone.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(ShopController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 00:54:46 Error: [MissingActionException] Action ShopController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'ShopController',
+  'action' => 'js',
+)
+Request URL: /icase/shop/js/slider/jquery.touchwipe.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(ShopController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 00:54:47 Error: [MissingActionException] Action ShopController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'ShopController',
+  'action' => 'js',
+)
+Request URL: /icase/shop/js/include/jquery.fitvids.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(ShopController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 00:54:47 Error: [MissingActionException] Action ShopController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'ShopController',
+  'action' => 'js',
+)
+Request URL: /icase/shop/js/include/jquery.equal-heights.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(ShopController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 00:54:48 Error: [MissingActionException] Action ShopController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'ShopController',
+  'action' => 'js',
+)
+Request URL: /icase/shop/js/include/jquery.select2.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(ShopController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 00:54:48 Error: [MissingActionException] Action ShopController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'ShopController',
+  'action' => 'js',
+)
+Request URL: /icase/shop/js/include/bootstrap.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(ShopController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 00:54:48 Error: [MissingActionException] Action ShopController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'ShopController',
+  'action' => 'js',
+)
+Request URL: /icase/shop/js/include/jquery.todo.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(ShopController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 00:54:48 Error: [MissingActionException] Action ShopController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'ShopController',
+  'action' => 'js',
+)
+Request URL: /icase/shop/js/include/jquery.tweet.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(ShopController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 00:54:48 Error: [MissingActionException] Action ShopController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'ShopController',
+  'action' => 'js',
+)
+Request URL: /icase/shop/js/include/jquery.pubsub.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(ShopController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 00:54:49 Error: [MissingActionException] Action ShopController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'ShopController',
+  'action' => 'js',
+)
+Request URL: /icase/shop/js/bootstrapslider/js/bootstrap-slider.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(ShopController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 00:54:49 Error: [MissingActionException] Action ShopController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'ShopController',
+  'action' => 'js',
+)
+Request URL: /icase/shop/js/config.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(ShopController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 00:54:49 Error: [MissingActionException] Action ShopController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'ShopController',
+  'action' => 'js',
+)
+Request URL: /icase/shop/js/colorpicker2/js/bootstrap-colorpicker.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(ShopController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 00:54:49 Error: [MissingActionException] Action ShopController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'ShopController',
+  'action' => 'js',
+)
+Request URL: /icase/shop/js/slider/jquery.touchwipe.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(ShopController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 00:54:49 Error: [MissingActionException] Action ShopController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'ShopController',
+  'action' => 'js',
+)
+Request URL: /icase/shop/js/slider/jquery.onebyone.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(ShopController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 00:54:50 Error: [MissingActionException] Action ShopController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'ShopController',
+  'action' => 'js',
+)
+Request URL: /icase/shop/js/slider/jquery.touchwipe.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(ShopController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 00:54:50 Error: [MissingActionException] Action ShopController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'ShopController',
+  'action' => 'js',
+)
+Request URL: /icase/shop/js/include/jquery.fitvids.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(ShopController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 00:54:51 Error: [MissingActionException] Action ShopController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'ShopController',
+  'action' => 'js',
+)
+Request URL: /icase/shop/js/include/jquery.tweet.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(ShopController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 00:54:51 Error: [MissingActionException] Action ShopController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'ShopController',
+  'action' => 'js',
+)
+Request URL: /icase/shop/js/include/jquery.equal-heights.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(ShopController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 00:54:51 Error: [MissingActionException] Action ShopController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'ShopController',
+  'action' => 'js',
+)
+Request URL: /icase/shop/js/include/jquery.todo.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(ShopController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 00:54:52 Error: [MissingActionException] Action ShopController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'ShopController',
+  'action' => 'js',
+)
+Request URL: /icase/shop/js/include/jquery.pubsub.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(ShopController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 00:54:52 Error: [MissingActionException] Action ShopController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'ShopController',
+  'action' => 'js',
+)
+Request URL: /icase/shop/js/include/jquery.select2.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(ShopController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 00:54:52 Error: [MissingActionException] Action ShopController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'ShopController',
+  'action' => 'js',
+)
+Request URL: /icase/shop/js/include/bootstrap.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(ShopController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 00:54:53 Error: [MissingActionException] Action ShopController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'ShopController',
+  'action' => 'js',
+)
+Request URL: /icase/shop/js/config.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(ShopController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 00:54:53 Error: [MissingActionException] Action ShopController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'ShopController',
+  'action' => 'js',
+)
+Request URL: /icase/shop/js/bootstrapslider/css/slider.css
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(ShopController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 00:54:53 Error: [MissingActionException] Action ShopController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'ShopController',
+  'action' => 'js',
+)
+Request URL: /icase/shop/js/bootstrapslider/js/bootstrap-slider.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(ShopController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 00:54:54 Error: [MissingActionException] Action ShopController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'ShopController',
+  'action' => 'js',
+)
+Request URL: /icase/shop/js/colorpicker2/css/bootstrap-colorpicker.css
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(ShopController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 00:54:54 Error: [MissingActionException] Action ShopController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'ShopController',
+  'action' => 'js',
+)
+Request URL: /icase/shop/js/colorpicker2/js/bootstrap-colorpicker.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(ShopController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 00:57:41 Error: Fatal Error (1): Call to undefined function finfo_open() in [C:\Program Files (x86)\Ampps\www\icase\app\Controller\MediaController.php, line 151]
+2013-07-16 00:57:41 Error: [FatalErrorException] Call to undefined function finfo_open()
+Request URL: /icase/media/upload
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Error\ErrorHandler.php(184): ErrorHandler::handleFatalError(1, 'Call to undefin...', 'C:\Program File...', 151)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to undefin...', 'C:\Program File...', 151, Array)
+#2 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Core\App.php(930): call_user_func('ErrorHandler::h...', 1, 'Call to undefin...', 'C:\Program File...', 151, Array)
+#3 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Core\App.php(903): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-07-16 01:11:40 Error: Fatal Error (1): Call to undefined function finfo_open() in [C:\Program Files (x86)\Ampps\www\icase\app\Controller\MediaController.php, line 151]
+2013-07-16 01:11:40 Error: [FatalErrorException] Call to undefined function finfo_open()
+Request URL: /icase/media/upload
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Error\ErrorHandler.php(184): ErrorHandler::handleFatalError(1, 'Call to undefin...', 'C:\Program File...', 151)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to undefin...', 'C:\Program File...', 151, Array)
+#2 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Core\App.php(930): call_user_func('ErrorHandler::h...', 1, 'Call to undefin...', 'C:\Program File...', 151, Array)
+#3 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Core\App.php(903): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-07-16 01:14:39 Error: Fatal Error (1): Call to undefined function finfo_open() in [C:\Program Files (x86)\Ampps\www\icase\app\Controller\MediaController.php, line 151]
+2013-07-16 01:14:39 Error: [FatalErrorException] Call to undefined function finfo_open()
+Request URL: /icase/media/upload
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Error\ErrorHandler.php(184): ErrorHandler::handleFatalError(1, 'Call to undefin...', 'C:\Program File...', 151)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to undefin...', 'C:\Program File...', 151, Array)
+#2 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Core\App.php(930): call_user_func('ErrorHandler::h...', 1, 'Call to undefin...', 'C:\Program File...', 151, Array)
+#3 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Core\App.php(903): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-07-16 01:15:27 Error: Fatal Error (1): Call to undefined function finfo_open() in [C:\Program Files (x86)\Ampps\www\icase\app\Controller\MediaController.php, line 151]
+2013-07-16 01:15:27 Error: [FatalErrorException] Call to undefined function finfo_open()
+Request URL: /icase/media/upload
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Error\ErrorHandler.php(184): ErrorHandler::handleFatalError(1, 'Call to undefin...', 'C:\Program File...', 151)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to undefin...', 'C:\Program File...', 151, Array)
+#2 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Core\App.php(930): call_user_func('ErrorHandler::h...', 1, 'Call to undefin...', 'C:\Program File...', 151, Array)
+#3 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Core\App.php(903): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-07-16 01:15:54 Error: Fatal Error (1): Call to undefined function finfo_open() in [C:\Program Files (x86)\Ampps\www\icase\app\Controller\MediaController.php, line 151]
+2013-07-16 01:15:54 Error: [FatalErrorException] Call to undefined function finfo_open()
+Request URL: /icase/media/upload
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Error\ErrorHandler.php(184): ErrorHandler::handleFatalError(1, 'Call to undefin...', 'C:\Program File...', 151)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to undefin...', 'C:\Program File...', 151, Array)
+#2 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Core\App.php(930): call_user_func('ErrorHandler::h...', 1, 'Call to undefin...', 'C:\Program File...', 151, Array)
+#3 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Core\App.php(903): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-07-16 01:22:35 Error: Fatal Error (1): Call to undefined function finfo_open() in [C:\Program Files (x86)\Ampps\www\icase\app\Controller\MediaController.php, line 155]
+2013-07-16 01:22:35 Error: [FatalErrorException] Call to undefined function finfo_open()
+Request URL: /icase/media/upload
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Error\ErrorHandler.php(184): ErrorHandler::handleFatalError(1, 'Call to undefin...', 'C:\Program File...', 155)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to undefin...', 'C:\Program File...', 155, Array)
+#2 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Core\App.php(930): call_user_func('ErrorHandler::h...', 1, 'Call to undefin...', 'C:\Program File...', 155, Array)
+#3 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Core\App.php(903): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-07-16 01:52:17 Error: [MissingControllerException] Controller class RegistersController could not be found.
+Exception Attributes: array (
+  'class' => 'RegistersController',
+  'plugin' => NULL,
+)
+Request URL: /icase/registers
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-16 01:52:39 Error: [MissingViewException] View file "C:\Program Files (x86)\Ampps\www\icase\app\View\Registers\index.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\Program Files (x86)\\Ampps\\www\\icase\\app\\View\\Registers\\index.ctp',
+)
+Request URL: /icase/registers
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\View\View.php(468): View->_getViewFileName(NULL)
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Controller\Controller.php(948): View->render(NULL, NULL)
+#2 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(194): Controller->render()
+#3 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2013-07-16 01:53:06 Error: [MissingViewException] View file "C:\Program Files (x86)\Ampps\www\icase\app\View\Registers\index.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\Program Files (x86)\\Ampps\\www\\icase\\app\\View\\Registers\\index.ctp',
+)
+Request URL: /icase/registers
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\View\View.php(468): View->_getViewFileName(NULL)
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Controller\Controller.php(948): View->render(NULL, NULL)
+#2 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(194): Controller->render()
+#3 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2013-07-16 01:58:19 Error: [MissingTableException] Table cases for model Register was not found in datasource default.
+Exception Attributes: array (
+  'table' => 'cases',
+  'class' => 'Register',
+  'ds' => 'default',
+)
+Request URL: /icase/registers
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Model\Model.php(3244): Model->setSource('cases')
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Model\Model.php(1319): Model->getDataSource()
+#2 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\View\Helper\FormHelper.php(199): Model->schema()
+#3 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\View\Helper\FormHelper.php(453): FormHelper->_introspectModel('Register', 'fields')
+#4 C:\Program Files (x86)\Ampps\www\icase\app\View\Registers\index.ctp(3): FormHelper->create()
+#5 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\View\View.php(945): include('C:\Program File...')
+#6 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\View\View.php(907): View->_evaluate('C:\Program File...', Array)
+#7 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\View\View.php(471): View->_render('C:\Program File...')
+#8 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Controller\Controller.php(948): View->render(NULL, NULL)
+#9 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(194): Controller->render()
+#10 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#11 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2013-07-16 01:59:48 Error: [MissingTableException] Table users for model Register was not found in datasource default.
+Exception Attributes: array (
+  'table' => 'users',
+  'class' => 'Register',
+  'ds' => 'default',
+)
+Request URL: /icase/registers
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Model\Model.php(3244): Model->setSource('users')
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Model\Model.php(1319): Model->getDataSource()
+#2 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\View\Helper\FormHelper.php(199): Model->schema()
+#3 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\View\Helper\FormHelper.php(453): FormHelper->_introspectModel('Register', 'fields')
+#4 C:\Program Files (x86)\Ampps\www\icase\app\View\Registers\index.ctp(3): FormHelper->create()
+#5 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\View\View.php(945): include('C:\Program File...')
+#6 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\View\View.php(907): View->_evaluate('C:\Program File...', Array)
+#7 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\View\View.php(471): View->_render('C:\Program File...')
+#8 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Controller\Controller.php(948): View->render(NULL, NULL)
+#9 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(194): Controller->render()
+#10 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#11 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
