@@ -20,7 +20,7 @@
                             <hr/>
                             <p>
                                 <a href="javascript:" data-action="new" title="remove"><i class="icon-remove-sign icon-3x"></i> clear canvas</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                                <input id="canvas-background-color" type="text" readonly="readonly" class="input-mini" placeholder="#ffffff"/>
+                                <!--<input id="canvas-background-color" type="text" readonly="readonly" class="input-mini" placeholder="#ffffff"/>-->
                             </p>
                         </div>
                     </div>
@@ -102,15 +102,31 @@
                         </div>
                     </div><!-- Image Editor -->
                     <div class="row-fluid draw-editor" style="width:100%;border:1px solid #ccc;background-color:white;margin-top:10px;padding:5px;">
-                      <div class="span12">
-                        <form class="form-inline">
-                            <label><span class="label label-info">Draw Property </span></label>
-                            <label>Width </label>
-                            <input id="draw-width" type="text" class="input-mini" placeholder="width" value="1" />
-                            <label>Color </label>
+                        <div class="span6">
+                            <div><b>Line Width</b></div>
+                            <div><input type="text" value="" data-slider-min="1" data-slider-max="30" data-slider-step="1" data-slider-value="1" data-slider-id="RC" id="draw-width" data-slider-selection="none" data-slider-tooltip="show" data-slider-handle="square" style="width:150px"></div>
+                        </div>
+                        <div class="span6">
+                            <div style="clear:both;display:block;"><b>Shadow Width</b></div>
+                            <div><input type="text" value="" data-slider-min="1" data-slider-max="30" data-slider-step="1" data-slider-value="1" data-slider-id="RC" id="draw-shadow-width" data-slider-selection="none" data-slider-tooltip="show" data-slider-handle="square" style="width:150px" ></div>
+                        </div>
+                        <div style="clear:both"></div>
+                        <div style="margin-top:10px;display:block;">
                             <input id="draw-fill" type="text" class="input-mini" readonly="readonly" placeholder="color" value="#000000" />
-                        </form>
-                      </div>
+                            
+                            <select id="draw-mode-selector" style="width:auto !important;margin-top:1px;">
+                                <option>Pencil</option>
+                                <option>Circle</option>
+                                <option>Spray</option>
+                                <option>Pattern</option>
+                  
+                                <option>hline</option>
+                                <option>vline</option>
+                                <option>square</option>
+                                <option>diamond</option>
+                                <option>texture</option>
+                            </select>
+                        </div>
                     </div><!-- draw editor -->
 
                     <!-- Form Name -->
