@@ -10,6 +10,10 @@ class MediaController extends AppController {
     );
 
     public function upload() {
+        
+        error_reporting(-1);
+	ini_set('display_errors', 'On');
+        
         $this->autoRender = false;
         header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
         header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
