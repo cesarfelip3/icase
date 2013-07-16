@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.29)
 # Database: icase
-# Generation Time: 2013-07-16 10:41:57 +0000
+# Generation Time: 2013-07-16 10:48:21 +0000
 # ************************************************************
 
 
@@ -217,7 +217,10 @@ CREATE TABLE `users` (
   `password` varchar(32) DEFAULT NULL,
   `address` varchar(512) DEFAULT NULL,
   `phone` varchar(64) DEFAULT NULL,
-  `buyer` int(11) NOT NULL DEFAULT '0',
+  `confirmed` int(11) NOT NULL DEFAULT '0',
+  `email_verfied` int(11) DEFAULT NULL,
+  `verfied_code` varchar(128) DEFAULT NULL,
+  `verfied_expire` int(11) DEFAULT NULL,
   `created` int(11) DEFAULT NULL,
   `modified` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)

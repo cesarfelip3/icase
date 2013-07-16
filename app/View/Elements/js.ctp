@@ -5,54 +5,52 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 <script>window.jQuery.ui || document.write('<script src="js/libs/jquery.ui.min.js"><\/script>')</script>
 
+<?php
+
+$js_jquery_ui = array (
+    "libs/jquery.ui.touch-punch.min.js",
+    "http://maps.google.com/maps/api/js?sensor=true",
+    "menu/jquery.ct.3LevelAccordion.min.js",
+    "slider/jquery.responsivethumbnailgallery.min.js",
+    "slider/jquery.onebyone.min.js",
+    "slider/jquery.touchwipe.min.js",
+    "include/jquery.fitvids.min.js",
+    "include/jquery.tweet.min.js",
+    "include/jquery.equal-heights.min.js",
+    "include/jquery.todo.min.js",
+    "include/jquery.pubsub.min.js",
+    "include/jquery.select2.min.js",
+    "include/bootstrap.min.js",
+    "config.js"
+);
+
+?>
+
 <!-- RECOMMENDED: For (IE6 - IE8) CSS3 pseudo-classes and attribute selectors -->
 <!--[if lt IE 9]> 
    <script src="js/include/selectivizr.min.js"></script>                   
 <![endif]-->
 
-<script src="js/libs/jquery.ui.touch-punch.min.js"></script>                <!-- REQUIRED:  A small hack that enables the use of touch events on mobile -->
+<?php echo $this->Html->script($js_jquery_ui); ?>
 
-<!-- Add 'http:' for testing locally -->
-<script src="http://maps.google.com/maps/api/js?sensor=true" type="text/javascript"></script>
-
-<script src="js/menu/jquery.ct.3LevelAccordion.min.js"></script>            <!-- REQUIRED: Accordion Menu with filter-->
-<script src="js/slider/jquery.responsivethumbnailgallery.min.js"></script>  <!-- REQUIRED: Responsive Gallery Plugin -->
-<script src="js/slider/jquery.onebyone.min.js"></script>                    <!-- REQUIRED: Slider Plugin -->
-<script src="js/slider/jquery.touchwipe.min.js"></script>                   <!-- REQUIRED: Plugin to make Slider Plugin work on Touch Devices -->
-<script src="js/slider/jquery.onebyone.min.js"></script>                    <!-- REQUIRED: Slider Plugin -->
-<script src="js/slider/jquery.touchwipe.min.js"></script>                   <!-- REQUIRED: Plugin to make Slider Plugin work on Touch Devices -->
-
-<script src="js/include/jquery.fitvids.min.js"></script>                    <!-- RECOMMENDED: Responsive videos -->         
-<script src="js/include/jquery.tweet.min.js"></script>                      <!-- OPTIONAL: Twitter display plugin -->
-<script src="js/include/jquery.equal-heights.min.js"></script>              <!-- RECOMMENDED: Plugin to keep div heights consistant --> 
-<script src="js/include/jquery.todo.min.js"></script>                       <!-- REQUIRED: Plugin to save "add to short list" items -->
-<script src="js/include/jquery.pubsub.min.js"></script>                     <!-- REQUIRED: (If todo.js is in use) Dependent with todo.js -->
-<script src="js/include/jquery.select2.min.js"></script>                    <!-- RECOMMENDED: Custom jQuery/searchable dropdowns -->    
-<script src="js/include/bootstrap.min.js"></script>                         <!-- REQUIRED: For BootStrap build -->
-
-<script src="js/config.js"></script>
 <script type="text/javascript"></script>
 $(function() {
-    //$( "#slider" ).slider();
+    $( "#slider" ).slider();
 });
 </script>   
-
 <!-- DO NOT REMOVE: Contains major plugin initiations and functions -->
 <!--<![endif]-->
 
-<!-- jquery range -->
-<!--<script type="text/javascript" src = "js/tools/jquery.tools.min.js"></script>-->
-<link rel="stylesheet" href="js/bootstrapslider/css/slider.css">
-<script type="text/javascript" src="js/bootstrapslider/js/bootstrap-slider.js"></script>
+<link rel="stylesheet" href="<?php echo $this->webroot; ?>js/bootstrapslider/css/slider.css">
+<script type="text/javascript" src="<?php echo $this->webroot; ?>js/bootstrapslider/js/bootstrap-slider.js"></script>
 <!-- colorpicker -->
-<link rel="stylesheet" href="js/colorpicker2/css/bootstrap-colorpicker.css">
-<script type="text/javascript" src="js/colorpicker2/js/bootstrap-colorpicker.js"></script>
-<!--<script type="text/javascript" src="js/colorpicker2/js/docs.js"></script>-->
+<link rel="stylesheet" href="<?php echo $this->webroot; ?>js/colorpicker2/css/bootstrap-colorpicker.css">
+<script type="text/javascript" src="<?php echo $this->webroot; ?>js/colorpicker2/js/bootstrap-colorpicker.js"></script>/
 <!-- fabric.js -->
 <script src="http://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.2.0/fabric.all.min.js"></script>
-    <!--<script src="js/fabric.js"></script>-->
-<script>
-    
+<!--<<script src="<?php echo $this->webroot; ?>js/fabricjs/fabric.min.js">-->
+
+<script>  
 var $ = jQuery.noConflict ();
 
 var mememaker = {
@@ -1039,9 +1037,40 @@ mememaker.tools.init = function (id) {
         }
     }
 //
+
+    /*
+    $(document).ready (
+       function () {
+          $.ajax({
+                url: "http://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.2.0/fabric.all.min.js",
+                type: "GET",
+                beforeSend: function(xhr) {
+                    //$("#ajax-indicator").show();
+                    console.log("working....");
+                }
+            }).done(function(data) {
+                alert (data);
+                //$("#fabric").html ("<script>" + data + "<\/script>");
+                console.log ("done");
+                mememaker.init('c1');
+                mememaker.tools.init(".tools");
+                mememaker.tools.newtemplate("<?php echo $this->webroot . "img/template/iphone.png"; ?>");
+                mememaker.texteditor.init(".text-editor");
+                mememaker.imageeditor.init(".image-editor");
+                mememaker.draweditor.init(".draw-editor");
+            }).fail(function() {
+            
+            });
+       }
+    );*/
+    
     $(document).ready(
             function() {
                 //alert ("hello");
+                $("#btn-loading-canvas").hide (0);
+                $("#btn-choose-device").show (1000);
+                $(".creator-parts").delay(500).show(0).css('visibility', 'visible');
+                
                 mememaker.init('c1');
                 mememaker.tools.init(".tools");
                 mememaker.tools.newtemplate("<?php echo $this->webroot . "img/template/iphone.png"; ?>");
@@ -1057,5 +1086,4 @@ mememaker.tools.init = function (id) {
                 )
             }
     );
-
 </script>

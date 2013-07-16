@@ -34,7 +34,7 @@
 
 // Icases Routes
 
-	Router::connect('/createcase', array('controller' => 'newcases', 'action' => 'index'));
+	Router::connect('/createcase', array('controller' => 'case', 'action' => 'newcase'));
 
 
 /**

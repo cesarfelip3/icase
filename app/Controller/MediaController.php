@@ -8,6 +8,11 @@ class MediaController extends AppController {
         "message" => "",
         "files" => array(),
     );
+    
+    public function beforeFilter() {
+        $this->Auth->allow ();
+	parent::beforeFilter();
+    }
 
     public function upload() {
         

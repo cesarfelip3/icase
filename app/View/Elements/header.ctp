@@ -17,17 +17,12 @@
                 <div class="nav-collapse">
                     <ul class="nav">
                         <li>
-                            <a href="<? $this->Html->url('/', true); ?>">Home</a>
+                            <a href="<?php echo $this->Html->Url ("/", true); ?>">Home</a>
                         </li>
                         <li class="active">
-                            <a href="<? $this->Html->url('/', true); ?>createcase">Create your case</a>
+                            <a href="<?php echo $this->Html->Url ("/createcase", false); ?>">Create your case</a>
                         </li>
-
-
-
                     </ul>
-
-
                 </div><!-- end nav-collapse -->
             </div><!-- end container-->
         </div><!-- end navbar-inner -->

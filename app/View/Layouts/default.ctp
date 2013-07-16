@@ -21,12 +21,13 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
         <!-- Load Google Web Font -->
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
         <!-- Load style.css: contains all css files concatenated to one single file -->
-        <link href="css/style.css" rel="stylesheet">
+        <?php echo $this->Html->css ("style.css"); ?>
+        <!-- link href="css/style.css" rel="stylesheet" -->
         <!--<![endif]-->
 
         <!-- Load HTMLShiv for IE9 HTML5 support -->
         <!--[if lt IE 9]>
-                <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->	
 
         <!-- Your Favoriate Icons -->
