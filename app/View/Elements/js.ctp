@@ -199,238 +199,248 @@ mememaker.tools.init = function (id) {
                 var action = $(this).data('action');
 
                 switch (action) {
-                    case 'new':
-                        mememaker.tools.new ();
-                        break;
-                    case 'info':
-                        break;
-                    case 'remove':
-                        mememaker.tools.remove();
-                        break;
-                    case 'group':
-                        mememaker.tools.group();
-                        break;
-                    case 'backward':
-                        mememaker.tools.backward();
-                        break;
-                    case 'forward':
-                        mememaker.tools.forward();
-                        break;
-                    case 'back':
-                        mememaker.tools.toBack();
-                        break;
-                    case 'front':
-                        mememaker.tools.toFront();
-                        break;
-                    case 'flipx':
-                        mememaker.tools.flip (0);
-                        break;
-                    case 'flipy':
-                        mememaker.tools.flip (1);
-                        break;
-                    case 'newtext':
-                        mememaker.tools.newtext();
-                        break;
-                    case 'newpic':
-                        break;
-                    case '+height':
-                        mememaker.tools.resize(true, this);
-                        break;
-                    case '-height':
-                        mememaker.tools.resize(false, this);
-                        break;
-                    case 'preview':
-                        mememaker.tools.preview();
-                        break;
-                    case 'backgroundcolor':
-                        //mememaker.tools.backgroundcolor ();
-                        break;
-                    case 'backgroundimage':
-                        mememaker.tools.backgroundimage("img/muffin.png");
-                        break;
-                    case 'draw':
-                        mememaker.draweditor.enable ($(this));
-                        break;
-                    default:
-                        break;
-                }
+                case 'new':
+                    mememaker.tools.new ();
+                    break;
+                case 'info':
+                    break;
+                case 'remove':
+                    mememaker.tools.remove();
+                    break;
+                case 'group':
+                    mememaker.tools.group();
+                    break;
+                case 'backward':
+                    mememaker.tools.backward();
+                    break;
+                case 'forward':
+                    mememaker.tools.forward();
+                    break;
+                case 'back':
+                    mememaker.tools.toBack();
+                    break;
+                case 'front':
+                    mememaker.tools.toFront();
+                    break;
+                case 'flipx':
+                    mememaker.tools.flip(0);
+                    break;
+                case 'flipy':
+                    mememaker.tools.flip(1);
+                    break;
+                case 'newtext':
+                    mememaker.tools.newtext();
+                    break;
+                case 'newpic':
+                    break;
+                case '+height':
+                    mememaker.tools.resize(true, this);
+                    break;
+                case '-height':
+                    mememaker.tools.resize(false, this);
+                    break;
+                case 'preview':
+                    mememaker.tools.preview();
+                    break;
+                case 'backgroundcolor':
+                    //mememaker.tools.backgroundcolor ();
+                    break;
+                case 'backgroundimage':
+                    mememaker.tools.backgroundimage("img/muffin.png");
+                    break;
+                case 'draw':
+                    mememaker.draweditor.enable($(this));
+                    break;
+                default:
+                    break;
             }
-    );
-}
+        }
+        );
+    }
 
-mememaker.tools.new = function() {
-    mememaker.backgroundColor = 'white';
-    mememaker.lastTextX = 150;
-    mememaker.lastTextY = 10;
-    mememaker.lastImageX = 10;
-    mememaker.lastImageY = 10;
-    mememaker.canvas.backgroundColor = mememaker.backgroundColor;
-    //mememaker.canvas.backgroundImage = null;
-    mememaker.canvas.clear();
-}
+    mememaker.tools.new = function() {
+        mememaker.backgroundColor = 'white';
+        mememaker.lastTextX = 150;
+        mememaker.lastTextY = 10;
+        mememaker.lastImageX = 10;
+        mememaker.lastImageY = 10;
+        mememaker.canvas.backgroundColor = mememaker.backgroundColor;
+        //mememaker.canvas.backgroundImage = null;
+        mememaker.canvas.clear();
+    }
 
-mememaker.tools.remove = function() {
-    var el = mememaker.canvas.getActiveObject();
+    mememaker.tools.remove = function() {
+        var el = mememaker.canvas.getActiveObject();
 
-    if (el == null || el == undefined) {
-        el = mememaker.canvas.getActiveGroup();
         if (el == null || el == undefined) {
-            return;
-        }
+            el = mememaker.canvas.getActiveGroup();
+            if (el == null || el == undefined) {
+                return;
+            }
 
-        //alert (el);
-        mememaker.canvas.discardActiveGroup();
-        for (i = 0; i < el.getObjects().length; ++i) {
-            mememaker.canvas.remove(el.item(i));
-        }
-
-        return;
-    }
-
-    mememaker.canvas.remove(el);
-}
-
-mememaker.tools.group = function() {
-    var el = mememaker.canvas.getActiveGroup();
-    if (el == null || el == undefined) {
-        return;
-    }
-
-    var texts = [];
-    var images = [];
-    var i = 0;
-
-    for (i = 0; i < el.getObjects().length; ++i) {
-
-        if (el.item(i).isType('image')) {
-            texts[i] = null;
-        } else {
-            texts[i] = el.item(i).clone();
-        }
-    }
-
-    for (i = 0; i < el.getObjects().length; ++i) {
-
-        if (el.item(i).isType('image')) {
-            images[i] = el.item(i);
-        } else {
-            images[i] = null;
-        }
-    }
-
-    function cloneImages(j, items, images, gr)
-    {
-        if (j >= images.length) {
-            var group = new fabric.Group(
-                    items,
-                    {
-                        'left': gr.left,
-                        'top': gr.top
-                    }
-            );
-
+            //alert (el);
             mememaker.canvas.discardActiveGroup();
-            for (i = 0; i < items.length; ++i) {
-                mememaker.canvas.remove(gr.item(i));
+            for (i = 0; i < el.getObjects().length; ++i) {
+                mememaker.canvas.remove(el.item(i));
             }
 
-            mememaker.canvas.add(group);
             return;
         }
 
-        if (images[j] != null) {
-            images[j].clone(
-                    function(el) {
-                        items[j] = el;
-                        cloneImages(j + 1, items, images, gr);
-                    }, null
-                    )
-        } else {
-            cloneImages(j + 1, items, images, gr);
-        }
+        mememaker.canvas.remove(el);
     }
 
-    cloneImages(0, texts, images, el);
-}
-
-mememaker.tools.backward = function() {
-    var el = mememaker.canvas.getActiveObject();
-
-    if (el == null || el == undefined) {
-        el = mememaker.canvas.getActiveGroup();
+    mememaker.tools.group = function() {
+        var el = mememaker.canvas.getActiveGroup();
         if (el == null || el == undefined) {
             return;
         }
 
-        //alert (el);
+        var texts = [];
+        var images = [];
+        var i = 0;
+
+        for (i = 0; i < el.getObjects().length; ++i) {
+
+            if (el.item(i).isType('image')) {
+                texts[i] = null;
+            } else {
+                texts[i] = el.item(i).clone();
+            }
+        }
+
+        for (i = 0; i < el.getObjects().length; ++i) {
+
+            if (el.item(i).isType('image')) {
+                images[i] = el.item(i);
+            } else {
+                images[i] = null;
+            }
+        }
+
+        function cloneImages(j, items, images, gr)
+        {
+            if (j >= images.length) {
+                var group = new fabric.Group(
+                        items,
+                        {
+                            'left': gr.left,
+                            'top': gr.top
+                        }
+                );
+
+                mememaker.canvas.discardActiveGroup();
+                for (i = 0; i < items.length; ++i) {
+                    mememaker.canvas.remove(gr.item(i));
+                }
+
+                mememaker.canvas.add(group);
+                return;
+            }
+
+            if (images[j] != null) {
+                images[j].clone(
+                        function(el) {
+                            items[j] = el;
+                            cloneImages(j + 1, items, images, gr);
+                        }, null
+                        )
+            } else {
+                cloneImages(j + 1, items, images, gr);
+            }
+        }
+
+        cloneImages(0, texts, images, el);
+    }
+
+    mememaker.tools.backward = function() {
+        var el = mememaker.canvas.getActiveObject();
+
+        if (el == null || el == undefined) {
+            el = mememaker.canvas.getActiveGroup();
+            if (el == null || el == undefined) {
+                return;
+            }
+
+            //alert (el);
+            el.sendBackwards();
+
+            return;
+        }
+
         el.sendBackwards();
-
-        return;
     }
 
-    el.sendBackwards();
-}
+    mememaker.tools.forward = function() {
+        var el = mememaker.canvas.getActiveObject();
 
-mememaker.tools.forward = function() {
-    var el = mememaker.canvas.getActiveObject();
-
-    if (el == null || el == undefined) {
-        el = mememaker.canvas.getActiveGroup();
         if (el == null || el == undefined) {
+            el = mememaker.canvas.getActiveGroup();
+            if (el == null || el == undefined) {
+                return;
+            }
+
+            //alert (el);
+            el.bringForward();
+
             return;
         }
 
-        //alert (el);
         el.bringForward();
-
-        return;
     }
 
-    el.bringForward();
-}
+    mememaker.tools.toBack = function() {
+        var el = mememaker.canvas.getActiveObject();
 
-mememaker.tools.toBack = function() {
-    var el = mememaker.canvas.getActiveObject();
-
-    if (el == null || el == undefined) {
-        el = mememaker.canvas.getActiveGroup();
         if (el == null || el == undefined) {
+            el = mememaker.canvas.getActiveGroup();
+            if (el == null || el == undefined) {
+                return;
+            }
+
+            //alert (el);
+            el.sendToBack();
+
             return;
         }
 
-        //alert (el);
         el.sendToBack();
-
-        return;
     }
 
-    el.sendToBack();
-}
+    mememaker.tools.toFront = function() {
+        var el = mememaker.canvas.getActiveObject();
 
-mememaker.tools.toFront = function() {
-    var el = mememaker.canvas.getActiveObject();
-
-    if (el == null || el == undefined) {
-        el = mememaker.canvas.getActiveGroup();
         if (el == null || el == undefined) {
+            el = mememaker.canvas.getActiveGroup();
+            if (el == null || el == undefined) {
+                return;
+            }
+
+            //alert (el);
+            el.bringToFront();
+
             return;
         }
 
-        //alert (el);
         el.bringToFront();
-
-        return;
     }
 
-    el.bringToFront();
-}
+    mememaker.tools.flip = function(x) {
+        var el = mememaker.canvas.getActiveObject();
 
-mememaker.tools.flip = function (x) {
-    var el = mememaker.canvas.getActiveObject();
-
-    if (el == null || el == undefined) {
-        el = mememaker.canvas.getActiveGroup();
         if (el == null || el == undefined) {
+            el = mememaker.canvas.getActiveGroup();
+            if (el == null || el == undefined) {
+                return;
+            }
+
+            if (x == 0) {
+                el.flipX = el.flipX == true ? false : true;
+            } else {
+                el.flipY = el.flipY == true ? false : true;
+            }
+
+            mememaker.canvas.renderAll();
             return;
         }
 
@@ -441,621 +451,611 @@ mememaker.tools.flip = function (x) {
         }
 
         mememaker.canvas.renderAll();
-        return;
     }
 
-    if (x == 0) {
-        el.flipX = el.flipX == true ? false : true;
-    } else {
-        el.flipY = el.flipY == true ? false : true;
-    }
+    mememaker.tools.newtext = function() {
+        var text = new fabric.Text(mememaker.defaultText.text, mememaker.defaultText.property);
 
-    mememaker.canvas.renderAll();   
-}
-
-mememaker.tools.newtext = function() {
-    var text = new fabric.Text(mememaker.defaultText.text, mememaker.defaultText.property);
-
-    //var content = $("#text-text").val();
-    //if ($.trim(content) == "") {
+        //var content = $("#text-text").val();
+        //if ($.trim(content) == "") {
         //return;
-    //}
-    //$("#text-text").val ("");
-    
-    text.text = "CLICK TO EDIT";
-    text.fontFamily = $("#text-font-family").val();
-    text.originX = "center";
-    text.originY = "center";
-    text.left = mememaker.lastTextX + text.getWidth() / 2;
-    text.top = mememaker.lastTextY + text.getHeight() / 2;
+        //}
+        //$("#text-text").val ("");
 
-    mememaker.canvas.add(text);
-    //mememaker.lastTextX += 10;
-    mememaker.lastTextY += 10;
+        text.text = "CLICK TO EDIT";
+        text.fontFamily = $("#text-font-family").val();
+        text.originX = "center";
+        text.originY = "center";
+        text.left = mememaker.lastTextX + text.getWidth() / 2;
+        text.top = mememaker.lastTextY + text.getHeight() / 2;
 
-    if (mememaker.lastTextX >= 400) {
-        mememaker.textTotal += 1;
-        mememaker.lastTextX = mememaker.textTotal * 10;
-        mememaker.lastTextY = mememaker.textTotal * 10;
-    }
+        mememaker.canvas.add(text);
+        //mememaker.lastTextX += 10;
+        mememaker.lastTextY += 10;
 
-    mememaker.canvas.renderAll();
-    
-    text.on(
-            'selected',
-            function(options) {
-                mememaker.texteditor.textselected ();
-            }
-    )
-}
-
-mememaker.tools.addpic = function(url) {
-   
-    fabric.Image.fromURL(url, function(oImg) {
-        // scale image down, and flip it, before adding it onto canvas
-        //oImg.set('originX', 'left');
-        //oImg.set('originY', 'top');
-        oImg.left = mememaker.lastImageX + oImg.getWidth() / 2;
-        oImg.top = mememaker.lastImageY + oImg.getHeight() / 2;
-
-        mememaker.canvas.add(oImg);
-        mememaker.lastImageX += 10;
-        mememaker.lastImageY += 10;
-
-        if (mememaker.lastImageX >= 400) {
-            mememaker.imageTotal += 1;
-            mememaker.lastImageX = mememaker.textTotal * 10;
-            mememaker.lastImageY = mememaker.textTotal * 10;
+        if (mememaker.lastTextX >= 400) {
+            mememaker.textTotal += 1;
+            mememaker.lastTextX = mememaker.textTotal * 10;
+            mememaker.lastTextY = mememaker.textTotal * 10;
         }
-        
-        oImg.on(
-            'selected',
-            function(options) {
-                mememaker.imageeditor.imageselected ();
-            }
-        );
-        
-    });
-}
 
-mememaker.tools.newtemplate = function (url) {
-    
-    mememaker.canvas.setOverlayImage(url, mememaker.canvas.renderAll.bind(mememaker.canvas));
+        mememaker.canvas.renderAll();
 
-}
-
-mememaker.tools.resize = function(plus, evt) {
-
-    var height = $('#' + $(evt).data('prefix') + '-height').val();
-
-    height = $.trim(height);
-    if (height == '') {
-        height = '0';
+        text.on(
+                'selected',
+                function(options) {
+                    mememaker.texteditor.textselected();
+                }
+        )
     }
 
-    height = parseInt(height);
+    mememaker.tools.addpic = function(url) {
 
-    if (plus == false) {
-        if (height == 0) {
+        fabric.Image.fromURL(url, function(oImg) {
+            // scale image down, and flip it, before adding it onto canvas
+            //oImg.set('originX', 'left');
+            //oImg.set('originY', 'top');
+            oImg.left = mememaker.lastImageX + oImg.getWidth() / 2;
+            oImg.top = mememaker.lastImageY + oImg.getHeight() / 2;
+
+            mememaker.canvas.add(oImg);
+            mememaker.lastImageX += 10;
+            mememaker.lastImageY += 10;
+
+            if (mememaker.lastImageX >= 400) {
+                mememaker.imageTotal += 1;
+                mememaker.lastImageX = mememaker.textTotal * 10;
+                mememaker.lastImageY = mememaker.textTotal * 10;
+            }
+
+            oImg.on(
+                    'selected',
+                    function(options) {
+                        mememaker.imageeditor.imageselected();
+                    }
+            );
+
+        });
+    }
+
+    mememaker.tools.newtemplate = function(url) {
+
+        mememaker.canvas.setOverlayImage(url, mememaker.canvas.renderAll.bind(mememaker.canvas));
+
+    }
+
+    mememaker.tools.resize = function(plus, evt) {
+
+        var height = $('#' + $(evt).data('prefix') + '-height').val();
+
+        height = $.trim(height);
+        if (height == '') {
+            height = '0';
+        }
+
+        height = parseInt(height);
+
+        if (plus == false) {
+            if (height == 0) {
+                return;
+            }
+            if (mememaker.canvas.getHeight() - height <= 0) {
+                mememaker.canvas.setDimensions({width: 460, height: 460});
+            } else {
+                mememaker.canvas.setDimensions({width: 460, height: mememaker.canvas.getHeight() - height});
+            }
             return;
         }
-        if (mememaker.canvas.getHeight() - height <= 0) {
-            mememaker.canvas.setDimensions({width: 460, height: 460});
-        } else {
-            mememaker.canvas.setDimensions({width: 460, height: mememaker.canvas.getHeight() - height});
+
+        if (height == 0) {
+            height = 460;
         }
-        return;
+
+        mememaker.canvas.setDimensions({width: 460, height: mememaker.canvas.getHeight() + height});
     }
 
-    if (height == 0) {
-        height = 460;
-    }
+    mememaker.tools.preview = function() {
+        // it will convert canvas to base64
+        console.log('preview');
+        var c = "box-" + mememaker.canvasId;
 
-    mememaker.canvas.setDimensions({width: 460, height: mememaker.canvas.getHeight() + height});
-}
+        $("#" + c).toggle();
+        $("#" + c + "-preview").toggle();
 
-mememaker.tools.preview = function() {
-    // it will convert canvas to base64
-    console.log ('preview');
-    var c = "box-" + mememaker.canvasId;
+        var preview = mememaker.canvas.toDataURL(
+                {
+                    format: 'jpeg',
+                    quality: 1
+                }
+        );
 
-    $("#" + c).toggle();
-    $("#" + c + "-preview").toggle();
-
-    var preview = mememaker.canvas.toDataURL(
-            {
-                format: 'jpeg',
-                quality: 1
+        $.ajax({
+            url: "media/preview",
+            data: {"image-extension": "jpeg", "image-data": preview},
+            type: "POST",
+            beforeSend: function(xhr) {
+                //$("#ajax-indicator").show();
+                console.log("working....");
             }
-    );
+        }).done(function(data) {
+            //$("#ajax-indicator").hide();
 
-    $.ajax({
-        url: "media/preview",
-        data:{"image-extension":"jpeg", "image-data":preview},
-        type: "POST",
-        beforeSend: function(xhr) {
-            //$("#ajax-indicator").show();
-            console.log ("working....");
-        }
-    }).done(function(data) {
-        //$("#ajax-indicator").hide();
-        
-        result = $.parseJSON (data);
-        if (result.error == 0) {
-            var url = result.files.url;
-            console.log (url);
-        } else {
-            console.log (result.message);
-        }
-        
-        //if (data=='ok') {
-        //    
-        //    $("input[type=text]").val('');
-        //    $("input[type='password'").val('');
-        //    $("textarea").val('');
-        //    $(".alert").hide();
-        //    
-        //} else {
-        //    $(".alert").show();
-        //    $("#alert-text").html(data);
-        //    setTimeout(function () {$(".alert").hide(100)}, 3000);
-        //}
-    }).fail(function () {
-        
-    });
-    //mememaker.canvas.deactivateAll();
-    //$("#" + mememaker.canvasId + "-preview").attr('src', preview);
-}
+            result = $.parseJSON(data);
+            if (result.error == 0) {
+                var url = result.files.url;
+                console.log(url);
+            } else {
+                console.log(result.message);
+            }
 
-mememaker.tools.backgroundcolor = function(color) {
-    //console.log (color);
-    mememaker.canvas.backgroundColor = color;
-    mememaker.canvas.renderAll();
-}
+            //if (data=='ok') {
+            //    
+            //    $("input[type=text]").val('');
+            //    $("input[type='password'").val('');
+            //    $("textarea").val('');
+            //    $(".alert").hide();
+            //    
+            //} else {
+            //    $(".alert").show();
+            //    $("#alert-text").html(data);
+            //    setTimeout(function () {$(".alert").hide(100)}, 3000);
+            //}
+        }).fail(function() {
 
-mememaker.tools.backgroundimage = function(url) {
-    mememaker.canvas.setBackgroundImage(
-            url,
-            function() {
-                mememaker.canvas.renderAll();
-            }, {'originX': 'left', 'originY': 'top', 'left': 0, 'top': 0}
-    )
-}
+        });
+        //mememaker.canvas.deactivateAll();
+        //$("#" + mememaker.canvasId + "-preview").attr('src', preview);
+    }
+
+    mememaker.tools.backgroundcolor = function(color) {
+        //console.log (color);
+        mememaker.canvas.backgroundColor = color;
+        mememaker.canvas.renderAll();
+    }
+
+    mememaker.tools.backgroundimage = function(url) {
+        mememaker.canvas.setBackgroundImage(
+                url,
+                function() {
+                    mememaker.canvas.renderAll();
+                }, {'originX': 'left', 'originY': 'top', 'left': 0, 'top': 0}
+        )
+    }
 
 // text editor
 
-mememaker.texteditor.init = function (id) {
-   if (id !== null) {
-      mememaker.texteditor.id = id;
-   }
-   
-   $("#text-font-family").change (
-      function () {
-         mememaker.texteditor.changeFontFamily ($(this).val());
-      }
-   )  
-    
-    $("#text-fill").colorpicker().on('changeColor', function(ev){
-        mememaker.texteditor.fill (ev.color.toHex());
-    });
-    
-    $("#text-text").keyup (
-        function (evt) {
-            if ( evt.which == 13 ) {
-                evt.preventDefault();
-                mememaker.texteditor.changeText ();
-                return;
+    mememaker.texteditor.init = function(id) {
+        if (id !== null) {
+            mememaker.texteditor.id = id;
+        }
+
+        $("#text-font-family").change(
+                function() {
+                    mememaker.texteditor.changeFontFamily($(this).val());
+                }
+        )
+
+        $("#text-fill").colorpicker().on('changeColor', function(ev) {
+            mememaker.texteditor.fill(ev.color.toHex());
+        });
+
+        $("#text-text").keyup(
+                function(evt) {
+                    if (evt.which == 13) {
+                        evt.preventDefault();
+                        mememaker.texteditor.changeText();
+                        return;
+                    }
+
+                    mememaker.texteditor.changeText();
+                }
+        )
+
+        $(mememaker.texteditor.id + " a").click(
+                function() {
+                    switch ($(this).data('action')) {
+                        case "bold":
+                            mememaker.texteditor.changeFontProperty("weight");
+                            break;
+                        case "italic":
+                            mememaker.texteditor.changeFontProperty("italic");
+                            break;
+                    }
+                }
+        )
+    }
+
+    mememaker.texteditor.textselected = function(options) {
+
+        var el = mememaker.canvas.getActiveObject();
+
+        if (el == null || el == undefined) {
+            return;
+        }
+
+        if (el.type != "text") {
+            return;
+        }
+
+        $("#text-text").val(el.text);
+        $("#text-font-family").val(el.fontFamily);
+        $("#text-fill").val(el.fill);
+        $(".editor").hide(0);
+        $(".text-editor").show(0);
+    }
+
+    mememaker.texteditor.fill = function(color) {
+        var el = mememaker.canvas.getActiveObject();
+
+        if (el == null || el == undefined) {
+            return;
+        }
+
+        if (el.type != "text") {
+            return;
+        }
+
+        el.fill = color;
+        mememaker.canvas.renderAll();
+    }
+
+    mememaker.texteditor.changeFontFamily = function(fontFamily) {
+        var el = mememaker.canvas.getActiveObject();
+
+        if (el == null || el == undefined) {
+            return;
+        }
+
+        if (el.type != "text") {
+            return;
+        }
+
+        el.fontFamily = fontFamily;
+        mememaker.canvas.renderAll();
+    }
+
+    mememaker.texteditor.changeText = function(fontFamily) {
+        var el = mememaker.canvas.getActiveObject();
+
+        if (el == null || el == undefined) {
+            return;
+        }
+
+        if (el.type != "text") {
+            return;
+        }
+
+        el.text = $("#text-text").val();
+        if (el.text == "") {
+            mememaker.canvas.remove(el);
+        }
+        mememaker.canvas.renderAll();
+    }
+
+    mememaker.texteditor.changeFontProperty = function(property) {
+
+        var el = mememaker.canvas.getActiveObject();
+
+        if (el == null || el == undefined) {
+            return;
+        }
+
+        if (el.type != "text") {
+            return;
+        }
+
+        if (property == "weight") {
+            if (el.fontWeight == "normal") {
+                el.fontWeight = "bold";
+            } else if (el.fontWeight == "bold") {
+                el.fontWeight = "normal";
             }
-            
-            mememaker.texteditor.changeText ();
         }
-    )
-    
-    $(mememaker.texteditor.id + " a").click (
-        function () {
-            switch ($(this).data('action')) {
-                case "bold":
-                    mememaker.texteditor.changeFontProperty ("weight");
-                    break;
-                case "italic":
-                    mememaker.texteditor.changeFontProperty ("italic");
-                    break;
+
+        if (property == "italic") {
+            if (el.fontStyle == "italic") {
+                el.fontStyle = "";
+            } else {
+                el.fontStyle = "italic";
             }
         }
-    )
-}
-
-mememaker.texteditor.textselected = function(options) {
-    
-    var el = mememaker.canvas.getActiveObject();
-    
-    if (el == null || el == undefined) {
-        return;
+        mememaker.canvas.renderAll();
     }
-
-    if (el.type != "text") {
-        return;
-    }
-    
-    $("#text-text").val (el.text);
-    $("#text-font-family").val (el.fontFamily);
-    $("#text-fill").val (el.fill);
-    $(".editor").hide (0);
-    $(".text-editor").show(0);
-}
-
-mememaker.texteditor.fill = function (color) {
-    var el = mememaker.canvas.getActiveObject();
-    
-    if (el == null || el == undefined) {
-        return;
-    }
-
-    if (el.type != "text") {
-        return;
-    }
-    
-    el.fill = color;
-    mememaker.canvas.renderAll();
-}
-
-mememaker.texteditor.changeFontFamily = function (fontFamily) {
-    var el = mememaker.canvas.getActiveObject();
-    
-    if (el == null || el == undefined) {
-        return;
-    }
-
-    if (el.type != "text") {
-        return;
-    }
-    
-    el.fontFamily = fontFamily;
-    mememaker.canvas.renderAll();    
-}
-
-mememaker.texteditor.changeText = function (fontFamily) {
-    var el = mememaker.canvas.getActiveObject();
-    
-    if (el == null || el == undefined) {
-        return;
-    }
-
-    if (el.type != "text") {
-        return;
-    }
-    
-    el.text = $("#text-text").val ();
-    if (el.text == "") {
-        mememaker.canvas.remove (el);
-    }
-    mememaker.canvas.renderAll();    
-}
-
-mememaker.texteditor.changeFontProperty = function (property) {
-    
-    var el = mememaker.canvas.getActiveObject();
-    
-    if (el == null || el == undefined) {
-        return;
-    }
-
-    if (el.type != "text") {
-        return;
-    }
-    
-    if (property == "weight") {
-        if (el.fontWeight == "normal") {
-            el.fontWeight = "bold";
-        } else if (el.fontWeight == "bold") {
-            el.fontWeight = "normal";
-        }
-    }
-    
-    if (property == "italic") {
-        if (el.fontStyle == "italic") {
-            el.fontStyle = "";
-        } else {
-            el.fontStyle = "italic";
-        }
-    }
-    mememaker.canvas.renderAll();
-}
 
 // image editor
 
-mememaker.imageeditor.init = function (id) {
-    
-    if (id !== null) {
-        mememaker.imageeditor.id = id;
-    }
-    
-    //http://www.eyecon.ro/bootstrap-slider/
-    mememaker.imageeditor.zoomValue = $("#image-zoom").slider(
-        {
-            formater: function(value) {
-                return '' + value / 100;
-            }
+    mememaker.imageeditor.init = function(id) {
+
+        if (id !== null) {
+            mememaker.imageeditor.id = id;
         }
-    ).on (   
-        "slide",
-        function () {
-            mememaker.imageeditor.zoom (mememaker.imageeditor.zoomValue.getValue());
+
+        //http://www.eyecon.ro/bootstrap-slider/
+        mememaker.imageeditor.zoomValue = $("#image-zoom").slider(
+                {
+                    formater: function(value) {
+                        return '' + value / 100;
+                    }
+                }
+        ).on(
+                "slide",
+                function() {
+                    mememaker.imageeditor.zoom(mememaker.imageeditor.zoomValue.getValue());
+                }
+        ).data('slider');
+
+        mememaker.imageeditor.rotateValue = $("#image-rotation").slider(
+                {
+                    formater: function(value) {
+                        return '' + value;
+                    }
+                }
+        ).on(
+                "slide",
+                function() {
+                    mememaker.imageeditor.rotate(mememaker.imageeditor.rotateValue.getValue());
+                }
+        ).data('slider');
+    }
+
+    mememaker.imageeditor.imageselected = function() {
+        var el = mememaker.canvas.getActiveObject();
+
+        if (el == null || el == undefined) {
+            return;
         }
-    ).data('slider');
-    
-    mememaker.imageeditor.rotateValue = $("#image-rotation").slider(
-        {
-            formater: function(value) {
-                return '' + value;
-            }
+
+        if (el.type != "image") {
+            return;
         }
-    ).on (
-        "slide",
-        function () {
-            mememaker.imageeditor.rotate (mememaker.imageeditor.rotateValue.getValue());
+
+        $(".editor").hide(0);
+        $(".image-editor").show(0);
+    }
+
+    mememaker.imageeditor.zoom = function(value) {
+        var el = mememaker.canvas.getActiveObject();
+
+        if (el == null || el == undefined) {
+            return;
         }
-    ).data('slider');
-}
 
-mememaker.imageeditor.imageselected = function () {
-    var el = mememaker.canvas.getActiveObject();
-    
-    if (el == null || el == undefined) {
-        return;
+        if (el.type != "image") {
+            return;
+        }
+
+        var scale = value / 100;
+        el.scale(scale);
+        mememaker.canvas.renderAll();
+
+        //$(".text-editor").hide(10);  
+        //$(".image-editor").show(10);    
     }
 
-    if (el.type != "image") {
-        return;
-    }
-    
-    $(".editor").hide (0); 
-    $(".image-editor").show(0);  
-}
+    mememaker.imageeditor.rotate = function(value) {
+        var el = mememaker.canvas.getActiveObject();
 
-mememaker.imageeditor.zoom = function (value) {
-     var el = mememaker.canvas.getActiveObject();
-    
-    if (el == null || el == undefined) {
-        return;
-    }
+        if (el == null || el == undefined) {
+            return;
+        }
 
-    if (el.type != "image") {
-        return;
-    }
-    
-    var scale = value / 100;
-    el.scale (scale);
-    mememaker.canvas.renderAll();
-    
-    //$(".text-editor").hide(10);  
-    //$(".image-editor").show(10);    
-}
+        if (el.type != "image") {
+            return;
+        }
 
-mememaker.imageeditor.rotate = function (value) {
-     var el = mememaker.canvas.getActiveObject();
-    
-    if (el == null || el == undefined) {
-        return;
-    }
+        el.originX = "center";
+        el.originY = "center";
 
-    if (el.type != "image") {
-        return;
+        //el.left = el.left + el.getWidth () / 2;
+        //el.top = el.top + el.getHeight () / 2;
+        el.angle = value;
+        mememaker.canvas.renderAll();
+
+        //$(".text-editor").hide(10);  
+        //$(".image-editor").show(10);    
     }
-    
-    el.originX = "center";
-    el.originY = "center";
-    
-    //el.left = el.left + el.getWidth () / 2;
-    //el.top = el.top + el.getHeight () / 2;
-    el.angle = value;
-    mememaker.canvas.renderAll();
-    
-    //$(".text-editor").hide(10);  
-    //$(".image-editor").show(10);    
-}
 
 //
-mememaker.draweditor.init = function (id) {
-    if (id !== null) {
-        mememaker.draweditor.id = id;
-    }
-    
-    mememaker.draweditor.lineWidth = $("#draw-width").slider(
-        {
-            formater: function(value) {
-                return '' + value;
+    mememaker.draweditor.init = function(id) {
+        if (id !== null) {
+            mememaker.draweditor.id = id;
+        }
+
+        mememaker.draweditor.lineWidth = $("#draw-width").slider(
+                {
+                    formater: function(value) {
+                        return '' + value;
+                    }
+                }
+        ).on(
+                "slide",
+                function() {
+                    mememaker.canvas.freeDrawingBrush.width = mememaker.draweditor.lineWidth.getValue();
+                }
+        ).data('slider');
+
+        mememaker.draweditor.shadowWidth = $("#draw-shadow-width").slider(
+                {
+                    formater: function(value) {
+                        return '' + value;
+                    }
+                }
+        ).on(
+                "slide",
+                function() {
+                    mememaker.canvas.freeDrawingBrush.shadowBlur = mememaker.draweditor.shadowWidth.getValue();
+                }
+        ).data('slider');
+
+        $("#draw-fill").colorpicker().on('changeColor', function(ev) {
+            mememaker.canvas.freeDrawingBrush.color = ev.color.toHex();
+        });
+
+        $('#draw-mode-selector').on('change', function() {
+
+            console.log(this.value);
+            if (this.value === 'hline') {
+                if (fabric.PatternBrush) {
+                    var vLinePatternBrush = new fabric.PatternBrush(mememaker.canvas);
+                    vLinePatternBrush.getPatternSrc = function() {
+
+                        var patternCanvas = fabric.document.createElement('canvas');
+                        patternCanvas.width = patternCanvas.height = 10;
+                        var ctx = patternCanvas.getContext('2d');
+
+                        ctx.strokeStyle = this.color;
+                        ctx.lineWidth = 5;
+                        ctx.beginPath();
+                        ctx.moveTo(0, 5);
+                        ctx.lineTo(10, 5);
+                        ctx.closePath();
+                        ctx.stroke();
+
+                        return patternCanvas;
+                    };
+                }
+                console.log(vLinePatternBrush);
+                mememaker.canvas.freeDrawingBrush = vLinePatternBrush;
             }
-        }
-    ).on (   
-        "slide",
-        function () {
-            mememaker.canvas.freeDrawingBrush.width =  mememaker.draweditor.lineWidth.getValue();
-        }
-    ).data('slider');
-    
-    mememaker.draweditor.shadowWidth = $("#draw-shadow-width").slider(
-        {
-            formater: function(value) {
-                return '' + value;
+            else if (this.value === 'vline') {
+                if (fabric.PatternBrush) {
+
+                    var hLinePatternBrush = new fabric.PatternBrush(mememaker.canvas);
+                    hLinePatternBrush.getPatternSrc = function() {
+
+                        var patternCanvas = fabric.document.createElement('canvas');
+                        patternCanvas.width = patternCanvas.height = 10;
+                        var ctx = patternCanvas.getContext('2d');
+
+                        ctx.strokeStyle = this.color;
+                        ctx.lineWidth = 5;
+                        ctx.beginPath();
+                        ctx.moveTo(5, 0);
+                        ctx.lineTo(5, 10);
+                        ctx.closePath();
+                        ctx.stroke();
+
+                        return patternCanvas;
+                    };
+                }
+                mememaker.canvas.freeDrawingBrush = hLinePatternBrush;
             }
-        }
-    ).on (
-        "slide",
-        function () {
-            mememaker.canvas.freeDrawingBrush.shadowBlur = mememaker.draweditor.shadowWidth.getValue();
-        }
-    ).data('slider');
-    
-    $("#draw-fill").colorpicker().on('changeColor', function(ev){
-        mememaker.canvas.freeDrawingBrush.color = ev.color.toHex();
-    });
-    
-    $('#draw-mode-selector').on('change', function() {
-        
-        console.log (this.value);
-        if (this.value === 'hline') {
-            if (fabric.PatternBrush) {
-               var vLinePatternBrush = new fabric.PatternBrush(mememaker.canvas);
-               vLinePatternBrush.getPatternSrc = function() {
-           
-                 var patternCanvas = fabric.document.createElement('canvas');
-                 patternCanvas.width = patternCanvas.height = 10;
-                 var ctx = patternCanvas.getContext('2d');
-           
-                 ctx.strokeStyle = this.color;
-                 ctx.lineWidth = 5;
-                 ctx.beginPath();
-                 ctx.moveTo(0, 5);
-                 ctx.lineTo(10, 5);
-                 ctx.closePath();
-                 ctx.stroke();
-           
-                 return patternCanvas;
-               };
+            else if (this.value === 'square') {
+                if (fabric.PatternBrush) {
+
+                    var squarePatternBrush = new fabric.PatternBrush(mememaker.canvas);
+                    squarePatternBrush.getPatternSrc = function() {
+
+                        var squareWidth = 10, squareDistance = 2;
+
+                        var patternCanvas = fabric.document.createElement('canvas');
+                        patternCanvas.width = patternCanvas.height = squareWidth + squareDistance;
+                        var ctx = patternCanvas.getContext('2d');
+
+                        ctx.fillStyle = this.color;
+                        ctx.fillRect(0, 0, squareWidth, squareWidth);
+
+                        return patternCanvas;
+                    };
+                }
+                mememaker.canvas.freeDrawingBrush = squarePatternBrush;
             }
-            console.log (vLinePatternBrush);
-            mememaker.canvas.freeDrawingBrush = vLinePatternBrush;
-        }
-        else if (this.value === 'vline') {
-            if (fabric.PatternBrush) {
-           
-                var hLinePatternBrush = new fabric.PatternBrush(mememaker.canvas);
-                hLinePatternBrush.getPatternSrc = function() {
-            
-                  var patternCanvas = fabric.document.createElement('canvas');
-                  patternCanvas.width = patternCanvas.height = 10;
-                  var ctx = patternCanvas.getContext('2d');
-            
-                  ctx.strokeStyle = this.color;
-                  ctx.lineWidth = 5;
-                  ctx.beginPath();
-                  ctx.moveTo(5, 0);
-                  ctx.lineTo(5, 10);
-                  ctx.closePath();
-                  ctx.stroke();
-            
-                  return patternCanvas;
-                };
-            }
-            mememaker.canvas.freeDrawingBrush = hLinePatternBrush;
-        }
-        else if (this.value === 'square') {
-            if (fabric.PatternBrush) {
-           
-                var squarePatternBrush = new fabric.PatternBrush(mememaker.canvas);
-                squarePatternBrush.getPatternSrc = function() {
-                
-                    var squareWidth = 10, squareDistance = 2;
-              
-                    var patternCanvas = fabric.document.createElement('canvas');
-                    patternCanvas.width = patternCanvas.height = squareWidth + squareDistance;
-                    var ctx = patternCanvas.getContext('2d');
-              
-                    ctx.fillStyle = this.color;
-                    ctx.fillRect(0, 0, squareWidth, squareWidth);
-              
-                    return patternCanvas;
-                  };
-            }
-            mememaker.canvas.freeDrawingBrush = squarePatternBrush;
-        }
-        else if (this.value === 'diamond') {
-            if (fabric.PatternBrush) {
-           
-                 var diamondPatternBrush = new fabric.PatternBrush(mememaker.canvas);
-                diamondPatternBrush.getPatternSrc = function() {
-                
-                      var squareWidth = 10, squareDistance = 5;
-                      var patternCanvas = fabric.document.createElement('canvas');
-                      var rect = new fabric.Rect({
-                        width: squareWidth,
-                        height: squareWidth,
-                        angle: 45,
-                        fill: this.color
-                      });
-                      var canvasWidth = rect.getBoundingRectWidth();
+            else if (this.value === 'diamond') {
+                if (fabric.PatternBrush) {
+
+                    var diamondPatternBrush = new fabric.PatternBrush(mememaker.canvas);
+                    diamondPatternBrush.getPatternSrc = function() {
+
+                        var squareWidth = 10, squareDistance = 5;
+                        var patternCanvas = fabric.document.createElement('canvas');
+                        var rect = new fabric.Rect({
+                            width: squareWidth,
+                            height: squareWidth,
+                            angle: 45,
+                            fill: this.color
+                        });
+                        var canvasWidth = rect.getBoundingRectWidth();
 
                         patternCanvas.width = patternCanvas.height = canvasWidth + squareDistance;
-                        rect.set({ left: canvasWidth / 2, top: canvasWidth / 2 });
-                  
+                        rect.set({left: canvasWidth / 2, top: canvasWidth / 2});
+
                         var ctx = patternCanvas.getContext('2d');
                         rect.render(ctx);
-                  
+
                         return patternCanvas;
-                }
-            }
-            mememaker.canvas.freeDrawingBrush = diamondPatternBrush;
-        }
-        else if (this.value === 'texture') {
-            if (fabric.PatternBrush) {
-                var img = new Image();
-                img.src = 'img/texture/texture_honey.png';
-            
-                var texturePatternBrush = new fabric.PatternBrush(mememaker.canvas);
-                texturePatternBrush.source = img;
-            }
-            mememaker.canvas.freeDrawingBrush = texturePatternBrush;
-        }
-        else {
-            mememaker.canvas.freeDrawingBrush = new fabric[this.value + 'Brush'](mememaker.canvas);
-        }
-    
-        if (mememaker.canvas.freeDrawingBrush) {
-            mememaker.canvas.freeDrawingBrush.color = $("#draw-fill").val ();
-            mememaker.canvas.freeDrawingBrush.width = mememaker.draweditor.lineWidth.getValue();
-            mememaker.canvas.freeDrawingBrush.shadowBlur = mememaker.draweditor.shadowWidth.getValue();
-        }
-  });
-}
-
-mememaker.draweditor.enable = function (obj) {
-    enable = mememaker.canvas.isDrawingMode == true ? false : true;
-    if (enable) {
-        $(obj).css('color', 'green');
-        mememaker.canvas.discardActiveObject();
-        mememaker.canvas.discardActiveGroup();
-        
-        var width = $("#draw-width").val ();
-        if (width != "") {
-            width = parseInt(width);    
-        }
-        
-        //mememaker.canvas.freeDrawingLineWidth = width;
-        //mememaker.canvas.freeDrawingColor = $("#draw-fill").val();
-        mememaker.canvas.isDrawingMode = true;
-        mememaker.canvas.freeDrawingBrush.width = width;
-        mememaker.canvas.freeDrawingBrush.color = $("#draw-fill").val ();
-        
-        //mememaker.canvas.renderAll();
-        
-        $(".editor").hide (0);
-        $(".draw-editor").show(0);
-    } else {
-        $(obj).css('color', '#c24f19');
-        mememaker.canvas.discardActiveObject();
-        mememaker.canvas.discardActiveGroup();
-        mememaker.canvas.isDrawingMode = false;
-    }
-}
-//
-$(document).ready(
-        function() {
-            //alert ("hello");
-            mememaker.init('c1');
-            mememaker.tools.init(".tools");
-            mememaker.tools.newtemplate("<?php echo $this->webroot . "img/template/iphone.png"; ?>");
-            mememaker.texteditor.init (".text-editor");
-            mememaker.imageeditor.init (".image-editor");
-            mememaker.draweditor.init (".draw-editor");
-
-            $(".thumbnail-list a").click(
-                    function() {
-                        //var url = $(this).children(":first-child").attr ('src');
-                        //mememaker.tools.addpic (url);
                     }
-            )
+                }
+                mememaker.canvas.freeDrawingBrush = diamondPatternBrush;
+            }
+            else if (this.value === 'texture') {
+                if (fabric.PatternBrush) {
+                    var img = new Image();
+                    img.src = 'img/texture/texture_honey.png';
+
+                    var texturePatternBrush = new fabric.PatternBrush(mememaker.canvas);
+                    texturePatternBrush.source = img;
+                }
+                mememaker.canvas.freeDrawingBrush = texturePatternBrush;
+            }
+            else {
+                mememaker.canvas.freeDrawingBrush = new fabric[this.value + 'Brush'](mememaker.canvas);
+            }
+
+            if (mememaker.canvas.freeDrawingBrush) {
+                mememaker.canvas.freeDrawingBrush.color = $("#draw-fill").val();
+                mememaker.canvas.freeDrawingBrush.width = mememaker.draweditor.lineWidth.getValue();
+                mememaker.canvas.freeDrawingBrush.shadowBlur = mememaker.draweditor.shadowWidth.getValue();
+            }
+        });
+    }
+
+    mememaker.draweditor.enable = function(obj) {
+        enable = mememaker.canvas.isDrawingMode == true ? false : true;
+        if (enable) {
+            $(obj).css('color', 'green');
+            mememaker.canvas.discardActiveObject();
+            mememaker.canvas.discardActiveGroup();
+
+            var width = $("#draw-width").val();
+            if (width != "") {
+                width = parseInt(width);
+            }
+
+            //mememaker.canvas.freeDrawingLineWidth = width;
+            //mememaker.canvas.freeDrawingColor = $("#draw-fill").val();
+            mememaker.canvas.isDrawingMode = true;
+            mememaker.canvas.freeDrawingBrush.width = width;
+            mememaker.canvas.freeDrawingBrush.color = $("#draw-fill").val();
+
+            //mememaker.canvas.renderAll();
+
+            $(".editor").hide(0);
+            $(".draw-editor").show(0);
+        } else {
+            $(obj).css('color', '#c24f19');
+            mememaker.canvas.discardActiveObject();
+            mememaker.canvas.discardActiveGroup();
+            mememaker.canvas.isDrawingMode = false;
         }
-);
+    }
+//
+    $(document).ready(
+            function() {
+                //alert ("hello");
+                mememaker.init('c1');
+                mememaker.tools.init(".tools");
+                mememaker.tools.newtemplate("<?php echo $this->webroot . "img/template/iphone.png"; ?>");
+                mememaker.texteditor.init(".text-editor");
+                mememaker.imageeditor.init(".image-editor");
+                mememaker.draweditor.init(".draw-editor");
+
+                $(".thumbnail-list a").click(
+                        function() {
+                            //var url = $(this).children(":first-child").attr ('src');
+                            //mememaker.tools.addpic (url);
+                        }
+                )
+            }
+    );
 
 </script>

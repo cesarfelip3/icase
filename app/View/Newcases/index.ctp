@@ -53,44 +53,44 @@
                 <div class="span6 listing-js">
 
                     <!-- page title with dropdown -->
-<!--                    <h1>Create Your Case</h1>
-                    <div class="container-fluid">
-                        <div class="row-fluid">
-                            <div class="span7 dropdown-results">
-                                <p>Select Your Device:</p>
-                            </div>
-                            <div class="span5">
-                                <select id="sort" name="sort">
-                                    <option value="iphone5">Iphone 5</option>
-                                    <option value="iphone4">Iphone 4/4S</option>
-                                    <option value="ipad">Ipad</option>
-                                    <option value="ipad-mine">Ipad Mine</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>-->
+                    <!--                    <h1>Create Your Case</h1>
+                                        <div class="container-fluid">
+                                            <div class="row-fluid">
+                                                <div class="span7 dropdown-results">
+                                                    <p>Select Your Device:</p>
+                                                </div>
+                                                <div class="span5">
+                                                    <select id="sort" name="sort">
+                                                        <option value="iphone5">Iphone 5</option>
+                                                        <option value="iphone4">Iphone 4/4S</option>
+                                                        <option value="ipad">Ipad</option>
+                                                        <option value="ipad-mine">Ipad Mine</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>-->
                     <!-- end page title -->
 
                     <!--start Canvas-->
                     <div>
-                      <div class="progress" style="height:2px"><div class="bar bar-warning" id="progress-bar" style="width: 0%; height:2px;"></div></div>
-                      <canvas class="upper-canvas " style="border: 1px solid rgb(170, 170, 170); -moz-user-select: none; cursor: crosshair;" width="450" height="450" id="c1"></canvas>						    </div>
+                        <div class="progress" style="height:2px"><div class="bar bar-warning" id="progress-bar" style="width: 0%; height:2px;"></div></div>
+                        <canvas class="upper-canvas " style="border: 1px solid rgb(170, 170, 170); -moz-user-select: none; cursor: crosshair;" width="450" height="450" id="c1"></canvas>						    </div>
                     <!--end Canvas-->
                     <div class="row-fluid text-editor hide editor" style="width:100%;border:1px solid #ccc;background-color:white;margin-top:10px;padding:5px;">
-                      <div class="span12">
-                        <form class="form-inline">
-                            <input type="text" class="input-medium" id="text-text" placeholder="text" />
-                            <input id="text-fill" type="text" class="input-mini" readonly="readonly" placeholder="font color" />
-                            <select id="text-font-family" style="width:auto !important;margin-top:1px;">
-                                <option value="Impact">Impact</option>
-                                <option value="Helvitica">Helvitica</option>
-                                <option value="Arial">Arial</option>
-                                <option value="Verdana">Verdana</option>
-                            </select>
-                            <a href="javascript:" class="btn btn-small" data-action="bold" data-toggle="button"><i class="icon-bold"></i></a>
-                            <a href="javascript:" class="btn btn-small" data-action="italic" data-toggle="button"><i class="icon-italic"></i></a>
-                        </form>
-                      </div>
+                        <div class="span12">
+                            <form class="form-inline">
+                                <input type="text" class="input-medium" id="text-text" placeholder="text" />
+                                <input id="text-fill" type="text" class="input-mini" readonly="readonly" placeholder="font color" />
+                                <select id="text-font-family" style="width:auto !important;margin-top:1px;">
+                                    <option value="Impact">Impact</option>
+                                    <option value="Helvitica">Helvitica</option>
+                                    <option value="Arial">Arial</option>
+                                    <option value="Verdana">Verdana</option>
+                                </select>
+                                <a href="javascript:" class="btn btn-small" data-action="bold" data-toggle="button"><i class="icon-bold"></i></a>
+                                <a href="javascript:" class="btn btn-small" data-action="italic" data-toggle="button"><i class="icon-italic"></i></a>
+                            </form>
+                        </div>
                     </div><!-- end of text editor -->
                     <div class="row-fluid image-editor hide editor" style="width:100%;border:1px solid #ccc;background-color:white;margin-top:10px;padding:5px;">
                         <div class="span6">
@@ -114,13 +114,13 @@
                         <div style="clear:both"></div>
                         <div style="margin-top:10px;display:block;">
                             <input id="draw-fill" type="text" class="input-mini" readonly="readonly" placeholder="color" value="#000000" />
-                            
+
                             <select id="draw-mode-selector" style="width:auto !important;margin-top:1px;">
                                 <option>Pencil</option>
                                 <option>Circle</option>
                                 <option>Spray</option>
                                 <option>Pattern</option>
-                  
+
                                 <option>hline</option>
                                 <option>vline</option>
                                 <option>square</option>
