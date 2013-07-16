@@ -1,15 +1,17 @@
 <!--[if !lte IE 6]><!-->
 <!-- Link to Google CDN jQuery + jQueryUI; fall back to local -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/libs/jquery.min.js"><\/script>')</script>
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
-<script>window.jQuery.ui || document.write('<script src="js/libs/jquery.ui.min.js"><\/script>')</script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>-->
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/ui/1.8.0/jquery-ui.min.js"></script>
+<script>window.jQuery.ui || document.write('<script src="<?php echo $this->webroot; ?>js/libs/jquery.ui.min.js"><\/script>')</script>
 
 <?php
 
 $js_jquery_ui = array (
     "libs/jquery.ui.touch-punch.min.js",
-    "http://maps.google.com/maps/api/js?sensor=true",
+    //"http://maps.google.com/maps/api/js?sensor=true",
     "menu/jquery.ct.3LevelAccordion.min.js",
     "slider/jquery.responsivethumbnailgallery.min.js",
     "slider/jquery.onebyone.min.js",
