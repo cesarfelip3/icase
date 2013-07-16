@@ -556,6 +556,7 @@ mememaker.tools.resize = function(plus, evt) {
 
 mememaker.tools.preview = function() {
     // it will convert canvas to base64
+    console.log ('preview');
     var c = "box-" + mememaker.canvasId;
 
     $("#" + c).toggle();
@@ -568,8 +569,42 @@ mememaker.tools.preview = function() {
             }
     );
 
+    $.ajax({
+        url: "media/preview",
+        data:{"image-extension":"jpeg", "image-data":preview},
+        type: "POST",
+        beforeSend: function(xhr) {
+            //$("#ajax-indicator").show();
+            console.log ("working....");
+        }
+    }).done(function(data) {
+        //$("#ajax-indicator").hide();
+        
+        result = $.parseJSON (data);
+        if (result.error == 0) {
+            var url = result.files.url;
+            console.log (url);
+        } else {
+            console.log (result.message);
+        }
+        
+        //if (data=='ok') {
+        //    
+        //    $("input[type=text]").val('');
+        //    $("input[type='password'").val('');
+        //    $("textarea").val('');
+        //    $(".alert").hide();
+        //    
+        //} else {
+        //    $(".alert").show();
+        //    $("#alert-text").html(data);
+        //    setTimeout(function () {$(".alert").hide(100)}, 3000);
+        //}
+    }).fail(function () {
+        
+    });
     //mememaker.canvas.deactivateAll();
-    $("#" + mememaker.canvasId + "-preview").attr('src', preview);
+    //$("#" + mememaker.canvasId + "-preview").attr('src', preview);
 }
 
 mememaker.tools.backgroundcolor = function(color) {

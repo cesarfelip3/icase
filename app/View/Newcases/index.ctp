@@ -19,7 +19,8 @@
                             </div>
                             <hr/>
                             <p>
-                                <a href="javascript:" data-action="new" title="remove"><i class="icon-remove-sign icon-3x"></i> clear canvas</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a href="javascript:" data-action="new" title="remove"><i class="icon-remove-sign icon-3x"></i> clear canvas</a>&nbsp;&nbsp;
+                                <a href="javascript:" data-action="preview" title="remove"><i class="icon-eye-open icon-3x"></i> preview</a>
                                 <!--<input id="canvas-background-color" type="text" readonly="readonly" class="input-mini" placeholder="#ffffff"/>-->
                             </p>
                         </div>
