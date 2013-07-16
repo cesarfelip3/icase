@@ -2378,3 +2378,773 @@ Stack Trace:
 #10 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
 #11 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #12 {main}
+2013-07-16 02:09:55 Error: [MissingActionException] Action RegistersController::login() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'login',
+)
+Request URL: /icase/registers/login
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:09:56 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/bootstrapslider/css/slider.css
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:09:56 Error: [MissingActionException] Action RegistersController::css() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'css',
+)
+Request URL: /icase/registers/css/style.css
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:09:56 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/colorpicker2/css/bootstrap-colorpicker.css
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:09:57 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/libs/jquery.ui.touch-punch.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:09:57 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/slider/jquery.onebyone.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:09:57 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/menu/jquery.ct.3LevelAccordion.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:09:58 Error: [MissingActionException] Action RegistersController::ico() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'ico',
+)
+Request URL: /icase/registers/ico/favicon.ico
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:09:58 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/include/jquery.tweet.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:09:58 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/slider/jquery.touchwipe.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:09:58 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/slider/jquery.responsivethumbnailgallery.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:09:58 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/include/jquery.fitvids.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:09:59 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/include/jquery.equal-heights.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:09:59 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/include/jquery.todo.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:10:00 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/include/jquery.pubsub.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:10:00 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/include/jquery.select2.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:10:00 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/config.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:10:00 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/include/bootstrap.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:10:00 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/bootstrapslider/js/bootstrap-slider.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:10:00 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/colorpicker2/js/bootstrap-colorpicker.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:10:01 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/slider/jquery.onebyone.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:10:01 Error: [MissingActionException] Action RegistersController::ico() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'ico',
+)
+Request URL: /icase/registers/ico/favicon.ico
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:10:01 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/slider/jquery.touchwipe.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:10:02 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/slider/jquery.onebyone.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:10:02 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/slider/jquery.touchwipe.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:10:03 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/include/jquery.fitvids.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:10:03 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/include/jquery.tweet.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:10:04 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/include/jquery.equal-heights.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:10:04 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/include/jquery.todo.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:10:04 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/include/jquery.pubsub.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:10:05 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/include/jquery.select2.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:10:05 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/include/bootstrap.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:10:06 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/config.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:10:06 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/bootstrapslider/css/slider.css
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:10:06 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/bootstrapslider/js/bootstrap-slider.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:10:07 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/colorpicker2/css/bootstrap-colorpicker.css
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:10:07 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/colorpicker2/js/bootstrap-colorpicker.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:10:53 Error: [MissingActionException] Action RegistersController::css() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'css',
+)
+Request URL: /icase/registers/css/style.css
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:10:54 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/colorpicker2/css/bootstrap-colorpicker.css
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:10:54 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/bootstrapslider/css/slider.css
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:10:54 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/libs/jquery.ui.touch-punch.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:10:55 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/menu/jquery.ct.3LevelAccordion.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:10:55 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/slider/jquery.responsivethumbnailgallery.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:10:55 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/slider/jquery.touchwipe.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:10:55 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/include/jquery.fitvids.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:10:55 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/slider/jquery.onebyone.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:10:56 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/include/jquery.tweet.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:10:56 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/include/jquery.todo.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:10:56 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/include/jquery.pubsub.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:10:56 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/include/jquery.equal-heights.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:10:56 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/include/bootstrap.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:10:57 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/include/jquery.select2.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:10:57 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/colorpicker2/js/bootstrap-colorpicker.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:10:57 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/config.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:10:57 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/slider/jquery.touchwipe.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:10:58 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/bootstrapslider/js/bootstrap-slider.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:10:58 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/slider/jquery.onebyone.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:10:58 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/slider/jquery.touchwipe.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:10:59 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/include/jquery.fitvids.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:11:00 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/include/jquery.tweet.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:11:00 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/include/jquery.equal-heights.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:11:01 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/include/jquery.todo.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:11:01 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/include/jquery.pubsub.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:11:01 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/include/jquery.select2.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:11:02 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/include/bootstrap.min.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:11:02 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/config.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:11:02 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/bootstrapslider/css/slider.css
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:11:03 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/bootstrapslider/js/bootstrap-slider.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:11:03 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/colorpicker2/css/bootstrap-colorpicker.css
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-16 02:11:03 Error: [MissingActionException] Action RegistersController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'RegistersController',
+  'action' => 'js',
+)
+Request URL: /icase/registers/js/colorpicker2/js/bootstrap-colorpicker.js
+Stack Trace:
+#0 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files (x86)\Ampps\www\icase\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(RegistersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files (x86)\Ampps\www\icase\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
