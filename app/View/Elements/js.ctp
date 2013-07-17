@@ -52,6 +52,9 @@ $(function() {
 <script src="http://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.2.0/fabric.all.min.js"></script>
 <!--<<script src="<?php echo $this->webroot; ?>js/fabricjs/fabric.min.js">-->
 
+<!-- shopping cart -->
+<script src="<?php echo $this->webroot; ?>js/jquery.storageapi.min.js"></script>
+
 <script>  
 var $ = jQuery.noConflict ();
 
@@ -1069,10 +1072,7 @@ mememaker.tools.init = function (id) {
     $(document).ready(
             function() {
                 //alert ("hello");
-                $("#btn-loading-canvas").hide (0);
-                $("#btn-choose-device").show (1000);
-                $(".creator-parts").delay(500).show(0).css('visibility', 'visible');
-                
+               
                 mememaker.init('c1');
                 mememaker.tools.init(".tools");
                 mememaker.tools.newtemplate("<?php echo $this->webroot . "img/template/iphone.png"; ?>");
@@ -1080,12 +1080,17 @@ mememaker.tools.init = function (id) {
                 mememaker.imageeditor.init(".image-editor");
                 mememaker.draweditor.init(".draw-editor");
 
-                $(".thumbnail-list a").click(
+                $("#device-list a").click(
                         function() {
-                            //var url = $(this).children(":first-child").attr ('src');
-                            //mememaker.tools.addpic (url);
+                            var url = $(this).children(":first-child").attr ('src');
+                            mememaker.tools.newtemplate (url);
                         }
                 )
+                
+                $("#btn-loading-canvas").hide (0);
+                $("#btn-choose-device").show (1000);
+                $(".creator-parts").delay(1000).show(0).css('visibility', 'visible');
+                
             }
     );
 </script>

@@ -179,15 +179,15 @@
                     <p><a class="btn btn-large btn-peach hide" id="btn-choose-device"><i class="icon-mobile-phone icon-1x"></i> Order Now</a></p>
                     <div class="qbox creator-parts" style="visibility:hidden">
                         <h3><i class="icon-search pull-right"></i>Choose Your Device</h3>
-                        <div style="overflow: auto;height:460px;margin:0px;padding:0px;">
+                        <div style="overflow: auto;height:460px;margin:0px;padding:0px;" id="device-list">
                             <h6>iphone 5</h6>
-                            <a href="#" class="thumbnail">
+                            <a href="javascript:" class="thumbnail">
                                 <img src="img/template/iphone.png" />
                             </a>
                             <br/>
                             <h6>iphone 4S</h6>
-                            <a href="#" class="thumbnail">
-                                <img src="img/template/iphone.png" />
+                            <a href="javascript:" class="thumbnail">
+                                <img src="img/template/iphone4.png" />
                             </a>
                             <br/>
                             <br/>

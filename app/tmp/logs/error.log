@@ -17084,3 +17084,23 @@ Request URL: /icase/js/fabricjs/fabric.min.js
 Stack Trace:
 #0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #1 {main}
+2013-07-17 04:14:05 Error: [MissingControllerException] Controller class LoginController could not be found.
+Exception Attributes: array (
+  'class' => 'LoginController',
+  'plugin' => NULL,
+)
+Request URL: /icase/login
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 04:18:55 Error: [MissingActionException] Action IndexController::ico() could not be found.
+Exception Attributes: array (
+  'controller' => 'IndexController',
+  'action' => 'ico',
+)
+Request URL: /icase/index/ico/favicon.ico
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(IndexController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
