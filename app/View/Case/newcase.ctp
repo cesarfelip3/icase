@@ -130,41 +130,6 @@
                             </select>
                         </div>
                     </div><!-- draw editor -->
-
-                    <!-- Form Name -->
-                    <!-- Textarea -->
-                    <!--<div class="control-group">
-
-                        <div class="controls">                     
-                            <textarea name="textarea"  placeholder="Enter your text"></textarea>
-                        </div>
-                    </div>-->
-
-                    <!-- Select Basic -->
-                    <!--<div class="control-group">
-                        <label class="control-label" for="selectbasic">Font</label>
-                        <div class="controls">
-                            <select id="text-font-family" name="selectbasic" class="input-large">
-                                <option value="Impact">Impact</option>
-                                <option value="Helvitica">Helvitica</option>
-                                <option value="Arial">Arial</option>
-                                <option value="Verdana">Verdana</option>
-                            </select>
-                        </div>
-                    </div>-->
-
-                    <!-- Select Basic -->
-                    <!--<div class="control-group">
-                        <label class="control-label" for="selectbasic">Text Align</label>
-                        <div class="controls">
-                            <select id="selectbasic" name="selectbasic" class="input-xlarge">
-                                <option>Left</option>
-                                <option>Right</option>
-                                <option>Center</option>
-                            </select>
-                        </div>
-                    </div>-->
-                    <!--</form>		-->
                 </div>
                 <!-- end listing-js -->
 
@@ -380,4 +345,7 @@ $js_pluploader = array (
         uploader.start();
         return false;
     };*/
+    
+    //$ = jQuery.noConflict ();
+    //$(".logo-area").hide ({"duration":3000, "easing":"swing"});
 </script>

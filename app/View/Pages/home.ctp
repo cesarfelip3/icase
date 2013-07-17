@@ -1,5 +1,5 @@
 <!-- Slider start-->
-<div id="slide-wrapper">
+<div id="slide-wrapper" style="min-height:300px;">
     <div id="banner">  				
         <div class="oneByOne_item">                                 	
             <img src="http://placehold.it/940x340/F56EDC/FFFFFF" alt="Placeholder" class="bigImage">

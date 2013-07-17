@@ -42,7 +42,6 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
         -->
         <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
-
     </head><!--end head-->
 
 
