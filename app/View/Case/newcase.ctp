@@ -141,7 +141,7 @@
                                                       the width is automatically "Re-adjusted" with javascript
                                                       See "config.js" for more details	
                     -->
-                    <p><a class="btn btn-large btn-peach hide" id="btn-choose-device"><i class="icon-mobile-phone icon-1x"></i> Order Now</a></p>
+                    <p><a class="btn btn-large btn-peach hide" id="btn-choose-device"><i class="icon-mobile-phone icon-1x"></i> Add To Cart</a></p>
                     <div class="qbox creator-parts" style="visibility:hidden">
                         <h3><i class="icon-search pull-right"></i>Choose Your Device</h3>
                         <div style="overflow: auto;height:460px;margin:0px;padding:0px;" id="device-list">

@@ -1,3 +1,8 @@
+<?php
+$controller = $this->request->controller;
+$action = $this->request->action;
+
+?>
 <header>
     <!--logo area start-->
     <div class="logo-area">
@@ -7,7 +12,7 @@
     </div><!--end logo area-->
 
     <!--nav bar start-->
-    <nav class="navbar">
+    <nav class="navbar">.
         <div class="navbar-inner">
             <div class="container">
                 <!--mobile nav icon (hidden:CSS)-->
@@ -16,11 +21,16 @@
                 </a><!--end btn-navbar-->
                 <div class="nav-collapse">
                     <ul class="nav">
-                        <li>
+                        <li class="<?php if ($controller == "pages" && $action == "display") echo "active"; ?>">
                             <a href="<?php echo $this->Html->Url ("/", true); ?>">Home</a>
                         </li>
-                        <li class="active">
+                        <li class="<?php if ($controller == "case" && $action == "newcase") echo "active"; ?>">
                             <a href="<?php echo $this->Html->Url ("/createcase", false); ?>">Create your case</a>
+                        </li>
+                    </ul>
+                    <ul class="nav pull-right">
+                        <li class="<?php if ($controller == "shop" && $action == "cart") echo "active"; ?>">
+                            <a href="<?php echo $this->Html->Url ("/shop/cart", false); ?>" target="_blank">Cart</a>
                         </li>
                     </ul>
                 </div><!-- end nav-collapse -->

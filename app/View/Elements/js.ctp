@@ -35,7 +35,7 @@ $js_jquery_ui = array (
 
 <?php echo $this->Html->script($js_jquery_ui); ?>
 
-<script type="text/javascript"></script>
+<script type="text/javascript">
 $(function() {
     $( "#slider" ).slider();
 });
@@ -47,7 +47,7 @@ $(function() {
 <script type="text/javascript" src="<?php echo $this->webroot; ?>js/bootstrapslider/js/bootstrap-slider.js"></script>
 <!-- colorpicker -->
 <link rel="stylesheet" href="<?php echo $this->webroot; ?>js/colorpicker2/css/bootstrap-colorpicker.css">
-<script type="text/javascript" src="<?php echo $this->webroot; ?>js/colorpicker2/js/bootstrap-colorpicker.js"></script>/
+<script type="text/javascript" src="<?php echo $this->webroot; ?>js/colorpicker2/js/bootstrap-colorpicker.js"></script>
 <!-- fabric.js -->
 <script src="http://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.2.0/fabric.all.min.js"></script>
 <!--<<script src="<?php echo $this->webroot; ?>js/fabricjs/fabric.min.js">-->
@@ -1094,3 +1094,7 @@ mememaker.tools.init = function (id) {
             }
     );
 </script>
+
+<div class="model row-fluid" style="position: fixed;top:0px;left:0px;z-index:1030;margin-bottom:0;">
+    
+</div>

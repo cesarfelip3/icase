@@ -32,4 +32,23 @@ App::uses('Model', 'Model');
  * @package       app.Model
  */
 class AppModel extends Model {
+    protected $_datasource;
+    
+    public function beginTransaction ()
+    {
+        $this->_datasource = $this->getDataSource();
+        $this->_datasource->begin ();
+    }
+    
+    public function commitTransaction ()
+    {
+        $this->_datasource = $this->getDataSource();
+        $this->_datasource->commit ();
+    }
+    
+    public function rollTransaction ()
+    {
+        $this->_datasource = $this->getDataSource();
+        $this->_datasource->rollback ();
+    }
 }

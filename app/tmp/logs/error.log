@@ -18157,3 +18157,826 @@ Request URL: /icase/js/jquery.storageapi.min.js
 Stack Trace:
 #0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #1 {main}
+2013-07-17 13:05:55 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:05:59 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:08:10 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:08:40 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:08:58 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:09:16 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:10:14 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:10:55 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:11:26 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:11:53 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:12:09 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:12:24 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:12:38 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:12:53 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:13:09 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:13:27 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:22:23 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:22:26 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:22:26 Error: [MissingActionException] Action ShopController::ico() could not be found.
+Exception Attributes: array (
+  'controller' => 'ShopController',
+  'action' => 'ico',
+)
+Request URL: /icase/shop/ico/favicon.ico
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(ShopController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-17 13:23:08 Error: [MissingActionException] Action CaseController::img() could not be found.
+Exception Attributes: array (
+  'controller' => 'CaseController',
+  'action' => 'img',
+)
+Request URL: /icase/case/img/template/iphone4.png
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(CaseController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-17 13:23:08 Error: [MissingActionException] Action CaseController::img() could not be found.
+Exception Attributes: array (
+  'controller' => 'CaseController',
+  'action' => 'img',
+)
+Request URL: /icase/case/img/template/iphone.png
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(CaseController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-17 13:23:08 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:23:09 Error: [MissingActionException] Action CaseController::ico() could not be found.
+Exception Attributes: array (
+  'controller' => 'CaseController',
+  'action' => 'ico',
+)
+Request URL: /icase/case/ico/favicon.ico
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(CaseController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-17 13:29:23 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:29:55 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:29:56 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:30:24 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:30:24 Error: [MissingActionException] Action ShopController::ico() could not be found.
+Exception Attributes: array (
+  'controller' => 'ShopController',
+  'action' => 'ico',
+)
+Request URL: /icase/shop/ico/favicon.ico
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(ShopController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-17 13:30:44 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:30:46 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:30:46 Error: [MissingActionException] Action ShopController::ico() could not be found.
+Exception Attributes: array (
+  'controller' => 'ShopController',
+  'action' => 'ico',
+)
+Request URL: /icase/shop/ico/favicon.ico
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(ShopController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-17 13:31:17 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:31:19 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:31:22 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:31:23 Error: [MissingActionException] Action ShopController::ico() could not be found.
+Exception Attributes: array (
+  'controller' => 'ShopController',
+  'action' => 'ico',
+)
+Request URL: /icase/shop/ico/favicon.ico
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(ShopController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-17 13:33:19 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:35:23 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:37:05 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:37:29 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:37:49 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:38:01 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:38:12 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:38:39 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:39:31 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:39:47 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:40:10 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:40:47 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:40:59 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:41:50 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:42:13 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:42:35 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:43:07 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:43:57 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:44:21 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:45:07 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:46:31 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:47:32 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:48:13 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:48:37 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:48:49 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:50:04 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:50:28 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:50:42 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:50:57 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:53:05 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:53:26 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:54:11 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:54:51 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 13:59:55 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 14:00:34 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 14:00:35 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 14:01:34 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 14:01:35 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 14:02:27 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 14:02:29 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 14:04:43 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 14:04:59 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 14:05:53 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 14:06:51 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 14:07:54 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 14:08:36 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 14:08:41 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 14:09:58 Error: [MissingActionException] Action ShopController::img() could not be found.
+Exception Attributes: array (
+  'controller' => 'ShopController',
+  'action' => 'img',
+)
+Request URL: /icase/shop/img/template/iphone.png
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(ShopController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-17 14:27:02 Error: Fatal Error (1): Call to a member function save() on a non-object in [/Volumes/DOS/work.current/icase/app/Controller/ShopController.php, line 55]
+2013-07-17 14:27:02 Error: [FatalErrorException] Call to a member function save() on a non-object
+Request URL: /icase/shop/create
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/lib/Cake/Error/ErrorHandler.php(184): ErrorHandler::handleFatalError(1, 'Call to a membe...', '/Volumes/DOS/wo...', 55)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', '/Volumes/DOS/wo...', 55, Array)
+#2 /Volumes/DOS/work.current/icase/lib/Cake/Core/App.php(930): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', '/Volumes/DOS/wo...', 55, Array)
+#3 /Volumes/DOS/work.current/icase/lib/Cake/Core/App.php(903): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-07-17 14:27:03 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 14:27:20 Error: [MissingViewException] View file "/Volumes/DOS/work.current/icase/app/View/Shop/create.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/Volumes/DOS/work.current/icase/app/View/Shop/create.ctp',
+)
+Request URL: /icase/shop/create
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /Volumes/DOS/work.current/icase/lib/Cake/Controller/Controller.php(948): View->render(NULL, NULL)
+#2 /Volumes/DOS/work.current/icase/lib/Cake/Routing/Dispatcher.php(194): Controller->render()
+#3 /Volumes/DOS/work.current/icase/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(ShopController), Object(CakeRequest), Object(CakeResponse))
+#4 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2013-07-17 14:27:22 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-17 14:27:23 Error: [MissingActionException] Action ShopController::ico() could not be found.
+Exception Attributes: array (
+  'controller' => 'ShopController',
+  'action' => 'ico',
+)
+Request URL: /icase/shop/ico/favicon.ico
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(ShopController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-17 14:44:05 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/js/jquery.storageapi.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
