@@ -12,4 +12,8 @@ class ProductController extends ProductAppController {
     {
         
     }
+    
+    public function newtemplate ()
+    {
+    }
 }
