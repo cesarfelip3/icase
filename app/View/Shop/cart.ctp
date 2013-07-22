@@ -22,7 +22,7 @@
                     <td><?php echo $i++; ?></td>
                     <td><a href="javascript:" class="thumbnail" style="width:80px;"><img src="img/template/iphone.png" style="width:80px;" /></a></td>
                     <td><?php echo $value['data']['Product']['price'] * $value['value']; ?></td>
-                    <td><a href="javascript:" data-action="plus" class="" data-guid="<?php echo $value['data']['Product']['guid']; ?>" style="text-decoration:none;"><i class="icon-plus icon-1x"></i></a><span style="padding-left:5px;padding-right:5px" id="amount"><?php echo $value['value']; ?></span><a href="javascript:" data-action="minus" class="" data-guid="<?php echo $value['data']['Product']['guid']; ?>" style="text-decoration:none;"><i class="icon-minus icon-1x"></i></a></td>
+                    <td><a href="javascript:" data-action="plus" class="" data-guid="<?php echo $value['data']['Product']['guid']; ?>" data-price="<?php echo $value['data']['Product']['price']; ?>" style="text-decoration:none;"><i class="icon-plus icon-1x"></i></a><span style="padding-left:5px;padding-right:5px" id="amount"><?php echo $value['value']; ?></span><a href="javascript:" data-action="minus" class="" data-guid="<?php echo $value['data']['Product']['guid']; ?>" data-price="<?php echo $value['data']['Product']['price']; ?>" style="text-decoration:none;"><i class="icon-minus icon-1x"></i></a></td>
                     <th><a href="javascript:" data-action="remove" data-guid="<?php echo $value['data']['Product']['guid']; ?>" style="text-decoration:none;"><i class="icon-remove-sign icon-2x"></i></a></th>
                   </tr>
                   <?php

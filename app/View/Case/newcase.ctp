@@ -402,6 +402,7 @@ $js_case = array (
                 var action = $(this).data('action');
                 var guid = $(this).data('guid');
                 var i = 0;
+                var price = 0;
                 
                 switch (action) {
                     case 'close':
@@ -414,7 +415,9 @@ $js_case = array (
                         i++;
                         jQuery(this).next().text(i);
                         shoppingcart.set(guid);
-                        reload();
+                        price = $(this).data('price');
+                        price = parseFloat(price) * i;
+                        $(this).parent().prev().text(price);
                         break;
                     case 'minus' :
                         i = jQuery(this).prev().text();
@@ -428,7 +431,9 @@ $js_case = array (
                         }
                         jQuery(this).prev().text(i);
                         shoppingcart.remove(guid);
-                        reload();
+                        price = $(this).data('price');
+                        price = parseFloat(price) * i;
+                        $(this).parent().prev().text(price);
                         break;
                     case 'remove' :
                         shoppingcart.removeall (guid);

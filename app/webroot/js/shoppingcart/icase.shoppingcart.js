@@ -60,7 +60,7 @@ shoppingcart.remove = function (id) {
         )
     }
     
-    shoppingcart.orders.slice (i, 1);
+    shoppingcart.orders.splice (i, 1);
     if (shoppingcart.orders.length < 1) {
         storage.remove ('orders');
         return;
