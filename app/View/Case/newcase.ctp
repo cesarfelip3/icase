@@ -417,7 +417,7 @@ $js_case = array (
                         shoppingcart.set(guid);
                         price = $(this).data('price');
                         price = parseFloat(price) * i;
-                        $(this).parent().prev().text(price);
+                        $(this).parent().prev().text(price.toFixed(2));
                         break;
                     case 'minus' :
                         i = jQuery(this).prev().text();
@@ -433,7 +433,7 @@ $js_case = array (
                         shoppingcart.remove(guid);
                         price = $(this).data('price');
                         price = parseFloat(price) * i;
-                        $(this).parent().prev().text(price);
+                        $(this).parent().prev().text(price.toFixed(2));
                         break;
                     case 'remove' :
                         shoppingcart.removeall (guid);
