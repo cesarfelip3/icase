@@ -123,7 +123,7 @@
                                                       See "config.js" for more details	
                     -->
                     <p><a class="btn btn-large btn-peach hide" id="btn-choose-device"><i class="icon-mobile-phone icon-1x"></i> Add To Cart</a></p>
-                    <div class="qbox creator-parts" style="visibility:hidden">
+                    <div class="qbox creator-parts" style="visibility:hidden;box-shadow:none;">
                         <h3><i class="icon-search pull-right"></i>Choose Your Device</h3>
                         <div style="overflow: auto;height:460px;margin:0px;padding:0px;" id="device-list">
                             <h6>iphone 5</h6>
@@ -241,6 +241,7 @@
 <?php
 
 $js_pluploader = array (
+    "http://bp.yahooapis.com/2.4.21/browserplus-min.js",
     "pluploader/plupload.js",
     "pluploader/plupload.gears.js",
     "pluploader/plupload.flash.js",
@@ -249,14 +250,15 @@ $js_pluploader = array (
     "pluploader/plupload.html5.js"
 );
 
+
 ?>
 
-<script type="text/javascript" src="http://bp.yahooapis.com/2.4.21/browserplus-min.js"></script>
 <?php echo $this->Html->script($js_pluploader); ?>
 
 <script type="text/javascript">
     // Custom example logic
-    function $(id) {
+    
+    function PL (id) {
         return document.getElementById(id);
     }
 
@@ -321,12 +323,44 @@ $js_pluploader = array (
         //alert($.parseJSON(response.response).result);
     });
 
-    /*
-    $('uploadfiles').onclick = function() {
-        uploader.start();
-        return false;
-    };*/
-    
-    //$ = jQuery.noConflict ();
-    //$(".logo-area").hide ({"duration":3000, "easing":"swing"});
+</script>
+
+<!-- fabric.js -->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.2.0/fabric.all.min.js"></script>
+<!--<script src="<?php echo $this->webroot; ?>js/fabricjs/fabric.min.js"></script>-->
+
+<?php
+
+$js_case = array (
+    "creator/casecreator.js",
+)
+?>
+
+<?php echo $this->Html->script($js_case); ?>
+
+<script type="text/javascript">
+    jQuery(document).ready(
+            function() {
+                //alert ("hello");
+               
+                mememaker.init('c1');
+                mememaker.tools.init(".tools");
+                mememaker.tools.newtemplate("<?php echo $this->webroot . "img/template/iphone.png"; ?>");
+                mememaker.texteditor.init(".text-editor");
+                mememaker.imageeditor.init(".image-editor");
+                mememaker.draweditor.init(".draw-editor");
+
+                jQuery("#device-list a").click(
+                        function() {
+                            var url = $(this).children(":first-child").attr ('src');
+                            mememaker.tools.newtemplate (url);
+                        }
+                )
+                
+                jQuery("#btn-loading-canvas").parent().hide (0);
+                jQuery("#btn-choose-device").show (1000);
+                jQuery(".creator-parts").delay(1000).show(0).css('visibility', 'visible');
+                
+            }
+    );
 </script>

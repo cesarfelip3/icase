@@ -42,6 +42,10 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
         -->
         <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
+        
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script>window.jQuery || document.write('<script src="<?php echo $this->webroot; ?>js/libs/jquery.min.js"><\/script>')</script>
+
     </head><!--end head-->
 
 

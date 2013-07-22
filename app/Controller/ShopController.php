@@ -31,8 +31,6 @@ class ShopController extends AppController {
 		exit ("");
 	    }
 	    
-	    
-	    
 	}
 	
     }
@@ -61,5 +59,23 @@ class ShopController extends AppController {
 	    $bulk[] = $data;
 	}
 	$this->Product->saveMany ($bulk);
+    }
+    
+    public function template () {
+	$this->autoRender = false;
+	
+	$this->loadModel ('Template');
+	$data = array (
+	    'name' => "iphone",
+	    'image' => "uploads/iphone.png"
+	);
+	
+	$bulk = array ();
+	for ($i = 0; $i < 3; ++$i) {
+	    $data['guid'] = uniqid ();
+	    $bulk[] = $data;
+	}
+	
+	$this->Template->saveMany ($bulk);
     }
 }
