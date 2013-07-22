@@ -9,7 +9,7 @@
 
                     <!-- Upload image -->
                     <div class="qbox creator-parts" style="visibility: hidden;box-shadow:none;">
-                        <h3><i class="icon-eye-open pull-right"></i>IMAGE TOOLS</h3>
+                        <h3></i>IMAGE TOOLS</h3>
 
                         <div class="tools">
                             <div id="uploader" style="padding:0px;margin:0px;">
@@ -28,7 +28,7 @@
                     <!-- end zone alert -->
                     <!-- add text -->
                     <div class="qbox creator-parts" style="visibility: hidden;box-shadow:none;">
-                        <h3><i class="icon-eye-open pull-right"></i>BASIC TOOLS</h3>
+                        <h3>BASIC TOOLS</h3>
                         <!--<button id="singlebutton" name="singlebutton" class="btn btn-default">Enter Drawing mode</button>-->
                         <div style="padding-top:5px;" class="tools">
                             <p>
@@ -124,19 +124,9 @@
                     -->
                     <p><a class="btn btn-large btn-peach hide" id="btn-choose-device"><i class="icon-mobile-phone icon-1x"></i> Add To Cart</a></p>
                     <div class="qbox creator-parts" style="visibility:hidden;box-shadow:none;">
-                        <h3><i class="icon-search pull-right"></i>Choose Your Device</h3>
+                        <h3><i class="icon-refresh icon-spin pull-right"></i>Choose Your Device</h3>
                         <div style="overflow: auto;height:460px;margin:0px;padding:0px;" id="device-list">
-                            <h6>iphone 5</h6>
-                            <a href="javascript:" class="thumbnail">
-                                <img src="img/template/iphone.png" />
-                            </a>
-                            <br/>
-                            <h6>iphone 4S</h6>
-                            <a href="javascript:" class="thumbnail">
-                                <img src="img/template/iphone4.png" />
-                            </a>
-                            <br/>
-                            <br/>
+                            
                         </div>
                     </div>
                     <div class="qbox hide" style="display: none;">
@@ -326,12 +316,11 @@ $js_pluploader = array (
 </script>
 
 <!-- fabric.js -->
-<script src="http://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.2.0/fabric.all.min.js"></script>
 <!--<script src="<?php echo $this->webroot; ?>js/fabricjs/fabric.min.js"></script>-->
 
 <?php
-
 $js_case = array (
+    "http://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.2.0/fabric.all.min.js",
     "creator/casecreator.js",
 )
 ?>
@@ -360,6 +349,27 @@ $js_case = array (
                 jQuery("#btn-loading-canvas").parent().hide (0);
                 jQuery("#btn-choose-device").show (1000);
                 jQuery(".creator-parts").delay(1000).show(0).css('visibility', 'visible');
+                
+                jQuery.ajax({
+                    url: "product/gettemplates",
+                    type: "GET",
+                    beforeSend: function(xhr) {
+                        console.log("working....");
+                    }
+                }).done(function(data) {
+            
+                    $("#device-list").prev().children(":first-child").hide(0);
+                    result = jQuery.parseJSON(data);
+                    jQuery(result).each (
+                        function (index, value) {
+                            var html = jQuery("#device-list").html() + '<h6>' + value.Template.name + '</h6><a href="javascript:" class="thumbnail"><img src="' + value.Template.image + '" /></a><br/>';
+                            jQuery("#device-list").html(html);  
+                        }
+                    )
+            
+                }).fail(function() {
+            
+                });
                 
             }
     );

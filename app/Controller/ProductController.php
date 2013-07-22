@@ -26,6 +26,12 @@ class ProductController extends AppController {
 	    )
 	);
 	
+	foreach ($data as $key => $value) {
+	    $value['Template']['image'] = $this->base . "/" . $value['Template']['image'];
+	    $data[$key] = $value;
+	}
+	
+	//print_r ($data);
 	echo json_encode($data);
     }
 }
