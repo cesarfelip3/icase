@@ -50,7 +50,7 @@ $(function() {
 <script type="text/javascript" src="<?php echo $this->webroot; ?>js/colorpicker2/js/bootstrap-colorpicker.js"></script>
 <!-- fabric.js -->
 <script src="http://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.2.0/fabric.all.min.js"></script>
-<!--<<script src="<?php echo $this->webroot; ?>js/fabricjs/fabric.min.js">-->
+<!--<script src="<?php echo $this->webroot; ?>js/fabricjs/fabric.min.js"></script>-->
 
 <!-- shopping cart -->
 <script src="<?php echo $this->webroot; ?>js/jquery.storageapi.min.js"></script>
@@ -1087,7 +1087,7 @@ mememaker.tools.init = function (id) {
                         }
                 )
                 
-                $("#btn-loading-canvas").hide (0);
+                $("#btn-loading-canvas").parent().hide (0);
                 $("#btn-choose-device").show (1000);
                 $(".creator-parts").delay(1000).show(0).css('visibility', 'visible');
                 

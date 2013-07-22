@@ -8,7 +8,7 @@
                 <div class="span3 hidden-phone">
 
                     <!-- Upload image -->
-                    <div class="qbox creator-parts" style="visibility: hidden">
+                    <div class="qbox creator-parts" style="visibility: hidden;box-shadow:none;">
                         <h3><i class="icon-eye-open pull-right"></i>IMAGE TOOLS</h3>
 
                         <div class="tools">
@@ -27,7 +27,7 @@
                     </div>
                     <!-- end zone alert -->
                     <!-- add text -->
-                    <div class="qbox creator-parts" style="visibility: hidden">
+                    <div class="qbox creator-parts" style="visibility: hidden;box-shadow:none;">
                         <h3><i class="icon-eye-open pull-right"></i>BASIC TOOLS</h3>
                         <!--<button id="singlebutton" name="singlebutton" class="btn btn-default">Enter Drawing mode</button>-->
                         <div style="padding-top:5px;" class="tools">
@@ -52,29 +52,10 @@
                 </div>
                 <div class="span6 listing-js">
 
-                    <!-- page title with dropdown -->
-                    <!--                    <h1>Create Your Case</h1>
-                                        <div class="container-fluid">
-                                            <div class="row-fluid">
-                                                <div class="span7 dropdown-results">
-                                                    <p>Select Your Device:</p>
-                                                </div>
-                                                <div class="span5">
-                                                    <select id="sort" name="sort">
-                                                        <option value="iphone5">Iphone 5</option>
-                                                        <option value="iphone4">Iphone 4/4S</option>
-                                                        <option value="ipad">Ipad</option>
-                                                        <option value="ipad-mine">Ipad Mine</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>-->
-                    <!-- end page title -->
-
                     <!--start Canvas-->
                     <div>
                         <div class="progress" style="height:2px"><div class="bar bar-warning" id="progress-bar" style="width: 0%; height:2px;"></div></div>
-                        <p><a href="javascript:" id="btn-loading-canvas" style="font-size:14px;"><i class="icon-refresh icon-spin"></i> Loading Canvas...</a></p>
+                        <div style="position: absolute;"><a href="javascript:" id="btn-loading-canvas" style="font-size:14px;"><i class="icon-refresh icon-spin"></i> Loading Canvas...</a></div>
                         <canvas class="upper-canvas " style="border: 1px solid rgb(170, 170, 170); -moz-user-select: none; cursor: crosshair;" width="450" height="450" id="c1"></canvas>				   </div>
                     <!--end Canvas-->
                     <div class="row-fluid text-editor hide editor" style="width:100%;border:1px solid #ccc;background-color:white;margin-top:10px;padding:5px;">
