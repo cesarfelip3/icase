@@ -351,7 +351,7 @@ $js_case = array (
                 jQuery(".creator-parts").delay(1000).show(0).css('visibility', 'visible');
                 
                 jQuery.ajax({
-                    url: "product/gettemplates",
+                    url: "shop/gettemplates",
                     type: "GET",
                     beforeSend: function(xhr) {
                         console.log("working....");
@@ -362,13 +362,13 @@ $js_case = array (
                     result = jQuery.parseJSON(data);
                     jQuery(result).each (
                         function (index, value) {
-                            var html = jQuery("#device-list").html() + '<h6>' + value.Template.name + '</h6><a href="javascript:" class="thumbnail"><img src="' + value.Template.image + '" /></a><br/>';
+                            var html = jQuery("#device-list").html() + '<h6>' + value.Product.name + '</h6><a href="javascript:" class="thumbnail"><img src="' + value.Product.image + '" /></a><br/>';
                             jQuery("#device-list").html(html);  
                         }
                     )
             
                 }).fail(function() {
-            
+                    $("#device-list").prev().children(":first-child").hide(0);
                 });
                 
             }

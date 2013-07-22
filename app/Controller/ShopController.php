@@ -34,6 +34,32 @@ class ShopController extends AppController {
 	}
 	
     }
+        
+    public function getTemplates () {
+	$this->autoRender = false;
+	
+	$this->loadModel ('Product');
+	$data = $this->Product->find("all",
+	    array (
+		"conditions" => array (
+		     "active" => 1,
+		     "type" => "template"
+		 ),
+		"order" => array (
+		    "created DESC",
+		    'id DESC'
+		)
+	    )
+	);
+	
+	foreach ($data as $key => $value) {
+	    $value['Product']['image'] = $this->base . "/" . $value['Product']['image'];
+	    $data[$key] = $value;
+	}
+	
+	//print_r ($data);
+	echo json_encode($data);
+    }
     
     public function create () {
 	
@@ -42,7 +68,7 @@ class ShopController extends AppController {
 	$this->loadModel ('Product');
 	$data = array (
 	    'guid' => uniqid (),
-	    'name' => "iphone 5 case",
+	    'name' => "iphone",
 	    "description" => "iphone 5 case description",
 	    "price" => 29.32,
 	    "tax" => 0,
@@ -53,9 +79,13 @@ class ShopController extends AppController {
 	);
 	
 	$bulk = array ();
-	for ($i = 0; $i < 50; ++$i) {
+	for ($i = 0; $i < 3; ++$i) {
 	    $data['price'] = 29.32 + rand (1, 100);
 	    $data['guid'] = uniqid ();
+	    $j = $i + 3;
+	    $data['name'] = "iphone" . $j;
+	    $data['type'] = 'template';
+	    $data['image'] = 'img/template/iphone.png';
 	    $bulk[] = $data;
 	}
 	$this->Product->saveMany ($bulk);
