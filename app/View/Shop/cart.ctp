@@ -1,6 +1,6 @@
 <div class="span8 offset2">
     <div class="qbox">
-        <h1><a href="#" type="button" class="close" data-dismiss="modal" aria-hidden="true" style="text-decoration:none;"><i class="icon-remove icon-1x"></i></a></h1>
+        <h1><a href="javascript:" class="close" type="button" data-action="close" data-dismiss="modal" aria-hidden="true" style="text-decoration:none;"><i class="icon-remove icon-1x"></i></a></h1>
         <div>
             <table class="table table-striped">
                 <thead>
@@ -20,10 +20,10 @@
                     ?>
                   <tr>
                     <td><?php echo $i++; ?></td>
-                    <td><a href="#" class="thumbnail" style="width:80px;"><img src="img/template/iphone.png" style="width:80px;" /></a></td>
+                    <td><a href="javascript:" class="thumbnail" style="width:80px;"><img src="img/template/iphone.png" style="width:80px;" /></a></td>
                     <td><?php echo $value['data']['Product']['price'] * $value['value']; ?></td>
-                    <td><a href="javascript:" class="remove" data-guid="<?php echo $value['data']['Product']['guid']; ?>" style="text-decoration:none;"><i class="icon-plus icon-1x"></i></a><?php echo $value['value']; ?></td>
-                    <th><a href="javascript:" class="remove" data-guid="<?php echo $value['data']['Product']['guid']; ?>" style="text-decoration:none;"><i class="icon-remove-sign icon-2x"></i></a></th>
+                    <td><a href="javascript:" data-action="plus" class="" data-guid="<?php echo $value['data']['Product']['guid']; ?>" style="text-decoration:none;"><i class="icon-plus icon-1x"></i></a><span style="padding-left:5px;padding-right:5px" id="amount"><?php echo $value['value']; ?></span><a href="javascript:" data-action="minus" class="" data-guid="<?php echo $value['data']['Product']['guid']; ?>" style="text-decoration:none;"><i class="icon-minus icon-1x"></i></a></td>
+                    <th><a href="javascript:" data-action="remove" data-guid="<?php echo $value['data']['Product']['guid']; ?>" style="text-decoration:none;"><i class="icon-remove-sign icon-2x"></i></a></th>
                   </tr>
                   <?php
                   endforeach;
@@ -32,7 +32,10 @@
                 </tbody>
               </table>
             <hr/>
-            <a class="btn btn-large btn-peach">Checkout</a>
+            <a class="btn btn-peach">Checkout</a>
+            <a class="btn btn-success pull-right">Register</a>
+            <a class="btn btn-success pull-right" style="margin-right:10px">Login</a>
+            <span class="help-block">You have to login to save your design</span>
         </div>
     </div>
 </div>

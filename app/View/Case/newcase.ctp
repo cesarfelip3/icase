@@ -339,17 +339,6 @@ $js_case = array (
                 mememaker.texteditor.init(".text-editor");
                 mememaker.imageeditor.init(".image-editor");
                 mememaker.draweditor.init(".draw-editor");
-
-                function init () {
-                
-                    jQuery("#device-list a").click(
-                            function() {
-                                var url = $(this).children(":first-child").attr ('src');
-                                mememaker.tools.newtemplate (url);
-                                $("#current-item").val ($(this).data('guid'));
-                            }
-                    )
-                }
                 
                 jQuery("#btn-loading-canvas").parent().hide (0);
                 jQuery("#btn-add-cart").show (1000);
@@ -387,28 +376,79 @@ $js_case = array (
                         }
                         
                         shoppingcart.set (orderId);
+                        //$("#current-item").val("");
                     
-                        jQuery.ajax({
-                            url: "/icase/shop/cart",
-                            data: {"orders":shoppingcart.get()},
-                            type: "POST",
-                            beforeSend: function(xhr) {
-                                console.log("working....");
-                            }
-                        }).done(function(data) {
-                            $("#box-cart").html (data);
-                            $("#box-cart").show ();
-                            $(".close").click (
-                                function () {
-                                    $(".model").hide (0);
-                                }
-                            )
-                        }).fail(function() {
-                            
-                        });
+                        reload ();
                     }
                 )
                 
             }
     );
+
+    function init () {
+    
+        jQuery("#device-list a").off('click');
+        jQuery("#device-list a").click(
+                function() {
+                    var url = $(this).children(":first-child").attr ('src');
+                    mememaker.tools.newtemplate (url);
+                    $("#current-item").val ($(this).data('guid'));
+                }
+        );
+        
+        jQuery("#box-cart a").off('click');
+        jQuery ("#box-cart a").click (
+            function () {
+                var action = $(this).data('action');
+                var guid = $(this).data('guid');
+                var i = 0;
+                
+                switch (action) {
+                    case 'close':
+                        jQuery("#box-cart").hide(0);
+                        break;
+                    case 'plus' :
+                        i = jQuery(this).next().text();
+                        console.log (i);
+                        i = parseInt (jQuery.trim(i));
+                        i++;
+                        jQuery(this).next().text(i);
+                        break;
+                    case 'minus' :
+                        i = jQuery(this).prev().text();
+                        console.log (i);
+                        i = parseInt (jQuery.trim(i));
+                        i--;
+                        if (i <= 0) {
+                            shoppingcart.removeall (guid);
+                            reload();
+                            break;
+                        }
+                        jQuery(this).prev().text(i);
+                        break;
+                    case 'remove' :
+                        shoppingcart.removeall (guid);
+                        reload();
+                        break;
+                }
+            }
+        )
+    }
+    
+    function reload () {
+        jQuery.ajax({
+            url: "/icase/shop/cart",
+            data: {"orders":shoppingcart.get()},
+            type: "POST",
+            beforeSend: function(xhr) {
+                console.log("working....");
+            }
+        }).done(function(data) {
+            $("#box-cart").html (data);
+            $("#box-cart").show ();
+            init ();
+        }).fail(function() {
+            
+        });
+    }
 </script>

@@ -37,10 +37,14 @@ class ShopController extends AppController {
 	    }
 	    
 	    $this->loadModel ("Product");
-	    $conditions = array ();
+	    $data = array ();
 	    $i = 0;
 	    foreach ($guids as $key => $value) {
 		$data[$i]['data'] = $this->Product->findByGuid ($key);
+		if (empty ($data[$i]['data'])) {
+		    $data = array ();
+		    break;
+		}
 		$data[$i]['value'] = $value;
 		$i++;
 	    }
