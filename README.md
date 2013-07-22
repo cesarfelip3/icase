@@ -5,11 +5,11 @@ icase
 Update
 ========
 
-2013.07.15 - Plan
+2013.07.22
 
-Image Editor
+About product
 
-    Zoom
-    Rotation
-    Flip
-    
+type : product, template
+
+product : for sale, not able to customize
+template : for customized case

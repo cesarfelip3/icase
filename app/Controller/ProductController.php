@@ -13,11 +13,12 @@ class ProductController extends AppController {
     public function getTemplates () {
 	$this->autoRender = false;
 	
-	$this->loadModel ('Template');
-	$data = $this->Template->find("all",
+	$this->loadModel ('Product');
+	$data = $this->Product->find("all",
 	    array (
 		"conditions" => array (
-		     "active" => 1
+		     "active" => 1,
+		     "type" => "template"
 		 ),
 		"order" => array (
 		    "created DESC",
@@ -27,7 +28,7 @@ class ProductController extends AppController {
 	);
 	
 	foreach ($data as $key => $value) {
-	    $value['Template']['image'] = $this->base . "/" . $value['Template']['image'];
+	    $value['Product']['image'] = $this->base . "/" . $value['Product']['image'];
 	    $data[$key] = $value;
 	}
 	
