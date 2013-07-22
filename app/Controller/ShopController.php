@@ -14,23 +14,38 @@ class ShopController extends AppController {
         
 	if ($this->request->is ("ajax")) {
 	    $this->layout = false;
-	    $product_guid = $this->request->query ('id');
-	   
-	    if (empty ($product_guid)) {
-		exit ("");
+	    $orders = $this->request->data['orders'];
+	    $orders = explode (",", $orders);
+	    
+	    if (empty ($orders)) {
+		return;
 	    }
 	    
-	    if (preg_match ("/[^a-z0-9A-Z]/i", $product_guid)) {
-		exit ("");
+	    $guids = array_flip ($orders);
+	    $i = 0;
+	    
+	    foreach ($guids as $key => $value) {
+		$guids[$key] = 0;
+	    }
+	    
+	    foreach ($guids as $key => $value) {
+		foreach ($orders as $order) {
+		    if ($order == $key) {
+			$guids[$key]++;
+		    }
+		}
 	    }
 	    
 	    $this->loadModel ("Product");
-	    $data = $this->Product->findByGuid ($guid);
-	    
-	    if (empty ($data)) {
-		exit ("");
+	    $conditions = array ();
+	    $i = 0;
+	    foreach ($guids as $key => $value) {
+		$data[$i]['data'] = $this->Product->findByGuid ($key);
+		$data[$i]['value'] = $value;
+		$i++;
 	    }
 	    
+	    $this->set ('data', $data);
 	}
 	
     }

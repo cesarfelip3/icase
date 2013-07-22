@@ -122,12 +122,13 @@
                                                       the width is automatically "Re-adjusted" with javascript
                                                       See "config.js" for more details	
                     -->
-                    <p><a class="btn btn-large btn-peach hide" id="btn-choose-device"><i class="icon-mobile-phone icon-1x"></i> Add To Cart</a></p>
+                    <p><a class="btn btn-large btn-peach hide" id="btn-add-cart"><i class="icon-mobile-phone icon-1x"></i> Add To Cart</a></p>
                     <div class="qbox creator-parts" style="visibility:hidden;box-shadow:none;">
                         <h3><i class="icon-refresh icon-spin pull-right"></i>Choose Your Device</h3>
                         <div style="overflow: auto;height:460px;margin:0px;padding:0px;" id="device-list">
                             
                         </div>
+                        <form id="cart-form"><input type="hidden" id="current-item" /></form>
                     </div>
                     <div class="qbox hide" style="display: none;">
                         <h3><i class="icon-search pull-right"></i>Filters</h3>
@@ -321,7 +322,7 @@ $js_pluploader = array (
 <?php
 $js_case = array (
     "http://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.2.0/fabric.all.min.js",
-    "creator/casecreator.js",
+    "creator/icase.casecreator.js"
 )
 ?>
 
@@ -334,20 +335,24 @@ $js_case = array (
                
                 mememaker.init('c1');
                 mememaker.tools.init(".tools");
-                mememaker.tools.newtemplate("<?php echo $this->webroot . "img/template/iphone.png"; ?>");
+                //mememaker.tools.newtemplate("<?php echo $this->webroot . "img/template/iphone.png"; ?>");
                 mememaker.texteditor.init(".text-editor");
                 mememaker.imageeditor.init(".image-editor");
                 mememaker.draweditor.init(".draw-editor");
 
-                jQuery("#device-list a").click(
-                        function() {
-                            var url = $(this).children(":first-child").attr ('src');
-                            mememaker.tools.newtemplate (url);
-                        }
-                )
+                function init () {
+                
+                    jQuery("#device-list a").click(
+                            function() {
+                                var url = $(this).children(":first-child").attr ('src');
+                                mememaker.tools.newtemplate (url);
+                                $("#current-item").val ($(this).data('guid'));
+                            }
+                    )
+                }
                 
                 jQuery("#btn-loading-canvas").parent().hide (0);
-                jQuery("#btn-choose-device").show (1000);
+                jQuery("#btn-add-cart").show (1000);
                 jQuery(".creator-parts").delay(1000).show(0).css('visibility', 'visible');
                 
                 jQuery.ajax({
@@ -362,14 +367,47 @@ $js_case = array (
                     result = jQuery.parseJSON(data);
                     jQuery(result).each (
                         function (index, value) {
-                            var html = jQuery("#device-list").html() + '<h6>' + value.Product.name + '</h6><a href="javascript:" class="thumbnail"><img src="' + value.Product.image + '" /></a><br/>';
+                            var html = jQuery("#device-list").html() + '<h6>' + value.Product.name + ' ' + value.Product.price + '$</h6><a href="javascript:" class="thumbnail" data-guid="' + value.Product.guid + '"><img src="' + value.Product.image + '" /></a><br/>';
                             jQuery("#device-list").html(html);  
                         }
-                    )
+                    );
+                    
+                    init ();
             
                 }).fail(function() {
                     $("#device-list").prev().children(":first-child").hide(0);
                 });
+                
+                jQuery("#btn-add-cart").click (
+                    function () {
+                        var orderId = null;
+                        orderId = $("#current-item").val();
+                        if (orderId == null || orderId == "" || orderId == "undefined") {
+                            return;
+                        }
+                        
+                        shoppingcart.set (orderId);
+                    
+                        jQuery.ajax({
+                            url: "/icase/shop/cart",
+                            data: {"orders":shoppingcart.get()},
+                            type: "POST",
+                            beforeSend: function(xhr) {
+                                console.log("working....");
+                            }
+                        }).done(function(data) {
+                            $("#box-cart").html (data);
+                            $("#box-cart").show ();
+                            $(".close").click (
+                                function () {
+                                    $(".model").hide (0);
+                                }
+                            )
+                        }).fail(function() {
+                            
+                        });
+                    }
+                )
                 
             }
     );

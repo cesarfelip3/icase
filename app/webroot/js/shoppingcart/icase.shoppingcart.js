@@ -1,11 +1,9 @@
 // powered by jquery plugin - storage 1.4
-
-var $ = jQuery.noConflict ();
+storage=jQuery.cookieStorage;
 
 var shoppingcart = {
-    orderIds: null,
     orders: [],
-    orderKeys: [],
+    index: 0,
     init: null,
     set: null,
     get: null,
@@ -17,89 +15,64 @@ shoppingcart.init = function () {
     
 }
 
-shoppingcart.set = function (order) {
-    var ids = storage.get ('orderIds');
-    if (ids !== null && ids !== 'undefined') {
-        ids = ids + ',' + order.id;
+shoppingcart.set = function (orderId) {
+    var orders = storage.get ('orders');
+    console.log ('orders = ' + orders);
+    
+    if (orders == null || orders == "undefined" || orders == "") {
+        shoppingcart.orders[0] = orderId;
     } else {
-        ids = order.id;
+        shoppingcart.orders = orders.split (',');
+        shoppingcart.orders[shoppingcart.orders.length] = orderId;
     }
     
-    shoppingcart.orderIds = all;
-    storage.set ('orderIds', shoppingcart.orderIds);
+    console.log (shoppingcart.orders);
     
-    var i = 0;
-    $(order).each (
-        function (key, value) {
-            storage.set (order.id + '_' + key, value);
-            if (orderKeys === null) {
-                orderKeys[i++] = key;
-            }
-        }
-    )
+    orders = shoppingcart.orders.join(",");
+    storage.set ('orders', orders);
 }
 
-shoppingcart.get = function (id) {
-    var ids = storage.get ('orderIds');
-    if (ids == null || ids == "undefined") {
-        shoppingcart.orders = [];
-        return;
+shoppingcart.get = function () {
+    var orders = storage.get ('orders');
+    
+    if (orders == null || orders == "undefined" || orders == "") {
+        return null;
     }
     
-    shoppingcart.orderIds = ids;
-    
-    $(shoppingcart.orderIds.split(",")).each (
-        function (index, value) {
-            var order;
-            
-            order = {};
-            order[id] = value;
-            $(shoppingcart.orderKeys).each (
-                function (i, k) {
-                    order[k] = storage.get (order.id + '_' + key);
-                }
-            )
-            
-            shoppingcart.orders[index] = order;
-        }
-    )
+    return storage.get ('orders');
 }
 
 shoppingcart.remove = function (id) {
-    var ids = storage.get ('orderIds');
-    if (ids == null || ids == "undefined") {
+    var orders = storage.get ('orders');
+    console.log ('orders = ' + orders);
+    var i = 0;
+    
+    if (orders == null || orders == "undefined" || orders == "") {
+        storage.remove ('orders');
+    } else {
+        shoppingcart.orders = orders.split (',');
+        jQuery(shoppingcart.orders).each (
+            function (index, value) {
+                if (value == id) {
+                    i = index;
+                }
+            }
+        )
+    }
+    
+    shoppingcart.orders.slice (i, 1);
+    if (shoppingcart.orders.length < 1) {
+        storage.remove ('orders');
         return;
     }
     
-    shoppingcart.orderIds = ids;
+    console.log (shoppingcart.orders);
     
-    ids = shoppingcart.orderIds.split(",");
-    
-    var i = 0;
-    $(ids).each (
-        function (index, value) {
-            if (id == value) {
-                $(shoppingcart.orderKeys).each (
-                    function (i, k) {
-                        storage.remove (order.id + '_' + key);
-                    }
-                );
-                i = index;
-            }
-        }
-    );
-    
-    ids.splice (index, 1);
-    shoppingcart.orderIds = ids.join (",");
-    
-    storage.remove ('orderIds');
-    storage.set ('orderIds', shoppingcart.orderIds);
+    orders = shoppingcart.orders.join(",");
+    storage.set ('orders', orders);
 }
 
 shoppingcart.clear = function () {
-    shoppingcart.orderIds = null;
-    shoppingcart.orderKeys = null;
-    shoppingcart.orders = [];
     
     storage.removeAll();
 }

@@ -24,7 +24,10 @@ $js_jquery_ui = array (
     "include/jquery.pubsub.min.js",
     "include/jquery.select2.min.js",
     "include/bootstrap.min.js",
-    "config.js"
+    "config.js",
+    "jquery.cookie.js",
+    "json2.js",
+    "jquery.storageapi.min.js",
 );
 
 ?>
@@ -52,7 +55,7 @@ $(function() {
 <script type="text/javascript" src="<?php echo $this->webroot; ?>js/colorpicker2/js/bootstrap-colorpicker.js"></script>
 
 <!-- shopping cart -->
-<script src="<?php echo $this->webroot; ?>js/jquery.storageapi.min.js"></script>
-<div class="model row-fluid" style="position: fixed;top:0px;left:0px;z-index:1030;margin-bottom:0;">
+<script src="<?php echo $this->webroot; ?>js/shoppingcart/icase.shoppingcart.js"></script>
+<div class="model row-fluid" id="box-cart" style="position: fixed;top:0px;left:0px;z-index:1030;margin-bottom:0;">
     
 </div>
