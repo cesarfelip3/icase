@@ -413,6 +413,8 @@ $js_case = array (
                         i = parseInt (jQuery.trim(i));
                         i++;
                         jQuery(this).next().text(i);
+                        shoppingcart.set(guid);
+                        reload();
                         break;
                     case 'minus' :
                         i = jQuery(this).prev().text();
@@ -425,6 +427,8 @@ $js_case = array (
                             break;
                         }
                         jQuery(this).prev().text(i);
+                        shoppingcart.remove(guid);
+                        reload();
                         break;
                     case 'remove' :
                         shoppingcart.removeall (guid);
