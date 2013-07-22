@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.29)
 # Database: icase
-# Generation Time: 2013-07-16 10:48:21 +0000
+# Generation Time: 2013-07-22 09:52:29 +0000
 # ************************************************************
 
 
@@ -183,7 +183,9 @@ DROP TABLE IF EXISTS `products`;
 CREATE TABLE `products` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `guid` char(13) DEFAULT NULL,
+  `user_guid` char(13) DEFAULT NULL,
   `name` varchar(256) DEFAULT NULL,
+  `image` varchar(1024) DEFAULT NULL,
   `description` text,
   `total` int(11) DEFAULT NULL,
   `price` decimal(10,2) DEFAULT NULL,
@@ -197,11 +199,24 @@ CREATE TABLE `products` (
   `special_start` int(11) DEFAULT NULL,
   `special_end` int(11) DEFAULT NULL,
   `attribute` int(11) NOT NULL DEFAULT '0',
+  `type` varchar(16) NOT NULL DEFAULT 'product',
+  `active` int(11) NOT NULL DEFAULT '1',
   `created` int(11) DEFAULT NULL,
   `modified` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+LOCK TABLES `products` WRITE;
+/*!40000 ALTER TABLE `products` DISABLE KEYS */;
+
+INSERT INTO `products` (`id`, `guid`, `user_guid`, `name`, `image`, `description`, `total`, `price`, `tax`, `discount`, `status`, `seo_keywords`, `seo_meta`, `seo_description`, `special_price`, `special_start`, `special_end`, `attribute`, `type`, `active`, `created`, `modified`)
+VALUES
+	(1,'51eccb1846067',NULL,'iphone3','img/template/iphone4.png','iphone 5 case description',100,104.32,0.00,NULL,'publish',NULL,NULL,NULL,NULL,NULL,NULL,0,'template',1,1374472984,1374472984),
+	(2,'51eccb1846097',NULL,'iphone4','img/template/iphone.png','iphone 5 case description',100,42.32,0.00,NULL,'publish',NULL,NULL,NULL,NULL,NULL,NULL,0,'template',1,1374472984,1374472984),
+	(3,'51eccb18460c0',NULL,'iphone5','img/template/iphone4.png','iphone 5 case description',100,59.32,0.00,NULL,'publish',NULL,NULL,NULL,NULL,NULL,NULL,0,'template',1,1374472984,1374472984);
+
+/*!40000 ALTER TABLE `products` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table users
