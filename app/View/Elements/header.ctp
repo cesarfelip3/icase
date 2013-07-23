@@ -30,7 +30,6 @@ $action = $this->request->action;
                     </ul>
                     <ul class="nav pull-right">
                         <li class="<?php if ($controller == "shop" && $action == "cart") echo "active"; ?>">
-                            <a href="<?php echo $this->Html->Url ("/shop/cart", false); ?>" target="_blank">Cart</a>
                         </li>
                     </ul>
                 </div><!-- end nav-collapse -->

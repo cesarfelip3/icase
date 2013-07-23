@@ -334,7 +334,7 @@ $js_case = array (
                 //alert ("hello");
                
                 mememaker.init('c1');
-                mememaker.tools.init(".tools");
+                mememaker.tools.init(".tools", "<?php echo $this->webroot; ?>/media/preview", "#modal-preview");
                 //mememaker.tools.newtemplate("<?php echo $this->webroot . "img/template/iphone.png"; ?>");
                 mememaker.texteditor.init(".text-editor");
                 mememaker.imageeditor.init(".image-editor");
