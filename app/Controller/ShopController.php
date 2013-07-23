@@ -21,6 +21,16 @@ class ShopController extends AppController {
 	    $orders = $this->request->data['orders'];
 	    $data = array ();
 	    
+	    $action = $this->request->query ('action');
+	    if ($action == "customize") {
+		$images = $this->request->data['images'];
+		
+		if (empty ($images)) {
+		    $this->set ('data', $data);
+		    return;
+		}
+	    }
+	    
 	    if (empty ($orders)) {
 		$this->set ('data', $data);
 		return;
@@ -31,6 +41,15 @@ class ShopController extends AppController {
 	    if (empty ($orders)) {
 		$this->set ('data', $data);
 		return;
+	    }
+	    
+	    if ($action == "customize") {
+		$images = explode (",", $images);
+		
+		if (empty ($images)) {
+		    $this->set ('data', $data);
+		    return;
+		}
 	    }
 	    
 	    $guids = array_flip ($orders);
@@ -55,6 +74,9 @@ class ShopController extends AppController {
 		$data[$i]['data'] = $this->Product->findByGuid ($key);
 		if (empty ($data[$i]['data'])) {
 		    break;
+		}
+		if ($action == "customize") {
+		    $data[$i]['data']['Product']['image'] = $images[$i];
 		}
 		$data[$i]['value'] = $value;
 		$i++;
