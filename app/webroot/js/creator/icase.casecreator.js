@@ -21,6 +21,8 @@ var mememaker = {
     // object memeber
     tools: {
         container: '.tools',
+        previewUrl: 'media/preview',
+        modal: '#modal-preview',
         init: null,
         new: null,
         info: null,
@@ -36,6 +38,7 @@ var mememaker = {
         addpic: null,
         resize: null,
         preview: null,
+        generate: null,
         backgroundcolor: null,
         newtemplate: null,
     },
@@ -128,11 +131,18 @@ mememaker.init = function (id) {
 }
 
 // tools
-mememaker.tools.init = function (id) {
+mememaker.tools.init = function (id, previewUrl, modal) {
     if (id != null) {
         mememaker.tools.container = id;
     }
     
+    if (previewUrl != null && previewUrl != 'undefined') {
+        mememaker.tools.previewUrl = previewUrl;
+    }
+    
+    if (modal != null && modal != 'undefined') {
+        mememaker.tools.modal = modal;
+    }
     //jQuery("#canvas-background-color").colorpicker().on('changeColor', function (ev) {
     //    mememaker.tools.backgroundcolor (ev.color.toHex());    
     //});
@@ -183,7 +193,7 @@ mememaker.tools.init = function (id) {
                     mememaker.tools.resize(false, this);
                     break;
                 case 'preview':
-                    mememaker.tools.preview();
+                    mememaker.tools.preview(mememaker.tools.generate);
                     break;
                 case 'backgroundcolor':
                     //mememaker.tools.backgroundcolor ();
@@ -497,14 +507,9 @@ mememaker.tools.resize = function(plus, evt) {
     mememaker.canvas.setDimensions({width: 460, height: mememaker.canvas.getHeight() + height});
 }
 
-mememaker.tools.preview = function() {
+mememaker.tools.preview = function(callback) {
     // it will convert canvas to base64
-    console.log('preview');
     mememaker.canvas.deactivateAll();
-    var c = "box-" + mememaker.canvasId;
-
-    jQuery("#" + c).toggle();
-    jQuery("#" + c + "-preview").toggle();
 
     var preview = mememaker.canvas.toDataURL(
             {
@@ -513,12 +518,17 @@ mememaker.tools.preview = function() {
             }
     );
     
+    callback (preview);
+}
+
+mememaker.tools.generate = function(preview) {
+    
+    jQuery(mememaker.tools.modal).modal();
     jQuery.ajax({
-        url: "media/preview",
+        url: mememaker.tools.previewUrl,
         data: {"image-extension": "jpeg", "image-data": preview},
         type: "POST",
         beforeSend: function(xhr) {
-            console.log("working....");
         }
     }).done(function(data) {
         //jQuery("#ajax-indicator").hide();
@@ -530,7 +540,7 @@ mememaker.tools.preview = function() {
         } else {
             console.log(result.message);
         }
-
+        jQuery(mememaker.tools.modal + " img").attr('src', result.files.url);
     }).fail(function() {
 
     });

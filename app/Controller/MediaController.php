@@ -225,11 +225,11 @@ class MediaController extends AppController {
         $current_width = $size[0];
         $current_height = $size[1];
         
-        $left = 50;
-        $top = 50;
+        $left = 100;
+        $top = 5;
          
-        $crop_width = 200;
-        $crop_height = 200;
+        $crop_width = 248;
+        $crop_height = 437;
          
         // Resample the image
         $canvas = imagecreatetruecolor($crop_width, $crop_height);

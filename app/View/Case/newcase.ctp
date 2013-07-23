@@ -461,3 +461,14 @@ $js_case = array (
         });
     }
 </script>
+
+<!-- preview modal -->
+<div id="modal-preview" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Your Design</h3>
+  </div>
+  <div class="modal-body">
+    <p><img src="" /></p>
+  </div>
+</div>

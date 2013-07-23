@@ -32,7 +32,11 @@
                 </tbody>
               </table>
             <hr/>
+            <?php
+            if (!empty ($data)) : ?>
             <a class="btn btn-peach">Checkout</a>
+            <?php
+            endif; ?>
             <a class="btn btn-success pull-right">Register</a>
             <a class="btn btn-success pull-right" style="margin-right:10px">Login</a>
             <span class="help-block">You have to login to save your design</span>

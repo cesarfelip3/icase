@@ -56,6 +56,6 @@ $(function() {
 
 <!-- shopping cart -->
 <script src="<?php echo $this->webroot; ?>js/shoppingcart/icase.shoppingcart.js"></script>
-<div class="model row-fluid" id="box-cart" style="position: fixed;top:0px;left:0px;z-index:1030;margin-bottom:0;">
+<div class="row-fluid" id="box-cart" style="position: fixed;top:0px;left:0px;z-index:1030;margin-bottom:0;">
     
 </div>

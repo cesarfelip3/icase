@@ -15,9 +15,17 @@ class ShopController extends AppController {
 	if ($this->request->is ("ajax")) {
 	    $this->layout = false;
 	    $orders = $this->request->data['orders'];
+	    $data = array ();
+	    
+	    if (empty ($orders)) {
+		$this->set ('data', $data);
+		return;
+	    }
+	    
 	    $orders = explode (",", $orders);
 	    
 	    if (empty ($orders)) {
+		$this->set ('data', $data);
 		return;
 	    }
 	    
@@ -37,12 +45,11 @@ class ShopController extends AppController {
 	    }
 	    
 	    $this->loadModel ("Product");
-	    $data = array ();
 	    $i = 0;
+	    
 	    foreach ($guids as $key => $value) {
 		$data[$i]['data'] = $this->Product->findByGuid ($key);
 		if (empty ($data[$i]['data'])) {
-		    $data = array ();
 		    break;
 		}
 		$data[$i]['value'] = $value;
@@ -55,31 +62,35 @@ class ShopController extends AppController {
     }
         
     public function getTemplates () {
-	$this->autoRender = false;
 	
-	$this->loadModel ('Product');
-	$data = $this->Product->find("all",
-	    array (
-		"conditions" => array (
-		     "active" => 1,
-		     "type" => "template"
-		 ),
-		"order" => array (
-		    "created DESC",
-		    'id DESC'
+	if ($this->request->is('ajax')) {
+	    $this->autoRender = false;
+	    
+	    $this->loadModel ('Product');
+	    $data = $this->Product->find("all",
+		array (
+		    "conditions" => array (
+			 "active" => 1,
+			 "type" => "template"
+		     ),
+		    "order" => array (
+			"created DESC",
+			'id DESC'
+		    )
 		)
-	    )
-	);
-	
-	foreach ($data as $key => $value) {
-	    $value['Product']['image'] = $this->base . "/" . $value['Product']['image'];
-	    $data[$key] = $value;
+	    );
+	    
+	    foreach ($data as $key => $value) {
+		$value['Product']['image'] = $this->base . "/" . $value['Product']['image'];
+		$data[$key] = $value;
+	    }
+	    
+	    //print_r ($data);
+	    echo json_encode($data);
 	}
-	
-	//print_r ($data);
-	echo json_encode($data);
     }
     
+    // for test
     public function create () {
 	
 	$this->autoRender = false;
