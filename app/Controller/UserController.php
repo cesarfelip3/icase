@@ -5,6 +5,7 @@ class UserController extends AppController {
     
     public function beforeFilter() {
         $this->Auth->deny();
+        $this->Auth->allow('guest');
 	parent::beforeFilter();
     }
     
@@ -31,5 +32,24 @@ class UserController extends AppController {
     public function invoice ()
     {
         
+    }
+    
+    public function guest ()
+    {
+        $this->autoRender = false;
+        if ($this->request->is('ajax')) {
+            
+            $action = $this->request->query ('action');
+            
+            if (empty ($action)) {
+                exit ("");
+            }
+            
+            if ($action == 'newuuid') {
+                $uuid = uniqid ();
+                exit ($uuid);
+            }
+            
+        }
     }
 }

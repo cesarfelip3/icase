@@ -234,8 +234,8 @@
 $js_pluploader = array (
     "http://bp.yahooapis.com/2.4.21/browserplus-min.js",
     "pluploader/plupload.js",
-    "pluploader/plupload.gears.js",
-    "pluploader/plupload.flash.js",
+    //"pluploader/plupload.gears.js",
+    //"pluploader/plupload.flash.js",
     "pluploader/plupload.browserplus.js",
     "pluploader/plupload.html4.js",
     "pluploader/plupload.html5.js"
@@ -361,7 +361,7 @@ $js_case = array (
                         }
                     );
                     
-                    init ();
+                    template_config ();
             
                 }).fail(function() {
                     $("#device-list").prev().children(":first-child").hide(0);
@@ -376,90 +376,47 @@ $js_case = array (
                         }
                         
                         shoppingcart.set (orderId);
-                        //$("#current-item").val("");
+                        
+                        jQuery(mememaker.tools.modal).modal();
+                        jQuery.ajax({
+                            url: "<?php echo $this->webroot; ?>media/order",
+                            data: {"image-extension": "jpeg", "image-data": preview, "user": shoppingcart.getuuid()},
+                            type: "POST",
+                            beforeSend: function(xhr) {
+                            }
+                        }).done(function(data) {
+                            //jQuery("#ajax-indicator").hide();
                     
-                        reload ();
+                            result = jQuery.parseJSON(data);
+                            if (result.error == 0) {
+                                var url = result.files.url;
+                                console.log(url);
+                            } else {
+                                console.log(result.message);
+                            }
+                            cart_reload ();
+                        }).fail(function() {
+                    
+                        });
+                        //cart_reload ();
                     }
                 )
                 
             }
     );
 
-    function init () {
+    function template_config () {
     
         jQuery("#device-list a").off('click');
         jQuery("#device-list a").click(
-                function() {
-                    var url = $(this).children(":first-child").attr ('src');
-                    mememaker.tools.newtemplate (url);
-                    $("#current-item").val ($(this).data('guid'));
-                }
-        );
-        
-        jQuery("#box-cart a").off('click');
-        jQuery ("#box-cart a").click (
-            function () {
-                var action = $(this).data('action');
-                var guid = $(this).data('guid');
-                var i = 0;
-                var price = 0;
-                
-                switch (action) {
-                    case 'close':
-                        jQuery("#box-cart").hide(0);
-                        break;
-                    case 'plus' :
-                        i = jQuery(this).next().text();
-                        console.log (i);
-                        i = parseInt (jQuery.trim(i));
-                        i++;
-                        jQuery(this).next().text(i);
-                        shoppingcart.set(guid);
-                        price = $(this).data('price');
-                        price = parseFloat(price) * i;
-                        $(this).parent().prev().text(price.toFixed(2));
-                        break;
-                    case 'minus' :
-                        i = jQuery(this).prev().text();
-                        console.log (i);
-                        i = parseInt (jQuery.trim(i));
-                        i--;
-                        if (i <= 0) {
-                            shoppingcart.removeall (guid);
-                            reload();
-                            break;
-                        }
-                        jQuery(this).prev().text(i);
-                        shoppingcart.remove(guid);
-                        price = $(this).data('price');
-                        price = parseFloat(price) * i;
-                        $(this).parent().prev().text(price.toFixed(2));
-                        break;
-                    case 'remove' :
-                        shoppingcart.removeall (guid);
-                        reload();
-                        break;
-                }
+            function() {
+                var url = $(this).children(":first-child").attr ('src');
+                mememaker.tools.newtemplate (url);
+                $("#current-item").val ($(this).data('guid'));
             }
-        )
+        );
     }
     
-    function reload () {
-        jQuery.ajax({
-            url: "/icase/shop/cart",
-            data: {"orders":shoppingcart.get()},
-            type: "POST",
-            beforeSend: function(xhr) {
-                console.log("working....");
-            }
-        }).done(function(data) {
-            $("#box-cart").html (data);
-            $("#box-cart").show ();
-            init ();
-        }).fail(function() {
-            
-        });
-    }
 </script>
 
 <!-- preview modal -->

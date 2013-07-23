@@ -4,15 +4,23 @@ storage=jQuery.cookieStorage;
 var shoppingcart = {
     orders: [],
     index: 0,
+    user: null,
+    uuidUrl: null,
+    uuid: null,
+    getuuid: null,
     init: null,
     set: null,
     get: null,
     remove: null,
-    clear: null
+    clear: null,
+    cookie: null,
 }
 
-shoppingcart.init = function () {
+shoppingcart.init = function (url) {
     
+    if (url != null) {
+        shoppingcart.uuidUrl = url;
+    }
 }
 
 shoppingcart.set = function (orderId) {
@@ -113,3 +121,58 @@ shoppingcart.clear = function () {
     
     storage.removeAll();
 }
+
+shoppingcart.uuid = function () {
+    var uuid = storage.get ('uuid');
+    
+    if (uuid == null || uuid == 'undefined') {
+        jQuery.ajax({
+            url: shoppingcart.uuidUrl,
+            type: "GET",
+            beforeSend: function(xhr) {
+            }
+        }).done(function(data) {
+            if (jQuery.trim (data) == "") {
+                return;
+            }
+            
+            if (data == null) {
+                return;
+            }
+            console.log ('uuid:' + data);
+            shoppingcart.user = data;
+    
+        }).fail(function() {
+            
+        });
+    } else {
+        shoppingcart.user = uuid;
+    }
+    
+}
+
+shoppingcart.getuuid = function (callback) {
+    var uuid = storage.get ('uuid');
+    
+    if (uuid == null || uuid == 'undefined') {
+        return (function () {return "";})();
+    }
+    
+    shoppingcart.user = uuid;
+    return (function(){return shoppingcart.user})();
+}
+
+shoppingcart.cookie = function () {
+    var TEST_COOKIE = 'test_cookie';
+    jQuery.cookie( TEST_COOKIE, true );
+    if ( jQuery.cookie ( TEST_COOKIE ) )
+    {
+      jQuery.cookie( TEST_COOKIE, null );  
+      return ((function() {return true})());
+    }
+    else
+    {
+      return (function () { return false })();
+    }
+}
+
