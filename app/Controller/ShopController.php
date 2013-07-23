@@ -10,6 +10,10 @@ class ShopController extends AppController {
 	parent::beforeFilter();
     }
     
+    public function checkout () {
+	
+    }
+    
     public function cart () {
         
 	if ($this->request->is ("ajax")) {
