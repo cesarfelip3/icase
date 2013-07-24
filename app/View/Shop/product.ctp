@@ -100,7 +100,7 @@
 				<!-- end container-fluid-->
 			</div>
 			<!-- end body-text -->
-			
+			</section>
 
 			
 			<!-- /container -->

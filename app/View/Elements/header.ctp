@@ -7,13 +7,12 @@
     <!--logo area start-->
     <div class="logo-area">
 
-<span id="logo"><img src="img/iCase-png.png" alt="iCase"></span>
+<span id="logo"></span>
     
 <div class="sec_logo_phone">
 <span id="secondary-logo"></span>
-<abbr title="Phone" id="call-phone">1-800-45-PEACH</abbr>
 
-<div style="clear:both"></div>
+
 <ul  id="user-nav" class="list-none">
 <li><a id="btn-register" class="hd-txt" href="#">Register</a></li>
 <li><a class="hd-txt" href="#">Sign in</a></li>
@@ -23,6 +22,19 @@
 <button class="btn btn-mini btn-peach colwhite"><a class="hd-txt" href="#">Checkout</a></button>
 </li>
 </ul>
+<div style="clear:both"></div>
+<abbr title="Phone" id="call-phone">
+    
+    <div class="searchwrapper">    
+        <form name="form1" method="post" action="">
+            <input type="text" name="search" id="search" onfocus="if (this.defaultValue == this.value) this.value='';" onblur="if ('' == this.value) this.value = this.defaultValue;" value="Search inside the box">
+            <input class="btn btn-mini btn-peach colwhite" type="submit" name="Search" id="submit" value="Submit">
+        </form>
+    </div>    
+
+
+</abbr>
+
 </div>    
 
     <div style="clear:both"></div>

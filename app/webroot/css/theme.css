@@ -302,8 +302,8 @@
 	}
 	#logo{
 		display:block;
-		/*background:url('../img/iCase-png.png') bottom left no-repeat;*/
-		width:auto;
+		background:url("../img/iCase-png.png") no-repeat scroll left 6px transparent;
+		width:150px;
 		height:130px;
 		padding:0;
 		margin-bottom:0px;
@@ -314,14 +314,14 @@
 	#logo img{ max-height:100%}
 	#secondary-logo {
 		display:block;
-		width:157px;
-		height:53px;
-		/*position:absolute;*/
+		width:45px;
+		height:140px;
+		position:fixed;
 		z-index: 1;
-		/*top:5px;
-		right:0;*/
+		top:10px;
+		right:10px;
 		background:url('../img/secondary-logo.png') top right no-repeat;
-		cursor:pointer; float:right
+		cursor:pointer; 
 	}
 	#call-phone {
 		font-size:24px;
@@ -2216,3 +2216,13 @@ hr.black{  background: url("../img/dotted.png") repeat-x scroll left center tran
 	.thumwrapper{float:left; width:100%; height:50px; margin:10px 0}
 	.thumwrapper img{ background-color:#FFFFFF; border:solid 1px #999999; padding:3px; margin-right:10px; height:50px; width:50px; float:left}
 	.social_wrapper{ float:right; margin-top: 5px;}
+	.searchwrapper{  background: url("../img/transparant-20.png") repeat scroll left top transparent;
+    margin: 0 !important;
+    padding: 10px 10px 0; border-radius:5px; border: solid 1px #000; }
+    .searchwrapper{ float: left}
+    .searchwrapper form{ margin: 0}
+    .searchwrapper form #search{ float: left; }
+    .searchwrapper form #submit{float: left;
+    font-size: 15px;
+    padding: 5px 15px;
+    text-transform: uppercase; margin-left: 5px}
