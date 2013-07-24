@@ -1,4 +1,4 @@
-<div class="row-fluid" style="overflow: auto;max-height:500px;">
+<div class="row-fluid">
     <?php if ($error['error'] != 0) : ?>
     <div class="span12">
         

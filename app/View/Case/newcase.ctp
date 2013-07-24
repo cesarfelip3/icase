@@ -445,7 +445,13 @@ $js_case = array (
     <div class="ajax-loading-indicator hide" style=""><a href="javascript:" style="font-size:14px;"><i class="icon-refresh icon-spin"></i> Loading ....</a></div>
   </div>
   <div class="modal-footer">
+    <span class="pull-left">To save your design, you have to login</span>
+    <a href="javascript:">Login</a> Or
+    <a href="javascript:">register</a>
+  </div>
+  <div class="modal-footer">
     <a href="javascript:" class="btn btn-peach" id="btn-cart">Add To Cart</a>
+    <a href="javascript:" class="btn btn-peach">Checkout</a>
   </div>
 </div>
 
