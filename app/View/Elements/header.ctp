@@ -6,10 +6,31 @@
 <header>
     <!--logo area start-->
     <div class="logo-area">
-        <span id="logo"></span>
-        <span id="secondary-logo"></span>
-        <abbr title="Phone" id="call-phone">1-800-45-ICASE</abbr>
-    </div><!--end logo area-->
+
+<span id="logo"><img src="img/iCase-png.png" alt="iCase"></span>
+    
+<div class="sec_logo_phone">
+<span id="secondary-logo"></span>
+<abbr title="Phone" id="call-phone">1-800-45-PEACH</abbr>
+
+<div style="clear:both"></div>
+<ul  id="user-nav" class="list-none">
+<li><a id="btn-register" class="hd-txt" href="#">Register</a></li>
+<li><a class="hd-txt" href="#">Sign in</a></li>
+<li><a class="hd-txt" href="#">My Account</a></li>
+<li><a class="hd-txt" href="#">My Cart (0)</a></li>
+<li>
+<button class="btn btn-mini btn-peach colwhite"><a class="hd-txt" href="#">Checkout</a></button>
+</li>
+</ul>
+</div>    
+
+    <div style="clear:both"></div>
+
+
+
+                
+            </div><!--end logo area-->
 
     <!--nav bar start-->
     <nav class="navbar">.

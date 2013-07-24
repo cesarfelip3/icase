@@ -302,34 +302,37 @@
 	}
 	#logo{
 		display:block;
-		background:url('../img/logo.png') bottom left no-repeat;
+		/*background:url('../img/iCase-png.png') bottom left no-repeat;*/
 		width:auto;
 		height:130px;
 		padding:0;
-		margin-bottom:25px;
+		margin-bottom:0px;
 		overflow:hidden;
 		cursor:pointer;
+		float:left
 	}
+	#logo img{ max-height:100%}
 	#secondary-logo {
 		display:block;
 		width:157px;
 		height:53px;
-		position:absolute;
+		/*position:absolute;*/
 		z-index: 1;
-		top:5px;
-		right:0;
+		/*top:5px;
+		right:0;*/
 		background:url('../img/secondary-logo.png') top right no-repeat;
-		cursor:pointer;
+		cursor:pointer; float:right
 	}
 	#call-phone {
 		font-size:24px;
 		text-align:right;
 		color:#cfcfcf;
 		z-index: 2;
-		position:absolute;
+	float:right; margin-top:9px
+		/*position:absolute;
 		bottom:1px;
 		right:0;
-		width:auto;
+		width:auto;*/
 	}
 	
 	/* ---------------------------------------------------------------------- */
@@ -431,7 +434,30 @@
 				 border-radius: 3px 3px 0 0;
 	
 	}
+		h3.heading{
+		box-sizing: content-box;
+		background-color: #363636;
+		background-image: -moz-linear-gradient(top, #444, #222);
+		background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#444), to(#222));
+		background-image: -webkit-linear-gradient(top, #444, #222);
+		background-image: -o-linear-gradient(top, #444, #222);
+		background-image: linear-gradient(to bottom, #444, #222);
+		background-repeat: repeat-x;
+		border-color: #222 #222 black;
+		border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff444444', endColorstr='#ff222222', GradientType=0);
+		filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+		color: #F6F6F6;
+		text-shadow: 0 1px black, 0 0 .2em rgba(0, 0, 0, .7);
+		font-size: 14px;
+		margin: -10px -10px 10px -10px;
+				 
+		 -webkit-border-radius: 3px 3px 0 0;
+		  -khtml-border-radius: 3px 3px 0 0;
+			-moz-border-radius: 3px 3px 0 0;
+				 border-radius: 3px 3px 0 0; padding:5px
 	
+	}
 	.qbox {
 		float:none; 
 		position:relative;
@@ -446,7 +472,8 @@
 	   	   -moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
 				box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
 	}
-
+.fullwide{ width:100% !important}
+.fullwide .row-fluid .span4{ width:23% !important}
 	.qbox h3 > i {
 		top:1px;
 		font-size:19px;
@@ -797,6 +824,18 @@
 		-webkit-border-radius:0px;
 		   -moz-border-radius:0px;
 		margin-bottom:20px;
+		background-color: #FAFAFA;
+		background-image: -moz-linear-gradient(top, white, #F2F2F2);
+		background-image: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(#F2F2F2));
+		background-image: -webkit-linear-gradient(top, white, #F2F2F2);
+		background-image: -o-linear-gradient(top, white, #F2F2F2);
+		background-image: linear-gradient(to bottom, white, #F2F2F2);
+		background-repeat: repeat-x;
+		border: 1px solid #D4D4D4;
+		/*filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#fff2f2f2', GradientType=0);*/
+		-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+		-moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+		box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065); padding:5px; border-radius:5px
 	}
 	.hotproperties div:hover.thumbnail {
 		border-color: #B93C00;
@@ -1088,8 +1127,21 @@
 		-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
 		-moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
 		box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+	}	.thumbnail{
+		background-color: #FAFAFA;
+		background-image: -moz-linear-gradient(top, white, #F2F2F2);
+		background-image: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(#F2F2F2));
+		background-image: -webkit-linear-gradient(top, white, #F2F2F2);
+		background-image: -o-linear-gradient(top, white, #F2F2F2);
+		background-image: linear-gradient(to bottom, white, #F2F2F2);
+		background-repeat: repeat-x;
+		border: 1px solid #D4D4D4;
+		/*filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#fff2f2f2', GradientType=0);*/
+		-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+		-moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+		box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
 	}
-
+.colwhite a{ color:#FFFFFF !important; text-transform:uppercase}
 	/* ---------------------------------------------------------------------- */
 	/*	Peach color button
 	/* ---------------------------------------------------------------------- */	
@@ -1407,7 +1459,29 @@
 		background: linear-gradient(to bottom,  rgba(143,196,0,1) 0%,rgba(143,196,0,1) 100%); /* W3C */
 		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8fc400', endColorstr='#8fc400',GradientType=0 ); /* IE6-9 */
 	}
-	
+	 p.asking-price {
+		margin:7px 0;
+		font-size: 15px;
+		line-height:25px;
+		font-weight:bold;
+		text-align:right;
+		display:block;
+		padding:5px 10px 4px;
+		color:#fff;
+		position:relative;
+		text-shadow: 0 1px 0 rgba(33, 102, 0, 0.5);
+		-webkit-box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.25), 0 1px 1px rgba(255, 255, 255, 0.25);
+		box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.25), 0 1px 1px rgba(255, 255, 255, 0.25);
+		
+		background: rgb(143,196,0); /* Old browsers */
+		background: -moz-linear-gradient(top,  rgba(143,196,0,1) 0%, rgba(143,196,0,1) 100%); /* FF3.6+ */
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(143,196,0,1)), color-stop(100%,rgba(143,196,0,1))); /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(top,  rgba(143,196,0,1) 0%,rgba(143,196,0,1) 100%); /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(top,  rgba(143,196,0,1) 0%,rgba(143,196,0,1) 100%); /* Opera 11.10+ */
+		background: -ms-linear-gradient(top,  rgba(143,196,0,1) 0%,rgba(143,196,0,1) 100%); /* IE10+ */
+		background: linear-gradient(to bottom,  rgba(143,196,0,1) 0%,rgba(143,196,0,1) 100%); /* W3C */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8fc400', endColorstr='#8fc400',GradientType=0 ); /* IE6-9 */
+	}
 	p.asking-price span {
 		font-size:15px;
 		position:absolute;
@@ -2131,3 +2205,13 @@
 	
 	
 	
+ul#user-nav{ float:right; }
+ul#user-nav li{ display:inline}
+.sec_logo_phone{ float:right; margin-top:27px}
+hr.black{  background: url("../img/dotted.png") repeat-x scroll left center transparent;
+    border: 0 none;
+    height: 1px;
+    margin: 0;
+    overflow: hidden; }
+	.thumwrapper{float:left; width:100%; height:50px; margin:10px 0}
+	.thumwrapper img{ background-color:#FFFFFF; border:solid 1px #999999; padding:3px; margin-right:10px; height:50px; width:50px; float:left}
