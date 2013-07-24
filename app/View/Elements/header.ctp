@@ -33,7 +33,7 @@
             </div><!--end logo area-->
 
     <!--nav bar start-->
-    <nav class="navbar">.
+    <nav class="navbar">
         <div class="navbar-inner">
             <div class="container">
                 <!--mobile nav icon (hidden:CSS)-->

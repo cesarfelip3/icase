@@ -2215,3 +2215,4 @@ hr.black{  background: url("../img/dotted.png") repeat-x scroll left center tran
     overflow: hidden; }
 	.thumwrapper{float:left; width:100%; height:50px; margin:10px 0}
 	.thumwrapper img{ background-color:#FFFFFF; border:solid 1px #999999; padding:3px; margin-right:10px; height:50px; width:50px; float:left}
+	.social_wrapper{ float:right; margin-top: 5px;}

@@ -4,7 +4,7 @@
 <!-- 2 columns -->
 <div class="row-fluid">
 <div class="span6">
-<p><img src="img/183061.png.560x560.jpg"></p>
+<p><img src="../img/big-pd.jpg"></p>
 </div>
 <div class="span6">
 <strong>BILLY RAYS</strong> iPhone 5 Case:
@@ -15,11 +15,24 @@
 <hr class="black"><br>
 
 <button class="btn btn-danger">Add To Cart</button>
-<img src="img/social.jpg">
+
+<div class="social_wrapper">
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style ">
+<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+<a class="addthis_button_tweet"></a>
+<a class="addthis_button_pinterest_pinit"></a>
+<a class="addthis_counter addthis_pill_style"></a>
+</div>
+<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-51937361798a0638"></script>
+<!-- AddThis Button END -->
+</div>
+
 
 <div class="thumwrapper">
-<img src="img/183061.png.505-50.jpg">
-<img src="img/183061.png.505-50.jpg">
+<img src="../img/183061.png.505-50.jpg">
+<img src="../img/183061.png.505-50.jpg">
 </div>
 						</div>			
 					</div>
