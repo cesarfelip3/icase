@@ -6,7 +6,6 @@
         <div class="container-fluid">
             <div class="row-fluid">
                 <div class="span3 hidden-phone">
-
                     <!-- Upload image -->
                     <div class="qbox creator-parts" style="visibility: hidden;box-shadow:none;">
                         <h3></i>IMAGE TOOLS</h3>
@@ -28,7 +27,7 @@
                     <!-- end zone alert -->
                     <!-- add text -->
                     <div class="qbox creator-parts" style="visibility: hidden;box-shadow:none;">
-                        <h3>BASIC TOOLS</h3>
+                        <!--<h3>BASIC TOOLS</h3>-->
                         <!--<button id="singlebutton" name="singlebutton" class="btn btn-default">Enter Drawing mode</button>-->
                         <div style="padding-top:5px;" class="tools">
                             <p>
@@ -425,12 +424,24 @@ $js_case = array (
             beforeSend: function(xhr) {
             }
         }).done(function(data) {
-            
+            jQuery(".ajax-loading-indicator").hide(0);
             jQuery("#modal-preview .modal-body").html (data);
+            checkoutone ();
             
         }).fail(function() {
-    
+            jQuery(".ajax-loading-indicator").hide(0);
         });
+    }
+    
+    function checkoutone ()
+    {
+        var orderId = null;                        
+        orderId = jQuery("#modal-preview #product-info").data ('guid');
+        var image = jQuery("#modal-preview #product-info").data ('file');
+        
+        console.log (orderId + "-" + image);
+        shoppingcart.setCurrentProductId (orderId + "-" + image);
+        return true;
     }
     
 </script>
@@ -451,7 +462,7 @@ $js_case = array (
   </div>
   <div class="modal-footer">
     <a href="javascript:" class="btn btn-peach" id="btn-cart">Add To Cart</a>
-    <a href="javascript:" class="btn btn-peach">Checkout</a>
+    <a href="<?php echo $this->webroot; ?>shop/checkout" class="btn btn-peach" target="_blank">Checkout this one!</a>
   </div>
 </div>
 
