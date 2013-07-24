@@ -15,25 +15,6 @@ class ShopController extends AppController {
 	parent::beforeFilter();
     }
     
-<<<<<<< HEAD
-=======
-    public function checkout () {
-	
-    }
-
-       public function product () {
-	
-    }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-    
->>>>>>> 8724236e2b7d4789a8df3e5557923dfae9a9e01a
-=======
->>>>>>> 8724236e2b7d4789a8df3e5557923dfae9a9e01a
-    
-    
->>>>>>> 8724236e2b7d4789a8df3e5557923dfae9a9e01a
     public function preview ()
     {
 	if ($this->request->is('ajax')) {
@@ -274,6 +255,10 @@ class ShopController extends AppController {
     public function checkout () {
 	
 	$this->set ('load_shop_cart', true);
+    }
+    
+    public function product () {
+	
     }
     
     public function getTemplates () {
