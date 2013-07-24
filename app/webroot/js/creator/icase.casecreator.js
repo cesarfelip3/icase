@@ -21,8 +21,6 @@ var mememaker = {
     // object memeber
     tools: {
         container: '.tools',
-        previewUrl: 'media/preview',
-        modal: '#modal-preview',
         init: null,
         new: null,
         info: null,
@@ -136,13 +134,6 @@ mememaker.tools.init = function (id, previewUrl, modal) {
         mememaker.tools.container = id;
     }
     
-    if (previewUrl != null && previewUrl != 'undefined') {
-        mememaker.tools.previewUrl = previewUrl;
-    }
-    
-    if (modal != null && modal != 'undefined') {
-        mememaker.tools.modal = modal;
-    }
     //jQuery("#canvas-background-color").colorpicker().on('changeColor', function (ev) {
     //    mememaker.tools.backgroundcolor (ev.color.toHex());    
     //});
@@ -518,33 +509,13 @@ mememaker.tools.preview = function(callback) {
             }
     );
     
-    callback (preview);
+    if (mememaker.tools.generate == null) {
+        return;
+    }
+    mememaker.tools.generate (preview);
 }
 
-mememaker.tools.generate = function(preview) {
-    
-    jQuery(mememaker.tools.modal).modal();
-    jQuery.ajax({
-        url: mememaker.tools.previewUrl,
-        data: {"image-extension": "jpeg", "image-data": preview},
-        type: "POST",
-        beforeSend: function(xhr) {
-        }
-    }).done(function(data) {
-        //jQuery("#ajax-indicator").hide();
-
-        result = jQuery.parseJSON(data);
-        if (result.error == 0) {
-            var url = result.files.url;
-            console.log(url);
-        } else {
-            console.log(result.message);
-        }
-        jQuery(mememaker.tools.modal + " img").attr('src', result.files.url);
-    }).fail(function() {
-
-    });
-}
+mememaker.tools.generate = null;
 
 mememaker.tools.backgroundcolor = function(color) {
     //console.log (color);

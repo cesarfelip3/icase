@@ -13,7 +13,7 @@ Unique ID for guest....
 2. when the user preview the image, the image name is uid_xxxxxx.jpeg
 3. when the user ordered some, it will....
 
-Guest Order....
+Headache - guest orders ---
 
-1. save design...put order with design url...then submit order...save temp orders in db
-2. 
+
+1. place order, ajax to get image, submit image and order

@@ -335,6 +335,8 @@ $js_case = array (
                
                 mememaker.init('c1');
                 mememaker.tools.init(".tools", "<?php echo $this->webroot; ?>/media/preview", "#modal-preview");
+                mememaker.tools.generate = preview;
+                
                 //mememaker.tools.newtemplate("<?php echo $this->webroot . "img/template/iphone.png"; ?>");
                 mememaker.texteditor.init(".text-editor");
                 mememaker.imageeditor.init(".image-editor");
@@ -367,8 +369,11 @@ $js_case = array (
                     $("#device-list").prev().children(":first-child").hide(0);
                 });
                 
+
+                
                 jQuery("#btn-add-cart").click (
                     function () {
+                    
                         var orderId = null;
                         orderId = $("#current-item").val();
                         if (orderId == null || orderId == "" || orderId == "undefined") {
@@ -413,8 +418,31 @@ $js_case = array (
                 var url = $(this).children(":first-child").attr ('src');
                 mememaker.tools.newtemplate (url);
                 $("#current-item").val ($(this).data('guid'));
+                shoppingcart.setCurrentProductId ($(this).data('guid'));
             }
         );
+    }
+    
+    function preview (preview)
+    {
+        if (jQuery.trim (jQuery("#current-item").val()) == "") {
+            return;
+        }
+        
+        $("#modal-preview").modal ();
+        jQuery.ajax({
+            url: "<?php echo $this->webroot; ?>shop/preview",
+            data: {"image-extension": "jpeg", "image-data": preview, "user": shoppingcart.getuuid(), "product": shoppingcart.getCurrentProductId()},
+            type: "POST",
+            beforeSend: function(xhr) {
+            }
+        }).done(function(data) {
+            
+            $("#modal-preview .modal-body").html (data);
+            
+        }).fail(function() {
+    
+        });
     }
     
 </script>
@@ -425,7 +453,10 @@ $js_case = array (
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     <h3 id="myModalLabel">Your Design</h3>
   </div>
-  <div class="modal-body">
-    <p><img src="" /></p>
+  <div class="modal-body" style="background-color:#666">
+
+  </div>
+  <div class="modal-footer">
+    <a href="javascript:" class="btn btn-peach">Add To Cart</a>
   </div>
 </div>

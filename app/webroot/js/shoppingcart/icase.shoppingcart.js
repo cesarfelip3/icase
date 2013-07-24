@@ -14,6 +14,8 @@ var shoppingcart = {
     remove: null,
     clear: null,
     cookie: null,
+    setCurrentProductId: null,
+    getCurrentProductId: null
 }
 
 shoppingcart.init = function (url) {
@@ -141,6 +143,7 @@ shoppingcart.uuid = function () {
             }
             console.log ('uuid:' + data);
             shoppingcart.user = data;
+            storage.set ('uuid', data);
     
         }).fail(function() {
             
@@ -174,5 +177,23 @@ shoppingcart.cookie = function () {
     {
       return (function () { return false })();
     }
+}
+
+shoppingcart.setCurrentProductId = function (id) {
+    if (id == null || id == 'undefined') {
+        storage.set ('current-product-id', null);
+    } else {
+        storage.set ('current-product-id', id);
+    }
+}
+
+shoppingcart.getCurrentProductId = function () {
+    var id = storage.get ('current-product-id');
+    
+    if (id == null || id == 'undefined') {
+        return (function () {return null;})();
+    }
+    
+    return (function(){return id})();    
 }
 

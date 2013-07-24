@@ -215,7 +215,7 @@ class MediaController extends AppController {
         $this->_error['files'] = array(
             'original' => "",
             'target' => $filename,
-            'url' => $this->base . "/uploads/" . $filename,
+            'url' => "uploads/" . $filename,
             'extension' => $extension,
             //'mime' => $mime
         );

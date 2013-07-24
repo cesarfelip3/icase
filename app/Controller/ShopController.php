@@ -4,6 +4,11 @@ App::uses('AppController', 'Controller');
 class ShopController extends AppController {
     
     public $uses = false;
+    protected $_error = array(
+        "error" => 1,
+        "message" => "",
+        "files" => array(),
+    );
     
     public function beforeFilter() {
         $this->Auth->allow();
@@ -14,22 +19,101 @@ class ShopController extends AppController {
 	
     }
     
+    public function preview ()
+    {
+	if ($this->request->is('ajax')) {
+	    $this->layout = false;
+	    
+	    header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+	    header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+	    header("Cache-Control: no-store, no-cache, must-revalidate");
+	    header("Cache-Control: post-check=0, pre-check=0", false);
+	    header("Pragma: no-cache");
+	    
+	    
+	    $product = $this->request->data ('product');
+	    $data = array ();
+	    if (empty ($product)) {
+		$this->set ('data', $data);
+		return;
+	    }
+    
+	    $targetDir = $this->_targetDir = ROOT . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'uploads';
+    
+	    $cleanupTargetDir = true; // Remove old files
+	    $maxFileAge = 5 * 3600; // Temp file age in seconds
+	    @set_time_limit(0);
+	    
+	    $imageData = $_POST['image-data'];
+	    $extension = $_POST['image-extension'];
+	    
+	    $imageData = str_replace ("data:image/" . $extension . ";base64,", "", $imageData);
+	    
+	    $filename = uniqid () . "." . $extension;
+	    $file = base64_encode ($imageData);
+	    $out = @fopen( $targetDir . DIRECTORY_SEPARATOR . $filename, "wb" );
+	    
+	    if ($out) {
+		fwrite ($out, base64_decode($imageData));
+		@fclose ($out);
+	    } else {
+		$this->_error['error'] = 1;
+		$this->_error['message'] = 'open write handler faild';
+		$this->set (array ('data' => $data, 'image' => $this->_error));
+	    }
+	    
+	    $this->_error['error'] = 0;
+	    $this->_error['message'] = 'success';
+	    $this->_error['files'] = array(
+		'original' => "",
+		'target' => $filename,
+		'url' => "uploads/" . $filename,
+		'extension' => $extension,
+		//'mime' => $mime
+	    );
+	    
+	    $size = getimagesize($targetDir . DIRECTORY_SEPARATOR . $filename);
+	    
+	    $current_width = $size[0];
+	    $current_height = $size[1];
+	    
+	    $left = 100;
+	    $top = 5;
+	     
+	    $crop_width = 248;
+	    $crop_height = 437;
+	     
+	    // Resample the image
+	    $canvas = imagecreatetruecolor($crop_width, $crop_height);
+	    $current_image = imagecreatefromjpeg($targetDir . DIRECTORY_SEPARATOR . $filename);
+	    imagecopy($canvas, $current_image, 0, 0, $left, $top, $current_width, $current_height);
+	    imagejpeg($canvas, $targetDir . DIRECTORY_SEPARATOR . $filename, 100);
+	    
+	    $path = $targetDir . DIRECTORY_SEPARATOR . $filename;
+	    $image = file_get_contents($targetDir . DIRECTORY_SEPARATOR . $filename);
+    
+	    $image = substr_replace($image, pack("cnn", 1, 300, 300), 13, 5);
+	    
+	    file_put_contents ($targetDir . DIRECTORY_SEPARATOR . $filename, $image);
+	    
+	    $this->loadModel ('Product');
+	    $data = $this->Product->find ('first',
+		array (
+		    'conditions' => array ('guid' => $product, 'type' => 'template')
+		)
+	    );
+	    
+	    $this->set (array ('data' => $data, 'error' => $this->_error));
+	    return;
+	}
+    }
+    
     public function cart () {
         
 	if ($this->request->is ("ajax")) {
 	    $this->layout = false;
 	    $orders = $this->request->data['orders'];
 	    $data = array ();
-	    
-	    $action = $this->request->query ('action');
-	    if ($action == "customize") {
-		$images = $this->request->data['images'];
-		
-		if (empty ($images)) {
-		    $this->set ('data', $data);
-		    return;
-		}
-	    }
 	    
 	    if (empty ($orders)) {
 		$this->set ('data', $data);
@@ -41,15 +125,6 @@ class ShopController extends AppController {
 	    if (empty ($orders)) {
 		$this->set ('data', $data);
 		return;
-	    }
-	    
-	    if ($action == "customize") {
-		$images = explode (",", $images);
-		
-		if (empty ($images)) {
-		    $this->set ('data', $data);
-		    return;
-		}
 	    }
 	    
 	    $guids = array_flip ($orders);
@@ -74,9 +149,6 @@ class ShopController extends AppController {
 		$data[$i]['data'] = $this->Product->findByGuid ($key);
 		if (empty ($data[$i]['data'])) {
 		    break;
-		}
-		if ($action == "customize") {
-		    $data[$i]['data']['Product']['image'] = $images[$i];
 		}
 		$data[$i]['value'] = $value;
 		$i++;
@@ -163,5 +235,9 @@ class ShopController extends AppController {
 	}
 	
 	$this->Template->saveMany ($bulk);
+    }
+    
+    protected function _json($data = array()) {
+        return json_encode($data); //, JSON_UNESCAPED_SLASHES);
     }
 }
