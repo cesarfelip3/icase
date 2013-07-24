@@ -7,8 +7,8 @@
                   <tr>
                     <th>#</th>
                     <th>Your Design</th>
-                    <th>Price</th>
-                    <th>Total</th>
+                    <th>Amount</th>
+                    <th>Quantity</th>
                     <th></th>
                   </tr>
                 </thead>

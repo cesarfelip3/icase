@@ -15,15 +15,6 @@ class ShopController extends AppController {
 	parent::beforeFilter();
     }
     
-    public function checkout () {
-	
-    }
-
-       public function product () {
-	
-    }
-    
-    
     public function preview ()
     {
 	if ($this->request->is('ajax')) {
@@ -177,9 +168,99 @@ class ShopController extends AppController {
 	    
 	    $this->set ('data', $data);
 	}
+    }
+    
+    public function order () {
+	if ($this->request->is ("ajax")) {
+	    $this->layout = false;
+	    $orders = $this->request->data['orders'];
+	    $data = array ();
+	    
+	    $user = $this->request->data['user'];
+	    
+	    if (empty ($orders)) {
+		$this->set ('data', $data);
+		return;
+	    }
+	    
+	    $orders = explode (",", $orders);
+	    
+	    if (empty ($orders)) {
+		$this->set ('data', $data);
+		return;
+	    }	    
+	    
+	    $guids = array_flip ($orders);
+	    $i = 0;
+	    
+	    foreach ($guids as $key => $value) {
+		$guids[$key] = 0;
+	    }
+	    
+	    foreach ($guids as $key => $value) {
+		foreach ($orders as $order) {
+		    if ($order == $key) {
+			$guids[$key]++;
+		    }
+		}
+	    }
+	    
+	    $this->loadModel ("Product");
+	    $i = 0;
+	    
+	    foreach ($guids as $key => $value) {
+		$key = explode ("-", $key);
+		if (is_array ($key)) {
+		    $guid = $key[0];
+		}
+		
+		$data[$i] = $this->Product->findByGuid ($guid);
+		if (empty ($data[$i])) {
+		    $data = null;
+		    break;
+		}
+		
+		if (isset ($key[1])) {
+		    $data[$i]['Product']['file'] = $key[1];
+		} else {
+		    $data[$i]['Product']['file'] = $data[$i]['Product']['image'];
+		}
+		$data[$i]['Product']['quantity'] = $value;
+		$i++;
+	    }
+	    
+	    $orders = array ();
+	    $i = 0;
+	    if (!empty ($data)) {
+		foreach ($data as $value) {
+		    $orders[$i] = array (
+			"guid" => uniqid (),
+			"buyer_guid" => $user,
+			"created" => time (),
+			"modified" => time (),
+			"amount" => round($value['Product']['price'] * $value['Product']['quantity'], 2, PHP_ROUND_HALF_DOWN),
+			"quantity" => $data[$i]['Product']['quantity'],
+			"file" => $value['Product']['file'] == "" ? $value['Product']['image'] : $value['Product']['file'],
+		    );
+		}
+	    }
+	    
+	    $this->loadModel ("Order");
+	    $this->Order->saveMany ($orders);
+	    
+	    $this->set ('data', $orders);
+	}	
+    }
+    
+    public function checkout () {
+	
+	$this->set ('load_shop_cart', true);
+    }
+    
+    public function product () {
 	
     }
-        
+    
     public function getTemplates () {
 	
 	if ($this->request->is('ajax')) {

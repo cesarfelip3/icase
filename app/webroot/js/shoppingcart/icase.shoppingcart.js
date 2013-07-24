@@ -22,6 +22,7 @@ var shoppingcart = {
     getuuid: null,
     
     // current product
+    product: null,
     cookie_current_product: "current-product-id",
     clearCurrentProductId: null,
     setCurrentProductId: null,
@@ -183,6 +184,7 @@ shoppingcart.getCurrentProductId = function () {
         return (function () {return null;})();
     }
     
-    return (function(){return id})();    
+    shoppingcart.product = id;
+    return (function(){return shoppingcart.product;})();    
 }
 
