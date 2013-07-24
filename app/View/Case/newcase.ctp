@@ -55,7 +55,7 @@
                     <!--start Canvas-->
                     <div>
                         <div class="progress" style="height:2px"><div class="bar bar-warning" id="progress-bar" style="width: 0%; height:2px;"></div></div>
-                        <div style="position: absolute;"><a href="javascript:" id="btn-loading-canvas" style="font-size:14px;"><i class="icon-refresh icon-spin"></i> Loading Canvas...</a></div>
+                        <div class="ajax-loading-indicator" style="position: absolute;"><a href="javascript:" style="font-size:14px;"><i class="icon-refresh icon-spin"></i> Loading Canvas...</a></div>
                         <canvas class="upper-canvas " style="border: 1px solid rgb(170, 170, 170); -moz-user-select: none; cursor: crosshair;" width="450" height="450" id="c1"></canvas>				   </div>
                     <!--end Canvas-->
                     <div class="row-fluid text-editor hide editor" style="width:100%;border:1px solid #ccc;background-color:white;margin-top:10px;padding:5px;">
@@ -122,10 +122,10 @@
                                                       the width is automatically "Re-adjusted" with javascript
                                                       See "config.js" for more details	
                     -->
-                    <p><a class="btn btn-large btn-peach hide" id="btn-add-cart"><i class="icon-mobile-phone icon-1x"></i> Add To Cart</a></p>
+                    <p><a class="btn btn-large btn-peach hide" id="btn-order"><i class="icon-mobile-phone icon-1x"></i> <span>Order Now</span></a></p>
                     <div class="qbox creator-parts" style="visibility:hidden;box-shadow:none;">
                         <h3><i class="icon-refresh icon-spin pull-right"></i>Choose Your Device</h3>
-                        <div style="overflow: auto;height:460px;margin:0px;padding:0px;" id="device-list">
+                        <div style="overflow: auto;height:460px;margin:0px;padding:0px;" id="template-list">
                             
                         </div>
                         <form id="cart-form"><input type="hidden" id="current-item" /></form>
@@ -331,19 +331,15 @@ $js_case = array (
 <script type="text/javascript">
     jQuery(document).ready(
             function() {
-                //alert ("hello");
-               
                 mememaker.init('c1');
-                mememaker.tools.init(".tools", "<?php echo $this->webroot; ?>/media/preview", "#modal-preview");
+                mememaker.tools.init(".tools");
                 mememaker.tools.generate = preview;
-                
-                //mememaker.tools.newtemplate("<?php echo $this->webroot . "img/template/iphone.png"; ?>");
                 mememaker.texteditor.init(".text-editor");
                 mememaker.imageeditor.init(".image-editor");
-                mememaker.draweditor.init(".draw-editor");
+                mememaker.draweditor.init(".draw-editor");                
                 
-                jQuery("#btn-loading-canvas").parent().hide (0);
-                jQuery("#btn-add-cart").show (1000);
+                jQuery(".ajax-loading-indicator").hide (0);
+                jQuery("#btn-order").show (1000);
                 jQuery(".creator-parts").delay(1000).show(0).css('visibility', 'visible');
                 
                 jQuery.ajax({
@@ -354,71 +350,58 @@ $js_case = array (
                     }
                 }).done(function(data) {
             
-                    $("#device-list").prev().children(":first-child").hide(0);
+                    $("#template-list").prev().children(":first-child").hide(0);
                     result = jQuery.parseJSON(data);
                     jQuery(result).each (
                         function (index, value) {
-                            var html = jQuery("#device-list").html() + '<h6>' + value.Product.name + ' ' + value.Product.price + '$</h6><a href="javascript:" class="thumbnail" data-guid="' + value.Product.guid + '"><img src="' + value.Product.image + '" /></a><br/>';
-                            jQuery("#device-list").html(html);  
+                            var html = jQuery("#template-list").html() + '<h6>' + value.Product.name + ' ' + value.Product.price + '$</h6><a href="javascript:" class="thumbnail" data-price="' + value.Product.price + '" data-guid="' + value.Product.guid + '"><img src="' + value.Product.image + '" /></a><br/>';
+                            jQuery("#template-list").html(html);  
                         }
                     );
                     
-                    template_config ();
+                    templatelist_config ();
             
                 }).fail(function() {
-                    $("#device-list").prev().children(":first-child").hide(0);
+                    $("#template-list").prev().children(":first-child").hide(0);
                 });
                 
-
-                
-                jQuery("#btn-add-cart").click (
+                jQuery("#btn-order").click (
                     function () {
                     
-                        var orderId = null;
-                        orderId = $("#current-item").val();
-                        if (orderId == null || orderId == "" || orderId == "undefined") {
+                        if (jQuery.trim (jQuery("#current-item").val()) == "") {
                             return;
                         }
-                        
+                        mememaker.tools.preview (preview);
+                        return;
+                    }
+                );
+                
+                jQuery("#btn-cart").click (
+                    function () {
+                    
+                        var orderId = null;                        
+                        orderId = jQuery("#modal-preview #product-info").data ('guid');
                         shoppingcart.set (orderId);
                         
-                        jQuery(mememaker.tools.modal).modal();
-                        jQuery.ajax({
-                            url: "<?php echo $this->webroot; ?>media/order",
-                            data: {"image-extension": "jpeg", "image-data": preview, "user": shoppingcart.getuuid()},
-                            type: "POST",
-                            beforeSend: function(xhr) {
-                            }
-                        }).done(function(data) {
-                            //jQuery("#ajax-indicator").hide();
-                    
-                            result = jQuery.parseJSON(data);
-                            if (result.error == 0) {
-                                var url = result.files.url;
-                                console.log(url);
-                            } else {
-                                console.log(result.message);
-                            }
-                            cart_reload ();
-                        }).fail(function() {
-                    
-                        });
-                        //cart_reload ();
+                        jQuery("#modal-preview").modal('hide');
+                        
+                        cart_reload();
                     }
                 )
                 
             }
     );
 
-    function template_config () {
+    function templatelist_config () {
     
-        jQuery("#device-list a").off('click');
-        jQuery("#device-list a").click(
+        jQuery("#template-list a").off('click');
+        jQuery("#template-list a").click(
             function() {
                 var url = $(this).children(":first-child").attr ('src');
                 mememaker.tools.newtemplate (url);
                 $("#current-item").val ($(this).data('guid'));
                 shoppingcart.setCurrentProductId ($(this).data('guid'));
+                $("#btn-order span").text ("Order Now " + $(this).data('price') + "$");
             }
         );
     }
@@ -428,8 +411,10 @@ $js_case = array (
         if (jQuery.trim (jQuery("#current-item").val()) == "") {
             return;
         }
+        jQuery("#modal-preview .modal-body").html ('<div class="ajax-loading-indicator hide" style=""><a href="javascript:" style="font-size:14px;"><i class="icon-refresh icon-spin"></i> Loading ....</a></div>');
+        jQuery(".ajax-loading-indicator").show(0);
+        jQuery("#modal-preview").modal ();
         
-        $("#modal-preview").modal ();
         jQuery.ajax({
             url: "<?php echo $this->webroot; ?>shop/preview",
             data: {"image-extension": "jpeg", "image-data": preview, "user": shoppingcart.getuuid(), "product": shoppingcart.getCurrentProductId()},
@@ -438,7 +423,7 @@ $js_case = array (
             }
         }).done(function(data) {
             
-            $("#modal-preview .modal-body").html (data);
+            jQuery("#modal-preview .modal-body").html (data);
             
         }).fail(function() {
     
@@ -453,10 +438,11 @@ $js_case = array (
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     <h3 id="myModalLabel">Your Design</h3>
   </div>
-  <div class="modal-body" style="background-color:#666">
-
+  <div class="modal-body" style='background:url("<?php echo $this->webroot; ?>img/pattern/whitey.png") repeat scroll 0 0 transparent;'>
+    <div class="ajax-loading-indicator hide" style=""><a href="javascript:" style="font-size:14px;"><i class="icon-refresh icon-spin"></i> Loading ....</a></div>
   </div>
   <div class="modal-footer">
-    <a href="javascript:" class="btn btn-peach">Add To Cart</a>
+    <a href="javascript:" class="btn btn-peach" id="btn-cart">Add To Cart</a>
   </div>
 </div>
+

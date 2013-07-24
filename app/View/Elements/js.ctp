@@ -27,6 +27,7 @@
             }
         }
     )
+ 
 </script>
 
 <div class="row-fluid hide" id="box-message" style="position: fixed;top:0px;left:0px;z-index:1030;margin-bottom:0;">
@@ -84,10 +85,31 @@ $(function() {
 <script type="text/javascript">
     jQuery (document).ready (
         function () {
-            shoppingcart.init ("<?php echo $this->webroot; ?>user/guest?action=newuuid");
-            shoppingcart.uuid();
+            shoppingcart.inituuid (uuid_init_callback);
         }
     )
+   
+    function uuid_init_callback ()
+    {
+        jQuery.ajax({
+            url: "<?php echo $this->webroot; ?>user/guest?action=newuuid",
+            type: "GET",
+            beforeSend: function(xhr) {
+            }
+        }).done(function(data) {
+            if (jQuery.trim (data) == "") {
+                return;
+            }
+            
+            if (data == null) {
+                return;
+            }
+            storage.set (shoppingcart.cookie_uuid, data);
+    
+        }).fail(function() {
+            
+        });
+    }
 </script>
 
 <?php
@@ -152,7 +174,7 @@ if (isset($load_shop_cart) && $load_shop_cart) : ?>
     
     function cart_reload () {
         jQuery.ajax({
-            url: "/icase/shop/cart",
+            url: "<?php echo $this->webroot; ?>shop/cart",
             data: {"orders":shoppingcart.get(), "user":shoppingcart.getuuid()},
             type: "POST",
             beforeSend: function(xhr) {

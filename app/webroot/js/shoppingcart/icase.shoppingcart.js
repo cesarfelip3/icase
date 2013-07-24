@@ -2,31 +2,38 @@
 storage=jQuery.cookieStorage;
 
 var shoppingcart = {
+    
+    // orders
+    cookie_orders: "orders",
     orders: [],
     index: 0,
-    user: null,
-    uuidUrl: null,
-    uuid: null,
-    getuuid: null,
     init: null,
     set: null,
     get: null,
     remove: null,
     clear: null,
     cookie: null,
+    
+    // guest uuid
+    user: null,
+    cookie_uuid: "uuid",
+    inituuid: null,
+    setuuid: null,
+    getuuid: null,
+    
+    // current product
+    cookie_current_product: "current-product-id",
+    clearCurrentProductId: null,
     setCurrentProductId: null,
     getCurrentProductId: null
 }
 
-shoppingcart.init = function (url) {
+shoppingcart.init = function () {
     
-    if (url != null) {
-        shoppingcart.uuidUrl = url;
-    }
 }
 
 shoppingcart.set = function (orderId) {
-    var orders = storage.get ('orders');
+    var orders = storage.get (shoppingcart.cookie_orders);
     console.log ('orders = ' + orders);
     
     if (orders == null || orders == "undefined" || orders == "") {
@@ -43,22 +50,21 @@ shoppingcart.set = function (orderId) {
 }
 
 shoppingcart.get = function () {
-    var orders = storage.get ('orders');
+    var orders = storage.get (shoppingcart.cookie_orders);
     
     if (orders == null || orders == "undefined" || orders == "") {
         return null;
     }
     
-    return storage.get ('orders');
+    return orders;
 }
 
 shoppingcart.remove = function (id) {
-    var orders = storage.get ('orders');
-    console.log ('orders = ' + orders);
+    var orders = storage.get (shoppingcart.cookie_orders);
     var i = 0;
     
     if (orders == null || orders == "undefined" || orders == "") {
-        storage.remove ('orders');
+        storage.remove (shoppingcart.cookie_orders);
     } else {
         shoppingcart.orders = orders.split (',');
         jQuery(shoppingcart.orders).each (
@@ -72,25 +78,24 @@ shoppingcart.remove = function (id) {
     
     shoppingcart.orders.splice (i, 1);
     if (shoppingcart.orders.length < 1) {
-        storage.remove ('orders');
+        storage.remove (shoppingcart.cookie_orders);
         return;
     }
     
     console.log (shoppingcart.orders);
     
     orders = shoppingcart.orders.join(",");
-    storage.set ('orders', orders);
+    storage.set (shoppingcart.cookie_orders, orders);
 }
 
 shoppingcart.removeall = function (id) {
-    var orders = storage.get ('orders');
-    console.log ('orders = ' + orders);
+    var orders = storage.get (shoppingcart.cookie_orders);
     var i = 0;
     var left = [];
     var j = 0;
     
     if (orders == null || orders == "undefined" || orders == "") {
-        storage.remove ('orders');
+        storage.remove (shoppingcart.cookie_orders);
     } else {
         shoppingcart.orders = orders.split (',');
         jQuery(shoppingcart.orders).each (
@@ -109,56 +114,40 @@ shoppingcart.removeall = function (id) {
     shoppingcart.orders = left;
     
     if (shoppingcart.orders.length < 1) {
-        storage.remove ('orders');
+        storage.remove (shoppingcart.cookie_orders);
         return;
     }
     
     console.log (shoppingcart.orders);
     
     orders = shoppingcart.orders.join(",");
-    storage.set ('orders', orders);
+    storage.set (shoppingcart.cookie_orders, orders);
 }
 
 shoppingcart.clear = function () {
-    
-    storage.removeAll();
+    storage.remove ('orders');
+    //storage.removeAll();
 }
 
-shoppingcart.uuid = function () {
-    var uuid = storage.get ('uuid');
+shoppingcart.inituuid = function (callback) {
+    var uuid = storage.get (shoppingcart.cookie_uuid);
     
     if (uuid == null || uuid == 'undefined') {
-        jQuery.ajax({
-            url: shoppingcart.uuidUrl,
-            type: "GET",
-            beforeSend: function(xhr) {
-            }
-        }).done(function(data) {
-            if (jQuery.trim (data) == "") {
-                return;
-            }
-            
-            if (data == null) {
-                return;
-            }
-            console.log ('uuid:' + data);
-            shoppingcart.user = data;
-            storage.set ('uuid', data);
-    
-        }).fail(function() {
-            
-        });
+        callback ();
     } else {
         shoppingcart.user = uuid;
     }
-    
+}
+
+shoppingcart.setuuid = function (uuid) {
+    storage.set (shoppingcart.cookie_uuid, uuid);
 }
 
 shoppingcart.getuuid = function (callback) {
-    var uuid = storage.get ('uuid');
+    var uuid = storage.get (shoppingcart.cookie_uuid);
     
     if (uuid == null || uuid == 'undefined') {
-        return (function () {return "";})();
+        return (function () {return null;})();
     }
     
     shoppingcart.user = uuid;
@@ -179,16 +168,20 @@ shoppingcart.cookie = function () {
     }
 }
 
+shoppingcart.clearCurrentProductId = function () {
+    storage.set (shoppingcart.cookie_current_product, null);
+}
+
 shoppingcart.setCurrentProductId = function (id) {
     if (id == null || id == 'undefined') {
-        storage.set ('current-product-id', null);
+        storage.set (shoppingcart.cookie_current_product, null);
     } else {
-        storage.set ('current-product-id', id);
+        storage.set (shoppingcart.cookie_current_product, id);
     }
 }
 
 shoppingcart.getCurrentProductId = function () {
-    var id = storage.get ('current-product-id');
+    var id = storage.get (shoppingcart.cookie_current_product);
     
     if (id == null || id == 'undefined') {
         return (function () {return null;})();
