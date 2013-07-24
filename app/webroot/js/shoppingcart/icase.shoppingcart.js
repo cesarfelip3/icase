@@ -34,7 +34,6 @@ shoppingcart.init = function () {
 
 shoppingcart.set = function (orderId) {
     var orders = storage.get (shoppingcart.cookie_orders);
-    console.log ('orders = ' + orders);
     
     if (orders == null || orders == "undefined" || orders == "") {
         shoppingcart.orders[0] = orderId;
@@ -42,8 +41,6 @@ shoppingcart.set = function (orderId) {
         shoppingcart.orders = orders.split (',');
         shoppingcart.orders[shoppingcart.orders.length] = orderId;
     }
-    
-    console.log (shoppingcart.orders);
     
     orders = shoppingcart.orders.join(",");
     storage.set ('orders', orders);
@@ -53,10 +50,10 @@ shoppingcart.get = function () {
     var orders = storage.get (shoppingcart.cookie_orders);
     
     if (orders == null || orders == "undefined" || orders == "") {
-        return null;
+        return (function () {return null})();
     }
     
-    return orders;
+    return (function () {return orders})();
 }
 
 shoppingcart.remove = function (id) {
@@ -82,8 +79,6 @@ shoppingcart.remove = function (id) {
         return;
     }
     
-    console.log (shoppingcart.orders);
-    
     orders = shoppingcart.orders.join(",");
     storage.set (shoppingcart.cookie_orders, orders);
 }
@@ -91,8 +86,8 @@ shoppingcart.remove = function (id) {
 shoppingcart.removeall = function (id) {
     var orders = storage.get (shoppingcart.cookie_orders);
     var i = 0;
-    var left = [];
     var j = 0;
+    var left = [];
     
     if (orders == null || orders == "undefined" || orders == "") {
         storage.remove (shoppingcart.cookie_orders);
@@ -109,6 +104,9 @@ shoppingcart.removeall = function (id) {
             }
         )
     }
+    console.log ("shoppingcart.removeall");
+    console.log ("guid = " + id);
+    console.log ("orders = " + orders);
     
     shoppingcart.orders = null;
     shoppingcart.orders = left;
@@ -117,8 +115,6 @@ shoppingcart.removeall = function (id) {
         storage.remove (shoppingcart.cookie_orders);
         return;
     }
-    
-    console.log (shoppingcart.orders);
     
     orders = shoppingcart.orders.join(",");
     storage.set (shoppingcart.cookie_orders, orders);

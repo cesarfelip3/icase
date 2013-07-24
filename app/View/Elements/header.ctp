@@ -29,7 +29,8 @@ $action = $this->request->action;
                         </li>
                     </ul>
                     <ul class="nav pull-right">
-                        <li class="<?php if ($controller == "shop" && $action == "cart") echo "active"; ?>">
+                        <li>
+                            <a href="javascript:" onclick="cart_reload();">My Cart</a>
                         </li>
                     </ul>
                 </div><!-- end nav-collapse -->

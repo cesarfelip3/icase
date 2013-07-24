@@ -381,7 +381,10 @@ $js_case = array (
                     
                         var orderId = null;                        
                         orderId = jQuery("#modal-preview #product-info").data ('guid');
-                        shoppingcart.set (orderId);
+                        var image = jQuery("#modal-preview #product-info").data ('file');
+                        
+                        shoppingcart.set (orderId + "-" + image);
+                        console.log (shoppingcart.get ());
                         
                         jQuery("#modal-preview").modal('hide');
                         
@@ -417,7 +420,7 @@ $js_case = array (
         
         jQuery.ajax({
             url: "<?php echo $this->webroot; ?>shop/preview",
-            data: {"image-extension": "jpeg", "image-data": preview, "user": shoppingcart.getuuid(), "product": shoppingcart.getCurrentProductId()},
+            data: {"image-extension": "jpeg", "image-data": preview, "user": shoppingcart.getuuid(), "product": jQuery("#current-item").val()},
             type: "POST",
             beforeSend: function(xhr) {
             }

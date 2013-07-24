@@ -103,6 +103,10 @@ class ShopController extends AppController {
 		)
 	    );
 	    
+	    if (empty ($data)) {
+		$this->_error['error'] = 1;
+	    }
+	    
 	    $this->set (array ('data' => $data, 'error' => $this->_error));
 	    return;
 	}
@@ -125,7 +129,7 @@ class ShopController extends AppController {
 	    if (empty ($orders)) {
 		$this->set ('data', $data);
 		return;
-	    }
+	    }	    
 	    
 	    $guids = array_flip ($orders);
 	    $i = 0;
@@ -146,11 +150,23 @@ class ShopController extends AppController {
 	    $i = 0;
 	    
 	    foreach ($guids as $key => $value) {
-		$data[$i]['data'] = $this->Product->findByGuid ($key);
-		if (empty ($data[$i]['data'])) {
+		$key = explode ("-", $key);
+		if (is_array ($key)) {
+		    $guid = $key[0];
+		}
+		
+		$data[$i] = $this->Product->findByGuid ($guid);
+		if (empty ($data[$i])) {
+		    $data = null;
 		    break;
 		}
-		$data[$i]['value'] = $value;
+		
+		if (isset ($key[1])) {
+		    $data[$i]['Product']['file'] = $key[1];
+		} else {
+		    $data[$i]['Product']['file'] = "";
+		}
+		$data[$i]['Product']['quantity'] = $value;
 		$i++;
 	    }
 	    

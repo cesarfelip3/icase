@@ -129,6 +129,7 @@ if (isset($load_shop_cart) && $load_shop_cart) : ?>
             function () {
                 var action = $(this).data('action');
                 var guid = $(this).data('guid');
+                var file = $(this).data('file');
                 var i = 0;
                 var price = 0;
                 
@@ -142,6 +143,11 @@ if (isset($load_shop_cart) && $load_shop_cart) : ?>
                         i = parseInt (jQuery.trim(i));
                         i++;
                         jQuery(this).next().text(i);
+                        if (file == "") {
+                            guid = guid;
+                        } else {
+                            guid = guid + "-" + file;
+                        }
                         shoppingcart.set(guid);
                         price = $(this).data('price');
                         price = parseFloat(price) * i;
@@ -158,12 +164,22 @@ if (isset($load_shop_cart) && $load_shop_cart) : ?>
                             break;
                         }
                         jQuery(this).prev().text(i);
+                        if (file == "") {
+                            guid = guid;
+                        } else {
+                            guid = guid + "-" + file;
+                        }
                         shoppingcart.remove(guid);
                         price = $(this).data('price');
                         price = parseFloat(price) * i;
                         $(this).parent().prev().text(price.toFixed(2));
                         break;
                     case 'remove' :
+                        if (file == "") {
+                            guid = guid;
+                        } else {
+                            guid = guid + "-" + file;
+                        }
                         shoppingcart.removeall (guid);
                         cart_reload();
                         break;
