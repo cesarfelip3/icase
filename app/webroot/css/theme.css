@@ -2226,3 +2226,6 @@ hr.black{  background: url("../img/dotted.png") repeat-x scroll left center tran
     font-size: 15px;
     padding: 5px 15px;
     text-transform: uppercase; margin-left: 5px}
+ .category_right.span6{ width: 74% !important; padding-bottom: 20px}
+    .category_right .span4{ width: 31% !important}
+    .alleft{ text-align: left; padding-left: 10px}
