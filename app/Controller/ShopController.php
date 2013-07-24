@@ -18,6 +18,11 @@ class ShopController extends AppController {
     public function checkout () {
 	
     }
+
+       public function product () {
+	
+    }
+    
     
     public function preview ()
     {

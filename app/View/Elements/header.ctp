@@ -1,6 +1,6 @@
 <?php
-$controller = $this->request->controller;
-$action = $this->request->action;
+ $controller = $this->request->controller;
+ $action = $this->request->action;
 
 ?>
 <header>
