@@ -15,6 +15,8 @@ class ShopController extends AppController {
 	parent::beforeFilter();
     }
     
+    public function category() {}
+
     public function preview ()
     {
 	if ($this->request->is('ajax')) {
