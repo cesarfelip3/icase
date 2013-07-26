@@ -33,6 +33,35 @@ class ShopController extends AppController {
             $checkout_single = true;
             $this->set('checkout_single', $checkout_single);
         }
+        
+        $stripe = array(
+            "secret_key" => "sk_test_t2e5s3XGtntC5eoUU7HNICa1",
+            "publishable_key" => "pk_test_wjgM6MXjzv0GNOBeUVFIOVKf"
+        );
+
+        if ($this->request->is('post')) {
+            require_once APP . 'Vendor' . DS . "Stripe/Stripe.php";
+
+            Stripe::setApiKey($stripe['secret_key']);
+
+            $token = $this->request->data('stripeToken');
+            if (empty($token)) {
+                return;
+            }
+
+            $customer = Stripe_Customer::create(array(
+                        'email' => 'customer@example.com',
+                        'card' => $token
+            ));
+
+            $charge = Stripe_Charge::create(array(
+                        'customer' => $customer->id,
+                        'amount' => 5000,
+                        'currency' => 'usd'
+            ));
+        }
+
+        $this->set('stripe_key', $stripe['publishable_key']);
     }
 
     public function cart() {
@@ -174,8 +203,12 @@ class ShopController extends AppController {
             }
 
             //print_r ($orders);
+            $amount = 0;
+            foreach ($orders as $order) {
+                $amount += $order['amount'];
+            }
 
-            $this->set('data', $orders);
+            $this->set(array('data' => $orders, 'amount' => $amount));
         }
     }
 
@@ -296,7 +329,7 @@ class ShopController extends AppController {
                 $value['Product']['image'] = $this->base . "/" . $value['Product']['image'];
                 $data[$key] = $value;
             }
-            
+
 
             echo json_encode($data);
         }

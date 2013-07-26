@@ -28,7 +28,13 @@
                     <th><!--<a href="javascript:" data-action="remove" data-guid="<?php echo $value['guid']; ?>" style="text-decoration:none;"><i class="icon-remove-sign icon-2x"></i></a>--></th>
                   </tr>
                   <?php
-                  endforeach;
+                  endforeach;?>
+                  <tr>
+                      <td>Total</td>
+                      <td></td>
+                      <td><?php echo $amount; ?></td>
+                  </tr>
+                  <?php
                   endif;
                   ?>
                 </tbody>
