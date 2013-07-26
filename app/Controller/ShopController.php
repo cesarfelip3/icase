@@ -56,7 +56,7 @@ class ShopController extends AppController {
 
             $charge = Stripe_Charge::create(array(
                         'customer' => $customer->id,
-                        'amount' => 5000,
+                        'amount' => 20,
                         'currency' => 'usd'
             ));
         }
