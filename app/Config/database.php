@@ -60,7 +60,7 @@ class DATABASE_CONFIG {
 		'persistent' => false,
 		'host' => 'localhost',
 		'login' => 'root',
-		'password' => 'mysql',
+		'password' => 'root',
 		'database' => 'icase',
 		'prefix' => '',
 		//'encoding' => 'utf8',

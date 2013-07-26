@@ -8,17 +8,17 @@ class MediaController extends AppController {
         "message" => "",
         "files" => array(),
     );
-    
+
     public function beforeFilter() {
-        $this->Auth->allow ();
-	parent::beforeFilter();
+        $this->Auth->allow();
+        parent::beforeFilter();
     }
 
     public function upload() {
-        
+
         error_reporting(-1);
-	ini_set('display_errors', 'On');
-        
+        ini_set('display_errors', 'On');
+
         $this->autoRender = false;
         header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
         header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
@@ -158,7 +158,7 @@ class MediaController extends AppController {
         }
 
         //$finfo = finfo_open(FILEINFO_MIME_TYPE);
-       // $mime = finfo_file($finfo, $target);
+        // $mime = finfo_file($finfo, $target);
         //finfo_close($finfo);
 
         $this->_error['error'] = 0;
@@ -168,17 +168,16 @@ class MediaController extends AppController {
             'target' => $name,
             'url' => $this->base . "/uploads/" . $name,
             'extension' => $extension,
-            //'mime' => $mime
+                //'mime' => $mime
         );
 
         die($this->_json($this->_error));
     }
-    
-    public function preview ()
-    {
+
+    public function preview() {
         error_reporting(-1);
-	ini_set('display_errors', 'On');
-        
+        ini_set('display_errors', 'On');
+
         $this->autoRender = false;
         header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
         header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
@@ -191,25 +190,25 @@ class MediaController extends AppController {
         $cleanupTargetDir = true; // Remove old files
         $maxFileAge = 5 * 3600; // Temp file age in seconds
         @set_time_limit(0);
-        
+
         $imageData = $_POST['image-data'];
         $extension = $_POST['image-extension'];
-        
-        $imageData = str_replace ("data:image/" . $extension . ";base64,", "", $imageData);
-        
-        $filename = uniqid () . "." . $extension;
-        $file = base64_encode ($imageData);
-        $out = @fopen( $targetDir . DIRECTORY_SEPARATOR . $filename, "wb" );
-        
+
+        $imageData = str_replace("data:image/" . $extension . ";base64,", "", $imageData);
+
+        $filename = uniqid() . "." . $extension;
+        $file = base64_encode($imageData);
+        $out = @fopen($targetDir . DIRECTORY_SEPARATOR . $filename, "wb");
+
         if ($out) {
-            fwrite ($out, base64_decode($imageData));
-            @fclose ($out);
+            fwrite($out, base64_decode($imageData));
+            @fclose($out);
         } else {
             $this->_error['error'] = 1;
             $this->_error['message'] = 'open write handler faild';
-            die ($this->_json ($this->_error));
+            die($this->_json($this->_error));
         }
-        
+
         $this->_error['error'] = 0;
         $this->_error['message'] = 'success';
         $this->_error['files'] = array(
@@ -217,34 +216,34 @@ class MediaController extends AppController {
             'target' => $filename,
             'url' => "uploads/" . $filename,
             'extension' => $extension,
-            //'mime' => $mime
+                //'mime' => $mime
         );
-        
+
         $size = getimagesize($targetDir . DIRECTORY_SEPARATOR . $filename);
-        
+
         $current_width = $size[0];
         $current_height = $size[1];
-        
+
         $left = 100;
         $top = 5;
-         
+
         $crop_width = 248;
         $crop_height = 437;
-         
+
         // Resample the image
         $canvas = imagecreatetruecolor($crop_width, $crop_height);
         $current_image = imagecreatefromjpeg($targetDir . DIRECTORY_SEPARATOR . $filename);
         imagecopy($canvas, $current_image, 0, 0, $left, $top, $current_width, $current_height);
         imagejpeg($canvas, $targetDir . DIRECTORY_SEPARATOR . $filename, 100);
-        
+
         $path = $targetDir . DIRECTORY_SEPARATOR . $filename;
         $image = file_get_contents($targetDir . DIRECTORY_SEPARATOR . $filename);
 
         $image = substr_replace($image, pack("cnn", 1, 300, 300), 13, 5);
-        
-        file_put_contents ($targetDir . DIRECTORY_SEPARATOR . $filename, $image);
-        
-        die ($this->_json($this->_error));
+
+        file_put_contents($targetDir . DIRECTORY_SEPARATOR . $filename, $image);
+
+        die($this->_json($this->_error));
     }
 
     protected function _json($data = array()) {

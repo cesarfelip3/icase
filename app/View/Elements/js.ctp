@@ -9,25 +9,25 @@
 <script src="<?php echo $this->webroot; ?>js/include/bootstrap.min.js"></script>
 
 <script type="text/javascript">
-    jQuery(document).ready (
-        function () {
-            var TEST_COOKIE = 'test_cookie';
-            jQuery.cookie( TEST_COOKIE, true );
-            if ( jQuery.cookie ( TEST_COOKIE ) )
-            {
-                
+    jQuery(document).ready(
+            function() {
+                var TEST_COOKIE = 'test_cookie';
+                jQuery.cookie(TEST_COOKIE, true);
+                if (jQuery.cookie(TEST_COOKIE))
+                {
+
+                }
+                else
+                {
+                    jQuery("#box-message").show();
+                    jQuery('.alert').alert();
+                    jQuery('.alert').bind('closed', function() {
+                        jQuery("#box-message").hide();
+                    })
+                }
             }
-            else
-            {
-                jQuery("#box-message").show();
-                jQuery('.alert').alert ();
-                jQuery('.alert').bind('closed', function () {
-                    jQuery("#box-message").hide();
-                })
-            }
-        }
     )
- 
+
 </script>
 
 <div class="row-fluid hide" id="box-message" style="position: fixed;top:0px;left:0px;z-index:1030;margin-bottom:0;">
@@ -38,10 +38,9 @@
 </div>
 
 <?php
-
-$js_themes = array (
+$js_themes = array(
     "libs/jquery.ui.touch-punch.min.js",
-    "http://maps.google.com/maps/api/js?sensor=true",
+    //"http://maps.google.com/maps/api/js?sensor=true",
     "menu/jquery.ct.3LevelAccordion.min.js",
     //"slider/jquery.responsivethumbnailgallery.min.js",
     //"slider/jquery.onebyone.min.js",
@@ -56,7 +55,6 @@ $js_themes = array (
     "config.js",
     "json2.js"
 );
-
 ?>
 
 <!-- RECOMMENDED: For (IE6 - IE8) CSS3 pseudo-classes and attribute selectors -->
@@ -67,9 +65,9 @@ $js_themes = array (
 <?php echo $this->Html->script($js_themes); ?>
 
 <script type="text/javascript">
-$(function() {
-    $( "#slider" ).slider();
-});
+    $(function() {
+        $("#slider").slider();
+    });
 </script>   
 <!-- DO NOT REMOVE: Contains major plugin initiations and functions -->
 <!--<![endif]-->
@@ -83,13 +81,14 @@ $(function() {
 
 <script src="<?php echo $this->webroot; ?>js/shoppingcart/icase.shoppingcart.js"></script>
 <script type="text/javascript">
-    jQuery (document).ready (
-        function () {
-            shoppingcart.inituuid (uuid_init_callback);
-        }
+    jQuery(document).ready(
+            function() {
+                shoppingcart.inituuid(uuid_init_callback);
+                cart_init();
+            }
     )
-   
-    function uuid_init_callback ()
+
+    function uuid_init_callback()
     {
         jQuery.ajax({
             url: "<?php echo $this->webroot; ?>user/guest?action=newuuid",
@@ -97,112 +96,115 @@ $(function() {
             beforeSend: function(xhr) {
             }
         }).done(function(data) {
-            if (jQuery.trim (data) == "") {
+            if (jQuery.trim(data) == "") {
                 return;
             }
-            
+
             if (data == null) {
                 return;
             }
-            storage.set (shoppingcart.cookie_uuid, data);
-    
+            storage.set(shoppingcart.cookie_uuid, data);
+
         }).fail(function() {
-            
+
         });
     }
 </script>
 
-<?php
+<?php if (isset($load_shop_cart) && $load_shop_cart) : ?>
 
-if (isset($load_shop_cart) && $load_shop_cart) : ?>
+    <!-- shopping cart -->
+    <div class="row-fluid" id="box-cart" style="position: fixed;top:0px;left:0px;z-index:1030;margin-bottom:0;">
 
-<!-- shopping cart -->
-<div class="row-fluid" id="box-cart" style="position: fixed;top:0px;left:0px;z-index:1030;margin-bottom:0;">
-    
-</div>
+    </div>
 
-<script type="text/javascript">
-    function cart_config () {
-        
-        jQuery("#box-cart a").off('click');
-        jQuery ("#box-cart a").click (
-            function () {
-                var action = $(this).data('action');
-                var guid = $(this).data('guid');
-                var file = $(this).data('file');
-                var i = 0;
-                var price = 0;
-                
-                switch (action) {
-                    case 'close':
-                        jQuery("#box-cart").hide(0);
-                        break;
-                    case 'plus' :
-                        i = jQuery(this).next().text();
-                        console.log (i);
-                        i = parseInt (jQuery.trim(i));
-                        i++;
-                        jQuery(this).next().text(i);
-                        if (file == "") {
-                            guid = guid;
-                        } else {
-                            guid = guid + "-" + file;
+    <script type="text/javascript">
+        function cart_init() {
+            shoppingcart.init();
+
+        }
+
+        function cart_config() {
+
+            jQuery("#box-cart a").off('click');
+            jQuery("#box-cart a").click(
+                    function() {
+                        var action = $(this).data('action');
+                        var guid = $(this).data('guid');
+                        var file = $(this).data('file');
+                        var i = 0;
+                        var price = 0;
+
+                        switch (action) {
+                            case 'close':
+                                jQuery("#box-cart").hide(0);
+                                break;
+                            case 'plus' :
+                                i = jQuery(this).next().text();
+                                console.log(i);
+                                i = parseInt(jQuery.trim(i));
+                                i++;
+                                jQuery(this).next().text(i);
+                                if (file == "") {
+                                    guid = guid;
+                                } else {
+                                    guid = guid + "-" + file;
+                                }
+                                shoppingcart.set(guid);
+                                price = $(this).data('price');
+                                price = parseFloat(price) * i;
+                                $(this).parent().prev().text(price.toFixed(2));
+                                break;
+                            case 'minus' :
+                                i = jQuery(this).prev().text();
+                                console.log(i);
+                                i = parseInt(jQuery.trim(i));
+                                i--;
+                                if (i <= 0) {
+                                    shoppingcart.removeall(guid);
+                                    cart_reload();
+                                    break;
+                                }
+                                jQuery(this).prev().text(i);
+                                if (file == "") {
+                                    guid = guid;
+                                } else {
+                                    guid = guid + "-" + file;
+                                }
+                                shoppingcart.remove(guid);
+                                price = $(this).data('price');
+                                price = parseFloat(price) * i;
+                                $(this).parent().prev().text(price.toFixed(2));
+                                break;
+                            case 'remove' :
+                                if (file == "") {
+                                    guid = guid;
+                                } else {
+                                    guid = guid + "-" + file;
+                                }
+                                shoppingcart.removeall(guid);
+                                cart_reload();
+                                break;
                         }
-                        shoppingcart.set(guid);
-                        price = $(this).data('price');
-                        price = parseFloat(price) * i;
-                        $(this).parent().prev().text(price.toFixed(2));
-                        break;
-                    case 'minus' :
-                        i = jQuery(this).prev().text();
-                        console.log (i);
-                        i = parseInt (jQuery.trim(i));
-                        i--;
-                        if (i <= 0) {
-                            shoppingcart.removeall (guid);
-                            cart_reload();
-                            break;
-                        }
-                        jQuery(this).prev().text(i);
-                        if (file == "") {
-                            guid = guid;
-                        } else {
-                            guid = guid + "-" + file;
-                        }
-                        shoppingcart.remove(guid);
-                        price = $(this).data('price');
-                        price = parseFloat(price) * i;
-                        $(this).parent().prev().text(price.toFixed(2));
-                        break;
-                    case 'remove' :
-                        if (file == "") {
-                            guid = guid;
-                        } else {
-                            guid = guid + "-" + file;
-                        }
-                        shoppingcart.removeall (guid);
-                        cart_reload();
-                        break;
+                    }
+            )
+        }
+
+        function cart_reload() {
+            jQuery.ajax({
+                url: "<?php echo $this->webroot; ?>shop/cart",
+                data: {"orders": shoppingcart.get(), "user": shoppingcart.getuuid()},
+                type: "POST",
+                beforeSend: function(xhr) {
+                    console.log("working....");
                 }
-            }
-        )
-    }
-    
-    function cart_reload () {
-        jQuery.ajax({
-            url: "<?php echo $this->webroot; ?>shop/cart",
-            data: {"orders":shoppingcart.get(), "user":shoppingcart.getuuid()},
-            type: "POST",
-            beforeSend: function(xhr) {
-                console.log("working....");
-            }
-        }).done(function(data) {
-            $("#box-cart").html (data);
-            $("#box-cart").show ();
-            cart_config ();
-        }).fail(function() {
-            
-        });
-    }
-</script>
+            }).done(function(data) {
+                $("#box-cart").html(data);
+                $("#box-cart").show();
+                cart_config();
+            }).fail(function() {
+
+            });
+        }
+    </script>
 <?php endif; ?>

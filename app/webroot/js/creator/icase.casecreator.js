@@ -11,18 +11,15 @@ var mememaker = {
     textTotal: 0,
     imageTotal: 0,
     backgroundColor: 'white',
-
     defaultText: null,
-
     // methods
     init: null,
     mousedown: null,
-
     // object memeber
     tools: {
         container: '.tools',
         init: null,
-        new: null,
+        new : null,
         info: null,
         remove: null,
         group: null,
@@ -79,7 +76,7 @@ mememaker.defaultText = {
         fontFamily: 'Impact',
         fontWeight: 'bold',
         fontSize: 40,
-        fill: 'black',       
+        fill: 'black',
         //stroke: 'white',
         //strokeWidth: 0,
         originX: 'left',
@@ -89,7 +86,7 @@ mememaker.defaultText = {
     }
 }
 
-mememaker.mousedown = function (options) {
+mememaker.mousedown = function(options) {
     var type = options.target.type;
     switch (type) {
         case "text":
@@ -104,103 +101,103 @@ mememaker.mousedown = function (options) {
     return false;
 }
 
-mememaker.init = function (id) {
+mememaker.init = function(id) {
     mememaker.canvasId = id;
 
     mememaker.canvas = new fabric.Canvas(mememaker.canvasId);
     mememaker.canvas.backgroundColor = mememaker.backgroundColor = 'white';
     mememaker.canvas.selection = true;
-    mememaker.canvas.clear ();
+    mememaker.canvas.clear();
 
     /*
-    mememaker.canvas.on (
-        'mouse:down',
-        function (options) {
-            //mememaker.mousedown (options)
-        }
-    );
-
-    mememaker.canvas.on (
-        'mouse:up',
-        function (options) {
-
-        }
+     mememaker.canvas.on (
+     'mouse:down',
+     function (options) {
+     //mememaker.mousedown (options)
+     }
+     );
+     
+     mememaker.canvas.on (
+     'mouse:up',
+     function (options) {
+     
+     }
      )*/
 }
 
 // tools
-mememaker.tools.init = function (id, previewUrl, modal) {
+mememaker.tools.init = function(id, previewUrl, modal) {
     if (id != null) {
         mememaker.tools.container = id;
     }
-    
+
     //jQuery("#canvas-background-color").colorpicker().on('changeColor', function (ev) {
     //    mememaker.tools.backgroundcolor (ev.color.toHex());    
     //});
-    
+
     jQuery(mememaker.tools.container + " a").click(
             function(evt) {
                 var action = jQuery(this).data('action');
 
                 switch (action) {
-                case 'new':
-                    mememaker.tools.new ();
-                    break;
-                case 'info':
-                    break;
-                case 'remove':
-                    mememaker.tools.remove();
-                    break;
-                case 'group':
-                    mememaker.tools.group();
-                    break;
-                case 'backward':
-                    mememaker.tools.backward();
-                    break;
-                case 'forward':
-                    mememaker.tools.forward();
-                    break;
-                case 'back':
-                    mememaker.tools.toBack();
-                    break;
-                case 'front':
-                    mememaker.tools.toFront();
-                    break;
-                case 'flipx':
-                    mememaker.tools.flip(0);
-                    break;
-                case 'flipy':
-                    mememaker.tools.flip(1);
-                    break;
-                case 'newtext':
-                    mememaker.tools.newtext();
-                    break;
-                case 'newpic':
-                    break;
-                case '+height':
-                    mememaker.tools.resize(true, this);
-                    break;
-                case '-height':
-                    mememaker.tools.resize(false, this);
-                    break;
-                case 'preview':
-                    mememaker.tools.preview(mememaker.tools.generate);
-                    break;
-                case 'backgroundcolor':
-                    //mememaker.tools.backgroundcolor ();
-                    break;
-                case 'backgroundimage':
-                    mememaker.tools.backgroundimage("img/muffin.png");
-                    break;
-                case 'draw':
-                    mememaker.draweditor.enable(jQuery(this));
-                    break;
-                default:
-                    break;
+                    case 'new':
+                        mememaker.tools.new ();
+                        break;
+                    case 'info':
+                        break;
+                    case 'remove':
+                        mememaker.tools.remove();
+                        break;
+                    case 'group':
+                        mememaker.tools.group();
+                        break;
+                    case 'backward':
+                        mememaker.tools.backward();
+                        break;
+                    case 'forward':
+                        mememaker.tools.forward();
+                        break;
+                    case 'back':
+                        mememaker.tools.toBack();
+                        break;
+                    case 'front':
+                        mememaker.tools.toFront();
+                        break;
+                    case 'flipx':
+                        mememaker.tools.flip(0);
+                        break;
+                    case 'flipy':
+                        mememaker.tools.flip(1);
+                        break;
+                    case 'newtext':
+                        mememaker.tools.newtext();
+                        break;
+                    case 'newpic':
+                        break;
+                    case '+height':
+                        mememaker.tools.resize(true, this);
+                        break;
+                    case '-height':
+                        mememaker.tools.resize(false, this);
+                        break;
+                    case 'preview':
+                        mememaker.tools.preview(mememaker.tools.generate);
+                        break;
+                    case 'backgroundcolor':
+                        //mememaker.tools.backgroundcolor ();
+                        break;
+                    case 'backgroundimage':
+                        mememaker.tools.backgroundimage("img/muffin.png");
+                        break;
+                    case 'draw':
+                        mememaker.draweditor.enable(jQuery(this));
+                        break;
+                    default:
+                        break;
+                }
             }
-        }
-        );
-    }
+    );
+}
 
 mememaker.tools.new = function() {
     mememaker.backgroundColor = 'white';
@@ -508,11 +505,11 @@ mememaker.tools.preview = function(callback) {
                 quality: 1
             }
     );
-    
+
     if (mememaker.tools.generate == null) {
         return;
     }
-    mememaker.tools.generate (preview);
+    mememaker.tools.generate(preview);
 }
 
 mememaker.tools.generate = null;
@@ -544,7 +541,7 @@ mememaker.texteditor.init = function(id) {
                 mememaker.texteditor.changeFontFamily(jQuery(this).val());
             }
     )
-    
+
     jQuery("#text-fill").colorpicker().on('changeColor', function(ev) {
         mememaker.texteditor.fill(ev.color.toHex());
     });

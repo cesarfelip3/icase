@@ -6,3 +6,4 @@ app/tmp/cache/*
 app/tmp/persistent/*
 app/webroot/uploaads/*
 !empty
+/nbproject/private/

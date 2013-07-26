@@ -66,7 +66,16 @@
 <script type="text/javascript">
   jQuery(document).ready (
     function () {
-      jQuery.ajax({
+      <?php if (isset($checkout_single)) : ?>
+      checkout_single ();
+      <?php else : ?>
+      checkout_cart ();
+      <?php endif; ?>
+    }
+  )
+  
+  function checkout_single () {
+     jQuery.ajax({
             url: "<?php echo $this->webroot; ?>shop/order",
             data: {"orders":shoppingcart.getCurrentProductId(), "user":shoppingcart.getuuid()},
             type: "POST",
@@ -75,11 +84,23 @@
             }
         }).done(function(data) {
             $("#box-orders").html (data);
-            //$("#box-orders").show ();
-            //cart_config ();
         }).fail(function() {
             
         });
-    }
-  )
+  }
+  
+  function checkout_cart () {
+          jQuery.ajax({
+            url: "<?php echo $this->webroot; ?>shop/order",
+            data: {"orders":shoppingcart.get(), "user":shoppingcart.getuuid()},
+            type: "POST",
+            beforeSend: function(xhr) {
+                console.log("working....");
+            }
+        }).done(function(data) {
+            $("#box-orders").html (data);
+        }).fail(function() {
+            
+        });
+  }
 </script>

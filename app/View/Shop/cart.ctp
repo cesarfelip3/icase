@@ -1,6 +1,6 @@
 <div class="span8 offset2">
     <div class="qbox">
-        <h1 style="height:30px;border-bottom:2px solid white;"><a href="javascript:" class="close" type="button" data-action="close" data-dismiss="modal" aria-hidden="true" style="text-decoration:none;"><i class="icon-remove icon-1x"></i></a></h1>
+        <h1 style="height:30px;border-bottom:2px solid white;">My Cart<a href="javascript:" class="close" type="button" data-action="close" data-dismiss="modal" aria-hidden="true" style="text-decoration:none;"><i class="icon-remove icon-1x"></i></a></h1>
         <div style="overflow: auto;max-height:400px;">
             <table class="table table-striped">
                 <thead>
@@ -35,7 +35,7 @@
         <div>
             <?php
             if (!empty ($data)) : ?>
-            <a class="btn btn-peach">Checkout</a>
+            <a class="btn btn-peach" href="<?php echo $this->webroot; ?>shop/checkout/?action=cart" target="_blank">Checkout</a>
             <?php
             endif; ?>
             <a class="btn btn-success pull-right">Register</a>
