@@ -296,6 +296,7 @@ class ShopController extends AppController {
                 $value['Product']['image'] = $this->base . "/" . $value['Product']['image'];
                 $data[$key] = $value;
             }
+            
 
             echo json_encode($data);
         }

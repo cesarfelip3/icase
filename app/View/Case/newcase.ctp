@@ -1,19 +1,19 @@
 <style>
     .tools a {text-decoration:none;}
-    hr {border-color:#E9E9E9}
     .tools label {width:100px;display:inline-block;}
+    hr {border-color:#E9E9E9}
 </style>
 <section id="main">
     <div class="body-text">
         <div class="container-fluid qbox creator-parts" style="box-shadow:none;font-size:14px;background:transparent;padding:10px;">
-            <div class="row-fluid"">
-                <div style="display:block;width:100%;height:24px;">
+            <div class="row-fluid">
+                <div style="display:block;width:100%;height:30px">
                     <div class="tools pull-left">
                         <a href="javascript:" data-action="new" title="remove"><i class="icon-remove-sign icon-2x"></i> clear canvas</a>
                         <a href="javascript:" data-action="preview" title="remove"><i class="icon-eye-open icon-2x"></i> preview</a>
                     </div>
                     <div class="tools pull-right">
-                        <a class="btn btn-large btn-peach hide" id="btn-order"><i class="icon-mobile-phone icon-1x"></i> <span>Order Now</span></a></p>
+                        <a class="btn btn-large btn-warning hide" id="btn-order"><i class="icon-mobile-phone icon-2x"></i> <span>Order Now</span></a></p>
                     </div>
                 </div>
             </div>
@@ -57,12 +57,15 @@
                 <div class="span6">
                     <div>
                         <div class="ajax-loading-indicator" style="position: absolute;"><a href="javascript:" style="font-size:14px;"><i class="icon-refresh icon-spin"></i> Loading Canvas...</a></div>
-                        <canvas class="upper-canvas " style="border: 1px solid rgb(170, 170, 170); -moz-user-select: none; cursor: crosshair;" width="450" height="450" id="c1"></canvas>				   
+                        <canvas class="upper-canvas " style="border: 2px #ccc dashed; -moz-user-select: none; cursor: crosshair;" width="450" height="450" id="c1"></canvas>				   
                     </div>
                 </div>
-                <div class="span2 pull-right">
-                    <div>
-                        <div style="overflow: auto;height:450px;margin:0px;padding:0px;" id="template-list">
+                <div class="span3" style="border:2px #ccc dashed;">
+                    <div class="pull-right">
+                        <div style="overflow: hidden;height:450px;width:160px;">
+                            <div style="overflow:auto;height:450px;padding-right: 20px;width:160px;" id="template-list">
+                                
+                            </div>
 
                         </div>
                         <form id="cart-form"><input type="hidden" id="current-item" /></form>
@@ -80,8 +83,8 @@
                             <option value="Arial">Arial</option>
                             <option value="Verdana">Verdana</option>
                         </select>
-                        <input id="text-stroke-fill" type="text" class="input-small" readonly="readonly" placeholder="stroke color" />
-                        <input type="text" value="" data-slider-min="50" data-slider-max="300" data-slider-step="1" data-slider-value="100" data-slider-id="RC" id="text-stroke-width" data-slider-selection="none" data-slider-tooltip="show" data-slider-handle="square" style="width:150px">
+<!--                        <input id="text-stroke-fill" type="text" class="input-small" readonly="readonly" placeholder="stroke color" />
+                        <input type="text" value="" data-slider-min="50" data-slider-max="300" data-slider-step="1" data-slider-value="100" data-slider-id="RC" id="text-stroke-width" data-slider-selection="none" data-slider-tooltip="show" data-slider-handle="square" style="width:150px">-->
                         <div class="display:inline">
                             <a href="javascript:" class="btn btn-small" data-action="bold" data-toggle="button"><i class="icon-bold"></i></a>
                             <a href="javascript:" class="btn btn-small" data-action="italic" data-toggle="button"><i class="icon-italic"></i></a>
@@ -97,7 +100,7 @@
                 </div><!-- Image Editor -->
             </div>
             <div class="row-fluid">
-                <div class="draw-editor creator-parts span9" style="width:100%;border:1px solid #ccc;margin-top:10px;padding:5px;margin-bottom:20px;">
+                <div class="draw-editor span9 hide" style="width:100%;border:1px solid #ccc;margin-top:10px;padding:5px;margin-bottom:20px;">
                     <div style="display:inline"><span style="display:inline-block;width:100px;"><b>LINE WIDTH</b></span><input type="text" value="" data-slider-min="1" data-slider-max="30" data-slider-step="1" data-slider-value="1" data-slider-id="RC" id="draw-width" data-slider-selection="none" data-slider-tooltip="show" data-slider-handle="square" style="width:150px"></div>
                     <div style="display:inline;margin-left:10px;"><span style="display:inline-block;width:130px;"><b>SHADOW WIDTH</b></span><input type="text" value="" data-slider-min="1" data-slider-max="30" data-slider-step="1" data-slider-value="1" data-slider-id="RC" id="draw-shadow-width" data-slider-selection="none" data-slider-tooltip="show" data-slider-handle="square" style="width:150px" ></div>
                     <div style="clear:both"></div>
@@ -338,7 +341,7 @@ $js_case = array(
                     result = jQuery.parseJSON(data);
                     jQuery(result).each(
                             function(index, value) {
-                                var html = jQuery("#template-list").html() + '<h6>' + value.Product.name + ' ' + value.Product.price + '$</h6><a href="javascript:" class="thumbnail" data-price="' + value.Product.price + '" data-guid="' + value.Product.guid + '"><img src="' + value.Product.image + '" /></a><br/>';
+                                var html = jQuery("#template-list").html() + '<span class="label label-warning">' + value.Product.name + ' ' + value.Product.price + '$</span><a href="javascript:" class="thumbnail" data-price="' + value.Product.price + '" data-guid="' + value.Product.guid + '"><img src="' + value.Product.image + '" /></a><br/>';
                                 jQuery("#template-list").html(html);
                             }
                     );
