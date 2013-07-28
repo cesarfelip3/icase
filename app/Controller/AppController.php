@@ -49,4 +49,5 @@ function beforeFilter() {
     }
 }
 
-var $components = array('ActiveAdmin.Filter');
+
+
