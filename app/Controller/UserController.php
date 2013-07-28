@@ -4,7 +4,7 @@ App::uses('AppController', 'Controller');
 class UserController extends AppController {
     
     public function beforeFilter() {
-        $this->Auth->deny();
+        $this->Auth->allow();
         $this->Auth->allow('guest');
 	parent::beforeFilter();
     }

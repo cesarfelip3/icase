@@ -10,6 +10,10 @@ class ShopController extends AppController {
         "message" => "",
         "files" => array(),
     );
+    protected $_stripe = array(
+        "secret_key" => "sk_test_t2e5s3XGtntC5eoUU7HNICa1",
+        "publishable_key" => "pk_test_wjgM6MXjzv0GNOBeUVFIOVKf"
+    );
 
     public function beforeFilter() {
         $this->Auth->allow();
@@ -29,39 +33,44 @@ class ShopController extends AppController {
         $this->set('load_shop_cart', true);
         $action = $this->request->query("action");
 
+        if (empty($action)) {
+            $action = "single";
+        }
+
         if ($action == "single") {
             $checkout_single = true;
             $this->set('checkout_single', $checkout_single);
         }
-        
-        $stripe = array(
-            "secret_key" => "sk_test_t2e5s3XGtntC5eoUU7HNICa1",
-            "publishable_key" => "pk_test_wjgM6MXjzv0GNOBeUVFIOVKf"
-        );
+
+        $this->set('action', $action);
 
         if ($this->request->is('post')) {
+
             require_once APP . 'Vendor' . DS . "Stripe/Stripe.php";
+            try {
 
-            Stripe::setApiKey($stripe['secret_key']);
+                Stripe::setApiKey($this->_stripe['secret_key']);
 
-            $token = $this->request->data('stripeToken');
-            if (empty($token)) {
-                return;
+                $token = $this->request->data('stripeToken');
+                if (empty($token)) {
+                    return;
+                }
+
+                $customer = Stripe_Customer::create(array(
+                            'email' => 'customer@example.com',
+                            'card' => $token
+                ));
+
+                $charge = Stripe_Charge::create(array(
+                            'customer' => $customer->id,
+                            'amount' => 50,
+                            'currency' => 'usd'
+                ));
+            } catch (Exception $e) {
+                print_r ($e);
+                exit;
             }
-
-            $customer = Stripe_Customer::create(array(
-                        'email' => 'customer@example.com',
-                        'card' => $token
-            ));
-
-            $charge = Stripe_Charge::create(array(
-                        'customer' => $customer->id,
-                        'amount' => 20,
-                        'currency' => 'usd'
-            ));
         }
-
-        $this->set('stripe_key', $stripe['publishable_key']);
     }
 
     public function cart() {
@@ -202,12 +211,14 @@ class ShopController extends AppController {
                 }
             }
 
-            //print_r ($orders);
+//print_r ($orders);
             $amount = 0;
             foreach ($orders as $order) {
                 $amount += $order['amount'];
             }
 
+
+            $this->set('stripe_key', $this->_stripe['publishable_key']);
             $this->set(array('data' => $orders, 'amount' => $amount));
         }
     }
@@ -278,7 +289,7 @@ class ShopController extends AppController {
             $crop_width = 248;
             $crop_height = 437;
 
-            // Resample the image
+// Resample the image
             $canvas = imagecreatetruecolor($crop_width, $crop_height);
             $current_image = imagecreatefromjpeg($targetDir . DIRECTORY_SEPARATOR . $filename);
             imagecopy($canvas, $current_image, 0, 0, $left, $top, $current_width, $current_height);

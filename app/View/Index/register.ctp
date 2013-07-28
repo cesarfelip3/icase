@@ -29,18 +29,19 @@
                     <input type="text" class="input-large" />
                 </p>
                 <p>
+                    <label>Email</label>
+                    <input type="text" class="input-large" placeholder='email@example.com' />
+                </p>
+                <p>
                     <label>Password</label>
-                    <input type="text" class="input-large" />
+                    <input type="password" class="input-large" />
                 </p>
                 <p>
-                    <button class="btn btn-success">Sign In</button>
+                    <button class="btn btn-success">Sign Up</button>
                 </p>
                 <p>
-                    <a href='<?php echo $this->webroot; ?>index/reset'><span>Forget Password?</span></a>
-                </p>
-                <p>
-                    <span>Don't have account yet?</span>
-                    <a href='<?php echo $this->webroot; ?>index/register'>Sign Up Now</a>
+                    <span>Already had account? Go </span>
+                    <a href='<?php echo $this->webroot; ?>index/login'>Sign In Now</a>
                 </p>
             </fieldset>
         </form>

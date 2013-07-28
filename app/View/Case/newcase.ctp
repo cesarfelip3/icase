@@ -370,8 +370,8 @@ $js_case = array(
                             orderId = jQuery("#modal-preview #product-info").data('guid');
                             var image = jQuery("#modal-preview #product-info").data('file');
 
-                            shoppingcart.set(orderId + "-" + image);
-                            console.log(shoppingcart.get());
+                            $.shoppingcart.set(orderId + "-" + image);
+                            console.log($.shoppingcart.get());
 
                             jQuery("#modal-preview").modal('hide');
 
@@ -390,7 +390,7 @@ $js_case = array(
                     var url = $(this).children(":first-child").attr('src');
                     mememaker.tools.newtemplate(url);
                     $("#current-item").val($(this).data('guid'));
-                    shoppingcart.setCurrentProductId($(this).data('guid'));
+                    $.shoppingcart.setCurrentProductId($(this).data('guid'));
                     $("#btn-order span").text("Order Now " + $(this).data('price') + "$");
                 }
         );
@@ -407,7 +407,7 @@ $js_case = array(
 
         jQuery.ajax({
             url: "<?php echo $this->webroot; ?>shop/preview",
-            data: {"image-extension": "jpeg", "image-data": preview, "user": shoppingcart.getuuid(), "product": jQuery("#current-item").val()},
+            data: {"image-extension": "jpeg", "image-data": preview, "user": $.shoppingcart.getuuid(), "product": jQuery("#current-item").val()},
             type: "POST",
             beforeSend: function(xhr) {
             }
@@ -428,7 +428,7 @@ $js_case = array(
         var image = jQuery("#modal-preview #product-info").data('file');
 
         console.log(orderId + "-" + image);
-        shoppingcart.setCurrentProductId(orderId + "-" + image);
+        $.shoppingcart.setCurrentProductId(orderId + "-" + image);
         return true;
     }
 
@@ -447,10 +447,6 @@ $js_case = array(
         <span class="pull-left">To save your design, you have to login</span>
         <a href="javascript:">Login</a> Or
         <a href="javascript:">register</a>
-    </div>
-    <div class="modal-footer">
-        <a href="javascript:" class="btn btn-peach" id="btn-cart">Add To Cart</a>
-        <a href="<?php echo $this->webroot; ?>shop/checkout/?action=single" class="btn btn-peach" target="_blank">Buy Now!</a>
     </div>
 </div>
 

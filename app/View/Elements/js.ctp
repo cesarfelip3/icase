@@ -83,7 +83,7 @@ $js_themes = array(
 <script type="text/javascript">
     jQuery(document).ready(
             function() {
-                shoppingcart.inituuid(uuid_init_callback);
+                $.shoppingcart.inituuid(uuid_init_callback);
                 cart_init();
             }
     )
@@ -103,7 +103,7 @@ $js_themes = array(
             if (data == null) {
                 return;
             }
-            storage.set(shoppingcart.cookie_uuid, data);
+            $.shoppingcart.setuuid(data);
 
         }).fail(function() {
 
@@ -120,7 +120,7 @@ $js_themes = array(
 
     <script type="text/javascript">
         function cart_init() {
-            shoppingcart.init();
+            $.shoppingcart.init();
 
         }
 
@@ -150,7 +150,7 @@ $js_themes = array(
                                 } else {
                                     guid = guid + "-" + file;
                                 }
-                                shoppingcart.set(guid);
+                                $.shoppingcart.set(guid);
                                 price = $(this).data('price');
                                 price = parseFloat(price) * i;
                                 $(this).parent().prev().text(price.toFixed(2));
@@ -161,7 +161,7 @@ $js_themes = array(
                                 i = parseInt(jQuery.trim(i));
                                 i--;
                                 if (i <= 0) {
-                                    shoppingcart.removeall(guid);
+                                    $.shoppingcart.removeall(guid);
                                     cart_reload();
                                     break;
                                 }
@@ -171,7 +171,7 @@ $js_themes = array(
                                 } else {
                                     guid = guid + "-" + file;
                                 }
-                                shoppingcart.remove(guid);
+                                $.shoppingcart.remove(guid);
                                 price = $(this).data('price');
                                 price = parseFloat(price) * i;
                                 $(this).parent().prev().text(price.toFixed(2));
@@ -182,7 +182,7 @@ $js_themes = array(
                                 } else {
                                     guid = guid + "-" + file;
                                 }
-                                shoppingcart.removeall(guid);
+                                $.shoppingcart.removeall(guid);
                                 cart_reload();
                                 break;
                         }
@@ -193,7 +193,7 @@ $js_themes = array(
         function cart_reload() {
             jQuery.ajax({
                 url: "<?php echo $this->webroot; ?>shop/cart",
-                data: {"orders": shoppingcart.get(), "user": shoppingcart.getuuid()},
+                data: {"orders": $.shoppingcart.get(), "user": $.shoppingcart.getuuid()},
                 type: "POST",
                 beforeSend: function(xhr) {
                     console.log("working....");

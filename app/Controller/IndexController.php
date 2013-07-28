@@ -5,6 +5,7 @@ class IndexController extends AppController {
     public $uses = null;
     
     public function beforeFilter() {
+        $this->Auth->allow("login", "register", "reset");
         $this->Auth->deny("logout");
 	parent::beforeFilter();
     }
@@ -20,6 +21,11 @@ class IndexController extends AppController {
     }
     
     public function logout ()
+    {
+        
+    }
+    
+    public function reset ()
     {
         
     }
