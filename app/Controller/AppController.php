@@ -17,8 +17,7 @@ class AppController extends Controller {
                     'fields' => array('username' => 'email', 'password' => 'password'),
                     'scope' => array ('User.active' => 1),
                     'passwordHasher' => array(
-                        'className' => 'Simple',
-                        'hashType' => 'md5'
+                        'className' => 'Simple'
                     )
                 )
             )

@@ -64,7 +64,7 @@
                     <div class="pull-right">
                         <div style="overflow: hidden;height:450px;width:160px;">
                             <div style="overflow:auto;height:450px;padding-right: 20px;width:160px;" id="template-list">
-                                
+
                             </div>
 
                         </div>
@@ -363,21 +363,7 @@ $js_case = array(
                         }
                 );
 
-                jQuery("#btn-cart").click(
-                        function() {
 
-                            var orderId = null;
-                            orderId = jQuery("#modal-preview #product-info").data('guid');
-                            var image = jQuery("#modal-preview #product-info").data('file');
-
-                            $.shoppingcart.set(orderId + "-" + image);
-                            console.log($.shoppingcart.get());
-
-                            jQuery("#modal-preview").modal('hide');
-
-                            cart_reload();
-                        }
-                )
 
             }
     );
@@ -394,6 +380,26 @@ $js_case = array(
                     $("#btn-order span").text("Order Now " + $(this).data('price') + "$");
                 }
         );
+    }
+
+    function order_config() {
+
+
+        jQuery("#btn-cart").click(
+                function() {
+
+                    var orderId = null;
+                    orderId = jQuery("#modal-preview #product-info").data('guid');
+                    var image = jQuery("#modal-preview #product-info").data('file');
+
+                    $.shoppingcart.set(orderId + "-" + image);
+                    console.log($.shoppingcart.get());
+
+                    jQuery("#modal-preview").modal('hide');
+
+                    cart_reload();
+                }
+        )
     }
 
     function preview(preview)
@@ -414,6 +420,7 @@ $js_case = array(
         }).done(function(data) {
             jQuery(".ajax-loading-indicator").hide(0);
             jQuery("#modal-preview .modal-body").html(data);
+            order_config ();
             checkoutone();
 
         }).fail(function() {

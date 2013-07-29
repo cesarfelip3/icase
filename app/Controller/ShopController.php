@@ -56,6 +56,9 @@ class ShopController extends AppController {
                     return;
                 }
 
+                
+                $deliver = $this->request->data['deliver'];
+
                 $customer = Stripe_Customer::create(array(
                             'email' => 'customer@example.com',
                             'card' => $token
@@ -67,7 +70,7 @@ class ShopController extends AppController {
                             'currency' => 'usd'
                 ));
             } catch (Exception $e) {
-                print_r ($e);
+                print_r($e);
                 exit;
             }
         }

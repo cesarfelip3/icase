@@ -187,7 +187,7 @@ $js_themes = array(
                                 break;
                         }
                     }
-            )
+            );
         }
 
         function cart_reload() {
