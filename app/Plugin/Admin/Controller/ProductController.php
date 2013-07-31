@@ -24,6 +24,10 @@ class ProductController extends AdminAppController {
     }
     
     public function category () {
+        $this->layout = false;
+        if ($this->request->is('ajax')) {
+            $this->render ('category.ajax');
+        }
         
     }
 }

@@ -16,6 +16,8 @@
         <!--[if lt IE 9]>
                 <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
+        
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     </head>    
     <body>
         <div class="masthead">
@@ -50,20 +52,20 @@
                             <div class="nav-collapse">
                                 <ul class="nav">
                                     <li class="active">
-                                        <a href="<?php echo $this->webroot;?>admin/"><i class="icon-home"></i> Dashboard</a>
+                                        <a href="<?php echo $this->webroot; ?>admin/"><i class="icon-home"></i> Dashboard</a>
                                     </li>
-<!--                                    <li class="dropdown">
-                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-sitemap"></i> Website <b class="caret"></b></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="listing.html">Pages</a></li>
-                                            <li><a href="listing.html">Menus</a></li>
-                                        </ul>
-                                    </li>-->
+                                    <!--                                    <li class="dropdown">
+                                                                            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-sitemap"></i> Website <b class="caret"></b></a>
+                                                                            <ul class="dropdown-menu">
+                                                                                <li><a href="listing.html">Pages</a></li>
+                                                                                <li><a href="listing.html">Menus</a></li>
+                                                                            </ul>
+                                                                        </li>-->
                                     <li class="dropdown">
                                         <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-shopping-cart"></i> Store <b class="caret"></b></a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="<?php echo $this->webroot;?>admin/product/">Catalogue</a></li>
-                                            <li><a href="<?php echo $this->webroot;?>admin/order/">Orders</a></li>
+                                            <li><a href="<?php echo $this->webroot; ?>admin/product/">Catalogue</a></li>
+                                            <li><a href="<?php echo $this->webroot; ?>admin/order/">Orders</a></li>
                                             <li><a href="listing.html">Enquiries</a></li>
                                         </ul>
                                     </li>
@@ -114,33 +116,50 @@
         <!-- Le javascript
     ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
         <script src="<?php echo $this->webroot; ?>plugins/admin/assets/js/bootstrap.js"></script>
         <script src="<?php echo $this->webroot; ?>plugins/admin/assets/js/excanvas.min.js"></script>
         <script src="<?php echo $this->webroot; ?>plugins/admin/assets/js/jquery.flot.min.js"></script>
         <script src="<?php echo $this->webroot; ?>plugins/admin/assets/js/jquery.flot.resize.js"></script>
+
+
         <script type="text/javascript">
-            $(function() {
-                var d1 = [];
-                d1.push([0, 20]);
-                d1.push([1, 16]);
-                d1.push([2, 17]);
-                d1.push([3, 25]);
-                d1.push([4, 51]);
-                d1.push([5, 57]);
-                d1.push([6, 46]);
-                d1.push([7, 36]);
-                d1.push([8, 27]);
-                d1.push([9, 36]);
-                d1.push([10, 38]);
-                d1.push([11, 41]);
-                d1.push([12, 45]);
-                d1.push([13, 48]);
-                d1.push([14, 40]);
-                d1.push([15, 36]);
-                d1.push([16, 34]);
-                $.plot($("#placeholder"), [d1], {grid: {backgroundColor: 'white', color: '#999', borderWidth: 1, borderColor: '#DDD'}, colors: ["#6ECBE2"], series: {lines: {show: true, fill: true, fillColor: "rgba(110, 203, 226, 0.5)"}}});
-            });
-        </script>
-    </body>
+            //<!--
+            if (typeof CKEDITOR === 'undefined' || null == CKEDITOR) {
+            document.write ('<script type="text/javascript" src="<?php echo $this->webroot; ?>js/ckeditor.basic/ckeditor.js"); ?>"></script><div style="display:none"><textarea class="ckeditor" cols="80" id="editor2" name="editor2" rows="10" style=""></textarea></div>');
+        };
+
+    </script><link rel="stylesheet" href="<?php echo $this->webroot; ?>js/datepicker/css/datepicker.css">
+    <script type="text/javascript" src="<?php echo $this->webroot; ?>js/datepicker/js/bootstrap-datepicker.js"></script>
+    <script>
+        jQuery(document).ready (function() {
+            window.prettyPrint && prettyPrint();
+            jQuery(".datepicker").datepicker({format: 'yyyy-mm-dd'});
+        });    </script>
+    <script type="text/javascript">
+                $(function() {
+            var d1 = [];
+            d1.push([0, 20]);
+            d1.push([1, 16]);
+            d1.push([2, 17]);
+            d1.push([3, 25]);
+            d1.push([4, 51]);
+            d1.push([5, 57]);
+            d1.push([6, 46]);
+            d1.push([7, 36]);
+            d1.push([8, 27]);
+            d1.push([9, 36]);
+            d1.push([10, 38]);
+            d1.push([11, 41]);
+            d1.push([12, 45]);
+            d1.push([13, 48]);
+            d1.push([14, 40]);
+            d1.push([15, 36]);
+            d1.push([16, 34]);
+            $.plot($("#placeholder"), [d1], {grid: {backgroundColor: 'white', color: '#999', borderWidth: 1, borderColor: '#DDD'}, colors: ["#6ECBE2"], series: {lines: {show: true, fill: true, fillColor: "rgba(110, 203, 226, 0.5)"}}});
+        });
+    </script>
+
+
+</body> 
+
 </html>
