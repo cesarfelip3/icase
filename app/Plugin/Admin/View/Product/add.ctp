@@ -72,6 +72,12 @@ $admin_product = $base . "product";
                                     <input type="text" class="input-mini" >
                                 </div>
                             </div>
+                            <div class="control-group warning">
+                                <label class="control-label" for="inputWarning">Quantity</label>
+                                <div class="controls">
+                                    <input type="text" class="input-mini" >
+                                </div>
+                            </div>
                             <div class="control-group error">
                                 <label class="control-label" for="inputError"></label>
                                 <div class="controls">
@@ -92,9 +98,14 @@ $admin_product = $base . "product";
                                 </div>
                             </div>
                             <div class="control-group">
-                                <label class="control-label" for="optionsCheckbox2">Duration</label>
+                                <label class="control-label" for="optionsCheckbox2">Start Date</label>
                                 <div class="controls">
                                     <input type="text" class="datepicker input-small" />
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="optionsCheckbox2">End Date</label>
+                                <div class="controls">
                                     <input type="text" class="datepicker input-small" />
                                 </div>
                             </div>
@@ -104,7 +115,13 @@ $admin_product = $base . "product";
                                     <input type="text" class="input-mini" >
                                 </div>
                             </div>
-                            <div class='hero-unit'>
+                            <div class="control-group warning">
+                                <label class="control-label" for="inputWarning"></label>
+                                <div class="controls">
+                                    <a href='javascript:' class='btn btn-primary'>Save</a>
+                                </div>
+                            </div>
+                            <div class='well'>
                                 <p>If "Special" is checked, the sale will start in duration, and use special price, when it's end, it will go back to the original price. All special offers will be on the top of the home product page, to promote sales.</p>
                             </div>
                         </fieldset>

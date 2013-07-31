@@ -24,14 +24,12 @@ $product_delete = $base . "product" . DS . "delete";
                 <div class="slate">
                     <form class="form-inline">
                         <input type="text" class="input-large" placeholder="Keyword...">
-                        <select>
-                            <option value=""> - From Date - </option>
-                        </select>
-                        <select>
-                            <option value=""> - To Date - </option>
-                        </select>
+                        <input type='text' class='input-large datepicker' placeholder='Start Date' />
+                        <input type='text' class='input-large datepicker' placeholder='End Date' />
                         <select>
                             <option value=""> - Filter - </option>
+                            <option value='template'>Case Template</option>
+                            <option value='product'>Case Product</option>
                         </select>
                         <button type="submit" class="btn btn-primary">Filter</button>
                     </form>
@@ -40,6 +38,7 @@ $product_delete = $base . "product" . DS . "delete";
         </div>
         <div class="row">
             <div class="span12 listing-buttons">
+                <a href="<?php echo $this->webroot; ?>admin/product/add" class="btn btn-primary">Add New Category</a>
                 <a href="<?php echo $this->webroot; ?>admin/product/add" class="btn btn-primary">Add New Item</a>
             </div>
             <div class="span12">
@@ -122,6 +121,7 @@ $product_delete = $base . "product" . DS . "delete";
                 </div>
             </div>
             <div class="span6 listing-buttons pull-right">
+                <a href="<?php echo $this->webroot; ?>admin/product/add" class="btn btn-primary">Add New Category</a>
                 <a href="<?php echo $product_add; ?>" class="btn btn-primary">Add New Item</a>
             </div>
         </div>
