@@ -9,6 +9,8 @@
                     <th>Your Design</th>
                     <th>Amount</th>
                     <th>Quantity</th>
+                    <th>tax</th>
+                    <th>Shipment</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -23,12 +25,21 @@
                     <td><a href="javascript:" class="thumbnail" style="width:80px;"><img src="<?php echo $this->webroot; ?>uploads/<?php echo $value['Product']['file']; ?>" style="width:60px;" /></a></td>
                     <td style="min-width:100px"><?php echo $value['Product']['price'] * $value['Product']['quantity']; ?></td>
                     <td><a href="javascript:" data-action="plus" class="" data-guid="<?php echo $value['Product']['guid']; ?>" data-price="<?php echo $value['Product']['price']; ?>" style="text-decoration:none;" data-file="<?php echo $value['Product']['file']; ?>"><i class="icon-plus icon-1x"></i></a><span style="padding-left:5px;padding-right:5px;width:30px;display:inline-block;text-align: center;" id="amount"><?php echo $value['Product']['quantity']; ?></span><a href="javascript:" data-action="minus" class="" data-guid="<?php echo $value['Product']['guid']; ?>" data-price="<?php echo $value['Product']['price']; ?>" data-file="<?php echo $value['Product']['file']; ?>" style="text-decoration:none;"><i class="icon-minus icon-1x"></i></a></td>
+                    <td>0.00</td>
+                    <td>To be determined</td>
                     <th><a href="javascript:" data-action="remove" data-guid="<?php echo $value['Product']['guid']; ?>" data-file="<?php echo $value['Product']['file']; ?>" style="text-decoration:none;"><i class="icon-remove-sign icon-2x"></i></a></th>
                   </tr>
                   <?php
                   endforeach;
-                  endif;
+                  else:
                   ?>
+                  <tr>
+                      <td colspan='7'>
+                          <em class='text-warning'>There is no product in the cart now</em>
+                      </td>
+                  </tr>
+                  <?php
+                  endif; ?>
                 </tbody>
               </table>
         </div>

@@ -57,6 +57,22 @@
         </div>
         <div class="span6">
             <div class="qbox">
+                <h1 style="height:30px;border-bottom:2px solid white;">Sign In <span class="text-warning">to save your design</span></h1>
+                <div id="payment-stripe">
+                    <p>
+                        <label>User/Email</label>
+                        <input type="text" class="input-large" name="signin[name]" />
+                    </p>
+                    <p>
+                        <label>Password</label>
+                        <input type="text" class="input-large" name="signin[password]"/>
+                    </p>
+                    <p>
+                        <span>Don't have account yet?</span><a href='javascript:' id='btn-signup'> Sign up Now</a>
+                    </p>
+                </div>
+            </div>
+            <div class="qbox" id='box-signup' style='display:none'>
                 <h1 style="height:30px;border-bottom:2px solid white;">Sign Up</h1>
                 <div id="payment-stripe">
                     <p>
@@ -74,19 +90,6 @@
                 </div>
                     
             </div>
-            <div class="qbox">
-                <h1 style="height:30px;border-bottom:2px solid white;">Sign In</h1>
-                <div id="payment-stripe">
-                    <p>
-                        <label>User/Email</label>
-                        <input type="text" class="input-large" name="signin[name]" />
-                    </p>
-                    <p>
-                        <label>Password</label>
-                        <input type="text" class="input-large" name="signin[password]"/>
-                    </p>
-                </div>
-            </div>
         </div>           
     </div>
 </form>
@@ -95,6 +98,10 @@
     jQuery(document).ready(
             function() {
                 checkout_cart ();
+                $("#btn-signup").click (
+                    function () {
+                        $("#box-signup").toggle(200);
+                    });
             }
     )
 
