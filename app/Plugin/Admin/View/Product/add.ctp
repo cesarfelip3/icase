@@ -29,25 +29,26 @@ $admin_product = $base . "product";
                     <div class="page-header">
                         <h2>New Product</h2>
                     </div>
-                    <form class="form-horizontal">
+                    <form class="form-horizontal" id="form-new">
                         <fieldset>
                             <div class="control-group">
                                 <label class="control-label" for="focusedInput">Name</label>
                                 <div class="controls">
-                                    <input class="input-xlarge focused" id="focusedInput" type="text" >
+                                    <input class="input-xlarge focused" id="focusedInput" type="text" name="product[name]" >
+                                    <span class="help-inline"></span>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label" for="disabledInput">Description</label>
                                 <div class="controls">
-                                    <textarea class="ckeditor" cols="80" id="editor1" name="post[post_content]" rows="10"></textarea>
+                                    <textarea class="ckeditor" cols="80" id="editor1" name="product[description]" rows="10"></textarea>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label" for="optionsCheckbox2">Template</label>
                                 <div class="controls">
                                     <label class="checkbox">
-                                        <input type="checkbox" id="optionsCheckbox2" value="option1">
+                                        <input type="checkbox" id="optionsCheckbox2" name="product[type]" value="template">
                                         Yes
                                     </label>
                                     <a href="#" class="btn btn-success">Template Image From Computer</a>
@@ -57,25 +58,29 @@ $admin_product = $base . "product";
                             <div class="control-group warning">
                                 <label class="control-label" for="inputWarning">Price</label>
                                 <div class="controls">
-                                    <input type="text" class="input-mini" >
+                                    <input type="text" class="input-mini" name="product[price]" placeholder="xxxx.xx">
+                                    <span class="help-inline"></span>
                                 </div>
                             </div>
                             <div class="control-group warning">
                                 <label class="control-label" for="inputWarning">Tax</label>
                                 <div class="controls">
-                                    <input type="text" class="input-mini" >
+                                    <input type="text" class="input-mini" name="product[tax]" value="0.00">
+                                    <span class="help-inline"></span>
                                 </div>
                             </div>
                             <div class="control-group warning">
-                                <label class="control-label" for="inputWarning">Discount</label>
+                                <label class="control-label" for="inputWarning" >Discount</label>
                                 <div class="controls">
-                                    <input type="text" class="input-mini" >
+                                    <input type="text" class="input-mini" name="product[discount]" value="0">
+                                    <span class="help-inline"></span>
                                 </div>
                             </div>
                             <div class="control-group warning">
-                                <label class="control-label" for="inputWarning">Quantity</label>
+                                <label class="control-label" for="inputWarning" >Quantity</label>
                                 <div class="controls">
-                                    <input type="text" class="input-mini" >
+                                    <input type="text" class="input-mini" name="product[quantity]" value="0">
+                                    <span class="help-inline">0 means unlimited</span>
                                 </div>
                             </div>
                             <div class="control-group error">
@@ -92,7 +97,7 @@ $admin_product = $base . "product";
                                 <label class="control-label" for="optionsCheckbox2">Special</label>
                                 <div class="controls">
                                     <label class="checkbox">
-                                        <input type="checkbox" id="optionsCheckbox2" value="option1">
+                                        <input type="checkbox" id="optionsCheckbox2" name="product[is_special]">
                                         Yes
                                     </label>
                                 </div>
@@ -100,25 +105,28 @@ $admin_product = $base . "product";
                             <div class="control-group">
                                 <label class="control-label" for="optionsCheckbox2">Start Date</label>
                                 <div class="controls">
-                                    <input type="text" class="datepicker input-small" />
+                                    <input type="text" class="datepicker input-small" name="product[special_start]"/>
+                                    <span class="help-inline"></span>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label" for="optionsCheckbox2">End Date</label>
                                 <div class="controls">
-                                    <input type="text" class="datepicker input-small" />
+                                    <input type="text" class="datepicker input-small" name="product[special_end]" />
+                                    <span class="help-inline"></span>
                                 </div>
                             </div>
                             <div class="control-group warning">
                                 <label class="control-label" for="inputWarning">Price</label>
                                 <div class="controls">
-                                    <input type="text" class="input-mini" >
+                                    <input type="text" class="input-mini" name="product[special_price]" placeholder="xxxx.xx">
+                                    <span class="help-inline"></span>
                                 </div>
                             </div>
                             <div class="control-group warning">
                                 <label class="control-label" for="inputWarning"></label>
                                 <div class="controls">
-                                    <a href='javascript:' class='btn btn-primary'>Save</a>
+                                    <a href='javascript:' class='btn btn-primary' data-loading-text="Saving..." onclick="save();" id="btn-save">Save</a>
                                 </div>
                             </div>
                             <div class='well'>
@@ -167,4 +175,31 @@ $admin_product = $base . "product";
         }).fail(function() {
         }); 
     })
+    
+    function save () {
+        jQuery.ajax({
+            url: "<?php echo $base; ?>product/add",
+            data: $("#form-new").serialize(),
+            type: "POST",
+            beforeSend: function(xhr) {
+                $("#btn-save").button('loading');
+            }
+        }).done(function(data) {
+            $("#btn-save").button('reset');
+            
+            var result = $.parseJSON (data);
+            console.log (result);
+            if (result.error == 1) {
+                console.log (result.element);
+                $(result.element).next(".help-inline").html (result.message);
+                $(result.element).parent().parent().addClass('error');
+                showAlert (result.message);
+            } else {
+                $(result.element).parent().parent().removeClass('error');
+                $(result.element).next(".help-inline").html ("");
+            }
+
+        }).fail(function() {
+        }); 
+    }
 </script>

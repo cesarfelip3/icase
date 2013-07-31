@@ -38,7 +38,7 @@ $product_delete = $base . "product" . DS . "delete";
         </div>
         <div class="row">
             <div class="span12 listing-buttons">
-                <a href="<?php echo $this->webroot; ?>admin/product/add" class="btn btn-primary">Add New Category</a>
+                <a href="<?php echo $this->webroot; ?>admin/product/category" class="btn btn-primary">Add New Category</a>
                 <a href="<?php echo $this->webroot; ?>admin/product/add" class="btn btn-primary">Add New Item</a>
             </div>
             <div class="span12">

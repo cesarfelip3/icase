@@ -16,7 +16,7 @@
         <!--[if lt IE 9]>
                 <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
-        
+
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     </head>    
     <body>
@@ -130,11 +130,22 @@
 
     </script><link rel="stylesheet" href="<?php echo $this->webroot; ?>js/datepicker/css/datepicker.css">
     <script type="text/javascript" src="<?php echo $this->webroot; ?>js/datepicker/js/bootstrap-datepicker.js"></script>
-    <script>
+    <script type="text/javascript">
         jQuery(document).ready (function() {
             window.prettyPrint && prettyPrint();
             jQuery(".datepicker").datepicker({format: 'yyyy-mm-dd'});
-        });    </script>
+            
+            
+        });
+        
+        function showAlert (message)
+        {
+            $("#box-message .body").html(message);
+            $("#box-message").show ();
+            window.setTimeout(function () {$("#box-message").hide(100)}, 3000);
+        }
+        
+    </script>
     <script type="text/javascript">
                 $(function() {
             var d1 = [];
@@ -159,7 +170,14 @@
         });
     </script>
 
-
+    <div class="row-fluid hide" id="box-message" style="position: fixed;top:0px;left:0px;z-index:1030;margin-bottom:0;">
+        <div class="span12">
+            <div class="alert">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <p><strong><span class="body"></span></strong></p>
+            </div>
+        </div>
+    </div>
 </body> 
 
 </html>
