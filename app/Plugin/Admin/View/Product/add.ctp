@@ -127,6 +127,7 @@ $admin_product = $base . "product";
                                 <label class="control-label" for="inputWarning"></label>
                                 <div class="controls">
                                     <a href='javascript:' class='btn btn-primary' data-loading-text="Saving..." onclick="save();" id="btn-save">Save</a>
+                                    <a href='javascript:' class='btn btn-primary' data-loading-text="Saving..." onclick="save();" id="btn-publish">Publish</a>
                                 </div>
                             </div>
                             <div class='well'>
@@ -142,7 +143,7 @@ $admin_product = $base . "product";
                         <h2>Category</h2>
                     </div>
                     <div class='body'>
-                        
+
                     </div>
                 </div>
                 <div class="slate">
@@ -159,24 +160,34 @@ $admin_product = $base . "product";
         </div>
     </div>
 </div>
+<div class="navbar navbar-fixed-bottom hide">
+    <div class="navbar-inner">
+        <div class="container" style="width: auto; padding: 0 20px;">
+            <a class="brand" href="#">Title</a>
+            <ul class="nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#">Link</a></li>
+                <li><a href="#">Link</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
 <script type='text/javascript'>
-    $(document).ready (
-        function () {
-    
-       
-        jQuery.ajax({
-            url: "<?php echo $base; ?>product/category",
-            type: "GET",
-            beforeSend: function(xhr) {
-            }
-        }).done(function(data) {
-            jQuery("#box-category .body").html(data);
+    $(document).ready(
+        function() {
+            jQuery.ajax({
+                url: "<?php echo $base; ?>product/category",
+                type: "GET",
+                beforeSend: function(xhr) {
+                }
+            }).done(function(data) {
+                jQuery("#box-category .body").html(data);
 
-        }).fail(function() {
-        }); 
-    })
-    
-    function save () {
+            }).fail(function() {
+            });
+        })
+
+    function save() {
         jQuery.ajax({
             url: "<?php echo $base; ?>product/add",
             data: $("#form-new").serialize(),
@@ -186,20 +197,20 @@ $admin_product = $base . "product";
             }
         }).done(function(data) {
             $("#btn-save").button('reset');
-            
-            var result = $.parseJSON (data);
-            console.log (result);
+
+            var result = $.parseJSON(data);
+            console.log(result);
             if (result.error == 1) {
-                console.log (result.element);
-                $(result.element).next(".help-inline").html (result.message);
+                console.log(result.element);
+                $(result.element).next(".help-inline").html(result.message);
                 $(result.element).parent().parent().addClass('error');
-                showAlert (result.message);
+                showAlert(result.message);
             } else {
                 $(result.element).parent().parent().removeClass('error');
-                $(result.element).next(".help-inline").html ("");
+                $(result.element).next(".help-inline").html("");
             }
 
         }).fail(function() {
-        }); 
+        });
     }
 </script>
