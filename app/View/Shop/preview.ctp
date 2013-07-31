@@ -33,8 +33,8 @@
             </div>
             <div>
 
-                <a href="javascript:" class="btn btn-peach" id="btn-cart">Add To Cart</a>
-                <a href="<?php echo $this->webroot; ?>shop/checkout/?action=single" class="btn btn-peach" target="_blank">Buy Now!</a>
+                <a href="javascript:" class="btn btn-peach" id="btn-cart">Add to Cart</a>
+<!--                <a href="<?php echo $this->webroot; ?>shop/checkout/?action=single" class="btn btn-peach" target="_blank">Buy Now!</a>-->
             </div>
         </div>
     <?php endif; ?>

@@ -29,7 +29,6 @@ class ShopController extends AppController {
     }
 
     public function checkout() {
-
         $this->set('load_shop_cart', true);
         $action = $this->request->query("action");
 
@@ -76,6 +75,9 @@ class ShopController extends AppController {
         }
     }
 
+    /*
+     * @function cart - 2013.07.31 cart is as same as order now...
+     */
     public function cart() {
 
         if ($this->request->is("ajax")) {
@@ -138,6 +140,9 @@ class ShopController extends AppController {
         }
     }
 
+    /*
+     * @function order - deprecated
+     */
     public function order() {
         if ($this->request->is("ajax")) {
             $this->layout = false;
@@ -214,7 +219,6 @@ class ShopController extends AppController {
                 }
             }
 
-//print_r ($orders);
             $amount = 0;
             foreach ($orders as $order) {
                 $amount += $order['amount'];
@@ -229,7 +233,6 @@ class ShopController extends AppController {
     /*
      * @function: preview - generate preview image for designed case
      */
-
     public function preview() {
         if ($this->request->is('ajax')) {
             $this->layout = false;
@@ -322,7 +325,6 @@ class ShopController extends AppController {
     /*
      * @function: getTemplates - get all templates 
      */
-
     public function getTemplates() {
 
         if ($this->request->is('ajax')) {

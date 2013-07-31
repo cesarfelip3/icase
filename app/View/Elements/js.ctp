@@ -51,7 +51,6 @@ $js_themes = array(
     //"include/jquery.todo.min.js",
     "include/jquery.pubsub.min.js",
     "include/jquery.select2.min.js",
-    "jquery.storageapi.min.js",
     "config.js",
     "json2.js"
 );
@@ -114,9 +113,9 @@ $js_themes = array(
 <?php if (isset($load_shop_cart) && $load_shop_cart) : ?>
 
     <!-- shopping cart -->
-    <div class="row-fluid" id="box-cart" style="position: fixed;top:0px;left:0px;z-index:1030;margin-bottom:0;">
+<!--    <div class="row-fluid" id="box-cart" style="position: fixed;top:0px;left:0px;z-index:1030;margin-bottom:0;">
 
-    </div>
+        </div>-->
 
     <script type="text/javascript">
         function cart_init() {
@@ -190,13 +189,22 @@ $js_themes = array(
             );
         }
 
-        function cart_reload() {
+        function cart_reload(single) {
+            var orders = "";
+            
+            if (single == true) {
+                orders = $.shoppingcart.getCurrentProductId();
+            } else {
+                orders = $.shoppingcart.get();
+            }
+            
             jQuery.ajax({
                 url: "<?php echo $this->webroot; ?>shop/cart",
-                data: {"orders": $.shoppingcart.get(), "user": $.shoppingcart.getuuid()},
+                data: {"orders": orders, "user": $.shoppingcart.getuuid()},
                 type: "POST",
                 beforeSend: function(xhr) {
-                    console.log("working....");
+                    console.log("loading cart...");
+                    console.log("orders");
                 }
             }).done(function(data) {
                 $("#box-cart").html(data);

@@ -1,8 +1,12 @@
-// powered by jquery plugin - storage 1.4
-
+// powered by jquery cookie
+// by default, cookie is independent from each tab...
 
 (function($) {
-    var storage = $.cookieStorage;
+    
+    $.cookie.defaults = {path:'/'};
+    var storage = {get:null, set:null};
+    storage.get = $.cookie;
+    storage.set = $.cookie;
     
     var ShoppingCart = function () {
         // this - refer to class
@@ -44,19 +48,21 @@
         var orders = storage.get(this.cookie_orders);
 
         if (orders == null || orders == "undefined" || orders == "") {
-            this.orders[0] = orderId;
+            orders = [];
+            orders[0] = orderId;
         } else {
-            this.orders = orders.split(',');
-            this.orders[this.orders.length] = orderId;
+            orders = orders.split(',');
+            orders[orders.length] = orderId;
         }
 
-        orders = this.orders.join(",");
+        console.log (orders);
+        orders = orders.join(",");
         storage.set(this.cookie_orders, orders);
     }
 
     ShoppingCart.prototype.get = function() {
         var orders = storage.get(this.cookie_orders);
-
+        
         if (orders == null || orders == "undefined" || orders == "") {
             return null;
         }
@@ -69,10 +75,10 @@
         var i = 0;
 
         if (orders == null || orders == "undefined" || orders == "") {
-            storage.remove(this.cookie_orders);
+            //storage.remove(this.cookie_orders);
         } else {
-            this.orders = orders.split(',');
-            $(this.orders).each(
+            orders = orders.split(',');
+            $(orders).each(
                     function(index, value) {
                         if (value == id) {
                             i = index;
@@ -81,31 +87,32 @@
             )
         }
 
-        this.orders.splice(i, 1);
-        if (this.orders.length < 1) {
+        orders.splice(i, 1);
+        if (orders.length < 1) {
             storage.remove(this.cookie_orders);
             return;
         }
 
-        orders = this.orders.join(",");
+        orders = orders.join(",");
+        console.log (orders);
         storage.set(this.cookie_orders, orders);
     }
 
     ShoppingCart.prototype.removeall = function(id) {
         var orders = storage.get(this.cookie_orders);
-        var i = 0;
         var j = 0;
         var left = [];
-
+        
         if (orders == null || orders == "undefined" || orders == "") {
             storage.remove(this.cookie_orders);
         } else {
-            this.orders = orders.split(',');
-            $(this.orders).each(
-                    function(index, value) {
+            orders = orders.split(',');
+            $(orders).each(
+                    function(i, value) {
                         if (value == id) {
-                            i = index;
+                            return;
                         } else {
+                            console.log (value);
                             left[j] = value;
                             j++;
                         }
@@ -114,22 +121,23 @@
         }
         console.log("ShoppingCart.removeall");
         console.log("guid = " + id);
-        console.log("orders = " + orders);
+        console.log("left = " + left);
+        console.log("left.length" + left.length);
 
-        this.orders = null;
-        this.orders = left;
+        orders = null;
+        orders = left;
 
-        if (this.orders.length < 1) {
-            storage.remove(this.cookie_orders);
+        if (orders.length < 1) {
+            storage.set(this.cookie_orders, "");
             return;
         }
 
-        orders = this.orders.join(",");
+        orders = orders.join(",");
         storage.set(this.cookie_orders, orders);
     }
 
     ShoppingCart.prototype.clear = function() {
-        storage.remove('orders');
+        storage.set(this.cookie_orders, "");
         //storage.removeAll();
     }
 

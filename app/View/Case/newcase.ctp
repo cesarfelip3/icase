@@ -362,9 +362,6 @@ $js_case = array(
                             return;
                         }
                 );
-
-
-
             }
     );
 
@@ -393,11 +390,14 @@ $js_case = array(
                     var image = jQuery("#modal-preview #product-info").data('file');
 
                     $.shoppingcart.set(orderId + "-" + image);
-                    console.log($.shoppingcart.get());
+                    console.log("add to cart = " + $.shoppingcart.get());
 
                     jQuery("#modal-preview").modal('hide');
 
-                    cart_reload();
+                    window.open("<?php echo $this->webroot; ?>shop/checkout?action=cart", "_blank");
+                    //window.location.href = "";
+                    window.focus();
+                    //cart_reload();
                 }
         )
     }
