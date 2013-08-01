@@ -1,6 +1,8 @@
 <?php
 //App::uses('AppController', 'Controller');
 App::uses('Controller', 'Controller');
+App::uses('Sanitize', 'Utility');
+
 class AdminAppController extends Controller {
     public $components = array(
         'Auth' => array(

@@ -90,6 +90,7 @@ class ProductController extends AdminAppController {
             'message' => '',
         );
 
+        $action = $this->request->query('action');
         if ($this->request->is('ajax')) {
 
             if (!$this->request->is('post')) {
@@ -97,7 +98,8 @@ class ProductController extends AdminAppController {
 
                 $this->loadModel('Category');
                 $categories = $this->Category->find('all', array(
-                    "conditions" => array('level' => 0)
+                    "conditions" => array('level' => 0),
+                    "order" => array('order ASC')
                 ));
 
                 $return = array();
@@ -110,8 +112,8 @@ class ProductController extends AdminAppController {
                                 "order" => array('order ASC')
                                     )
                             );
-                            
-                            if (!empty ($result)) {
+
+                            if (!empty($result)) {
                                 $return[] = $category;
                                 $this->_categoryList($result, $return);
                             }
@@ -121,18 +123,55 @@ class ProductController extends AdminAppController {
                     }
                 }
 
+                if (!empty ($action)) {
+                    switch ($action) {
+                        case "checkbox":
+                            $this->set('checkbox', true);
+                            break;
+                    }
+                }
+                
                 $this->set('data', $return);
                 $this->render('category.ajax');
             } else {
-                $action = $this->request->query('action');
 
                 if (empty($action)) {
                     exit("");
                 }
-                
+
                 if ($action == "empty") {
                     $this->loadModel('Category');
                     $this->Category->query('TRUNCATE TABLE categories;');
+                    exit(json_encode($error));
+                }
+                
+                if ($action == "update") {
+                    $this->loadModel('Category');
+                    $data = $this->request->data('category');
+                    $data = $data['edit'];
+                    
+                    $update = array (
+                        'name' => "'" . Sanitize::escape($data['name']) . "'",
+                        'order' => Sanitize::escape($data['order'])
+                    );
+                    
+                    $guid = $data['guid'];
+                    $this->Category->updateAll ($update, array ("guid" => $guid));
+                    exit(json_encode($error));
+                }
+                
+                if ($action == "delete") {
+                    $this->loadModel('Category');
+                    $data = $this->request->data('category');
+                    $guid = $data['parent_guid'];
+                    
+                    //$guid = $this->request->data('category[parent_guid]');
+                    $this->Category->deleteAll (array ("guid" => $guid));
+                    $this->Category->deleteAll (array ("parent_guid" => $guid));
+                    
+                    if ($this->Category->find('count') == 0) {
+                        $error['error'] = 1;
+                    }
                     exit(json_encode($error));
                 }
 

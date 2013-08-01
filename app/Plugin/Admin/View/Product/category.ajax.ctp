@@ -112,7 +112,7 @@ function categoryList ($data, $group)
                     foreach ($data as $value) :
                         ?>
                         <li class="media level<?php echo $value['Category']['level']; ?>">
-                            <a href="javascript:" data-guid="<?php echo $value['Category']['guid']; ?>" data-name="<?php echo $value['Category']['name']; ?>" class="t<?php echo $value['Category']['parent_guid']; ?>"><?php echo $value['Category']['name']; ?><?php if ($value['Category']['children'] > 0 && false) : ?><i class="icon-chevron-down indicator-expension"></i><?php else: ?><?php endif; ?></a>
+                            <a href="javascript:" data-guid="<?php echo $value['Category']['guid']; ?>" data-name="<?php echo $value['Category']['name']; ?>" data-order="<?php echo $value['Category']['order']; ?>" class="t<?php echo $value['Category']['parent_guid']; ?>"><?php if (isset($checkbox) && $checkbox) : ?><input type="checkbox" name="" value="" /><?php endif; ?> <?php echo $value['Category']['name']; ?><?php if ($value['Category']['children'] > 0 && false) : ?><i class="icon-chevron-down indicator-expension"></i><?php else: ?><?php endif; ?></a>
                             
                         </li>
                         <?php
@@ -172,9 +172,15 @@ function categoryList ($data, $group)
                 $(this).parent().addClass("active");
                 var name = $(this).data('name');
                 var guid = $(this).data('guid');
+                
+                var order = $(this).data('order');
 
                 $("input[name='category[parent_guid]']").val(guid);
                 $("input[name='category[parent]']").val(name);
+                
+                $("input[name='category[edit][order]']").val(order);
+                $("input[name='category[edit][name]']").val(name);
+                $("input[name='category[edit][guid]']").val(guid);
             });
 
             $("#user-form a").click(function() {
