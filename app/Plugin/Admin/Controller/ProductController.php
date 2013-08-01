@@ -49,21 +49,23 @@ class ProductController extends AdminAppController {
         $this->Product->create ();
         $data = $this->Product->find('all', array(
             'limit' => $limit,
-            'page' => $page,
+            'page' => $page + 1,
             'conditions' => $conditions,
                 )
         );
         
         $total = $this->Product->find('count', array('conditions' => $conditions));
+        $pages = ceil($total / $limit);
 
-        $log = $this->Product->getDataSource()->getLog(false, false);
+        //$log = $this->Product->getDataSource()->getLog(false, false);
         //print_r ($log);
         //exit;
+        
         $params = array (
             "data" => $data,
             "page" => $page,
             "limit" => $limit,
-            "total" => $total,
+            "pages" => $pages,
         );
         
         $this->set ($params);

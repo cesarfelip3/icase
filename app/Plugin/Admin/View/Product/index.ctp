@@ -111,19 +111,22 @@ $product_delete = $base . "product" . DS . "delete";
             <div class="span6">
                 <div class="pagination pull-left">
                     <ul>
-                        <li><a href="<?php $base; ?>product/index/?page=<?php echo $page - 1; ?>&total=<?php echo $total; ?>">Prev</a></li>
-                        <li class="active">
-                            <a href="#">1</a>
+                        <li><a href="<?php echo $base; ?>product/index/?page=<?php echo $page - 1; ?>">Prev</a></li>
+                        <?php
+                        
+                        $j = 0;
+                        for (; $j < $pages; ++$j) : ?>
+                        <li <?php if ($j == $page) : echo 'class="active"'; endif; ?>>
+                            <a href="<?php echo $base; ?>product/index/?page=<?php echo $j; ?>"><?php echo $j + 1; ?></a>
                         </li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="<?php $base; ?>product/index/?page=<?php echo $page + 1; ?>&total=<?php echo $total; ?>">Next</a></li>
+                        <?php
+                        endfor; ?>
+                        <li><a href="<?php echo $base; ?>product/index/?page=<?php echo $page + 1; ?>">Next</a></li>
                     </ul>
                 </div>
             </div>
             <div class="span6 listing-buttons pull-right">
-                <a href="<?php echo $this->webroot; ?>admin/product/add" class="btn btn-primary">Edit Category</a>
+                <a href="<?php echo $this->webroot; ?>admin/product/category" class="btn btn-primary">Edit Category</a>
                 <a href="<?php echo $product_add; ?>" class="btn btn-primary">New Product</a>
             </div>
         </div>
