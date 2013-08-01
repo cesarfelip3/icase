@@ -124,11 +124,22 @@ $admin_product = $base . "product";
     }
     
     function category_empty_table() {
+        var r=confirm("This operation will empty all table data, are u sure?")
+        if (r==true)
+        {
+            //alert("You pressed OK!")
+        }
+        else
+        {
+            return;
+        }
+        
         jQuery.ajax({
             url: "<?php echo $base; ?>product/category/?action=empty",
             data: {},
             type: "POST",
             beforeSend: function(xhr) {
+                showAlert2("Empty table now......");
             }
         }).done(function(data) {
 
@@ -136,10 +147,12 @@ $admin_product = $base . "product";
             console.log(result);
             if (result.error == 1) {
             } else {
+                //hideAlert()
                 category_load ();
             }
 
         }).fail(function() {
+            hideAlert();
         });
     }
     
@@ -153,12 +166,15 @@ $admin_product = $base . "product";
             url: "<?php echo $base; ?>product/category",
             type: "GET",
             beforeSend: function(xhr) {
+                showAlert2("Loading category data now......");
             }
         }).done(function(data) {
             //alert (data);
+            hideAlert();
             jQuery("#box-category .body").html(data);
 
         }).fail(function() {
+            hideAlert();
         });
     }
  

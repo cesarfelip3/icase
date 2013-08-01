@@ -145,6 +145,17 @@
             window.setTimeout(function () {$("#box-message").hide(100)}, 3000);
         }
         
+        function showAlert2 (message) 
+        {
+            $("#box-message .body").html(message);
+            $("#box-message").show ();
+        }
+        
+        function hideAlert (message)
+        {
+            $("#box-message").hide ();
+        }
+        
     </script>
     <script type="text/javascript">
                 $(function() {
@@ -170,11 +181,10 @@
         });
     </script>
 
-    <div class="row-fluid hide" id="box-message" style="position: fixed;top:0px;left:0px;z-index:1030;margin-bottom:0;">
-        <div class="span12">
-            <div class="alert">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <p><strong><span class="body"></span></strong></p>
+    <div class="row hide" id="box-message" style="position: fixed;top:0px;left:0px;z-index:1030;margin-bottom:0;">
+        <div class="span4 offset4">
+            <div style="background-color:rgb(235, 235, 40);height:30px;border:1px black solid; ">
+                <p style="margin-top:5px;margin-left:20px;"><strong><span class="body"></span></strong></p>
             </div>
         </div>
     </div>
