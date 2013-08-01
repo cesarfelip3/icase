@@ -64,7 +64,6 @@ $product_delete = $base . "product" . DS . "delete";
                                 <th>Name</th>
                                 <th>Type</th>
                                 <th>Picture</th>
-                                <th>Description</th>
                                 <th>Price</th>
                                 <th>Quantity</th>
                                 <th>Tax</th>
@@ -73,22 +72,25 @@ $product_delete = $base . "product" . DS . "delete";
                             </tr>
                         </thead>
                         <tbody>
+                            <?php 
+                            $i = $page * $limit;
+                            if (!empty ($data)) : 
+                                foreach ($data as $value) : ?>
                             <tr>
-                                <td>1</td>
-                                <td>iphone 5</td>
-                                <td>template</td>
-                                <td><img src='' /></td>
-                                <td>iphone 5</td>
-                                <td>54.32$</td>
-                                <td>30</td>
-                                <td>0.00$</td>
-                                <td>2013-07-31</td>
+                                <td><?php echo ++$i; ?></td>
+                                <td><?php echo $value['Product']['name']; ?></td>
+                                <td><?php echo $value['Product']['type']; ?></td>
+                                <td><a class="thumbnail"><img src='<?php echo $this->webroot . "uploads/" . $value['Product']['image']; ?>' style="width:32px" /></a></td>
+                                <td><?php echo $value['Product']['price']; ?>$</td>
+                                <td><?php echo $value['Product']['quantity']; ?></td>
+                                <td><?php echo $value['Product']['tax']; ?>$</td>
+                                <td><?php echo date ("Y-m-d H:i:s", $value['Product']['created']); ?></td>
                                 <td class="actions">
                                     <a class="btn btn-small btn-danger" data-toggle="modal" href="#removeItem">Remove</a>
                                     <a class="btn btn-small btn-primary" href="<?php echo $product_edit; ?>" target="_blank">Edit</a>
                                 </td>
                             </tr>
-
+                            <?php endforeach; endif; ?>
                         </tbody>
                     </table>
                 </div>
@@ -109,14 +111,14 @@ $product_delete = $base . "product" . DS . "delete";
             <div class="span6">
                 <div class="pagination pull-left">
                     <ul>
-                        <li><a href="#">Prev</a></li>
+                        <li><a href="<?php $base; ?>product/index/?page=<?php echo $page - 1; ?>&total=<?php echo $total; ?>">Prev</a></li>
                         <li class="active">
                             <a href="#">1</a>
                         </li>
                         <li><a href="#">2</a></li>
                         <li><a href="#">3</a></li>
                         <li><a href="#">4</a></li>
-                        <li><a href="#">Next</a></li>
+                        <li><a href="<?php $base; ?>product/index/?page=<?php echo $page + 1; ?>&total=<?php echo $total; ?>">Next</a></li>
                     </ul>
                 </div>
             </div>

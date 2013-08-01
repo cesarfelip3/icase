@@ -251,7 +251,7 @@ $js_pluploader = array(
         //flash_swf_url: 'js/uploader/plupload.flash.swf',
         //silverlight_xap_url : 'js/uploader/plupload.silverlight.xap',
         filters: [
-            {title: "Excel files", extensions: "png,jpeg,jpg,gif"}
+            {title: "Image Files", extensions: "png,jpeg,jpg,gif"}
         ]
     });
 

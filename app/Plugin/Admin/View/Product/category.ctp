@@ -24,7 +24,7 @@ $admin_product = $base . "product";
             <h4 class="alert-heading">Information</h4>
         </div>
         <div class="row">
-            <div class="span6">
+            <div class="span7">
                 <div class="slate">
                     <div class="page-header">
                         <h2>New Category</h2>
@@ -77,12 +77,12 @@ $admin_product = $base . "product";
                     </form>
                 </div>
             </div>
-            <div class="span6">
+            <div class="span5">
                 <div class="slate" id='box-category'>
                     <div class="page-header">
                         <h2>Category</h2>
                     </div>
-                    <div class='body'>
+                    <div class='body' style="height:500px;overflow: auto;">
                     </div>
                 </div>
             </div>

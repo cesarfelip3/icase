@@ -9,7 +9,64 @@ class ProductController extends AdminAppController {
     }
 
     public function index() {
+        $this->loadModel('Product');
+
+        $page = $this->request->query('page');
+        $limit = $this->request->query('limit');
         
+        if (empty($limit)) {
+            $limit = 25;
+        }
+
+        if (empty($page)) {
+            $page = 0;
+        }
+
+        if ($page < 0) {
+            $page = 0;
+        }
+
+        $conditions = array();
+        if ($this->request->is('post')) {
+            $keyword = $this->request->data('keyword');
+            $filter = $this->request->data('filter');
+
+            $start = $this->request->data('start');
+            $end = $this->request->data('end');
+
+
+            if (!empty($start) && !empty($end)) {
+                $duration = array("created >=" => strtotime($start), "created <=" => strtotime($end));
+                $conditions = array("AND" => $duration);
+            }
+
+            if (!empty($keyword)) {
+                $search = array("name LIKE" => "%" . Sanitize::escape($keyword) . "%", "description LIKE" => "%" . Sanitize::escape($keyword) . "%");
+                $conditions = array_merge($conditions, array("OR" => $search));
+            }
+        }
+        
+        $this->Product->create ();
+        $data = $this->Product->find('all', array(
+            'limit' => $limit,
+            'page' => $page,
+            'conditions' => $conditions,
+                )
+        );
+        
+        $total = $this->Product->find('count', array('conditions' => $conditions));
+
+        $log = $this->Product->getDataSource()->getLog(false, false);
+        //print_r ($log);
+        //exit;
+        $params = array (
+            "data" => $data,
+            "page" => $page,
+            "limit" => $limit,
+            "total" => $total,
+        );
+        
+        $this->set ($params);
     }
 
     public function add() {
@@ -22,6 +79,7 @@ class ProductController extends AdminAppController {
         if ($this->request->is('ajax') && $this->request->is('post')) {
             $this->autoRender = false;
             $data = $this->request->data('product');
+            $category = $this->request->data('category');
 
             if (empty($data['name'])) {
                 $error['error'] = 1;
@@ -50,6 +108,88 @@ class ProductController extends AdminAppController {
                 $error['message'] = 'Invalid discount number';
                 exit(json_encode($error));
             }
+
+            $is_special = 0;
+            if (isset($data['is_special'])) {
+                $is_special = 1;
+                if (preg_match("/^[0-9]{1,}\.?[0-9]{0,2}$/i", $data['special_price']) == false) {
+                    $error['error'] = 1;
+                    $error['element'] = 'input[name="product[special_price]"]';
+                    $error['message'] = 'Invalid special price number';
+                    exit(json_encode($error));
+                }
+            }
+
+            $type = "";
+            if (!isset($data['type'])) {
+                $type = "product";
+            } else {
+                $type = $data['type'];
+            }
+
+            $status = 'draft';
+            if (!empty($action)) {
+                if ($action == 'publish') {
+                    $status = 'published';
+                }
+            }
+
+            $this->loadModel('Product');
+            $product_guid = uniqid();
+
+            if (!empty($data['featured'])) {
+                $data['featured'] = trim($data['featured'], "-");
+                $data['featured'] = serialize(explode("-", $data['featured']));
+            }
+
+            $product = array(
+                "guid" => $product_guid,
+                "name" => $data['name'],
+                "description" => $data['description'],
+                "image" => trim($data['image']),
+                "featured" => $data['featured'],
+                "type" => $type,
+                "price" => $data['price'],
+                "tax" => $data['tax'],
+                "quantity" => $data['quantity'],
+                "status" => $status,
+                "created" => time(),
+                "modified" => time()
+            );
+
+            if ($is_special == 1) {
+                $product = array_merge(
+                        $product, array(
+                    "is_special" => 1,
+                    "special_price" => $data['special_price'],
+                    "special_start" => strtotime($data['special_start']),
+                    "special_end" => strtotime($data['special_end'])
+                        )
+                );
+            }
+
+            $this->Product->create();
+            $this->Product->save($product);
+
+            if (!empty($category)) {
+
+                $this->loadModel('CategoryToObject');
+
+                $data = array();
+                foreach ($category as $value) {
+                    $data[] = array(
+                        "category_guid" => $value,
+                        "object_guid" => $product_guid
+                    );
+                }
+
+                $this->CategoryToObject->create();
+                $this->CategoryToObject->saveMany($data);
+            }
+
+            //print_r ($this->request->data);
+            //print_r ($product);
+            //exit;
 
             $error['element'] = 'input';
             exit(json_encode($error));
@@ -123,14 +263,14 @@ class ProductController extends AdminAppController {
                     }
                 }
 
-                if (!empty ($action)) {
+                if (!empty($action)) {
                     switch ($action) {
                         case "checkbox":
                             $this->set('checkbox', true);
                             break;
                     }
                 }
-                
+
                 $this->set('data', $return);
                 $this->render('category.ajax');
             } else {
@@ -144,31 +284,31 @@ class ProductController extends AdminAppController {
                     $this->Category->query('TRUNCATE TABLE categories;');
                     exit(json_encode($error));
                 }
-                
+
                 if ($action == "update") {
                     $this->loadModel('Category');
                     $data = $this->request->data('category');
                     $data = $data['edit'];
-                    
-                    $update = array (
+
+                    $update = array(
                         'name' => "'" . Sanitize::escape($data['name']) . "'",
                         'order' => Sanitize::escape($data['order'])
                     );
-                    
+
                     $guid = $data['guid'];
-                    $this->Category->updateAll ($update, array ("guid" => $guid));
+                    $this->Category->updateAll($update, array("guid" => $guid));
                     exit(json_encode($error));
                 }
-                
+
                 if ($action == "delete") {
                     $this->loadModel('Category');
                     $data = $this->request->data('category');
                     $guid = $data['parent_guid'];
-                    
+
                     //$guid = $this->request->data('category[parent_guid]');
-                    $this->Category->deleteAll (array ("guid" => $guid));
-                    $this->Category->deleteAll (array ("parent_guid" => $guid));
-                    
+                    $this->Category->deleteAll(array("guid" => $guid));
+                    $this->Category->deleteAll(array("parent_guid" => $guid));
+
                     if ($this->Category->find('count') == 0) {
                         $error['error'] = 1;
                     }
