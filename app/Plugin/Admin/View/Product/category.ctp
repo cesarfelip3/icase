@@ -34,22 +34,42 @@ $admin_product = $base . "product";
                             <div class="control-group">
                                 <label class="control-label" for="focusedInput">Name</label>
                                 <div class="controls">
-                                    <input class="input-xlarge focused" id="focusedInput" type="text" name="product[name]" >
+                                    <input class="input-xlarge focused" id="focusedInput" type="text" name="category[name]" >
                                     <span class="help-inline"></span>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label" for="disabledInput">Description</label>
                                 <div class="controls">
-                                    <textarea name="product[description]" style="width:280px" rows="5"></textarea>
+                                    <textarea name="category[description]" style="width:280px" rows="5"></textarea>
                                 </div>
                             </div>
                             <div class="control-group warning">
                                 <label class="control-label" for="inputWarning">Parent</label>
                                 <div class="controls">
-                                    <input type="text" class="input-medium" name="product[price]" placeholder="parent">
+                                    <input type="text" class="input-medium" name="category[parent]" placeholder="Parent category">
+                                    <input type="hidden" class="input-medium" name="category[parent_guid]">
                                     <span class="help-inline"></span>
-                                    <a href="javascript:" class="btn btn-success">Save</a>
+                                    <a href="javascript:" class="btn btn-success" data-loading-text="Saving..." onclick="save();" id="btn-save">Save</a>
+                                    <a href="javascript:" class="btn btn-success" onclick="category_clear();" id="btn-clear">Clear</a>
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="control-group warning">
+                                <label class="control-label" for="inputWarning">Selection</label>
+                                <div class="controls">
+                                    <input type="text" class="input-small" name="category[edit_name]" placeholder="name" data-guid="">
+                                    <input type="text" class="input-mini" name="category[order]" placeholder="order" data-guid="">
+                                    <span class="help-inline"></span>
+                                    <a href="javascript:" class="btn btn-success">Update</a>
+                                    <a href="javascript:" class="btn btn-info">Delete</a>
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="control-group warning">
+                                <label class="control-label" for="inputWarning"></label>
+                                <div class="controls">
+                                    <a href="javascript:" class="btn btn-info" onclick="category_empty_table();">Empty Category Table</a>
                                 </div>
                             </div>
                         </fieldset>
@@ -62,7 +82,6 @@ $admin_product = $base . "product";
                         <h2>Category</h2>
                     </div>
                     <div class='body'>
-                        
                     </div>
                 </div>
             </div>
@@ -70,25 +89,15 @@ $admin_product = $base . "product";
     </div>
 </div>
 <script type='text/javascript'>
-    $(document).ready (
-        function () {
-    
-       
-        jQuery.ajax({
-            url: "<?php echo $base; ?>product/category",
-            type: "GET",
-            beforeSend: function(xhr) {
-            }
-        }).done(function(data) {
-            jQuery("#box-category .body").html(data);
+    $(document).ready(
+            function() {
 
-        }).fail(function() {
-        }); 
-    })
-    
-    function save () {
+               category_load ();
+            })
+
+    function save() {
         jQuery.ajax({
-            url: "<?php echo $base; ?>product/add",
+            url: "<?php echo $base; ?>product/category/?action=add",
             data: $("#form-new").serialize(),
             type: "POST",
             beforeSend: function(xhr) {
@@ -96,20 +105,61 @@ $admin_product = $base . "product";
             }
         }).done(function(data) {
             $("#btn-save").button('reset');
-            
-            var result = $.parseJSON (data);
-            console.log (result);
+
+            var result = $.parseJSON(data);
+            console.log(result);
             if (result.error == 1) {
-                console.log (result.element);
-                $(result.element).next(".help-inline").html (result.message);
+                console.log(result.element);
+                $(result.element).next(".help-inline").html(result.message);
                 $(result.element).parent().parent().addClass('error');
-                showAlert (result.message);
+                showAlert(result.message);
             } else {
                 $(result.element).parent().parent().removeClass('error');
-                $(result.element).next(".help-inline").html ("");
+                $(result.element).next(".help-inline").html("");
+                category_load ();
             }
 
         }).fail(function() {
-        }); 
+        });
     }
+    
+    function category_empty_table() {
+        jQuery.ajax({
+            url: "<?php echo $base; ?>product/category/?action=empty",
+            data: {},
+            type: "POST",
+            beforeSend: function(xhr) {
+            }
+        }).done(function(data) {
+
+            var result = $.parseJSON(data);
+            console.log(result);
+            if (result.error == 1) {
+            } else {
+                category_load ();
+            }
+
+        }).fail(function() {
+        });
+    }
+    
+    function category_clear() {
+        $("input[name='category[parent_guid]']").val("");
+        $("input[name='category[parent]']").val("");
+    }
+    
+    function category_load () {
+        jQuery.ajax({
+            url: "<?php echo $base; ?>product/category",
+            type: "GET",
+            beforeSend: function(xhr) {
+            }
+        }).done(function(data) {
+            //alert (data);
+            jQuery("#box-category .body").html(data);
+
+        }).fail(function() {
+        });
+    }
+ 
 </script>
