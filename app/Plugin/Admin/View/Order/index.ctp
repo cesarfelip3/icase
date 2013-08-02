@@ -71,7 +71,7 @@
                             <?php if (!empty ($data)) : ?>
                             <?php foreach ($data as $value) : ?>
                             <tr>
-                                <td><a href="vieworder.html">#<?php echo ++$i; ?> - <?php echo $value['Order']['title']; ?></a> <span class="label label-info"><?php echo $value['Order']['status']; ?></span><br /><span class="meta"><?php echo date('', $value['Order']['created']); ?></span></td>
+                                <td><a href="vieworder.html">#<?php echo ++$i; ?> - <?php echo $value['Order']['title']; ?></a> <span class="label label-info"><?php echo $value['Order']['status']; ?></span><br /><span class="meta"><?php echo date ("F j, Y, g:i a", $value['Order']['created']); ?></span></td>
                                 <td class="value">
                                     <?php echo $value['Order']['quantity']; ?>
                                 </td>

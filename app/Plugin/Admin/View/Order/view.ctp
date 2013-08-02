@@ -34,7 +34,7 @@
                         <h2>Order Details</h2>
                     </div>
                     <p><strong>Order #:</strong> <?php echo $data['Order']['id']; ?></p>
-                    <p><strong>Order Date:</strong> <?php echo $data['Order']['created']; ?></p>
+                    <p><strong>Order Date:</strong> <?php echo date ("F j, Y, g:i a", $data['Order']['created']); ?></p>
                     <p><strong>Payment Method:</strong> PayPal</p>
                     <p><strong>Transaction ID:</strong> <?php echo $data['Order']['guid']; ?></p>
                     <p><strong>Voucher Code:</strong> 12345 (10% Discount)</p>
