@@ -31,7 +31,16 @@ class OrderController extends AdminAppController {
     }
     
     public function view () {
+        $id = $this->request->query ('id');
         
+        $this->loadModel ('Order');
+        $order = $this->Order->find ('first', array ('conditions' => array ('guid' => $id)));
+        
+        $this->loadModel ('UserDeliverInfo');
+        $deliver = $this->UserDeliverInfo->find ('first', array ('conditions' => array ('guid' => $order['Order']['deliver_guid'])));
+        
+        $this->set ('data', $order);
+        $this->set ('deliver', $deliver['UserDeliverInfo']);
     }
     
     public function edit () {

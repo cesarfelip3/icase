@@ -17,7 +17,7 @@
 </div>
 <div class="main-area dashboard">
     <div class="container">
-        <div class="alert alert-info">
+        <div class="alert alert-info hide">
             <a class="close" data-dismiss="alert" href="#">x</a>
             <h4 class="alert-heading">Information</h4>
             The view order template would be used to display order information.
@@ -33,10 +33,10 @@
                     <div class="page-header">
                         <h2>Order Details</h2>
                     </div>
-                    <p><strong>Order #:</strong> 12345</p>
-                    <p><strong>Order Date:</strong> Today at 13:42</p>
+                    <p><strong>Order #:</strong> <?php echo $data['Order']['id']; ?></p>
+                    <p><strong>Order Date:</strong> <?php echo $data['Order']['created']; ?></p>
                     <p><strong>Payment Method:</strong> PayPal</p>
-                    <p><strong>Transaction ID:</strong> 123456789012</p>
+                    <p><strong>Transaction ID:</strong> <?php echo $data['Order']['guid']; ?></p>
                     <p><strong>Voucher Code:</strong> 12345 (10% Discount)</p>
                     <p><strong>Member:</strong> <a href="">Joe Bloggs</a></p>
                 </div>
@@ -46,12 +46,11 @@
                     <div class="page-header">
                         <h2>Billing Address</h2>
                     </div>
-                    <p>Joe Bloggs</p>
-                    <p>1 Long Road</p>
-                    <p>Small Town</p>
-                    <p>Big City</p>
-                    <p>Country</p>
-                    <p>ZIP/Postal Code</p>
+                    <p><?php echo $deliver['firstname'] . " " . $deliver['lastname']; ?></p>
+                    <p><?php echo $deliver['address']; ?></p>
+                    <p><?php echo $deliver['city']; ?></p>
+                    <p><?php echo $deliver['country']; ?></p>
+                    <p><?php echo $deliver['zipcode']; ?></p>
                 </div>
             </div>
             <div class="span4">
@@ -59,12 +58,11 @@
                     <div class="page-header">
                         <h2>Delivery Address</h2>
                     </div>
-                    <p>Joe Bloggs</p>
-                    <p>1 Long Road</p>
-                    <p>Small Town</p>
-                    <p>Big City</p>
-                    <p>Country</p>
-                    <p>ZIP/Postal Code</p>
+                    <p><?php echo $deliver['firstname'] . " " . $deliver['lastname']; ?></p>
+                    <p><?php echo $deliver['address']; ?></p>
+                    <p><?php echo $deliver['city']; ?></p>
+                    <p><?php echo $deliver['country']; ?></p>
+                    <p><?php echo $deliver['zipcode']; ?></p>
                 </div>
             </div>
         </div>

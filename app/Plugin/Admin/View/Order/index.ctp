@@ -14,10 +14,9 @@
 </div>
 <div class="main-area dashboard">
     <div class="container">
-        <div class="alert alert-info">
+        <div class="alert alert-info hide">
             <a class="close" data-dismiss="alert" href="#">x</a>
             <h4 class="alert-heading">Information</h4>
-            The orders template can be used to list customer orders.
         </div>
         <div class="row">
             <div class="span12">
@@ -80,7 +79,7 @@
                                     $<?php echo $value['Order']['amount']; ?>
                                 </td>
                                 <td class="actions">
-                                    <a class="btn btn-small btn-primary" href="">View Order</a>
+                                    <a class="btn btn-small btn-primary" href="<?php echo $base; ?>order/view/?id=<?php echo $value['Order']['guid']; ?>">View Order</a>
                                 </td>
                             </tr>
                             <?php endforeach; ?>
