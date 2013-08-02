@@ -44,6 +44,11 @@
               </table>
         </div>
         <div>
+            <?php
+            if (!empty ($data)) : ?>
+            <input type="submit" class="btn btn-peach" value="Pay Now" />
+            <?php
+            endif; ?>
         </div>
     </div>
 </div>

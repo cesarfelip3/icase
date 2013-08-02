@@ -9,6 +9,21 @@ class OrderController extends AdminAppController {
     }
     
     public function index () { 
+        $this->loadModel('Order');
+        
+        $orders = $this->Order->find (
+                "all",
+                array (
+                    "conditions" => array (
+                        
+                    ),
+                    "page" => 0,
+                    "limit" => 25
+                )
+        );
+        
+        $this->set ('data', $orders);
+        
     }
     
     public function add () {

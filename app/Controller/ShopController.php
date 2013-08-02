@@ -45,39 +45,136 @@ class ShopController extends AppController {
 
         if ($this->request->is('post')) {
 
-            require_once APP . 'Vendor' . DS . "Stripe/Stripe.php";
-            try {
+            /*
+              require_once APP . 'Vendor' . DS . "Stripe/Stripe.php";
+              try {
 
-                Stripe::setApiKey($this->_stripe['secret_key']);
+              Stripe::setApiKey($this->_stripe['secret_key']);
 
-                $token = $this->request->data('stripeToken');
-                if (empty($token)) {
-                    return;
+              $token = $this->request->data('stripeToken');
+              if (empty($token)) {
+              return;
+              }
+
+
+              $deliver = $this->request->data['deliver'];
+
+              $customer = Stripe_Customer::create(array(
+              'email' => 'customer@example.com',
+              'card' => $token
+              ));
+
+              $charge = Stripe_Charge::create(array(
+              'customer' => $customer->id,
+              'amount' => 50,
+              'currency' => 'usd'
+              ));
+              } catch (Exception $e) {
+              print_r($e);
+              exit;
+              } */
+
+            $deliver = $this->request->data('deliver');
+            //$signup = $this->request->data('signin');
+
+            $orders = $_COOKIE['orders'];
+            $data = array();
+
+            if (empty($orders)) {
+                $this->set('data', $data);
+                return;
+            }
+
+            $orders = explode(",", $orders);
+
+            if (empty($orders)) {
+                $this->set('data', $data);
+                return;
+            }
+
+            $guids = array_flip($orders);
+            $i = 0;
+
+            foreach ($guids as $key => $value) {
+                $guids[$key] = 0;
+            }
+
+            foreach ($guids as $key => $value) {
+                foreach ($orders as $order) {
+                    if ($order == $key) {
+                        $guids[$key]++;
+                    }
+                }
+            }
+
+            $this->loadModel("Product");
+            $i = 0;
+
+            foreach ($guids as $key => $value) {
+                $key = explode("-", $key);
+                if (is_array($key)) {
+                    $guid = $key[0];
                 }
 
-                
-                $deliver = $this->request->data['deliver'];
+                $data[$i] = $this->Product->findByGuid($guid);
+                if (empty($data[$i])) {
+                    $data = null;
+                    break;
+                }
 
-                $customer = Stripe_Customer::create(array(
-                            'email' => 'customer@example.com',
-                            'card' => $token
-                ));
-
-                $charge = Stripe_Charge::create(array(
-                            'customer' => $customer->id,
-                            'amount' => 50,
-                            'currency' => 'usd'
-                ));
-            } catch (Exception $e) {
-                print_r($e);
-                exit;
+                if (isset($key[1])) {
+                    $data[$i]['Product']['file'] = $key[1];
+                } else {
+                    $data[$i]['Product']['file'] = $data[$i]['Product']['image'];
+                }
+                $data[$i]['Product']['quantity'] = $value;
+                $i++;
             }
+
+            $orders = array();
+            $i = 0;
+            if (!empty($data)) {
+                foreach ($data as $value) {
+                    $orders[$i] = array(
+                        "guid" => uniqid(),
+                        "product_guid" => $value['Product']['guid'],
+                        "title" => $value['Product']['name'] . "-" . $value['Product']['type'],
+                        "status" => "paid",
+                        "created" => time(),
+                        "modified" => time(),
+                        "amount" => round($value['Product']['price'] * $value['Product']['quantity'], 2, PHP_ROUND_HALF_DOWN),
+                        "quantity" => $data[$i]['Product']['quantity'],
+                        "file" => $value['Product']['file'] == "" ? $value['Product']['image'] : $value['Product']['file'],
+                    );
+                    $i++;
+                }
+            }
+
+            $this->loadModel('UserDeliverInfo');
+
+            $this->UserDeliverInfo->create();
+            $deliver_guid = uniqid();
+            $deliver['guid'] = $deliver_guid;
+            
+            $this->UserDeliverInfo->save($deliver);
+            
+            $this->loadModel('Order');
+            
+            foreach ($orders as $key => $order) {
+                $order['deliver_guid'] = $deliver_guid;
+                $orders[$key] = $order;
+            }
+            
+            $this->Order->saveMany ($orders);
+            $this->set ("paid", true);
+            
         }
     }
 
     /*
      * @function cart - 2013.07.31 cart is as same as order now...
      */
+
     public function cart() {
 
         if ($this->request->is("ajax")) {
@@ -143,6 +240,7 @@ class ShopController extends AppController {
     /*
      * @function order - deprecated
      */
+
     public function order() {
         if ($this->request->is("ajax")) {
             $this->layout = false;
@@ -233,6 +331,7 @@ class ShopController extends AppController {
     /*
      * @function: preview - generate preview image for designed case
      */
+
     public function preview() {
         if ($this->request->is('ajax')) {
             $this->layout = false;
@@ -325,6 +424,7 @@ class ShopController extends AppController {
     /*
      * @function: getTemplates - get all templates 
      */
+
     public function getTemplates() {
 
         if ($this->request->is('ajax')) {
@@ -342,7 +442,7 @@ class ShopController extends AppController {
             )));
 
             foreach ($data as $key => $value) {
-                $value['Product']['image'] = $this->base . "/" . $value['Product']['image'];
+                $value['Product']['image'] = $this->base . "/uploads/" . $value['Product']['image'];
                 $data[$key] = $value;
             }
 

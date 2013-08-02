@@ -62,20 +62,29 @@
                         <thead>
                             <tr>
                                 <th>Orders</th>
+                                <th class="value">Quantity</th>
                                 <th class="value">Value</th>
                                 <th class="actions">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
+                            <?php $i = 0; ?>
+                            <?php if (!empty ($data)) : ?>
+                            <?php foreach ($data as $value) : ?>
                             <tr>
-                                <td><a href="vieworder.html">#12345 - John Smith</a> <span class="label label-info">New</span><br /><span class="meta">Today at 13:42</span></td>
+                                <td><a href="vieworder.html">#<?php echo ++$i; ?> - <?php echo $value['Order']['title']; ?></a> <span class="label label-info"><?php echo $value['Order']['status']; ?></span><br /><span class="meta"><?php echo date('', $value['Order']['created']); ?></span></td>
                                 <td class="value">
-                                    $132.00
+                                    <?php echo $value['Order']['quantity']; ?>
+                                </td>
+                                <td class="value">
+                                    $<?php echo $value['Order']['amount']; ?>
                                 </td>
                                 <td class="actions">
                                     <a class="btn btn-small btn-primary" href="">View Order</a>
                                 </td>
                             </tr>
+                            <?php endforeach; ?>
+                            <?php endif; ?>
                         </tbody>
                     </table>
                 </div>
