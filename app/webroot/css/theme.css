@@ -11,7 +11,7 @@
 	}
 	
 	body {
-		background:url('../img/pattern/whitey.png');
+		background:url('../img/pattern/whitey.png') repeat scroll 0 0 transparent;
 		margin:0;
 		padding:0;
 		font-size:13px;

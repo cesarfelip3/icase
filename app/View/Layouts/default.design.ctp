@@ -43,7 +43,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 
     <!--begin body-->
     <body>
-        <?php echo $this->element('header') ?>	
+        <?php echo $this->element('header.design') ?>	
         <section id="main">
             <?php echo $this->fetch('content'); ?>
         </section>	

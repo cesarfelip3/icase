@@ -1,6 +1,6 @@
 
 <style type="text/css">
-    ul {
+    ul.media-list {
         margin-top:0px;
         margin-bottom:0px;
         padding:0px;
@@ -22,9 +22,10 @@
         padding:2px;
         display:block;
         width:100%;
-        color:black;
+        color:orangered;
         text-decoration: none;
         background-color:none;
+        text-transform:uppercase
     }
 
     ul.media-body-list li.active a {
@@ -33,6 +34,7 @@
         display:block;
         background-color:#2fa4e7;
         color:white;
+        text-transform:uppercase
     }
 
     ul.media-body-list li.active a:hover {
@@ -73,7 +75,7 @@
         margin-left:95px;
     }
 </style>
-
+<h3 style="border-bottom:1px solid #ccc">Categories</h3>
 <ul class="media-list media-body-list">
     <?php
     if (!empty($data)) :

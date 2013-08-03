@@ -7,7 +7,7 @@ class IndexController extends AppController {
     public $uses = null;
 
     public function beforeFilter() {
-        $this->Auth->allow("login", "register", "reset");
+        $this->Auth->allow("signin","signup","reset");
         $this->Auth->deny("logout");
         parent::beforeFilter();
     }

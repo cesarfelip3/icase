@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Routes configuration
  *
@@ -28,23 +27,24 @@
  * to use (in this case, /app/View/Pages/home.ctp)...
  */
 Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
-/**
- * ...and connect the rest of 'Pages' controller's urls.
- */
-Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
-
 // Icases Routes
-
-Router::connect('/createcase', array('controller' => 'case', 'action' => 'newcase'));
-
+Router::connect('/design', array('controller' => 'case', 'action' => 'newcase'));
 Router::connect(
-    '/category/:slug', // E.g. /blog/3-CakePHP_Rocks
-    array('controller' => 'shop', 'action' => 'category'), 
+    '/category/:slug', 
+    array('controller' => 'catalogue', 'action' => 'category'), 
     array(
         'pass' => array('slug'),
     )
 );
-
+Router::connect(
+    '/product/:slug', // E.g. /blog/3-CakePHP_Rocks
+    array('controller' => 'catalogue', 'action' => 'product'), 
+    array(
+        'pass' => array('slug'),
+    )
+);
+Router::connect('/signin', array('controller' => 'index', 'action' => 'signin'));
+Router::connect('/signup', array('controller' => 'index', 'action' => 'signup'));
 
 /**
  * Load all plugin routes. See the CakePlugin documentation on
@@ -52,7 +52,6 @@ Router::connect(
  */
 CakePlugin::routes(
 );
-
 /**
  * Load the CakePHP default routes. Only remove this if you do not want to use
  * the built-in default routes.

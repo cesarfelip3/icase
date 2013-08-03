@@ -1,19 +1,11 @@
-<!--<ul class="breadcrumb">
-    <li><a href="#">Home</a> <span class="divider">/</span></li>
-    <li><a href="#">Gallery</a> <span class="divider">/</span></li>
-    <li class="active">Category</li>
-</ul>-->
+
 <div class="row-fluid">
 
     <div class="span3">
         <!-- Upload image -->
-        <div style="visibility: visible; box-shadow: none;" class="qbox creator-parts">
+        <div class="well" id="box-category" style="margin-top:20px;background-color:white;border:1px solid #ccc;padding-top:5px">
 
-
-            <div class="tools" id="box-category">
-            </div>
-            <!-- end zone alert -->
-            <!-- add text -->
+            
 
         </div>
     </div>
@@ -88,7 +80,7 @@
 
     function category_load() {
         jQuery.ajax({
-            url: "<?php echo $this->webroot; ?>shop/category/<?php echo $slug; ?>",
+            url: "<?php echo $this->webroot; ?>catalogue/category/<?php echo $slug; ?>",
             type: "GET",
             beforeSend: function(xhr) {
                 //showAlert2("Loading category data now......");
