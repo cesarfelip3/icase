@@ -362,6 +362,7 @@ class ProductController extends AdminAppController {
                         "guid" => uniqid(),
                         "group_guid" => $group_guid,
                         "name" => $data['name'],
+                        "slug" => preg_replace ("/ +/i", "-", $data['name']),
                         "description" => $data['description'],
                         "parent_guid" => $data['parent_guid'],
                         "level" => $level

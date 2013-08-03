@@ -1,8 +1,8 @@
-<ul class="breadcrumb">
+<!--<ul class="breadcrumb">
     <li><a href="#">Home</a> <span class="divider">/</span></li>
     <li><a href="#">Gallery</a> <span class="divider">/</span></li>
     <li class="active">Category</li>
-</ul>
+</ul>-->
 <div class="row-fluid">
 
     <div class="span3">
@@ -10,62 +10,97 @@
         <div style="visibility: visible; box-shadow: none;" class="qbox creator-parts">
 
 
-            <div class="tools">
-                <ul class="nav nav-list">
-                    <li class="nav-header">List header</li>
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#">Library</a></li>
-                </ul>
+            <div class="tools" id="box-category">
             </div>
-        </div>
-        <!-- end zone alert -->
-        <!-- add text -->
+            <!-- end zone alert -->
+            <!-- add text -->
 
+        </div>
     </div>
     <div class="span6 category_right">
+        <?php
+        $i = 0;
+        $j = 0;
+        ?>
+        <?php if (!empty($data)) : ?>
+                <?php for ($i = 0; $i < count($data); $i += 3) : ?>
+                <div class="row-fluid" style='margin-top:20px;'>
+        <?php if (isset($data[$i])) : ?>
+                        <div class="span4 set-equal-heights-js">
+                            <div class="thumbnail">
+                                <a href="property.html"><img src="<?php echo $this->webroot; ?>uploads/<?php echo $data[$i]['Product']['featured'][0]; ?>" alt="Placeholder" class=""></a>
+                                <div class="caption">
+                                    <a href="property.html" class="prop-title"><?php echo $data[$i]['Product']['name']; ?></a>
 
-        <div class="span4 set-equal-heights-js">
-            <div class="thumbnail">
-                <a href="property.html"><img src="http://www.casetagram.com/usr/7705/217705/221463.png.240x240.png" alt="Placeholder" class=""></a>
-                <div class="caption">
-                    <a href="property.html" class="prop-title">Property Name, Toronto ON</a>
+                                    <p class="price"><?php echo $data[$i]['Product']['price']; ?></p>
 
-                    <p class="price">$259,000</p>
+                                    <ul class="list-btns">
+                                        <li><button class="btn btn-small btn-inverse colwhite"><a href="" class="btn btn-small btn-inverse colwhite">View Details</a></button></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+        <?php if (isset($data[$i + 1])) : ?>
+                        <div class="span4 set-equal-heights-js">
+                            <div class="thumbnail">
+                                <a href="property.html"><img src="<?php echo $this->webroot; ?>uploads/<?php echo $data[$i + 1]['Product']['featured'][0]; ?>" alt="Placeholder" class=""></a>
+                                <div class="caption">
+                                    <a href="property.html" class="prop-title"><?php echo $data[$i + 1]['Product']['name']; ?></a>
 
-                    <ul class="list-btns">
-                        <li><button class="btn btn-small btn-inverse colwhite"><a href="property.html">View Details</a></button></li>
-                    </ul>
+                                    <p class="price"><?php echo $data[$i + 1]['Product']['price']; ?></p>
+
+                                    <ul class="list-btns">
+                                        <li><button class="btn btn-small btn-inverse colwhite"><a href="" class="btn btn-small btn-inverse colwhite">View Details</a></button></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+        <?php if (isset($data[$i + 2])) : ?>
+                        <div class="span4 set-equal-heights-js">
+                            <div class="thumbnail">
+                                <a href="property.html"><img src="<?php echo $this->webroot; ?>uploads/<?php echo $data[$i + 2]['Product']['featured'][0]; ?>" alt="Placeholder" class=""></a>
+                                <div class="caption">
+                                    <a href="property.html" class="prop-title"><?php echo $data[$i + 2]['Product']['name']; ?></a>
+
+                                    <p class="price"><?php echo $data[$i + 2]['Product']['price']; ?></p>
+
+                                    <ul class="list-btns">
+                                        <li><button class="btn btn-small btn-inverse colwhite"><a href="" class="btn btn-small btn-inverse colwhite">View Details</a></button></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                <?php endif; ?>
                 </div>
-            </div>
-        </div>
-        <div class="span4 set-equal-heights-js">
-            <div class="thumbnail">
-                <a href="property.html"><img src="http://www.casetagram.com/usr/7705/217705/221463.png.240x240.png" alt="Placeholder" class=""></a>
-                <div class="caption">
-                    <a href="property.html" class="prop-title">Property Name, Toronto ON</a>
-
-                    <p class="price">$259,000</p>
-
-                    <ul class="list-btns">
-                        <li><button class="btn btn-small btn-inverse colwhite"><a href="property.html">View Details</a></button></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="span4 set-equal-heights-js">
-            <div class="thumbnail">
-                <a href="property.html"><img src="http://www.casetagram.com/usr/7705/217705/221463.png.240x240.png" alt="Placeholder" class=""></a>
-                <div class="caption">
-                    <a href="property.html" class="prop-title">Property Name, Toronto ON</a>
-
-                    <p class="price">$259,000</p>
-
-                    <ul class="list-btns">
-                        <li><button class="btn btn-small btn-inverse colwhite"><a href="property.html">View Details</a></button></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+            <?php endfor; ?>
+<?php endif; ?>
     </div>
 </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(
+            function() {
+                //alert ("hello");
+                category_load();
+            });
+
+    function category_load() {
+        jQuery.ajax({
+            url: "<?php echo $this->webroot; ?>shop/category/<?php echo $slug; ?>",
+            type: "GET",
+            beforeSend: function(xhr) {
+                //showAlert2("Loading category data now......");
+            }
+        }).done(function(data) {
+            //alert (data);
+            //hideAlert();
+            //alert(data);
+            jQuery("#box-category").html(data);
+
+        }).fail(function() {
+            //hideAlert();
+        });
+    }
+</script>

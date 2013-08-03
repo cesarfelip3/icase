@@ -1,17 +1,5 @@
 <?php
-$result = array();
 
-function categoryList($data, $group) {
-    global $result;
-
-    if (empty($group)) {
-        $result[$i] = $data;
-    }
-
-    if ($data['group_guid'] == $group) {
-        
-    }
-}
 ?>
 <style type="text/css">
     ul {
