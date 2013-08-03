@@ -22,6 +22,7 @@ $admin_product = $base . "product";
         <form class="form-horizontal" id="form-new">
             <input type="hidden" name="product[featured]" value="" />
             <input type="hidden" name="product[image]" value="" />
+            <input type="hidden" name="product[guid]" value='' />
             <div class="alert alert-info hide">
                 <a class="close" data-dismiss="alert" href="#">x</a>
                 <h4 class="alert-heading">Information</h4>
@@ -118,10 +119,14 @@ $admin_product = $base . "product";
                                 </div>
                             </div>
                             <div class="control-group warning">
-                                <label class="control-label" for="inputWarning"></label>
+                                <label class="control-label" for="inputWarning">Save Option</label>
                                 <div class="controls">
-                                    <a href='javascript:' class='btn btn-primary' data-loading-text="Saving..." onclick="save('draft');" id="btn-save">Save</a>
-                                    <a href='javascript:' class='btn btn-primary' data-loading-text="Saving..." onclick="save('publish');" id="btn-publish">Publish</a>
+                                    <label class="checkbox">
+                                        <input type="checkbox" class="input-mini" name="product[status]" value="published">Published
+                                    </label>
+                                    <a href='javascript:' class='btn btn-primary' data-loading-text="Saving..." onclick="save('create');" id="btn-save">Create</a>
+                                    <a href='javascript:' class='btn btn-primary' data-loading-text="Saving..." onclick="save('update');" id="btn-save">Update</a>
+                                    <span class="help-inline">Create new one or update current one</span>
                                 </div>
                             </div>
                             <div class='well'>
@@ -165,7 +170,7 @@ $admin_product = $base . "product";
                                 <a href="javascript:" id="btn-upload-featured-image" class="btn btn-block btn-info" onclick="featured_image_start_upload();">Upload</a>
                             </p>
                             <div id="box-featured-image" class="row-fluid">
-                                
+
                             </div>
                         </div>
                     </div>
@@ -186,25 +191,26 @@ $admin_product = $base . "product";
         </div>
     </div>
 </div>
+<!-- -->
 <script type='text/javascript'>
     $(document).ready(
-        function() {
-            jQuery.ajax({
-                url: "<?php echo $base; ?>product/category/?action=checkbox",
-                type: "GET",
-                beforeSend: function(xhr) {
-                }
-            }).done(function(data) {
-                jQuery("#box-category .body").html(data);
-                $("#form-new").serialize();
+            function() {
+                jQuery.ajax({
+                    url: "<?php echo $base; ?>product/category/?action=checkbox",
+                    type: "GET",
+                    beforeSend: function(xhr) {
+                    }
+                }).done(function(data) {
+                    jQuery("#box-category .body").html(data);
+                    $("#form-new").serialize();
 
-            }).fail(function() {
-            });
-        }
+                }).fail(function() {
+                });
+            }
     );
 
     function save(action) {
-    
+
         CKEDITOR.instances.editor1.updateElement();
         jQuery.ajax({
             url: "<?php echo $base; ?>product/add/?action" + action,
@@ -224,6 +230,9 @@ $admin_product = $base . "product";
                 $(result.element).parent().parent().addClass('error');
                 showAlert(result.message);
             } else {
+                if (action == 'create') {
+                    $("input[name='product[guid]'").val(result.data);
+                }
                 $(result.element).parent().parent().removeClass('error');
                 $(result.element).next(".help-inline").html("");
             }
@@ -313,19 +322,19 @@ $js_pluploader = array(
 
         //alert($.parseJSON(response.response).result);
     });
-    
-    function template_image_start_upload ()
+
+    function template_image_start_upload()
     {
-        uploader.start ();
-        $("#template-image-list").html ("");
-        $("#box-template-image").html ("");
+        uploader.start();
+        $("#template-image-list").html("");
+        $("#box-template-image").html("");
     }
 
 </script>
 
 <script type="text/javascript">
     var total = 0;
-    
+
     var uploader2 = new plupload.Uploader({
         runtimes: 'gears,html5,browserplus',
         browse_button: 'btn-select-featured-image',
@@ -378,10 +387,10 @@ $js_pluploader = array(
                 //console.log(result);
                 if (result.error == 0) {
                     //console.log(result.files.url);
-                    $("#box-featured-image").append ('<div class="thumbnail" style="width:24%;float:left;margin-left:5px;margin-bottom:10px;"><a class="featured-thumbnail"><img src="' + result.files.url + '" style="" /></a><div class="caption"><p><a class="btn btn-success" data-image="' + result.files.target + '" onclick="featured_image_delete(this);">Delete</a></p></div></div>');
+                    $("#box-featured-image").append('<div class="thumbnail" style="width:24%;float:left;margin-left:5px;margin-bottom:10px;"><a class="featured-thumbnail"><img src="' + result.files.url + '" style="" /></a><div class="caption"><p><a class="btn btn-success" data-image="' + result.files.target + '" onclick="featured_image_delete(this);">Delete</a></p></div></div>');
                     $("input[name='product[featured]']").val($("input[name='product[featured]']").val() + "-" + result.files.target);
                     //console.log ($("input[name='product[featured]']").val());
-                    init ();
+                    init();
                 }
                 //jQuery('#progress-bar').css('width', "0%");
             }
@@ -389,27 +398,27 @@ $js_pluploader = array(
 
         //alert($.parseJSON(response.response).result);
     });
-    
-    function featured_image_start_upload ()
+
+    function featured_image_start_upload()
     {
-        uploader2.start ();
-        $('#box-featured-image').html ("");
-        $('#featured-image-list').html ("");
+        uploader2.start();
+        $('#box-featured-image').html("");
+        $('#featured-image-list').html("");
         $('input[name="product[featured]"]').val("");
     }
-    
-    function featured_image_delete (id)
+
+    function featured_image_delete(id)
     {
         //console.log (jQuery(id).parent().parent());
-        jQuery(id).parent().parent().parent().remove ();
-        
-        var image = $(id).data ('image');
+        jQuery(id).parent().parent().parent().remove();
+
+        var image = $(id).data('image');
         var images = $('input[name="product[featured]"]').val();
-        
+
         image = "-" + image;
-        images = images.replace (image, "");
+        images = images.replace(image, "");
 
         $('input[name="product[featured]"]').val(images);
-        console.log (image + ":" + images);
+        console.log(image + ":" + images);
     }
 </script>

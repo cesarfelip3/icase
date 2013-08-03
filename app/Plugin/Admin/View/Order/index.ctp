@@ -39,7 +39,7 @@
         </div>
         <div class="row">
             <div class="span12 listing-buttons">
-                <button class="btn btn-primary">Add New Order</button>
+                <a class="btn btn-primary">Update Selected</a>
             </div>
             <div class="span12">
                 <div class="slate">
@@ -60,9 +60,11 @@
                     <table class="orders-table table">
                         <thead>
                             <tr>
+                                <th>#</th>
                                 <th>Orders</th>
                                 <th class="value">Quantity</th>
-                                <th class="value">Value</th>
+                                <th class="value">Amount</th>
+                                <th class="value">Status</th>
                                 <th class="actions">Actions</th>
                             </tr>
                         </thead>
@@ -71,14 +73,23 @@
                             <?php if (!empty ($data)) : ?>
                             <?php foreach ($data as $value) : ?>
                             <tr>
-                                <td><a href="vieworder.html">#<?php echo ++$i; ?> - <?php echo $value['Order']['title']; ?></a> <span class="label label-info"><?php echo $value['Order']['status']; ?></span><br /><span class="meta"><?php echo date ("F j, Y, g:i a", $value['Order']['created']); ?></span></td>
+                                <td><input type="checkbox" name="orders[]" value="<?php echo $value['Order']['guid']; ?>" /></td>
+                                <td><a href="<?php echo $base; ?>order/view/?id=<?php echo $value['Order']['guid']; ?>">#<?php echo ++$i; ?> - <?php echo $value['Order']['title']; ?></a> <span class="label label-info"><?php echo $value['Order']['status']; ?></span><br /><span class="meta"><?php echo date ("F j, Y, g:i a", $value['Order']['created']); ?></span></td>
                                 <td class="value">
                                     <?php echo $value['Order']['quantity']; ?>
                                 </td>
                                 <td class="value">
                                     $<?php echo $value['Order']['amount']; ?>
                                 </td>
+                                <td class="value">
+                                    <select class="input-small">
+                                        <option value="paid">Paid</option>
+                                        <option value="dispatched">Dispatch</option>
+                                        <option value="cancel">Cancel</option>
+                                    </select>
+                                </td>
                                 <td class="actions">
+                                    <a class="btn btn-small btn-primary" href="<?php echo $base; ?>order/view/?id=<?php echo $value['Order']['guid']; ?>">Update</a>
                                     <a class="btn btn-small btn-primary" href="<?php echo $base; ?>order/view/?id=<?php echo $value['Order']['guid']; ?>">View Order</a>
                                 </td>
                             </tr>
@@ -103,7 +114,7 @@
                 </div>
             </div>
             <div class="span6 listing-buttons pull-right">
-                <button class="btn btn-primary">Add New Item</button>
+                <a class="btn btn-primary">Update Selected</a>
             </div>
         </div>
         <div class="row">

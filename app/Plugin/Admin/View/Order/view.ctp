@@ -34,7 +34,7 @@
                         <h2>Order Details</h2>
                     </div>
                     <p><strong>Order #:</strong> <?php echo $data['Order']['id']; ?></p>
-                    <p><strong>Order Date:</strong> <?php echo date ("F j, Y, g:i a", $data['Order']['created']); ?></p>
+                    <p><strong>Order Date:</strong> <?php echo date("F j, Y, g:i a", $data['Order']['created']); ?></p>
                     <p><strong>Payment Method:</strong> PayPal</p>
                     <p><strong>Transaction ID:</strong> <?php echo $data['Order']['guid']; ?></p>
                     <p><strong>Voucher Code:</strong> 12345 (10% Discount)</p>
@@ -77,97 +77,33 @@
                             <tr>
                                 <th>Orders</th>
                                 <th class="value">Value</th>
-                                <th class="actions">Dispatch</th>
+                                <th class="actions">Status</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td><a href="">Product Name</a> <span class="label label-info">6 In Stock</span><br /><span class="meta">Item summary or notes</span></td>
+                                <td><a href=""><?php echo $data['Order']['title']; ?></a> <span class="label label-info"><?php echo $data['Order']['status']; ?></span></td>
                                 <td class="value">
-                                    $132.00
+                                    $<?php echo $data['Order']['amount']; ?>
                                 </td>
                                 <td class="actions">
-                                    <input type="checkbox" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><a href="">Product Name</a> <span class="label label-info">6 In Stock</span><br /><span class="meta">Item summary or notes</span></td>
-                                <td class="value">
-                                    $132.00
-                                </td>
-                                <td class="actions">
-                                    <input type="checkbox" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><a href="">Product Name</a> <span class="label label-info">6 In Stock</span><br /><span class="meta">Item summary or notes</span></td>
-                                <td class="value">
-                                    $132.00
-                                </td>
-                                <td class="actions">
-                                    <input type="checkbox" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><a href="">Product Name</a> <span class="label label-success">Dispatched</span><br /><span class="meta">Item summary or notes</span></td>
-                                <td class="value">
-                                    $132.00
-                                </td>
-                                <td class="actions">
-                                    Consignment # 1234
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><a href="">Product Name</a> <span class="label label-important">Out Of Stock</span><br /><span class="meta">Item summary or notes</span></td>
-                                <td class="value">
-                                    $132.00
-                                </td>
-                                <td class="actions">
-                                    <input type="checkbox" />
+                                    <select class="input-small">
+                                        <option value="paid">Paid</option>
+                                        <option value="dispatched">Dispatch</option>
+                                        <option value="cancel">Cancel</option>
+                                    </select>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-            </div>
-            <div class="span12 listing-buttons">
-                <button class="btn btn-primary">Dispatch Selected</button>
             </div>
         </div>
         <div class="row">
             <div class="span12">
-                <div class="slate">
-                    <div class="page-header">
-                        <h2>Order History</h2>
-                    </div>
-                    <table class="orders-table table">
-                        <thead>
-                            <tr>
-                                <th>Action</th>
-                                <th class="actions">Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1 Item Dispatched - Consignment # 1234</td>
-                                <td class="date">
-                                    Today at 14:55
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Order Paid via Paypal</td>
-                                <td class="date">
-                                    Today at 13:42
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="span12 footer">
-                <p>&copy; Website Name 2012</p>
+                <?php if (!empty ($data['Order']['file'])) : ?>
+                <a class="thumbnail"><img src="<?php echo $this->webroot . "uploads/" . $data['Order']['file']; ?>" /></a>
+                <?php endif; ?>
             </div>
         </div>
     </div>

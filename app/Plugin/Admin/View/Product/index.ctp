@@ -22,16 +22,17 @@ $product_delete = $base . "product" . DS . "delete";
         <div class="row">
             <div class="span12">
                 <div class="slate">
-                    <form class="form-inline">
-                        <input type="text" class="input-large" placeholder="Keyword...">
-                        <input type='text' class='input-large datepicker' placeholder='Start Date' />
-                        <input type='text' class='input-large datepicker' placeholder='End Date' />
-                        <select>
+                    <form class="form-inline" id='form-filter' method='GET'>
+                        <input type='hidden' name='page' value='<?php echo $page; ?>' />
+                        <input type="text" class="input-large" placeholder="Keyword..." name='keyword'>
+                        <input type='text' class='input-large datepicker' name='start' placeholder='Start Date' />
+                        <input type='text' class='input-large datepicker' name='end' placeholder='End Date' />
+                        <select name='filter'>
                             <option value=""> - Filter - </option>
-                            <option value='template'>Case Template</option>
-                            <option value='product'>Case Product</option>
+                            <option value='type=template]'>Case Template</option>
+                            <option value='type=product]'>Case Product</option>
                         </select>
-                        <button type="submit" class="btn btn-primary">Filter</button>
+                        <input type="submit" class="btn btn-primary" name="action" value="Filter" />
                     </form>
                 </div>
             </div>
@@ -87,7 +88,7 @@ $product_delete = $base . "product" . DS . "delete";
                                 <td><?php echo date ("Y-m-d H:i:s", $value['Product']['created']); ?></td>
                                 <td class="actions">
                                     <a class="btn btn-small btn-danger" data-toggle="modal" href="#removeItem">Remove</a>
-                                    <a class="btn btn-small btn-primary" href="<?php echo $product_edit; ?>" target="_blank">Edit</a>
+                                    <a class="btn btn-small btn-primary" href="<?php echo $product_edit; ?>?id=<?php echo $value['Product']['guid']; ?>" target="_blank">Edit</a>
                                 </td>
                             </tr>
                             <?php endforeach; endif; ?>
@@ -111,17 +112,17 @@ $product_delete = $base . "product" . DS . "delete";
             <div class="span6">
                 <div class="pagination pull-left">
                     <ul>
-                        <li><a href="<?php echo $base; ?>product/index/?page=<?php echo $page - 1; ?>">Prev</a></li>
+                        <li><a href="javascript:" data-page="<?php echo $page - 1; ?>">Prev</a></li>
                         <?php
                         
                         $j = 0;
                         for (; $j < $pages; ++$j) : ?>
                         <li <?php if ($j == $page) : echo 'class="active"'; endif; ?>>
-                            <a href="<?php echo $base; ?>product/index/?page=<?php echo $j; ?>"><?php echo $j + 1; ?></a>
+                            <a href="javascript:" data-page="<?php echo $j; ?>"><?php echo $j + 1; ?></a>
                         </li>
                         <?php
                         endfor; ?>
-                        <li><a href="<?php echo $base; ?>product/index/?page=<?php echo $page + 1; ?>">Next</a></li>
+                        <li><a href="javascript:" data-page="<?php echo $page + 1; ?>">Next</a></li>
                     </ul>
                 </div>
             </div>
@@ -132,3 +133,23 @@ $product_delete = $base . "product" . DS . "delete";
         </div>
     </div>
 </div>
+<script>
+    $(document).ready 
+    (
+        function () 
+        {
+            $(".pagination a").click (
+                function () {
+                    var page = $(this).data('page');
+                    $('input[name=page]').val (page);
+                    $("#form-filter").submit();
+                    
+                });
+        }
+    );
+    
+    
+        
+        
+        
+</script>
