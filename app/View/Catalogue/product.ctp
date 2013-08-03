@@ -4,14 +4,14 @@
             <!-- 2 columns -->
             <div class="row-fluid">
                 <div class="span6">
-                    <p><img src="../img/big-pd.jpg"></p>
+                    <p><img src="<?php echo $this->webroot . "uploads/" . $data['featured'][0]; ?>"></p>
                 </div>
                 <div class="span6">
-                    <strong>BILLY RAYS</strong> iPhone 5 Case:
+                    <h3><strong>BILLY RAYS</strong> <span style="text-transform: uppercase;"><?php echo $data['name']; ?></span></h3>
                     <hr class="black">
-                    <p class="asking-price"><span>$39.95</span> Free international shipping</p>
+                    <p class="asking-price"><span>$<?php echo $data['price']; ?></span> Free international shipping</p>
                     <hr class="black">
-                    <p data-lstyle="case_description" data-l="case_description" class="case-desc case_description">All designs are printed on an easy snap on, durable hard case made with same quality material available in clear, white and black color. It features an extremely slim profile and yet provides enough protection for your iPhone 5.</p>
+                    <div data-lstyle="case_description" data-l="case_description" class="case-desc case_description" style="height:200px;overflow: auto;"><?php echo $data['description']; ?></div>
                     <hr class="black"><br>
 
                     <button class="btn btn-danger">Add To Cart</button>
@@ -31,8 +31,9 @@
 
 
                     <div class="thumwrapper">
-                        <img src="../img/183061.png.505-50.jpg">
-                        <img src="../img/183061.png.505-50.jpg">
+                        <?php foreach ($data['featured'] as $image) : ?>
+                        <img src="<?php echo $this->webroot . "uploads/" . $image; ?>">
+                        <?php endforeach; ?>
                     </div>
                 </div>			
             </div>

@@ -19,14 +19,53 @@ class CatalogueController extends AppController {
         parent::beforeFilter();
     }
 
-    public function product() {
+    public function product($slug) {
+        $this->loadModel('Product');
         
+        /*
+        $data = $this->Product->find('all', array ("conditions" => array ("type" => "product")));
+        
+        foreach ($data as $key => $value) {
+            $this->Product->id = $value['Product']['id'];
+            
+            $name = "iphone " . rand (3, 5);
+            $this->Product->set (array(
+                    "name" => $name,
+                    "slug" => preg_replace ("/ +/i", "-", $name) . "-" . $key,
+                    "price" => rand (20, 100) . ".07",
+            ));
+            
+            $this->Product->save();
+        }
+        
+        
+        
+        $log = $this->Product->getDataSource()->getLog(false, false);
+        print_r ($log);
+        
+        exit;
+        */
+        
+        $data = $this->Product->find('first', array ("conditions" => array ("slug" => $slug)));
+        
+        if (empty ($data)) {
+            $this->redirect("/");
+            exit;
+        }
+        
+        $data = $data['Product'];
+        $data['featured'] = unserialize($data['featured']);
+        
+        
+        $this->set ("title", env ("SERVER_NAME") . " | product | $slug");
+        $this->set ("data", $data);
     }
 
     public function category($slug) {
 
         $this->loadModel('Category');
-        $guid = $this->Category->findBySlug($slug, array('guid'));
+        
+        $guid= $this->Category->findBySlug($slug, array ('guid'));
 
         if (empty($guid)) {
             $this->redirect("/");
@@ -93,7 +132,8 @@ class CatalogueController extends AppController {
                 ),
             ),
             'conditions' => array(
-                "CategoryToObject.category_guid" => $guid
+                "CategoryToObject.category_guid" => $guid,
+                "Product.type" => "product",
             ),
             'fields' => array("Product.*")
         ));
@@ -104,7 +144,8 @@ class CatalogueController extends AppController {
                 $data[$key] = $value;
             }
         }
-
+        
+        $this->set ("title", env ("SERVER_NAME") . " | category | $slug");
         $this->set ("slug", $slug);
         $this->set("data", $data);
     }

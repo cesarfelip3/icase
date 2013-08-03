@@ -5,8 +5,6 @@
         <!-- Upload image -->
         <div class="well" id="box-category" style="margin-top:20px;background-color:white;border:1px solid #ccc;padding-top:5px">
 
-            
-
         </div>
     </div>
     <div class="span6 category_right">
@@ -20,14 +18,14 @@
         <?php if (isset($data[$i])) : ?>
                         <div class="span4 set-equal-heights-js">
                             <div class="thumbnail">
-                                <a href="property.html"><img src="<?php echo $this->webroot; ?>uploads/<?php echo $data[$i]['Product']['featured'][0]; ?>" alt="Placeholder" class=""></a>
+                                <a href="<?php echo $this->webroot;?>product/<?php echo $data[$i]['Product']['slug']; ?>"><img src="<?php echo $this->webroot; ?>uploads/<?php echo $data[$i]['Product']['featured'][0]; ?>" alt="Placeholder" class=""></a>
                                 <div class="caption">
-                                    <a href="property.html" class="prop-title"><?php echo $data[$i]['Product']['name']; ?></a>
+                                    <a href="<?php echo $this->webroot;?>product/<?php echo $data[$i]['Product']['slug']; ?>" class="prop-title" target="_blank" style="text-transform: uppercase"><?php echo $data[$i]['Product']['name']; ?></a>
 
-                                    <p class="price"><?php echo $data[$i]['Product']['price']; ?></p>
+                                    <p class="price">$<?php echo $data[$i]['Product']['price']; ?></p>
 
                                     <ul class="list-btns">
-                                        <li><button class="btn btn-small btn-inverse colwhite"><a href="" class="btn btn-small btn-inverse colwhite">View Details</a></button></li>
+                                        <li><a href="<?php echo $this->webroot;?>product/<?php echo $data[$i]['Product']['slug']; ?>" target="_blank">View Details</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -36,14 +34,14 @@
         <?php if (isset($data[$i + 1])) : ?>
                         <div class="span4 set-equal-heights-js">
                             <div class="thumbnail">
-                                <a href="property.html"><img src="<?php echo $this->webroot; ?>uploads/<?php echo $data[$i + 1]['Product']['featured'][0]; ?>" alt="Placeholder" class=""></a>
+                                <a href="<?php echo $this->webroot;?>product/<?php echo $data[$i + 1]['Product']['slug']; ?>"><img src="<?php echo $this->webroot; ?>uploads/<?php echo $data[$i + 1]['Product']['featured'][0]; ?>" alt="Placeholder" class=""></a>
                                 <div class="caption">
-                                    <a href="property.html" class="prop-title"><?php echo $data[$i + 1]['Product']['name']; ?></a>
+                                    <a href="<?php echo $this->webroot;?>product/<?php echo $data[$i + 1]['Product']['slug']; ?>" class="prop-title" style="text-transform: uppercase"><?php echo $data[$i + 1]['Product']['name']; ?></a>
 
-                                    <p class="price"><?php echo $data[$i + 1]['Product']['price']; ?></p>
+                                    <p class="price">$<?php echo $data[$i + 1]['Product']['price']; ?></p>
 
                                     <ul class="list-btns">
-                                        <li><button class="btn btn-small btn-inverse colwhite"><a href="" class="btn btn-small btn-inverse colwhite">View Details</a></button></li>
+                                        <li><a href="<?php echo $this->webroot;?>product/<?php echo $data[$i + 1]['Product']['slug']; ?>" target="_blank">View Details</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -52,14 +50,14 @@
         <?php if (isset($data[$i + 2])) : ?>
                         <div class="span4 set-equal-heights-js">
                             <div class="thumbnail">
-                                <a href="property.html"><img src="<?php echo $this->webroot; ?>uploads/<?php echo $data[$i + 2]['Product']['featured'][0]; ?>" alt="Placeholder" class=""></a>
+                                <a href="<?php echo $this->webroot;?>product/<?php echo $data[$i + 2]['Product']['slug']; ?>"><img src="<?php echo $this->webroot; ?>uploads/<?php echo $data[$i + 2]['Product']['featured'][0]; ?>" alt="Placeholder" class=""></a>
                                 <div class="caption">
-                                    <a href="property.html" class="prop-title"><?php echo $data[$i + 2]['Product']['name']; ?></a>
+                                    <a href="<?php echo $this->webroot;?>product/<?php echo $data[$i + 2]['Product']['slug']; ?>" class="prop-title" style="text-transform: uppercase"><?php echo $data[$i + 2]['Product']['name']; ?></a>
 
-                                    <p class="price"><?php echo $data[$i + 2]['Product']['price']; ?></p>
+                                    <p class="price">$<?php echo $data[$i + 2]['Product']['price']; ?></p>
 
                                     <ul class="list-btns">
-                                        <li><button class="btn btn-small btn-inverse colwhite"><a href="" class="btn btn-small btn-inverse colwhite">View Details</a></button></li>
+                                        <li><a href="<?php echo $this->webroot;?>product/<?php echo $data[$i + 2]['Product']['slug']; ?>" target="_blank">View Details</a></li>
                                     </ul>
                                 </div>
                             </div>

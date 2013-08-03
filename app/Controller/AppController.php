@@ -23,6 +23,10 @@ class AppController extends Controller {
     );
     
     public function beforeFilter() {
+        //$this->set ("title", env ("SERVER_NAME"));
+    }
+    
+    public function afterFilter () {
     }
 }
 

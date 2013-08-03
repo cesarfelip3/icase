@@ -7,9 +7,30 @@ class IndexController extends AppController {
     public $uses = null;
 
     public function beforeFilter() {
-        $this->Auth->allow("signin","signup","reset");
+        $this->Auth->allow("signin","signup","reset", "index");
         $this->Auth->deny("logout");
         parent::beforeFilter();
+    }
+    
+    public function index () {
+        
+        $this->loadModel('Product');
+        $data = $this->Product->find('all',
+                array (
+                    "conditions" => array ("type" => "product"),
+                    "order" => array ("modified" => "DESC"),
+                    "limit" => 4,
+                    "page" => 0
+                ));
+        
+        if (!empty ($data)) {
+            foreach ($data as $key => $value) {
+                $value['Product']['featured'] = unserialize($value['Product']['featured']);
+                $data[$key] = $value;
+            }
+        }
+        
+        $this->set ('data', $data);
     }
 
     public function signin () {
