@@ -169,7 +169,7 @@ class ProductController extends AdminAppController {
                         foreach ($category as $value) {
                             $data[] = array(
                                 "category_guid" => $value,
-                                "object_guid" => $product_guid
+                                "object_guid" => $data['guid']
                             );
                         }
 
@@ -196,7 +196,7 @@ class ProductController extends AdminAppController {
                 foreach ($category as $value) {
                     $data[] = array(
                         "category_guid" => $value,
-                        "object_guid" => $product_guid
+                        "object_guid" => $data['guid']
                     );
                 }
 
