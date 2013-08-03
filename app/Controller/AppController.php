@@ -24,6 +24,7 @@ class AppController extends Controller {
     
     public function beforeFilter() {
         //$this->set ("title", env ("SERVER_NAME"));
+        $this->set ("load_shop_cart", true);
     }
     
     public function afterFilter () {

@@ -1,5 +1,6 @@
 <!-- Slider start-->
- 	
+ 
+
 <!-- end slider -->		 
 <!-- single column -->
 <div class="clear:both;"></div>

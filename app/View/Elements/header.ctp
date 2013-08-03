@@ -39,7 +39,7 @@ $action = $this->request->action;
                 <div class="nav-collapse">
                     <ul class="nav">
                         <li class="<?php
-                        if ($controller == "pages" && $action == "display")
+                        if ($controller == "index" && $action == "index")
                             echo "active";
                         ?>">
                             <a href="<?php echo $this->Html->Url("/", true); ?>">Home</a>
