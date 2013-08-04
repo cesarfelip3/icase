@@ -32,7 +32,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a href="profile.html">Your Profile</a></li>
-                                <li class="active"><a href="form.html">Account Settings</a></li>
+<!--                                <li class="active"><a href="form.html">Account Settings</a></li>-->
                                 <li class="divider"></li>
                                 <li><a href="">Logout</a></li>
                             </ul>
@@ -81,21 +81,21 @@
                                         <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-group"></i> Members <b class="caret"></b></a>
                                         <ul class="dropdown-menu">
                                             <li><a href="listing.html">Members</a></li>
-                                            <li><a href="listing.html">User Groups</a></li>
-                                            <li><a href="listing.html">Permissions</a></li>
+<!--                                            <li><a href="listing.html">User Groups</a></li>
+                                            <li><a href="listing.html">Permissions</a></li>-->
                                         </ul>
                                     </li>
                                     <li class="dropdown">
                                         <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-cogs"></i> Settings <b class="caret"></b></a>
                                         <ul class="dropdown-menu">
                                             <li><a href="listing.html">Payment Processors</a></li>
-                                            <li><a href="listing.html">Order Statuses</a></li>
-                                            <li><a href="listing.html">Shipping Methods</a></li>
+<!--                                            <li><a href="listing.html">Order Statuses</a></li>
+                                            <li><a href="listing.html">Shipping Methods</a></li>-->
                                             <li><a href="listing.html">Emails</a></li>
                                         </ul>
                                     </li>
                                 </ul>
-                                <ul class="nav pull-right">
+<!--                                <ul class="nav pull-right">
                                     <li><a href="#"><i class="icon-bullhorn"></i> Alerts<span class="badge badge-info">2</span></a></li>
                                     <li class="dropdown">
                                         <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-info-sign"></i> Help <b class="caret"></b></a>
@@ -105,7 +105,7 @@
                                             <li><a href="content.html">Support</a></li>
                                         </ul>
                                     </li>
-                                </ul>
+                                </ul>-->
                             </div>
                         </div>
                     </div>

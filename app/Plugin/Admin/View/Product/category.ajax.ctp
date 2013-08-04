@@ -76,7 +76,7 @@
     }
 </style>
 
-<ul class="media-list media-body-list">
+<ul class="media-list media-body-list" style='margin:0px;'>
     <?php
     if (!empty($data)) :
         foreach ($data as $value) :
@@ -89,28 +89,6 @@
         endforeach;
     endif;
     ?>
-    <!--                        
-                            <li><ul class="media-body media-body-list">
-                                    <li><a href="javascript:" data-guid="" data-name="abc">abc</a></li>
-                                    <li><a href="javascript:" data-guid="" data-name="abc">abc</a></li>
-                                    <li><a href="javascript:" data-guid="" data-name="abc">abc</a></li>
-                                    <li><a href="javascript:" data-guid="" data-name="abc">abc</a></li>
-                                    <li><a href="javascript:" data-guid="" data-name="abc">abc</a></li>
-                                    <li><a href="javascript:" data-guid="" data-name="abc">abc</a></li>
-                                    <li>
-                                        <a href="javascript:" data-guid="" data-name="aaa"><i class="icon-chevron-down indicator-expension"></i>aaa</span></a></li>
-                                    <li>
-                                        <ul class="media-body media-body-list">                   
-                                            <li><a href="javascript:" data-guid="" data-name="abc">abc</a><input type="text" class="input-small" style="display:none;" value="abc" /></li>
-                                            <li><a href="javascript:" data-guid="" data-name="abc">abc</a></li>
-                                            <li><a href="javascript:" data-guid="" data-name="abc">abc</a></li>
-                                            <li><a href="javascript:" data-guid="" data-name="abc">abc</a></li>
-                                            <li><a href="javascript:" data-guid="" data-name="abc">abc</a></li>
-                                            <li><a href="javascript:" data-guid="" data-name="abc">abc</a></li>
-                                        </ul>   
-                                    </li>
-                                </ul>
-                            </li>-->
 </ul>
 <script type="text/javascript">
 

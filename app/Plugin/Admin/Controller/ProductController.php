@@ -471,10 +471,6 @@ class ProductController extends AdminAppController {
                 $this->render('category.ajax');
             } else {
 
-                if (empty($action)) {
-                    exit("");
-                }
-
                 if ($action == "empty") {
                     $this->loadModel('Category');
                     $this->Category->query('TRUNCATE TABLE categories;');
