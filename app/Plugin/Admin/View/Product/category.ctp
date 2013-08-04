@@ -39,6 +39,13 @@ $admin_product = $base . "product";
                                 </div>
                             </div>
                             <div class="control-group">
+                                <label class="control-label" for="focusedInput">Slug</label>
+                                <div class="controls">
+                                    <input class="input-xlarge focused" id="focusedInput" type="text" name="category[slug]" >
+                                    <span class="help-inline"></span>
+                                </div>
+                            </div>
+                            <div class="control-group">
                                 <label class="control-label" for="disabledInput">Description</label>
                                 <div class="controls">
                                     <textarea name="category[description]" style="width:280px" rows="5"></textarea>

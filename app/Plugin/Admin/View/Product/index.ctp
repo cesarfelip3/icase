@@ -96,35 +96,8 @@ $product_delete = $base . "product" . DS . "delete";
                     </table>
                 </div>
             </div>
-<!--            <div class="modal hide fade" id="removeItem">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">×</button>
-                    <h3>Remove Item</h3>
-                </div>
-                <div class="modal-body">
-                    <p>Are you sure you would like to remove this item?</p>
-                </div>
-                <div class="modal-footer">
-                    <a href="#" class="btn" data-dismiss="modal">Close</a>
-                    <a href="#" class="btn btn-danger">Remove</a>
-                </div>
-            </div>-->
             <div class="span6">
-                <div class="pagination pull-left">
-                    <ul>
-                        <li><a href="javascript:" data-page="<?php echo $page - 1; ?>">Prev</a></li>
-                        <?php
-                        
-                        $j = 0;
-                        for (; $j < $pages; ++$j) : ?>
-                        <li <?php if ($j == $page) : echo 'class="active"'; endif; ?>>
-                            <a href="javascript:" data-page="<?php echo $j; ?>"><?php echo $j + 1; ?></a>
-                        </li>
-                        <?php
-                        endfor; ?>
-                        <li><a href="javascript:" data-page="<?php echo $page + 1; ?>">Next</a></li>
-                    </ul>
-                </div>
+                <?php echo $this->element("pagination", array ("plugin"=>"Admin", "page"=>$page, "form" => "#form-filter")); ?>
             </div>
             <div class="span6 listing-buttons pull-right">
                 <a href="<?php echo $this->webroot; ?>admin/product/category" class="btn btn-primary">Edit Category</a>
@@ -133,42 +106,4 @@ $product_delete = $base . "product" . DS . "delete";
         </div>
     </div>
 </div>
-<script>
-    $(document).ready 
-    (
-        function () 
-        {
-            $(".pagination a").click (
-                function () {
-                    var page = $(this).data('page');
-                    $('input[name=page]').val (page);
-                    $("#form-filter").submit();
-                    
-                });
-        }
-    );
-    
-    function del (id) {
-        var r=confirm("This operation will delete this category and all its decendents, are u sure?")
-        if (r==true)
-        {
-            //alert("You pressed OK!")
-        }
-        else
-        {
-            return;
-        }
-        jQuery.ajax({
-            url: "<?php echo $base; ?>product/delete/?id=" + id,
-            type: "GET",
-            beforeSend: function(xhr) {
-            }
-        }).done(function(data) {
-            $("#form-filter").submit ();
-        }).fail(function() {
-        });
-    }
-        
-        
-        
-</script>
+<?php echo $this->element("action_del", array ("plugin"=>"Admin", "actionUrl" => $base . "product/delete/", "form" => "#form-filter", "message" => "Are you sure to remove this product?")); ?>
