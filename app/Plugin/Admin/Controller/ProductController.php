@@ -372,7 +372,11 @@ class ProductController extends AdminAppController {
     }
 
     public function delete() {
+        $id = $this->request->query ('id');
+        $this->loadModel('Product');
         
+        $this->Product->delete ($id);
+        exit;
     }
 
     protected function _categoryList($data, &$return) {

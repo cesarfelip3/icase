@@ -87,7 +87,7 @@ $product_delete = $base . "product" . DS . "delete";
                                 <td><?php echo $value['Product']['tax']; ?>$</td>
                                 <td><?php echo date ("Y-m-d H:i:s", $value['Product']['created']); ?></td>
                                 <td class="actions">
-                                    <a class="btn btn-small btn-danger" data-toggle="modal" href="#removeItem">Remove</a>
+                                    <a class="btn btn-small btn-danger" onclick="del('<?php echo $value['Product']['id']; ?>')">Remove</a>
                                     <a class="btn btn-small btn-primary" href="<?php echo $product_edit; ?>?id=<?php echo $value['Product']['guid']; ?>" target="_blank">Edit</a>
                                 </td>
                             </tr>
@@ -96,7 +96,7 @@ $product_delete = $base . "product" . DS . "delete";
                     </table>
                 </div>
             </div>
-            <div class="modal hide fade" id="removeItem">
+<!--            <div class="modal hide fade" id="removeItem">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">×</button>
                     <h3>Remove Item</h3>
@@ -108,7 +108,7 @@ $product_delete = $base . "product" . DS . "delete";
                     <a href="#" class="btn" data-dismiss="modal">Close</a>
                     <a href="#" class="btn btn-danger">Remove</a>
                 </div>
-            </div>
+            </div>-->
             <div class="span6">
                 <div class="pagination pull-left">
                     <ul>
@@ -148,7 +148,26 @@ $product_delete = $base . "product" . DS . "delete";
         }
     );
     
-    
+    function del (id) {
+        var r=confirm("This operation will delete this category and all its decendents, are u sure?")
+        if (r==true)
+        {
+            //alert("You pressed OK!")
+        }
+        else
+        {
+            return;
+        }
+        jQuery.ajax({
+            url: "<?php echo $base; ?>product/delete/?id=" + id,
+            type: "GET",
+            beforeSend: function(xhr) {
+            }
+        }).done(function(data) {
+            $("#form-filter").submit ();
+        }).fail(function() {
+        });
+    }
         
         
         
