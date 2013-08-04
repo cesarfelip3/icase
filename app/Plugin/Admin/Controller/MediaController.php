@@ -14,10 +14,7 @@ class MediaController extends AppController {
         parent::beforeFilter();
     }
 
-    public function upload() {
-
-        error_reporting(-1);
-        ini_set('display_errors', 'On');
+    public function uploadimage () {
 
         $this->autoRender = false;
         header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
@@ -144,13 +141,14 @@ class MediaController extends AppController {
             }
         }
 
-        $name = pathinfo($fileName, PATHINFO_FILENAME);
+        $filename = pathinfo($fileName, PATHINFO_FILENAME);
         $extension = pathinfo($fileName, PATHINFO_EXTENSION);
 
-        $original = $name . "." . $extension;
-        //$name .= "_" . time() . "." . $extension;
-        $name = uniqid() . "." . $extension;
+        $original = $filename . "." . $extension;
         
+        $filename = uniqid ();
+        $name = $filename . "." . $extension;
+
         $target = $targetDir . DIRECTORY_SEPARATOR . $name;
 
         if (!$chunks || $chunk == $chunks - 1) {
@@ -158,92 +156,66 @@ class MediaController extends AppController {
             rename("{$filePath}.part", $target);
         }
 
-        //$finfo = finfo_open(FILEINFO_MIME_TYPE);
-        // $mime = finfo_file($finfo, $target);
-        //finfo_close($finfo);
-
         $this->_error['error'] = 0;
         $this->_error['message'] = 'Success';
         $this->_error['files'] = array(
             'original' => $original,
             'target' => $name,
+            'filename' => $filename,
             'url' => $this->base . "/uploads/" . $name,
+            'url150' => $this->base . "/uploads/" . $filename . "_150." . $extension,
             'extension' => $extension,
-                //'mime' => $mime
         );
 
-        die($this->_json($this->_error));
-    }
+        require_once APP . 'Vendor' . DS . "Zebra/Zebra_Image.php";
+        $image = new Zebra_Image();
 
-    public function preview() {
-        error_reporting(-1);
-        ini_set('display_errors', 'On');
+        $image->source_path = $target;
+        $image->target_path = $targetDir . DIRECTORY_SEPARATOR . $filename . "_150." .$extension;
 
-        $this->autoRender = false;
-        header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
-        header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-        header("Cache-Control: no-store, no-cache, must-revalidate");
-        header("Cache-Control: post-check=0, pre-check=0", false);
-        header("Pragma: no-cache");
+        $image->jpeg_quality = 100;
 
-        $targetDir = $this->_targetDir = ROOT . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'uploads';
+        $image->preserve_aspect_ratio = true;
+        $image->enlarge_smaller_images = true;
+        $image->preserve_time = true;
 
-        $cleanupTargetDir = true; // Remove old files
-        $maxFileAge = 5 * 3600; // Temp file age in seconds
-        @set_time_limit(0);
+        // resize the image to exactly 100x100 pixels by using the "crop from center" method
+        // (read more in the overview section or in the documentation)
+        //  and if there is an error, check what the error is about
+        if (!$image->resize(150, 0, ZEBRA_IMAGE_CROP_CENTER)) {
 
-        $imageData = $_POST['image-data'];
-        $extension = $_POST['image-extension'];
+            // if there was an error, let's see what the error is about
+            switch ($image->error) {
 
-        $imageData = str_replace("data:image/" . $extension . ";base64,", "", $imageData);
+                case 1:
+                    //echo 'Source file could not be found!';
+                    break;
+                case 2:
+                    //echo 'Source file is not readable!';
+                    break;
+                case 3:
+                    //echo 'Could not write target file!';
+                    break;
+                case 4:
+                    //echo 'Unsupported source file format!';
+                    break;
+                case 5:
+                    //echo 'Unsupported target file format!';
+                    break;
+                case 6:
+                    //echo 'GD library version does not support target file format!';
+                    break;
+                case 7:
+                    //echo 'GD library is not installed!';
+                    break;
+                case 8:
+                    //echo '"chmod" command is disabled via configuration!';
+                    break;
+            }
 
-        $filename = uniqid() . "." . $extension;
-        $file = base64_encode($imageData);
-        $out = @fopen($targetDir . DIRECTORY_SEPARATOR . $filename, "wb");
-
-        if ($out) {
-            fwrite($out, base64_decode($imageData));
-            @fclose($out);
-        } else {
-            $this->_error['error'] = 1;
-            $this->_error['message'] = 'open write handler faild';
-            die($this->_json($this->_error));
+            // if no errors
         }
-
-        $this->_error['error'] = 0;
-        $this->_error['message'] = 'success';
-        $this->_error['files'] = array(
-            'original' => "",
-            'target' => $filename,
-            'url' => "uploads/" . $filename,
-            'extension' => $extension,
-                //'mime' => $mime
-        );
-
-        $size = getimagesize($targetDir . DIRECTORY_SEPARATOR . $filename);
-
-        $current_width = $size[0];
-        $current_height = $size[1];
-
-        $left = 100;
-        $top = 5;
-
-        $crop_width = 248;
-        $crop_height = 437;
-
-        // Resample the image
-        $canvas = imagecreatetruecolor($crop_width, $crop_height);
-        $current_image = imagecreatefromjpeg($targetDir . DIRECTORY_SEPARATOR . $filename);
-        imagecopy($canvas, $current_image, 0, 0, $left, $top, $current_width, $current_height);
-        imagejpeg($canvas, $targetDir . DIRECTORY_SEPARATOR . $filename, 100);
-
-        $path = $targetDir . DIRECTORY_SEPARATOR . $filename;
-        $image = file_get_contents($targetDir . DIRECTORY_SEPARATOR . $filename);
-
-        $image = substr_replace($image, pack("cnn", 1, 300, 300), 13, 5);
-
-        file_put_contents($targetDir . DIRECTORY_SEPARATOR . $filename, $image);
-
+        
         die($this->_json($this->_error));
     }
 

@@ -2,6 +2,15 @@
 $admin_home = $base;
 $admin_product = $base . "product";
 ?>
+<style>
+    div.control-group label.control-label {
+        width:60px;
+    }
+    
+    form.form-horizontal div.controls {
+        margin-left:100px;
+    }
+</style>
 <div class="secondary-masthead">
     <div class="container">
         <ul class="breadcrumb">
@@ -24,7 +33,16 @@ $admin_product = $base . "product";
             <h4 class="alert-heading">Information</h4>
         </div>
         <div class="row">
-            <div class="span7">
+            <div class="span2">
+                <div class="slate" id='box-category'>
+                    <div class="page-header">
+                        <h2>Categories</h2>
+                    </div>
+                    <div class='body' style="height:500px;overflow: auto;">
+                    </div>
+                </div>
+            </div>
+            <div class="span5">
                 <div class="slate">
                     <div class="page-header">
                         <h2>New Category</h2>
@@ -39,16 +57,18 @@ $admin_product = $base . "product";
                                 </div>
                             </div>
                             <div class="control-group">
-                                <label class="control-label" for="focusedInput">Slug</label>
+                                <label class="control-label" for="focusedInput">URL Key</label>
                                 <div class="controls">
                                     <input class="input-xlarge focused" id="focusedInput" type="text" name="category[slug]" >
                                     <span class="help-inline"></span>
                                 </div>
                             </div>
                             <div class="control-group">
-                                <label class="control-label" for="disabledInput">Description</label>
+                                <label class="control-label" for="disabledInput">SEO</label>
                                 <div class="controls">
-                                    <textarea name="category[description]" style="width:280px" rows="5"></textarea>
+                                    <p><input class="input-xlarge focused" id="focusedInput" type="text" name="category[seo_keywords]" placeholder="keywords" ></p>
+                                    <p><input class="input-xlarge focused" id="focusedInput" type="text" name="category[seo_meta]" placeholder="meta"></p>
+                                    <p><textarea name="category[seo_description]" style="width:280px" rows="3" placeholder="description"></textarea></p>
                                 </div>
                             </div>
                             <div class="control-group warning">
@@ -63,18 +83,6 @@ $admin_product = $base . "product";
                             </div>
                             <hr/>
                             <div class="control-group warning">
-                                <label class="control-label" for="inputWarning">Selection</label>
-                                <div class="controls">
-                                    <input type="text" class="input-small" name="category[edit][name]" placeholder="name" data-guid="">
-                                    <input type="text" class="input-mini" name="category[edit][order]" placeholder="order" data-guid="">
-                                    <input type="hidden" class="input-mini" name="category[edit][guid]" placeholder="order" data-guid="">
-                                    <span class="help-inline"></span>
-                                    <a href="javascript:" class="btn btn-success" onclick="category_edit(true);">Update</a>
-                                    <a href="javascript:" class="btn btn-info" onclick="category_edit(false);">Delete</a>
-                                </div>
-                            </div>
-                            <hr/>
-                            <div class="control-group warning">
                                 <label class="control-label" for="inputWarning"></label>
                                 <div class="controls">
                                     <a href="javascript:" class="btn btn-info" onclick="category_empty_table();">Empty Category Table</a>
@@ -85,12 +93,45 @@ $admin_product = $base . "product";
                 </div>
             </div>
             <div class="span5">
-                <div class="slate" id='box-category'>
+                <div class="slate">
                     <div class="page-header">
-                        <h2>Category</h2>
+                        <h2>Edit Category</h2>
                     </div>
-                    <div class='body' style="height:500px;overflow: auto;">
-                    </div>
+                    <form class="form-horizontal" id="form-edit">
+                        <fieldset>
+                            <div class="control-group">
+                                <label class="control-label" for="focusedInput">Name</label>
+                                <div class="controls">
+                                    <input class="input-xlarge focused" id="focusedInput" type="text" name="category[name]" >
+                                    <span class="help-inline"></span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="focusedInput">URL Key</label>
+                                <div class="controls">
+                                    <input class="input-xlarge focused" id="focusedInput" type="text" name="category[slug]" >
+                                    <span class="help-inline"></span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="disabledInput">SEO</label>
+                                <div class="controls">
+                                    <p><input class="input-xlarge focused" id="focusedInput" type="text" name="category[seo_keywords]" placeholder="keywords" ></p>
+                                    <p><input class="input-xlarge focused" id="focusedInput" type="text" name="category[seo_meta]" placeholder="meta"></p>
+                                    <p><textarea name="category[seo_description]" style="width:280px" rows="3" placeholder="description"></textarea></p>
+                                </div>
+                            </div>
+                            <div class="control-group warning">
+                                <label class="control-label" for="inputWarning">Order</label>
+                                <div class="controls">
+                                    <input type="text" name="category['order']" class='input-mini' />
+                                    <span class="help-inline"></span>
+                                    <a href="javascript:" class="btn btn-success" data-loading-text="Saving..." onclick="save();" id="btn-save">Update</a>
+                                </div>
+                            </div>
+                            <hr/>
+                        </fieldset>
+                    </form>
                 </div>
             </div>
         </div>
@@ -100,7 +141,7 @@ $admin_product = $base . "product";
     $(document).ready(
             function() {
 
-               category_load ();
+                category_load();
             })
 
     function save() {
@@ -124,30 +165,30 @@ $admin_product = $base . "product";
             } else {
                 $(result.element).parent().parent().removeClass('error');
                 $(result.element).next(".help-inline").html("");
-                category_load ();
+                category_load();
             }
 
         }).fail(function() {
         });
     }
-    
+
     function category_edit(update) {
-    
+
         var url;
         var guid;
         var name;
-        
+
         name = $("input[name='category[edit][name]']").val();
-        if ($.trim (name) == "") {
+        if ($.trim(name) == "") {
             return;
         }
-        
+
         if (update) {
             url = "<?php echo $base; ?>product/category/?action=update";
         } else {
             url = "<?php echo $base; ?>product/category/?action=delete";
-            var r=confirm("This operation will delete this category and all its decendents, are u sure?")
-            if (r==true)
+            var r = confirm("This operation will delete this category and all its decendents, are u sure?")
+            if (r == true)
             {
                 //alert("You pressed OK!")
             }
@@ -156,16 +197,16 @@ $admin_product = $base . "product";
                 return;
             }
         }
-        
+
         //or = $("input[name='category[edit][order]']").val();
         //name = $("input[name='category[edit][name]']").val();        
-        
+
         jQuery.ajax({
             url: url,
             data: $("#form-new").serialize(),
             type: "POST",
             beforeSend: function(xhr) {
-                showAlert ("Updating......");
+                showAlert("Updating......");
             }
         }).done(function(data) {
 
@@ -175,18 +216,18 @@ $admin_product = $base . "product";
                     window.location.href = "";
                 }
             } else {
-                hideAlert ();
-                category_load ();
+                hideAlert();
+                category_load();
             }
 
         }).fail(function() {
-            hideAlert ();
+            hideAlert();
         });
     }
-    
+
     function category_empty_table() {
-        var r=confirm("This operation will empty all table data, are u sure?")
-        if (r==true)
+        var r = confirm("This operation will empty all table data, are u sure?")
+        if (r == true)
         {
             //alert("You pressed OK!")
         }
@@ -194,7 +235,7 @@ $admin_product = $base . "product";
         {
             return;
         }
-        
+
         jQuery.ajax({
             url: "<?php echo $base; ?>product/category/?action=empty",
             data: {},
@@ -216,13 +257,13 @@ $admin_product = $base . "product";
             hideAlert();
         });
     }
-    
+
     function category_clear() {
         $("input[name='category[parent_guid]']").val("");
         $("input[name='category[parent]']").val("");
     }
-    
-    function category_load () {
+
+    function category_load() {
         jQuery.ajax({
             url: "<?php echo $base; ?>product/category",
             type: "GET",
@@ -238,5 +279,5 @@ $admin_product = $base . "product";
             hideAlert();
         });
     }
- 
+
 </script>

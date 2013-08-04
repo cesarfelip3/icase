@@ -81,8 +81,8 @@ $admin_product = $base . "product";
                             <div class="control-group warning">
                                 <label class="control-label" for="inputWarning" >Quantity</label>
                                 <div class="controls">
-                                    <input type="text" class="input-mini" name="product[quantity]" value="0">
-                                    <span class="help-inline">0 means unlimited</span>
+                                    <input type="text" class="input-mini" name="product[quantity]" value="65535">
+                                    <span class="help-inline">65535 means unlimited</span>
                                 </div>
                             </div>
                             <div class="page-header">
@@ -267,7 +267,7 @@ $js_pluploader = array(
         browse_button: 'btn-select-template-image',
         container: 'template-image-uploader',
         max_file_size: '10mb',
-        url: '<?php echo $base; ?>media/upload',
+        url: '<?php echo $base; ?>media/uploadimage',
         multi_selection: false,
         //resize: {width: 640, height: 240, quality: 100},
         //flash_swf_url: 'js/uploader/plupload.flash.swf',
@@ -340,7 +340,7 @@ $js_pluploader = array(
         browse_button: 'btn-select-featured-image',
         container: 'featured-image-uploader',
         max_file_size: '10mb',
-        url: '<?php echo $base; ?>media/upload',
+        url: '<?php echo $base; ?>media/uploadimage',
         multi_selection: true,
         //resize: {width: 640, height: 240, quality: 100},
         //flash_swf_url: 'js/uploader/plupload.flash.swf',
@@ -387,7 +387,7 @@ $js_pluploader = array(
                 //console.log(result);
                 if (result.error == 0) {
                     //console.log(result.files.url);
-                    $("#box-featured-image").append('<div class="thumbnail" style="width:24%;float:left;margin-left:5px;margin-bottom:10px;"><a class="featured-thumbnail"><img src="' + result.files.url + '" style="" /></a><div class="caption"><p><a class="btn btn-success" data-image="' + result.files.target + '" onclick="featured_image_delete(this);">Delete</a></p></div></div>');
+                    $("#box-featured-image").append('<div class="thumbnail" style="width:24%;float:left;margin-left:5px;margin-bottom:10px;"><a class="featured-thumbnail"><img src="' + result.files.url150 + '" style="" /></a><div class="caption"><p><a class="btn btn-success" data-image="' + result.files.target + '" onclick="featured_image_delete(this);">Delete</a></p></div></div>');
                     $("input[name='product[featured]']").val($("input[name='product[featured]']").val() + "-" + result.files.target);
                     //console.log ($("input[name='product[featured]']").val());
                     init();

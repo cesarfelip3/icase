@@ -9,7 +9,6 @@ class ProductController extends AdminAppController {
     }
 
     public function index() {
-        $this->loadModel('Product');
 
         $page = $this->request->query('page');
         $limit = $this->request->query('limit');
@@ -26,45 +25,65 @@ class ProductController extends AdminAppController {
             $page = 0;
         }
 
+        $keyword = $this->request->query('keyword');
+        $filter = $this->request->query('filter');
+
+        $start = $this->request->query('start');
+        $end = $this->request->query('end');
+
         $conditions = array();
-        if ($this->request->is('post')) {
-            $keyword = $this->request->data('keyword');
-            $filter = $this->request->data('filter');
 
-            $start = $this->request->data('start');
-            $end = $this->request->data('end');
-
-
-            if (!empty($start) && !empty($end)) {
-                $duration = array("created >=" => strtotime($start), "created <=" => strtotime($end));
-                $conditions = array("AND" => $duration);
-            }
-
-            if (!empty($keyword)) {
-                $search = array("name LIKE" => "%" . Sanitize::escape($keyword) . "%", "description LIKE" => "%" . Sanitize::escape($keyword) . "%");
-                $conditions = array_merge($conditions, array("OR" => $search));
-            }
+        if (!empty($start) && !empty($end)) {
+            $duration = array("created >=" => strtotime($start), "created <=" => strtotime($end));
+            $conditions = array("AND" => $duration);
         }
 
-        $this->Product->create();
+        if (!empty($keyword)) {
+            $search = array("name LIKE" => "%" . Sanitize::escape($keyword) . "%", "description LIKE" => "%" . Sanitize::escape($keyword) . "%");
+            $conditions = array_merge($conditions, array("OR" => $search));
+        }
+
+        //=========================================================
+        $this->loadModel('Product');
         $data = $this->Product->find('all', array(
             'limit' => $limit,
             'page' => $page + 1,
             'conditions' => $conditions,
+            'fields' => array("Product.*", "COUNT(*) AS count")
                 )
         );
 
-        $total = $this->Product->find('count', array('conditions' => $conditions));
-        $pages = ceil($total / $limit);
+        if (!empty($data)) {
+            $total = $data[0][0]['count'];
+            foreach ($data as $key => $value) {
+
+                if ($value['Product']['type'] == 'product') {
+                    $value['Product']['featured'] = unserialize($value['Product']['featured']);
+                    $value['Product']['image'] = count($value['Product']['featured']) > 0 ? $value['Product']['featured'][0] : "";
+                    $data[$key] = $value;
+                }
+            }
+        } else {
+            $total = 0;
+        }
         
-        $params = array(
+        if ($total == 0) {
+            $data = array ();
+        }
+        //=========================================================
+
+        $pages = ceil($total / $limit);
+
+        $this->set(array(
             "data" => $data,
             "page" => $page,
             "limit" => $limit,
             "pages" => $pages,
-        );
-
-        $this->set($params);
+            "keyword" => $keyword,
+            "start" => $start,
+            "end" => $end,
+            "filter" => $filter
+        ));
     }
 
     public function add() {
@@ -151,8 +170,8 @@ class ProductController extends AdminAppController {
                 );
             }
 
-            $data['slug'] = preg_replace ("/ +/i", "-", $data['name']) . "-" . uniqid();
-            
+            $data['slug'] = preg_replace("/ +/i", "-", $data['name']) . "-" . uniqid();
+
             if ($action == "update" && !empty($data['guid'])) {
                 $count = $this->Product->find('count', array("conditions" => array("guid" => $data['guid'])));
                 if ($count == 0) {
@@ -217,7 +236,7 @@ class ProductController extends AdminAppController {
             'message' => '',
             'data' => ''
         );
-        
+
         if ($this->request->is('ajax') && $this->request->is('post')) {
             $this->autoRender = false;
 
@@ -350,52 +369,54 @@ class ProductController extends AdminAppController {
             $error['element'] = 'input';
             exit(json_encode($error));
         }
-        
-        
-        $guid = $this->request->query ("id");
-        if (empty ($guid)) {
-            $this->set ('data', null);
+
+
+        $guid = $this->request->query("id");
+        if (empty($guid)) {
+            $this->set('data', null);
             return;
         }
-        
-        $this->loadModel ('Product');
-        
-        $data = $this->Product->find ('first', array ("conditions" => array ("guid" => $guid)));
+
+        $this->loadModel('Product');
+
+        $data = $this->Product->find('first', array("conditions" => array("guid" => $guid)));
         $data = $data['Product'];
         if (!empty($data)) {
             $data['featured'] = unserialize($data['featured']);
-            $data['created'] = date ("F j, Y, g:i a", $data['created']);
-            $data['modified'] = date ("F j, Y, g:i a", $data['modified']);
+            $data['created'] = date("F j, Y, g:i a", $data['created']);
+            $data['modified'] = date("F j, Y, g:i a", $data['modified']);
         }
-        
-        $this->set ('data', $data);
+
+        $this->set('data', $data);
     }
 
     public function delete() {
-        $id = $this->request->query ('id');
+        $id = $this->request->query('id');
         $this->loadModel('Product');
-        
-        $this->Product->delete ($id);
-        exit;
-    }
 
-    protected function _categoryList($data, &$return) {
+        $data = $this->Product->find('first', array("conditions" => array("id" => $id)));
         if (!empty($data)) {
-            foreach ($data as $value) {
 
-                if ($value['Category']['children'] > 0) {
-                    $result = $this->Category->find('all', array(
-                        "conditions" => array('parent_guid' => $value['Category']['guid']),
-                        "order" => array('order ASC')
-                            )
-                    );
-                    $return[] = $value;
-                    $this->_categoryList($result, $return);
-                } else {
-                    $return[] = $value;
+            $data['Product']['featured'] = unserialize($data['Product']['featured']);
+            if (!empty($data['Product']['featured'])) {
+
+                foreach ($data['Product']['featured'] as $value) {
+                    @unlink(ROOT . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'uploads' . DS . $value);
+                    $value = @preg_replace("/\./i", "_150.", $value);
+                    @unlink(ROOT . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'uploads' . DS . $value);
                 }
             }
+
+            if (!empty($data['Product']['image'])) {
+                $value = $data['Product']['image'];
+                @unlink(ROOT . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'uploads' . DS . $value);
+                $value = @preg_replace("/\./i", "_150.", $value);
+                @unlink(ROOT . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'uploads' . DS . $value);
+            }
         }
+
+        $this->Product->delete($id);
+        exit;
     }
 
     public function category() {
@@ -542,6 +563,25 @@ class ProductController extends AdminAppController {
                     );
                     $this->Category->save($category);
                     exit(json_encode($error));
+                }
+            }
+        }
+    }
+
+    protected function _categoryList($data, &$return) {
+        if (!empty($data)) {
+            foreach ($data as $value) {
+
+                if ($value['Category']['children'] > 0) {
+                    $result = $this->Category->find('all', array(
+                        "conditions" => array('parent_guid' => $value['Category']['guid']),
+                        "order" => array('order ASC')
+                            )
+                    );
+                    $return[] = $value;
+                    $this->_categoryList($result, $return);
+                } else {
+                    $return[] = $value;
                 }
             }
         }

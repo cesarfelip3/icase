@@ -149,15 +149,15 @@ h1, h2, h3, h4, h5, h6 {
 /* Slates */
 
 .slate {
-	background: #F8F8F8;
+	background: #FEFEFE;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
-	-moz-box-shadow:1px 1px 3px 1px rgba(186, 186, 186, 0.4);
+	/*-moz-box-shadow:1px 1px 3px 1px rgba(186, 186, 186, 0.4);
 	-webkit-box-shadow:1px 1px 3px 1px rgba(186, 186, 186, 0.4);
-	box-shadow:1px 1px 3px 1px rgba(186, 186, 186, 0.4);
+	box-shadow:1px 1px 3px 1px rgba(186, 186, 186, 0.4);*/
 	padding: 10px 20px;
-	border: 2px solid #FFF;
+	border: 1px solid #DDD;
 	margin-bottom: 20px;
 }
 
