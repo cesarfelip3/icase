@@ -213,7 +213,7 @@ $admin_product = $base . "product";
 
         CKEDITOR.instances.editor1.updateElement();
         jQuery.ajax({
-            url: "<?php echo $base; ?>product/add/?action" + action,
+            url: "<?php echo $base; ?>product/add/?action=" + action,
             data: $("#form-new").serialize(),
             type: "POST",
             beforeSend: function(xhr) {

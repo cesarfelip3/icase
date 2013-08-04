@@ -424,7 +424,6 @@ class ShopController extends AppController {
             $this->loadModel('Product');
             $data = $this->Product->find("all", array(
                 "conditions" => array(
-                    "active" => 1,
                     "type" => "template"
                 ),
                 "order" => array(
@@ -437,6 +436,7 @@ class ShopController extends AppController {
                 $data[$key] = $value;
             }
 
+            
 
             echo json_encode($data);
         }

@@ -151,6 +151,8 @@ class ProductController extends AdminAppController {
                 );
             }
 
+            $data['slug'] = preg_replace ("/ +/i", "-", $data['name']) . "-" . uniqid();
+            
             if ($action == "update" && !empty($data['guid'])) {
                 $count = $this->Product->find('count', array("conditions" => array("guid" => $data['guid'])));
                 if ($count == 0) {
@@ -185,23 +187,22 @@ class ProductController extends AdminAppController {
             }
 
             $this->Product->create();
-            $this->Product->save($product);
+            $this->Product->save($data);
             $error['data'] = $data['guid'];
 
             if (!empty($category)) {
 
                 $this->loadModel('CategoryToObject');
 
-                $data = array();
                 foreach ($category as $value) {
-                    $data[] = array(
+                    $categories[] = array(
                         "category_guid" => $value,
                         "object_guid" => $data['guid']
                     );
                 }
 
                 $this->CategoryToObject->create();
-                $this->CategoryToObject->saveMany($data);
+                $this->CategoryToObject->saveMany($categories);
             }
 
             $error['element'] = 'input';
