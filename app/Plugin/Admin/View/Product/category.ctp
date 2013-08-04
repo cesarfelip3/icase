@@ -77,7 +77,7 @@ $admin_product = $base . "product";
                                     <input type="text" class="input-medium" name="category[parent]" placeholder="Parent category">
                                     <input type="hidden" class="input-medium" name="category[parent_guid]">
                                     <span class="help-inline"></span>
-                                    <a href="javascript:" class="btn btn-success" data-loading-text="Saving..." onclick="save();" id="btn-save">Save</a>
+                                    <a href="javascript:" class="btn btn-success" data-loading-text="Saving..." onclick="save('add');" id="btn-save">Create</a>
                                     <a href="javascript:" class="btn btn-success" onclick="category_clear();" id="btn-clear">Clear</a>
                                 </div>
                             </div>
@@ -98,6 +98,11 @@ $admin_product = $base . "product";
                         <h2>Edit Category</h2>
                     </div>
                     <form class="form-horizontal" id="form-edit">
+                        <input type="hidden" name="category[guid]" />
+                        <input type='hidden' name='category[id]' />
+                        <input type='hidden' name='category[group_guid]' />
+                        <input type='hidden' name='category[parent_guid]' />
+                        <input type='hidden' name='category[level]' />
                         <fieldset>
                             <div class="control-group">
                                 <label class="control-label" for="focusedInput">Name</label>
@@ -124,9 +129,10 @@ $admin_product = $base . "product";
                             <div class="control-group warning">
                                 <label class="control-label" for="inputWarning">Order</label>
                                 <div class="controls">
-                                    <input type="text" name="category['order']" class='input-mini' />
+                                    <input type="text" name="category[order]" class='input-mini' />
                                     <span class="help-inline"></span>
-                                    <a href="javascript:" class="btn btn-success" data-loading-text="Saving..." onclick="save();" id="btn-save">Update</a>
+                                    <a href="javascript:" class="btn btn-success" data-loading-text="Updating..." onclick="save('update', this);" id="btn-update">Update</a>
+                                    <a href="javascript:" class="btn btn-success" data-loading-text="Deleting..." onclick="save('delete', this);" id="btn-update">Delete</a>
                                 </div>
                             </div>
                             <hr/>
@@ -144,27 +150,41 @@ $admin_product = $base . "product";
                 category_load();
             })
 
-    function save() {
+    function save(action, button) {
+        
+        var data = "";
+        if (action == "update") {
+            data = $("#form-edit").serialize();
+        } 
+        
+        if (action == "add") {
+            data = $("#form-new").serialize();
+        }
+        
+        if (action == "delete") {
+            data = $("#form-edit").serialize();
+        }
+        
         jQuery.ajax({
-            url: "<?php echo $base; ?>product/category/?action=add",
-            data: $("#form-new").serialize(),
+            url: "<?php echo $base; ?>product/category/?action=" + action,
+            data: data,
             type: "POST",
             beforeSend: function(xhr) {
-                $("#btn-save").button('loading');
+                $(button).button('loading');
             }
         }).done(function(data) {
-            $("#btn-save").button('reset');
+            $(button).button('reset');
 
             var result = $.parseJSON(data);
             console.log(result);
             if (result.error == 1) {
-                console.log(result.element);
-                $(result.element).next(".help-inline").html(result.message);
-                $(result.element).parent().parent().addClass('error');
+                //console.log(result.element);
+                //$(result.element).next(".help-inline").html(result.message);
+                //$(result.element).parent().parent().addClass('error');
                 showAlert(result.message);
             } else {
-                $(result.element).parent().parent().removeClass('error');
-                $(result.element).next(".help-inline").html("");
+                //$(result.element).parent().parent().removeClass('error');
+                //$(result.element).next(".help-inline").html("");
                 category_load();
             }
 

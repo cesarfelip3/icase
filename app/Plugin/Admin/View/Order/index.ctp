@@ -21,18 +21,18 @@
         <div class="row">
             <div class="span12">
                 <div class="slate">
-                    <form class="form-inline">
-                        <input type="text" class="input-large" placeholder="Order # or Customer Name...">
-                        <select>
-                            <option value=""> - From Date - </option>
+                    <form class="form-inline" id='form-filter' method='GET'>
+                        <input type='hidden' name='page' value='<?php echo $page; ?>' />
+                        <input type="text" class="input-large" placeholder="Keyword..." name='keyword' value='<?php echo $keyword; ?>'>
+                        <input type='text' class='input-small datepicker' name='start' placeholder='Start Date' readonly='readonly' value="<?php echo $start; ?>" />
+                        <input type='text' class='input-small datepicker' name='end' placeholder='End Date' readonly='readonly' value="<?php echo $end; ?>" />
+                        <select name='filter'>
+                            <option value=""> - Filter - </option>
+                            <?php foreach ($filters as $key=>$value) :?>
+                            <option value="<?php echo $key; ?>" <?php if ($key == $filter) echo 'selected="selected"'; ?>><?php echo $value; ?></option>
+                            <?php endforeach; ?>
                         </select>
-                        <select>
-                            <option value=""> - To Date - </option>
-                        </select>
-                        <select>
-                            <option value=""> - Order Status - </option>
-                        </select>
-                        <button type="submit" class="btn btn-primary">Filter</button>
+                        <input type="submit" class="btn btn-primary" name="action" value="Filter" />
                     </form>
                 </div>
             </div>
@@ -100,18 +100,7 @@
                 </div>
             </div>
             <div class="span6">
-                <div class="pagination pull-left">
-                    <ul>
-                        <li><a href="#">Prev</a></li>
-                        <li class="active">
-                            <a href="#">1</a>
-                        </li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">Next</a></li>
-                    </ul>
-                </div>
+                <?php echo $this->element("pagination", array ("plugin"=>"Admin", "page"=>$page, "form" => "#form-filter")); ?>
             </div>
             <div class="span6 listing-buttons pull-right">
                 <a class="btn btn-primary">Update Selected</a>

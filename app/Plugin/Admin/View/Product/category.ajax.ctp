@@ -82,7 +82,19 @@
         foreach ($data as $value) :
             ?>
             <li class="media level<?php echo $value['Category']['level']; ?>">
-                <a href="javascript:" data-guid="<?php echo $value['Category']['guid']; ?>" data-name="<?php echo $value['Category']['name']; ?>" data-order="<?php echo $value['Category']['order']; ?>" class="t<?php echo $value['Category']['parent_guid']; ?>"><?php if (isset($checkbox) && $checkbox) : ?><input type="checkbox" name="category[]" value="<?php echo $value['Category']['guid']; ?>" /><?php endif; ?> <?php echo $value['Category']['name']; ?><?php if ($value['Category']['children'] > 0 && false) : ?><i class="icon-chevron-down indicator-expension"></i><?php else: ?><?php endif; ?></a>
+                <a href="javascript:" 
+                   data-id="<?php echo $value['Category']['id']; ?>" 
+                   data-guid="<?php echo $value['Category']['guid']; ?>"
+                   data-group-guid='<?php echo $value['Category']['group_guid']; ?>'
+                   data-parent_guid='<?php echo $value['Category']['parent_guid']; ?>'
+                   data-level='<?php echo $value['Category']['level']; ?>'
+                   data-name="<?php echo addslashes ($value['Category']['name']); ?>" 
+                   data-order="<?php echo $value['Category']['order']; ?>" 
+                   data-slug="<?php echo addslashes($value['Category']['slug']); ?>"
+                   data-seo-keywords="<?php echo addslashes($value['Category']['seo_keywords']); ?>"
+                   data-seo-meta="<?php echo addslashes ($value['Category']['seo_meta']); ?>"
+                   data-seo-description="<?php echo addslashes ($value['Category']['seo_description']); ?>"
+                   class="t<?php echo $value['Category']['parent_guid']; ?>"><?php if (isset($checkbox) && $checkbox) : ?><input type="checkbox" name="category[]" value="<?php echo $value['Category']['guid']; ?>" /><?php endif; ?> <?php echo $value['Category']['name']; ?><?php if ($value['Category']['children'] > 0 && false) : ?><i class="icon-chevron-down indicator-expension"></i><?php else: ?><?php endif; ?></a>
 
             </li>
             <?php
@@ -114,17 +126,37 @@
         $(".media-body-list a").click(function(e) {
             $(".media-body-list li").removeClass("active");
             $(this).parent().addClass("active");
+            
             var name = $(this).data('name');
             var guid = $(this).data('guid');
-
+            var slug = $(this).data('slug');
+            var keywords = $(this).data('seo-keywords');
+            var meta = $(this).data('seo-meta');
+            var description = $(this).data('seo-description');
             var order = $(this).data('order');
-
-            $("input[name='category[parent_guid]']").val(guid);
-            $("input[name='category[parent]']").val(name);
-
-            $("input[name='category[edit][order]']").val(order);
-            $("input[name='category[edit][name]']").val(name);
-            $("input[name='category[edit][guid]']").val(guid);
+            var id = $(this).data('id');
+            var group_guid = $(this).data('group-guid');
+            var parent_guid = $(this).data('parent-guid');
+            var level = $(this).data('level');
+            
+            $("#form-edit input[name='category[name]']").val (name);
+            $("#form-edit input[name='category[guid]']").val (guid);
+            $("#form-edit input[name='category[slug]']").val (slug);
+            
+            $("#form-edit input[name='category[seo_keywords]']").val (keywords);
+            $("#form-edit input[name='category[seo_meta]']").val (meta);
+            
+            $("#form-edit textarea[name='category[seo_description]']").val (description);
+            $("#form-edit input[name='category[order]']").val (order);
+            $("#form-edit input[name='category[id]']").val (id);
+            $("#form-edit input[name='category[guid]']").val (guid);
+            $("#form-edit input[name='category[group_guid]']").val (group_guid);
+            $("#form-edit input[name='category[parent_guid]']").val (parent_guid);
+            $("#form-edit input[name='category[level]']").val (level);
+            
+            //
+            $("#form-new input[name='category[parent_guid]']").val (guid);
+            $("#form-new input[name='category[parent]']").val (name);
         });
 
         $("#user-form a").click(function() {

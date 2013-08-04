@@ -25,7 +25,7 @@
                 <div class="masthead-top clearfix">
                     <ul class="nav nav-pills pull-right">
                         <li>
-                            <a href="#"><i class="icon-globe"></i> View Website</a>
+                            <a href="<?php echo $this->webroot; ?>" target="_blank"><i class="icon-globe"></i> View Website</a>
                         </li>
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-user"></i> John Smith <b class="caret"></b>
@@ -54,19 +54,12 @@
                                     <li class="active">
                                         <a href="<?php echo $this->webroot; ?>admin/"><i class="icon-home"></i> Dashboard</a>
                                     </li>
-                                    <!--                                    <li class="dropdown">
-                                                                            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-sitemap"></i> Website <b class="caret"></b></a>
-                                                                            <ul class="dropdown-menu">
-                                                                                <li><a href="listing.html">Pages</a></li>
-                                                                                <li><a href="listing.html">Menus</a></li>
-                                                                            </ul>
-                                                                        </li>-->
                                     <li class="dropdown">
                                         <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-shopping-cart"></i> Store <b class="caret"></b></a>
                                         <ul class="dropdown-menu">
                                             <li><a href="<?php echo $this->webroot; ?>admin/product/">Catalogue</a></li>
                                             <li><a href="<?php echo $this->webroot; ?>admin/order/">Orders</a></li>
-                                            <li><a href="listing.html">Enquiries</a></li>
+                                            <li><a href="<?php echo $this->webroot; ?>admin/enquiry/">Enquiries</a></li>
                                         </ul>
                                     </li>
                                     <li class="dropdown">
@@ -80,7 +73,7 @@
                                     <li class="dropdown">
                                         <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-group"></i> Members <b class="caret"></b></a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="listing.html">Members</a></li>
+                                            <li><a href="<?php echo $this->webroot; ?>admin/member/">Members</a></li>
 <!--                                            <li><a href="listing.html">User Groups</a></li>
                                             <li><a href="listing.html">Permissions</a></li>-->
                                         </ul>
