@@ -25,8 +25,8 @@ $product_delete = $base . "product" . DS . "delete";
                     <form class="form-inline" id='form-filter' method='GET'>
                         <input type='hidden' name='page' value='<?php echo $page; ?>' />
                         <input type="text" class="input-large" placeholder="Keyword..." name='keyword'>
-                        <input type='text' class='input-large datepicker' name='start' placeholder='Start Date' />
-                        <input type='text' class='input-large datepicker' name='end' placeholder='End Date' />
+                        <input type='text' class='input-small datepicker' name='start' placeholder='Start Date' readonly='readonly' />
+                        <input type='text' class='input-small datepicker' name='end' placeholder='End Date' readonly='readonly' />
                         <select name='filter'>
                             <option value=""> - Filter - </option>
                             <option value='type=template]'>Case Template</option>
