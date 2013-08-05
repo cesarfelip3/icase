@@ -9,8 +9,13 @@ $action = $this->request->action;
         <div class="sec_logo_phone">
             <span id="secondary-logo"></span>
             <ul  id="user-nav" class="list-none">
+                <?php if (!isset ($_auth)) : ?>
                 <li><a id="btn-register" class="hd-txt" href='<?php echo $this->webroot; ?>signup'>Sign up</a></li>
                 <li><a class="hd-txt" href='<?php echo $this->webroot; ?>signin'>Sign in</a></li>
+                <?php else: ?>
+                <li><a class="hd-txt" href='<?php echo $this->webroot; ?>user'><?php echo $_auth['name']; ?></a></li>
+                <li><a class="hd-txt" href='<?php echo $this->webroot; ?>logout'>Logout</a></li>
+                <?php endif; ?>
                 <li><a class="hd-txt" href='<?php echo $this->webroot; ?>user'>My Account</a></li>
                 <li><a class="hd-txt" href="#" id="btn-my-cart">My Cart <span class="value">(0)</span></a></li>
             </ul>

@@ -2013,6 +2013,14 @@ class FormHelper extends AppHelper {
 			$tag = 'selectstart';
 		}
 
+		if ($tag !== 'checkboxmultiplestart' &&
+			!isset($attributes['required']) &&
+			empty($attributes['disabled']) &&
+			$this->_introspectModel($this->model(), 'validates', $this->field())
+		) {
+			$attributes['required'] = true;
+		}
+
 		if (!empty($tag) || isset($template)) {
 			$hasOptions = (count($options) > 0 || $showEmpty);
 			// Secure the field if there are options, or its a multi select.

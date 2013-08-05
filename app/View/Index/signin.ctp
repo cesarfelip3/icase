@@ -1,7 +1,7 @@
 <style type="text/css">
     form#user-form label {
         display:inline-block;
-        width:70px;
+        width:100px;
         font-size:14px;
     }
     
@@ -25,25 +25,47 @@
         <form id="user-form" style="margin-top:20px;">
             <fieldset>
                 <p>
-                    <label>User</label>
-                    <input type="text" class="input-large" />
+                    <label>User/Email</label>
+                    <input type="text" class="input-large" name='User[name]' />
                 </p>
                 <p>
                     <label>Password</label>
-                    <input type="text" class="input-large" />
+                    <input type="password" class="input-large" name='User[password]' />
                 </p>
                 <p>
-                    <button class="btn btn-success">Sign In</button>
+                    <a href='javascript:' class='btn btn-primary' data-loading-text="Working..." onclick="save();" id="btn-signup">Sign in</a>
                 </p>
                 <p>
                     <a href='<?php echo $this->webroot; ?>index/reset'><span>Forget Password?</span></a>
                 </p>
                 <p>
                     <span>Don't have account yet?</span>
-                    <a href='<?php echo $this->webroot; ?>index/register'>Sign Up Now</a>
+                    <a href='<?php echo $this->webroot; ?>signup'>Sign Up Now</a>
                 </p>
             </fieldset>
         </form>
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(
+            
+    );
+    
+    function save ()
+    {
+        jQuery.ajax({
+            url: "<?php echo $this->webroot; ?>index/signin",
+            data: $("#user-form").serialize(),
+            type: "POST",
+            beforeSend: function(xhr) {
+                $("#btn-signup").button("loading");
+            }
+        }).done(function(data) {
+            console.log (data);
+            $("#btn-signup").button("reset");
+            window.href="<?php $this->webroot . "user/"; ?>";
+        }).fail(function() {
+        });
+    }
+</script>

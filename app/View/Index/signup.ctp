@@ -26,22 +26,22 @@
                 <fieldset>
                     <p>
                         <label>User</label>
-                        <input type="text" class="input-large" />
+                        <input type="text" class="input-large"  name="signup[name]"/>
                     </p>
                     <p>
                         <label>Email</label>
-                        <input type="text" class="input-large" placeholder='email@example.com' />
+                        <input type="text" class="input-large" name='signup[email]' placeholder='email@example.com' />
                     </p>
                     <p>
                         <label>Password</label>
-                        <input type="password" class="input-large" />
+                        <input type="password" class="input-large" name='signup[password]' />
                     </p>
                     <p>
-                        <button class="btn btn-success">Sign Up</button>
+                        <a href='javascript:' class='btn btn-primary' data-loading-text="Working..." onclick="save();" id="btn-signup">Sign up</a>
                     </p>
                     <p>
                         <span>Already had account? Go </span>
-                        <a href='<?php echo $this->webroot; ?>index/login'>Sign In Now</a>
+                        <a href='<?php echo $this->webroot; ?>signin'>Sign In Now</a>
                     </p>
                 </fieldset>
             </form>
@@ -50,17 +50,23 @@
 </div>
 <script type="text/javascript">
     $(document).ready(
-            function() {
-                jQuery.ajax({
-                    url: "<?php echo $this->webroot; ?>index/register",
-                    type: "GET",
-                    beforeSend: function(xhr) {
-                    }
-                }).done(function(data) {
-                    alert (data);
-
-                }).fail(function() {
-                });
-            }
+            
     );
+    
+    function save ()
+    {
+        jQuery.ajax({
+            url: "<?php echo $this->webroot; ?>index/signup",
+            data: $("#user-form").serialize(),
+            type: "POST",
+            beforeSend: function(xhr) {
+                $("#btn-signup").button("loading");
+            }
+        }).done(function(data) {
+            console.log (data);
+            $("#btn-signup").button("reset");
+            window.href="<?php $this->webroot . "user/"; ?>";
+        }).fail(function() {
+        });
+    }
 </script>
