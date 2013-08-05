@@ -48,13 +48,10 @@ class IndexController extends AppController {
         if ($this->request->is('ajax')) {
             $this->autoRender = false;
 
-            //$data = $this->request->data('signin');
+            $data = $this->request->data('signin');
 
             if ($this->request->is('post')) {
                 
-                $this->Auth->login();
-                exit;
-
                 $passwordHasher = new SimplePasswordHasher();
                 $password = $passwordHasher->hash($data['password']);
 
@@ -79,9 +76,6 @@ class IndexController extends AppController {
                         "first", array ("conditions" => $conditions)
                 );
                 
-                print_r ($conditions);
-                exit;
-
                 if (empty($result)) {
                     $this->error['error'] = 1;
                     $this->error['message'] = "Your user/email isn't found";

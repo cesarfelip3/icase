@@ -26,11 +26,11 @@
             <fieldset>
                 <p>
                     <label>User/Email</label>
-                    <input type="text" class="input-large" name='User[name]' />
+                    <input type="text" class="input-large" name='signin[name]' />
                 </p>
                 <p>
                     <label>Password</label>
-                    <input type="password" class="input-large" name='User[password]' />
+                    <input type="password" class="input-large" name='signin[password]' />
                 </p>
                 <p>
                     <a href='javascript:' class='btn btn-primary' data-loading-text="Working..." onclick="save();" id="btn-signup">Sign in</a>
@@ -64,7 +64,13 @@
         }).done(function(data) {
             console.log (data);
             $("#btn-signup").button("reset");
-            window.href="<?php $this->webroot . "user/"; ?>";
+            
+            var result = $.parseJSON(data);
+            if (result.error == 1) {
+                
+            } else {
+                window.location.href="<?php $this->webroot . "user/"; ?>";
+            }
         }).fail(function() {
         });
     }

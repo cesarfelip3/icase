@@ -63,9 +63,13 @@
                 $("#btn-signup").button("loading");
             }
         }).done(function(data) {
-            console.log (data);
             $("#btn-signup").button("reset");
-            window.href="<?php $this->webroot . "user/"; ?>";
+            
+            if (result.error == 1) {
+                
+            } else {
+                window.location.href="<?php $this->webroot . "user/"; ?>";
+            }
         }).fail(function() {
         });
     }
