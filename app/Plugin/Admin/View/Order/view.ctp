@@ -75,7 +75,8 @@
                             <tr>
                                 <th>Orders</th>
                                 <th class="value">Value</th>
-                                <th class="actions">Status</th>
+                                <th class="value">Status</th>
+                                <th class="actions">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -84,12 +85,15 @@
                                 <td class="value">
                                     $<?php echo $data['Order']['amount']; ?>
                                 </td>
-                                <td class="actions">
+                                <td>
                                     <select class="input-medium" name="order[<?php echo $data['Order']['id']; ?>][status]" onchange="save('edit/?id=<?php echo $data['Order']['id']; ?>')">
                                         <?php foreach ($status as $key => $state) : ?>
                                             <option value="<?php echo $key; ?>" <?php if ($data['Order']['status'] == $key) echo 'selected="selected"'; ?>><?php echo $state; ?></option>
                                         <?php endforeach; ?>
                                     </select>
+                                </td>
+                                <td class="actions">
+                                    <a href="javascript:" onclick="$('#myModal').modal();" class="btn btn-primary btn-small">Send Email</a>
                                 </td>
                             </tr>
                         </tbody>
@@ -105,6 +109,33 @@
                     <?php endif; ?>
             </div>
         </div>
+    </div>
+</div>
+<div id="myModal" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Email Notification</h3>
+    </div>
+    <div class="modal-body">
+        <form>
+            <fieldset>
+                <div class="input-prepend">
+                    <span class="add-on" style="width:80px;">Email</span>
+                    <input class="input-medium" id="prependedInput" type="text" value="<?php echo ""; ?>" placeholder="User email">
+                </div>
+                <div class="input-prepend">
+                    <span class="add-on" style="width:80px;">Subject</span>
+                    <input class="input-xlarge" id="prependedInput" type="text" placeholder="Username" value="The Status of Your Order Has Changed">
+                </div>
+                <div>
+                    <textarea class="ckeditor" cols="80" id="editor1" name="" rows="10"></textarea>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <button class="btn btn-primary">Send</button>
     </div>
 </div>
 <script>

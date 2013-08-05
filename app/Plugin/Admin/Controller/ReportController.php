@@ -11,7 +11,7 @@ class ReportController extends AdminAppController {
     public function sales () { 
     }
     
-    public function registration () {
+    public function member () {
         
     }
     

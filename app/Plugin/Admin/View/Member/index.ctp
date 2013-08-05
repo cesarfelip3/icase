@@ -9,7 +9,7 @@ $product_delete = $base . "product" . DS . "delete";
             <li>
                 <a href="<?php echo $this->webroot; ?>admin">Admin</a> <span class="divider">/</span>
             </li>
-            <li class="active">Products</li>
+            <li class="active">Members</li>
         </ul>
     </div>
 </div>

@@ -52,22 +52,21 @@
                             <div class="nav-collapse">
                                 <ul class="nav">
                                     <li class="active">
-                                        <a href="<?php echo $this->webroot; ?>admin/"><i class="icon-home"></i> Dashboard</a>
+                                        <a href="<?php echo $base; ?>"><i class="icon-home"></i> Dashboard</a>
                                     </li>
                                     <li class="dropdown">
                                         <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-shopping-cart"></i> Store <b class="caret"></b></a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="<?php echo $this->webroot; ?>admin/product/">Catalogue</a></li>
-                                            <li><a href="<?php echo $this->webroot; ?>admin/order/">Orders</a></li>
-                                            <li><a href="<?php echo $this->webroot; ?>admin/enquiry/">Enquiries</a></li>
+                                            <li><a href="<?php echo $base; ?>product/">Catalogue</a></li>
+                                            <li><a href="<?php echo $base; ?>order/">Orders</a></li>
+                                            <li><a href="<?php echo $base; ?>enquiry/">Enquiries</a></li>
                                         </ul>
                                     </li>
                                     <li class="dropdown">
                                         <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-signal"></i> Reports <b class="caret"></b></a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="report.html">Sales Reports</a></li>
-                                            <li><a href="report.html">Product Popularity</a></li>
-                                            <li><a href="report.html">Member Registrations</a></li>
+                                            <li><a href="<?php echo $base; ?>report/sales">Sales Reports</a></li>
+                                            <li><a href="<?php echo $base; ?>report/visits">Visits Reports</a></li>
                                         </ul>
                                     </li>
                                     <li class="dropdown">

@@ -1,15 +1,11 @@
-<?php
-$product_add = $base . "product" . DS . "add";
-$product_edit = $base . "product" . DS . "edit";
-$product_delete = $base . "product" . DS . "delete";
-?>
+
 <div class="secondary-masthead">
     <div class="container">
         <ul class="breadcrumb">
             <li>
                 <a href="<?php echo $this->webroot; ?>admin">Admin</a> <span class="divider">/</span>
             </li>
-            <li class="active">Products</li>
+            <li class="active">Enquires</li>
         </ul>
     </div>
 </div>
@@ -56,18 +52,17 @@ $product_delete = $base . "product" . DS . "delete";
                                 <li><a href="">PDF</a></li>
                             </ul>
                         </div>
-                        <h2>Products</h2>
+                        <h2>Enquires</h2>
                     </div>
                     <table class="orders-table table">
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Name</th>
-                                <th>Type</th>
-                                <th>Picture</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
-                                <th>Tax</th>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Title</th>
+                                <th>Content</th>
                                 <th>Created</th>
                                 <th class="actions">Actions</th>
                             </tr>
@@ -84,11 +79,10 @@ $product_delete = $base . "product" . DS . "delete";
                                 <td><a class="thumbnail"><img src='<?php echo $this->webroot . "uploads/" . $value['Product']['image']; ?>' style="width:32px" /></a></td>
                                 <td><?php echo $value['Product']['price']; ?>$</td>
                                 <td><?php echo $value['Product']['quantity']; ?></td>
-                                <td><?php echo $value['Product']['tax']; ?>$</td>
                                 <td><?php echo date ("Y-m-d H:i:s", $value['Product']['created']); ?></td>
                                 <td class="actions">
                                     <a class="btn btn-small btn-danger" onclick="del('<?php echo $value['Product']['id']; ?>')">Remove</a>
-                                    <a class="btn btn-small btn-primary" href="<?php echo $product_edit; ?>?id=<?php echo $value['Product']['guid']; ?>" target="_blank">Edit</a>
+                                    <a class="btn btn-small btn-primary" href="javascript:" target="_blank">Replay</a>
                                 </td>
                             </tr>
                             <?php endforeach; endif; ?>

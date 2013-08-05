@@ -37,6 +37,7 @@
         <form id="form-edit" method="POST">
             <div class="row">
                 <div class="span12 listing-buttons">
+                    <a class="btn btn-primary" href="javascript:">Settings</a>
                     <a class="btn btn-primary" onclick="save('edit/?id=0')" href="javascript:">Update Selected</a>
                 </div>
                 <div class="span12">
