@@ -54,20 +54,22 @@ class ProductController extends AdminAppController {
         if (!empty($filter)) {
             $conditions = array($conditions, array($filter));
         }
-        
+
 
         //=========================================================
         $this->loadModel('Product');
-        $data = $this->Product->find('all', array(
-            'limit' => $limit,
-            'page' => $page + 1,
-            'conditions' => $conditions,
-            'fields' => array("Product.*", "COUNT(*) AS count")
-                )
-        );
+        $total = $this->Product->find("count", array("conditions" => $conditions));
 
-        if (!empty($data)) {
-            $total = $data[0][0]['count'];
+        if ($total <= 0) {
+            $data = array();
+        } else {
+            $data = $this->Product->find('all', array(
+                'limit' => $limit,
+                'page' => $page + 1,
+                'conditions' => $conditions,
+                'fields' => array("Product.*")
+                    )
+            );
             foreach ($data as $key => $value) {
 
                 if ($value['Product']['type'] == 'product') {
@@ -76,22 +78,18 @@ class ProductController extends AdminAppController {
                     $data[$key] = $value;
                 }
             }
-        } else {
-            $total = 0;
         }
 
-        if ($total == 0) {
-            $data = array();
-        }
         //=========================================================
 
         $pages = ceil($total / $limit);
 
-        $filters = array (
+        $filters = array(
             "type='template'" => "Template",
-            "type='product'" => "Product"
+            "type='product'" => "Product",
+            "quantity=0" => "Empty Stocks"
         );
-        
+
         $this->set(array(
             "data" => $data,
             "page" => $page,

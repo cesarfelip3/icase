@@ -1,13 +1,13 @@
 <style>
     .tools a {text-decoration:none;}
-    .tools label {width:100px;display:inline-block;}
+    .tools label {width:90px;display:inline-block;}
     hr {border-color:#E9E9E9}
 </style>
 <section id="main">
     <div class="body-text">
-        <div class="container-fluid qbox creator-parts" style="box-shadow:none;font-size:14px;background:transparent;padding:10px;">
+        <div class="container-fluid qbox creator-parts" style="box-shadow:none;font-size:14px;background:transparent;padding:10px;padding-top:5px;">
             <div class="row-fluid">
-                <div style="display:block;width:100%;height:30px">
+                <div style="display:block;width:100%;height:25px">
                     <div class="tools pull-left">
                         <a href="javascript:" data-action="new" title="remove"><i class="icon-remove-sign icon-2x"></i> clear canvas</a>
                         <a href="javascript:" data-action="preview" title="remove"><i class="icon-eye-open icon-2x"></i> preview</a>
@@ -19,12 +19,12 @@
             </div>
             <div class="progress" style="height:2px;display:block;width:100%;margin-top:10px;"><div class="bar bar-warning" id="progress-bar" style="width: 0%; height:2px;"></div></div>
             <div class="row-fluid">
-                <div class="span3">
+                <div class="span3" style="width:190px;">
                     <div class="tools">
                         <div id="uploader" style="padding:0px;margin:0px;">
                             <div id="filelist" style="display:none;padding:0px;margin:0px;"></div>
-                            <a href="javascript:" id="pickfiles" class="btn btn-block btn-info btn-large"><i class="icon-laptop icon-3x"></i> Image From Computer</a> 
-                            <a href="javascript:" class="btn btn-block btn-success btn-large"><i class="icon-picture icon-3x"></i> Image From Service&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                            <a href="javascript:" id="pickfiles" class="btn btn-block btn-info btn-large"><i class="icon-laptop icon-2x"></i>Image From Computer</a> 
+                            <a href="javascript:" class="btn btn-block btn-success btn-large"><i class="icon-picture icon-2x"></i>Image From Service&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         </div>
                         <hr/>
                         <p>
@@ -54,16 +54,16 @@
                     </div>
                 </div>
 
-                <div class="span6">
+                <div class="span8" style="width:560px;">
                     <div>
                         <div class="ajax-loading-indicator" style="position: absolute;"><a href="javascript:" style="font-size:14px;"><i class="icon-refresh icon-spin"></i> Loading Canvas...</a></div>
-                        <canvas class="upper-canvas " style="border: 2px #ccc dashed; -moz-user-select: none; cursor: crosshair;" width="450" height="450" id="c1"></canvas>				   
+                        <canvas class="upper-canvas " style="border: 1px #ccc dashed; -moz-user-select: none; cursor: crosshair;" width="560" height="560" id="c1"></canvas>				   
                     </div>
                 </div>
-                <div class="span3" style="border:2px #ccc dashed;">
+                <div class="span2" style="border:2px #ccc dashed;width:110px">
                     <div class="pull-right">
-                        <div style="overflow: hidden;height:450px;width:160px;">
-                            <div style="overflow:auto;height:450px;padding-right: 20px;width:160px;" id="template-list">
+                        <div style="overflow: hidden;height:560px;width:100px;">
+                            <div style="overflow:auto;height:560px;padding-right: 20px;width:100px;" id="template-list">
 
                             </div>
 
