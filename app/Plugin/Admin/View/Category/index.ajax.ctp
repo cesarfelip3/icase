@@ -94,7 +94,10 @@
                    data-seo-keywords="<?php echo addslashes($value['Category']['seo_keywords']); ?>"
                    data-seo-meta="<?php echo addslashes ($value['Category']['seo_meta']); ?>"
                    data-seo-description="<?php echo addslashes ($value['Category']['seo_description']); ?>"
-                   class="t<?php echo $value['Category']['parent_guid']; ?>"><?php if (isset($checkbox) && $checkbox) : ?><input type="checkbox" name="category[]" value="<?php echo $value['Category']['guid']; ?>" /><?php endif; ?> <?php echo $value['Category']['name']; ?><?php if ($value['Category']['children'] > 0 && false) : ?><i class="icon-chevron-down indicator-expension"></i><?php else: ?><?php endif; ?></a>
+                   class="t<?php echo $value['Category']['parent_guid']; ?>">
+                       <?php if (isset($checkbox) && $checkbox) : ?><input type="checkbox" name="category[]" value="<?php echo $value['Category']['guid']; ?>" /><?php endif; ?> 
+                       <?php echo $value['Category']['name']; ?>
+                </a>
 
             </li>
             <?php

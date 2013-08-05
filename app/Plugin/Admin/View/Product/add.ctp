@@ -196,7 +196,7 @@ $admin_product = $base . "product";
     $(document).ready(
             function() {
                 jQuery.ajax({
-                    url: "<?php echo $base; ?>product/category/?action=checkbox",
+                    url: "<?php echo $base; ?>category/?action=checkbox",
                     type: "GET",
                     beforeSend: function(xhr) {
                     }

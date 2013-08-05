@@ -3,13 +3,10 @@
     <div class="container">
         <ul class="breadcrumb">
             <li>
-                <a href="#">Admin</a> <span class="divider">/</span>
+                <a href="<?php echo $base; ?>">Admin</a> <span class="divider">/</span>
             </li>
             <li>
-                <a href="#">Store</a> <span class="divider">/</span>
-            </li>
-            <li>
-                <a href="#">Orders</a> <span class="divider">/</span>
+                <a href="<?php echo $base; ?>Order/">Orders</a> <span class="divider">/</span>
             </li>
             <li class="active">View Order</li>
         </ul>
@@ -66,6 +63,7 @@
                 </div>
             </div>
         </div>
+        <form id="form-edit">
         <div class="row">
             <div class="span12">
                 <div class="slate">
@@ -87,10 +85,10 @@
                                     $<?php echo $data['Order']['amount']; ?>
                                 </td>
                                 <td class="actions">
-                                    <select class="input-small">
-                                        <option value="paid">Paid</option>
-                                        <option value="dispatched">Dispatch</option>
-                                        <option value="cancel">Cancel</option>
+                                    <select class="input-medium" name="order[<?php echo $data['Order']['id']; ?>][status]" onchange="save('edit/?id=<?php echo $data['Order']['id']; ?>')">
+                                        <?php foreach ($status as $key => $state) : ?>
+                                            <option value="<?php echo $key; ?>" <?php if ($data['Order']['status'] == $key) echo 'selected="selected"'; ?>><?php echo $state; ?></option>
+                                        <?php endforeach; ?>
                                     </select>
                                 </td>
                             </tr>
@@ -99,12 +97,56 @@
                 </div>
             </div>
         </div>
+        </form>
         <div class="row">
             <div class="span12">
-                <?php if (!empty ($data['Order']['file'])) : ?>
-                <a class="thumbnail"><img src="<?php echo $this->webroot . "uploads/" . $data['Order']['file']; ?>" /></a>
-                <?php endif; ?>
+                <?php if (!empty($data['Order']['file'])) : ?>
+                    <a class="thumbnail"><img src="<?php echo $this->webroot . "uploads/" . $data['Order']['file']; ?>" /></a>
+                    <?php endif; ?>
             </div>
         </div>
     </div>
 </div>
+<script>
+function save(action, button) {
+        
+        var data = "";
+        if (action.substring (0, 4) == "edit") {
+            data = $("#form-edit").serialize();
+        } 
+        
+        if (action == "add") {
+            data = $("#form-new").serialize();
+        }
+        
+        if (action == "delete") {
+            data = $("#form-edit").serialize();
+        }
+        
+        jQuery.ajax({
+            url: "<?php echo $base; ?>order/" + action,
+            data: data,
+            type: "POST",
+            beforeSend: function(xhr) {
+                $(button).button('loading');
+            }
+        }).done(function(data) {
+            $(button).button('reset');
+
+            var result = $.parseJSON(data);
+            console.log(result);
+            if (result.error == 1) {
+                //console.log(result.element);
+                //$(result.element).next(".help-inline").html(result.message);
+                //$(result.element).parent().parent().addClass('error');
+                showAlert(result.message);
+            } else {
+                //$(result.element).parent().parent().removeClass('error');
+                //$(result.element).next(".help-inline").html("");
+                window.location.href="";
+            }
+
+        }).fail(function() {
+        });
+    }    
+</script>

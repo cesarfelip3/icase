@@ -40,7 +40,7 @@ $product_delete = $base . "product" . DS . "delete";
         </div>
         <div class="row">
             <div class="span12 listing-buttons">
-                <a href="<?php echo $this->webroot; ?>admin/product/category" class="btn btn-primary">Edit Category</a>
+                <a href="<?php echo $this->webroot; ?>admin/category/" class="btn btn-primary">Edit Category</a>
                 <a href="<?php echo $this->webroot; ?>admin/product/add" class="btn btn-primary">New Product</a>
             </div>
             <div class="span12">
@@ -101,7 +101,7 @@ $product_delete = $base . "product" . DS . "delete";
                 <?php echo $this->element("pagination", array ("plugin"=>"Admin", "page"=>$page, "form" => "#form-filter")); ?>
             </div>
             <div class="span6 listing-buttons pull-right">
-                <a href="<?php echo $this->webroot; ?>admin/product/category" class="btn btn-primary">Edit Category</a>
+                <a href="<?php echo $this->webroot; ?>admin/category/" class="btn btn-primary">Edit Category</a>
                 <a href="<?php echo $product_add; ?>" class="btn btn-primary">New Product</a>
             </div>
         </div>

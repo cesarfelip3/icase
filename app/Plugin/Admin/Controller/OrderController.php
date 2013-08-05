@@ -2,6 +2,21 @@
 
 class OrderController extends AdminAppController {
 
+    protected $status = array (
+            "awaiting" => "Awaiting Payment",
+            "paid" => "Paid",
+            "dispatch" => "Dispatched",
+            "cancel" => "Cancelled",
+            "refund" => "Refunded",
+            "fail" => "Failed"
+        );
+    
+    protected $error = array(
+        'error' => 0,
+        'element' => '',
+        'message' => '',
+    );
+        
     public function beforeFilter() {
         $this->Auth->allow();
         $this->Auth->allow('guest');
@@ -85,6 +100,7 @@ class OrderController extends AdminAppController {
             "status='refund'" => "Refunded",
             "status='fail'" => "Failed"
         );
+        
 
         $this->set(array(
             "data" => $data,
@@ -95,7 +111,8 @@ class OrderController extends AdminAppController {
             "start" => $start,
             "end" => $end,
             "filter" => $filter,
-            "filters" => $filters
+            "filters" => $filters,
+            "status" => $this->status
         ));
     }
 
@@ -113,11 +130,36 @@ class OrderController extends AdminAppController {
         $deliver = $this->UserDeliverInfo->find('first', array('conditions' => array('guid' => $order['Order']['deliver_guid'])));
 
         $this->set('data', $order);
+        $this->set('status', $this->status);
         $this->set('deliver', $deliver['UserDeliverInfo']);
     }
 
     public function edit() {
+        $id = $this->request->query ('id');
         
+        if ($this->request->is ('ajax')) {
+            $this->autoRender = false;
+            $data = $this->request->data ('order');
+            $this->loadModel('Order');
+            
+            if ($id == 0) {
+                if (isset ($data['selected'])) {
+                
+                    foreach ($data['selected'] as $key => $value) {
+                        $this->Order->id = $value;
+                        $this->Order->set (array("status" => $data[$value]['status']));
+                        $this->Order->save();
+                    }
+                }
+                exit (json_encode($this->error));
+            }
+            
+            $this->Order->id = $id;
+            
+            $this->Order->set (array("status"=>$data[$id]['status']));
+            $this->Order->save ();
+            exit(json_encode($this->error));
+        }
     }
 
     public function delete() {

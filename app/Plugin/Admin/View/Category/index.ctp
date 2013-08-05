@@ -166,7 +166,7 @@ $admin_product = $base . "product";
         }
         
         jQuery.ajax({
-            url: "<?php echo $base; ?>product/category/?action=" + action,
+            url: "<?php echo $base; ?>category/" + action,
             data: data,
             type: "POST",
             beforeSend: function(xhr) {
@@ -192,59 +192,6 @@ $admin_product = $base . "product";
         });
     }
 
-    function category_edit(update) {
-
-        var url;
-        var guid;
-        var name;
-
-        name = $("input[name='category[edit][name]']").val();
-        if ($.trim(name) == "") {
-            return;
-        }
-
-        if (update) {
-            url = "<?php echo $base; ?>product/category/?action=update";
-        } else {
-            url = "<?php echo $base; ?>product/category/?action=delete";
-            var r = confirm("This operation will delete this category and all its decendents, are u sure?")
-            if (r == true)
-            {
-                //alert("You pressed OK!")
-            }
-            else
-            {
-                return;
-            }
-        }
-
-        //or = $("input[name='category[edit][order]']").val();
-        //name = $("input[name='category[edit][name]']").val();        
-
-        jQuery.ajax({
-            url: url,
-            data: $("#form-new").serialize(),
-            type: "POST",
-            beforeSend: function(xhr) {
-                showAlert("Updating......");
-            }
-        }).done(function(data) {
-
-            var result = $.parseJSON(data);
-            if (result.error == 1) {
-                if (update == false) {
-                    window.location.href = "";
-                }
-            } else {
-                hideAlert();
-                category_load();
-            }
-
-        }).fail(function() {
-            hideAlert();
-        });
-    }
-
     function category_empty_table() {
         var r = confirm("This operation will empty all table data, are u sure?")
         if (r == true)
@@ -257,7 +204,7 @@ $admin_product = $base . "product";
         }
 
         jQuery.ajax({
-            url: "<?php echo $base; ?>product/category/?action=empty",
+            url: "<?php echo $base; ?>category/clean",
             data: {},
             type: "POST",
             beforeSend: function(xhr) {
@@ -285,7 +232,7 @@ $admin_product = $base . "product";
 
     function category_load() {
         jQuery.ajax({
-            url: "<?php echo $base; ?>product/category",
+            url: "<?php echo $base; ?>category",
             type: "GET",
             beforeSend: function(xhr) {
                 showAlert2("Loading category data now......");
