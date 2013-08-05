@@ -40,8 +40,7 @@ $product_delete = $base . "product" . DS . "delete";
         </div>
         <div class="row">
             <div class="span12 listing-buttons">
-                <a href="<?php echo $this->webroot; ?>admin/product/category" class="btn btn-primary">Edit Category</a>
-                <a href="<?php echo $this->webroot; ?>admin/product/add" class="btn btn-primary">New Product</a>
+                <a href="<?php echo $this->webroot; ?>admin/product/add" class="btn btn-primary">New User</a>
             </div>
             <div class="span12">
                 <div class="slate">
@@ -63,13 +62,13 @@ $product_delete = $base . "product" . DS . "delete";
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Name</th>
+                                <th>Username</th>
+                                <th>Email</th>
                                 <th>Type</th>
-                                <th>Picture</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
-                                <th>Tax</th>
-                                <th>Created</th>
+                                <th>Name</th>
+                                <th>Phone</th>
+                                <th>Country/State/City/Address</th>
+                                <th>Created / Modified</th>
                                 <th class="actions">Actions</th>
                             </tr>
                         </thead>
@@ -80,16 +79,16 @@ $product_delete = $base . "product" . DS . "delete";
                                 foreach ($data as $value) : ?>
                             <tr>
                                 <td><?php echo ++$i; ?></td>
-                                <td><?php echo $value['Product']['name']; ?></td>
-                                <td><?php echo $value['Product']['type']; ?></td>
-                                <td><a class="thumbnail"><img src='<?php echo $this->webroot . "uploads/" . $value['Product']['image']; ?>' style="width:32px" /></a></td>
-                                <td><?php echo $value['Product']['price']; ?>$</td>
-                                <td><?php echo $value['Product']['quantity']; ?></td>
-                                <td><?php echo $value['Product']['tax']; ?>$</td>
-                                <td><?php echo date ("Y-m-d H:i:s", $value['Product']['created']); ?></td>
-                                <td class="actions">
-                                    <a class="btn btn-small btn-danger" onclick="del('<?php echo $value['Product']['id']; ?>')">Remove</a>
-                                    <a class="btn btn-small btn-primary" href="<?php echo $product_edit; ?>?id=<?php echo $value['Product']['guid']; ?>" target="_blank">Edit</a>
+                                <td><?php echo $value['User']['name']; ?></td>
+                                <td><?php echo $value['User']['email']; ?></td>
+                                <td><?php echo $value['User']['type']; ?></td>
+                                <td><?php echo $value['User']['firstname'] . " " . $value['User']['lastname']; ?></td>
+                                <td><?php echo $value['User']['phone']; ?></td>
+                                <td><?php echo $value['User']['country'] . DS . $value['User']['state'] . DS . $value['User']['city'] . DS . $value['User']['address']; ?></td>
+                                <td><?php echo date ("Y-m-d H:i:s ", $value['User']['created']) . DS . date (" Y-m-d H:i:s", $value['User']['modified']); ?></td>
+                                <td class='actions'>
+                                    <a class="btn btn-small btn-danger" onclick="del('<?php echo $value['User']['id']; ?>')">Remove</a>
+                                    <a class="btn btn-small btn-primary" href="<?php echo $product_edit; ?>?id=<?php echo $value['User']['guid']; ?>" target="_blank">Edit</a>
                                 </td>
                             </tr>
                             <?php endforeach; endif; ?>
@@ -101,8 +100,7 @@ $product_delete = $base . "product" . DS . "delete";
                 <?php echo $this->element("pagination", array ("plugin"=>"Admin", "page"=>$page, "form" => "#form-filter")); ?>
             </div>
             <div class="span6 listing-buttons pull-right">
-                <a href="<?php echo $this->webroot; ?>admin/product/category" class="btn btn-primary">Edit Category</a>
-                <a href="<?php echo $product_add; ?>" class="btn btn-primary">New Product</a>
+                <a href="<?php echo $product_add; ?>" class="btn btn-primary">New User</a>
             </div>
         </div>
     </div>

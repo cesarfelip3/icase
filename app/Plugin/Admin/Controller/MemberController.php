@@ -2,13 +2,13 @@
 
 class MemberController extends AdminAppController {
     
-    public function beforeFilter() {
+        public function beforeFilter() {
         $this->Auth->allow();
         $this->Auth->allow('guest');
-	parent::beforeFilter();
+        parent::beforeFilter();
     }
-    
-      public function index() {
+
+    public function index() {
 
         $page = $this->request->query('page');
         $limit = $this->request->query('limit');
@@ -54,44 +54,42 @@ class MemberController extends AdminAppController {
         if (!empty($filter)) {
             $conditions = array($conditions, array($filter));
         }
-        
+
 
         //=========================================================
-        $this->loadModel('Product');
-        $data = $this->Product->find('all', array(
-            'limit' => $limit,
-            'page' => $page + 1,
-            'conditions' => $conditions,
-            'fields' => array("Product.*", "COUNT(*) AS count")
-                )
-        );
+        $this->loadModel('User');
+        $total = $this->User->find("count", array("conditions" => $conditions));
 
-        if (!empty($data)) {
-            $total = $data[0][0]['count'];
+        if ($total <= 0) {
+            $data = array();
+        } else {
+            $data = $this->User->find('all', array(
+                'limit' => $limit,
+                'page' => $page + 1,
+                'conditions' => $conditions,
+                'fields' => array("User.*")
+                    )
+            );
             foreach ($data as $key => $value) {
 
-                if ($value['Product']['type'] == 'product') {
-                    $value['Product']['featured'] = unserialize($value['Product']['featured']);
-                    $value['Product']['image'] = count($value['Product']['featured']) > 0 ? $value['Product']['featured'][0] : "";
+                if ($value['User']['type'] == 'product') {
+                    $value['User']['featured'] = unserialize($value['User']['featured']);
+                    $value['User']['image'] = count($value['User']['featured']) > 0 ? $value['User']['featured'][0] : "";
                     $data[$key] = $value;
                 }
             }
-        } else {
-            $total = 0;
         }
 
-        if ($total == 0) {
-            $data = array();
-        }
         //=========================================================
 
         $pages = ceil($total / $limit);
 
-        $filters = array (
+        $filters = array(
             "type='template'" => "Template",
-            "type='product'" => "Product"
+            "type='product'" => "User",
+            "quantity=0" => "Empty Stocks"
         );
-        
+
         $this->set(array(
             "data" => $data,
             "page" => $page,
@@ -123,7 +121,7 @@ class MemberController extends AdminAppController {
             if (empty($data['name'])) {
                 $error['error'] = 1;
                 $error['element'] = 'input[name="product[name]"]';
-                $error['message'] = 'Product name is required';
+                $error['message'] = 'User name is required';
                 exit(json_encode($error));
             }
 
@@ -171,7 +169,7 @@ class MemberController extends AdminAppController {
                 $data['status'] = 'draft';
             }
 
-            $this->loadModel('Product');
+            $this->loadModel('User');
 
             if (!empty($data['featured'])) {
                 $data['featured'] = trim($data['featured'], "-");
@@ -192,14 +190,14 @@ class MemberController extends AdminAppController {
             $data['slug'] = preg_replace("/ +/i", "-", $data['name']) . "-" . uniqid();
 
             if ($action == "update" && !empty($data['guid'])) {
-                $count = $this->Product->find('count', array("conditions" => array("guid" => $data['guid'])));
+                $count = $this->User->find('count', array("conditions" => array("guid" => $data['guid'])));
                 if ($count == 0) {
                     $data['guid'] = uniqid();
                     $data['created'] = time();
                     $data['modified'] = time();
                 } else {
                     $data['modified'] = time();
-                    $this->Product->updateAll(array($product), array("conditions" => array("guid" => $data['guid'])));
+                    $this->User->updateAll(array($product), array("conditions" => array("guid" => $data['guid'])));
 
                     if (!empty($category)) {
                         $this->loadModel('CategoryToObject');
@@ -224,8 +222,8 @@ class MemberController extends AdminAppController {
                 $data['modified'] = time();
             }
 
-            $this->Product->create();
-            $this->Product->save($data);
+            $this->User->create();
+            $this->User->save($data);
             $error['data'] = $data['guid'];
 
             if (!empty($category)) {
@@ -266,7 +264,7 @@ class MemberController extends AdminAppController {
             if (empty($data['name'])) {
                 $error['error'] = 1;
                 $error['element'] = 'input[name="product[name]"]';
-                $error['message'] = 'Product name is required';
+                $error['message'] = 'User name is required';
                 exit(json_encode($error));
             }
 
@@ -314,7 +312,7 @@ class MemberController extends AdminAppController {
                 $data['status'] = 'draft';
             }
 
-            $this->loadModel('Product');
+            $this->loadModel('User');
 
             if (!empty($data['featured'])) {
                 $data['featured'] = trim($data['featured'], "-");
@@ -333,14 +331,14 @@ class MemberController extends AdminAppController {
             }
 
             if ($action == "update" && !empty($data['guid'])) {
-                $count = $this->Product->find('count', array("conditions" => array("guid" => $data['guid'])));
+                $count = $this->User->find('count', array("conditions" => array("guid" => $data['guid'])));
                 if ($count == 0) {
                     $data['guid'] = uniqid();
                     $data['created'] = time();
                     $data['modified'] = time();
                 } else {
                     $data['modified'] = time();
-                    $this->Product->updateAll(array($product), array("conditions" => array("guid" => $data['guid'])));
+                    $this->User->updateAll(array($product), array("conditions" => array("guid" => $data['guid'])));
 
                     if (!empty($category)) {
                         $this->loadModel('CategoryToObject');
@@ -365,8 +363,8 @@ class MemberController extends AdminAppController {
                 $data['modified'] = time();
             }
 
-            $this->Product->create();
-            $this->Product->save($product);
+            $this->User->create();
+            $this->User->save($product);
             $error['data'] = $data['guid'];
 
             if (!empty($category)) {
@@ -396,10 +394,10 @@ class MemberController extends AdminAppController {
             return;
         }
 
-        $this->loadModel('Product');
+        $this->loadModel('User');
 
-        $data = $this->Product->find('first', array("conditions" => array("guid" => $guid)));
-        $data = $data['Product'];
+        $data = $this->User->find('first', array("conditions" => array("guid" => $guid)));
+        $data = $data['User'];
         if (!empty($data)) {
             $data['featured'] = unserialize($data['featured']);
             $data['created'] = date("F j, Y, g:i a", $data['created']);
@@ -411,32 +409,33 @@ class MemberController extends AdminAppController {
 
     public function delete() {
         $id = $this->request->query('id');
-        $this->loadModel('Product');
+        $this->loadModel('User');
 
-        $data = $this->Product->find('first', array("conditions" => array("id" => $id)));
+        $data = $this->User->find('first', array("conditions" => array("id" => $id)));
         if (!empty($data)) {
 
-            $data['Product']['featured'] = unserialize($data['Product']['featured']);
-            if (!empty($data['Product']['featured'])) {
+            $data['User']['featured'] = unserialize($data['User']['featured']);
+            if (!empty($data['User']['featured'])) {
 
-                foreach ($data['Product']['featured'] as $value) {
+                foreach ($data['User']['featured'] as $value) {
                     @unlink(ROOT . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'uploads' . DS . $value);
                     $value = @preg_replace("/\./i", "_150.", $value);
                     @unlink(ROOT . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'uploads' . DS . $value);
                 }
             }
 
-            if (!empty($data['Product']['image'])) {
-                $value = $data['Product']['image'];
+            if (!empty($data['User']['image'])) {
+                $value = $data['User']['image'];
                 @unlink(ROOT . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'uploads' . DS . $value);
                 $value = @preg_replace("/\./i", "_150.", $value);
                 @unlink(ROOT . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'uploads' . DS . $value);
             }
         }
 
-        $this->Product->delete($id);
+        $this->User->delete($id);
         exit;
     }
+
     
     public function profile () {
         
