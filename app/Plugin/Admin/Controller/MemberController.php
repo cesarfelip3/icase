@@ -85,9 +85,9 @@ class MemberController extends AdminAppController {
         $pages = ceil($total / $limit);
 
         $filters = array(
-            "type='template'" => "Template",
-            "type='product'" => "User",
-            "quantity=0" => "Empty Stocks"
+            "type='register'" => "Registered",
+            "type='guest'" => "Guest",
+            "orders > 0" => "Has Orders"
         );
 
         $this->set(array(
@@ -398,11 +398,6 @@ class MemberController extends AdminAppController {
 
         $data = $this->User->find('first', array("conditions" => array("guid" => $guid)));
         $data = $data['User'];
-        if (!empty($data)) {
-            $data['featured'] = unserialize($data['featured']);
-            $data['created'] = date("F j, Y, g:i a", $data['created']);
-            $data['modified'] = date("F j, Y, g:i a", $data['modified']);
-        }
 
         $this->set('data', $data);
     }

@@ -20,9 +20,9 @@ $admin_product = $base . "product";
 <div class="main-area dashboard">
     <div class="container">
         <form class="form-horizontal" id="form-new">
-            <input type="hidden" name="product[featured]" value="" />
-            <input type="hidden" name="product[image]" value="" />
-            <input type="hidden" name="product[guid]" value='' />
+            <input type="hidden" name="product[featured]" value="<?php echo $data['featured']; ?>" />
+            <input type="hidden" name="product[image]" value="<?php echo $data['image']; ?>" />
+            <input type="hidden" name="product[guid]" value='<?php echo $data['guid']; ?>' />
             <div class="alert alert-info hide">
                 <a class="close" data-dismiss="alert" href="#">x</a>
                 <h4 class="alert-heading">Information</h4>
@@ -31,14 +31,21 @@ $admin_product = $base . "product";
                 <div class="span8">
                     <div class="slate">
                         <div class="page-header">
-                            <h2>Edit Product</h2>
+                            <h2>New Product</h2>
                         </div>
                         <fieldset>
                             <div class="control-group">
                                 <label class="control-label" for="focusedInput">Name</label>
                                 <div class="controls">
-                                    <input class="input-xlarge focused" id="focusedInput" type="text" name="product[name]" value='<?php echo $data['name']; ?>' >
+                                    <input class="input-xlarge focused" id="focusedInput" type="text" name="product[name]" value="<?php echo $data['name']; ?>" >
                                     <span class="help-inline"></span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="focusedInput">URL Key</label>
+                                <div class="controls">
+                                    <input class="input-xlarge focused" id="focusedInput" type="text" name="product[slug]" value="<?php echo $data['slug']; ?>" >
+                                    <span class="help-inline">Default: Name<-id></span>
                                 </div>
                             </div>
                             <div class="control-group">
@@ -51,7 +58,7 @@ $admin_product = $base . "product";
                                 <label class="control-label" for="optionsCheckbox2">Template</label>
                                 <div class="controls">
                                     <label class="checkbox">
-                                        <input type="checkbox" id="optionsCheckbox2" name="product[type]" value="template">
+                                        <input type="checkbox" id="optionsCheckbox2" name="product[type]" value="template" <?php if ($data['type'] == 'template') echo 'checked'; ?>>
                                         Yes
                                         <span class="help-inline"><b><em style="color:green">Template means this product is only for cusomized case</em></b></span>
                                     </label>
@@ -60,29 +67,29 @@ $admin_product = $base . "product";
                             <div class="control-group warning">
                                 <label class="control-label" for="inputWarning">Price</label>
                                 <div class="controls">
-                                    <input type="text" class="input-mini" name="product[price]" placeholder="xxxx.xx" value='<?php echo $data['price']; ?>'>
+                                    <input type="text" class="input-mini" name="product[price]" placeholder="xxxx.xx" value="<?php echo $data['price']; ?>">
                                     <span class="help-inline"></span>
                                 </div>
                             </div>
                             <div class="control-group warning">
                                 <label class="control-label" for="inputWarning">Tax</label>
                                 <div class="controls">
-                                    <input type="text" class="input-mini" name="product[tax]" value="0.00" value='<?php echo $data['tax']; ?>'>
+                                    <input type="text" class="input-mini" name="product[tax]" value="<?php echo $data['tax']; ?>">
                                     <span class="help-inline"></span>
                                 </div>
                             </div>
                             <div class="control-group warning">
                                 <label class="control-label" for="inputWarning" >Discount</label>
                                 <div class="controls">
-                                    <input type="text" class="input-mini" name="product[discount]" value="0" value='<?php echo $data['discount']; ?>'>
+                                    <input type="text" class="input-mini" name="product[discount]" value="<?php echo $data['discount']; ?>">
                                     <span class="help-inline"></span>
                                 </div>
                             </div>
                             <div class="control-group warning">
                                 <label class="control-label" for="inputWarning" >Quantity</label>
                                 <div class="controls">
-                                    <input type="text" class="input-mini" name="product[quantity]" value="0" value='<?php echo $data['quantity']; ?>'>
-                                    <span class="help-inline">0 means unlimited</span>
+                                    <input type="text" class="input-mini" name="product[quantity]"  value="<?php echo $data['quantity']; ?>">
+                                    <span class="help-inline">65535 means unlimited</span>
                                 </div>
                             </div>
                             <div class="page-header">
@@ -92,7 +99,7 @@ $admin_product = $base . "product";
                                 <label class="control-label" for="optionsCheckbox2">Special</label>
                                 <div class="controls">
                                     <label class="checkbox">
-                                        <input type="checkbox" id="optionsCheckbox2" name="product[is_special]">
+                                        <input type="checkbox" id="optionsCheckbox2" name="product[is_special]" <?php if ($data['is_special'] == 1) echo 'checked'; ?>>
                                         Yes
                                     </label>
                                 </div>
@@ -100,21 +107,21 @@ $admin_product = $base . "product";
                             <div class="control-group">
                                 <label class="control-label" for="optionsCheckbox2">Start Date</label>
                                 <div class="controls">
-                                    <input type="text" class="datepicker input-small" name="product[special_start]" value='<?php echo $data['special_start']; ?>'/>
+                                    <input type="text" class="datepicker input-small" name="product[special_start]" value="<?php if ($data['special_start'] > 0) echo date("Y-m-d", $data['special_start']); ?>"/>
                                     <span class="help-inline"></span>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label" for="optionsCheckbox2">End Date</label>
                                 <div class="controls">
-                                    <input type="text" class="datepicker input-small" name="product[special_end]" value='<?php echo $data['special_end']; ?>' />
+                                    <input type="text" class="datepicker input-small" name="product[special_end]" value="<?php if ($data['special_end'] > 0) echo date("Y-m-d", $data['special_end']); ?>" />
                                     <span class="help-inline"></span>
                                 </div>
                             </div>
                             <div class="control-group warning">
                                 <label class="control-label" for="inputWarning">Price</label>
                                 <div class="controls">
-                                    <input type="text" class="input-mini" name="product[special_price]" placeholder="xxxx.xx" value='<?php echo $data['special_price']; ?>'>
+                                    <input type="text" class="input-mini" name="product[special_price]" placeholder="xxxx.xx" value="<?php echo $data['special_price']; ?>">
                                     <span class="help-inline"></span>
                                 </div>
                             </div>
@@ -122,19 +129,10 @@ $admin_product = $base . "product";
                                 <label class="control-label" for="inputWarning">Save Option</label>
                                 <div class="controls">
                                     <label class="checkbox">
-                                        <input type="checkbox" class="input-mini" name="product[status]" value="published">Published
+                                        <input type="checkbox" class="input-mini" name="product[status]" value="published" <?php if ($data['status'] == 'published') echo 'checked'; ?>>Published
                                     </label>
                                     <a href='javascript:' class='btn btn-primary' data-loading-text="Saving..." onclick="save('update');" id="btn-save">Update</a>
-                                    <p><br/><strong>Last Modified</strong> : <?php echo $data['modified']; ?><br/>
-                                    <strong>First Created</strong> : <?php echo $data['created']; ?></p>
-                                    
-                                    <span class="help-inline"></span>
-                                </div>
-                            </div>
-                            <div class="control-group warning">
-                                <label class="control-label" for="inputWarning"></label>
-                                <div class="controls">
-                                    
+                                    <span class="help-inline">Create new one or update current one</span>
                                 </div>
                             </div>
                             <div class='well'>
@@ -163,7 +161,11 @@ $admin_product = $base . "product";
                                 <a href="javascript:" id="btn-select-template-image" class="btn btn-block btn-info">Select</a> 
                                 <a href="javascript:" id="btn-upload-template-image" class="btn btn-block btn-info" onclick="template_image_start_upload();">Upload</a>
                             </p>
-                            <div id="box-template-image" class="row-fluid"></div>
+                            <div id="box-template-image" class="row-fluid">
+                                <?php if (!empty($data['image'])) : ?>
+                                <div class="span8"><a class="featured-thumbnail"><img src="<?php echo $this->webroot . "uploads/" . $data['image']; ?>" style="width:60px"></a></div>
+                                <?php endif; ?>
+                            </div>
                         </div>
                     </div>
                     <div class="slate">
@@ -178,7 +180,17 @@ $admin_product = $base . "product";
                                 <a href="javascript:" id="btn-upload-featured-image" class="btn btn-block btn-info" onclick="featured_image_start_upload();">Upload</a>
                             </p>
                             <div id="box-featured-image" class="row-fluid">
-
+                                <?php if (!empty ($data['featured2'])) : ?>
+                                <?php foreach ($data['featured2'] as $image) : ?>
+                                <div class="thumbnail" style="width:24%;float:left;margin-left:5px;margin-bottom:10px;">
+                                    <a class="featured-thumbnail">
+                                        <img src="<?php echo $this->webroot . "uploads/" . $image; ?>" style=""></a>
+                                    <div class="caption">
+                                        <p><a class="btn btn-success" data-image="<?php echo $image; ?>" onclick="featured_image_delete(this);">Delete</a></p>
+                                    </div>
+                                </div>
+                                <?php endforeach; ?>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -204,13 +216,28 @@ $admin_product = $base . "product";
     $(document).ready(
             function() {
                 jQuery.ajax({
-                    url: "<?php echo $base; ?>product/category/?action=checkbox",
+                    url: "<?php echo $base; ?>category/?action=checkbox",
                     type: "GET",
                     beforeSend: function(xhr) {
                     }
                 }).done(function(data) {
                     jQuery("#box-category .body").html(data);
-                    $("#form-new").serialize();
+                    //$("#form-new").serialize();
+                    
+                    <?php if (!empty ($categories)) : $all = ""; ?>
+                    <?php foreach ($categories as $value) : ?>
+                    <?php $all .= "'{$value['CategoryToObject']['category_guid']}'" . ","; ?>
+                    <?php endforeach; $all=trim($all, ",");?>
+                    <?php endif; ?>
+                        
+                    var categories = [<?php echo $all; ?>];
+                    
+                    $(".media a").each (
+                        function (index, value) {
+                            if (jQuery.inArray($(value).data('guid'), categories)) {
+                                $(this).children("input[type=checkbox]").prop("checked", true);
+                            }
+                        });
 
                 }).fail(function() {
                 });
@@ -221,7 +248,7 @@ $admin_product = $base . "product";
 
         CKEDITOR.instances.editor1.updateElement();
         jQuery.ajax({
-            url: "<?php echo $base; ?>product/add/?action" + action,
+            url: "<?php echo $base; ?>product/add/?action=" + action,
             data: $("#form-new").serialize(),
             type: "POST",
             beforeSend: function(xhr) {
@@ -275,7 +302,7 @@ $js_pluploader = array(
         browse_button: 'btn-select-template-image',
         container: 'template-image-uploader',
         max_file_size: '10mb',
-        url: '<?php echo $base; ?>media/upload',
+        url: '<?php echo $base; ?>media/uploadimage',
         multi_selection: false,
         //resize: {width: 640, height: 240, quality: 100},
         //flash_swf_url: 'js/uploader/plupload.flash.swf',
@@ -348,7 +375,7 @@ $js_pluploader = array(
         browse_button: 'btn-select-featured-image',
         container: 'featured-image-uploader',
         max_file_size: '10mb',
-        url: '<?php echo $base; ?>media/upload',
+        url: '<?php echo $base; ?>media/uploadimage',
         multi_selection: true,
         //resize: {width: 640, height: 240, quality: 100},
         //flash_swf_url: 'js/uploader/plupload.flash.swf',
@@ -395,7 +422,7 @@ $js_pluploader = array(
                 //console.log(result);
                 if (result.error == 0) {
                     //console.log(result.files.url);
-                    $("#box-featured-image").append('<div class="thumbnail" style="width:24%;float:left;margin-left:5px;margin-bottom:10px;"><a class="featured-thumbnail"><img src="' + result.files.url + '" style="" /></a><div class="caption"><p><a class="btn btn-success" data-image="' + result.files.target + '" onclick="featured_image_delete(this);">Delete</a></p></div></div>');
+                    $("#box-featured-image").append('<div class="thumbnail" style="width:24%;float:left;margin-left:5px;margin-bottom:10px;"><a class="featured-thumbnail"><img src="' + result.files.url150 + '" style="" /></a><div class="caption"><p><a class="btn btn-success" data-image="' + result.files.target + '" onclick="featured_image_delete(this);">Delete</a></p></div></div>');
                     $("input[name='product[featured]']").val($("input[name='product[featured]']").val() + "-" + result.files.target);
                     //console.log ($("input[name='product[featured]']").val());
                     init();

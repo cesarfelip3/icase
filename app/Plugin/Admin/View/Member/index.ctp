@@ -1,7 +1,7 @@
 <?php
-$product_add = $base . "product" . DS . "add";
-$product_edit = $base . "product" . DS . "edit";
-$product_delete = $base . "product" . DS . "delete";
+$member_add = $base . "member" . DS . "add";
+$member_edit = $base . "member" . DS . "edit";
+$member_delete = $base . "member" . DS . "delete";
 ?>
 <div class="secondary-masthead">
     <div class="container">
@@ -40,7 +40,7 @@ $product_delete = $base . "product" . DS . "delete";
         </div>
         <div class="row">
             <div class="span12 listing-buttons">
-                <a href="<?php echo $this->webroot; ?>admin/product/add" class="btn btn-primary">New User</a>
+<!--                <a href="<?php echo $this->webroot; ?>admin/product/add" class="btn btn-primary">New User</a>-->
             </div>
             <div class="span12">
                 <div class="slate">
@@ -88,7 +88,7 @@ $product_delete = $base . "product" . DS . "delete";
                                 <td><?php echo date ("Y-m-d H:i:s ", $value['User']['created']) . DS . date (" Y-m-d H:i:s", $value['User']['modified']); ?></td>
                                 <td class='actions'>
                                     <a class="btn btn-small btn-danger" onclick="del('<?php echo $value['User']['id']; ?>')">Remove</a>
-                                    <a class="btn btn-small btn-primary" href="<?php echo $product_edit; ?>?id=<?php echo $value['User']['guid']; ?>" target="_blank">Edit</a>
+                                    <a class="btn btn-small btn-primary" href="<?php echo $member_edit; ?>?id=<?php echo $value['User']['guid']; ?>" target="_blank">View User</a>
                                 </td>
                             </tr>
                             <?php endforeach; endif; ?>
@@ -100,7 +100,7 @@ $product_delete = $base . "product" . DS . "delete";
                 <?php echo $this->element("pagination", array ("plugin"=>"Admin", "page"=>$page, "form" => "#form-filter")); ?>
             </div>
             <div class="span6 listing-buttons pull-right">
-                <a href="<?php echo $product_add; ?>" class="btn btn-primary">New User</a>
+<!--                <a href="<?php echo $member_add; ?>" class="btn btn-primary">New User</a>-->
             </div>
         </div>
     </div>

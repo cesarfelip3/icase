@@ -42,6 +42,13 @@ $admin_product = $base . "product";
                                 </div>
                             </div>
                             <div class="control-group">
+                                <label class="control-label" for="focusedInput">URL Key</label>
+                                <div class="controls">
+                                    <input class="input-xlarge focused" id="focusedInput" type="text" name="product[slug]" >
+                                    <span class="help-inline">Default: Name<-id></span>
+                                </div>
+                            </div>
+                            <div class="control-group">
                                 <label class="control-label" for="disabledInput">Description</label>
                                 <div class="controls">
                                     <textarea class="ckeditor" cols="80" id="editor1" name="product[description]" rows="10"></textarea>

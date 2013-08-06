@@ -120,7 +120,8 @@
             document.write ('<script type="text/javascript" src="<?php echo $this->webroot; ?>js/ckeditor.basic/ckeditor.js"); ?>"></script><div style="display:none"><textarea class="ckeditor" cols="80" id="editor2" name="editor2" rows="10" style=""></textarea></div>');
         };
 
-    </script><link rel="stylesheet" href="<?php echo $this->webroot; ?>js/datepicker/css/datepicker.css">
+    </script>
+    <link rel="stylesheet" href="<?php echo $this->webroot; ?>js/datepicker/css/datepicker.css">
     <script type="text/javascript" src="<?php echo $this->webroot; ?>js/datepicker/js/bootstrap-datepicker.js"></script>
     <script type="text/javascript">
         jQuery(document).ready (function() {
