@@ -67,7 +67,6 @@ $admin_product = $base . "product";
                                 <label class="control-label" for="disabledInput">SEO</label>
                                 <div class="controls">
                                     <p><input class="input-xlarge focused" id="focusedInput" type="text" name="category[seo_keywords]" placeholder="keywords" ></p>
-                                    <p><input class="input-xlarge focused" id="focusedInput" type="text" name="category[seo_meta]" placeholder="meta"></p>
                                     <p><textarea name="category[seo_description]" style="width:280px" rows="3" placeholder="description"></textarea></p>
                                 </div>
                             </div>
@@ -122,7 +121,6 @@ $admin_product = $base . "product";
                                 <label class="control-label" for="disabledInput">SEO</label>
                                 <div class="controls">
                                     <p><input class="input-xlarge focused" id="focusedInput" type="text" name="category[seo_keywords]" placeholder="keywords" ></p>
-                                    <p><input class="input-xlarge focused" id="focusedInput" type="text" name="category[seo_meta]" placeholder="meta"></p>
                                     <p><textarea name="category[seo_description]" style="width:280px" rows="3" placeholder="description"></textarea></p>
                                 </div>
                             </div>

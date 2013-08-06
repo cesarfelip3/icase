@@ -92,7 +92,6 @@
                    data-order="<?php echo $value['Category']['order']; ?>" 
                    data-slug="<?php echo addslashes($value['Category']['slug']); ?>"
                    data-seo-keywords="<?php echo addslashes($value['Category']['seo_keywords']); ?>"
-                   data-seo-meta="<?php echo addslashes ($value['Category']['seo_meta']); ?>"
                    data-seo-description="<?php echo addslashes ($value['Category']['seo_description']); ?>"
                    class="t<?php echo $value['Category']['parent_guid']; ?>">
                        <?php if (isset($checkbox) && $checkbox) : ?><input type="checkbox" name="category[]" value="<?php echo $value['Category']['guid']; ?>" /><?php endif; ?> 

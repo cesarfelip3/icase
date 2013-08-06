@@ -4,6 +4,8 @@ App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
 
 class AppController extends Controller {
     
+    protected $_sitedomain = "";
+    
     public $components = array(
         'Session',
         'Auth' => array(
@@ -27,7 +29,10 @@ class AppController extends Controller {
     
     public function beforeFilter() {
         //$this->set ("title", env ("SERVER_NAME"));
+        
         $this->set ("load_shop_cart", true);
+        $this->set ("_sitedomain", $this->_sitedomain);
+        
         if ($this->Auth->loggedIn()) {
             $user = array (
                 'name' => $this->Auth->user ('name'),

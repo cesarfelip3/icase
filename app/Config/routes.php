@@ -37,7 +37,7 @@ Router::connect(
     )
 );
 Router::connect(
-    '/product/:slug', // E.g. /blog/3-CakePHP_Rocks
+    '/product/:category/:slug', // E.g. /blog/3-CakePHP_Rocks
     array('controller' => 'catalogue', 'action' => 'product'), 
     array(
         'pass' => array('slug'),

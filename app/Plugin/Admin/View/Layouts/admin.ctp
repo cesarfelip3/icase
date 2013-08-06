@@ -5,7 +5,8 @@
         <meta charset="utf-8">
         <title>Your Admin Dashboard</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="">
+        <meta name="keywords" value="" />
+        <meta name="description" value="The secrets to baking fresh chewy chocolate chip cookies that make you wish thousands of calories were actually good for you!" />
         <meta name="author" content="">
         <!-- Le styles -->
         <link href="http://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet" type="text/css">

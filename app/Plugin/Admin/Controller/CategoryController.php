@@ -19,7 +19,7 @@ class CategoryController extends AdminAppController {
         if ($this->request->is('ajax')) {
             $this->layout = false;
 
-            $action = $this->request->query ('action');
+            $action = $this->request->query('action');
             $this->loadModel('Category');
             $categories = $this->Category->find('all', array(
                 "conditions" => array('level' => 0),
@@ -114,8 +114,12 @@ class CategoryController extends AdminAppController {
             "level" => $level,
                 )
         );
-        
-        $data['slug'] = preg_replace ("/ +/i", "-", $data['slug']);
+
+        if (empty($data['slug'])) {
+            $data['slug'] = preg_replace("/ +/i", "-", $data['name']);
+        } else {
+            $data['slug'] = preg_replace("/ +/i", "-", $data['slug']);
+        }
 
         $this->Category->save($data);
         exit(json_encode($this->error));

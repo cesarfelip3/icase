@@ -147,15 +147,9 @@ class ProductController extends AdminAppController {
             }
 
             if (empty($data['slug'])) {
-                $data['slug'] = preg_replace("/ +/i", "-", $data['name']) . "-" . uniqid();
+                $data['slug'] = preg_replace("/ +/i", "-", $data['name']);
             } else {
                 $data['slug'] = preg_replace("/ +/i", "-", $data['slug']);
-                if ($action != 'update' && $this->Product->find('first', array("conditions" => array("slug" => $data['slug'])))) {
-                    $error['error'] = 1;
-                    $error['element'] = 'input[name="product[slug]"]';
-                    $error['message'] = 'This URL Key already exists';
-                    exit(json_encode($error));
-                }
             }
 
             $is_special = 0;
@@ -302,15 +296,9 @@ class ProductController extends AdminAppController {
             }
 
             if (empty($data['slug'])) {
-                $data['slug'] = preg_replace("/ +/i", "-", $data['name']) . "-" . uniqid();
+                $data['slug'] = preg_replace("/ +/i", "-", $data['name']);
             } else {
                 $data['slug'] = preg_replace("/ +/i", "-", $data['slug']);
-                if ($action != 'update' && $this->Product->find('first', array("conditions" => array("slug" => $data['slug'])))) {
-                    $error['error'] = 1;
-                    $error['element'] = 'input[name="product[slug]"]';
-                    $error['message'] = 'This URL Key already exists';
-                    exit(json_encode($error));
-                }
             }
 
             $is_special = 0;
