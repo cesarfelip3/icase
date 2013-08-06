@@ -175,8 +175,6 @@ class MediaController extends AppController {
     }
 
     public function preview() {
-        error_reporting(-1);
-        ini_set('display_errors', 'On');
 
         $this->autoRender = false;
         header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
@@ -185,7 +183,7 @@ class MediaController extends AppController {
         header("Cache-Control: post-check=0, pre-check=0", false);
         header("Pragma: no-cache");
 
-        $targetDir = $this->_targetDir = ROOT . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'uploads';
+        $targetDir = $this->_targetDir = ROOT . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'uploads' . DS . 'preview';
 
         $cleanupTargetDir = true; // Remove old files
         $maxFileAge = 5 * 3600; // Temp file age in seconds

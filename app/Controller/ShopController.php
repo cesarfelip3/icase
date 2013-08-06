@@ -348,7 +348,7 @@ class ShopController extends AppController {
                 return;
             }
 
-            $targetDir = $this->_targetDir = ROOT . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'uploads';
+            $targetDir = $this->_targetDir = ROOT . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'uploads' . DS . 'preview';
 
             $cleanupTargetDir = true; // Remove old files
             $maxFileAge = 5 * 3600; // Temp file age in seconds
@@ -377,7 +377,7 @@ class ShopController extends AppController {
             $this->_error['files'] = array(
                 'original' => "",
                 'target' => $filename,
-                'url' => "uploads/" . $filename,
+                'url' => "uploads/preview/" . $filename,
                 'extension' => $extension,
                     //'mime' => $mime
             );
@@ -440,7 +440,7 @@ class ShopController extends AppController {
             )));
 
             foreach ($data as $key => $value) {
-                $value['Product']['image'] = $this->base . "/uploads/" . $value['Product']['image'];
+                $value['Product']['image'] = $this->base . "/uploads/template/" . $value['Product']['image'];
                 $data[$key] = $value;
             }
 

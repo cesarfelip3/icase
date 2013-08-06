@@ -16,6 +16,11 @@ class MediaController extends AppController {
 
     public function uploadimage () {
 
+        $action = $this->request->query ("action");
+        if (empty ($action)) {
+            exit ("");
+        }
+        
         $this->autoRender = false;
         header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
         header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
@@ -23,7 +28,7 @@ class MediaController extends AppController {
         header("Cache-Control: post-check=0, pre-check=0", false);
         header("Pragma: no-cache");
 
-        $targetDir = $this->_targetDir = ROOT . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'uploads';
+        $targetDir = $this->_targetDir = ROOT . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'uploads' . DS . $action;
 
         $cleanupTargetDir = true; // Remove old files
         $maxFileAge = 5 * 3600; // Temp file age in seconds
@@ -162,8 +167,8 @@ class MediaController extends AppController {
             'original' => $original,
             'target' => $name,
             'filename' => $filename,
-            'url' => $this->base . "/uploads/" . $name,
-            'url150' => $this->base . "/uploads/" . $filename . "_150." . $extension,
+            'url' => $this->base . "/uploads/$action/" . $name,
+            'url150' => $this->base . "/uploads/$action/" . $filename . "_150." . $extension,
             'extension' => $extension,
         );
 
