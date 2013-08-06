@@ -21,7 +21,7 @@ Planed - 1 day (Admin Complete)
 
 Optional
 
-1. Admin/Marketing - Email...
+1. Admin/Marketing - Email/Export - Email/Verification - Email/Send - Email/Feedback
 
 SEO basic --
 
@@ -38,7 +38,9 @@ SEO basic --
 5. URL name 
 
     1). http://domain.com/ #must full domain name
+
     2). http://domain.com/products/category-url-key-C[id]
+
     3). http://domain.com/products/category-url-key-C[id]/product-url-key-P[id]
 
 6. Content

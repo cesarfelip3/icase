@@ -23,6 +23,7 @@ $admin_product = $base . "product";
             <input type="hidden" name="product[featured]" value="<?php echo $data['featured']; ?>" />
             <input type="hidden" name="product[image]" value="<?php echo $data['image']; ?>" />
             <input type="hidden" name="product[guid]" value='<?php echo $data['guid']; ?>' />
+            <input type="hidden" name="product[id]" value='<?php echo $data['id']; ?>' />
             <div class="alert alert-info hide">
                 <a class="close" data-dismiss="alert" href="#">x</a>
                 <h4 class="alert-heading">Information</h4>
@@ -227,15 +228,19 @@ $admin_product = $base . "product";
                     <?php if (!empty ($categories)) : $all = ""; ?>
                     <?php foreach ($categories as $value) : ?>
                     <?php $all .= "'{$value['CategoryToObject']['category_guid']}'" . ","; ?>
-                    <?php endforeach; $all=trim($all, ",");?>
+                    <?php endforeach; $all=trim($all, ",");?>var categories = [<?php echo $all; ?>];
                     <?php endif; ?>
                         
-                    var categories = [<?php echo $all; ?>];
+                    var categories = [<?php if (!empty($all)) echo $all; ?>];
+                    
+                    if (categories.length <= 0) {
+                        return;
+                    }
                     
                     $(".media a").each (
                         function (index, value) {
-                            if (jQuery.inArray($(value).data('guid'), categories)) {
-                                $(this).children("input[type=checkbox]").prop("checked", true);
+                            if (categories.indexOf($(value).data('guid')) != -1) {
+                                $(value).children("input[type=checkbox]").prop("checked", true);
                             }
                         });
 
@@ -248,7 +253,7 @@ $admin_product = $base . "product";
 
         CKEDITOR.instances.editor1.updateElement();
         jQuery.ajax({
-            url: "<?php echo $base; ?>product/add/?action=" + action,
+            url: "<?php echo $base; ?>product/edit/?action=" + action,
             data: $("#form-new").serialize(),
             type: "POST",
             beforeSend: function(xhr) {
@@ -261,8 +266,10 @@ $admin_product = $base . "product";
             console.log(result);
             if (result.error == 1) {
                 console.log(result.element);
-                $(result.element).next(".help-inline").html(result.message);
-                $(result.element).parent().parent().addClass('error');
+                if (result.element != "") {
+                    $(result.element).next(".help-inline").html(result.message);
+                    $(result.element).parent().parent().addClass('error');
+                }
                 showAlert(result.message);
             } else {
                 if (action == 'create') {

@@ -203,22 +203,27 @@ class ProductController extends AdminAppController {
                     $data['modified'] = time();
                 } else {
                     $data['modified'] = time();
-                    $this->Product->updateAll(array($product), array("conditions" => array("guid" => $data['guid'])));
+                    $this->Product->id = $data['guid'];
+                    $this->Product->set($data);
+                    $this->Product->save();
+                    //$this->Product->updateAll(array($data), array("conditions" => array("guid" => $data['guid'])));
 
                     if (!empty($category)) {
                         $this->loadModel('CategoryToObject');
-                        $this->CategoryToObject->deleteAll(array("object_guid" => $data['guid']));
+                        $this->CategoryToObject->query("DELETE FROM category_to_object WHERE object_guid='{$data['guid']}'");
 
-                        $data = array();
                         foreach ($category as $value) {
-                            $data[] = array(
+                            $c[] = array(
                                 "category_guid" => $value,
                                 "object_guid" => $data['guid']
                             );
                         }
 
                         $this->CategoryToObject->create();
-                        $this->CategoryToObject->saveMany($data);
+                        $this->CategoryToObject->saveMany($c);
+                    } else {
+                        $this->loadModel('CategoryToObject');
+                        $this->CategoryToObject->query("DELETE FROM category_to_object WHERE object_guid='{$data['guid']}'");
                     }
                     exit(json_encode($error));
                 }
@@ -230,7 +235,7 @@ class ProductController extends AdminAppController {
 
             $this->Product->create();
             $this->Product->save($data);
-            $error['data'] = $data['guid'];
+            $error['data'] = $this->Product->id;
 
             if (!empty($category)) {
 
@@ -346,28 +351,37 @@ class ProductController extends AdminAppController {
 
             if ($action == "update" && !empty($data['guid'])) {
                 $count = $this->Product->find('count', array("conditions" => array("guid" => $data['guid'])));
-                if ($count == 0) {
-                    $data['guid'] = uniqid();
-                    $data['created'] = time();
-                    $data['modified'] = time();
+                if ($count <= 0) {
+                    //$data['guid'] = uniqid();
+                    //$data['created'] = time();
+                    //$data['modified'] = time();
+                    $error['error'] = 1;
+                    $error['message'] = "The Product doesn't exist anymore";
+                    $error['element'] = "";
+                    exit(json_encode($error));
                 } else {
                     $data['modified'] = time();
-                    $this->Product->updateAll(array($product), array("conditions" => array("guid" => $data['guid'])));
+                    $this->Product->id = $data['id'];
+                    $this->Product->set($data);
+                    $this->Product->save();
+                    //$this->Product->updateAll(array($data), array("conditions" => array("guid" => $data['guid'])));
 
                     if (!empty($category)) {
                         $this->loadModel('CategoryToObject');
-                        $this->CategoryToObject->deleteAll(array("object_guid" => $data['guid']));
+                        $this->CategoryToObject->query("DELETE FROM category_to_object WHERE object_guid='{$data['guid']}'");
 
-                        $data = array();
                         foreach ($category as $value) {
-                            $data[] = array(
+                            $c[] = array(
                                 "category_guid" => $value,
                                 "object_guid" => $data['guid']
                             );
                         }
 
                         $this->CategoryToObject->create();
-                        $this->CategoryToObject->saveMany($data);
+                        $this->CategoryToObject->saveMany($c);
+                    } else {
+                        $this->loadModel('CategoryToObject');
+                        $this->CategoryToObject->query("DELETE FROM category_to_object WHERE object_guid='{$data['guid']}'");
                     }
                     exit(json_encode($error));
                 }
@@ -414,13 +428,16 @@ class ProductController extends AdminAppController {
         if (!empty($data)) {
             $data['featured'] = unserialize($data['featured']);
             $data['featured2'] = $data['featured'];
-            $data['featured'] = implode("-", $data['featured']);
+            if (!empty($data['featured'])) {
+                $data['featured'] = implode("-", $data['featured']);
+            } else {
+                $data['featured'] = "";
+            }
             $data['created'] = date("F j, Y, g:i a", $data['created']);
             $data['modified'] = date("F j, Y, g:i a", $data['modified']);
-            
+
             $this->loadModel('CategoryToObject');
-            $category = $this->CategoryToObject->find ('all', array ("conditions"=>array ("object_guid"=>$data['guid'])));
-            
+            $category = $this->CategoryToObject->find('all', array("conditions" => array("object_guid" => $data['guid'])));
         }
 
         $this->set('categories', $category);
