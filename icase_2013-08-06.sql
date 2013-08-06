@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.29)
 # Database: icase
-# Generation Time: 2013-08-05 11:42:09 +0000
+# Generation Time: 2013-08-06 12:28:56 +0000
 # ************************************************************
 
 
@@ -51,7 +51,6 @@ CREATE TABLE `categories` (
   `children` int(11) NOT NULL DEFAULT '0',
   `order` int(11) NOT NULL DEFAULT '0',
   `seo_keywords` varchar(1024) DEFAULT NULL,
-  `seo_meta` varchar(1024) DEFAULT NULL,
   `seo_description` varchar(1024) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -59,14 +58,15 @@ CREATE TABLE `categories` (
 LOCK TABLES `categories` WRITE;
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
 
-INSERT INTO `categories` (`id`, `guid`, `parent_guid`, `group_guid`, `name`, `slug`, `description`, `level`, `children`, `order`, `seo_keywords`, `seo_meta`, `seo_description`)
+INSERT INTO `categories` (`id`, `guid`, `parent_guid`, `group_guid`, `name`, `slug`, `description`, `level`, `children`, `order`, `seo_keywords`, `seo_description`)
 VALUES
-	(1,'51ff653f910a5','','51ff653f9108e','iphone','iphone',NULL,0,3,0,'iphone','iphone','iphone'),
-	(2,'51ff654998b94','51ff653f910a5','51ff653f9108e','iphone4','iphone4',NULL,1,0,0,'iphone4','iphone4','iphone4'),
-	(3,'51ff6550aa711','51ff653f910a5','51ff653f9108e','iphone4S','iphone4S',NULL,1,0,0,'iphone4S','iphone4S','iphone4S'),
-	(4,'51ff6558d1dda','51ff653f910a5','51ff653f9108e','iphone5','iphone5',NULL,1,1,0,'iphone5','iphone5','iphone5'),
-	(5,'51ff657ed9e5d','','51ff657ed9e46','ipod touch','ipod touch',NULL,0,0,0,'ipod touch','ipod touch','ipod touch'),
-	(7,'51ff77c84b846','51ff6558d1dda','51ff653f9108e','ipad 3','ipad-3',NULL,2,0,0,'ipad 3','ipad 3','ipad 3');
+	(1,'51ff653f910a5','','51ff653f9108e','iphone','iphone',NULL,0,3,0,'iphone','iphone'),
+	(2,'51ff654998b94','51ff653f910a5','51ff653f9108e','iphone4','iphone4',NULL,1,0,0,'iphone4','iphone4'),
+	(3,'51ff6550aa711','51ff653f910a5','51ff653f9108e','iphone4S','iphone4S',NULL,1,0,0,'iphone4S','iphone4S'),
+	(4,'51ff6558d1dda','51ff653f910a5','51ff653f9108e','iphone5','iphone5',NULL,1,1,0,'iphone5','iphone5'),
+	(5,'51ff657ed9e5d','','51ff657ed9e46','ipod touch','ipod touch',NULL,0,0,0,'ipod touch','ipod touch'),
+	(7,'51ff77c84b846','51ff6558d1dda','51ff653f9108e','ipad 3','ipad-3',NULL,2,1,0,'ipad 3','ipad 3'),
+	(8,'51ffe40fe461f','51ff77c84b846','51ff653f9108e','ipad4','ipad-4',NULL,3,0,0,'ipad 4','ipad 4');
 
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -82,6 +82,34 @@ CREATE TABLE `category_to_object` (
   `object_guid` char(13) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+LOCK TABLES `category_to_object` WRITE;
+/*!40000 ALTER TABLE `category_to_object` DISABLE KEYS */;
+
+INSERT INTO `category_to_object` (`category_guid`, `object_guid`)
+VALUES
+	('51ff654998b94','51ffe43d49438'),
+	('51ff6558d1dda','51ffe43d49438'),
+	('51ff77c84b846','51ffe43d49438'),
+	('51ffe40fe461f','51ffe43d49438'),
+	('51ff654998b94','51ffe44d555f1'),
+	('51ff6558d1dda','51ffe44d555f1'),
+	('51ff77c84b846','51ffe44d555f1'),
+	('51ffe40fe461f','51ffe44d555f1'),
+	('51ff654998b94','51ffe44e68d03'),
+	('51ff6558d1dda','51ffe44e68d03'),
+	('51ff77c84b846','51ffe44e68d03'),
+	('51ffe40fe461f','51ffe44e68d03'),
+	('51ff654998b94','51ffe44f0b09b'),
+	('51ff6558d1dda','51ffe44f0b09b'),
+	('51ff77c84b846','51ffe44f0b09b'),
+	('51ffe40fe461f','51ffe44f0b09b'),
+	('51ff654998b94','51ffe44f7f8b6'),
+	('51ff6558d1dda','51ffe44f7f8b6'),
+	('51ff77c84b846','51ffe44f7f8b6'),
+	('51ffe40fe461f','51ffe44f7f8b6');
+
+/*!40000 ALTER TABLE `category_to_object` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table enquiries
@@ -238,13 +266,25 @@ CREATE TABLE `products` (
   `status` varchar(11) NOT NULL DEFAULT 'draft',
   `active` int(11) NOT NULL DEFAULT '1',
   `seo_keywords` varchar(512) DEFAULT NULL,
-  `seo_meta` varchar(512) DEFAULT NULL,
   `seo_description` varchar(512) DEFAULT NULL,
   `created` int(11) DEFAULT NULL,
   `modified` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+LOCK TABLES `products` WRITE;
+/*!40000 ALTER TABLE `products` DISABLE KEYS */;
+
+INSERT INTO `products` (`id`, `guid`, `user_guid`, `name`, `slug`, `image`, `featured`, `description`, `price`, `tax`, `discount`, `quantity`, `is_special`, `special_price`, `special_start`, `special_end`, `type`, `status`, `active`, `seo_keywords`, `seo_description`, `created`, `modified`)
+VALUES
+	(1,'51ffe43d49438',NULL,'hello world','hello-world-51ffe43d48f9d','','a:2:{i:0;s:17:\"51ffe438c0619.jpg\";i:1;s:17:\"51ffe4393cf14.jpg\";}','',23.23,0.00,0.00,65535,0,NULL,NULL,NULL,'product','published',1,NULL,NULL,1375724605,1375724605),
+	(2,'51ffe44d555f1',NULL,'hello world','hello-world-51ffe44d555d3','','a:2:{i:0;s:17:\"51ffe438c0619.jpg\";i:1;s:17:\"51ffe4393cf14.jpg\";}','',23.23,0.00,0.00,65535,0,NULL,NULL,NULL,'product','published',1,NULL,NULL,1375724621,1375724621),
+	(3,'51ffe44e68d03',NULL,'hello world','hello-world-51ffe44e68ce4','','a:2:{i:0;s:17:\"51ffe438c0619.jpg\";i:1;s:17:\"51ffe4393cf14.jpg\";}','',23.23,0.00,0.00,65535,0,NULL,NULL,NULL,'product','published',1,NULL,NULL,1375724622,1375724622),
+	(4,'51ffe44f0b09b',NULL,'hello world','hello-world-51ffe44f0b07a','','a:2:{i:0;s:17:\"51ffe438c0619.jpg\";i:1;s:17:\"51ffe4393cf14.jpg\";}','',23.23,0.00,0.00,65535,0,NULL,NULL,NULL,'product','published',1,NULL,NULL,1375724623,1375724623),
+	(5,'51ffe44f7f8b6',NULL,'hello world','hello-world-51ffe44f7f896','','a:2:{i:0;s:17:\"51ffe438c0619.jpg\";i:1;s:17:\"51ffe4393cf14.jpg\";}','',23.23,0.00,0.00,65535,0,NULL,NULL,NULL,'product','published',1,NULL,NULL,1375724623,1375724623);
+
+/*!40000 ALTER TABLE `products` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table templates
@@ -314,16 +354,36 @@ CREATE TABLE `users` (
   `guid` char(13) DEFAULT NULL,
   `name` varchar(32) DEFAULT NULL,
   `email` varchar(128) DEFAULT NULL,
-  `password` varchar(32) DEFAULT NULL,
-  `email_verfied` int(11) DEFAULT NULL,
+  `password` varchar(128) DEFAULT NULL,
+  `email_verfied` int(11) NOT NULL DEFAULT '0',
   `verfied_code` varchar(128) DEFAULT NULL,
   `verfied_expire` int(11) DEFAULT NULL,
+  `type` varchar(32) NOT NULL DEFAULT 'guest',
+  `firstname` varchar(32) DEFAULT NULL,
+  `lastname` varchar(32) DEFAULT NULL,
+  `address` varchar(1024) DEFAULT NULL,
+  `phone` varchar(64) DEFAULT NULL,
+  `country` varchar(32) DEFAULT NULL,
+  `state` varchar(32) DEFAULT NULL,
+  `city` varchar(32) DEFAULT NULL,
+  `orders` int(11) NOT NULL DEFAULT '0',
+  `subscribe` int(11) NOT NULL DEFAULT '0',
+  `subscription` text,
+  `active` int(11) NOT NULL DEFAULT '1',
   `created` int(11) DEFAULT NULL,
   `modified` int(11) DEFAULT NULL,
-  `type` varchar(32) NOT NULL DEFAULT 'guest',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+
+INSERT INTO `users` (`id`, `guid`, `name`, `email`, `password`, `email_verfied`, `verfied_code`, `verfied_expire`, `type`, `firstname`, `lastname`, `address`, `phone`, `country`, `state`, `city`, `orders`, `subscribe`, `subscription`, `active`, `created`, `modified`)
+VALUES
+	(1,'51fff4ecaeb8d','hello','hello@gmail.com','cad9747bad0af7fade2ff3fd841f48d566f5ef4e',0,NULL,NULL,'registered',NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,0,NULL,1,1375728876,1375728876);
+
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 

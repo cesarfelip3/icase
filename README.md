@@ -9,10 +9,8 @@ Update
 
 Planed - 1 day (Admin Complete)
 
-1. Member/Register, Member/Login, Member/Logout
-1. Admin/Member
-2. Admin/Report - Dashboard
-3. Admin/Setting - Payment, Email
+1. Admin/Report - Dashboard
+2. Admin/Setting - Payment, Email
 
 
 SEO basic --
