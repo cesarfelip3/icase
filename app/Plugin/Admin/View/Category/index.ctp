@@ -129,7 +129,7 @@ $admin_product = $base . "product";
                                 <div class="controls">
                                     <input type="text" name="category[order]" class='input-mini' />
                                     <span class="help-inline"></span>
-                                    <a href="javascript:" class="btn btn-success" data-loading-text="Updating..." onclick="save('update', this);" id="btn-update">Update</a>
+                                    <a href="javascript:" class="btn btn-success" data-loading-text="Updating..." onclick="save('edit', this);" id="btn-update">Update</a>
                                     <a href="javascript:" class="btn btn-success" data-loading-text="Deleting..." onclick="save('delete', this);" id="btn-update">Delete</a>
                                 </div>
                             </div>
@@ -151,7 +151,7 @@ $admin_product = $base . "product";
     function save(action, button) {
         
         var data = "";
-        if (action == "update") {
+        if (action == "edit") {
             data = $("#form-edit").serialize();
         } 
         

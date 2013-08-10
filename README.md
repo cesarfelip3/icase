@@ -5,7 +5,7 @@ iCase
 Update
 ========
 
-2013.08.06
+2013.08.06 - 2013.08.12
 
 Planed - 1 day (Admin Complete)
 

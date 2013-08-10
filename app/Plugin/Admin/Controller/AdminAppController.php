@@ -7,14 +7,14 @@ class AdminAppController extends Controller {
     public $components = array(
         'Auth' => array(
             'loginAction' => array(
-                'controller' => 'index',
+                'controller' => 'admin',
                 'action' => 'login'
             ),
             'authError' => 'Did you really think you are allowed to see that?',
             'authenticate' => array(
                 'Form' => array(
                     'userModel' => 'Admin',
-                    'fields' => array('username' => 'email', 'password' => 'password'),
+                    'fields' => array('username' => 'name', 'password' => 'password'),
                     'scope' => array('User.active' => 1),
                     'passwordHasher' => array(
                         'className' => 'Simple'
@@ -27,5 +27,14 @@ class AdminAppController extends Controller {
         $this->layout = "admin";
         $base = $this->base . DS . $this->request->params['plugin'] . DS;
         $this->set ('base', $base);
+        
+        if ($this->Auth->loggedIn()) {
+            $user = array (
+                'name' => $this->Auth->user ('name'),
+                'guid' => $this->Auth->user ('guid')
+            );
+            
+            $this->set ('_identity', $user);
+        }
     }
 }
