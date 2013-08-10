@@ -73,7 +73,7 @@ $admin_product = $base . "product";
                             <div class="control-group warning">
                                 <label class="control-label" for="inputWarning">Parent</label>
                                 <div class="controls">
-                                    <input type="text" class="input-medium" name="category[parent]" placeholder="Parent category">
+                                    <input type="text" class="input-medium" name="category[parent]" placeholder="Parent category" readonly="readonly">
                                     <input type="hidden" class="input-medium" name="category[parent_guid]">
                                     <span class="help-inline"></span>
                                     <a href="javascript:" class="btn btn-success" data-loading-text="Saving..." onclick="save('add');" id="btn-save">Create</a>

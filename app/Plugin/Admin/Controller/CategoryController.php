@@ -147,6 +147,8 @@ class CategoryController extends AdminAppController {
         $this->Category->id = $data['id'];
         unset($data['id']);
         unset($data['guid']);
+        unset($data['parent_guid']);
+        unset($data['group_guid']);
 
         $this->Category->set($data);
         $this->Category->save($data);

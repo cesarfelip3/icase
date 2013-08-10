@@ -8,7 +8,7 @@ class CaseController extends AppController {
     
     public function newcase () {
 	$this->set ('load_shop_cart', true);
-        $this->layout = "default.design";
+        $this->layout = "default";
     }
 
 }
