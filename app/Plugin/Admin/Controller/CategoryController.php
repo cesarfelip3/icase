@@ -212,5 +212,6 @@ class CategoryController extends AdminAppController {
             }
         }
     }
+}
 
     
