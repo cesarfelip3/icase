@@ -26,21 +26,20 @@ class CategoryController extends AdminAppController {
                 "order" => array('order ASC')
             ));
 
+
             $return = array();
             if (!empty($categories)) {
 
                 foreach ($categories as $category) {
-                    if ($category['Category']['children'] > 0) {
-                        $result = $this->Category->find('all', array(
-                            "conditions" => array('parent_guid' => $category['Category']['guid']),
-                            "order" => array('order ASC')
-                                )
-                        );
+                    $result = $this->Category->find('all', array(
+                        "conditions" => array('parent_guid' => $category['Category']['guid']),
+                        "order" => array('order ASC')
+                            )
+                    );
 
-                        if (!empty($result)) {
-                            $return[] = $category;
-                            $this->_categoryList($result, $return);
-                        }
+                    if (!empty($result)) {
+                        $return[] = $category;
+                        $this->_categoryList($result, $return);
                     } else {
                         $return[] = $category;
                     }
@@ -161,13 +160,27 @@ class CategoryController extends AdminAppController {
 
         $data = $this->request->data('category');
 
+        $parent = $this->Category->find('first', array('conditions' => array("guid" => $data['parent_guid'])));
+
+        if (!empty($parent)) {
+            $parent = $parent['Category'];
+            $children = $parent['children'] - 1;
+            $this->Category->id = $parent['id'];
+            $parent = array();
+            $parent['children'] = $children;
+            $this->Category->set($parent);
+            $this->Category->save();
+        }
+
+        $this->Category->clear();
+
         $result = $this->Category->find('all', array("conditions" => array("parent_guid" => $data['guid'])));
         $this->_categoryList($result, $return);
         $result['Category'] = $data;
         $return[] = $result;
 
         foreach ($return as $value) {
-            $this->Category->delete($value['Category']['id']);
+            $this->Category->query("DELETE FROM categories WHERE id={$value['Category']['id']}");
             $this->CategoryToObject->query("DELETE FROM category_to_object WHERE category_guid='{$value['Category']['guid']}'");
         }
 
@@ -184,12 +197,13 @@ class CategoryController extends AdminAppController {
         if (!empty($data)) {
             foreach ($data as $value) {
 
-                if ($value['Category']['children'] > 0) {
-                    $result = $this->Category->find('all', array(
-                        "conditions" => array('parent_guid' => $value['Category']['guid']),
-                        "order" => array('order ASC')
-                            )
-                    );
+                $result = $this->Category->find('all', array(
+                    "conditions" => array('parent_guid' => $value['Category']['guid']),
+                    "order" => array('order ASC')
+                        )
+                );
+
+                if (!empty($result)) {
                     $return[] = $value;
                     $this->_categoryList($result, $return);
                 } else {
@@ -199,4 +213,4 @@ class CategoryController extends AdminAppController {
         }
     }
 
-}
+    

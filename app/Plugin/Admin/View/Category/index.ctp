@@ -33,17 +33,17 @@ $admin_product = $base . "product";
             <h4 class="alert-heading">Information</h4>
         </div>
         <div class="row">
-            <div class="span2">
+            <div class="span5">
                 <div class="slate" id='box-category'>
                     <div class="page-header">
-                        <h2>Categories</h2>
+                        <h2>Categories<a class="btn btn-primary pull-right" id="btn-add">Add New</a><a class="btn btn-primary pull-right" id="btn-edit" style="margin-right:5px;">Edit</a></h2>
                     </div>
                     <div class='body' style="height:500px;overflow: auto;">
                     </div>
                 </div>
             </div>
             <div class="span5">
-                <div class="slate">
+                <div class="slate hide" id="box-new">
                     <div class="page-header">
                         <h2>New Category</h2>
                     </div>
@@ -92,7 +92,7 @@ $admin_product = $base . "product";
                 </div>
             </div>
             <div class="span5">
-                <div class="slate">
+                <div class="slate" id="box-edit">
                     <div class="page-header">
                         <h2>Edit Category</h2>
                     </div>
@@ -146,7 +146,21 @@ $admin_product = $base . "product";
             function() {
 
                 category_load();
-            })
+                
+                $("#btn-add").click (
+                    function () {
+                        $("#box-edit").hide ();
+                        $("#box-new").show ();
+                        
+                    });
+                
+                $("#btn-edit").click (
+                    function () {
+                        $("#box-edit").show ();
+                        $("#box-new").hide ();
+                        
+                    });
+            });
 
     function save(action, button) {
         

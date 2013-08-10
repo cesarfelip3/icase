@@ -58,10 +58,10 @@
                                     <li class="dropdown">
                                         <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-shopping-cart"></i> Store <b class="caret"></b></a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="<?php echo $base; ?>product/">Catalogue</a></li>
-                                            <li><a href="<?php echo $base; ?>category/">Manage Category</a></li>
-                                            <li><a href="<?php echo $base; ?>order/">Orders</a></li>
-                                            <li><a href="<?php echo $base; ?>enquiry/">Enquiries</a></li>
+                                            <li><a href="<?php echo $base; ?>product/">Manage Catalogue</a></li>
+                                            <li><a href="<?php echo $base; ?>category/">Manage Categories</a></li>
+                                            <li><a href="<?php echo $base; ?>order/">Manage Orders</a></li>
+                                            <li><a href="<?php echo $base; ?>enquiry/">Manage Enquiries</a></li>
                                         </ul>
                                     </li>
                                     <li class="dropdown">
