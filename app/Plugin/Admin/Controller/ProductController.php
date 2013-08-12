@@ -2,6 +2,13 @@
 
 class ProductController extends AdminAppController {
 
+    protected $error = array(
+        'error' => 0,
+        'element' => '',
+        'message' => '',
+        'data' => ''
+    );
+
     public function beforeFilter() {
         $this->Auth->allow();
         $this->Auth->allow('guest');
@@ -111,12 +118,6 @@ class ProductController extends AdminAppController {
     }
 
     public function add() {
-        $error = array(
-            'error' => 0,
-            'element' => '',
-            'message' => '',
-            'data' => ''
-        );
 
         if ($this->request->is('ajax') && $this->request->is('post')) {
             $this->autoRender = false;
@@ -126,31 +127,42 @@ class ProductController extends AdminAppController {
             $action = $this->request->query('action');
 
             if (empty($data['name'])) {
-                $error['error'] = 1;
-                $error['element'] = 'input[name="product[name]"]';
-                $error['message'] = 'Product name is required';
-                exit(json_encode($error));
+                $this->error['error'] = 1;
+                $this->error['element'] = 'input[name="product[name]"]';
+                $this->error['message'] = 'Product name is required';
+                exit(json_encode($this->error));
             }
 
             if (preg_match("/^[0-9]{1,}\.?[0-9]{0,2}$/i", $data['price']) == false) {
-                $error['error'] = 1;
-                $error['element'] = 'input[name="product[price]"]';
-                $error['message'] = 'Invalid price number';
-                exit(json_encode($error));
+                $this->error['error'] = 1;
+                $this->error['element'] = 'input[name="product[price]"]';
+                $this->error['message'] = 'Invalid price number';
+                exit(json_encode($this->error));
             }
 
             if (preg_match("/^[0-9]{1,}\.?[0-9]{0,2}$/i", $data['tax']) == false) {
-                $error['error'] = 1;
-                $error['element'] = 'input[name="product[tax]"]';
-                $error['message'] = 'Invalid tax number';
-                exit(json_encode($error));
+                $this->error['error'] = 1;
+                $this->error['element'] = 'input[name="product[tax]"]';
+                $this->error['message'] = 'Invalid tax number';
+                exit(json_encode($this->error));
             }
 
             if (preg_match("/^[0-9]{1,2}$/i", $data['discount']) == false) {
-                $error['error'] = 1;
-                $error['element'] = 'input[name="product[discount]"]';
-                $error['message'] = 'Invalid discount number';
-                exit(json_encode($error));
+                $this->error['error'] = 1;
+                $this->error['element'] = 'input[name="product[discount]"]';
+                $this->error['message'] = 'Invalid discount number';
+                exit(json_encode($this->error));
+            }
+
+            $is_special = 0;
+            if (isset($data['is_special'])) {
+                $is_special = 1;
+                if (preg_match("/^[0-9]{1,}\.?[0-9]{0,2}$/i", $data['special_price']) == false) {
+                    $this->error['error'] = 1;
+                    $this->error['element'] = 'input[name="product[special_price]"]';
+                    $this->error['message'] = 'Invalid special price number';
+                    exit(json_encode($this->error));
+                }
             }
 
             if (empty($data['slug'])) {
@@ -159,30 +171,8 @@ class ProductController extends AdminAppController {
                 $data['slug'] = preg_replace("/ +/i", "-", $data['slug']);
             }
 
-            $is_special = 0;
-            if (isset($data['is_special'])) {
-                $is_special = 1;
-                if (preg_match("/^[0-9]{1,}\.?[0-9]{0,2}$/i", $data['special_price']) == false) {
-                    $error['error'] = 1;
-                    $error['element'] = 'input[name="product[special_price]"]';
-                    $error['message'] = 'Invalid special price number';
-                    exit(json_encode($error));
-                }
-            }
-
-            if (!isset($data['type'])) {
-                $data['type'] = "product";
-            } else {
-                $data['type'] = "template";
-            }
-
-            if (isset($data['status'])) {
-                $data['status'] = 'published';
-            } else {
-                $data['status'] = 'draft';
-            }
-
-            $this->loadModel('Product');
+            $data['type'] = isset($data['type']) ? $data['type'] : 'product';
+            $data['status'] = isset($data['status']) ? $data['status'] : 'draft';
 
             if (!empty($data['featured'])) {
                 $data['featured'] = trim($data['featured'], "-");
@@ -201,6 +191,8 @@ class ProductController extends AdminAppController {
                 $data = array_merge($data, $special);
             }
 
+            $this->loadModel('Product');
+            
             if ($action == "update" && !empty($data['id'])) {
                 $element = $this->Product->find('first', array("conditions" => array("id" => $data['id'])));
                 if (empty($element)) {
@@ -231,17 +223,17 @@ class ProductController extends AdminAppController {
                         $this->loadModel('CategoryToObject');
                         $this->CategoryToObject->query("DELETE FROM category_to_object WHERE object_guid='{$data['guid']}'");
                     }
-                    exit(json_encode($error));
+                    exit(json_encode($this->error));
                 }
             }
-            
+
             $data['guid'] = uniqid();
             $data['created'] = time();
             $data['modified'] = time();
 
             $this->Product->create();
             $this->Product->save($data);
-            $error['data'] = $this->Product->id;
+            $this->error['data'] = $this->Product->id;
 
             if (!empty($category)) {
 
@@ -258,13 +250,13 @@ class ProductController extends AdminAppController {
                 $this->CategoryToObject->saveMany($c);
             }
 
-            $error['element'] = 'input';
-            exit(json_encode($error));
+            $this->error['element'] = 'input';
+            exit(json_encode($this->error));
         }
     }
 
     public function edit() {
-        $error = array(
+        $this->error = array(
             'error' => 0,
             'element' => '',
             'message' => '',
@@ -279,31 +271,42 @@ class ProductController extends AdminAppController {
             $action = $this->request->query('action');
 
             if (empty($data['name'])) {
-                $error['error'] = 1;
-                $error['element'] = 'input[name="product[name]"]';
-                $error['message'] = 'Product name is required';
-                exit(json_encode($error));
+                $this->error['error'] = 1;
+                $this->error['element'] = 'input[name="product[name]"]';
+                $this->error['message'] = 'Product name is required';
+                exit(json_encode($this->error));
             }
 
             if (preg_match("/^[0-9]{1,}\.?[0-9]{0,2}$/i", $data['price']) == false) {
-                $error['error'] = 1;
-                $error['element'] = 'input[name="product[price]"]';
-                $error['message'] = 'Invalid price number';
-                exit(json_encode($error));
+                $this->error['error'] = 1;
+                $this->error['element'] = 'input[name="product[price]"]';
+                $this->error['message'] = 'Invalid price number';
+                exit(json_encode($this->error));
             }
 
             if (preg_match("/^[0-9]{1,}\.?[0-9]{0,2}$/i", $data['tax']) == false) {
-                $error['error'] = 1;
-                $error['element'] = 'input[name="product[tax]"]';
-                $error['message'] = 'Invalid tax number';
-                exit(json_encode($error));
+                $this->error['error'] = 1;
+                $this->error['element'] = 'input[name="product[tax]"]';
+                $this->error['message'] = 'Invalid tax number';
+                exit(json_encode($this->error));
             }
 
             if (preg_match("/^[0-9]{1,2}$/i", $data['discount']) == false) {
-                $error['error'] = 1;
-                $error['element'] = 'input[name="product[discount]"]';
-                $error['message'] = 'Invalid discount number';
-                exit(json_encode($error));
+                $this->error['error'] = 1;
+                $this->error['element'] = 'input[name="product[discount]"]';
+                $this->error['message'] = 'Invalid discount number';
+                exit(json_encode($this->error));
+            }
+
+            $is_special = 0;
+            if (isset($data['is_special'])) {
+                $is_special = 1;
+                if (preg_match("/^[0-9]{1,}\.?[0-9]{0,2}$/i", $data['special_price']) == false) {
+                    $this->error['error'] = 1;
+                    $this->error['element'] = 'input[name="product[special_price]"]';
+                    $this->error['message'] = 'Invalid special price number';
+                    exit(json_encode($this->error));
+                }
             }
 
             if (empty($data['slug'])) {
@@ -312,31 +315,9 @@ class ProductController extends AdminAppController {
                 $data['slug'] = preg_replace("/ +/i", "-", $data['slug']);
             }
 
-            $is_special = 0;
-            if (isset($data['is_special'])) {
-                $is_special = 1;
-                if (preg_match("/^[0-9]{1,}\.?[0-9]{0,2}$/i", $data['special_price']) == false) {
-                    $error['error'] = 1;
-                    $error['element'] = 'input[name="product[special_price]"]';
-                    $error['message'] = 'Invalid special price number';
-                    exit(json_encode($error));
-                }
-            }
-
-            if (!isset($data['type'])) {
-                $data['type'] = "product";
-            } else {
-                $data['type'] = "template";
-            }
-
-            if (isset($data['status'])) {
-                $data['status'] = 'published';
-            } else {
-                $data['status'] = 'draft';
-            }
-
-            $this->loadModel('Product');
-
+            $data['type'] = isset($data['type']) ? $data['type'] : 'product';
+            $data['status'] = isset($data['status']) ? $data['status'] : 'draft';
+            
             if (!empty($data['featured'])) {
                 $data['featured'] = trim($data['featured'], "-");
                 $data['featured'] = serialize(explode("-", $data['featured']));
@@ -354,19 +335,20 @@ class ProductController extends AdminAppController {
                 $data = array_merge($data, $special);
             }
 
+            $this->loadModel('Product');
             if ($action == "update" && !empty($data['guid'])) {
                 $element = $this->Product->find('count', array("conditions" => array("guid" => $data['guid'])));
                 if (empty($element)) {
-                    $error['error'] = 1;
-                    $error['message'] = "The Product doesn't exist anymore";
-                    $error['element'] = "";
-                    exit(json_encode($error));
+                    $this->error['error'] = 1;
+                    $this->error['message'] = "The Product doesn't exist anymore";
+                    $this->error['element'] = "";
+                    exit(json_encode($this->error));
                 } else {
                     $data['modified'] = time();
                     $this->Product->id = $data['id'];
                     $this->Product->set($data);
                     $this->Product->save();
-                    
+
                     $data['guid'] = $element['Product']['guid'];
 
                     if (!empty($category)) {
@@ -386,13 +368,13 @@ class ProductController extends AdminAppController {
                         $this->loadModel('CategoryToObject');
                         $this->CategoryToObject->query("DELETE FROM category_to_object WHERE object_guid='{$data['guid']}'");
                     }
-                    exit(json_encode($error));
+                    exit(json_encode($this->error));
                 }
-            } 
-            
-            $error['error'] = 1;
-            $error['message'] = "wrong action";
-            exit(json_encode($error));
+            }
+
+            $this->error['error'] = 1;
+            $this->error['message'] = "wrong action";
+            exit(json_encode($this->error));
         }
 
 
@@ -401,12 +383,10 @@ class ProductController extends AdminAppController {
             $this->set('data', null);
             return;
         }
-
-        $this->loadModel('Product');
-
+        
         $data = $this->Product->find('first', array("conditions" => array("guid" => $guid)));
         $data = $data['Product'];
-        
+
         if (!empty($data)) {
             $data['featured'] = unserialize($data['featured']);
             $data['featured2'] = $data['featured'];
