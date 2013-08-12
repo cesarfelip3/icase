@@ -263,12 +263,12 @@ class ProductController extends AdminAppController {
 
     public function edit() {
 
-        $this->_edit ();  
-
         $guid = $this->request->query("id");
         if (empty($guid)) {
             $this->redirect ("/admin/product");
         }
+        
+        $this->_edit ();  
 
         $data = $this->Product->find('first', array("conditions" => array("guid" => $guid)));
         $data = $data['Product'];
@@ -283,9 +283,6 @@ class ProductController extends AdminAppController {
             }
             $data['created'] = date("F j, Y, g:i a", $data['created']);
             $data['modified'] = date("F j, Y, g:i a", $data['modified']);
-
-            //$this->loadModel('CategoryToObject');
-            //$category = $this->CategoryToObject->find('all', array("conditions" => array("object_guid" => $data['guid'])));
         }
 
         $this->set(array ('data' => $data));
@@ -367,7 +364,7 @@ class ProductController extends AdminAppController {
 
             $this->loadModel('Product');
             if ($action == "update" && !empty($data['guid'])) {
-                $element = $this->Product->find('count', array("conditions" => array("guid" => $data['guid'])));
+                $element = $this->Product->find('first', array("conditions" => array("guid" => $data['guid'])));
                 if (!empty($element)) {
 
                     $data['modified'] = time();
