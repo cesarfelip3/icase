@@ -22,6 +22,7 @@ $admin_product = $base . "product";
         <form class="form-horizontal" id="form-new">
             <input type="hidden" name="product[featured]" value="" />
             <input type="hidden" name="product[image]" value="" />
+            <input type="hidden" name="product[id]" value='' />
             <input type="hidden" name="product[guid]" value='' />
             <div class="alert alert-info hide">
                 <a class="close" data-dismiss="alert" href="#">x</a>
@@ -238,7 +239,7 @@ $admin_product = $base . "product";
                 showAlert(result.message);
             } else {
                 if (action == 'create') {
-                    $("input[name='product[guid]'").val(result.data);
+                    $("input[name='product[id]'").val(result.data);
                 }
                 $(result.element).parent().parent().removeClass('error');
                 $(result.element).next(".help-inline").html("");

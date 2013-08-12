@@ -190,30 +190,29 @@ class ProductController extends AdminAppController {
             }
 
             if ($is_special == 1) {
-                $data = array_merge(
-                        $data, array(
+
+                $special = array(
                     "is_special" => 1,
                     "special_price" => $data['special_price'],
                     "special_start" => strtotime($data['special_start']),
                     "special_end" => strtotime($data['special_end'])
-                        )
                 );
+
+                $data = array_merge($data, $special);
             }
 
-            //$data['slug'] = preg_replace("/ +/i", "-", $data['name']) . "-" . uniqid();
-
-            if ($action == "update" && !empty($data['guid'])) {
-                $count = $this->Product->find('count', array("conditions" => array("guid" => $data['guid'])));
-                if ($count == 0) {
+            if ($action == "update" && !empty($data['id'])) {
+                $element = $this->Product->find('first', array("conditions" => array("id" => $data['id'])));
+                if (empty($element)) {
                     $data['guid'] = uniqid();
                     $data['created'] = time();
                     $data['modified'] = time();
                 } else {
+                    $data['guid'] = $element['Product']['guid'];
                     $data['modified'] = time();
-                    $this->Product->id = $data['guid'];
+                    $this->Product->id = $data['id'];
                     $this->Product->set($data);
                     $this->Product->save();
-                    //$this->Product->updateAll(array($data), array("conditions" => array("guid" => $data['guid'])));
 
                     if (!empty($category)) {
                         $this->loadModel('CategoryToObject');
@@ -234,11 +233,11 @@ class ProductController extends AdminAppController {
                     }
                     exit(json_encode($error));
                 }
-            } else {
-                $data['guid'] = uniqid();
-                $data['created'] = time();
-                $data['modified'] = time();
             }
+            
+            $data['guid'] = uniqid();
+            $data['created'] = time();
+            $data['modified'] = time();
 
             $this->Product->create();
             $this->Product->save($data);
@@ -249,14 +248,14 @@ class ProductController extends AdminAppController {
                 $this->loadModel('CategoryToObject');
 
                 foreach ($category as $value) {
-                    $categories[] = array(
+                    $c[] = array(
                         "category_guid" => $value,
                         "object_guid" => $data['guid']
                     );
                 }
 
                 $this->CategoryToObject->create();
-                $this->CategoryToObject->saveMany($categories);
+                $this->CategoryToObject->saveMany($c);
             }
 
             $error['element'] = 'input';
@@ -344,24 +343,20 @@ class ProductController extends AdminAppController {
             }
 
             if ($is_special == 1) {
-                $data = array_merge(
-                        $data, array(
+
+                $special = array(
                     "is_special" => 1,
                     "special_price" => $data['special_price'],
                     "special_start" => strtotime($data['special_start']),
                     "special_end" => strtotime($data['special_end'])
-                        )
                 );
+
+                $data = array_merge($data, $special);
             }
 
-            //$data['slug'] = preg_replace("/ +/i", "-", $data['name']) . "-" . uniqid();
-
             if ($action == "update" && !empty($data['guid'])) {
-                $count = $this->Product->find('count', array("conditions" => array("guid" => $data['guid'])));
-                if ($count <= 0) {
-                    //$data['guid'] = uniqid();
-                    //$data['created'] = time();
-                    //$data['modified'] = time();
+                $element = $this->Product->find('count', array("conditions" => array("guid" => $data['guid'])));
+                if (empty($element)) {
                     $error['error'] = 1;
                     $error['message'] = "The Product doesn't exist anymore";
                     $error['element'] = "";
@@ -371,7 +366,8 @@ class ProductController extends AdminAppController {
                     $this->Product->id = $data['id'];
                     $this->Product->set($data);
                     $this->Product->save();
-                    //$this->Product->updateAll(array($data), array("conditions" => array("guid" => $data['guid'])));
+                    
+                    $data['guid'] = $element['Product']['guid'];
 
                     if (!empty($category)) {
                         $this->loadModel('CategoryToObject');
@@ -392,32 +388,10 @@ class ProductController extends AdminAppController {
                     }
                     exit(json_encode($error));
                 }
-            } else {
-                $data['guid'] = uniqid();
-                $data['created'] = time();
-                $data['modified'] = time();
-            }
-
-            $this->Product->create();
-            $this->Product->save($data);
-            $error['data'] = $data['guid'];
-
-            if (!empty($category)) {
-
-                $this->loadModel('CategoryToObject');
-
-                foreach ($category as $value) {
-                    $categories[] = array(
-                        "category_guid" => $value,
-                        "object_guid" => $data['guid']
-                    );
-                }
-
-                $this->CategoryToObject->create();
-                $this->CategoryToObject->saveMany($categories);
-            }
-
-            $error['element'] = 'input';
+            } 
+            
+            $error['error'] = 1;
+            $error['message'] = "wrong action";
             exit(json_encode($error));
         }
 
@@ -432,6 +406,7 @@ class ProductController extends AdminAppController {
 
         $data = $this->Product->find('first', array("conditions" => array("guid" => $guid)));
         $data = $data['Product'];
+        
         if (!empty($data)) {
             $data['featured'] = unserialize($data['featured']);
             $data['featured2'] = $data['featured'];
