@@ -73,8 +73,15 @@ class ProductController extends AdminAppController {
             foreach ($data as $key => $value) {
 
                 if ($value['Product']['type'] == 'product') {
-                    $value['Product']['featured'] = unserialize($value['Product']['featured']);
-                    $value['Product']['image'] = count($value['Product']['featured']) > 0 ? $value['Product']['featured'][0] : "";
+
+                    if ($value['Product']['type'] == 'product') {
+                        $value['Product']['featured'] = unserialize($value['Product']['featured']);
+                        $value['Product']['image'] = count($value['Product']['featured']) > 0 ? $value['Product']['featured'][0] : "";
+                        $value['Product']['image'] = "product/" . $value['Product']['image'];
+                    } else {
+                        $value['Product']['image'] = "template/" . $value['Product']['image'];
+                    }
+
                     $data[$key] = $value;
                 }
             }
