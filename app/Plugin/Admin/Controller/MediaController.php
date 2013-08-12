@@ -17,9 +17,9 @@ class MediaController extends AppController {
     public function uploadimage() {
 
         $action = $this->request->query("action");
-        if (empty($action)) {
-            exit("");
-        }
+        if (!empty($action)) {
+            $action = DS . $action;
+        } 
 
         error_reporting (0);
         register_shutdown_function(
@@ -41,7 +41,7 @@ class MediaController extends AppController {
         header("Cache-Control: post-check=0, pre-check=0", false);
         header("Pragma: no-cache");
 
-        $targetDir = $this->_targetDir = ROOT . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'uploads' . DS . $action;
+        $targetDir = $this->_targetDir = ROOT . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'uploads' . $action;
 
         $cleanupTargetDir = true; // Remove old files
         $maxFileAge = 5 * 3600; // Temp file age in seconds
@@ -94,7 +94,7 @@ class MediaController extends AppController {
             } else {
                 $this->_error['error'] = 1;
                 $this->_error['message'] = 'Failed to open temp directory.';
-                die($this->_json($this->_error));
+                exit($this->_json($this->_error));
             }
         }
 
@@ -118,7 +118,7 @@ class MediaController extends AppController {
                     } else {
                         $this->_error['error'] = 1;
                         $this->_error['message'] = 'Failed to open input stream.';
-                        die($this->_json($this->_error));
+                        exit($this->_json($this->_error));
                     }
 
                     @fclose($in);
@@ -127,12 +127,12 @@ class MediaController extends AppController {
                 } else {
                     $this->_error['error'] = 1;
                     $this->_error['message'] = 'Failed to open output stream.';
-                    die($this->_json($this->_error));
+                    exit($this->_json($this->_error));
                 }
             } else {
                 $this->_error['error'] = 1;
                 $this->_error['message'] = 'Failed to move uploaded file.';
-                die($this->_json($this->_error));
+                exit($this->_json($this->_error));
             }
         } else {
             // Open temp file
@@ -147,7 +147,7 @@ class MediaController extends AppController {
                 } else {
                     $this->_error['error'] = 1;
                     $this->_error['message'] = 'Failed to open input stream.';
-                    die($this->_json($this->_error));
+                    exit($this->_json($this->_error));
                 }
 
                 @fclose($in);
@@ -155,7 +155,7 @@ class MediaController extends AppController {
             } else {
                 $this->_error['error'] = 1;
                 $this->_error['message'] = 'Failed to open output stream.';
-                die($this->_json($this->_error));
+                exit($this->_json($this->_error));
             }
         }
 
@@ -234,7 +234,7 @@ class MediaController extends AppController {
             // if no errors
         }
 
-        die($this->_json($this->_error));
+        exit($this->_json($this->_error));
     }
 
     protected function _json($data = array()) {

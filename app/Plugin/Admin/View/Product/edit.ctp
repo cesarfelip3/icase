@@ -133,7 +133,7 @@ $admin_product = $base . "product";
                                         <input type="checkbox" class="input-mini" name="product[status]" value="published" <?php if ($data['status'] == 'published') echo 'checked'; ?>>Published
                                     </label>
                                     <a href='javascript:' class='btn btn-primary' data-loading-text="Saving..." onclick="save('update');" id="btn-save">Update</a>
-                                    <span class="help-inline">Create new one or update current one</span>
+                                    <span class="help-inline"></span>
                                 </div>
                             </div>
                             <div class='well'>
