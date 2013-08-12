@@ -14,10 +14,61 @@ class ShopController extends AppController {
     public function beforeFilter() {
         $this->Auth->allow();
         parent::beforeFilter();
+        $this->set('load_shop_cart', true);
+    }
+
+    protected function beforeCheckout() {
+        if ($this->request->is('ajax') && $this->request->is('post')) {
+
+            $deliver = $this->request->data('deliver');
+
+            foreach ($deliver as $value) {
+                if (empty($value)) {
+                    $this->_error['error'] = 1;
+                    $this->_error['message'] = "Deliver Info - All fields required";
+                    exit(json_encode($this->_error));
+                }
+            }
+
+            $signin = $this->request->data('signin');
+            $signup = $this->request->data('signup');
+
+            if (empty($signin['name'])) {
+                
+            }
+
+            if (empty($signin['password'])) {
+                $this->_error['error'] = 1;
+                $this->_error['message'] = "";
+                exit(json_encode($this->_error));
+            }
+
+            $passwordHasher = new SimplePasswordHasher();
+            $password = $passwordHasher->hash($data['password']);
+            
+            $conditions = array ();
+            if (preg_match("/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/i", $data['name']) == true) {
+                $conditions = array ("email" => $data['name'], "password" => $password);
+            } else {
+                $conditions = array ("name" => $data['name'], "password" => $password);
+            }
+            
+            $this->loadModel("User");
+            $user = $this->find('first', array("conditions" => $conditions));
+            
+            if (!empty ($user['User'])) {
+                $this->Auth->login($user['User']);
+            } else {
+                $this->_error['error'] = 1;
+                $this->_error['message'] = "Your Login Information isn't correct";
+                exit(json_encode($this->_error));
+            }
+
+            exit(json_encode($this->_error));
+        }
     }
 
     public function checkout() {
-        $this->set('load_shop_cart', true);
         $action = $this->request->query("action");
 
         if (empty($action)) {
@@ -31,9 +82,13 @@ class ShopController extends AppController {
 
         $this->set('action', $action);
 
+        $this->beforeCheckout();
+
         if ($this->request->is('post')) {
 
             $deliver = $this->request->data('deliver');
+
+
             //$signup = $this->request->data('signin');
 
             $orders = $_COOKIE['orders'];
@@ -145,7 +200,9 @@ class ShopController extends AppController {
 
         if ($this->request->is("ajax")) {
             $this->layout = false;
-            $orders = $this->request->data['orders'];
+            //$orders = $this->request->data('orders');
+            
+            $orders = $_COOKIE['orders'];
             $data = array();
 
             if (empty($orders)) {
@@ -184,10 +241,11 @@ class ShopController extends AppController {
                     $guid = $key[0];
                 }
 
-                $data[$i] = $this->Product->findByGuid($guid);
+                $data[$i] = $this->Product->find('first', array ("conditions" => array ("guid" => $guid)));
+                
                 if (empty($data[$i])) {
-                    $data = null;
-                    break;
+                    $i = 0;
+                    continue;
                 }
 
                 if (isset($key[1])) {
@@ -198,7 +256,10 @@ class ShopController extends AppController {
                 $data[$i]['Product']['quantity'] = $value;
                 $i++;
             }
-
+            
+            if ($i == 0 && empty ($data[$i])) {
+                $data = array ();
+            }
             $this->set('data', $data);
         }
     }

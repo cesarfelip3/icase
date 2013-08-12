@@ -108,111 +108,40 @@ $js_themes = array(
 
         });
     }
+    
+    function cart_init() {
+        $.shoppingcart.init();
+
+    }
+
 </script>
 
-<?php if (isset($load_shop_cart) && $load_shop_cart) : ?>
-
-    <!-- shopping cart -->
-<!--    <div class="row-fluid" id="box-cart" style="position: fixed;top:0px;left:0px;z-index:1030;margin-bottom:0;">
-
-        </div>-->
-
-    <script type="text/javascript">
-        function cart_init() {
-            $.shoppingcart.init();
-
+    <div class="row hide" id="box-alert" style="position: fixed;top:0px;left:0px;z-index:1030;margin-bottom:0;">
+        <div class="span4 offset4">
+            <div style="background-color:yellow;min-height:30px;border:1px black solid; ">
+                <p style="margin-top:5px;margin-left:20px;"><strong><span class="body"></span></strong></p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        
+        function showAlert (message)
+        {
+            $("#box-alert .body").html(message);
+            $("#box-alert").show ();
+            window.setTimeout(function () {$("#box-alert").hide(100)}, 5000);
         }
-
-        function cart_config() {
-
-            jQuery("#box-cart a").off('click');
-            jQuery("#box-cart a").click(
-                    function() {
-                        var action = $(this).data('action');
-                        var guid = $(this).data('guid');
-                        var file = $(this).data('file');
-                        var i = 0;
-                        var price = 0;
-
-                        switch (action) {
-                            case 'close':
-                                jQuery("#box-cart").hide(0);
-                                break;
-                            case 'plus' :
-                                i = jQuery(this).next().text();
-                                console.log(i);
-                                i = parseInt(jQuery.trim(i));
-                                i++;
-                                jQuery(this).next().text(i);
-                                if (file == "") {
-                                    guid = guid;
-                                } else {
-                                    guid = guid + "-" + file;
-                                }
-                                $.shoppingcart.set(guid);
-                                price = $(this).data('price');
-                                price = parseFloat(price) * i;
-                                $(this).parent().prev().text(price.toFixed(2));
-                                break;
-                            case 'minus' :
-                                i = jQuery(this).prev().text();
-                                console.log(i);
-                                i = parseInt(jQuery.trim(i));
-                                i--;
-                                if (i <= 0) {
-                                    $.shoppingcart.removeall(guid);
-                                    cart_reload();
-                                    break;
-                                }
-                                jQuery(this).prev().text(i);
-                                if (file == "") {
-                                    guid = guid;
-                                } else {
-                                    guid = guid + "-" + file;
-                                }
-                                $.shoppingcart.remove(guid);
-                                price = $(this).data('price');
-                                price = parseFloat(price) * i;
-                                $(this).parent().prev().text(price.toFixed(2));
-                                break;
-                            case 'remove' :
-                                if (file == "") {
-                                    guid = guid;
-                                } else {
-                                    guid = guid + "-" + file;
-                                }
-                                $.shoppingcart.removeall(guid);
-                                cart_reload();
-                                break;
-                        }
-                    }
-            );
+        
+        function showAlert2 (message) 
+        {
+            $("#box-alert .body").html(message);
+            $("#box-alert").show ();
         }
-
-        function cart_reload(single) {
-            var orders = "";
-            
-            if (single == true) {
-                orders = $.shoppingcart.getCurrentProductId();
-            } else {
-                orders = $.shoppingcart.get();
-            }
-            
-            jQuery.ajax({
-                url: "<?php echo $this->webroot; ?>shop/cart",
-                data: {"orders": orders, "user": $.shoppingcart.getuuid()},
-                type: "POST",
-                beforeSend: function(xhr) {
-                    console.log("loading cart...");
-                    console.log("orders");
-                }
-            }).done(function(data) {
-                $("#box-cart").html(data);
-                $("#box-cart").show();
-                cart_config();
-            }).fail(function() {
-
-            });
+        
+        function hideAlert (message)
+        {
+            $("#box-alert").hide ();
         }
+        
     </script>
-<?php endif; ?>

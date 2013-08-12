@@ -17,8 +17,8 @@
                 <tbody>
                     <?php
                     $i = 1;
-                    if (!empty ($data)) :
-                    foreach ($data as $key=>$value) :
+                    if (!empty ($data)) : 
+                    foreach ($data as $key=>$value) : 
                     ?>
                   <tr>
                     <td><?php echo $i++; ?></td>
@@ -46,9 +46,33 @@
         <div>
             <?php
             if (!empty ($data)) : ?>
-            <input type="submit" class="btn btn-peach" value="Pay Now" />
+            <a class="btn btn-peach" onclick="javascript:cart_pay()">Pay Now</a>
             <?php
             endif; ?>
         </div>
     </div>
 </div>
+<script>
+    function cart_pay ()
+    {
+        jQuery.ajax({
+            url: "<?php echo $this->webroot; ?>shop/checkout/?action=payment",
+            data: $("#form-payment").serialize(),
+            type: "POST",
+            beforeSend: function(xhr) {
+                showAlert2 ("Working....");
+            }
+        }).done(function(data) {
+
+            var result = $.parseJSON(data);
+            if (result.error == 1) {
+                showAlert(result.message);
+            } else {
+                $("#form-payment").submit();
+            }
+            
+        }).fail(function() {
+            hideAlert ();
+        });
+    }
+</script>

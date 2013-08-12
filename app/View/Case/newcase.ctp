@@ -13,7 +13,7 @@
                         <a href="javascript:" data-action="preview" title="remove"><i class="icon-eye-open icon-2x"></i> preview</a>
                     </div>
                     <div class="tools pull-right">
-                        <a class="btn btn-large btn-warning hide" id="btn-order"><i class="icon-mobile-phone icon-2x"></i> <span>Order Now</span></a></p>
+                        <a class="btn btn-large btn-warning hide" id="btn-order" onclick="order();"><i class="icon-mobile-phone icon-2x"></i> <span>Order Now</span></a></p>
                     </div>
                 </div>
             </div>
@@ -317,54 +317,75 @@ $js_case = array(
 
 <script type="text/javascript">
     jQuery(document).ready(
-            function() {
-                mememaker.init('c1');
-                mememaker.tools.init(".tools");
-                mememaker.tools.generate = preview;
-                mememaker.texteditor.init(".text-editor");
-                mememaker.imageeditor.init(".image-editor");
-                mememaker.draweditor.init(".draw-editor");
-
-                jQuery(".ajax-loading-indicator").hide(0);
-                jQuery("#btn-order").show(1000);
-                jQuery(".creator-parts").delay(1000).show(0).css('visibility', 'visible');
-
-                jQuery.ajax({
-                    url: "shop/gettemplates",
-                    type: "GET",
-                    beforeSend: function(xhr) {
-                        console.log("working....");
-                    }
-                }).done(function(data) {
-
-                    $("#template-list").prev().children(":first-child").hide(0);
-                    result = jQuery.parseJSON(data);
-                    jQuery(result).each(
-                            function(index, value) {
-                                var html = jQuery("#template-list").html() + '<span class="label label-warning">' + value.Product.name + ' ' + value.Product.price + '$</span><a href="javascript:" class="thumbnail" data-price="' + value.Product.price + '" data-guid="' + value.Product.guid + '"><img src="' + value.Product.image + '" /></a><br/>';
-                                jQuery("#template-list").html(html);
-                            }
-                    );
-
-                    templatelist_config();
-
-                }).fail(function() {
-                    $("#template-list").prev().children(":first-child").hide(0);
-                });
-
-                jQuery("#btn-order").click(
-                        function() {
-
-                            if (jQuery.trim(jQuery("#current-item").val()) == "") {
-                                return;
-                            }
-                            mememaker.tools.preview(preview);
-                            return;
-                        }
-                );
-            }
+        function() {
+            newcase_init ();
+        }
     );
 
+    function order_config() {
+        
+        jQuery("#btn-cart").click(
+            function() {
+                jQuery("#btn-cart").off("click");
+                var orderId = null;
+                orderId = jQuery("#modal-preview #product-info").data('guid');
+                var image = jQuery("#modal-preview #product-info").data('file');
+
+                $.shoppingcart.set(orderId + "-" + image);
+
+                jQuery("#modal-preview").modal('hide');
+
+                window.open("<?php echo $this->webroot; ?>shop/checkout?action=cart", "_blank");
+                window.focus();
+            }
+        )
+    }
+   
+    function newcase_init ()
+    {
+        mememaker.init('c1');
+        mememaker.tools.init(".tools");
+        mememaker.tools.generate = preview;
+        mememaker.texteditor.init(".text-editor");
+        mememaker.imageeditor.init(".image-editor");
+        mememaker.draweditor.init(".draw-editor");
+
+        jQuery(".ajax-loading-indicator").hide(0);
+        jQuery("#btn-order").show(1000);
+        jQuery(".creator-parts").delay(1000).show(0).css('visibility', 'visible');
+
+        templatelist_load ();       
+    }
+    
+    //===========================================================
+    // template list
+    //===========================================================
+    function templatelist_load ()
+    {
+         jQuery.ajax({
+            url: "<?php $this->webroot; ?>shop/gettemplates",
+            type: "GET",
+            beforeSend: function(xhr) {
+                
+            }
+        }).done(function(data) {
+
+            $("#template-list").prev().children(":first-child").hide(0);
+            result = jQuery.parseJSON(data);
+            $(result).each(
+                function(index, value) {
+                    var html = jQuery("#template-list").html() + '<span class="label label-warning">' + value.Product.name + ' ' + value.Product.price + '$</span><a href="javascript:" class="thumbnail" data-price="' + value.Product.price + '" data-guid="' + value.Product.guid + '"><img src="' + value.Product.image + '" /></a><br/>';
+                    jQuery("#template-list").html(html);
+                }
+            );
+
+            templatelist_config();
+
+        }).fail(function() {
+            $("#template-list").prev().children(":first-child").hide(0);
+        });        
+    }
+    
     function templatelist_config() {
 
         jQuery("#template-list a").off('click');
@@ -378,28 +399,18 @@ $js_case = array(
                 }
         );
     }
-
-    function order_config() {
-
-
-        jQuery("#btn-cart").click(
-                function() {
-
-                    var orderId = null;
-                    orderId = jQuery("#modal-preview #product-info").data('guid');
-                    var image = jQuery("#modal-preview #product-info").data('file');
-
-                    $.shoppingcart.set(orderId + "-" + image);
-                    console.log("add to cart = " + $.shoppingcart.get());
-
-                    jQuery("#modal-preview").modal('hide');
-
-                    window.open("<?php echo $this->webroot; ?>shop/checkout?action=cart", "_blank");
-                    //window.location.href = "";
-                    window.focus();
-                    //cart_reload();
-                }
-        )
+ 
+    //==================================================================
+    // order
+    //==================================================================
+    
+    function order ()
+    {
+        if (jQuery.trim(jQuery("#current-item").val()) == "") {
+            return;
+        }
+        mememaker.tools.preview(preview);
+        return;
     }
 
     function preview(preview)
@@ -421,20 +432,19 @@ $js_case = array(
             jQuery(".ajax-loading-indicator").hide(0);
             jQuery("#modal-preview .modal-body").html(data);
             order_config ();
-            checkoutone();
+            order_current ();
 
         }).fail(function() {
             jQuery(".ajax-loading-indicator").hide(0);
         });
     }
 
-    function checkoutone()
+    function order_current()
     {
         var orderId = null;
         orderId = jQuery("#modal-preview #product-info").data('guid');
         var image = jQuery("#modal-preview #product-info").data('file');
 
-        console.log(orderId + "-" + image);
         $.shoppingcart.setCurrentProductId(orderId + "-" + image);
         return true;
     }

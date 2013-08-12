@@ -163,6 +163,98 @@
         function checkout_cart_succ() {
             $.shoppingcart.clear();
         }
+        
+        function cart_config() {
+
+            jQuery("#box-cart a").off('click');
+            jQuery("#box-cart a").click(
+                    function() {
+                        var action = $(this).data('action');
+                        var guid = $(this).data('guid');
+                        var file = $(this).data('file');
+                        var i = 0;
+                        var price = 0;
+
+                        switch (action) {
+                            case 'close':
+                                jQuery("#box-cart").hide(0);
+                                break;
+                            case 'plus' :
+                                i = jQuery(this).next().text();
+                                console.log(i);
+                                i = parseInt(jQuery.trim(i));
+                                i++;
+                                jQuery(this).next().text(i);
+                                if (file == "") {
+                                    guid = guid;
+                                } else {
+                                    guid = guid + "-" + file;
+                                }
+                                $.shoppingcart.set(guid);
+                                price = $(this).data('price');
+                                price = parseFloat(price) * i;
+                                $(this).parent().prev().text(price.toFixed(2));
+                                break;
+                            case 'minus' :
+                                i = jQuery(this).prev().text();
+                                console.log(i);
+                                i = parseInt(jQuery.trim(i));
+                                i--;
+                                if (i <= 0) {
+                                    $.shoppingcart.removeall(guid);
+                                    cart_reload();
+                                    break;
+                                }
+                                jQuery(this).prev().text(i);
+                                if (file == "") {
+                                    guid = guid;
+                                } else {
+                                    guid = guid + "-" + file;
+                                }
+                                $.shoppingcart.remove(guid);
+                                price = $(this).data('price');
+                                price = parseFloat(price) * i;
+                                $(this).parent().prev().text(price.toFixed(2));
+                                break;
+                            case 'remove' :
+                                if (file == "") {
+                                    guid = guid;
+                                } else {
+                                    guid = guid + "-" + file;
+                                }
+                                $.shoppingcart.removeall(guid);
+                                cart_reload();
+                                break;
+                        }
+                    }
+            );
+        }
+
+        function cart_reload(single) {
+        
+            /*
+            var orders = "";
+
+            if (single == true) {
+                orders = $.shoppingcart.getCurrentProductId();
+            } else {
+                orders = $.shoppingcart.get();
+            }*/
+
+            jQuery.ajax({
+                url: "<?php echo $this->webroot; ?>shop/cart",
+                //data: {"orders": orders, "user": $.shoppingcart.getuuid()},
+                type: "POST",
+                beforeSend: function(xhr) {
+                }
+            }).done(function(data) {
+                $("#box-cart").html(data);
+                $("#box-cart").show();
+                cart_config();
+            }).fail(function() {
+
+            });
+        }
     </script>
 <?php else: ?>
     <div class="row-fluid">

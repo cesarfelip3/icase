@@ -14,13 +14,26 @@ class MediaController extends AppController {
         parent::beforeFilter();
     }
 
-    public function uploadimage () {
+    public function uploadimage() {
 
-        $action = $this->request->query ("action");
-        if (empty ($action)) {
-            exit ("");
+        $action = $this->request->query("action");
+        if (empty($action)) {
+            exit("");
         }
-        
+
+        error_reporting (0);
+        register_shutdown_function(
+                function () {
+
+                    $last_error = error_get_last();
+
+                    if (!is_null($last_error)) {
+                        $this->_error['error'] = 1;
+                        $this->_error['message'] = $last_error['message'];
+                        exit(json_encode($this->_error));
+                    }
+                });
+
         $this->autoRender = false;
         header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
         header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
@@ -150,8 +163,8 @@ class MediaController extends AppController {
         $extension = pathinfo($fileName, PATHINFO_EXTENSION);
 
         $original = $filename . "." . $extension;
-        
-        $filename = uniqid ();
+
+        $filename = uniqid();
         $name = $filename . "." . $extension;
 
         $target = $targetDir . DIRECTORY_SEPARATOR . $name;
@@ -176,7 +189,7 @@ class MediaController extends AppController {
         $image = new Zebra_Image();
 
         $image->source_path = $target;
-        $image->target_path = $targetDir . DIRECTORY_SEPARATOR . $filename . "_150." .$extension;
+        $image->target_path = $targetDir . DIRECTORY_SEPARATOR . $filename . "_150." . $extension;
 
         $image->jpeg_quality = 100;
 
@@ -220,7 +233,7 @@ class MediaController extends AppController {
 
             // if no errors
         }
-        
+
         die($this->_json($this->_error));
     }
 

@@ -322,6 +322,10 @@ $js_pluploader = array(
                     console.log(result.files.url);
                     $("#box-template-image").html('<div class="span8"><a class="featured-thumbnail"><img src="' + result.files.url + '" style="width:60px" /></a></div>');
                     $('input[name="product[image]"]').val(result.files.target);
+                } else {
+                    showAlert (result.message);
+                    $("#box-template-image").html('<div class="span8"><a class="featured-thumbnail"><img src="' + result.files.url + '" style="width:60px" /></a></div>');
+                    $('input[name="product[image]"]').val(result.files.target);
                 }
                 //jQuery('#progress-bar').css('width', "0%");
             }
