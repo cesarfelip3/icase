@@ -457,7 +457,7 @@ $js_pluploader = array(
                     if (url == "") {
                         url = result.files.url;
                     }
-                    $("#box-featured-image").append('<div class="thumbnail" style="width:24%;float:left;margin-left:5px;margin-bottom:10px;"><a class="featured-thumbnail"><img src="' + url + '" style="" /></a><div class="caption"><p><a class="btn btn-success" data-image="' + result.files.target + '" onclick="featured_image_delete(this);">Delete</a></p></div></div>');
+                    $("#box-featured-image").append('<div class="thumbnail" style="width:20%;float:left;margin-left:5px;margin-bottom:10px;"><a class="featured-thumbnail"><img src="' + url + '" style="" /></a><div class="caption"><p><a href="javascript:" data-image="' + result.files.target + '" onclick="featured_image_delete(this);">Delete</a></p></div></div>');
                     $("input[name='product[featured]']").val($("input[name='product[featured]']").val() + "-" + result.files.target);
                     //console.log ($("input[name='product[featured]']").val());
                     init();
