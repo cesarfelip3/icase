@@ -192,7 +192,7 @@ $admin_product = $base . "product";
                                     <a class="featured-thumbnail">
                                         <img src="<?php echo $this->webroot . "uploads/product/" . str_replace(".", "_150.", $image); ?>" style=""></a>
                                     <div class="caption">
-                                        <p><a class="btn btn-success" data-image="<?php echo $image; ?>" onclick="featured_image_delete(this);">Delete</a></p>
+                                        <p><a href="javascript:" data-image="<?php echo $image; ?>" onclick="featured_image_delete(this);">Delete</a></p>
                                     </div>
                                 </div>
                                 <?php endforeach; ?>
