@@ -1,7 +1,7 @@
 <?php
-$member_add = $base . "member" . DS . "add";
-$member_edit = $base . "member" . DS . "edit";
-$member_delete = $base . "member" . DS . "delete";
+$subscribe_add = $base . "subscribe" . DS . "add";
+$subscribe_edit = $base . "subscribe" . DS . "edit";
+$subscribe_delete = $base . "subscribe" . DS . "delete";
 ?>
 <div class="secondary-masthead">
     <div class="container">
@@ -9,7 +9,7 @@ $member_delete = $base . "member" . DS . "delete";
             <li>
                 <a href="<?php echo $this->webroot; ?>admin">Admin</a> <span class="divider">/</span>
             </li>
-            <li class="active">Customers</li>
+            <li class="active">Subscribes</li>
         </ul>
     </div>
 </div>
@@ -40,7 +40,17 @@ $member_delete = $base . "member" . DS . "delete";
         </div>
         <div class="row">
             <div class="span12 listing-buttons">
-<!--                <a href="<?php echo $this->webroot; ?>admin/product/add" class="btn btn-primary">New User</a>-->
+                <form class="form-horizontal">
+                    <select>
+                        <option> - Schedule - </option>
+                    </select>
+                    <select>
+                        <option> - Email Template - </option>
+                    </select>
+                    <a href="<?php echo $this->webroot; ?>admin/product/add" class="btn btn-primary">Save</a>
+                    <a href="<?php echo $this->webroot; ?>admin/product/add" class="btn btn-primary">Edit Template</a>
+                    <a href="<?php echo $this->webroot; ?>admin/product/add" class="btn btn-primary">Send Manually</a>
+                </form>
             </div>
             <div class="span12">
                 <div class="slate">
@@ -56,7 +66,7 @@ $member_delete = $base . "member" . DS . "delete";
                                 <li><a href="">PDF</a></li>
                             </ul>
                         </div>
-                        <h2>Customers</h2>
+                        <h2>Subscribes</h2>
                     </div>
                     <table class="orders-table table">
                         <thead>
@@ -88,7 +98,7 @@ $member_delete = $base . "member" . DS . "delete";
                                 <td><?php echo date ("Y-m-d H:i:s ", $value['User']['created']) . DS . date (" Y-m-d H:i:s", $value['User']['modified']); ?></td>
                                 <td class='actions'>
                                     <a class="btn btn-small btn-danger" onclick="del('<?php echo $value['User']['id']; ?>')">Remove</a>
-                                    <a class="btn btn-small btn-primary" href="<?php echo $member_edit; ?>?id=<?php echo $value['User']['guid']; ?>" target="_blank">View User</a>
+                                    <a class="btn btn-small btn-primary" href="<?php echo $subscribe_edit; ?>?id=<?php echo $value['User']['guid']; ?>" target="_blank">View User</a>
                                 </td>
                             </tr>
                             <?php endforeach; endif; ?>
@@ -100,7 +110,7 @@ $member_delete = $base . "member" . DS . "delete";
                 <?php echo $this->element("pagination", array ("plugin"=>"Admin", "page"=>$page, "form" => "#form-filter")); ?>
             </div>
             <div class="span6 listing-buttons pull-right">
-<!--                <a href="<?php echo $member_add; ?>" class="btn btn-primary">New User</a>-->
+<!--                <a href="<?php echo $subscribe_add; ?>" class="btn btn-primary">New User</a>-->
             </div>
         </div>
     </div>

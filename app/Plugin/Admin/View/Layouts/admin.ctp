@@ -72,17 +72,24 @@
                                         </ul>
                                     </li>
                                     <li class="dropdown">
-                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-group"></i> Members <b class="caret"></b></a>
+                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-group"></i> Marketing <b class="caret"></b></a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="<?php echo $this->webroot; ?>admin/member/">Customers</a></li>
-                                            <li><a href="<?php echo $this->webroot; ?>admin/member/">Administrators</a></li>
+                                            <li><a href="<?php echo $this->webroot; ?>admin/subscribe/">Manage Subscribes</a></li>
+                                            <li><a href="<?php echo $this->webroot; ?>admin/subscribe/">Manage Emails</a></li>
                                         </ul>
                                     </li>
                                     <li class="dropdown">
-                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-cogs"></i> Settings <b class="caret"></b></a>
+                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-group"></i> Members <b class="caret"></b></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="<?php echo $this->webroot; ?>admin/member/">Manage Customers</a></li>
+                                            <li><a href="<?php echo $this->webroot; ?>admin/member/">Manage Admins</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown">
+                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-cogs"></i> Tools <b class="caret"></b></a>
                                         <ul class="dropdown-menu">
                                             <li><a href="<?php echo $base; ?>setting/payment/">Payment Processors</a></li>
-                                            <li><a href="<?php echo $base; ?>setting/mail/">Emails</a></li>
+                                            <li><a href="<?php echo $base; ?>mail/">Email Templates</a></li>
                                         </ul>
                                     </li>
                                 </ul>

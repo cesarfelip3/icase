@@ -10,10 +10,6 @@ class ShopController extends AppController {
         "message" => "",
         "files" => array(),
     );
-    protected $_stripe = array(
-        "secret_key" => "sk_test_t2e5s3XGtntC5eoUU7HNICa1",
-        "publishable_key" => "pk_test_wjgM6MXjzv0GNOBeUVFIOVKf"
-    );
 
     public function beforeFilter() {
         $this->Auth->allow();
@@ -36,35 +32,6 @@ class ShopController extends AppController {
         $this->set('action', $action);
 
         if ($this->request->is('post')) {
-
-            /*
-              require_once APP . 'Vendor' . DS . "Stripe/Stripe.php";
-              try {
-
-              Stripe::setApiKey($this->_stripe['secret_key']);
-
-              $token = $this->request->data('stripeToken');
-              if (empty($token)) {
-              return;
-              }
-
-
-              $deliver = $this->request->data['deliver'];
-
-              $customer = Stripe_Customer::create(array(
-              'email' => 'customer@example.com',
-              'card' => $token
-              ));
-
-              $charge = Stripe_Charge::create(array(
-              'customer' => $customer->id,
-              'amount' => 50,
-              'currency' => 'usd'
-              ));
-              } catch (Exception $e) {
-              print_r($e);
-              exit;
-              } */
 
             $deliver = $this->request->data('deliver');
             //$signup = $this->request->data('signin');
