@@ -164,7 +164,7 @@ $admin_product = $base . "product";
                             </p>
                             <div id="box-template-image" class="row-fluid">
                                 <?php if (!empty($data['image'])) : ?>
-                                <div class="span8"><a class="featured-thumbnail"><img src="<?php echo $this->webroot . "uploads/template/" . $data['image']; ?>" style="width:60px"></a></div>
+                                <div class="span8"><a class="featured-thumbnail"><img src="<?php echo $this->webroot . "uploads/template/" . str_replace(".", "_150.", $data['image']); ?>" style="width:60px"></a></div>
                                 <?php endif; ?>
                             </div>
                         </div>
@@ -185,7 +185,7 @@ $admin_product = $base . "product";
                                 <?php foreach ($data['featured2'] as $image) : ?>
                                 <div class="thumbnail" style="width:24%;float:left;margin-left:5px;margin-bottom:10px;">
                                     <a class="featured-thumbnail">
-                                        <img src="<?php echo $this->webroot . "uploads/product/" . $image; ?>" style=""></a>
+                                        <img src="<?php echo $this->webroot . "uploads/product/" . str_replace(".", "_150.", $image); ?>" style=""></a>
                                     <div class="caption">
                                         <p><a class="btn btn-success" data-image="<?php echo $image; ?>" onclick="featured_image_delete(this);">Delete</a></p>
                                     </div>
