@@ -81,24 +81,11 @@
                                     <li class="dropdown">
                                         <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-cogs"></i> Settings <b class="caret"></b></a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="listing.html">Payment Processors</a></li>
-<!--                                            <li><a href="listing.html">Order Statuses</a></li>
-                                            <li><a href="listing.html">Shipping Methods</a></li>-->
-                                            <li><a href="listing.html">Emails</a></li>
+                                            <li><a href="<?php echo $base; ?>setting/payment/">Payment Processors</a></li>
+                                            <li><a href="<?php echo $base; ?>setting/mail/">Emails</a></li>
                                         </ul>
                                     </li>
                                 </ul>
-<!--                                <ul class="nav pull-right">
-                                    <li><a href="#"><i class="icon-bullhorn"></i> Alerts<span class="badge badge-info">2</span></a></li>
-                                    <li class="dropdown">
-                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-info-sign"></i> Help <b class="caret"></b></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="content.html">FAQ</a></li>
-                                            <li class="active"><a href="content.html">User Guide</a></li>
-                                            <li><a href="content.html">Support</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>-->
                             </div>
                         </div>
                     </div>

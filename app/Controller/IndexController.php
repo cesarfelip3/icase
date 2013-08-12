@@ -177,5 +177,9 @@ class IndexController extends AppController {
     function reset() {
         
     }
+    
+    function subscribe() {
+        
+    }
 
 }

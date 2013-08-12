@@ -10,7 +10,7 @@
 </div>
 <div class="main-area dashboard">
     <div class="container">
-        <div class="alert alert-info">
+        <div class="alert alert-info hide">
             <a class="close" data-dismiss="alert" href="#">x</a>
             <h4 class="alert-heading">Information</h4>
             The report template can be used to display charts and report data, such as sales reports, website stats and member sign ups.
@@ -18,18 +18,18 @@
         <div class="row">
             <div class="span12">
                 <div class="slate">
-                    <form class="form-inline">
-                        <input type="text" class="input-large" placeholder="Keyword...">
-                        <select>
-                            <option value=""> - From Date - </option>
-                        </select>
-                        <select>
-                            <option value=""> - To Date - </option>
-                        </select>
-                        <select>
+                    <form class="form-inline" id='form-filter' method='GET'>
+                        <input type='hidden' name='page' value='<?php echo $page; ?>' />
+                        <input type="text" class="input-large" placeholder="Keyword..." name='keyword' value='<?php echo $keyword; ?>'>
+                        <input type='text' class='input-small datepicker' name='start' placeholder='Start Date' readonly='readonly' value="<?php echo $start; ?>" />
+                        <input type='text' class='input-small datepicker' name='end' placeholder='End Date' readonly='readonly' value="<?php echo $end; ?>" />
+                        <select name='filter'>
                             <option value=""> - Filter - </option>
+                            <?php foreach ($filters as $key => $value) : ?>
+                                <option value="<?php echo $key; ?>" <?php if ($key == $filter) echo 'selected="selected"'; ?>><?php echo $value; ?></option>
+                            <?php endforeach; ?>
                         </select>
-                        <button type="submit" class="btn btn-primary">Filter Report</button>
+                        <input type="submit" class="btn btn-primary" name="action" value="Filter" />
                     </form>
                 </div>
             </div>

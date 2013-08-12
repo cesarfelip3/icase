@@ -68,6 +68,7 @@ $admin_product = $base . "product";
                                 <div class="controls">
                                     <p><input class="input-xlarge focused" id="focusedInput" type="text" name="category[seo_keywords]" placeholder="keywords" ></p>
                                     <p><textarea name="category[seo_description]" style="width:280px" rows="3" placeholder="description"></textarea></p>
+                                    <a href="javascript:" class="btn btn-success" data-loading-text="Saving..." onclick="save('add');" id="btn-save">Create</a>
                                 </div>
                             </div>
                             <div class="control-group warning">
@@ -76,7 +77,6 @@ $admin_product = $base . "product";
                                     <input type="text" class="input-medium" name="category[parent]" placeholder="Parent category" readonly="readonly">
                                     <input type="hidden" class="input-medium" name="category[parent_guid]">
                                     <span class="help-inline"></span>
-                                    <a href="javascript:" class="btn btn-success" data-loading-text="Saving..." onclick="save('add');" id="btn-save">Create</a>
                                     <a href="javascript:" class="btn btn-success" onclick="category_clear();" id="btn-clear">Clear</a>
                                 </div>
                             </div>

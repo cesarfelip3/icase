@@ -7,5 +7,15 @@ class SettingController extends AdminAppController {
         $this->Auth->allow('guest');
 	parent::beforeFilter();
     }
+    
+    public function mail ()
+    {
+        
+    }
+    
+    public function payment ()
+    {
+        
+    }
 }
 ?>
