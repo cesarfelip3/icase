@@ -188,7 +188,7 @@ $admin_product = $base . "product";
                             <div id="box-featured-image" class="row-fluid">
                                 <?php if (!empty ($data['featured2'])) : ?>
                                 <?php foreach ($data['featured2'] as $image) : ?>
-                                <div class="thumbnail" style="width:24%;float:left;margin-left:5px;margin-bottom:10px;">
+                                <div class="thumbnail" style="width:20%;float:left;margin-left:5px;margin-bottom:10px;">
                                     <a class="featured-thumbnail">
                                         <img src="<?php echo $this->webroot . "uploads/product/" . str_replace(".", "_150.", $image); ?>" style=""></a>
                                     <div class="caption">
