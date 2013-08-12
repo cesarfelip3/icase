@@ -46,7 +46,7 @@ $product_delete = $base . "product" . DS . "delete";
             <div class="span12">
                 <div class="slate">
                     <div class="page-header">
-                        <div class="btn-group pull-right">
+                        <div class="btn-group pull-right hide">
                             <button class="btn dropdown-toggle" data-toggle="dropdown">
                                 <i class="icon-download-alt"></i> Export
                                 <span class="caret"></span>

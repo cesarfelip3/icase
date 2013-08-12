@@ -32,7 +32,7 @@ $admin_product = $base . "product";
                 <div class="span8">
                     <div class="slate">
                         <div class="page-header">
-                            <h2>New Product</h2>
+                            <h2>Edit Product</h2>
                         </div>
                         <fieldset>
                             <div class="control-group">

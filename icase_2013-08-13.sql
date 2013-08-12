@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.29)
 # Database: icase
-# Generation Time: 2013-08-12 16:04:21 +0000
+# Generation Time: 2013-08-12 17:49:34 +0000
 # ************************************************************
 
 
@@ -75,6 +75,16 @@ CREATE TABLE `categories` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+LOCK TABLES `categories` WRITE;
+/*!40000 ALTER TABLE `categories` DISABLE KEYS */;
+
+INSERT INTO `categories` (`id`, `guid`, `parent_guid`, `group_guid`, `name`, `slug`, `description`, `level`, `children`, `order`, `seo_keywords`, `seo_description`)
+VALUES
+	(1,'5209153de2e54','','5209153de2e3e','iphone','iphone',NULL,0,1,0,'iphone','iphone'),
+	(2,'5209154a2178a','5209153de2e54','5209153de2e3e','iphone4','iphone4',NULL,1,0,0,'iphone4','iphone4');
+
+/*!40000 ALTER TABLE `categories` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table category_to_object
@@ -87,6 +97,15 @@ CREATE TABLE `category_to_object` (
   `object_guid` char(13) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+LOCK TABLES `category_to_object` WRITE;
+/*!40000 ALTER TABLE `category_to_object` DISABLE KEYS */;
+
+INSERT INTO `category_to_object` (`category_guid`, `object_guid`)
+VALUES
+	('5209154a2178a','5209156bda4d1');
+
+/*!40000 ALTER TABLE `category_to_object` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table enquiries
@@ -184,16 +203,18 @@ CREATE TABLE `orders` (
   `buyer_guid` char(13) DEFAULT NULL,
   `seller_guid` char(13) NOT NULL DEFAULT '0',
   `deliver_guid` char(13) DEFAULT NULL,
+  `transaction_id` char(32) DEFAULT NULL,
   `title` text,
   `description` varchar(1024) DEFAULT NULL,
   `status` varchar(11) NOT NULL DEFAULT 'pending',
-  `amount` decimal(11,2) DEFAULT NULL,
-  `quantity` int(11) DEFAULT NULL,
-  `tax` decimal(11,2) DEFAULT NULL,
-  `express_fee` decimal(11,2) DEFAULT NULL,
-  `payment` varchar(11) DEFAULT NULL,
-  `express` varchar(11) DEFAULT NULL,
+  `amount` decimal(11,2) NOT NULL DEFAULT '0.00',
+  `quantity` int(11) NOT NULL DEFAULT '0',
+  `tax` decimal(11,2) NOT NULL DEFAULT '0.00',
+  `express_fee` decimal(11,2) NOT NULL DEFAULT '0.00',
+  `express_type` varchar(11) NOT NULL DEFAULT 'free',
+  `payment` varchar(11) NOT NULL DEFAULT 'paypal',
   `file` varchar(1024) DEFAULT NULL,
+  `notification` varchar(32) DEFAULT '',
   `created` int(11) DEFAULT NULL,
   `modified` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -210,6 +231,7 @@ CREATE TABLE `products` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `guid` char(13) DEFAULT NULL,
   `user_guid` char(13) DEFAULT NULL,
+  `sku` char(64) DEFAULT NULL,
   `name` varchar(512) DEFAULT NULL,
   `slug` varchar(1024) DEFAULT NULL,
   `image` varchar(1024) DEFAULT NULL,
@@ -233,6 +255,15 @@ CREATE TABLE `products` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+LOCK TABLES `products` WRITE;
+/*!40000 ALTER TABLE `products` DISABLE KEYS */;
+
+INSERT INTO `products` (`id`, `guid`, `user_guid`, `sku`, `name`, `slug`, `image`, `featured`, `description`, `price`, `tax`, `discount`, `quantity`, `is_special`, `special_price`, `special_start`, `special_end`, `type`, `status`, `active`, `seo_keywords`, `seo_description`, `created`, `modified`)
+VALUES
+	(1,'5209156bda4d1',NULL,NULL,'iphone','iphone','','','<p>iphone</p>',22.00,0.00,0,65535,0,NULL,NULL,NULL,'product','published',1,NULL,NULL,1376327019,1376328243);
+
+/*!40000 ALTER TABLE `products` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table templates

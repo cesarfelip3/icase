@@ -92,7 +92,7 @@ if (!empty($data)) :
                    data-seo-keywords="<?php echo addslashes($value['Category']['seo_keywords']); ?>"
                    data-seo-description="<?php echo addslashes($value['Category']['seo_description']); ?>"
                    class="t<?php echo $value['Category']['parent_guid']; ?>">
-        <?php if (isset($checkbox) && $checkbox) : ?><input type="checkbox" name="category[]" value="<?php echo $value['Category']['guid']; ?>" <?php if ($value['Category']['selected']) echo 'checked="checked"'; ?> /><?php endif; ?> 
+        <?php if (isset($checkbox) && $checkbox) : ?><input type="checkbox" name="category[]" value="<?php echo $value['Category']['guid']; ?>" <?php if (isset($value['Category']['selected']) && $value['Category']['selected']) echo 'checked="checked"'; ?> /><?php endif; ?> 
                     <?php echo $value['Category']['name']; ?>
                 </a>
 
