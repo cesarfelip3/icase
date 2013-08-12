@@ -13,7 +13,7 @@ $admin_product = $base . "product";
                 <a href="<?php echo $admin_product; ?>">Products</a> 
                 <span class="divider">/</span>
             </li>
-            <li class="active">Add</li>
+            <li class="active">Edit</li>
         </ul>
     </div>
 </div>

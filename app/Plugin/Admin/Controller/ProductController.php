@@ -262,13 +262,13 @@ class ProductController extends AdminAppController {
     //================================================================
 
     public function edit() {
-
+        
+        $this->_edit ();  
+        
         $guid = $this->request->query("id");
         if (empty($guid)) {
             $this->redirect ("/admin/product");
         }
-        
-        $this->_edit ();  
 
         $data = $this->Product->find('first', array("conditions" => array("guid" => $guid)));
         $data = $data['Product'];
@@ -361,18 +361,17 @@ class ProductController extends AdminAppController {
 
                 $data = array_merge($data, $special);
             }
-
+            
             $this->loadModel('Product');
             if ($action == "update" && !empty($data['guid'])) {
                 $element = $this->Product->find('first', array("conditions" => array("guid" => $data['guid'])));
+              
                 if (!empty($element)) {
 
                     $data['modified'] = time();
                     $this->Product->id = $data['id'];
                     $this->Product->set($data);
                     $this->Product->save();
-
-                    $data['guid'] = $element['Product']['guid'];
 
                     if (!empty($category)) {
                         $this->loadModel('CategoryToObject');
