@@ -174,6 +174,8 @@ class MediaController extends AppController {
             rename("{$filePath}.part", $target);
         }
 
+        $url150 = $this->base . "/uploads/$action/" . $filename . "_150." . $extension;
+        
         $this->_error['error'] = 0;
         $this->_error['message'] = 'Success';
         $this->_error['files'] = array(
@@ -181,7 +183,7 @@ class MediaController extends AppController {
             'target' => $name,
             'filename' => $filename,
             'url' => $this->base . "/uploads/$action/" . $name,
-            'url150' => $this->base . "/uploads/$action/" . $filename . "_150." . $extension,
+            'url150' => "",
             'extension' => $extension,
         );
 
@@ -234,6 +236,7 @@ class MediaController extends AppController {
             // if no errors
         }
 
+        $this->_error['files']['url150'] = $url150;
         exit($this->_json($this->_error));
     }
 
