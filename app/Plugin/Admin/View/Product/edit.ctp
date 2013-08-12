@@ -466,7 +466,7 @@ $js_pluploader = array(
         var image = $(id).data('image');
         var images = $('input[name="product[featured]"]').val();
 
-        image = "-" + image;
+        image = image;
         images = images.replace(image, "");
 
         $('input[name="product[featured]"]').val(images);
