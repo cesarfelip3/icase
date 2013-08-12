@@ -222,34 +222,17 @@ $admin_product = $base . "product";
     $(document).ready(
             function() {
                 jQuery.ajax({
-                    url: "<?php echo $base; ?>category/?action=checkbox",
+                    url: "<?php echo $base; ?>category/?action=checkbox&id=<?php echo $data['guid']; ?>",
                     type: "GET",
                     beforeSend: function(xhr) {
+                        showAlert2 ("Loading categories...")
                     }
                 }).done(function(data) {
                     jQuery("#box-category .body").html(data);
-                    //$("#form-new").serialize();
-                    
-                    <?php if (!empty ($categories)) : $all = ""; ?>
-                    <?php foreach ($categories as $value) : ?>
-                    <?php $all .= "'{$value['CategoryToObject']['category_guid']}'" . ","; ?>
-                    <?php endforeach; $all=trim($all, ",");?>var categories = [<?php echo $all; ?>];
-                    <?php endif; ?>
-                        
-                    var categories = [<?php if (!empty($all)) echo $all; ?>];
-                    
-                    if (categories.length <= 0) {
-                        return;
-                    }
-                    
-                    $(".media a").each (
-                        function (index, value) {
-                            if (categories.indexOf($(value).data('guid')) != -1) {
-                                $(value).children("input[type=checkbox]").prop("checked", true);
-                            }
-                        });
+                    hideAlert ();
 
                 }).fail(function() {
+                    hideAlert ();
                 });
             }
     );

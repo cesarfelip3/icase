@@ -192,14 +192,11 @@ class ProductController extends AdminAppController {
             }
 
             $this->loadModel('Product');
-            
+
             if ($action == "update" && !empty($data['id'])) {
                 $element = $this->Product->find('first', array("conditions" => array("id" => $data['id'])));
-                if (empty($element)) {
-                    $data['guid'] = uniqid();
-                    $data['created'] = time();
-                    $data['modified'] = time();
-                } else {
+                if (!empty($element)) {
+
                     $data['guid'] = $element['Product']['guid'];
                     $data['modified'] = time();
                     $this->Product->id = $data['id'];
@@ -225,6 +222,11 @@ class ProductController extends AdminAppController {
                     }
                     exit(json_encode($this->error));
                 }
+
+                $this->error['error'] = 1;
+                $this->error['message'] = "The Product doesn't exist anymore";
+                $this->error['element'] = "";
+                exit(json_encode($this->error));
             }
 
             $data['guid'] = uniqid();
@@ -254,15 +256,43 @@ class ProductController extends AdminAppController {
             exit(json_encode($this->error));
         }
     }
+    
+    //================================================================
+    // @action: edit
+    //================================================================
 
     public function edit() {
-        $this->error = array(
-            'error' => 0,
-            'element' => '',
-            'message' => '',
-            'data' => ''
-        );
 
+        $this->_edit ();  
+
+        $guid = $this->request->query("id");
+        if (empty($guid)) {
+            $this->redirect ("/admin/product");
+        }
+
+        $data = $this->Product->find('first', array("conditions" => array("guid" => $guid)));
+        $data = $data['Product'];
+
+        if (!empty($data)) {
+            $data['featured'] = unserialize($data['featured']);
+            $data['featured2'] = $data['featured'];
+            if (!empty($data['featured'])) {
+                $data['featured'] = implode("-", $data['featured']);
+            } else {
+                $data['featured'] = "";
+            }
+            $data['created'] = date("F j, Y, g:i a", $data['created']);
+            $data['modified'] = date("F j, Y, g:i a", $data['modified']);
+
+            //$this->loadModel('CategoryToObject');
+            //$category = $this->CategoryToObject->find('all', array("conditions" => array("object_guid" => $data['guid'])));
+        }
+
+        $this->set(array ('data' => $data));
+    }
+    
+    protected function _edit ()
+    {
         if ($this->request->is('ajax') && $this->request->is('post')) {
             $this->autoRender = false;
 
@@ -317,7 +347,7 @@ class ProductController extends AdminAppController {
 
             $data['type'] = isset($data['type']) ? $data['type'] : 'product';
             $data['status'] = isset($data['status']) ? $data['status'] : 'draft';
-            
+
             if (!empty($data['featured'])) {
                 $data['featured'] = trim($data['featured'], "-");
                 $data['featured'] = serialize(explode("-", $data['featured']));
@@ -338,12 +368,8 @@ class ProductController extends AdminAppController {
             $this->loadModel('Product');
             if ($action == "update" && !empty($data['guid'])) {
                 $element = $this->Product->find('count', array("conditions" => array("guid" => $data['guid'])));
-                if (empty($element)) {
-                    $this->error['error'] = 1;
-                    $this->error['message'] = "The Product doesn't exist anymore";
-                    $this->error['element'] = "";
-                    exit(json_encode($this->error));
-                } else {
+                if (!empty($element)) {
+
                     $data['modified'] = time();
                     $this->Product->id = $data['id'];
                     $this->Product->set($data);
@@ -370,42 +396,23 @@ class ProductController extends AdminAppController {
                     }
                     exit(json_encode($this->error));
                 }
+
+                $this->error['error'] = 1;
+                $this->error['message'] = "The Product doesn't exist anymore";
+                $this->error['element'] = "";
+                exit(json_encode($this->error));
             }
 
             $this->error['error'] = 1;
             $this->error['message'] = "wrong action";
             exit(json_encode($this->error));
         }
-
-
-        $guid = $this->request->query("id");
-        if (empty($guid)) {
-            $this->set('data', null);
-            return;
-        }
-        
-        $data = $this->Product->find('first', array("conditions" => array("guid" => $guid)));
-        $data = $data['Product'];
-
-        if (!empty($data)) {
-            $data['featured'] = unserialize($data['featured']);
-            $data['featured2'] = $data['featured'];
-            if (!empty($data['featured'])) {
-                $data['featured'] = implode("-", $data['featured']);
-            } else {
-                $data['featured'] = "";
-            }
-            $data['created'] = date("F j, Y, g:i a", $data['created']);
-            $data['modified'] = date("F j, Y, g:i a", $data['modified']);
-
-            $this->loadModel('CategoryToObject');
-            $category = $this->CategoryToObject->find('all', array("conditions" => array("object_guid" => $data['guid'])));
-        }
-
-        $this->set('categories', $category);
-        $this->set('data', $data);
     }
 
+    //===========================================================
+    //
+    //===========================================================
+    
     public function delete() {
         $id = $this->request->query('id');
         $this->loadModel('Product');

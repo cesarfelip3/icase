@@ -17,15 +17,16 @@ class CategoryController extends AdminAppController {
     public function index() {
 
         if ($this->request->is('ajax')) {
+            
             $this->layout = false;
-
             $action = $this->request->query('action');
+            $id = $this->request->query('id');
+            
             $this->loadModel('Category');
             $categories = $this->Category->find('all', array(
                 "conditions" => array('level' => 0),
                 "order" => array('order ASC')
             ));
-
 
             $return = array();
             if (!empty($categories)) {
@@ -53,7 +54,22 @@ class CategoryController extends AdminAppController {
                         break;
                 }
             }
-
+            
+            if (!empty ($id)) {
+                $this->loadModel('CategoryToObject');
+                $data = $this->CategoryToObject->find('all', array("conditions" => array("object_guid" => $id)));
+                foreach ($return as $key => $value) {
+                    
+                    $value['Category']['selected'] = false;
+                    foreach ($data as $category) {
+                        if ($value['Category']['guid'] == $category['CategoryToObject']['category_guid']) {
+                            $value['Category']['selected'] = true;
+                        } 
+                    }
+                    $return[$key] = $value;
+                }
+            }
+            
             $this->set('data', $return);
             $this->render('index.ajax');
         }
