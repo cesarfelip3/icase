@@ -164,7 +164,12 @@ $admin_product = $base . "product";
                             </p>
                             <div id="box-template-image" class="row-fluid">
                                 <?php if (!empty($data['image'])) : ?>
-                                <div class="span8"><a class="featured-thumbnail"><img src="<?php echo $this->webroot . "uploads/template/" . str_replace(".", "_150.", $data['image']); ?>" style="width:60px"></a></div>
+                                <div class="span8">
+                                    <a class="featured-thumbnail">
+                                        <img src="<?php echo $this->webroot . "uploads/template/" . str_replace(".", "_150.", $data['image']); ?>" style="width:60px">
+                                    </a>
+                                    <a class="btn btn-primary" data-image="<?php echo $data['image']; ?>" onclick="template_image_delete(this);">Delete</a>
+                                </div>
                                 <?php endif; ?>
                             </div>
                         </div>
@@ -374,6 +379,20 @@ $js_pluploader = array(
         uploader.start();
         $("#template-image-list").html("");
         $("#box-template-image").html("");
+    }
+    
+    function template_image_delete(id)
+    {
+        //console.log (jQuery(id).parent().parent());
+        jQuery(id).parent().remove();
+
+        var image = $(id).data('image');
+        var images = $('input[name="product[image]"]').val();
+
+        image = image;
+        images = images.replace(image, "");
+
+        $('input[name="product[image]"]').val(images);
     }
 
 </script>
