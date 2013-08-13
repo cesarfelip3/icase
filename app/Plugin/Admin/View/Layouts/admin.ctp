@@ -61,16 +61,16 @@
                                             <li><a href="<?php echo $base; ?>product/">Manage Catalogue</a></li>
                                             <li><a href="<?php echo $base; ?>category/">Manage Categories</a></li>
                                             <li><a href="<?php echo $base; ?>order/">Manage Orders</a></li>
-                                            <li><a href="<?php echo $base; ?>enquiry/">Manage Enquiries</a></li>
+<!--                                            <li><a href="<?php echo $base; ?>enquiry/">Manage Enquiries</a></li>-->
                                         </ul>
                                     </li>
-                                    <li class="dropdown">
+<!--                                    <li class="dropdown">
                                         <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-signal"></i> Reports <b class="caret"></b></a>
                                         <ul class="dropdown-menu">
                                             <li><a href="<?php echo $base; ?>report/sales">Sales Reports</a></li>
                                             <li><a href="<?php echo $base; ?>report/visits">Visits Reports</a></li>
                                         </ul>
-                                    </li>
+                                    </li>-->
                                     <li class="dropdown">
                                         <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-group"></i> Marketing <b class="caret"></b></a>
                                         <ul class="dropdown-menu">

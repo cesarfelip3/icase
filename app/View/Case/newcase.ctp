@@ -349,6 +349,11 @@ $js_case = array(
         mememaker.texteditor.init(".text-editor");
         mememaker.imageeditor.init(".image-editor");
         mememaker.draweditor.init(".draw-editor");
+        
+        mememaker.tools.backgroundimage("<?php echo $this->webroot; ?>img/template/iphone5_bg.png");
+        mememaker.tools.newtemplate("<?php echo $this->webroot; ?>img/template/iphone5_fg.png");
+        
+        //mememaker.tools.backgroundcolor("red");
 
         jQuery(".ajax-loading-indicator").hide(0);
         jQuery("#btn-order").show(1000);
