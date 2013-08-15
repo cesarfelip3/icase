@@ -40,12 +40,12 @@ class AdminController extends AdminAppController {
                     $this->layout = false;
                     $this->render ("index.orders");
                     break;
-                case 'enquires' :
-                    $this->loadModel("Enquiry");
-                    $data = $this->Order->find ('all', array ("order" => "created DESC", "limit" => 7, "page" => 0));
+                case 'stock' :
+                    $this->loadModel("Product");
+                    $data = $this->Product->find ('all', array ("conditions" => array ("type" => "product", "quantity <=" => 0), "order" => "created DESC", "limit" => 7, "page" => 0));
                     $this->set ('data', $data);
                     $this->layout = false;
-                    $this->render ("index.enquires");
+                    $this->render ("index.stock");
                     break;
             }
         }
