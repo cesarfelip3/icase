@@ -200,7 +200,7 @@ class ShopController extends AppController {
 
                 //
                 $media = array();
-                $m2o = array ();
+                $m2o = array();
                 $j = 0;
 
                 foreach ($data as $value) {
@@ -231,29 +231,29 @@ class ShopController extends AppController {
                             "created" => time(),
                             "modified" => time()
                         );
-                        
+
                         $m2o[$j] = array(
                             'media_guid' => $media_guid,
                             "object_guid" => $user_guid,
                             "type" => "user.design"
                         );
-                        
+
                         $j++;
                     }
 
                     $i++;
                 }
-                
+
                 $this->loadModel('Order');
                 $this->Order->saveMany($orders);
-                
+
                 $this->loadModel('Media');
                 $this->Media->create();
                 $this->Media->saveMany($media);
-                
+
                 $this->loadModel('MediaToObject');
                 $this->MediaToObject->save($m2o);
-                
+
                 $this->Product->commitTransaction();
 
                 if (isset($_SERVER['HTTP_COOKIE'])) {
@@ -372,9 +372,8 @@ class ShopController extends AppController {
             //$orders = $this->request->data('orders');
 
             $action = $this->request->query('action');
-            if ($action == "cart") {
-                $orders = $_COOKIE['orders'];
-            }
+
+            $orders = $_COOKIE['orders'];
 
             if ($action == "single") {
                 $orders = $_COOKIE['current-product-id'];
