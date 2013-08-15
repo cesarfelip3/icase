@@ -17,10 +17,7 @@
         <div class="row-fluid">
             <div class="span6">
                 <div class="qbox" id="box-bill-details">
-                    <h1 style="height:30px;border-bottom:2px solid white;">Shippment<!--<a href="javascript:" class="close" type="button" data-action="close" data-dismiss="modal" aria-hidden="true" style="text-decoration:none;"><i class="icon-remove icon-1x"></i></a>--></h1>
-                    <p>
-                        <span class="label label-warning">All fields are required</span>
-                    </p>
+                    <h1 style="height:30px;border-bottom:2px solid white;">Shippment<span style="font-size:12px;font-weight:normal;text-transform: none;color:red;float:right;">All fields are required</span></h1>
                     <p>
                         <label>First Name</label>
                         <input type="text" class="input-medium" name="deliver[firstname]" />
@@ -32,7 +29,7 @@
                     </p>
                     <p>
                         <label>Email</label>
-                        <input type="text" class="input-medium" name="deliver[email]" />
+                        <input type="text" class="input-large" name="deliver[email]" />
                         <span class="help-inline"></span>
                     </p> 
                     <p>
@@ -51,13 +48,13 @@
                     </p>
                     <p>
                         <label>State</label>
-                        <select  name="deliver[state]">
+                        <select name="deliver[state]">
                             <option value="Utah">Utah</option>
                         </select>
                     </p>
                     <p>
                         <label>City</label>
-                        <input type="text" placeholder="City" />
+                        <input type="text" placeholder="City" name="deliver[city]" />
                     </p>
                     <p>
                         <label>Zip Code</label>
@@ -67,15 +64,15 @@
             </div>
             <div class="span6">
                 <div class="qbox">
-                    <h1 style="height:30px;border-bottom:2px solid white;">Bill In Credit Card</h1>
+                    <h1 style="height:30px;border-bottom:2px solid white;">Billing<span style="font-size:12px;font-weight:normal;text-transform: none;color:red;float:right;">All fields are required</span></h1>
                     <div id="payment-stripe">
                         <p>
                             <label>Number</label>
-                            <input type="text" class="input-large" name="bill[cc_number]" />
+                            <input type="text" class="input-large" name="bill[cc_number]" placeholder='Credit Card Number' />
                         </p>
                         <p>
                             <label>Expired</label>
-                            <input type="text" class="input-large datepicker" readonly="readonly" name="bill[cc_expired]"/>
+                            <input type="text" class="input-large datepicker" readonly="readonly" name="bill[cc_expired]" placeholder='Credit Card Expire Date'/>
                         </p>
                     </div>
                 </div>
@@ -134,50 +131,11 @@
         )
 
         function checkout_single() {
-            cart_reload(true);
-
-    //        jQuery.ajax({
-    //            url: "<?php echo $this->webroot; ?>shop/cart",
-    //            data: {"orders": $.shoppingcart.getCurrentProductId(), "user": $.shoppingcart.getuuid()},
-    //            type: "POST",
-    //            beforeSend: function(xhr) {
-    //                console.log("working....");
-    //            }
-    //        }).done(function(data) {
-    //            $("#box-cart").html(data);
-    //            $("#payment-form").show();
-    //        }).fail(function() {
-    //
-    //        });
-        }
-
-        function checkout_single_succ() {
-            $.shoppingcart.setCurrentProductId(null);
+            cart_reload('single');
         }
 
         function checkout_cart() {
-            cart_reload(false);
-
-            /*
-             jQuery.ajax({
-             url: "<?php echo $this->webroot; ?>shop/cart",
-             data: {"orders": $.shoppingcart.get(), "user": $.shoppingcart.getuuid()},
-             type: "POST",
-             beforeSend: function(xhr) {
-             console.log("working....");
-             }
-             }).done(function(data) {
-             $("#box-cart").html(data);
-             $("#payment-form").show();
-             $("#stripe-script").data("amount", $("#amount-total").val());
-             }).fail(function() {
-             
-             });
-             */
-        }
-
-        function checkout_cart_succ() {
-            $.shoppingcart.clear();
+            cart_reload('cart');
         }
         
         function cart_config() {
@@ -247,32 +205,24 @@
         }
 
         function cart_reload(single) {
-        
-            /*
-            var orders = "";
-
-            if (single == true) {
-                orders = $.shoppingcart.getCurrentProductId();
-            } else {
-                orders = $.shoppingcart.get();
-            }*/
 
             jQuery.ajax({
-                url: "<?php echo $this->webroot; ?>shop/cart",
-                //data: {"orders": orders, "user": $.shoppingcart.getuuid()},
+                url: "<?php echo $this->webroot; ?>shop/cart/?action=" + single,
+                data: {"user": $.shoppingcart.getuuid()},
                 type: "POST",
                 beforeSend: function(xhr) {
                 }
             }).done(function(data) {
                 $("#box-cart").html(data);
                 $("#box-cart").show();
-                var hasorder = $("input[name=hasorder]").val();
                 
+                var hasorder = $("input[name=hasorder]").val();
                 if (hasorder == "1") {
                     $("#box-bill-details").html ($("#box-bill-details").html() + '<p><a class="btn btn-peach" onclick="javascript:cart_pay()">Pay Now</a></p>');
                 }
                 
                 cart_config();
+                
             }).fail(function() {
 
             });

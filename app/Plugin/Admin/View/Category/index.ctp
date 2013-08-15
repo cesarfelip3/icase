@@ -38,8 +38,8 @@ $admin_product = $base . "product";
                     </div>
                 </div>
             </div>
-            <div class="span5">
-                <div class="slate hide" id="box-new">
+            <div class="span7 hide" id="box-new">
+                <div class="slate">
                     <div class="page-header">
                         <h2>New Category</h2>
                     </div>
@@ -80,15 +80,15 @@ $admin_product = $base . "product";
                             <div class="control-group warning">
                                 <label class="control-label" for="inputWarning"></label>
                                 <div class="controls">
-                                    <a href="javascript:" class="btn btn-info" onclick="category_empty_table();">Empty Category Table</a>
+                                    <a href="javascript:" class="btn btn-info" onclick="category_empty_table();">Empty All</a>
                                 </div>
                             </div>
                         </fieldset>
                     </form>
                 </div>
             </div>
-            <div class="span5">
-                <div class="slate" id="box-edit">
+            <div class="span7" id="box-edit">
+                <div class="slate">
                     <div class="page-header">
                         <h2>Edit Category</h2>
                     </div>

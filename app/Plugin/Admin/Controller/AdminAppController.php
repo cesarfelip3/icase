@@ -4,6 +4,9 @@ App::uses('Controller', 'Controller');
 App::uses('Sanitize', 'Utility');
 
 class AdminAppController extends Controller {
+    
+    protected $_base_plugin;
+    
     public $components = array(
         'Auth' => array(
             'loginAction' => array(
@@ -23,10 +26,11 @@ class AdminAppController extends Controller {
             )
         )
     );
+    
     public function beforeFilter() {
         $this->layout = "admin";
-        $base = $this->base . DS . $this->request->params['plugin'] . DS;
-        $this->set ('base', $base);
+        $this->_base_plugin = $this->base . DS . $this->request->params['plugin'] . DS;
+        $this->set ('base', $this->_base_plugin);
         
         if ($this->Auth->loggedIn()) {
             $user = array (

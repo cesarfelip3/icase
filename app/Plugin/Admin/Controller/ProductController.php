@@ -38,7 +38,7 @@ class ProductController extends AdminAppController {
         $start = $this->request->query('start');
         $end = $this->request->query('end');
 
-        $conditions = array();
+        $conditions = array("type" => "product");
 
         if (!empty($start) && !empty($end)) {
             $duration = array(
@@ -99,7 +99,7 @@ class ProductController extends AdminAppController {
         $pages = ceil($total / $limit);
 
         $filters = array(
-            "type='template'" => "Template",
+            //"type='template'" => "Template",
             "type='product'" => "Product",
             "quantity=0" => "Empty Stocks"
         );
@@ -451,7 +451,8 @@ class ProductController extends AdminAppController {
                     "background" => "iphone5_bg.png",
                 ),
                 "type" => "template",
-                "status" => "published"
+                "status" => "published",
+                "quantity" => "65535"
             )
         );
         
@@ -467,6 +468,8 @@ class ProductController extends AdminAppController {
         }
         
         $this->autoRender = false;
+                
+        $this->redirect (array ("plugin" => "admin", "controller" => "product", "action" => "index"));
         echo "Successfully all templates created";
         
     }

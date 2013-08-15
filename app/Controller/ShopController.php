@@ -9,6 +9,7 @@ class ShopController extends AppController {
         "error" => 1,
         "message" => "",
         "files" => array(),
+        "data" => array(),
     );
 
     public function beforeFilter() {
@@ -73,8 +74,10 @@ class ShopController extends AppController {
             $this->loadModel("Product");
             $i = 0;
 
-            foreach ($guids as $key => $value) {
-                $key = explode("-", $key);
+            $this->Product->beginTransaction();
+
+            foreach ($guids as $k => $value) {
+                $k = explode("-", $key);
                 if (is_array($key)) {
                     $guid = $key[0];
                 }
@@ -82,25 +85,54 @@ class ShopController extends AppController {
                 $data[$i] = $this->Product->findByGuid($guid);
                 if (empty($data[$i])) {
                     $data = null;
-                    break;
+                    $this->Session->setFlash("Product - " . $data[$i]['Product']['name'] . " - is off shelf, please remove it and try again.");
+                    $this->Product->endTransaction();
+                    return;
                 }
 
+                if ($data[$i]['Product']['quantity'] < $value) {
+                    $data = null;
+                    $this->Session->setFlash("Product - " . $data[$i]['Product']['name'] . " - is out of stock, please remove it and try again.");
+                    $this->Product->endTransaction();
+                    return;
+                }
+                
+                $i++;
+            }            
+
+            $i = 0;
+            foreach ($guids as $k => $value) {
+
+                $k = explode("-", $key);
+                if (is_array($key)) {
+                    $guid = $key[0];
+                }
+
+                $data[$i] = $this->Product->findByGuid($guid);
+                
                 if (isset($key[1])) {
                     $data[$i]['Product']['file'] = $key[1];
                 } else {
                     $data[$i]['Product']['file'] = $data[$i]['Product']['image'];
                 }
+                
+                if ($data[$i]['Product']['quantity'] != 65535) {
+                    $this->Product->id = $data[$i]['Product']['id'];
+                    $this->Product->set (array ('quantity' => $data[$i]['Product']['quantity'] - $value));
+                    $this->Product->save ();
+                }
+                
                 $data[$i]['Product']['quantity'] = $value;
                 $i++;
             }
-            
+
             $orders = array();
             $i = 0;
             if (!empty($data)) {
 
                 $amount = 0;
                 foreach ($data as $value) {
-                    $amount = round($value['Product']['price'] * $value['Product']['quantity'], 2, PHP_ROUND_HALF_DOWN) + "";
+                    $amount += round($value['Product']['price'] * $value['Product']['quantity'], 2, PHP_ROUND_HALF_DOWN) + "";
                 }
 
                 require_once APP . DS . 'Vendor' . DS . 'AuthorizeNet/AuthorizeNet.php'; // Make sure this path is correct.
@@ -114,9 +146,10 @@ class ShopController extends AppController {
                 if ($response->approved) {
                     
                 } else {
-                    print_r ($response->error_message);
+                    $this->Product->rollTransaction();
+                    print_r($response->error_message);
                     exit;
-                    
+
                     $this->Session->setFlash($response->error_message);
                     return;
                 }
@@ -125,28 +158,26 @@ class ShopController extends AppController {
                     $orders[$i] = array(
                         "guid" => uniqid(),
                         "product_guid" => $value['Product']['guid'],
-                        "title" => $value['Product']['name'] . "-" . $value['Product']['type'],
-                        "status" => "paid",
-                        "created" => time(),
-                        "modified" => time(),
+                        "title" => $value['Product']['name'],
+                        "type" => $value['Product']['type'],
                         "amount" => round($value['Product']['price'] * $value['Product']['quantity'], 2, PHP_ROUND_HALF_DOWN),
                         "quantity" => $data[$i]['Product']['quantity'],
                         "file" => $value['Product']['file'] == "" ? $value['Product']['image'] : "",
-                        "transactionid" => $response->transaction_id,
-                        "payment" => "AuthorizeNet",
+                        "transaction_id" => $response->transaction_id,
+                        "transaction_type" => $response->transaction_type,
+                        "payment_gateway" => "AuthorizeNet",
+                        "status" => "paid",
+                        "created" => time(),
+                        "modified" => time(),
                     );
                     $i++;
                 }
 
-                print_r($orders);
-                exit;
-                
                 $this->loadModel('UserDeliverInfo');
 
                 $this->UserDeliverInfo->create();
                 $deliver_guid = uniqid();
                 $deliver['guid'] = $deliver_guid;
-
                 $this->UserDeliverInfo->save($deliver);
 
                 $this->loadModel('Order');
@@ -155,6 +186,9 @@ class ShopController extends AppController {
                     $order['deliver_guid'] = $deliver_guid;
                     $orders[$key] = $order;
                 }
+                
+                $this->Order->saveMany($orders);
+                $this->Product->commitTransaction();
 
                 if (isset($_SERVER['HTTP_COOKIE'])) {
                     $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
@@ -164,7 +198,6 @@ class ShopController extends AppController {
                         setcookie($name, '', time() - 1000, '/');
                     }
                 }
-                $this->Order->saveMany($orders);
                 $this->set("paid", true);
             }
         }
@@ -175,17 +208,25 @@ class ShopController extends AppController {
 
             $deliver = $this->request->data('deliver');
 
-            foreach ($deliver as $value) {
+            foreach ($deliver as $key => $value) {
                 if (empty($value)) {
                     $this->_error['error'] = 1;
-                    $this->_error['message'] = "Deliver Info - All fields required";
+                    $this->_error['message'] = $key . " is required";
                     exit(json_encode($this->_error));
+                }
+                
+                if ($key == "email") {
+                    if (preg_match("/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/i", $value) == false) {
+                        $this->_error['error'] = 1;
+                        $this->_error['message'] = "Email format is incorrect";
+                        exit(json_encode($this->_error));
+                    }
                 }
             }
 
             $bill = $this->request->data('bill');
 
-            foreach ($bill as $value) {
+            foreach ($bill as $key => $value) {
                 if (empty($value)) {
                     $this->_error['error'] = 1;
                     $this->_error['message'] = "Credit card - all fields required";
@@ -193,41 +234,61 @@ class ShopController extends AppController {
                 }
             }
 
+            $orders = $_COOKIE['orders'];
+            $data = array();
+
+            if (empty($orders)) {
+                $this->_error['error'] = 1;
+                $this->_error['message'] = "You have to enable cookie to pay your cart";
+                exit(json_encode($this->_error));
+            }
+
+            $orders = explode(",", $orders);
+
+            if (empty($orders)) {
+                $this->_error['error'] = 1;
+                $this->_error['message'] = "You have to enable cookie to pay your cart";
+                exit(json_encode($this->_error));
+            }
+
+            $guids = array_flip($orders);
+            $i = 0;
+
+            foreach ($guids as $key => $value) {
+                $guids[$key] = 0;
+            }
+
+            foreach ($guids as $key => $value) {
+                foreach ($orders as $order) {
+                    if ($order == $key) {
+                        $guids[$key]++;
+                    }
+                }
+            }
+
+            $this->loadModel("Product");
+            $i = 0;
+
             $this->_error['error'] = 0;
-            exit(json_encode($this->_error));
 
-            $signin = $this->request->data('signin');
-            $signup = $this->request->data('signup');
+            foreach ($guids as $k => $value) {
+                $key = explode("-", $k);
+                if (is_array($key)) {
+                    $guid = $key[0];
+                }
 
-            if (empty($signin['name'])) {
-                
-            }
+                $data = $this->Product->findByGuid($guid);
+                if (empty($data)) {
+                    $this->_error['error'] = 1;
+                    $this->_error['data'][] = $key;
+                    continue;
+                }
 
-            if (empty($signin['password'])) {
-                $this->_error['error'] = 1;
-                $this->_error['message'] = "";
-                exit(json_encode($this->_error));
-            }
-
-            $passwordHasher = new SimplePasswordHasher();
-            $password = $passwordHasher->hash($data['password']);
-
-            $conditions = array();
-            if (preg_match("/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/i", $data['name']) == true) {
-                $conditions = array("email" => $data['name'], "password" => $password);
-            } else {
-                $conditions = array("name" => $data['name'], "password" => $password);
-            }
-
-            $this->loadModel("User");
-            $user = $this->find('first', array("conditions" => $conditions));
-
-            if (!empty($user['User'])) {
-                $this->Auth->login($user['User']);
-            } else {
-                $this->_error['error'] = 1;
-                $this->_error['message'] = "Your Login Information isn't correct";
-                exit(json_encode($this->_error));
+                if ($data['Product']['quantity'] != 65535 && $data['Product']['quantity'] < 1) {
+                    $this->_error['error'] = 1;
+                    $this->_error['data'][] = $key;
+                    continue;
+                }
             }
 
             exit(json_encode($this->_error));
@@ -244,14 +305,16 @@ class ShopController extends AppController {
             $this->layout = false;
             //$orders = $this->request->data('orders');
 
-            $orders = $_COOKIE['orders'];
-            $data = array();
-
-            if (empty($orders)) {
-                $this->set('data', $data);
-                return;
+            $action = $this->request->query ('action');
+            if ($action == "cart") {
+                $orders = $_COOKIE['orders'];
             }
-
+            
+            if ($action == "single") {
+                $orders = $_COOKIE['current-product-id'];
+            }
+            
+            $data = array();
             $orders = explode(",", $orders);
 
             if (empty($orders)) {
