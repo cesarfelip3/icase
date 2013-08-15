@@ -269,7 +269,7 @@
                 var hasorder = $("input[name=hasorder]").val();
                 
                 if (hasorder == "1") {
-                    $("#box-bill-details").append ('<p><a class="btn btn-peach" onclick="javascript:cart_pay()">Pay Now</a></p>');
+                    $("#box-bill-details").html ($("#box-bill-details").html() + '<p><a class="btn btn-peach" onclick="javascript:cart_pay()">Pay Now</a></p>');
                 }
                 
                 cart_config();
