@@ -96,9 +96,9 @@ class ShopController extends AppController {
                     $this->Product->endTransaction();
                     return;
                 }
-                
+
                 $i++;
-            }            
+            }
 
             $i = 0;
             foreach ($guids as $k => $value) {
@@ -109,19 +109,19 @@ class ShopController extends AppController {
                 }
 
                 $data[$i] = $this->Product->findByGuid($guid);
-                
+
                 if (isset($key[1])) {
                     $data[$i]['Product']['file'] = $key[1];
                 } else {
                     $data[$i]['Product']['file'] = $data[$i]['Product']['image'];
                 }
-                
+
                 if ($data[$i]['Product']['quantity'] != 65535) {
                     $this->Product->id = $data[$i]['Product']['id'];
-                    $this->Product->set (array ('quantity' => $data[$i]['Product']['quantity'] - $value));
-                    $this->Product->save ();
+                    $this->Product->set(array('quantity' => $data[$i]['Product']['quantity'] - $value));
+                    $this->Product->save();
                 }
-                
+
                 $data[$i]['Product']['quantity'] = $value;
                 $i++;
             }
@@ -156,25 +156,40 @@ class ShopController extends AppController {
 
                 // create user - guest
                 $user_guid = null;
-                if (empty ($this->_identity)) {
-                    $this->loadModel('User');
-                    
-                    $User_guid = uniqid ();
-                    $user = array (
+                $user_guest = false;
+
+                $this->loadModel('User');
+                
+                if (empty($this->_identity)) {
+
+                    $user_guest = true;
+
+                    $User_guid = uniqid();
+                    $user = array(
                         "guid" => $user_guid,
                         "type" => "guest",
+                        "orders" => count($data),
                         "created" => time(),
                         "modified" => time()
                     );
-                    
-                    $user = array_merge ($user, $deliver);
-                    
-                    $this->User->create ();
-                    $this->User->save ($user);
+
+                    $user = array_merge($user, $deliver);
+
+                    $this->User->create();
+                    $this->User->save($user);
                 } else {
                     $user_guid = $this->_identity['guid'];
+
+                    $user = array(
+                        "orders" => ($this->_identity['orders'] + count($data))
+                    );
+
+                    $this->User->id = $this->_identity['id'];
+                    $this->user->set($user);
+                    $this->user->save();
                 }
-                
+
+                // deliver info
                 $this->loadModel('UserDeliverInfo');
 
                 $this->UserDeliverInfo->create();
@@ -193,7 +208,7 @@ class ShopController extends AppController {
                         "type" => $value['Product']['type'],
                         "amount" => round($value['Product']['price'] * $value['Product']['quantity'], 2, PHP_ROUND_HALF_DOWN),
                         "quantity" => $data[$i]['Product']['quantity'],
-                        "file" => $value['Product']['file'] == "" ? $value['Product']['image'] : "",
+                        "file" => $value['Product']['file'],
                         "transaction_id" => $response->transaction_id,
                         "transaction_type" => $response->transaction_type,
                         "payment_gateway" => "AuthorizeNet",
@@ -201,10 +216,34 @@ class ShopController extends AppController {
                         "created" => time(),
                         "modified" => time(),
                     );
+
+                    if ($value['Product']['type'] == 'template' && !$user_guest) {
+                        $this->loadModel('Media');
+                        $this->Media->create();
+
+                        $media = array(
+                            "guid" => uniqid(),
+                            "filename" => $value['Product']['file'],
+                            "type" => "user.design",
+                            "created" => time(),
+                            "modified" => time()
+                        );
+
+                        $this->Media->save($media);
+
+                        $this->loadModel('MediaToObject');
+                        $m2o = array(
+                            'media_guid' => $media_guid,
+                            "object_guid" => $user_guid,
+                            "type" => "user.design"
+                        );
+                        $this->MediaToObject->save($m2o);
+                    }
+
                     $i++;
                 }
                 $this->loadModel('Order');
-                
+
                 $this->Order->saveMany($orders);
                 $this->Product->commitTransaction();
 
@@ -232,7 +271,7 @@ class ShopController extends AppController {
                     $this->_error['message'] = $key . " is required";
                     exit(json_encode($this->_error));
                 }
-                
+
                 if ($key == "email") {
                     if (preg_match("/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/i", $value) == false) {
                         $this->_error['error'] = 1;
@@ -323,15 +362,15 @@ class ShopController extends AppController {
             $this->layout = false;
             //$orders = $this->request->data('orders');
 
-            $action = $this->request->query ('action');
+            $action = $this->request->query('action');
             if ($action == "cart") {
                 $orders = $_COOKIE['orders'];
             }
-            
+
             if ($action == "single") {
                 $orders = $_COOKIE['current-product-id'];
             }
-            
+
             $data = array();
             $orders = explode(",", $orders);
 

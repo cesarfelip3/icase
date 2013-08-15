@@ -36,11 +36,13 @@ class AppController extends Controller {
         
         if ($this->Auth->loggedIn()) {
             $user = array (
+                'id' => $this->Auth->user ('id'),
                 'name' => $this->Auth->user ('name'),
                 'guid' => $this->Auth->user ('guid'),
                 'email' => $this->Auth->user ('email'),
                 'firstname' => $this->Auth->user ('firstname'),
-                'lastname' => $this->Auth->user ('lastname')        
+                'lastname' => $this->Auth->user ('lastname'),
+                'orders' => $this->Auth->user ('orders')
             );
             
             $this->_identity = $user;
