@@ -14,11 +14,11 @@ class IndexController extends AppController {
         $this->Auth->allow("signin", "signup", "reset", "index");
         $this->Auth->deny("logout");
         parent::beforeFilter();
-        
+
         if ($this->Auth->loggedIn()) {
-            if (in_array(strtolower ($this->request->action), array ("signin", "signup"))) {
-                
-                $this->redirect ("/user/");
+            if (in_array(strtolower($this->request->action), array("signin", "signup"))) {
+
+                $this->redirect("/user/");
             }
         }
     }
@@ -51,7 +51,7 @@ class IndexController extends AppController {
             $data = $this->request->data('signin');
 
             if ($this->request->is('post')) {
-                
+
                 $passwordHasher = new SimplePasswordHasher();
                 $password = $passwordHasher->hash($data['password']);
 
@@ -70,19 +70,19 @@ class IndexController extends AppController {
                     $this->error['message'] = "invalid user name or email";
                     exit(json_encode($this->error));
                 }
-                
+
                 $this->loadModel('User');
                 $result = $this->User->find(
-                        "first", array ("conditions" => $conditions)
+                        "first", array("conditions" => $conditions)
                 );
-                
+
                 if (empty($result)) {
                     $this->error['error'] = 1;
                     $this->error['message'] = "Your user/email isn't found";
                     exit(json_encode($this->error));
                 }
 
-                $this->Auth->login ($result['User']);
+                $this->Auth->login($result['User']);
                 exit(json_encode($this->error));
             }
 
@@ -110,9 +110,8 @@ class IndexController extends AppController {
 
                     $this->loadModel('User');
                     $result = $this->User->find(
-                            "first", 
-                            array (
-                                "conditions" => $conditions
+                            "first", array(
+                        "conditions" => $conditions
                             )
                     );
 
@@ -134,6 +133,12 @@ class IndexController extends AppController {
                         $this->error['message'] = "Invalid email address";
                         exit(json_encode($this->error));
                     }
+                    
+                    if (empty($data['password'])) {
+                        $this->error['error'] = 1;
+                        $this->error['message'] = "Password is required";
+                        exit(json_encode($this->error));
+                    }
 
                     App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
                     $passwordHasher = new SimplePasswordHasher();
@@ -144,7 +149,7 @@ class IndexController extends AppController {
                         'email' => $data['email'],
                         'password' => $password,
                         'created' => time(),
-                        'modified' => time (),
+                        'modified' => time(),
                         'type' => 'registered',
                         'guid' => uniqid(),
                     );
@@ -153,10 +158,10 @@ class IndexController extends AppController {
                     $this->User->save($user);
 
                     $id = $this->User->id;
-                    $user = array_merge (array ("id" => $id), $user);
+                    $user = array_merge(array("id" => $id), $user);
                     $this->Auth->login($user);
                     //$this->redirect($this->webroot . "user/");
-                  
+
                     exit(json_encode($this->error));
                 }
 
@@ -171,13 +176,20 @@ class IndexController extends AppController {
     }
 
     function logout() {
+        if ($this->request->is('ajax')) {
+            $this->Auth->logout();
+            $this->error['error'] = 0;
+            $this->error['message'] = "";
+            exit(json_encode($this->error));
+        }
+        
         $this->redirect($this->Auth->logout());
     }
 
     function reset() {
         
     }
-    
+
     function subscribe() {
         
     }

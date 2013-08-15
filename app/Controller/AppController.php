@@ -5,6 +5,7 @@ App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
 class AppController extends Controller {
     
     protected $_sitedomain = "";
+    protected $_identity = null;
     
     public $components = array(
         'Session',
@@ -36,10 +37,15 @@ class AppController extends Controller {
         if ($this->Auth->loggedIn()) {
             $user = array (
                 'name' => $this->Auth->user ('name'),
-                'guid' => $this->Auth->user ('guid')
+                'guid' => $this->Auth->user ('guid'),
+                'email' => $this->Auth->user ('email'),
+                'firstname' => $this->Auth->user ('firstname'),
+                'lastname' => $this->Auth->user ('lastname')        
             );
             
-            $this->set ('_auth', $user);
+            $this->_identity = $user;
+            
+            $this->set ('identity', $user);
         }
     }
     

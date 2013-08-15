@@ -154,10 +154,41 @@ class ShopController extends AppController {
                     return;
                 }
 
+                // create user - guest
+                $user_guid = null;
+                if (empty ($this->_identity)) {
+                    $this->loadModel('User');
+                    
+                    $User_guid = uniqid ();
+                    $user = array (
+                        "guid" => $user_guid,
+                        "type" => "guest",
+                        "created" => time(),
+                        "modified" => time()
+                    );
+                    
+                    $user = array_merge ($user, $deliver);
+                    
+                    $this->User->create ();
+                    $this->User->save ($user);
+                } else {
+                    $user_guid = $this->_identity['guid'];
+                }
+                
+                $this->loadModel('UserDeliverInfo');
+
+                $this->UserDeliverInfo->create();
+                $deliver_guid = uniqid();
+                $deliver['guid'] = $deliver_guid;
+                $deliver['user_guid'] = $user_guid;
+                $this->UserDeliverInfo->save($deliver);
+
                 foreach ($data as $value) {
                     $orders[$i] = array(
                         "guid" => uniqid(),
+                        "buyer_guid" => empty($user_guid) ? null : $user_guid,
                         "product_guid" => $value['Product']['guid'],
+                        "deliver_guid" => $deliver_guid,
                         "title" => $value['Product']['name'],
                         "type" => $value['Product']['type'],
                         "amount" => round($value['Product']['price'] * $value['Product']['quantity'], 2, PHP_ROUND_HALF_DOWN),
@@ -172,20 +203,7 @@ class ShopController extends AppController {
                     );
                     $i++;
                 }
-
-                $this->loadModel('UserDeliverInfo');
-
-                $this->UserDeliverInfo->create();
-                $deliver_guid = uniqid();
-                $deliver['guid'] = $deliver_guid;
-                $this->UserDeliverInfo->save($deliver);
-
                 $this->loadModel('Order');
-
-                foreach ($orders as $key => $order) {
-                    $order['deliver_guid'] = $deliver_guid;
-                    $orders[$key] = $order;
-                }
                 
                 $this->Order->saveMany($orders);
                 $this->Product->commitTransaction();

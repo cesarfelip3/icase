@@ -76,7 +76,25 @@
                         </p>
                     </div>
                 </div>
+                <?php if (isset($identity)) : ?>
                 <div class="qbox">
+                    <h1 style="height:30px;border-bottom:2px solid white;">Your Account <span class="text-warning">to save your design</span></h1>
+                    <div id="payment-stripe">
+                        <p>
+                            <label>User</label>
+                            <label style="width:auto;"><?php echo $identity['name']; ?></label>
+                        </p>
+                        <p>
+                            <label>Email</label>
+                            <label style="width:auto;"><?php echo $identity['email']; ?></label>
+                        </p>
+                        <p>
+                            <a class="btn btn-primary" href="javascript:" onclick="logout();">Logout</a>
+                        </p>
+                    </div>
+                </div>
+                <?php else: ?>
+                <div class="qbox" id='box-signin'>
                     <h1 style="height:30px;border-bottom:2px solid white;">Sign In <span class="text-warning">to save your design</span></h1>
                     <div id="payment-stripe">
                         <p>
@@ -85,10 +103,10 @@
                         </p>
                         <p>
                             <label>Password</label>
-                            <input type="text" class="input-large" name="signin[password]"/>
+                            <input type="password" class="input-large" name="signin[password]"/>
                         </p>
                         <p>
-                            <a class="btn btn-primary">Login</a>
+                            <a class="btn btn-primary" href="javascript:" onclick="login()">Sign in</a>
                         </p>
                         <p>
                             <span>Don't have account yet?</span><a href='javascript:' id='btn-signup'> Sign up Now</a>
@@ -110,9 +128,15 @@
                             <label>Password</label>
                             <input type="text" class="input-large" name="signup[password]"/>
                         </p>
+                        <p>
+                            <a class="btn btn-primary" href="javascript:" onclick="signup()">Sign up</a>
+                        </p>
+                        <p>
+                            <span>Already have account...</span><a href='javascript:' id='btn-signin'> Sign in Now</a>
+                        </p>
                     </div>
-
                 </div>
+                <?php endif; ?>
             </div>           
         </div>
     </form>
@@ -123,7 +147,14 @@
                     checkout_cart();
                     $("#btn-signup").click(
                             function() {
-                                $("#box-signup").toggle(200);
+                                $("#box-signup").show();
+                                $("#box-signin").hide();
+                            });
+                            
+                    $("#btn-signin").click(
+                            function() {
+                                $("#box-signup").hide();
+                                $("#box-signin").show();
                             });
                             
                     jQuery(".datepicker").datepicker({format: 'mm/yy'});
@@ -244,6 +275,75 @@
                     showAlert(result.message);
                 } else {
                     $("#form-payment").submit();
+                }
+
+            }).fail(function() {
+                hideAlert ();
+            });
+        }
+        
+        //===================================
+        function login ()
+        {
+            jQuery.ajax({
+                url: "<?php echo $this->webroot; ?>signin/",
+                data: $("#form-payment").serialize(),
+                type: "POST",
+                beforeSend: function(xhr) {
+                    showAlert2 ("Working....");
+                }
+            }).done(function(data) {
+
+                var result = $.parseJSON(data);
+                if (result.error == 1) {
+                    showAlert(result.message);
+                } else {
+                    window.location.href = "";
+                }
+
+            }).fail(function() {
+                hideAlert ();
+            });
+        }
+        
+        function signup ()
+        {
+            jQuery.ajax({
+                url: "<?php echo $this->webroot; ?>signup/",
+                data: $("#form-payment").serialize(),
+                type: "POST",
+                beforeSend: function(xhr) {
+                    showAlert2 ("Working....");
+                }
+            }).done(function(data) {
+
+                var result = $.parseJSON(data);
+                if (result.error == 1) {
+                    showAlert(result.message);
+                } else {
+                    window.location.href = "";
+                }
+
+            }).fail(function() {
+                hideAlert ();
+            });
+        }
+        
+        function logout ()
+        {
+            jQuery.ajax({
+                url: "<?php echo $this->webroot; ?>logout/",
+                type: "GET",
+                beforeSend: function(xhr) {
+                    showAlert2 ("Working....");
+                }
+            }).done(function(data) {
+
+                var result = $.parseJSON(data);
+                if (result.error == 1) {
+                    showAlert(result.message);
+                } else {
+                    window.location.href = "";
                 }
 
             }).fail(function() {
