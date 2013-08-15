@@ -9,8 +9,8 @@
             <div class="row-fluid">
                 <div style="display:block;width:100%;height:30px">
                     <div class="tools pull-left">
-                        <a href="javascript:" data-action="new" title="remove"><i class="icon-remove-sign icon-2x"></i> clear canvas</a>
-                        <a href="javascript:" data-action="preview" title="remove"><i class="icon-eye-open icon-2x"></i> preview</a>
+                        <a href="javascript:" class="btn btn-info btn-large " data-action="new" title="remove"><i class="icon-remove-sign icon-1x"></i> <span>clear canvas</span></a>
+                        <a href="javascript:" class="btn btn-info btn-large " data-action="preview" title="remove"><i class="icon-eye-open icon-1x"></i> preview</a>
                     </div>
                     <div class="tools pull-right">
                         <a class="btn btn-warning btn-large " id="btn-order" onclick="order();">
@@ -19,7 +19,7 @@
                         </a>
                     </div>
                     <div class="pull-right" id="box-template-list" style="margin-right:10px;">
-                          
+
                     </div>
                     <input type="hidden" id="current-item" />
                 </div>
@@ -67,17 +67,17 @@
                         <canvas class="upper-canvas " style="border: 1px #ccc dashed; -moz-user-select: none; cursor: crosshair;" width="560" height="560" id="c1"></canvas>				   
                     </div>
                 </div>
-<!--                <div class="span2" style="border:2px #ccc dashed;width:110px">
-                    <div class="pull-right">
-                        <div style="overflow: hidden;height:560px;width:100px;">
-                            <div style="overflow:auto;height:560px;padding-right: 20px;width:100px;" id="template-list">
-
-                            </div>
-
-                        </div>
-                        <form id="cart-form"><input type="hidden" id="current-item" /></form>
-                    </div>
-                </div>-->
+                <!--                <div class="span2" style="border:2px #ccc dashed;width:110px">
+                                    <div class="pull-right">
+                                        <div style="overflow: hidden;height:560px;width:100px;">
+                                            <div style="overflow:auto;height:560px;padding-right: 20px;width:100px;" id="template-list">
+                
+                                            </div>
+                
+                                        </div>
+                                        <form id="cart-form"><input type="hidden" id="current-item" /></form>
+                                    </div>
+                                </div>-->
             </div>
             <div class="row-fluid">
                 <div class="text-editor editor span9 hide" style="width:100%;border:1px solid #ccc;margin-top:10px;padding:5px;">
@@ -241,72 +241,72 @@ $js_pluploader = array(
 <?php echo $this->Html->script($js_pluploader); ?>
 
 <script type="text/javascript">
-    // Custom example logic
+                            // Custom example logic
 
-    function PL(id) {
-        return document.getElementById(id);
-    }
+                            function PL(id) {
+                                return document.getElementById(id);
+                            }
 
-    var uploader = new plupload.Uploader({
-        runtimes: 'gears,html5,browserplus',
-        browse_button: 'pickfiles',
-        container: 'uploader',
-        max_file_size: '10mb',
-        url: 'media/upload',
-        multi_selection: false,
-        //resize: {width: 640, height: 240, quality: 100},
-        //flash_swf_url: 'js/uploader/plupload.flash.swf',
-        //silverlight_xap_url : 'js/uploader/plupload.silverlight.xap',
-        filters: [
-            {title: "Image Files", extensions: "png,jpeg,jpg,gif"}
-        ]
-    });
+                            var uploader = new plupload.Uploader({
+                                runtimes: 'gears,html5,browserplus',
+                                browse_button: 'pickfiles',
+                                container: 'uploader',
+                                max_file_size: '10mb',
+                                url: 'media/upload',
+                                multi_selection: false,
+                                //resize: {width: 640, height: 240, quality: 100},
+                                //flash_swf_url: 'js/uploader/plupload.flash.swf',
+                                //silverlight_xap_url : 'js/uploader/plupload.silverlight.xap',
+                                filters: [
+                                    {title: "Image Files", extensions: "png,jpeg,jpg,gif"}
+                                ]
+                            });
 
-    uploader.bind('Init', function(up, params) {
-        //$('filelist').innerHTML = "<div>Current runtime: " + params.runtime + "</div>";
-    });
+                            uploader.bind('Init', function(up, params) {
+                                //$('filelist').innerHTML = "<div>Current runtime: " + params.runtime + "</div>";
+                            });
 
-    uploader.init();
+                            uploader.init();
 
-    uploader.bind('FilesAdded', function(up, files) {
+                            uploader.bind('FilesAdded', function(up, files) {
 
-        console.log("hello");
-        if (uploader.files.length == 2) {
-            uploader.removeFile(uploader.files[0]);
-        }
+                                console.log("hello");
+                                if (uploader.files.length == 2) {
+                                    uploader.removeFile(uploader.files[0]);
+                                }
 
-        for (var i in files) {
-            //document.getElementById('filelist').innerHTML = '<div id="' + files[i].id + '">' + files[i].name + ' (' + plupload.formatSize(files[i].size) + ') <b></b></div>';
-        }
-        jQuery('#progress-bar').css('width', "0%");
-        uploader.start();
-    });
+                                for (var i in files) {
+                                    //document.getElementById('filelist').innerHTML = '<div id="' + files[i].id + '">' + files[i].name + ' (' + plupload.formatSize(files[i].size) + ') <b></b></div>';
+                                }
+                                jQuery('#progress-bar').css('width', "0%");
+                                uploader.start();
+                            });
 
-    uploader.bind('UploadProgress', function(up, file) {
-        //$(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
-        jQuery('#progress-bar').css('width', file.percent + "%");
+                            uploader.bind('UploadProgress', function(up, file) {
+                                //$(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
+                                jQuery('#progress-bar').css('width', file.percent + "%");
 
-    });
+                            });
 
-    uploader.bind('FileUploaded', function(up, file, response) {
-        plupload.each(response, function(value, key) {
+                            uploader.bind('FileUploaded', function(up, file, response) {
+                                plupload.each(response, function(value, key) {
 
-            console.log(key);
-            console.log(value);
+                                    console.log(key);
+                                    console.log(value);
 
-            if (key == "response") {
-                var result = jQuery.parseJSON(value);
-                console.log(result);
-                if (result.error == 0) {
-                    console.log(result.files.url);
-                    mememaker.tools.addpic(result.files.url);
-                }
-                //jQuery('#progress-bar').css('width', "0%");
-            }
-        });
+                                    if (key == "response") {
+                                        var result = jQuery.parseJSON(value);
+                                        console.log(result);
+                                        if (result.error == 0) {
+                                            console.log(result.files.url);
+                                            mememaker.tools.addpic(result.files.url);
+                                        }
+                                        //jQuery('#progress-bar').css('width', "0%");
+                                    }
+                                });
 
-        //alert($.parseJSON(response.response).result);
-    });
+                                //alert($.parseJSON(response.response).result);
+                            });
 
 </script>
 
@@ -324,31 +324,31 @@ $js_case = array(
 
 <script type="text/javascript">
     jQuery(document).ready(
-        function() {
-            newcase_init ();
-        }
+            function() {
+                newcase_init();
+            }
     );
 
     function order_config() {
-        
+
         jQuery("#btn-cart").click(
-            function() {
-                jQuery("#btn-cart").off("click");
-                var orderId = null;
-                orderId = jQuery("#modal-preview #product-info").data('guid');
-                var image = jQuery("#modal-preview #product-info").data('file');
+                function() {
+                    jQuery("#btn-cart").off("click");
+                    var orderId = null;
+                    orderId = jQuery("#modal-preview #product-info").data('guid');
+                    var image = jQuery("#modal-preview #product-info").data('file');
 
-                $.shoppingcart.set(orderId + "-" + image);
+                    $.shoppingcart.set(orderId + "-" + image);
 
-                jQuery("#modal-preview").modal('hide');
+                    jQuery("#modal-preview").modal('hide');
 
-                window.open("<?php echo $this->webroot; ?>shop/checkout?action=cart", "_blank");
-                window.focus();
-            }
+                    window.open("<?php echo $this->webroot; ?>shop/checkout?action=cart", "_blank");
+                    window.focus();
+                }
         )
     }
-   
-    function newcase_init ()
+
+    function newcase_init()
     {
         mememaker.init('c1');
         mememaker.tools.init(".tools");
@@ -362,71 +362,71 @@ $js_case = array(
         jQuery("#btn-order").show(1000);
         jQuery(".creator-parts").delay(1000).show(0).css('visibility', 'visible');
 
-        templatelist_load ();       
+        templatelist_load();
     }
-    
+
     //===========================================================
     // template list
     //===========================================================
-    function templatelist_load ()
+    function templatelist_load()
     {
-         jQuery.ajax({
+        jQuery.ajax({
             url: "<?php $this->webroot; ?>shop/gettemplates",
             type: "GET",
             beforeSend: function(xhr) {
-                
+
             }
         }).done(function(data) {
 
-/*
-            $("#template-list").prev().children(":first-child").hide(0);
-            result = jQuery.parseJSON(data);
-            $(result).each(
-                function(index, value) {
-                    var html = jQuery("#template-list").html() + '<span class="label label-warning">' + value.Product.name + ' ' + value.Product.price + '$</span><a href="javascript:" class="thumbnail" data-price="' + value.Product.price + '" data-guid="' + value.Product.guid + '"><img src="' + value.Product.image + '" /></a><br/>';
-                    jQuery("#template-list").html(html);
-                }
-            ); */
-            
-            $("#box-template-list").html (data);
+            /*
+             $("#template-list").prev().children(":first-child").hide(0);
+             result = jQuery.parseJSON(data);
+             $(result).each(
+             function(index, value) {
+             var html = jQuery("#template-list").html() + '<span class="label label-warning">' + value.Product.name + ' ' + value.Product.price + '$</span><a href="javascript:" class="thumbnail" data-price="' + value.Product.price + '" data-guid="' + value.Product.guid + '"><img src="' + value.Product.image + '" /></a><br/>';
+             jQuery("#template-list").html(html);
+             }
+             ); */
+
+            $("#box-template-list").html(data);
 
             templatelist_config();
 
         }).fail(function() {
             //$("#template-list").prev().children(":first-child").hide(0);
-        });        
+        });
     }
-    
+
     function templatelist_config() {
 
         jQuery("#template-list a").off('click');
         jQuery("#template-list a").click(
                 function() {
-            /*
-                    var url = $(this).children(":first-child").attr('src');
-                    mememaker.tools.newtemplate(url);
+                    /*
+                     var url = $(this).children(":first-child").attr('src');
+                     mememaker.tools.newtemplate(url);
+                     $("#current-item").val($(this).data('guid'));
+                     $.shoppingcart.setCurrentProductId($(this).data('guid'));
+                     $("#btn-order span").text("Order Now " + $(this).data('price') + "$");
+                     */
+                    var bg = $(this).data('bg');
+                    var fg = $(this).data('fg');
+
+                    mememaker.tools.backgroundimage(bg);
+                    mememaker.tools.newtemplate(fg);
+
                     $("#current-item").val($(this).data('guid'));
                     $.shoppingcart.setCurrentProductId($(this).data('guid'));
                     $("#btn-order span").text("Order Now " + $(this).data('price') + "$");
-                    */
-                   var bg = $(this).data('bg');
-                   var fg = $(this).data('fg');
-                   
-                   mememaker.tools.backgroundimage(bg);
-                   mememaker.tools.newtemplate(fg);
-                   
-                   $("#current-item").val ($(this).data('guid'));
-                   $.shoppingcart.setCurrentProductId($(this).data('guid'));
-                   $("#btn-order span").text("Order Now " + $(this).data('price') + "$");
                 }
         );
     }
- 
+
     //==================================================================
     // order
     //==================================================================
-    
-    function order ()
+
+    function order()
     {
         if (jQuery.trim(jQuery("#current-item").val()) == "") {
             return;
@@ -453,8 +453,8 @@ $js_case = array(
         }).done(function(data) {
             jQuery(".ajax-loading-indicator").hide(0);
             jQuery("#modal-preview .modal-body").html(data);
-            order_config ();
-            order_current ();
+            order_config();
+            order_current();
 
         }).fail(function() {
             jQuery(".ajax-loading-indicator").hide(0);
