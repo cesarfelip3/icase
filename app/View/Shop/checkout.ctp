@@ -10,7 +10,7 @@
     }
 </style>
 <?php if (!isset($paid)) : ?>
-    <form id="form-payment" class="info" action="<?php echo $this->webroot; ?>shop/checkout?action=<?php echo $action; ?>" method="post">
+    <form id="form-payment" class="info" action="<?php echo $this->webroot; ?>shop/checkout/?action=<?php echo $action; ?>" method="post">
         <div class="row-fluid" id="box-cart">
             <div class="ajax-loading-indicator" style="margin:10px;"><a href="javascript:" style="font-size:14px;"><i class="icon-refresh icon-spin"></i> Loading orders....</a></div>
         </div>

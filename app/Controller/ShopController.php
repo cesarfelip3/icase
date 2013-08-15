@@ -94,24 +94,33 @@ class ShopController extends AppController {
                 $i++;
             }
 
+            print_r($data);
+            exit;
+
             $orders = array();
             $i = 0;
             if (!empty($data)) {
-                
+
+                $amount = 0;
+                foreach ($data as $value) {
+                    $amount = round($value['Product']['price'] * $value['Product']['quantity'], 2, PHP_ROUND_HALF_DOWN) + "";
+                }
+
                 require_once APP . DS . 'Vendor' . DS . 'AuthorizeNet/AuthorizeNet.php'; // Make sure this path is correct.
                 $transaction = new AuthorizeNetAIM('9c22BSeN', '6333jT7Cc3JmwpUN');
-                $transaction->amount = round($value['Product']['price'] * $value['Product']['quantity'], 2, PHP_ROUND_HALF_DOWN) + "";
+                $transaction->amount = $amount;
                 $transaction->card_num = $bill['cc_number'];
                 $transaction->exp_date = '10/16';
 
                 $response = $transaction->authorizeAndCapture();
 
                 if ($response->approved) {
+                    
                 } else {
                     $this->Session->setFlash($response->error_message);
                     return;
                 }
-                
+
                 foreach ($data as $value) {
                     $orders[$i] = array(
                         "guid" => uniqid(),
@@ -128,33 +137,36 @@ class ShopController extends AppController {
                     );
                     $i++;
                 }
-            }
 
-            $this->loadModel('UserDeliverInfo');
+                print_r($orders);
+                exit;
+                
+                $this->loadModel('UserDeliverInfo');
 
-            $this->UserDeliverInfo->create();
-            $deliver_guid = uniqid();
-            $deliver['guid'] = $deliver_guid;
+                $this->UserDeliverInfo->create();
+                $deliver_guid = uniqid();
+                $deliver['guid'] = $deliver_guid;
 
-            $this->UserDeliverInfo->save($deliver);
+                $this->UserDeliverInfo->save($deliver);
 
-            $this->loadModel('Order');
+                $this->loadModel('Order');
 
-            foreach ($orders as $key => $order) {
-                $order['deliver_guid'] = $deliver_guid;
-                $orders[$key] = $order;
-            }
-
-            if (isset($_SERVER['HTTP_COOKIE'])) {
-                $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
-                foreach ($cookies as $cookie) {
-                    $parts = explode('=', $cookie);
-                    $name = trim($parts[0]);
-                    setcookie($name, '', time() - 1000, '/');
+                foreach ($orders as $key => $order) {
+                    $order['deliver_guid'] = $deliver_guid;
+                    $orders[$key] = $order;
                 }
+
+                if (isset($_SERVER['HTTP_COOKIE'])) {
+                    $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
+                    foreach ($cookies as $cookie) {
+                        $parts = explode('=', $cookie);
+                        $name = trim($parts[0]);
+                        setcookie($name, '', time() - 1000, '/');
+                    }
+                }
+                $this->Order->saveMany($orders);
+                $this->set("paid", true);
             }
-            $this->Order->saveMany($orders);
-            $this->set("paid", true);
         }
     }
 
@@ -170,9 +182,9 @@ class ShopController extends AppController {
                     exit(json_encode($this->_error));
                 }
             }
-            
+
             $bill = $this->request->data('bill');
-            
+
             foreach ($bill as $value) {
                 if (empty($value)) {
                     $this->_error['error'] = 1;
@@ -183,7 +195,7 @@ class ShopController extends AppController {
 
             $this->_error['error'] = 0;
             exit(json_encode($this->_error));
-            
+
             $signin = $this->request->data('signin');
             $signup = $this->request->data('signup');
 
