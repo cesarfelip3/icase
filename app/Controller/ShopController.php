@@ -93,10 +93,7 @@ class ShopController extends AppController {
                 $data[$i]['Product']['quantity'] = $value;
                 $i++;
             }
-
-            print_r($data);
-            exit;
-
+            
             $orders = array();
             $i = 0;
             if (!empty($data)) {
@@ -117,6 +114,9 @@ class ShopController extends AppController {
                 if ($response->approved) {
                     
                 } else {
+                    print_r ($response->error_message);
+                    exit;
+                    
                     $this->Session->setFlash($response->error_message);
                     return;
                 }
