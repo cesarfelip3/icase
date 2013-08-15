@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.29)
 # Database: icase
-# Generation Time: 2013-08-12 17:49:34 +0000
+# Generation Time: 2013-08-15 06:15:03 +0000
 # ************************************************************
 
 
@@ -203,7 +203,7 @@ CREATE TABLE `orders` (
   `buyer_guid` char(13) DEFAULT NULL,
   `seller_guid` char(13) NOT NULL DEFAULT '0',
   `deliver_guid` char(13) DEFAULT NULL,
-  `transaction_id` char(32) DEFAULT NULL,
+  `transactionid` varchar(128) DEFAULT NULL,
   `title` text,
   `description` varchar(1024) DEFAULT NULL,
   `status` varchar(11) NOT NULL DEFAULT 'pending',
@@ -213,6 +213,8 @@ CREATE TABLE `orders` (
   `express_fee` decimal(11,2) NOT NULL DEFAULT '0.00',
   `express_type` varchar(11) NOT NULL DEFAULT 'free',
   `payment` varchar(11) NOT NULL DEFAULT 'paypal',
+  `cc_number` varchar(512) DEFAULT NULL,
+  `cc_expired` varchar(128) DEFAULT NULL,
   `file` varchar(1024) DEFAULT NULL,
   `notification` varchar(32) DEFAULT '',
   `created` int(11) DEFAULT NULL,
@@ -260,7 +262,7 @@ LOCK TABLES `products` WRITE;
 
 INSERT INTO `products` (`id`, `guid`, `user_guid`, `sku`, `name`, `slug`, `image`, `featured`, `description`, `price`, `tax`, `discount`, `quantity`, `is_special`, `special_price`, `special_start`, `special_end`, `type`, `status`, `active`, `seo_keywords`, `seo_description`, `created`, `modified`)
 VALUES
-	(1,'5209156bda4d1',NULL,NULL,'iphone','iphone','','','<p>iphone</p>',22.00,0.00,0,65535,0,NULL,NULL,NULL,'product','published',1,NULL,NULL,1376327019,1376328243);
+	(2,'520c5c6fdd8f3',NULL,NULL,'iphone5',NULL,'a:2:{s:10:\"foreground\";s:14:\"iphone5_fg.png\";s:10:\"background\";s:14:\"iphone5_bg.png\";}',NULL,'iphone5 case',34.99,0.00,0,0,0,NULL,NULL,NULL,'template','published',1,NULL,NULL,1376541807,1376541807);
 
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
