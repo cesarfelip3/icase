@@ -1,6 +1,6 @@
 <div class="btn-group">
-    <a class="btn dropdown-toggle btn-large btn-warning" data-toggle="dropdown" href="#">
-    Select Model
+    <a class="btn dropdown-toggle btn-large btn-info" data-toggle="dropdown" href="#">
+    Select Your Product
     <span class="caret"></span>
   </a>
     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" id="template-list">
