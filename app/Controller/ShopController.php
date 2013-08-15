@@ -171,9 +171,9 @@ class ShopController extends AppController {
                 }
             }
             
-            $order = $this->request->data('bill');
+            $bill = $this->request->data('bill');
             
-            foreach ($order as $value) {
+            foreach ($bill as $value) {
                 if (empty($value)) {
                     $this->_error['error'] = 1;
                     $this->_error['message'] = "Credit card - all fields required";
@@ -181,6 +181,7 @@ class ShopController extends AppController {
                 }
             }
 
+            $this->_error['error'] = 0;
             exit(json_encode($this->_error));
             
             $signin = $this->request->data('signin');
