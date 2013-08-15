@@ -437,6 +437,39 @@ class ProductController extends AdminAppController {
         $this->Product->delete($id);
         exit;
     }
+    
+    //======================================================
+    public function install() {
+
+        $templates = array (
+            "iphone5" => array (
+                "name" => "iphone5",
+                "description" => "iphone5 case",
+                "price" => "34.99",
+                "image" => array (
+                    "foreground" => "iphone5_fg.png",
+                    "background" => "iphone5_bg.png",
+                ),
+                "type" => "template",
+                "status" => "published"
+            )
+        );
+        
+        $this->loadModel("Product");
+        $this->Product->query ("DELETE FROM products WHERE type='template'");
+        foreach ($templates as $template) {
+            $template['guid'] = uniqid();
+            $template['created'] = time();
+            $template['modified'] = time();
+            $template['image'] = serialize($template['image']);
+            $this->Product->create ();
+            $this->Product->save ($template);
+        }
+        
+        $this->autoRender = false;
+        echo "Successfully all templates created";
+        
+    }
 
 }
 

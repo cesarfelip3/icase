@@ -5,7 +5,7 @@
         </div>
     <?php else : ?>
         <div class="span5">
-            <input type="hidden" id="product-info" data-guid="<?php echo $data['Product']['guid']; ?>" data-file="<?php echo $error['files']['target']; ?>" data-amount="<?php echo $data['Product']['price']; ?>" data-quantity="1" />
+            <input type="hidden" id="product-info" data-guid="<?php echo $data['guid']; ?>" data-file="<?php echo $error['files']['target']; ?>" data-amount="<?php echo $data['price']; ?>" data-quantity="1" />
             <p><a class="thumbnail" href="javascript:"><img src="<?php echo $this->webroot . $error['files']['url']; ?>" style="width:200px" data-file="<?php echo $error['files']['target']; ?>" /></a></p>
         </div>
         <div class="span7">
@@ -14,7 +14,7 @@
                     <tbody>
                         <tr>
                             <td class="text-info">Type</td>
-                            <td><?php echo $data['Product']['name']; ?></td>
+                            <td><?php echo $data['name']; ?></td>
                         </tr>
                         <tr>
                             <td class="text-success">Quantity</td>
@@ -22,11 +22,11 @@
                         </tr>
                         <tr>
                             <td class="text-success">Amount</td>
-                            <td><?php echo $data['Product']['price']; ?></td>
+                            <td><?php echo $data['price']; ?></td>
                         </tr>
                         <tr>
                             <td>Description</td>
-                            <td><?php echo $data['Product']['description']; ?></td>
+                            <td><?php echo $data['description']; ?></td>
                         </tr>
                     </tbody>
                 </table>

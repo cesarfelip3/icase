@@ -45,18 +45,18 @@ class ShopController extends AppController {
 
             $passwordHasher = new SimplePasswordHasher();
             $password = $passwordHasher->hash($data['password']);
-            
-            $conditions = array ();
+
+            $conditions = array();
             if (preg_match("/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/i", $data['name']) == true) {
-                $conditions = array ("email" => $data['name'], "password" => $password);
+                $conditions = array("email" => $data['name'], "password" => $password);
             } else {
-                $conditions = array ("name" => $data['name'], "password" => $password);
+                $conditions = array("name" => $data['name'], "password" => $password);
             }
-            
+
             $this->loadModel("User");
             $user = $this->find('first', array("conditions" => $conditions));
-            
-            if (!empty ($user['User'])) {
+
+            if (!empty($user['User'])) {
                 $this->Auth->login($user['User']);
             } else {
                 $this->_error['error'] = 1;
@@ -201,7 +201,7 @@ class ShopController extends AppController {
         if ($this->request->is("ajax")) {
             $this->layout = false;
             //$orders = $this->request->data('orders');
-            
+
             $orders = $_COOKIE['orders'];
             $data = array();
 
@@ -241,8 +241,8 @@ class ShopController extends AppController {
                     $guid = $key[0];
                 }
 
-                $data[$i] = $this->Product->find('first', array ("conditions" => array ("guid" => $guid)));
-                
+                $data[$i] = $this->Product->find('first', array("conditions" => array("guid" => $guid)));
+
                 if (empty($data[$i])) {
                     $i = 0;
                     continue;
@@ -256,9 +256,9 @@ class ShopController extends AppController {
                 $data[$i]['Product']['quantity'] = $value;
                 $i++;
             }
-            
-            if ($i == 0 && empty ($data[$i])) {
-                $data = array ();
+
+            if ($i == 0 && empty($data[$i])) {
+                $data = array();
             }
             $this->set('data', $data);
         }
@@ -410,29 +410,30 @@ class ShopController extends AppController {
                     //'mime' => $mime
             );
 
-            $size = getimagesize($targetDir . DIRECTORY_SEPARATOR . $filename);
+            /*
+              $size = getimagesize($targetDir . DIRECTORY_SEPARATOR . $filename);
 
-            $current_width = $size[0];
-            $current_height = $size[1];
+              $current_width = $size[0];
+              $current_height = $size[1];
 
-            $left = 100;
-            $top = 5;
+              $left = 100;
+              $top = 5;
 
-            $crop_width = 248;
-            $crop_height = 437;
+              $crop_width = 248;
+              $crop_height = 437;
 
-// Resample the image
-            $canvas = imagecreatetruecolor($crop_width, $crop_height);
-            $current_image = imagecreatefromjpeg($targetDir . DIRECTORY_SEPARATOR . $filename);
-            imagecopy($canvas, $current_image, 0, 0, $left, $top, $current_width, $current_height);
-            imagejpeg($canvas, $targetDir . DIRECTORY_SEPARATOR . $filename, 100);
+              $canvas = imagecreatetruecolor($crop_width, $crop_height);
+              $current_image = imagecreatefromjpeg($targetDir . DIRECTORY_SEPARATOR . $filename);
+              imagecopy($canvas, $current_image, 0, 0, $left, $top, $current_width, $current_height);
+              imagejpeg($canvas, $targetDir . DIRECTORY_SEPARATOR . $filename, 100);
 
-            $path = $targetDir . DIRECTORY_SEPARATOR . $filename;
-            $image = file_get_contents($targetDir . DIRECTORY_SEPARATOR . $filename);
+              $path = $targetDir . DIRECTORY_SEPARATOR . $filename;
+              $image = file_get_contents($targetDir . DIRECTORY_SEPARATOR . $filename);
 
-            $image = substr_replace($image, pack("cnn", 1, 300, 300), 13, 5);
+              $image = substr_replace($image, pack("cnn", 1, 300, 300), 13, 5);
 
-            file_put_contents($targetDir . DIRECTORY_SEPARATOR . $filename, $image);
+              file_put_contents($targetDir . DIRECTORY_SEPARATOR . $filename, $image);
+             */
 
             $this->loadModel('Product');
             $data = $this->Product->find('first', array(
@@ -443,7 +444,7 @@ class ShopController extends AppController {
                 $this->_error['error'] = 1;
             }
 
-            $this->set(array('data' => $data, 'error' => $this->_error));
+            $this->set(array('data' => $data['Product'], 'error' => $this->_error));
             return;
         }
     }
@@ -455,7 +456,7 @@ class ShopController extends AppController {
     public function getTemplates() {
 
         if ($this->request->is('ajax')) {
-            $this->autoRender = false;
+            $this->layout = false;
 
             $this->loadModel('Product');
             $data = $this->Product->find("all", array(
@@ -468,13 +469,16 @@ class ShopController extends AppController {
             )));
 
             foreach ($data as $key => $value) {
-                $value['Product']['image'] = $this->base . "/uploads/template/" . $value['Product']['image'];
+                $value['Product']['image'] = unserialize($value['Product']['image']);
+                $value['Product']['foreground'] = $value['Product']['image']['foreground'];
+                $value['Product']['background'] = $value['Product']['image']['background'];
                 $data[$key] = $value;
             }
 
-
-
-            echo json_encode($data);
+            $this->set ('data', $data);
+            $this->render("gettemplates.ajax");
+            return;
+            //echo json_encode($data);
         }
     }
 

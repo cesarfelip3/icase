@@ -1,25 +1,32 @@
 <style>
     .tools a {text-decoration:none;}
-    .tools label {width:90px;display:inline-block;}
+    .tools label {width:100px;display:inline-block;}
     hr {border-color:#E9E9E9}
 </style>
 <section id="main">
     <div class="body-text">
         <div class="container-fluid qbox creator-parts" style="box-shadow:none;font-size:14px;background:transparent;padding:10px;padding-top:5px;">
             <div class="row-fluid">
-                <div style="display:block;width:100%;height:25px">
+                <div style="display:block;width:100%;height:30px">
                     <div class="tools pull-left">
                         <a href="javascript:" data-action="new" title="remove"><i class="icon-remove-sign icon-2x"></i> clear canvas</a>
                         <a href="javascript:" data-action="preview" title="remove"><i class="icon-eye-open icon-2x"></i> preview</a>
                     </div>
-                    <div class="tools pull-right">
-                        <a class="btn btn-large btn-warning hide" id="btn-order" onclick="order();"><i class="icon-mobile-phone icon-2x"></i> <span>Order Now</span></a></p>
+                    <div class="pull-right" id="box-template-list">
+                          
                     </div>
+                    <div class="tools pull-right" style="margin-right:10px;">
+                        <a class="btn btn-warning btn-large " id="btn-order" onclick="order();">
+                            <i class="icon-mobile-phone icon-1x"></i> 
+                            <span>Order Now</span>
+                        </a>
+                    </div>
+                    <input type="hidden" id="current-item" />
                 </div>
             </div>
             <div class="progress" style="height:2px;display:block;width:100%;margin-top:10px;"><div class="bar bar-warning" id="progress-bar" style="width: 0%; height:2px;"></div></div>
             <div class="row-fluid">
-                <div class="span3" style="width:190px;">
+                <div class="span4" style="width:210px;">
                     <div class="tools">
                         <div id="uploader" style="padding:0px;margin:0px;">
                             <div id="filelist" style="display:none;padding:0px;margin:0px;"></div>
@@ -60,7 +67,7 @@
                         <canvas class="upper-canvas " style="border: 1px #ccc dashed; -moz-user-select: none; cursor: crosshair;" width="560" height="560" id="c1"></canvas>				   
                     </div>
                 </div>
-                <div class="span2" style="border:2px #ccc dashed;width:110px">
+<!--                <div class="span2" style="border:2px #ccc dashed;width:110px">
                     <div class="pull-right">
                         <div style="overflow: hidden;height:560px;width:100px;">
                             <div style="overflow:auto;height:560px;padding-right: 20px;width:100px;" id="template-list">
@@ -70,7 +77,7 @@
                         </div>
                         <form id="cart-form"><input type="hidden" id="current-item" /></form>
                     </div>
-                </div>
+                </div>-->
             </div>
             <div class="row-fluid">
                 <div class="text-editor editor span9 hide" style="width:100%;border:1px solid #ccc;margin-top:10px;padding:5px;">
@@ -349,10 +356,6 @@ $js_case = array(
         mememaker.texteditor.init(".text-editor");
         mememaker.imageeditor.init(".image-editor");
         mememaker.draweditor.init(".draw-editor");
-        
-        mememaker.tools.backgroundimage("<?php echo $this->webroot; ?>img/template/iphone5_bg.png");
-        mememaker.tools.newtemplate("<?php echo $this->webroot; ?>img/template/iphone5_fg.png");
-        
         //mememaker.tools.backgroundcolor("red");
 
         jQuery(".ajax-loading-indicator").hide(0);
@@ -375,6 +378,7 @@ $js_case = array(
             }
         }).done(function(data) {
 
+/*
             $("#template-list").prev().children(":first-child").hide(0);
             result = jQuery.parseJSON(data);
             $(result).each(
@@ -382,12 +386,14 @@ $js_case = array(
                     var html = jQuery("#template-list").html() + '<span class="label label-warning">' + value.Product.name + ' ' + value.Product.price + '$</span><a href="javascript:" class="thumbnail" data-price="' + value.Product.price + '" data-guid="' + value.Product.guid + '"><img src="' + value.Product.image + '" /></a><br/>';
                     jQuery("#template-list").html(html);
                 }
-            );
+            ); */
+            
+            $("#box-template-list").html (data);
 
             templatelist_config();
 
         }).fail(function() {
-            $("#template-list").prev().children(":first-child").hide(0);
+            //$("#template-list").prev().children(":first-child").hide(0);
         });        
     }
     
@@ -396,11 +402,22 @@ $js_case = array(
         jQuery("#template-list a").off('click');
         jQuery("#template-list a").click(
                 function() {
+            /*
                     var url = $(this).children(":first-child").attr('src');
                     mememaker.tools.newtemplate(url);
                     $("#current-item").val($(this).data('guid'));
                     $.shoppingcart.setCurrentProductId($(this).data('guid'));
                     $("#btn-order span").text("Order Now " + $(this).data('price') + "$");
+                    */
+                   var bg = $(this).data('bg');
+                   var fg = $(this).data('fg');
+                   
+                   mememaker.tools.backgroundimage(bg);
+                   mememaker.tools.newtemplate(fg);
+                   
+                   $("#current-item").val ($(this).data('guid'));
+                   $.shoppingcart.setCurrentProductId($(this).data('guid'));
+                   $("#btn-order span").text("Order Now " + $(this).data('price') + "$");
                 }
         );
     }

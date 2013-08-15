@@ -42,6 +42,7 @@ $product_delete = $base . "product" . DS . "delete";
             <div class="span12 listing-buttons">
                 <a href="<?php echo $this->webroot; ?>admin/category/" class="btn btn-primary">Edit Category</a>
                 <a href="<?php echo $this->webroot; ?>admin/product/add" class="btn btn-primary">New Product</a>
+                <a href="<?php echo $this->webroot; ?>admin/product/add/?action=template" class="btn btn-primary">New Template</a>
             </div>
             <div class="span12">
                 <div class="slate">
