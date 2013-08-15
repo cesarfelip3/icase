@@ -16,7 +16,7 @@
         </div>
         <div class="row-fluid">
             <div class="span6">
-                <div class="qbox">
+                <div class="qbox" id="box-bill-details">
                     <h1 style="height:30px;border-bottom:2px solid white;">Bill Details<!--<a href="javascript:" class="close" type="button" data-action="close" data-dismiss="modal" aria-hidden="true" style="text-decoration:none;"><i class="icon-remove icon-1x"></i></a>--></h1>
                     <p>
                         <span class="label label-warning">All fields are required</span>
@@ -24,7 +24,7 @@
                     <p>
                         <label>First Name</label>
                         <input type="text" class="input-medium" name="deliver[firstname]" />
-                        <span class="text-warning" style="text-shadow:none;" >hello</span>
+                        <span class="text-warning" style="text-shadow:none;"></span>
                     </p>
                     <p>
                         <label>Last Name</label>
@@ -57,9 +57,7 @@
                     </p>
                     <p>
                         <label>City</label>
-                        <select name="deliver[city]">
-                            <option value="Salt Lake City">Salt Lake City</option>
-                        </select>
+                        <input type="text" placeholder="City" />
                     </p>
                     <p>
                         <label>Zip Code</label>
@@ -68,6 +66,19 @@
                 </div>
             </div>
             <div class="span6">
+                <div class="qbox">
+                    <h1 style="height:30px;border-bottom:2px solid white;">Credit Card</h1>
+                    <div id="payment-stripe">
+                        <p>
+                            <label>Number</label>
+                            <input type="text" class="input-large" name="order[cc_number]" />
+                        </p>
+                        <p>
+                            <label>Expired</label>
+                            <input type="text" class="input-large datepicker" readonly="readonly" name="order[cc_expired]"/>
+                        </p>
+                    </div>
+                </div>
                 <div class="qbox">
                     <h1 style="height:30px;border-bottom:2px solid white;">Sign In <span class="text-warning">to save your design</span></h1>
                     <div id="payment-stripe">
@@ -250,9 +261,38 @@
             }).done(function(data) {
                 $("#box-cart").html(data);
                 $("#box-cart").show();
+                var hasorder = $("input[name=hasorder]").val();
+                
+                if (hasorder == "1") {
+                    $("#box-bill-details").append ('<p><a class="btn btn-peach" onclick="javascript:cart_pay()">Pay Now</a></p>');
+                }
+                
                 cart_config();
             }).fail(function() {
 
+            });
+        }
+        
+        function cart_pay ()
+        {
+            jQuery.ajax({
+                url: "<?php echo $this->webroot; ?>shop/checkout/?action=payment",
+                data: $("#form-payment").serialize(),
+                type: "POST",
+                beforeSend: function(xhr) {
+                    showAlert2 ("Working....");
+                }
+            }).done(function(data) {
+
+                var result = $.parseJSON(data);
+                if (result.error == 1) {
+                    showAlert(result.message);
+                } else {
+                    $("#form-payment").submit();
+                }
+
+            }).fail(function() {
+                hideAlert ();
             });
         }
     </script>

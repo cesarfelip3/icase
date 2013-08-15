@@ -77,6 +77,9 @@ $js_themes = array(
 <!-- colorpicker -->
 <link rel="stylesheet" href="<?php echo $this->webroot; ?>js/colorpicker2/css/bootstrap-colorpicker.css">
 <script type="text/javascript" src="<?php echo $this->webroot; ?>js/colorpicker2/js/bootstrap-colorpicker.js"></script>
+<!-- bootstrap date-->
+<link rel="stylesheet" href="<?php echo $this->webroot; ?>js/datepicker/css/datepicker.css">
+<script type="text/javascript" src="<?php echo $this->webroot; ?>js/datepicker/js/bootstrap-datepicker.js"></script>
 
 <script src="<?php echo $this->webroot; ?>js/shoppingcart/icase.shoppingcart.js"></script>
 <script type="text/javascript">
@@ -84,6 +87,8 @@ $js_themes = array(
             function() {
                 $.shoppingcart.inituuid(uuid_init_callback);
                 cart_init();
+                window.prettyPrint && prettyPrint();
+                jQuery(".datepicker").datepicker({format: 'yyyy-mm-dd'});
             }
     )
 

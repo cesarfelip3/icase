@@ -17,56 +17,7 @@ class ShopController extends AppController {
         $this->set('load_shop_cart', true);
     }
 
-    protected function beforeCheckout() {
-        if ($this->request->is('ajax') && $this->request->is('post')) {
-
-            $deliver = $this->request->data('deliver');
-
-            foreach ($deliver as $value) {
-                if (empty($value)) {
-                    $this->_error['error'] = 1;
-                    $this->_error['message'] = "Deliver Info - All fields required";
-                    exit(json_encode($this->_error));
-                }
-            }
-
-            $signin = $this->request->data('signin');
-            $signup = $this->request->data('signup');
-
-            if (empty($signin['name'])) {
-                
-            }
-
-            if (empty($signin['password'])) {
-                $this->_error['error'] = 1;
-                $this->_error['message'] = "";
-                exit(json_encode($this->_error));
-            }
-
-            $passwordHasher = new SimplePasswordHasher();
-            $password = $passwordHasher->hash($data['password']);
-
-            $conditions = array();
-            if (preg_match("/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/i", $data['name']) == true) {
-                $conditions = array("email" => $data['name'], "password" => $password);
-            } else {
-                $conditions = array("name" => $data['name'], "password" => $password);
-            }
-
-            $this->loadModel("User");
-            $user = $this->find('first', array("conditions" => $conditions));
-
-            if (!empty($user['User'])) {
-                $this->Auth->login($user['User']);
-            } else {
-                $this->_error['error'] = 1;
-                $this->_error['message'] = "Your Login Information isn't correct";
-                exit(json_encode($this->_error));
-            }
-
-            exit(json_encode($this->_error));
-        }
-    }
+    //==============================================================
 
     public function checkout() {
         $action = $this->request->query("action");
@@ -82,7 +33,7 @@ class ShopController extends AppController {
 
         $this->set('action', $action);
 
-        $this->beforeCheckout();
+        $this->_checkout();
 
         if ($this->request->is('post')) {
 
@@ -148,6 +99,22 @@ class ShopController extends AppController {
             $orders = array();
             $i = 0;
             if (!empty($data)) {
+
+                require_once 'anet_php_sdk/AuthorizeNet.php'; // Make sure this path is correct.
+                $transaction = new AuthorizeNetAIM('YOUR_API_LOGIN_ID', 'YOUR_TRANSACTION_KEY');
+                $transaction->amount = '9.99';
+                $transaction->card_num = '4007000000027';
+                $transaction->exp_date = '10/16';
+
+                $response = $transaction->authorizeAndCapture();
+
+                if ($response->approved) {
+                    echo "<h1>Success! The test credit card has been charged!</h1>";
+                    echo "Transaction ID: " . $response->transaction_id;
+                } else {
+                    echo $response->error_message;
+                }
+                
                 foreach ($data as $value) {
                     $orders[$i] = array(
                         "guid" => uniqid(),
@@ -189,6 +156,67 @@ class ShopController extends AppController {
             }
             $this->Order->saveMany($orders);
             $this->set("paid", true);
+        }
+    }
+
+    protected function _checkout() {
+        if ($this->request->is('ajax') && $this->request->is('post')) {
+
+            $deliver = $this->request->data('deliver');
+
+            foreach ($deliver as $value) {
+                if (empty($value)) {
+                    $this->_error['error'] = 1;
+                    $this->_error['message'] = "Deliver Info - All fields required";
+                    exit(json_encode($this->_error));
+                }
+            }
+            
+            $order = $this->request->data('order');
+            
+            foreach ($order as $value) {
+                if (empty($value)) {
+                    $this->_error['error'] = 1;
+                    $this->_error['message'] = "Credit card - all fields required";
+                    exit(json_encode($this->_error));
+                }
+            }
+
+            $signin = $this->request->data('signin');
+            $signup = $this->request->data('signup');
+
+            if (empty($signin['name'])) {
+                
+            }
+
+            if (empty($signin['password'])) {
+                $this->_error['error'] = 1;
+                $this->_error['message'] = "";
+                exit(json_encode($this->_error));
+            }
+
+            $passwordHasher = new SimplePasswordHasher();
+            $password = $passwordHasher->hash($data['password']);
+
+            $conditions = array();
+            if (preg_match("/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/i", $data['name']) == true) {
+                $conditions = array("email" => $data['name'], "password" => $password);
+            } else {
+                $conditions = array("name" => $data['name'], "password" => $password);
+            }
+
+            $this->loadModel("User");
+            $user = $this->find('first', array("conditions" => $conditions));
+
+            if (!empty($user['User'])) {
+                $this->Auth->login($user['User']);
+            } else {
+                $this->_error['error'] = 1;
+                $this->_error['message'] = "Your Login Information isn't correct";
+                exit(json_encode($this->_error));
+            }
+
+            exit(json_encode($this->_error));
         }
     }
 
@@ -475,7 +503,7 @@ class ShopController extends AppController {
                 $data[$key] = $value;
             }
 
-            $this->set ('data', $data);
+            $this->set('data', $data);
             $this->render("gettemplates.ajax");
             return;
             //echo json_encode($data);
