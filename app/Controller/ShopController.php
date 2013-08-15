@@ -159,7 +159,7 @@ class ShopController extends AppController {
                 $user_guest = false;
 
                 $this->loadModel('User');
-                
+
                 if (empty($this->_identity)) {
 
                     $user_guest = true;
@@ -198,6 +198,11 @@ class ShopController extends AppController {
                 $deliver['user_guid'] = $user_guid;
                 $this->UserDeliverInfo->save($deliver);
 
+                //
+                $media = array();
+                $m2o = array ();
+                $j = 0;
+
                 foreach ($data as $value) {
                     $orders[$i] = array(
                         "guid" => uniqid(),
@@ -218,33 +223,37 @@ class ShopController extends AppController {
                     );
 
                     if ($value['Product']['type'] == 'template' && !$user_guest) {
-                        $this->loadModel('Media');
-                        $this->Media->create();
 
-                        $media = array(
+                        $media[$j] = array(
                             "guid" => uniqid(),
                             "filename" => $value['Product']['file'],
                             "type" => "user.design",
                             "created" => time(),
                             "modified" => time()
                         );
-
-                        $this->Media->save($media);
-
-                        $this->loadModel('MediaToObject');
-                        $m2o = array(
+                        
+                        $m2o[$j] = array(
                             'media_guid' => $media_guid,
                             "object_guid" => $user_guid,
                             "type" => "user.design"
                         );
-                        $this->MediaToObject->save($m2o);
+                        
+                        $j++;
                     }
 
                     $i++;
                 }
+                
                 $this->loadModel('Order');
-
                 $this->Order->saveMany($orders);
+                
+                $this->loadModel('Media');
+                $this->Media->create();
+                $this->Media->saveMany($media);
+                
+                $this->loadModel('MediaToObject');
+                $this->MediaToObject->save($m2o);
+                
                 $this->Product->commitTransaction();
 
                 if (isset($_SERVER['HTTP_COOKIE'])) {
