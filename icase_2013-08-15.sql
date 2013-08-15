@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.29)
 # Database: icase
-# Generation Time: 2013-08-15 12:47:07 +0000
+# Generation Time: 2013-08-15 14:53:02 +0000
 # ************************************************************
 
 
@@ -160,6 +160,7 @@ CREATE TABLE `medias` (
   `filename` varchar(256) DEFAULT NULL,
   `extension` varchar(16) DEFAULT NULL,
   `url` varchar(1024) DEFAULT NULL,
+  `type` varchar(128) DEFAULT NULL,
   `created` int(11) DEFAULT NULL,
   `modified` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -313,10 +314,13 @@ CREATE TABLE `users` (
   `name` varchar(32) DEFAULT NULL,
   `email` varchar(128) DEFAULT NULL,
   `password` varchar(128) DEFAULT NULL,
+  `type` varchar(32) NOT NULL DEFAULT 'guest',
   `email_verfied` int(11) NOT NULL DEFAULT '0',
   `verfied_code` varchar(128) DEFAULT NULL,
   `verfied_expire` int(11) DEFAULT NULL,
-  `type` varchar(32) NOT NULL DEFAULT 'guest',
+  `subscribe` int(11) NOT NULL DEFAULT '0',
+  `subscribe_content` text,
+  `subscribe_schedule` varchar(32) NOT NULL DEFAULT 'daily',
   `firstname` varchar(32) DEFAULT NULL,
   `lastname` varchar(32) DEFAULT NULL,
   `address` varchar(1024) DEFAULT NULL,
@@ -325,9 +329,6 @@ CREATE TABLE `users` (
   `state` varchar(32) DEFAULT NULL,
   `city` varchar(32) DEFAULT NULL,
   `orders` int(11) NOT NULL DEFAULT '0',
-  `subscribe` int(11) NOT NULL DEFAULT '0',
-  `subscribe_content` text,
-  `subscribe_schedule` varchar(32) NOT NULL DEFAULT 'daily',
   `active` int(11) NOT NULL DEFAULT '1',
   `created` int(11) DEFAULT NULL,
   `modified` int(11) DEFAULT NULL,
