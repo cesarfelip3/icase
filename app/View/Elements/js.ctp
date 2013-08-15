@@ -88,7 +88,6 @@ $js_themes = array(
                 $.shoppingcart.inituuid(uuid_init_callback);
                 cart_init();
                 window.prettyPrint && prettyPrint();
-                jQuery(".datepicker").datepicker({format: 'yyyy-mm-dd'});
             }
     )
 

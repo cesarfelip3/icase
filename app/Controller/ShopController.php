@@ -38,9 +38,7 @@ class ShopController extends AppController {
         if ($this->request->is('post')) {
 
             $deliver = $this->request->data('deliver');
-
-
-            //$signup = $this->request->data('signin');
+            $bill = $this->request->data('bill');
 
             $orders = $_COOKIE['orders'];
             $data = array();
@@ -99,20 +97,19 @@ class ShopController extends AppController {
             $orders = array();
             $i = 0;
             if (!empty($data)) {
-
-                require_once 'anet_php_sdk/AuthorizeNet.php'; // Make sure this path is correct.
-                $transaction = new AuthorizeNetAIM('YOUR_API_LOGIN_ID', 'YOUR_TRANSACTION_KEY');
-                $transaction->amount = '9.99';
-                $transaction->card_num = '4007000000027';
+                
+                require_once APP . DS . 'Vendor' . DS . 'AuthorizeNet/AuthorizeNet.php'; // Make sure this path is correct.
+                $transaction = new AuthorizeNetAIM('9c22BSeN', '6333jT7Cc3JmwpUN');
+                $transaction->amount = round($value['Product']['price'] * $value['Product']['quantity'], 2, PHP_ROUND_HALF_DOWN) + "";
+                $transaction->card_num = $bill['cc_number'];
                 $transaction->exp_date = '10/16';
 
                 $response = $transaction->authorizeAndCapture();
 
                 if ($response->approved) {
-                    echo "<h1>Success! The test credit card has been charged!</h1>";
-                    echo "Transaction ID: " . $response->transaction_id;
                 } else {
-                    echo $response->error_message;
+                    $this->Session->setFlash($response->error_message);
+                    return;
                 }
                 
                 foreach ($data as $value) {
@@ -125,7 +122,9 @@ class ShopController extends AppController {
                         "modified" => time(),
                         "amount" => round($value['Product']['price'] * $value['Product']['quantity'], 2, PHP_ROUND_HALF_DOWN),
                         "quantity" => $data[$i]['Product']['quantity'],
-                        "file" => $value['Product']['file'] == "" ? $value['Product']['image'] : $value['Product']['file'],
+                        "file" => $value['Product']['file'] == "" ? $value['Product']['image'] : "",
+                        "transactionid" => $response->transaction_id,
+                        "payment" => "AuthorizeNet",
                     );
                     $i++;
                 }
@@ -172,7 +171,7 @@ class ShopController extends AppController {
                 }
             }
             
-            $order = $this->request->data('order');
+            $order = $this->request->data('bill');
             
             foreach ($order as $value) {
                 if (empty($value)) {
@@ -182,6 +181,8 @@ class ShopController extends AppController {
                 }
             }
 
+            exit(json_encode($this->_error));
+            
             $signin = $this->request->data('signin');
             $signup = $this->request->data('signup');
 

@@ -17,7 +17,7 @@
         <div class="row-fluid">
             <div class="span6">
                 <div class="qbox" id="box-bill-details">
-                    <h1 style="height:30px;border-bottom:2px solid white;">Bill Details<!--<a href="javascript:" class="close" type="button" data-action="close" data-dismiss="modal" aria-hidden="true" style="text-decoration:none;"><i class="icon-remove icon-1x"></i></a>--></h1>
+                    <h1 style="height:30px;border-bottom:2px solid white;">Shippment<!--<a href="javascript:" class="close" type="button" data-action="close" data-dismiss="modal" aria-hidden="true" style="text-decoration:none;"><i class="icon-remove icon-1x"></i></a>--></h1>
                     <p>
                         <span class="label label-warning">All fields are required</span>
                     </p>
@@ -67,15 +67,15 @@
             </div>
             <div class="span6">
                 <div class="qbox">
-                    <h1 style="height:30px;border-bottom:2px solid white;">Credit Card</h1>
+                    <h1 style="height:30px;border-bottom:2px solid white;">Bill In Credit Card</h1>
                     <div id="payment-stripe">
                         <p>
                             <label>Number</label>
-                            <input type="text" class="input-large" name="order[cc_number]" />
+                            <input type="text" class="input-large" name="bill[cc_number]" />
                         </p>
                         <p>
                             <label>Expired</label>
-                            <input type="text" class="input-large datepicker" readonly="readonly" name="order[cc_expired]"/>
+                            <input type="text" class="input-large datepicker" readonly="readonly" name="bill[cc_expired]"/>
                         </p>
                     </div>
                 </div>
@@ -89,6 +89,9 @@
                         <p>
                             <label>Password</label>
                             <input type="text" class="input-large" name="signin[password]"/>
+                        </p>
+                        <p>
+                            <a class="btn btn-primary">Login</a>
                         </p>
                         <p>
                             <span>Don't have account yet?</span><a href='javascript:' id='btn-signup'> Sign up Now</a>
@@ -125,6 +128,8 @@
                             function() {
                                 $("#box-signup").toggle(200);
                             });
+                            
+                    jQuery(".datepicker").datepicker({format: 'mm/yy'});
                 }
         )
 
