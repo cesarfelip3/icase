@@ -12,13 +12,13 @@
                         <a href="javascript:" data-action="new" title="remove"><i class="icon-remove-sign icon-2x"></i> clear canvas</a>
                         <a href="javascript:" data-action="preview" title="remove"><i class="icon-eye-open icon-2x"></i> preview</a>
                     </div>
-                    <div class="tools pull-right" style="margin-right:10px;">
+                    <div class="tools pull-right">
                         <a class="btn btn-warning btn-large " id="btn-order" onclick="order();">
                             <i class="icon-mobile-phone icon-1x"></i> 
                             <span>Order Now</span>
                         </a>
                     </div>
-                    <div class="pull-right" id="box-template-list">
+                    <div class="pull-right" id="box-template-list" style="margin-right:10px;">
                           
                     </div>
                     <input type="hidden" id="current-item" />
