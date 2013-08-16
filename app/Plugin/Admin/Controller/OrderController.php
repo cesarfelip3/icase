@@ -174,7 +174,18 @@ class OrderController extends AdminAppController {
         
         $guid = $this->request->query ('id');
         
+        $data = $this->find ('first', array ("conditions" => array ("guid" => $id)));
         
+        if (!empty ($data)) {
+            
+            $from = "";
+            $to = $data['email'];
+            $subject = "";
+            $content = null;
+            $template = "admin_order_notification";
+            
+            
+        }
     }
     
     protected function email($from, $to, $subject, $content, $template, $vars = array()) {
