@@ -127,7 +127,7 @@
             <fieldset>
                 <div class="input-prepend">
                     <span class="add-on" style="width:80px;">Email</span>
-                    <input class="input-medium" id="prependedInput" type="text" value="<?php echo $data['Order']['email']; ?>" placeholder="User email">
+                    <input class="input-medium" id="prependedInput" type="text" value="<?php echo $data['Order']['notification_email']; ?>" placeholder="User email">
                 </div>
                 <div class="input-prepend">
                     <span class="add-on" style="width:80px;">Subject</span>
