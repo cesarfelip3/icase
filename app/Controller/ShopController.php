@@ -97,7 +97,7 @@ class ShopController extends AppController {
             $i = 0;
             foreach ($guids as $k => $value) {
 
-                $k = explode("-", $key);
+                $key = explode("-", $k);
                 if (is_array($key)) {
                     $guid = $key[0];
                 }
