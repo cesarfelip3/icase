@@ -219,6 +219,7 @@ class ShopController extends AppController {
                         "product_guid" => $value['Product']['guid'],
                         "deliver_guid" => $deliver_guid,
                         "bill_guid" => $bill_guid,
+                        "notification_email" => $deliver['email'],
                         "title" => $value['Product']['name'],
                         "type" => $value['Product']['type'],
                         "amount" => round($value['Product']['price'] * $value['Product']['quantity'], 2, PHP_ROUND_HALF_DOWN),

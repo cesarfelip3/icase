@@ -169,6 +169,24 @@ class OrderController extends AdminAppController {
     public function delete() {
         
     }
+    
+    public function notify () {
+        
+        $guid = $this->request->query ('id');
+        
+        
+    }
+    
+    protected function email($from, $to, $subject, $content, $template, $vars = array()) {
+        $Email = new CakeEmail();
+        $Email->template ($template);
+        $Email->viewVars($vars);
+        $Email->emailFormat('html');
+        $Email->from($from);
+        $Email->to($to);
+        $Email->subject($subject);
+        $Email->send();
+    }
 
 }
 
