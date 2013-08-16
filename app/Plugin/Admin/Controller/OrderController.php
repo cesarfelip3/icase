@@ -75,7 +75,7 @@ class OrderController extends AdminAppController {
             'limit' => $limit,
             'page' => $page + 1,
             'conditions' => $conditions,
-            'fields' => array("Order.*", "COUNT(*) AS count")
+            'fields' => array("Order.*")
                 )
         );
 
