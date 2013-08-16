@@ -281,7 +281,8 @@
 
             var hasorder = $("input[name=hasorder]").val();
             if (hasorder == "1") {
-                $("#box-bill-details").html($("#box-bill-details").html() + '<p><a class="btn btn-peach" onclick="javascript:cart_check()">Pay Now</a></p>');
+                $("#btn-paynow").parent().remove();
+                $("#box-bill-details").html($("#box-bill-details").html() + '<p><a class="btn btn-peach" onclick="javascript:cart_check()" id="btn-paynow">Pay Now</a></p>');
             }
 
             cart_config();
