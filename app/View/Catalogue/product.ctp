@@ -41,59 +41,6 @@
             <!-- start row-rluid demo -->
             <div class="row-fluid demo">
 
-
-                <div class="clearfix"></div>
-
-                <div class="row-fluid">
-                    <div class="span12">
-                        <!-- start tabs -->
-                        <ul id="myTab" class="nav nav-tabs">
-                            <li class="active">
-                                <a href="#first" data-toggle="tab">MORE FROM SAME ARTIST</a>
-                            </li>
-                            <li>
-                                <a href="#second" data-toggle="tab">YOU MAY ALSO LIKE THIS</a>
-                            </li>
-
-                        </ul>
-                        <!-- end tabs -->
-                        <!-- start tabs content -->
-                        <div id="myTabContent" class="tab-content">
-                            <div class="tab-pane fade in active" id="first">
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                    Nulla congue accumsan est, id scelerisque lorem commodo quis.
-                                    Donec cursus rutrum urna, et rutrum leo egestas in.
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                    Nulla congue accumsan est, id scelerisque lorem commodo quis.
-
-                                </p>
-                            </div>
-                            <div class="tab-pane fade" id="second">
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                    Nulla congue accumsan est, id scelerisque lorem commodo quis.
-                                    Donec cursus rutrum urna, et rutrum leo egestas in.
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                    Nulla congue accumsan est, id scelerisque lorem commodo quis.
-
-                                </p>
-                            </div>
-                            <div class="tab-pane fade" id="dropdown1">
-                                <p>
-                                    You have selected option 1
-                                </p>
-                            </div>
-                            <div class="tab-pane fade" id="dropdown2">
-                                <p>
-                                    You have selected option 2
-                                </p>
-                            </div>
-                        </div>
-                        <!-- end tabs content -->
-                    </div>
-                    <!-- end .span6 -->
-                </div>
                 <!-- end .row-fluid -->	
             </div>
             <!-- end .row-fluid demo -->
