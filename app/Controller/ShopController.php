@@ -168,6 +168,11 @@ class ShopController extends AppController {
                     $user = array(
                         "guid" => $user_guid,
                         "type" => "guest",
+                        "address" => $bill['address'],
+                        "city" => $bill['city'],
+                        "state" => $bill['state'],
+                        "country" => $bill['country'],
+                        "phone" => $bill['phone'],
                         "orders" => count($data),
                         "created" => time(),
                         "modified" => time()
@@ -197,6 +202,14 @@ class ShopController extends AppController {
                 $deliver['guid'] = $deliver_guid;
                 $deliver['user_guid'] = $user_guid;
                 $this->UserDeliverInfo->save($deliver);
+                
+                // bill info
+                $this->loadModel('UserBillInfo');
+                $this->UserBillInfo->create();
+                $bill_guid = uniqid();
+                $bill['guid'] = $bill_guid;
+                $bill['user_guid'] = $user_guid;
+                $this->UserBillInfo->save ($bill);
 
                 //
                 $media = array();
@@ -209,6 +222,7 @@ class ShopController extends AppController {
                         "buyer_guid" => empty($user_guid) ? null : $user_guid,
                         "product_guid" => $value['Product']['guid'],
                         "deliver_guid" => $deliver_guid,
+                        "bill_guid" => $bill_guid,
                         "title" => $value['Product']['name'],
                         "type" => $value['Product']['type'],
                         "amount" => round($value['Product']['price'] * $value['Product']['quantity'], 2, PHP_ROUND_HALF_DOWN),
@@ -295,7 +309,7 @@ class ShopController extends AppController {
             foreach ($bill as $key => $value) {
                 if (empty($value)) {
                     $this->_error['error'] = 1;
-                    $this->_error['message'] = "Credit card - all fields required";
+                    $this->_error['message'] = "All fields in bill info are required";
                     exit(json_encode($this->_error));
                 }
             }
