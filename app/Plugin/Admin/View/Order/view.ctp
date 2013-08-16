@@ -41,11 +41,15 @@
                     <div class="page-header">
                         <h2>Billing Address</h2>
                     </div>
-                    <p><?php echo $bill['name']; ?></p>
-                    <p><?php echo $bill['address']; ?></p>
-                    <p><?php echo $bill['city'] . "," . $bill['state']; ?></p>
-                    <p><?php echo $bill['country']; ?></p>
-                    <p><?php echo $deliver['zipcode']; ?></p>
+                    <address>
+                        <strong><?php echo $bill['name']; ?></strong><br>
+                        <p><?php echo $bill['address']; ?></p>
+                        <abbr title="Zip Code">Zip code:</abbr> <p><?php echo $deliver['zipcode']; ?></p>
+                        <abbr title="Phone">P:</abbr> <p><?php echo $bill['phone']; ?></p>
+                        <abbr title="City">City:</abbr> <p><?php echo $bill['city']; ?></p>
+                        <abbr title="State">State:</abbr> <p><?php echo $bill['state']; ?></p>
+                        <abbr title="Country">Country:</abbr> <p><?php echo $bill['country']; ?></p>
+                    </address>
                 </div>
             </div>
             <div class="span4">
@@ -53,58 +57,63 @@
                     <div class="page-header">
                         <h2>Delivery Address</h2>
                     </div>
-                    <p><?php echo $deliver['firstname'] . " " . $deliver['lastname']; ?></p>
-                    <p><?php echo $deliver['address']; ?></p>
-                    <p><?php echo $deliver['city']; ?></p>
-                    <p><?php echo $deliver['country']; ?></p>
-                    <p><?php echo $deliver['zipcode']; ?></p>
+                    <address>
+                        <strong><?php echo $deliver['firstname'] . " " . $deliver['lastname']; ?></strong><br>
+                        <p><?php echo $deliver['address']; ?></p>
+                        <abbr title="Zip Code">Zip code:</abbr> <p><?php echo $deliver['zipcode']; ?></p>
+                        <abbr title="Phone">P:</abbr> <p><?php echo $deliver['phone']; ?></p>
+                        <abbr title="Email">Email:</abbr> <p><?php echo $deliver['email']; ?></p>
+                        <abbr title="City">City:</abbr> <p><?php echo $deliver['city']; ?></p>
+                        <abbr title="State">State:</abbr> <p><?php echo $deliver['state']; ?></p>
+                        <abbr title="Country">Country:</abbr> <p><?php echo $deliver['country']; ?></p>
+                    </address>
                 </div>
             </div>
         </div>
         <form id="form-edit">
-        <div class="row">
-            <div class="span12">
-                <div class="slate">
-                    <div class="page-header">
-                        <h2>Ordered Items</h2>
+            <div class="row">
+                <div class="span12">
+                    <div class="slate">
+                        <div class="page-header">
+                            <h2>Ordered Items</h2>
+                        </div>
+                        <table class="orders-table table">
+                            <thead>
+                                <tr>
+                                    <th>Orders</th>
+                                    <th class="value">Value</th>
+                                    <th class="value">Status</th>
+                                    <th class="actions">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><a href=""><?php echo $data['Order']['title']; ?></a> <span class="label label-info"><?php echo $data['Order']['status']; ?></span></td>
+                                    <td class="value">
+                                        $<?php echo $data['Order']['amount']; ?>
+                                    </td>
+                                    <td>
+                                        <select class="input-medium" name="order[<?php echo $data['Order']['id']; ?>][status]" onchange="save('edit/?id=<?php echo $data['Order']['id']; ?>')">
+                                            <?php foreach ($status as $key => $state) : ?>
+                                                <option value="<?php echo $key; ?>" <?php if ($data['Order']['status'] == $key) echo 'selected="selected"'; ?>><?php echo $state; ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </td>
+                                    <td class="actions">
+                                        <a href="javascript:" onclick="$('#myModal').modal();" class="btn btn-primary btn-small">Send Email</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <table class="orders-table table">
-                        <thead>
-                            <tr>
-                                <th>Orders</th>
-                                <th class="value">Value</th>
-                                <th class="value">Status</th>
-                                <th class="actions">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><a href=""><?php echo $data['Order']['title']; ?></a> <span class="label label-info"><?php echo $data['Order']['status']; ?></span></td>
-                                <td class="value">
-                                    $<?php echo $data['Order']['amount']; ?>
-                                </td>
-                                <td>
-                                    <select class="input-medium" name="order[<?php echo $data['Order']['id']; ?>][status]" onchange="save('edit/?id=<?php echo $data['Order']['id']; ?>')">
-                                        <?php foreach ($status as $key => $state) : ?>
-                                            <option value="<?php echo $key; ?>" <?php if ($data['Order']['status'] == $key) echo 'selected="selected"'; ?>><?php echo $state; ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                </td>
-                                <td class="actions">
-                                    <a href="javascript:" onclick="$('#myModal').modal();" class="btn btn-primary btn-small">Send Email</a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
                 </div>
             </div>
-        </div>
         </form>
         <div class="row">
             <div class="span12">
                 <?php if (!empty($data['Order']['attachement'])) : ?>
                     <a class="thumbnail"><img src="<?php echo $this->webroot . "uploads/preview/" . $data['Order']['attachement']; ?>" /></a>
-                    <?php endif; ?>
+                <?php endif; ?>
             </div>
         </div>
     </div>
@@ -137,45 +146,45 @@
     </div>
 </div>
 <script>
-function save(action, button) {
-        
-        var data = "";
-        if (action.substring (0, 4) == "edit") {
-            data = $("#form-edit").serialize();
-        } 
-        
-        if (action == "add") {
-            data = $("#form-new").serialize();
-        }
-        
-        if (action == "delete") {
-            data = $("#form-edit").serialize();
-        }
-        
-        jQuery.ajax({
-            url: "<?php echo $base; ?>order/" + action,
-            data: data,
-            type: "POST",
-            beforeSend: function(xhr) {
-                $(button).button('loading');
-            }
-        }).done(function(data) {
-            $(button).button('reset');
+                                            function save(action, button) {
 
-            var result = $.parseJSON(data);
-            console.log(result);
-            if (result.error == 1) {
-                //console.log(result.element);
-                //$(result.element).next(".help-inline").html(result.message);
-                //$(result.element).parent().parent().addClass('error');
-                showAlert(result.message);
-            } else {
-                //$(result.element).parent().parent().removeClass('error');
-                //$(result.element).next(".help-inline").html("");
-                window.location.href="";
-            }
+                                                var data = "";
+                                                if (action.substring(0, 4) == "edit") {
+                                                    data = $("#form-edit").serialize();
+                                                }
 
-        }).fail(function() {
-        });
-    }    
+                                                if (action == "add") {
+                                                    data = $("#form-new").serialize();
+                                                }
+
+                                                if (action == "delete") {
+                                                    data = $("#form-edit").serialize();
+                                                }
+
+                                                jQuery.ajax({
+                                                    url: "<?php echo $base; ?>order/" + action,
+                                                    data: data,
+                                                    type: "POST",
+                                                    beforeSend: function(xhr) {
+                                                        $(button).button('loading');
+                                                    }
+                                                }).done(function(data) {
+                                                    $(button).button('reset');
+
+                                                    var result = $.parseJSON(data);
+                                                    console.log(result);
+                                                    if (result.error == 1) {
+                                                        //console.log(result.element);
+                                                        //$(result.element).next(".help-inline").html(result.message);
+                                                        //$(result.element).parent().parent().addClass('error');
+                                                        showAlert(result.message);
+                                                    } else {
+                                                        //$(result.element).parent().parent().removeClass('error');
+                                                        //$(result.element).next(".help-inline").html("");
+                                                        window.location.href = "";
+                                                    }
+
+                                                }).fail(function() {
+                                                });
+                                            }
 </script>
