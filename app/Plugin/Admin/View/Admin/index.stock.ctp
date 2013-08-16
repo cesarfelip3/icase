@@ -12,7 +12,7 @@
         </tr>
         <?php else: ?>
         <tr>
-            <td colspan="2"><em class="text-warning">No products yet</em></td>
+            <td colspan="2"><em class="text-warning">No products out of stock</em></td>
         </tr>
         <?php endif; ?>
     </tbody>
