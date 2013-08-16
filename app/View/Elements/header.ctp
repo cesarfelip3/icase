@@ -1,6 +1,7 @@
 <?php
 $controller = $this->request->controller;
 $action = $this->request->action;
+print_r ($this->params);
 ?>
 <header>
     <!--logo area start-->
