@@ -32,7 +32,7 @@
                     </div>
                     <p><strong>Order #:</strong> <?php echo $data['Order']['guid']; ?></p>
                     <p><strong>Order Date:</strong> <?php echo date("F j, Y, g:i a", $data['Order']['created']); ?></p>
-                    <p><strong>Payment Method:</strong> PayPal</p>
+                    <p><strong>Payment Method:</strong> <?php echo $data['Order']['payment_gateway']; ?></p>
                     <p><strong>Transaction ID:</strong> <?php echo $data['Order']['transaction_id']; ?></p>
                 </div>
             </div>
@@ -103,7 +103,7 @@
         <div class="row">
             <div class="span12">
                 <?php if (!empty($data['Order']['file'])) : ?>
-                    <a class="thumbnail"><img src="<?php echo $this->webroot . "uploads/preview/" . $data['Order']['file']; ?>" /></a>
+                    <a class="thumbnail"><img src="<?php echo $this->webroot . "uploads/preview/" . $data['Order']['attachement']; ?>" /></a>
                     <?php endif; ?>
             </div>
         </div>

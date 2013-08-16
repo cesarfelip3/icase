@@ -223,7 +223,7 @@ class ShopController extends AppController {
                         "type" => $value['Product']['type'],
                         "amount" => round($value['Product']['price'] * $value['Product']['quantity'], 2, PHP_ROUND_HALF_DOWN),
                         "quantity" => $data[$i]['Product']['quantity'],
-                        "file" => $value['Product']['file'],
+                        "attachement" => $value['Product']['file'],
                         //"transaction_id" => $response->transaction_id,
                         //"transaction_type" => $response->transaction_type,
                         "payment_gateway" => "AuthorizeNet",
