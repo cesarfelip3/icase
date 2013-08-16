@@ -44,11 +44,11 @@
                     <address>
                         <strong><?php echo $bill['name']; ?></strong><br>
                         <p><?php echo $bill['address']; ?></p>
-                        <abbr title="Zip Code">Zip code:</abbr> <?php echo $deliver['zipcode']; ?>
-                        <abbr title="Phone">P:</abbr> <?php echo $bill['phone']; ?>
-                        <abbr title="City">City:</abbr> <?php echo $bill['city']; ?>
-                        <abbr title="State">State:</abbr> <?php echo $bill['state']; ?>
-                        <abbr title="Country">Country:</abbr> <?php echo $bill['country']; ?>
+                        <abbr title="Zip Code">Zip code:</abbr> <?php echo $deliver['zipcode']; ?><br/>
+                        <abbr title="Phone">P:</abbr> <?php echo $bill['phone']; ?><br/>
+                        <abbr title="City">City:</abbr> <?php echo $bill['city']; ?><br/>
+                        <abbr title="State">State:</abbr> <?php echo $bill['state']; ?><br/>
+                        <abbr title="Country">Country:</abbr> <?php echo $bill['country']; ?><br/>
                     </address>
                 </div>
             </div>
@@ -58,14 +58,13 @@
                         <h2>Delivery Address</h2>
                     </div>
                     <address>
-                        <strong><?php echo $deliver['firstname'] . " " . $deliver['lastname']; ?></strong><br>
+                        <strong><?php echo $deliver['firstname'] . " " . $deliver['lastname']; ?>(<?php echo $deliver['email']; ?>)</strong><br>
                         <p><?php echo $deliver['address']; ?></p>
-                        <abbr title="Zip Code">Zip code:</abbr> <?php echo $deliver['zipcode']; ?>
-                        <abbr title="Phone">P:</abbr> <?php echo $deliver['phone']; ?>
-                        <abbr title="Email">Email:</abbr> <?php echo $deliver['email']; ?>
-                        <abbr title="City">City:</abbr> <?php echo $deliver['city']; ?>
-                        <abbr title="State">State:</abbr> <?php echo $deliver['state']; ?>
-                        <abbr title="Country">Country:</abbr> <?php echo $deliver['country']; ?>
+                        <abbr title="Zip Code">Zip code:</abbr> <?php echo $deliver['zipcode']; ?><br/>
+                        <abbr title="Phone">P:</abbr> <?php echo $deliver['phone']; ?><br/>
+                        <abbr title="City">City:</abbr> <?php echo $deliver['city']; ?><br/>
+                        <abbr title="State">State:</abbr> <?php echo $deliver['state']; ?><br/>
+                        <abbr title="Country">Country:</abbr> <?php echo $deliver['country']; ?><br/>
                     </address>
                 </div>
             </div>
