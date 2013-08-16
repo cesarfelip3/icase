@@ -78,14 +78,14 @@ $admin_product = $base . "product";
                                 </div>
                             </div>
                             <?php endif; ?>
-                            <div class="control-group warning">
+                            <div class="control-group warning hide">
                                 <label class="control-label" for="inputWarning">Price</label>
                                 <div class="controls">
                                     <input type="text" class="input-mini" name="product[price]" placeholder="xxxx.xx" value="<?php echo $data['price']; ?>">
                                     <span class="help-inline"></span>
                                 </div>
                             </div>
-                            <div class="control-group warning">
+                            <div class="control-group warning hide">
                                 <label class="control-label" for="inputWarning">Tax</label>
                                 <div class="controls">
                                     <input type="text" class="input-mini" name="product[tax]" value="<?php echo $data['tax']; ?>">
