@@ -4,7 +4,7 @@
         <?php if (!empty ($data)) : ?>
         <?php foreach ($data as $value) : ?>
         <tr>
-            <td><a href="<?php echo $base; ?>order/view/?id=<?php echo $value['Order']['guid']; ?>">#<?php echo $value['Order']['guid']; ?> - Joe Bloggs</a> <span class="label label-info"><?php echo $value['Order']['status']; ?></span></td>
+            <td><a href="<?php echo $base; ?>order/view/?id=<?php echo $value['Order']['guid']; ?>">#<?php echo $value['Order']['guid']; ?> - <?php echo $value['Order']['name']; ?></a> <span class="label label-info"><?php echo $value['Order']['status']; ?></span></td>
             <td><?php echo $value['Order']['amount']; ?></td>
         </tr>
         <?php endforeach; ?>
