@@ -282,13 +282,13 @@ class ShopController extends AppController {
                 $subject = "Your Order is Confirmed";
                 $vars = array ('deliver' => $deliver, 'bill' => $bill);
                 $content = null;
-                $this->email($from, $to, $subject, $content, "checkout.order.buyer", $vars);
+                $this->email($from, $to, $subject, $content, "checkout_order_buyer", $vars);
                 
                 $from = array ("admin@admin.com" => "www.admin.com");
                 $to = "cesarfelip3@gmail.com";
                 $subject = "There new orders come";
                 $var = array ('data' => $orders);
-                $this->email($from, $to, $subject, $content, "checkout.order.seller");
+                $this->email($from, $to, $subject, $content, "checkout_order_seller");
                 
                 $this->render("checkout.success");
                 return;

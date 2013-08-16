@@ -313,10 +313,10 @@
                 }
             } 
             catch(e) {
+                hideAlert();
                 $(".checkout").hide(0)
                 $("#box-order-confirm").show(0);
                 $("#box-order-confirm").html(data);
-                hideAlert();
             }
 
         }).fail(function() {
@@ -345,11 +345,11 @@
                 }
             } 
             catch(e) {
+                hideAlert();
                 $(".checkout").hide(0)
                 $("#box-order-confirm").hide(0);
                 $("#box-order-success").show(0);
                 $("#box-order-success").html(data);
-                hideAlert();
             }
 
         }).fail(function() {
