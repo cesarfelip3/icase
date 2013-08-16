@@ -128,10 +128,14 @@ class OrderController extends AdminAppController {
 
         $this->loadModel('UserDeliverInfo');
         $deliver = $this->UserDeliverInfo->find('first', array('conditions' => array('guid' => $order['Order']['deliver_guid'])));
+        
+        $this->loadModel('UserBillInfo');
+        $bill = $this->UserBillInfo->find ('first', array('conditions' => array('guid' => $order['Order']['bill_guid'])));
 
         $this->set('data', $order);
         $this->set('status', $this->status);
         $this->set('deliver', $deliver['UserDeliverInfo']);
+        $this->set('bill', $bill['UserBillInfo']);
     }
 
     public function edit() {

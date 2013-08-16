@@ -30,12 +30,10 @@
                     <div class="page-header">
                         <h2>Order Details</h2>
                     </div>
-                    <p><strong>Order #:</strong> <?php echo $data['Order']['id']; ?></p>
+                    <p><strong>Order #:</strong> <?php echo $data['Order']['guid']; ?></p>
                     <p><strong>Order Date:</strong> <?php echo date("F j, Y, g:i a", $data['Order']['created']); ?></p>
                     <p><strong>Payment Method:</strong> PayPal</p>
-                    <p><strong>Transaction ID:</strong> <?php echo $data['Order']['guid']; ?></p>
-                    <p><strong>Voucher Code:</strong> 12345 (10% Discount)</p>
-                    <p><strong>Member:</strong> <a href="">Joe Bloggs</a></p>
+                    <p><strong>Transaction ID:</strong> <?php echo $data['Order']['transaction_id']; ?></p>
                 </div>
             </div>
             <div class="span4">
@@ -43,10 +41,10 @@
                     <div class="page-header">
                         <h2>Billing Address</h2>
                     </div>
-                    <p><?php echo $deliver['firstname'] . " " . $deliver['lastname']; ?></p>
-                    <p><?php echo $deliver['address']; ?></p>
-                    <p><?php echo $deliver['city']; ?></p>
-                    <p><?php echo $deliver['country']; ?></p>
+                    <p><?php echo $bill['name']; ?></p>
+                    <p><?php echo $bill['address']; ?></p>
+                    <p><?php echo $bill['city'] . "," . $bill['state']; ?></p>
+                    <p><?php echo $bill['country']; ?></p>
                     <p><?php echo $deliver['zipcode']; ?></p>
                 </div>
             </div>
@@ -105,7 +103,7 @@
         <div class="row">
             <div class="span12">
                 <?php if (!empty($data['Order']['file'])) : ?>
-                    <a class="thumbnail"><img src="<?php echo $this->webroot . "uploads/" . $data['Order']['file']; ?>" /></a>
+                    <a class="thumbnail"><img src="<?php echo $this->webroot . "uploads/preview/" . $data['Order']['file']; ?>" /></a>
                     <?php endif; ?>
             </div>
         </div>

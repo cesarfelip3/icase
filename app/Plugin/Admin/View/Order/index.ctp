@@ -73,7 +73,7 @@
                                     <?php foreach ($data as $value) : ?>
                                         <tr>
                                             <td><input type="checkbox" name="order[selected][]" value="<?php echo $value['Order']['id']; ?>" /></td>
-                                            <td><a href="<?php echo $base; ?>order/view/?id=<?php echo $value['Order']['guid']; ?>" style="font-size:14px;">#<?php echo++$i; ?> - <?php echo $value['Order']['title']; ?></a> <span class="label label-info"><?php echo $value['Order']['status']; ?></span><br /><span class="meta" style="color:black;font-size:14px;"><?php echo date("F j, Y, g:i a", $value['Order']['created']); ?></span></td>
+                                            <td><a href="<?php echo $base; ?>order/view/?id=<?php echo $value['Order']['guid']; ?>" style="font-size:14px;">#<?php echo $value['Order']['guid']; ?> - <?php echo $value['Order']['title']; ?></a> <span class="label label-info"><?php echo $value['Order']['status']; ?></span><br /><span class="meta" style="color:black;font-size:14px;"><?php echo date("F j, Y, g:i a", $value['Order']['created']); ?></span></td>
                                             <td class="value">
                                                 <?php echo $value['Order']['quantity']; ?>
                                             </td>
