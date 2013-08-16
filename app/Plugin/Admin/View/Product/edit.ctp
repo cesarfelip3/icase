@@ -55,6 +55,7 @@ $admin_product = $base . "product";
                                     <textarea class="ckeditor" cols="80" id="editor1" name="product[description]" rows="10"><?php echo $data['description']; ?></textarea>
                                 </div>
                             </div>
+                            <?php if ($data['type'] == 'template') : ?>
                             <div class="control-group">
                                 <label class="control-label" for="optionsCheckbox2">Template</label>
                                 <div class="controls">
@@ -65,6 +66,18 @@ $admin_product = $base . "product";
                                     </label>
                                 </div>
                             </div>
+                            <?php else: ?>
+                            <div class="control-group">
+                                <label class="control-label" for="optionsCheckbox2">Featured</label>
+                                <div class="controls">
+                                    <label class="checkbox">
+                                        <input type="checkbox" id="optionsCheckbox2" name="product[is_featured]" value="1" <?php if ($data['is_featured'] == 1) echo 'checked'; ?>>
+                                        Yes
+                                        <span class="help-inline"><b><em style="color:green">Template means this product is only for cusomized case</em></b></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <?php endif; ?>
                             <div class="control-group warning">
                                 <label class="control-label" for="inputWarning">Price</label>
                                 <div class="controls">

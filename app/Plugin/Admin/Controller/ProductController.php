@@ -173,6 +173,7 @@ class ProductController extends AdminAppController {
 
             $data['type'] = isset($data['type']) ? $data['type'] : 'product';
             $data['status'] = isset($data['status']) ? $data['status'] : 'draft';
+            $data['is_featured'] = isset($data['is_featured']) ? 1 : 0;
 
             if (!empty($data['featured'])) {
                 $data['featured'] = trim($data['featured'], "-");
@@ -344,6 +345,7 @@ class ProductController extends AdminAppController {
 
             $data['type'] = isset($data['type']) ? $data['type'] : 'product';
             $data['status'] = isset($data['status']) ? $data['status'] : 'draft';
+            $data['is_featured'] = isset($data['is_featured']) ? 1 : 0;
 
             if (!empty($data['featured'])) {
                 $data['featured'] = trim($data['featured'], "-");

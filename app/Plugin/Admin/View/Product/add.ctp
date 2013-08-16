@@ -55,13 +55,13 @@ $admin_product = $base . "product";
                                     <textarea class="ckeditor" cols="80" id="editor1" name="product[description]" rows="10"></textarea>
                                 </div>
                             </div>
-                            <div class="control-group hide">
-                                <label class="control-label" for="optionsCheckbox2">Template</label>
+                            <div class="control-group">
+                                <label class="control-label" for="optionsCheckbox2">Featured</label>
                                 <div class="controls">
                                     <label class="checkbox">
-                                        <input type="checkbox" id="optionsCheckbox2" name="product[type]" value="template">
+                                        <input type="checkbox" id="optionsCheckbox2" name="product[is_featured]" value="1">
                                         Yes
-                                        <span class="help-inline"><b><em style="color:green">Template means this product is only for cusomized case</em></b></span>
+                                        <span class="help-inline"></span>
                                     </label>
                                 </div>
                             </div>
