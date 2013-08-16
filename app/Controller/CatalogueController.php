@@ -80,8 +80,15 @@ class CatalogueController extends AppController {
 
         if ($this->request->is('ajax')) {
             $this->layout = false;
+            
+            /*
             $categories = $this->Category->find('all', array(
                 "conditions" => array('level' => 0),
+                "order" => array('order ASC')
+            ));*/
+            
+            $categories = $this->Category->find('all', array(
+                "conditions" => array('parent_guid' => $guid),
                 "order" => array('order ASC')
             ));
 
