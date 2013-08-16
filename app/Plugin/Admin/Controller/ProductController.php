@@ -452,7 +452,7 @@ class ProductController extends AdminAppController {
                 ),
                 "type" => "template",
                 "status" => "published",
-                "quantity" => "65535"
+                "quantity" => 65535
             )
         );
         

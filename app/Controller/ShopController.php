@@ -23,20 +23,11 @@ class ShopController extends AppController {
     public function checkout() {
         $action = $this->request->query("action");
 
-        if (empty($action)) {
-            $action = "single";
-        }
-
-        if ($action == "single") {
-            $checkout_single = true;
-            $this->set('checkout_single', $checkout_single);
-        }
-
         $this->set('action', $action);
 
-        $this->_checkout();
+        $this->_checkout($action);
 
-        if ($this->request->is('post')) {
+        if (!$this->request->is('ajax') && $this->request->is('post')) {
 
             $deliver = $this->request->data('deliver');
             $bill = $this->request->data('bill');
@@ -96,7 +87,7 @@ class ShopController extends AppController {
                     $this->Product->endTransaction();
                     return;
                 }
-
+                
                 $i++;
             }
 
@@ -283,8 +274,8 @@ class ShopController extends AppController {
         }
     }
 
-    protected function _checkout() {
-        if ($this->request->is('ajax') && $this->request->is('post')) {
+    protected function _checkout($action) {
+        if ($this->request->is('ajax') && $this->request->is('post') && $action == "payment") {
 
             $deliver = $this->request->data('deliver');
 
@@ -341,37 +332,59 @@ class ShopController extends AppController {
             foreach ($guids as $key => $value) {
                 foreach ($orders as $order) {
                     if ($order == $key) {
-                        $guids[$key]++;
+                        $guids[$key] += 1;
                     }
                 }
             }
-
+            
             $this->loadModel("Product");
             $i = 0;
 
             $this->_error['error'] = 0;
 
+            $data = array ();
+            $total = 0;
+            $quantity = 0;
+            
             foreach ($guids as $k => $value) {
                 $key = explode("-", $k);
                 if (is_array($key)) {
                     $guid = $key[0];
                 }
 
-                $data = $this->Product->findByGuid($guid);
-                if (empty($data)) {
+                $data[$i] = $this->Product->findByGuid($guid);
+                if (empty($data[$i])) {
                     $this->_error['error'] = 1;
+                    $this->_error['message'] = "Product doesn't exist";
                     $this->_error['data'][] = $key;
-                    continue;
+                    exit(json_encode($this->_error));
                 }
 
-                if ($data['Product']['quantity'] != 65535 && $data['Product']['quantity'] < 1) {
+                if ($data[$i]['Product']['quantity'] != 65535 && $data[$i]['Product']['quantity'] < $value) {
                     $this->_error['error'] = 1;
+                    $this->_error['message'] = "Product Quantity is not enough";
                     $this->_error['data'][] = $key;
-                    continue;
+                    exit(json_encode($this->_error));
                 }
+                
+                //print_r ($value);
+                
+                $data[$i]['Product']['quantity'] = $value;
+                $data[$i]['Product']['total'] = round($data[$i]['Product']['price'] * $data[$i]['Product']['quantity'], 2, PHP_ROUND_HALF_DOWN);
+                
+                $total += $data[$i]['Product']['total'];
+                
+                $i++;
+                
             }
-
-            exit(json_encode($this->_error));
+            
+            $this->layout = false;
+            $this->set ("data", $data);
+            $this->set ("bill", $bill);
+            $this->set ("total", $total);
+            $this->set ("deliver", $deliver);
+            $this->render ("checkout.confirm");
+            //exit(json_encode($this->_error));
         }
     }
 

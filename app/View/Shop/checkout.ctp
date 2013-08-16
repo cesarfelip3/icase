@@ -11,10 +11,10 @@
 </style>
 <?php if (!isset($paid)) : ?>
     <form id="form-payment" class="info" action="<?php echo $this->webroot; ?>shop/checkout/?action=<?php echo $action; ?>" method="post">
-        <div class="row-fluid" id="box-cart">
+        <div class="row-fluid checkout" id="box-cart">
             <div class="ajax-loading-indicator" style="margin:10px;"><a href="javascript:" style="font-size:14px;"><i class="icon-refresh icon-spin"></i> Loading orders....</a></div>
         </div>
-        <div class="row-fluid">
+        <div class="row-fluid checkout">
             <div class="span6">
                 <div class="qbox" id="box-bill-details">
                     <h1 style="height:30px;border-bottom:2px solid white;">Shippment<span style="font-size:12px;font-weight:normal;text-transform: none;color:red;float:right;">All fields are required</span></h1>
@@ -77,7 +77,11 @@
                         <p>
                             <label>Expired</label>
                             <input type="text" class="input-large datepicker" readonly="readonly" name="bill[cc_expired]" placeholder='Credit Card Expire Date'/>
-                        </p> 
+                        </p>
+                        <p>
+                            <label>Phone</label>
+                            <input type="text" class="input-large" name="bill[phone]" placeholder='Credit Card Number' />
+                        </p
                         <p>
                             <label>Address</label>
                             <textarea name="bill[address]" style="width:400px"></textarea>
@@ -101,7 +105,7 @@
                     </div>
                 </div>
                 <?php if (isset($identity)) : ?>
-                    <div class="qbox hide">
+                    <div class="qbox hide" style='display:none'>
                         <h1 style="height:30px;border-bottom:2px solid white;">Your Account <span class="text-warning">to save your design</span></h1>
                         <div id="payment-stripe">
                             <p>
@@ -118,7 +122,7 @@
                         </div>
                     </div>
                 <?php else: ?>
-                    <div class="qbox hide" id='box-signin'>
+                    <div class="qbox hide" id='box-signin' style='display:none'>
                         <h1 style="height:30px;border-bottom:2px solid white;">Sign In <span class="text-warning">to save your design</span></h1>
                         <div id="payment-stripe">
                             <p>
@@ -163,218 +167,227 @@
                 <?php endif; ?>
             </div>           
         </div>
+        <div class="container" id="box-order-confirm">
+
+
+        </div>
     </form>
 
-    <script type="text/javascript">
-                                jQuery(document).ready(
-                                        function() {
-                                            checkout_cart();
-                                            $("#btn-signup").click(
-                                                    function() {
-                                                        $("#box-signup").show();
-                                                        $("#box-signin").hide();
-                                                    });
+<script type="text/javascript">
+    jQuery(document).ready(
+            function() {
+                checkout_cart();
+                $("#btn-signup").click(
+                        function() {
+                            $("#box-signup").show();
+                            $("#box-signin").hide();
+                        });
 
-                                            $("#btn-signin").click(
-                                                    function() {
-                                                        $("#box-signup").hide();
-                                                        $("#box-signin").show();
-                                                    });
+                $("#btn-signin").click(
+                        function() {
+                            $("#box-signup").hide();
+                            $("#box-signin").show();
+                        });
 
-                                            jQuery(".datepicker").datepicker({format: 'mm/yy'});
-                                        }
-                                )
+                jQuery(".datepicker").datepicker({format: 'mm/yy'});
+            }
+    );
 
-                                function checkout_single() {
-                                    cart_reload('single');
-                                }
+    function checkout_cart() {
+        cart_reload('cart');
+    }
 
-                                function checkout_cart() {
-                                    cart_reload('cart');
-                                }
+    function cart_config() {
 
-                                function cart_config() {
+        jQuery("#box-cart a").off('click');
+        jQuery("#box-cart a").click(
+                function() {
+                    var action = $(this).data('action');
+                    var guid = $(this).data('guid');
+                    var file = $(this).data('file');
+                    var i = 0;
+                    var price = 0;
 
-                                    jQuery("#box-cart a").off('click');
-                                    jQuery("#box-cart a").click(
-                                            function() {
-                                                var action = $(this).data('action');
-                                                var guid = $(this).data('guid');
-                                                var file = $(this).data('file');
-                                                var i = 0;
-                                                var price = 0;
+                    switch (action) {
+                        case 'close':
+                            jQuery("#box-cart").hide(0);
+                            break;
+                        case 'plus' :
+                            i = jQuery(this).next().text();
+                            console.log(i);
+                            i = parseInt(jQuery.trim(i));
+                            i++;
+                            jQuery(this).next().text(i);
+                            if (file == "") {
+                                guid = guid;
+                            } else {
+                                guid = guid + "-" + file;
+                            }
+                            $.shoppingcart.set(guid);
+                            price = $(this).data('price');
+                            price = parseFloat(price) * i;
+                            $(this).parent().prev().text(price.toFixed(2));
+                            break;
+                        case 'minus' :
+                            i = jQuery(this).prev().text();
+                            console.log(i);
+                            i = parseInt(jQuery.trim(i));
+                            i--;
+                            if (i <= 0) {
+                                $.shoppingcart.removeall(guid);
+                                cart_reload();
+                                break;
+                            }
+                            jQuery(this).prev().text(i);
+                            if (file == "") {
+                                guid = guid;
+                            } else {
+                                guid = guid + "-" + file;
+                            }
+                            $.shoppingcart.remove(guid);
+                            price = $(this).data('price');
+                            price = parseFloat(price) * i;
+                            $(this).parent().prev().text(price.toFixed(2));
+                            break;
+                        case 'remove' :
+                            if (file == "") {
+                                guid = guid;
+                            } else {
+                                guid = guid + "-" + file;
+                            }
+                            $.shoppingcart.removeall(guid);
+                            cart_reload();
+                            break;
+                    }
+                }
+        );
+    }
 
-                                                switch (action) {
-                                                    case 'close':
-                                                        jQuery("#box-cart").hide(0);
-                                                        break;
-                                                    case 'plus' :
-                                                        i = jQuery(this).next().text();
-                                                        console.log(i);
-                                                        i = parseInt(jQuery.trim(i));
-                                                        i++;
-                                                        jQuery(this).next().text(i);
-                                                        if (file == "") {
-                                                            guid = guid;
-                                                        } else {
-                                                            guid = guid + "-" + file;
-                                                        }
-                                                        $.shoppingcart.set(guid);
-                                                        price = $(this).data('price');
-                                                        price = parseFloat(price) * i;
-                                                        $(this).parent().prev().text(price.toFixed(2));
-                                                        break;
-                                                    case 'minus' :
-                                                        i = jQuery(this).prev().text();
-                                                        console.log(i);
-                                                        i = parseInt(jQuery.trim(i));
-                                                        i--;
-                                                        if (i <= 0) {
-                                                            $.shoppingcart.removeall(guid);
-                                                            cart_reload();
-                                                            break;
-                                                        }
-                                                        jQuery(this).prev().text(i);
-                                                        if (file == "") {
-                                                            guid = guid;
-                                                        } else {
-                                                            guid = guid + "-" + file;
-                                                        }
-                                                        $.shoppingcart.remove(guid);
-                                                        price = $(this).data('price');
-                                                        price = parseFloat(price) * i;
-                                                        $(this).parent().prev().text(price.toFixed(2));
-                                                        break;
-                                                    case 'remove' :
-                                                        if (file == "") {
-                                                            guid = guid;
-                                                        } else {
-                                                            guid = guid + "-" + file;
-                                                        }
-                                                        $.shoppingcart.removeall(guid);
-                                                        cart_reload();
-                                                        break;
-                                                }
-                                            }
-                                    );
-                                }
+    function cart_reload(single) {
 
-                                function cart_reload(single) {
+        jQuery.ajax({
+            url: "<?php echo $this->webroot; ?>shop/cart/?action=" + single,
+            data: {"user": $.shoppingcart.getuuid()},
+            type: "POST",
+            beforeSend: function(xhr) {
+            }
+        }).done(function(data) {
+            $("#box-cart").html(data);
+            $("#box-cart").show();
 
-                                    jQuery.ajax({
-                                        url: "<?php echo $this->webroot; ?>shop/cart/?action=" + single,
-                                        data: {"user": $.shoppingcart.getuuid()},
-                                        type: "POST",
-                                        beforeSend: function(xhr) {
-                                        }
-                                    }).done(function(data) {
-                                        $("#box-cart").html(data);
-                                        $("#box-cart").show();
+            var hasorder = $("input[name=hasorder]").val();
+            if (hasorder == "1") {
+                $("#box-bill-details").html($("#box-bill-details").html() + '<p><a class="btn btn-peach" onclick="javascript:cart_pay()">Pay Now</a></p>');
+            }
 
-                                        var hasorder = $("input[name=hasorder]").val();
-                                        if (hasorder == "1") {
-                                            $("#box-bill-details").html($("#box-bill-details").html() + '<p><a class="btn btn-peach" onclick="javascript:cart_pay()">Pay Now</a></p>');
-                                        }
+            cart_config();
 
-                                        cart_config();
+        }).fail(function() {
 
-                                    }).fail(function() {
+        });
+    }
 
-                                    });
-                                }
+    function cart_pay()
+    {
+        jQuery.ajax({
+            url: "<?php echo $this->webroot; ?>shop/checkout/?action=payment",
+            data: $("#form-payment").serialize(),
+            type: "POST",
+            beforeSend: function(xhr) {
+                showAlert2("Working....");
+            }
+        }).done(function(data) {
+            
+                
+            try {
+                var result = $.parseJSON(data);
+                if (result.error == 1) {
+                    showAlert(result.message);
+                } else {
 
-                                function cart_pay()
-                                {
-                                    jQuery.ajax({
-                                        url: "<?php echo $this->webroot; ?>shop/checkout/?action=payment",
-                                        data: $("#form-payment").serialize(),
-                                        type: "POST",
-                                        beforeSend: function(xhr) {
-                                            showAlert2("Working....");
-                                        }
-                                    }).done(function(data) {
+                }
+            } 
+            catch(e) {
+                $(".checkout").hide(0)
+                $("#box-order-confirm").show(0);
+                $("#box-order-confirm").html(data);
+                hideAlert();
+            }
 
-                                        var result = $.parseJSON(data);
-                                        if (result.error == 1) {
-                                            showAlert(result.message);
-                                        } else {
-                                            $("#form-payment").submit();
-                                        }
+        }).fail(function() {
+            hideAlert();
+        });
+    }
 
-                                    }).fail(function() {
-                                        hideAlert();
-                                    });
-                                }
+    //===================================
+    function login()
+    {
+        jQuery.ajax({
+            url: "<?php echo $this->webroot; ?>signin/",
+            data: $("#form-payment").serialize(),
+            type: "POST",
+            beforeSend: function(xhr) {
+                showAlert2("Working....");
+            }
+        }).done(function(data) {
 
-                                //===================================
-                                function login()
-                                {
-                                    jQuery.ajax({
-                                        url: "<?php echo $this->webroot; ?>signin/",
-                                        data: $("#form-payment").serialize(),
-                                        type: "POST",
-                                        beforeSend: function(xhr) {
-                                            showAlert2("Working....");
-                                        }
-                                    }).done(function(data) {
+            var result = $.parseJSON(data);
+            if (result.error == 1) {
+                showAlert(result.message);
+            } else {
+                window.location.href = "";
+            }
 
-                                        var result = $.parseJSON(data);
-                                        if (result.error == 1) {
-                                            showAlert(result.message);
-                                        } else {
-                                            window.location.href = "";
-                                        }
+        }).fail(function() {
+            hideAlert();
+        });
+    }
 
-                                    }).fail(function() {
-                                        hideAlert();
-                                    });
-                                }
+    function signup()
+    {
+        jQuery.ajax({
+            url: "<?php echo $this->webroot; ?>signup/",
+            data: $("#form-payment").serialize(),
+            type: "POST",
+            beforeSend: function(xhr) {
+                showAlert2("Working....");
+            }
+        }).done(function(data) {
 
-                                function signup()
-                                {
-                                    jQuery.ajax({
-                                        url: "<?php echo $this->webroot; ?>signup/",
-                                        data: $("#form-payment").serialize(),
-                                        type: "POST",
-                                        beforeSend: function(xhr) {
-                                            showAlert2("Working....");
-                                        }
-                                    }).done(function(data) {
+            var result = $.parseJSON(data);
+            if (result.error == 1) {
+                showAlert(result.message);
+            } else {
+                window.location.href = "";
+            }
 
-                                        var result = $.parseJSON(data);
-                                        if (result.error == 1) {
-                                            showAlert(result.message);
-                                        } else {
-                                            window.location.href = "";
-                                        }
+        }).fail(function() {
+            hideAlert();
+        });
+    }
 
-                                    }).fail(function() {
-                                        hideAlert();
-                                    });
-                                }
+    function logout()
+    {
+        jQuery.ajax({
+            url: "<?php echo $this->webroot; ?>logout/",
+            type: "GET",
+            beforeSend: function(xhr) {
+                showAlert2("Working....");
+            }
+        }).done(function(data) {
 
-                                function logout()
-                                {
-                                    jQuery.ajax({
-                                        url: "<?php echo $this->webroot; ?>logout/",
-                                        type: "GET",
-                                        beforeSend: function(xhr) {
-                                            showAlert2("Working....");
-                                        }
-                                    }).done(function(data) {
+            var result = $.parseJSON(data);
+            if (result.error == 1) {
+                showAlert(result.message);
+            } else {
+                window.location.href = "";
+            }
 
-                                        var result = $.parseJSON(data);
-                                        if (result.error == 1) {
-                                            showAlert(result.message);
-                                        } else {
-                                            window.location.href = "";
-                                        }
-
-                                    }).fail(function() {
-                                        hideAlert();
-                                    });
-                                }
-    </script>
+        }).fail(function() {
+            hideAlert();
+        });
+    }
+</script>
 <?php else: ?>
     <div class="row-fluid">
         <div class="span12">
