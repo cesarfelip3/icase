@@ -68,8 +68,8 @@ $product_delete = $base . "product" . DS . "delete";
                                 <th>Picture</th>
                                 <th>Price</th>
                                 <th>Quantity</th>
-                                <th>Tax</th>
-                                <th>Discount</th>
+<!--                                <th>Tax</th>
+                                <th>Discount</th>-->
                                 <th>Created</th>
                                 <th class="actions">Actions</th>
                             </tr>
@@ -86,8 +86,8 @@ $product_delete = $base . "product" . DS . "delete";
                                 <td><?php echo $value['Product']['type']; ?></td>
                                 <td><a class="thumbnail"><img src='<?php echo $this->webroot . "uploads/" . str_replace(".", "_150.", $value['Product']['image']); ?>' style="width:32px" /></a></td>
                                 <td>$<?php echo $value['Product']['price']; ?></td>
-                                <td><?php echo $value['Product']['quantity']; ?></td>
-                                <td>$<?php echo $value['Product']['tax']; ?></td>
+<!--                                <td><?php echo $value['Product']['quantity']; ?></td>
+                                <td>$<?php echo $value['Product']['tax']; ?></td>-->
                                 <td><?php echo $value['Product']['discount']; ?>%</td>
                                 <td><?php echo date ("Y-m-d H:i:s", $value['Product']['created']); ?></td>
                                 <td class="actions">
