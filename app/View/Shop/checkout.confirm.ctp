@@ -50,7 +50,7 @@
             <?php endif; ?>
         </tbody>
     </table>
-    <p><a href="javascript:" onclick="cart_edit()" class="btn btn-primary" style="margin-right:10px">Edit</a><a href="javascript:" onclick="cart_edit()" class="btn btn-primary">Continue</a></p>
+    <p><a href="javascript:" onclick="cart_edit()" class="btn btn-primary" style="margin-right:10px">Edit</a><a href="javascript:" onclick="cart_pay()" class="btn btn-primary">Continue</a></p>
     
 </div>
 <script>
