@@ -101,7 +101,7 @@
                     </div>
                 </div>
                 <?php if (isset($identity)) : ?>
-                    <div class="qbox">
+                    <div class="qbox hide">
                         <h1 style="height:30px;border-bottom:2px solid white;">Your Account <span class="text-warning">to save your design</span></h1>
                         <div id="payment-stripe">
                             <p>
@@ -118,7 +118,7 @@
                         </div>
                     </div>
                 <?php else: ?>
-                    <div class="qbox" id='box-signin'>
+                    <div class="qbox hide" id='box-signin'>
                         <h1 style="height:30px;border-bottom:2px solid white;">Sign In <span class="text-warning">to save your design</span></h1>
                         <div id="payment-stripe">
                             <p>
@@ -137,7 +137,7 @@
                             </p>
                         </div>
                     </div>
-                    <div class="qbox" id='box-signup' style='display:none'>
+                    <div class="qbox hide" id='box-signup' style='display:none'>
                         <h1 style="height:30px;border-bottom:2px solid white;">Sign Up</h1>
                         <div id="payment-stripe">
                             <p>
