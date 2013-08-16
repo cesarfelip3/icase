@@ -73,7 +73,7 @@ $admin_product = $base . "product";
                                     <label class="checkbox">
                                         <input type="checkbox" id="optionsCheckbox2" name="product[is_featured]" value="1" <?php if ($data['is_featured'] == 1) echo 'checked'; ?>>
                                         Yes
-                                        <span class="help-inline"><b><em style="color:green">Template means this product is only for cusomized case</em></b></span>
+                                        <span class="help-inline"></span>
                                     </label>
                                 </div>
                             </div>
