@@ -290,6 +290,7 @@ class ShopController extends AppController {
                 $var = array ('data' => $orders);
                 $this->email($from, $to, $subject, $content, "checkout_order_seller");
                 
+                $this->layout = false;
                 $this->render("checkout.success");
                 return;
             }
