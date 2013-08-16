@@ -102,7 +102,7 @@
         </form>
         <div class="row">
             <div class="span12">
-                <?php if (!empty($data['Order']['file'])) : ?>
+                <?php if (!empty($data['Order']['attachement'])) : ?>
                     <a class="thumbnail"><img src="<?php echo $this->webroot . "uploads/preview/" . $data['Order']['attachement']; ?>" /></a>
                     <?php endif; ?>
             </div>
