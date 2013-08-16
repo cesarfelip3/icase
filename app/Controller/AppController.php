@@ -51,7 +51,7 @@ class AppController extends Controller {
         }
         
         $this->loadModel("Category");
-        $top_header = $this->Category->find('all', array ("conditions" => array ("level" => 0), "order" => array("created" => "DESC")));
+        $top_header = $this->Category->find('all', array ("conditions" => array ("level" => 0), "order" => array("order" => "ASC", "id" => "ASC")));
         
         if (!empty ($top_header)){
             $this->set ("top_header", $top_header);
