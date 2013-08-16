@@ -28,7 +28,7 @@ class ShopController extends AppController {
 
         $this->_checkout($action);
 
-        if ($this->request->is('post') && $action == "pay") {
+        if ($this->request->is('ajax') && $this->request->is('post') && $action == "pay") {
 
             $deliver = $this->request->data('deliver');
             $bill = $this->request->data('bill');
@@ -71,7 +71,7 @@ class ShopController extends AppController {
             $this->Product->beginTransaction();
 
             foreach ($guids as $k => $value) {
-                $k = explode("-", $key);
+                $key = explode("-", $k);
                 if (is_array($key)) {
                     $guid = $key[0];
                 }
@@ -286,7 +286,7 @@ class ShopController extends AppController {
                 
                 $from = array ("admin@admin.com" => "www.admin.com");
                 $to = "cesarfelip3@gmail.com";
-                $subject = "Your Order is Confirmed";
+                $subject = "There new orders come";
                 $var = array ('data' => $orders);
                 $this->email($from, $to, $subject, $content, "checkout.order.seller");
                 
