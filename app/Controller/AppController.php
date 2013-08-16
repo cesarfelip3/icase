@@ -49,6 +49,13 @@ class AppController extends Controller {
             
             $this->set ('identity', $user);
         }
+        
+        $this->loadModel("Category");
+        $top_header = $this->Category->find('all', array ("conditions" => array ("level" => 0), "order" => array("created" => "DESC")));
+        
+        if (!empty ($top_header)){
+            $this->set ("top_header", $top_header);
+        }
     }
     
     public function afterFilter () {

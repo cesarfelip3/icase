@@ -42,7 +42,7 @@ $action = $this->request->action;
                     menu
                 </a><!--end btn-navbar-->
                 <div class="nav-collapse">
-                    <ul class="nav">
+                    <ul class="nav" id="top-navbar">
                         <li class="<?php
                         if ($controller == "index" && $action == "index")
                             echo "active";
@@ -55,6 +55,13 @@ $action = $this->request->action;
                         ?>">
                             <a href="<?php echo $this->Html->Url("/design", false); ?>">Design</a>
                         </li>
+                        <?php if (!empty ($top_header)) : ?>
+                        <?php foreach ($top_header as $value) : ?>
+                        <li>
+                            <a href="<?php echo $this->Html->Url("/category/{$value['slug']}", false); ?>"><?php echo $value['Category']['name']; ?></a>
+                        </li>
+                        <?php endforeach; ?>
+                        <?php endif; ?>
                     </ul>
                 </div><!-- end nav-collapse -->
             </div><!-- end container-->
