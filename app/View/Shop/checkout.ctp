@@ -171,6 +171,10 @@
 
 
         </div>
+        <div class="container" id="box-order-success">
+
+
+        </div>
     </form>
 
 <script type="text/javascript">
@@ -277,7 +281,7 @@
 
             var hasorder = $("input[name=hasorder]").val();
             if (hasorder == "1") {
-                $("#box-bill-details").html($("#box-bill-details").html() + '<p><a class="btn btn-peach" onclick="javascript:cart_pay()">Pay Now</a></p>');
+                $("#box-bill-details").html($("#box-bill-details").html() + '<p><a class="btn btn-peach" onclick="javascript:cart_check()">Pay Now</a></p>');
             }
 
             cart_config();
@@ -287,10 +291,10 @@
         });
     }
 
-    function cart_pay()
+    function cart_check()
     {
         jQuery.ajax({
-            url: "<?php echo $this->webroot; ?>shop/checkout/?action=payment",
+            url: "<?php echo $this->webroot; ?>shop/checkout/?action=check",
             data: $("#form-payment").serialize(),
             type: "POST",
             beforeSend: function(xhr) {
@@ -317,6 +321,39 @@
         }).fail(function() {
             hideAlert();
         });
+    }
+    
+    function cart_pay ()
+    {
+        jQuery.ajax({
+            url: "<?php echo $this->webroot; ?>shop/checkout/?action=pay",
+            data: $("#form-payment").serialize(),
+            type: "POST",
+            beforeSend: function(xhr) {
+                showAlert2("Working....");
+            }
+        }).done(function(data) {
+            
+                
+            try {
+                var result = $.parseJSON(data);
+                if (result.error == 1) {
+                    showAlert(result.message);
+                } else {
+
+                }
+            } 
+            catch(e) {
+                $(".checkout").hide(0)
+                $("#box-order-confirm").hide(0);
+                $("#box-order-success").show(0);
+                $("#box-order-success").html(data);
+                hideAlert();
+            }
+
+        }).fail(function() {
+            hideAlert();
+        });        
     }
 
     //===================================

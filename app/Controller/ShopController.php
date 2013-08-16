@@ -1,6 +1,7 @@
 <?php
 
 App::uses('AppController', 'Controller');
+App::uses('CakeEmail', 'Network/Email');
 
 class ShopController extends AppController {
 
@@ -27,7 +28,7 @@ class ShopController extends AppController {
 
         $this->_checkout($action);
 
-        if (!$this->request->is('ajax') && $this->request->is('post')) {
+        if ($this->request->is('post') && $action == "pay") {
 
             $deliver = $this->request->data('deliver');
             $bill = $this->request->data('bill');
@@ -36,15 +37,17 @@ class ShopController extends AppController {
             $data = array();
 
             if (empty($orders)) {
-                $this->set('data', $data);
-                return;
+                $this->_error['error'] = 1;
+                $this->_error['message'] = "Your orders are empty, don't clear cookie before order";
+                exit(json_encode($this->_error));
             }
 
             $orders = explode(",", $orders);
 
             if (empty($orders)) {
-                $this->set('data', $data);
-                return;
+                $this->_error['error'] = 1;
+                $this->_error['message'] = "Your orders are empty, don't clear cookie before order";
+                exit(json_encode($this->_error));
             }
 
             $guids = array_flip($orders);
@@ -75,19 +78,19 @@ class ShopController extends AppController {
 
                 $data[$i] = $this->Product->findByGuid($guid);
                 if (empty($data[$i])) {
-                    $data = null;
-                    $this->Session->setFlash("Product - " . $data[$i]['Product']['name'] . " - is off shelf, please remove it and try again.");
-                    $this->Product->endTransaction();
-                    return;
+                    $this->Product->rollTransaction();
+                    $this->_error['error'] = 1;
+                    $this->_error['message'] = "Product - " . $data[$i]['Product']['name'] . " - is off shelf, please remove it and try again.";
+                    exit(json_encode($this->_error));
                 }
 
                 if ($data[$i]['Product']['quantity'] < $value) {
-                    $data = null;
-                    $this->Session->setFlash("Product - " . $data[$i]['Product']['name'] . " - is out of stock, please remove it and try again.");
-                    $this->Product->endTransaction();
-                    return;
+                    $this->Product->rollTransaction();
+                    $this->_error['error'] = 1;
+                    $this->_error['message'] = "Product - " . $data[$i]['Product']['name'] . " - is out of stock, please remove it and try again.";
+                    exit(json_encode($this->_error));
                 }
-                
+
                 $i++;
             }
 
@@ -126,24 +129,26 @@ class ShopController extends AppController {
                     $amount += round($value['Product']['price'] * $value['Product']['quantity'], 2, PHP_ROUND_HALF_DOWN) + "";
                 }
 
-                require_once APP . DS . 'Vendor' . DS . 'AuthorizeNet/AuthorizeNet.php'; // Make sure this path is correct.
-                $transaction = new AuthorizeNetAIM('9c22BSeN', '6333jT7Cc3JmwpUN');
-                $transaction->amount = $amount;
-                $transaction->card_num = $bill['cc_number'];
-                $transaction->exp_date = $bill['cc_expired'];
+                /*
+                  require_once APP . DS . 'Vendor' . DS . 'AuthorizeNet/AuthorizeNet.php'; // Make sure this path is correct.
+                  $transaction = new AuthorizeNetAIM('9c22BSeN', '6333jT7Cc3JmwpUN');
+                  $transaction->amount = $amount;
+                  $transaction->card_num = $bill['cc_number'];
+                  $transaction->exp_date = $bill['cc_expired'];
 
-                $response = $transaction->authorizeAndCapture();
+                  $response = $transaction->authorizeAndCapture();
 
-                if ($response->approved) {
-                    
-                } else {
-                    $this->Product->rollTransaction();
-                    print_r($response->error_message);
-                    exit;
+                  if ($response->approved) {
 
-                    $this->Session->setFlash($response->error_message);
-                    return;
-                }
+                  } else {
+                  $this->Product->rollTransaction();
+                  print_r($response->error_message);
+                  exit;
+
+                  $this->Session->setFlash($response->error_message);
+                  return;
+                  }
+                 */
 
                 // create user - guest
                 $user_guid = null;
@@ -193,14 +198,14 @@ class ShopController extends AppController {
                 $deliver['guid'] = $deliver_guid;
                 $deliver['user_guid'] = $user_guid;
                 $this->UserDeliverInfo->save($deliver);
-                
+
                 // bill info
                 $this->loadModel('UserBillInfo');
                 $this->UserBillInfo->create();
                 $bill_guid = uniqid();
                 $bill['guid'] = $bill_guid;
                 $bill['user_guid'] = $user_guid;
-                $this->UserBillInfo->save ($bill);
+                $this->UserBillInfo->save($bill);
 
                 //
                 $media = array();
@@ -252,12 +257,14 @@ class ShopController extends AppController {
                 $this->loadModel('Order');
                 $this->Order->saveMany($orders);
 
-                $this->loadModel('Media');
-                $this->Media->create();
-                $this->Media->saveMany($media);
+                if (!$user_guest) {
+                    $this->loadModel('Media');
+                    $this->Media->create();
+                    $this->Media->saveMany($media);
 
-                $this->loadModel('MediaToObject');
-                $this->MediaToObject->save($m2o);
+                    $this->loadModel('MediaToObject');
+                    $this->MediaToObject->save($m2o);
+                }
 
                 $this->Product->commitTransaction();
 
@@ -269,13 +276,28 @@ class ShopController extends AppController {
                         setcookie($name, '', time() - 1000, '/');
                     }
                 }
-                $this->set("paid", true);
+
+                $from = array ("admin@admin.com" => "www.admin.com");
+                $to = $deliver['email'];
+                $subject = "Your Order is Confirmed";
+                $vars = array ('deliver' => $deliver, 'bill' => $bill);
+                
+                $this->email($from, $to, $subject, $content, "checkout.order.buyer", $vars);
+                
+                $from = array ("admin@admin.com" => "www.admin.com");
+                $to = "cesarfelip3@gmail.com";
+                $subject = "Your Order is Confirmed";
+                $var = array ('data' => $orders);
+                $this->email($from, $to, $subject, $content, "checkout.order.seller");
+                
+                $this->render("checkout.success");
+                return;
             }
         }
     }
 
     protected function _checkout($action) {
-        if ($this->request->is('ajax') && $this->request->is('post') && $action == "payment") {
+        if ($this->request->is('ajax') && $this->request->is('post') && $action == "check") {
 
             $deliver = $this->request->data('deliver');
 
@@ -336,16 +358,16 @@ class ShopController extends AppController {
                     }
                 }
             }
-            
+
             $this->loadModel("Product");
             $i = 0;
 
             $this->_error['error'] = 0;
 
-            $data = array ();
+            $data = array();
             $total = 0;
             $quantity = 0;
-            
+
             foreach ($guids as $k => $value) {
                 $key = explode("-", $k);
                 if (is_array($key)) {
@@ -366,26 +388,37 @@ class ShopController extends AppController {
                     $this->_error['data'][] = $key;
                     exit(json_encode($this->_error));
                 }
-                
+
                 //print_r ($value);
-                
+
                 $data[$i]['Product']['quantity'] = $value;
                 $data[$i]['Product']['total'] = round($data[$i]['Product']['price'] * $data[$i]['Product']['quantity'], 2, PHP_ROUND_HALF_DOWN);
-                
+
                 $total += $data[$i]['Product']['total'];
-                
+
                 $i++;
-                
             }
-            
+
             $this->layout = false;
-            $this->set ("data", $data);
-            $this->set ("bill", $bill);
-            $this->set ("total", $total);
-            $this->set ("deliver", $deliver);
-            $this->render ("checkout.confirm");
+            $this->set("data", $data);
+            $this->set("bill", $bill);
+            $this->set("total", $total);
+            $this->set("deliver", $deliver);
+            $this->render("checkout.confirm");
+            return;
             //exit(json_encode($this->_error));
         }
+    }
+
+    protected function email($from, $to, $subject, $content, $template, $vars = array()) {
+        $Email = new CakeEmail();
+        $Email->template ($template);
+        $Email->viewVars($vars);
+        $Email->emailFormat('html');
+        $Email->from($from);
+        $Email->to($to);
+        $Email->subject($subject);
+        $Email->send();
     }
 
     /*
