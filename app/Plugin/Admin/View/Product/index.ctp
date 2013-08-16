@@ -75,6 +75,7 @@ $product_delete = $base . "product" . DS . "delete";
                             </tr>
                         </thead>
                         <tbody>
+                            
                             <?php 
                             $i = $page * $limit;
                             if (!empty ($data)) : 
