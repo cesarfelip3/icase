@@ -93,6 +93,7 @@ $admin_product = $base . "product";
                                     <span class="help-inline">65535 means unlimited</span>
                                 </div>
                             </div>
+                            <div class="hide">
                             <div class="page-header">
                                 <h3>Special Offer</h3>
                             </div>
@@ -126,6 +127,10 @@ $admin_product = $base . "product";
                                     <span class="help-inline"></span>
                                 </div>
                             </div>
+                            <div class='well'>
+                                <p>If "Special" is checked, the sale will start in duration, and use special price, when it's end, it will go back to the original price. All special offers will be on the top of the home product page, to promote sales.</p>
+                            </div>
+                            </div>
                             <div class="control-group warning">
                                 <label class="control-label" for="inputWarning">Save Option</label>
                                 <div class="controls">
@@ -136,9 +141,6 @@ $admin_product = $base . "product";
                                     <a href='javascript:' class='btn btn-primary' data-loading-text="Saving..." onclick="save('update');" id="btn-save">Update</a>
                                     <span class="help-inline">Create new one or update current one</span>
                                 </div>
-                            </div>
-                            <div class='well'>
-                                <p>If "Special" is checked, the sale will start in duration, and use special price, when it's end, it will go back to the original price. All special offers will be on the top of the home product page, to promote sales.</p>
                             </div>
                         </fieldset>
                     </div>
