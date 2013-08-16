@@ -1,7 +1,12 @@
 <?php
 $controller = $this->request->controller;
 $action = $this->request->action;
-print_r ($this->params);
+//print_r ($this->params);
+
+$slug = null;
+if (isset ($this->params['slug'])) {
+    $slug = $this->params['slug'];
+}
 ?>
 <header>
     <!--logo area start-->
@@ -58,7 +63,7 @@ print_r ($this->params);
                         </li>
                         <?php if (!empty ($top_header)) : ?>
                         <?php foreach ($top_header as $value) : ?>
-                        <li>
+                        <li class="<?php if ($slug == $value['Category']['slug']) echo 'active'; ?>">
                             <a href="<?php echo $this->Html->Url("/category/{$value['Category']['slug']}", false); ?>"><?php echo $value['Category']['name']; ?></a>
                         </li>
                         <?php endforeach; ?>
