@@ -164,6 +164,7 @@ $admin_product = $base . "product";
 
                         </div>
                     </div>
+                    <?php if ($data['type'] == 'template') : ?>
                     <div class="slate">
                         <div class="page-header">
                             <h2>Template Image</h2>
@@ -187,6 +188,7 @@ $admin_product = $base . "product";
                             </div>
                         </div>
                     </div>
+                    <?php else: ?>
                     <div class="slate">
                         <div class="page-header" id='box-featured-images'>
                             <h2>Featured Images</h2>
@@ -213,6 +215,7 @@ $admin_product = $base . "product";
                             </div>
                         </div>
                     </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </form>
