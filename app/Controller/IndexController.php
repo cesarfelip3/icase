@@ -27,7 +27,7 @@ class IndexController extends AppController {
 
         $this->loadModel('Product');
         $data = $this->Product->find('all', array(
-            "conditions" => array("type" => "product"),
+            "conditions" => array("type" => "product", "is_featured" => 1),
             "order" => array("modified" => "DESC"),
             "limit" => 4,
             "page" => 0
