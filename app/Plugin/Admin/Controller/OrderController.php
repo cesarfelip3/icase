@@ -80,7 +80,7 @@ class OrderController extends AdminAppController {
         );
 
         if (!empty($data)) {
-            $total = $data[0][0]['count'];
+            $total = $this->Product->find("count", array("conditions" => $conditions));
         } else {
             $total = 0;
         }
