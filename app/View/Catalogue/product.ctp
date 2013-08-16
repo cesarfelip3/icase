@@ -4,7 +4,7 @@
             <!-- 2 columns -->
             <div class="row-fluid">
                 <div class="span6">
-                    <p><img src="<?php echo $this->webroot . "uploads/" . $data['featured'][0]; ?>"></p>
+                    <p><img src="<?php echo $this->webroot . "uploads/product/" . $data['featured'][0]; ?>"></p>
                 </div>
                 <div class="span6">
                     <h3><strong>BILLY RAYS</strong> <span style="text-transform: uppercase;"><?php echo $data['name']; ?></span></h3>
@@ -32,7 +32,7 @@
 
                     <div class="thumwrapper">
                         <?php foreach ($data['featured'] as $image) : ?>
-                        <img src="<?php echo $this->webroot . "uploads/" . $image; ?>">
+                        <img src="<?php echo $this->webroot . "uploads/product/" . $image; ?>">
                         <?php endforeach; ?>
                     </div>
                 </div>			
