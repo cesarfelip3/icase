@@ -58,7 +58,7 @@ $action = $this->request->action;
                         <?php if (!empty ($top_header)) : ?>
                         <?php foreach ($top_header as $value) : ?>
                         <li>
-                            <a href="<?php echo $this->Html->Url("/category/{$value['slug']}", false); ?>"><?php echo $value['Category']['name']; ?></a>
+                            <a href="<?php echo $this->Html->Url("/category/{$value['Category']['slug']}", false); ?>"><?php echo $value['Category']['name']; ?></a>
                         </li>
                         <?php endforeach; ?>
                         <?php endif; ?>
