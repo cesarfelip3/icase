@@ -52,12 +52,12 @@ class AppController extends Controller {
     }
     
     public function layoutInit() {
-        $categories = CacheEngine::read("category_top");
+        $categories = Cache::read("category_top");
         
         if (empty ($categories)) {
             $this->loadModel("Category");
             $categories = $this->Category->find('all', array ("conditions" => array ("level" => 0), "order" => array("order" => "ASC", "id" => "ASC")));
-            CacheEngine::write ("category_top", $categories);
+            Cache::write ("category_top", $categories);
         } 
         
         if (!empty ($categories)){
