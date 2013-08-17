@@ -138,8 +138,8 @@ $admin_product = $base . "product";
                                         <input type="checkbox" class="input-mini" name="product[status]" value="published">Published
                                     </label>
                                     <a href='javascript:' class='btn btn-primary' data-loading-text="Saving..." onclick="save('create');" id="btn-save">Create</a>
-                                    <a href='javascript:' class='btn btn-primary' data-loading-text="Saving..." onclick="save('update');" id="btn-save">Update</a>
-                                    <span class="help-inline">Create new one or update current one</span>
+<!--                                    <a href='javascript:' class='btn btn-primary' data-loading-text="Saving..." onclick="save('update');" id="btn-save">Update</a>-->
+                                    <span class="help-inline"></span>
                                 </div>
                             </div>
                         </fieldset>
@@ -242,6 +242,7 @@ $admin_product = $base . "product";
             } else {
                 if (action == 'create') {
                     $("input[name='product[id]'").val(result.data);
+                    window.location.href="";
                 }
                 $(result.element).parent().parent().removeClass('error');
                 $(result.element).next(".help-inline").html("");

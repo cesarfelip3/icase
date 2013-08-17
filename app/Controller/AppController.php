@@ -46,7 +46,6 @@ class AppController extends Controller {
             );
             
             $this->_identity = $user;
-            
             $this->set ('identity', $user);
         }
     }
