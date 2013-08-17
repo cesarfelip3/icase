@@ -33,7 +33,7 @@ class ShopController extends AppController {
             $deliver = $this->request->data('deliver');
             $bill = $this->request->data('bill');
 
-            $orders = $_COOKIE['orders'];
+            $orders = isset($_COOKIE['orders']) : $_COOKIE['orders'] : "";
             $data = array();
 
             if (empty($orders)) {
@@ -435,7 +435,7 @@ class ShopController extends AppController {
 
             $action = $this->request->query('action');
 
-            $orders = $_COOKIE['orders'];
+            $orders = isset($_COOKIE['orders']) : $_COOKIE['orders'] : "";
 
             if ($action == "single") {
                 $orders = $_COOKIE['current-product-id'];
