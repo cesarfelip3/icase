@@ -503,6 +503,36 @@ class ProductController extends AdminAppController {
         $this->redirect(array("plugin" => "admin", "controller" => "product", "action" => "index"));
         echo "Successfully all templates created";
     }
+    
+    public function repair ()
+    {
+        $this->loadModel('Product');
+        
+        $data = $this->Product->find ('all');
+        
+        foreach ($data as $value) {
+            
+            $value['Product']['featured'] = unserialize($value['Product']['featured']);
+            
+            if (!empty ($value['Product']['featured'])) {
+                $images = $value['Product']['featured'];
+                
+                $value['Product']['featured'] = array ();
+                foreach ($images as $key => $value) {
+                    $value['Product']['featured']['origin'][$key] = $value;
+                    $value['Product']['featured']['150w'][$key] = str_replace(".", "_150.", $value);
+                }
+            }
+            
+            $value['Product']['featured'] = serialize($value['Product']['featured']);
+            
+            $this->Product->id = $value['Product']['id'];
+            $this->Product->set (array ('featured' => $value['Product']['featured'] ));
+            $this->Product->save ();
+        }
+        
+        
+    }
 
 }
 
