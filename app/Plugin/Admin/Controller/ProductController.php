@@ -512,7 +512,7 @@ class ProductController extends AdminAppController {
         
         $image = array();
         
-        print_r ($data);
+        //print_r ($data);
         
         foreach ($data as $value) {
             
@@ -520,19 +520,27 @@ class ProductController extends AdminAppController {
             
             if (!empty ($value['Product']['featured'])) {
                 
-                $image = array ();
-                $image['origin'] = array();
-                $image['150w'] = array();
+                $origin = null;
+                $w150 = null;
+                
+                $origin = array();
+                $w150 = array ();
+                
                 $images = $value['Product']['featured'];
                 
                 foreach ($images as $key => $value) {
-                    $image['origin'][] = $value;
-                    $image['150w'][] = str_replace(".", "_150.", $value);
+                    $origin[] = $value;
+                    $w150[] = str_replace(".", "_150.", $value);
                 }
             }
             
+            
+            $image = array (
+                "origin" => $origin,
+                "150w" => $w150
+            );
+            
             print_r ($image);
-            $image = serialize($image);
             
             //$this->Product->id = $value['Product']['id'];
             //$this->Product->set (array ('featured' => $image ));
