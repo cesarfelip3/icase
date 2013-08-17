@@ -508,10 +508,9 @@ class ProductController extends AdminAppController {
     {
         $this->loadModel('Product');
         
-        $data = $this->Product->find ('all');
-        $image = array ();
-        $image['origin'] = array();
-        $image['150w'] = array();
+        $data = $this->Product->find ('all', array ("conditions" => array ("type" => "product")));
+        
+        $image = array();
         
         print_r ($data);
         
@@ -520,6 +519,8 @@ class ProductController extends AdminAppController {
             $value['Product']['featured'] = unserialize($value['Product']['featured']);
             
             if (!empty ($value['Product']['featured'])) {
+                
+                $image = array ('origin' => array(), '150w' => array());
                 $images = $value['Product']['featured'];
                 
                 foreach ($images as $key => $value) {
