@@ -529,6 +529,7 @@ class ProductController extends AdminAppController {
                 }
             }
             
+            print_r ($image);
             $image = serialize($image);
             
             //$this->Product->id = $value['Product']['id'];
