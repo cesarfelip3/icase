@@ -135,8 +135,8 @@ class ShopController extends AppController {
                 $transaction = new AuthorizeNetAIM('9c22BSeN', '234k5bjzGPc8NN33');
                 $transaction->setSandbox(false);
                 $transaction->amount = $amount;
-                $transaction->card_num = "4007000000027"; //$bill['cc_number'];
-                $transaction->exp_date = "06/16"; //$bill['cc_expired'];
+                $transaction->card_num = $bill['cc_number'];
+                $transaction->exp_date = $bill['cc_expired'];
 
                 $response = $transaction->authorizeAndCapture();
 
@@ -144,15 +144,10 @@ class ShopController extends AppController {
                     
                 } else {
                     $this->Product->rollTransaction();
-                    print_r($response->error_message);
-                    exit;
-
-                    $this->Session->setFlash($response->error_message);
-                    return;
+                    $this->_error['error'] = 1;
+                    $this->_error['message'] = $response->error_message;
+                    exit(json_encode($this->_error));
                 }
-
-                print_r ($response);
-                exit;
                 
                 // create user - guest
                 $user_guid = null;
