@@ -520,8 +520,6 @@ class ProductController extends AdminAppController {
             if (!empty ($value['Product']['featured'])) {
                 $images = $value['Product']['featured'];
                 
-                
-                
                 foreach ($images as $key => $value) {
                     $image['origin'][$key] = $value;
                     $image['150w'][$key] = str_replace(".", "_150.", $value);
@@ -530,9 +528,9 @@ class ProductController extends AdminAppController {
             
             $image = serialize($image);
             
-            $this->Product->id = $value['Product']['id'];
-            $this->Product->set (array ('featured' => $image ));
-            $this->Product->save ();
+            //$this->Product->id = $value['Product']['id'];
+            //$this->Product->set (array ('featured' => $image ));
+            //$this->Product->save ();
         }
         
         
