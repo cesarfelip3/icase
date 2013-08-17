@@ -83,7 +83,7 @@ class ProductController extends AdminAppController {
 
                     if ($value['Product']['type'] == 'product') {
                         $value['Product']['featured'] = unserialize($value['Product']['featured']);
-                        $value['Product']['image'] = count($value['Product']['featured']) > 0 ? $value['Product']['featured'][0] : "";
+                        $value['Product']['image'] = count($value['Product']['featured']) > 0 ? $value['Product']['featured']['150w'][0] : "";
                         $value['Product']['image'] = "product/" . $value['Product']['image'];
                     } else {
                         $value['Product']['image'] = "template/" . $value['Product']['image'];
@@ -177,7 +177,18 @@ class ProductController extends AdminAppController {
 
             if (!empty($data['featured'])) {
                 $data['featured'] = trim($data['featured'], "-");
-                $data['featured'] = serialize(explode("-", $data['featured']));
+                $images = explode("-", $data['featured']);
+
+                $data['featured'] = array();
+                $data['featured']['origin'] = $image;
+
+                $data['featured']['150w'] = array();
+
+                foreach ($images as $value) {
+                    $data['featured']['150w'][] = str_replace(".", "_150.png", $value);
+                }
+
+                $data['featured'] = serialize($data['featured']);
             }
 
             if ($is_special == 1) {
@@ -257,18 +268,18 @@ class ProductController extends AdminAppController {
             exit(json_encode($this->error));
         }
     }
-    
+
     //================================================================
     // @action: edit
     //================================================================
 
     public function edit() {
-        
-        $this->_edit ();  
-        
+
+        $this->_edit();
+
         $guid = $this->request->query("id");
         if (empty($guid)) {
-            $this->redirect ("/admin/product");
+            $this->redirect("/admin/product");
         }
 
         $data = $this->Product->find('first', array("conditions" => array("guid" => $guid)));
@@ -286,11 +297,10 @@ class ProductController extends AdminAppController {
             $data['modified'] = date("F j, Y, g:i a", $data['modified']);
         }
 
-        $this->set(array ('data' => $data));
+        $this->set(array('data' => $data));
     }
-    
-    protected function _edit ()
-    {
+
+    protected function _edit() {
         if ($this->request->is('ajax') && $this->request->is('post')) {
             $this->autoRender = false;
 
@@ -346,12 +356,6 @@ class ProductController extends AdminAppController {
             $data['type'] = isset($data['type']) ? $data['type'] : 'product';
             $data['status'] = isset($data['status']) ? $data['status'] : 'draft';
             $data['is_featured'] = isset($data['is_featured']) ? 1 : 0;
-
-            if (!empty($data['featured'])) {
-                $data['featured'] = trim($data['featured'], "-");
-                $data['featured'] = serialize(explode("-", $data['featured']));
-            }
-
             if ($is_special == 1) {
 
                 $special = array(
@@ -363,12 +367,48 @@ class ProductController extends AdminAppController {
 
                 $data = array_merge($data, $special);
             }
-            
+
             $this->loadModel('Product');
             if ($action == "update" && !empty($data['guid'])) {
                 $element = $this->Product->find('first', array("conditions" => array("guid" => $data['guid'])));
-              
+
                 if (!empty($element)) {
+
+                    if (!empty($data['featured'])) {
+                        $data['featured'] = trim($data['featured'], "-");
+                        $images = explode("-", $data['featured']);
+
+                        $data['featured'] = array();
+                        $data['featured']['origin'] = $image;
+
+                        $data['featured']['150w'] = array();
+
+                        foreach ($images as $value) {
+                            $data['featured']['150w'][] = str_replace(".", "_150.png", $value);
+                        }
+
+                        $data['featured'] = serialize($data['featured']);
+
+                        if ($data['featured'] == $element['featured']) {
+
+                            unset($data['featured']);
+                        } else {
+
+                            $image_files = unserialize($element['featured']);
+                            foreach ($image_files['origin'] as $value) {
+                                if (file_exists(WWW_ROOT . DS . "uploads/product/" . $value)) {
+                                    @unlink(WWW_ROOT . DS . "uploads/product/" . $value);
+                                }
+                            }
+
+                            foreach ($image_files['150w'] as $value) {
+                                if (file_exists(WWW_ROOT . DS . "uploads/product/" . $value)) {
+                                    @unlink(WWW_ROOT . DS . "uploads/product/" . $value);
+                                }
+                            }
+                        }
+                    }
+
 
                     $data['modified'] = time();
                     $this->Product->id = $data['id'];
@@ -410,7 +450,7 @@ class ProductController extends AdminAppController {
     //===========================================================
     //
     //===========================================================
-    
+
     public function delete() {
         $id = $this->request->query('id');
         $this->loadModel('Product');
@@ -439,16 +479,16 @@ class ProductController extends AdminAppController {
         $this->Product->delete($id);
         exit;
     }
-    
+
     //======================================================
     public function install() {
 
-        $templates = array (
-            "iphone5" => array (
+        $templates = array(
+            "iphone5" => array(
                 "name" => "iphone5",
                 "description" => "iphone5 case",
                 "price" => "34.99",
-                "image" => array (
+                "image" => array(
                     "foreground" => "iphone5_fg.png",
                     "background" => "iphone5_bg.png",
                 ),
@@ -457,23 +497,22 @@ class ProductController extends AdminAppController {
                 "quantity" => 65535
             )
         );
-        
+
         $this->loadModel("Product");
-        $this->Product->query ("DELETE FROM products WHERE type='template'");
+        $this->Product->query("DELETE FROM products WHERE type='template'");
         foreach ($templates as $template) {
             $template['guid'] = uniqid();
             $template['created'] = time();
             $template['modified'] = time();
             $template['image'] = serialize($template['image']);
-            $this->Product->create ();
-            $this->Product->save ($template);
+            $this->Product->create();
+            $this->Product->save($template);
         }
-        
+
         $this->autoRender = false;
-                
-        $this->redirect (array ("plugin" => "admin", "controller" => "product", "action" => "index"));
+
+        $this->redirect(array("plugin" => "admin", "controller" => "product", "action" => "index"));
         echo "Successfully all templates created";
-        
     }
 
 }

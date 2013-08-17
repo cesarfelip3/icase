@@ -25,7 +25,6 @@ class IndexController extends AppController {
                 $this->redirect("/user/");
             }
         }
-        
     }
 
     public function index() {
