@@ -542,9 +542,9 @@ class ProductController extends AdminAppController {
             
             print_r ($image);
             
-            //$this->Product->id = $value['Product']['id'];
-            //$this->Product->set (array ('featured' => $image ));
-            //$this->Product->save ();
+            $this->Product->id = $value['Product']['id'];
+            $this->Product->set (array ('featured' => serialize($image)));
+            $this->Product->save ();
             
             $image = null;
         }
