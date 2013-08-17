@@ -513,6 +513,8 @@ class ProductController extends AdminAppController {
         $image['origin'] = array();
         $image['150w'] = array();
         
+        print_r ($data);
+        
         foreach ($data as $value) {
             
             $value['Product']['featured'] = unserialize($value['Product']['featured']);
