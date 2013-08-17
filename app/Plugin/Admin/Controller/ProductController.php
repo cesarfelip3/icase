@@ -520,12 +520,14 @@ class ProductController extends AdminAppController {
             
             if (!empty ($value['Product']['featured'])) {
                 
-                $image = array ('origin' => array(), '150w' => array());
+                $image = array ();
+                $image['origin'] = array();
+                $image['150w'] = array();
                 $images = $value['Product']['featured'];
                 
                 foreach ($images as $key => $value) {
-                    $image['origin'][$key] = $value;
-                    $image['150w'][$key] = str_replace(".", "_150.", $value);
+                    $image['origin'][] = $value;
+                    $image['150w'][] = str_replace(".", "_150.", $value);
                 }
             }
             
