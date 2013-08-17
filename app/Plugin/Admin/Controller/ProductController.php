@@ -528,9 +528,9 @@ class ProductController extends AdminAppController {
                 
                 $images = $value['Product']['featured'];
                 
-                foreach ($images as $key => $value) {
-                    $origin[] = $value;
-                    $w150[] = str_replace(".", "_150.", $value);
+                foreach ($images as $key => $val) {
+                    $origin[] = $val;
+                    $w150[] = str_replace(".", "_150.", $val);
                 }
             }
             
