@@ -15,12 +15,17 @@ class IndexController extends AppController {
         $this->Auth->deny("logout");
         parent::beforeFilter();
 
+        if (!$this->request->is('ajax')) {
+            $this->layoutInit();
+        }
+        
         if ($this->Auth->loggedIn()) {
             if (in_array(strtolower($this->request->action), array("signin", "signup"))) {
 
                 $this->redirect("/user/");
             }
         }
+        
     }
 
     public function index() {

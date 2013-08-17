@@ -17,6 +17,10 @@ class ShopController extends AppController {
         $this->Auth->allow();
         parent::beforeFilter();
         $this->set('load_shop_cart', true);
+        
+        if (!$this->request->is('ajax')) {
+            $this->layoutInit();
+        }
     }
 
     //==============================================================

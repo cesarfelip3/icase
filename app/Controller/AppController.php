@@ -49,12 +49,19 @@ class AppController extends Controller {
             
             $this->set ('identity', $user);
         }
+    }
+    
+    public function layoutInit() {
+        $categories = CacheEngine::read("category_top");
         
-        $this->loadModel("Category");
-        $top_header = $this->Category->find('all', array ("conditions" => array ("level" => 0), "order" => array("order" => "ASC", "id" => "ASC")));
+        if (empty ($categories)) {
+            $this->loadModel("Category");
+            $categories = $this->Category->find('all', array ("conditions" => array ("level" => 0), "order" => array("order" => "ASC", "id" => "ASC")));
+            CacheEngine::write ("category_top", $categories);
+        } 
         
-        if (!empty ($top_header)){
-            $this->set ("top_header", $top_header);
+        if (!empty ($categories)){
+            $this->set ("top_header", $categories);
         }
     }
     

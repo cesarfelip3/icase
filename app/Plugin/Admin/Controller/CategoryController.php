@@ -115,6 +115,10 @@ class CategoryController extends AdminAppController {
                 $this->Category->save();
             }
         }
+        
+        if ($level == 0) {
+            CacheEngine::delete("category_top");
+        }
 
         $this->Category->create();
 

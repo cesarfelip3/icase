@@ -9,14 +9,14 @@ class CatalogueController extends AppController {
         "message" => "",
         "files" => array(),
     );
-    protected $_stripe = array(
-        "secret_key" => "sk_test_t2e5s3XGtntC5eoUU7HNICa1",
-        "publishable_key" => "pk_test_wjgM6MXjzv0GNOBeUVFIOVKf"
-    );
 
     public function beforeFilter() {
         $this->Auth->allow();
         parent::beforeFilter();
+        
+        if (!$this->request->is('ajax')) {
+            $this->layoutInit();
+        }
     }
 
     public function product($slug) {

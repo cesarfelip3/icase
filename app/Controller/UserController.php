@@ -7,6 +7,9 @@ class UserController extends AppController {
         $this->Auth->allow();
         $this->Auth->allow('guest');
 	parent::beforeFilter();
+        if (!$this->request->is('ajax')) {
+            $this->layoutInit();
+        }
     }
     
     public function index ()
