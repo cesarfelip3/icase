@@ -133,8 +133,8 @@ class ShopController extends AppController {
                 require_once APP . DS . 'Vendor' . DS . 'AuthorizeNet/AuthorizeNet.php'; // Make sure this path is correct.
                 $transaction = new AuthorizeNetAIM('9c22BSeN', '234k5bjzGPc8NN33');
                 $transaction->amount = $amount;
-                $transaction->card_num = $bill['cc_number'];
-                $transaction->exp_date = $bill['cc_expired'];
+                $transaction->card_num = "4007000000027"; //$bill['cc_number'];
+                $transaction->exp_date = "08/16"; // $bill['cc_expired'];
 
                 $response = $transaction->authorizeAndCapture();
 
