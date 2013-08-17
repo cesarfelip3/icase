@@ -151,7 +151,9 @@ class ShopController extends AppController {
                     return;
                 }
 
-
+                print_r ($response);
+                exit;
+                
                 // create user - guest
                 $user_guid = null;
                 $user_guest = false;
