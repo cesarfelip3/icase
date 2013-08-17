@@ -129,26 +129,26 @@ class ShopController extends AppController {
                     $amount += round($value['Product']['price'] * $value['Product']['quantity'], 2, PHP_ROUND_HALF_DOWN) + "";
                 }
 
-                /*
-                  require_once APP . DS . 'Vendor' . DS . 'AuthorizeNet/AuthorizeNet.php'; // Make sure this path is correct.
-                  $transaction = new AuthorizeNetAIM('9c22BSeN', '6333jT7Cc3JmwpUN');
-                  $transaction->amount = $amount;
-                  $transaction->card_num = $bill['cc_number'];
-                  $transaction->exp_date = $bill['cc_expired'];
 
-                  $response = $transaction->authorizeAndCapture();
+                require_once APP . DS . 'Vendor' . DS . 'AuthorizeNet/AuthorizeNet.php'; // Make sure this path is correct.
+                $transaction = new AuthorizeNetAIM('9c22BSeN', '234k5bjzGPc8NN33');
+                $transaction->amount = $amount;
+                $transaction->card_num = $bill['cc_number'];
+                $transaction->exp_date = $bill['cc_expired'];
 
-                  if ($response->approved) {
+                $response = $transaction->authorizeAndCapture();
 
-                  } else {
-                  $this->Product->rollTransaction();
-                  print_r($response->error_message);
-                  exit;
+                if ($response->approved) {
+                    
+                } else {
+                    $this->Product->rollTransaction();
+                    print_r($response->error_message);
+                    exit;
 
-                  $this->Session->setFlash($response->error_message);
-                  return;
-                  }
-                 */
+                    $this->Session->setFlash($response->error_message);
+                    return;
+                }
+
 
                 // create user - guest
                 $user_guid = null;
@@ -225,8 +225,8 @@ class ShopController extends AppController {
                         "amount" => round($value['Product']['price'] * $value['Product']['quantity'], 2, PHP_ROUND_HALF_DOWN),
                         "quantity" => $data[$i]['Product']['quantity'],
                         "attachement" => $value['Product']['file'],
-                        //"transaction_id" => $response->transaction_id,
-                        //"transaction_type" => $response->transaction_type,
+                        "transaction_id" => $response->transaction_id,
+                        "transaction_type" => $response->transaction_type,
                         "payment_gateway" => "AuthorizeNet",
                         "status" => "paid",
                         "created" => time(),
@@ -278,19 +278,19 @@ class ShopController extends AppController {
                     }
                 }
 
-                $from = array ("admin@admin.com" => "www.admin.com");
+                $from = array("admin@admin.com" => "www.admin.com");
                 $to = $deliver['email'];
                 $subject = "Your Order is Confirmed";
-                $vars = array ('deliver' => $deliver, 'bill' => $bill);
+                $vars = array('deliver' => $deliver, 'bill' => $bill);
                 $content = null;
                 $this->email($from, $to, $subject, $content, "checkout_order_buyer", $vars);
-                
-                $from = array ("admin@admin.com" => "www.admin.com");
+
+                $from = array("admin@admin.com" => "www.admin.com");
                 $to = "cesarfelip3@gmail.com";
                 $subject = "There new orders come";
-                $var = array ('data' => $orders);
+                $var = array('data' => $orders);
                 $this->email($from, $to, $subject, $content, "checkout_order_seller");
-                
+
                 $this->layout = false;
                 $this->render("checkout.success");
                 return;
@@ -414,7 +414,7 @@ class ShopController extends AppController {
 
     protected function email($from, $to, $subject, $content, $template, $vars = array()) {
         $Email = new CakeEmail();
-        $Email->template ($template);
+        $Email->template($template);
         $Email->viewVars($vars);
         $Email->emailFormat('html');
         $Email->from($from);
