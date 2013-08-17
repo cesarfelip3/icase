@@ -537,6 +537,8 @@ class ProductController extends AdminAppController {
             //$this->Product->id = $value['Product']['id'];
             //$this->Product->set (array ('featured' => $image ));
             //$this->Product->save ();
+            
+            $image = null;
         }
         
         
