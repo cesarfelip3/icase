@@ -29,7 +29,7 @@ class IndexController extends AppController {
         $data = $this->Product->find('all', array(
             "conditions" => array("type" => "product", "is_featured" => 1),
             "order" => array("modified" => "DESC"),
-            "limit" => 4,
+            "limit" => 8,
             "page" => 0
         ));
 
