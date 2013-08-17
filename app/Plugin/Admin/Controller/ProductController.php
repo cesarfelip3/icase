@@ -180,12 +180,12 @@ class ProductController extends AdminAppController {
                 $images = explode("-", $data['featured']);
 
                 $data['featured'] = array();
-                $data['featured']['origin'] = $image;
+                $data['featured']['origin'] = $images;
 
                 $data['featured']['150w'] = array();
 
                 foreach ($images as $value) {
-                    $data['featured']['150w'][] = str_replace(".", "_150.png", $value);
+                    $data['featured']['150w'][] = str_replace(".", "_150.", $value);
                 }
 
                 $data['featured'] = serialize($data['featured']);
@@ -289,10 +289,11 @@ class ProductController extends AdminAppController {
             $data['featured'] = unserialize($data['featured']);
             $data['featured2'] = $data['featured'];
             if (!empty($data['featured'])) {
-                $data['featured'] = implode("-", $data['featured']);
+                $data['featured'] = implode("-", $data['featured']['origin']);
             } else {
                 $data['featured'] = "";
             }
+            
             $data['created'] = date("F j, Y, g:i a", $data['created']);
             $data['modified'] = date("F j, Y, g:i a", $data['modified']);
         }
@@ -379,33 +380,21 @@ class ProductController extends AdminAppController {
                         $images = explode("-", $data['featured']);
 
                         $data['featured'] = array();
-                        $data['featured']['origin'] = $image;
+                        $data['featured']['origin'] = $images;
 
                         $data['featured']['150w'] = array();
 
                         foreach ($images as $value) {
-                            $data['featured']['150w'][] = str_replace(".", "_150.png", $value);
+                            $data['featured']['150w'][] = str_replace(".", "_150.", $value);
                         }
 
                         $data['featured'] = serialize($data['featured']);
 
-                        if ($data['featured'] == $element['featured']) {
-
+                        if ($data['featured'] == $element['Product']['featured']) {
                             unset($data['featured']);
                         } else {
 
-                            $image_files = unserialize($element['featured']);
-                            foreach ($image_files['origin'] as $value) {
-                                if (file_exists(WWW_ROOT . DS . "uploads/product/" . $value)) {
-                                    @unlink(WWW_ROOT . DS . "uploads/product/" . $value);
-                                }
-                            }
-
-                            foreach ($image_files['150w'] as $value) {
-                                if (file_exists(WWW_ROOT . DS . "uploads/product/" . $value)) {
-                                    @unlink(WWW_ROOT . DS . "uploads/product/" . $value);
-                                }
-                            }
+                            
                         }
                     }
 
