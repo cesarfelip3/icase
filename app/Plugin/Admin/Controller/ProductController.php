@@ -506,6 +506,8 @@ class ProductController extends AdminAppController {
     
     public function repair ()
     {
+        exit;
+        
         $this->loadModel('Product');
         
         $data = $this->Product->find ('all', array ("conditions" => array ("type" => "product")));
