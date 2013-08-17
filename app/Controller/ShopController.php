@@ -135,8 +135,8 @@ class ShopController extends AppController {
                 $transaction = new AuthorizeNetAIM('9c22BSeN', '234k5bjzGPc8NN33');
                 $transaction->setSandbox(false);
                 $transaction->amount = $amount;
-                $transaction->card_num = "4007000000027"; //$bill['cc_number'];
-                $transaction->exp_date = "08/16"; // $bill['cc_expired'];
+                $transaction->card_num = $bill['cc_number'];
+                $transaction->exp_date = $bill['cc_expired'];
 
                 $response = $transaction->authorizeAndCapture();
 
@@ -280,18 +280,22 @@ class ShopController extends AppController {
                     }
                 }
 
-                $from = array("admin@admin.com" => "www.admin.com");
-                $to = $deliver['email'];
-                $subject = "Your Order is Confirmed";
-                $vars = array('deliver' => $deliver, 'bill' => $bill);
-                $content = null;
-                $this->email($from, $to, $subject, $content, "checkout_order_buyer", $vars);
+                try {
+                    $from = array("admin@admin.com" => "www.admin.com");
+                    $to = $deliver['email'];
+                    $subject = "Your Order is Confirmed";
+                    $vars = array('deliver' => $deliver, 'bill' => $bill);
+                    $content = null;
+                    $this->email($from, $to, $subject, $content, "checkout_order_buyer", $vars);
 
-                $from = array("admin@admin.com" => "www.admin.com");
-                $to = "cesarfelip3@gmail.com";
-                $subject = "There new orders come";
-                $var = array('data' => $orders);
-                $this->email($from, $to, $subject, $content, "checkout_order_seller");
+                    $from = array("admin@admin.com" => "www.admin.com");
+                    $to = "cesarfelip3@gmail.com";
+                    $subject = "There new orders come";
+                    $var = array('data' => $orders);
+                    $this->email($from, $to, $subject, $content, "checkout_order_seller");
+                } catch (Exception $e) {
+                    
+                }
 
                 $this->layout = false;
                 $this->render("checkout.success");
