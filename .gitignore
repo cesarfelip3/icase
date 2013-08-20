@@ -7,5 +7,5 @@ app/tmp/persistent/*
 !empty
 /nbproject/private/
 app/webroot/uploads/
-/nbproject
+nbproject
 !nbproject
