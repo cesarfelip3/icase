@@ -29,6 +29,9 @@ class AdminAppController extends Controller {
     );
     
     public function beforeFilter() {
+        
+        AuthComponent::$sessionKey = "Auth.Admin";
+        
         $this->layout = "admin";
         $this->_base_plugin = $this->base . DS . $this->request->params['plugin'] . DS;
         $this->set ('base', $this->_base_plugin);
