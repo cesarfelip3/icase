@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.29)
 # Database: icase
-# Generation Time: 2013-08-20 07:18:04 +0000
+# Generation Time: 2013-08-20 08:37:19 +0000
 # ************************************************************
 
 
@@ -53,6 +53,16 @@ CREATE TABLE `admins` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+LOCK TABLES `admins` WRITE;
+/*!40000 ALTER TABLE `admins` DISABLE KEYS */;
+
+INSERT INTO `admins` (`id`, `guid`, `name`, `email`, `password`, `type`, `email_verfied`, `verfied_code`, `verfied_expire`, `subscribe`, `subscribe_content`, `subscribe_schedule`, `firstname`, `lastname`, `phone`, `country`, `state`, `city`, `address`, `zipcode`, `orders`, `active`, `created`, `modified`)
+VALUES
+	(1,'521324cdcae5d','beautahful007','admin@beautahfulcreations.com','3c9bf1830df9a92b94110d619948889851c95c69','register',0,NULL,NULL,0,NULL,'daily',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,1,1376986317,1376986317),
+	(2,'521324e5a5676','kkkkkk','kkkkkk@gmail.com','beb00a69280583a9b67a6b9cc95cadcf3be11fa8','register',0,NULL,NULL,0,NULL,'daily',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,1,1376986341,1376986435);
+
+/*!40000 ALTER TABLE `admins` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table categories
