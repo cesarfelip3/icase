@@ -19,7 +19,7 @@ class AdminAppController extends Controller {
                 'Form' => array(
                     'userModel' => 'Admin',
                     'fields' => array('username' => 'name', 'password' => 'password'),
-                    'scope' => array('User.active' => 1),
+                    'scope' => array('Admin.active' => 1),
                     'passwordHasher' => array(
                         'className' => 'Simple'
                     )

@@ -10,7 +10,7 @@ class AdministratorController extends AdminAppController {
     );
 
     public function beforeFilter() {
-        $this->Auth->deny();
+        $this->Auth->allow();
         parent::beforeFilter();
     }
 
@@ -286,6 +286,96 @@ class AdministratorController extends AdminAppController {
         
         $this->Admin->delete($id);
         exit (json_encode($this->error));
+    }
+    
+    public function profile ()
+    {
+        if ($this->request->is('ajax') && $this->request->is('post')) {
+            $this->autoRender = false;
+
+            $data = $this->request->data('user');
+            $action = $this->request->query('action');
+
+            if (empty($data['name'])) {
+                $this->error['error'] = 1;
+                $this->error['element'] = 'input[name="user[name]"]';
+                $this->error['message'] = 'Customer name is required';
+                exit(json_encode($this->error));
+            }
+
+            if (preg_match("/^[a-z]{1,}|[a-z]{1,}[0-9]{1,}$/i", $data['name']) == false) {
+                $this->error['error'] = 1;
+                $this->error['element'] = 'input[name="user[name]"]';
+                $this->error['message'] = 'Invalid name, [a-z]...[0-9]...';
+                exit(json_encode($this->error));
+            }
+
+            if (empty($data['email'])) {
+                $this->error['error'] = 1;
+                $this->error['element'] = 'input[name="user[email]"]';
+                $this->error['message'] = 'Email is required';
+                exit(json_encode($this->error));
+            }
+
+            if (preg_match("/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/i", $data['email']) == false) {
+                $this->error['error'] = 1;
+                $this->error['element'] = 'input[name="user[email]"]';
+                $this->error['message'] = 'Invalid email address';
+                exit(json_encode($this->error));
+            }
+
+            if (!isset($data['active'])) {
+                $data['active'] = 0;
+            }
+
+            $this->loadModel('Admin');
+            $result = $this->Admin->find('first', array("conditions" => array("OR" => array("name" => $data['name'], "email" => $data['email']))));
+
+            if (empty($result)) {
+                $this->error['error'] = 1;
+                $this->error['element'] = '';
+                $this->error['message'] = 'Admin name or email doesn\'t exists';
+                exit(json_encode($this->error));
+            }
+
+            $data['name'] = strtolower($data['name']);
+            
+            if (!empty ($data['password'])) {
+                $passwordHasher = new SimplePasswordHasher();
+                $data['password'] = $passwordHasher->hash($data['password']);
+            }
+
+            $data['modified'] = time();
+            $data['type'] = "register";
+
+            if (isset ($data['guid'])) {
+                unset ($data['guid']);
+            }
+            
+            $this->Admin->id = $result['Admin']['id'];
+            $this->Admin->set($data);
+            $this->Admin->save ();
+
+            $this->error['error'] = 0;
+            $this->error['element'] = 'input';
+            exit(json_encode($this->error));
+        }
+        
+        $guid = $this->request->query ('id');
+        if (empty ($guid)) {
+            $this->redirect ($this->base . "/admin/member/");
+            //exit;
+        }
+        
+        $this->loadModel('Admin');
+        $data = $this->Admin->find('first', array("conditions" => array("guid" => $guid)));
+        
+        if (empty ($data)) {
+            $this->redirect (array ("plugin"=>"admin", "controller"=>"member", "action"=>"index"));
+        }
+        
+        $data = $data['Admin'];
+        $this->set ('data', $data);
     }
 
 }

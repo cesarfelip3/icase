@@ -50,12 +50,14 @@ class IndexController extends AdminAppController {
                 if (preg_match("/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/i", $data['name']) == true) {
                     $conditions = array(
                         "email" => $data['name'],
-                        "password" => $password
+                        "password" => $password,
+                        "active" => 1
                     );
                 } else {
                     $conditions = array(
                         "name" => $data['name'],
-                        "password" => $password
+                        "password" => $password,
+                        "active" => 1
                     );
                 }
 
