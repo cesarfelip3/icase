@@ -1,4 +1,5 @@
 <?php
+
 App::uses('AppController', 'Controller');
 
 class CatalogueController extends AppController {
@@ -13,7 +14,7 @@ class CatalogueController extends AppController {
     public function beforeFilter() {
         $this->Auth->allow();
         parent::beforeFilter();
-        
+
         if (!$this->request->is('ajax')) {
             $this->layoutInit();
         }
@@ -21,72 +22,76 @@ class CatalogueController extends AppController {
 
     public function product($slug) {
         $this->loadModel('Product');
-        
+
         /*
-        $data = $this->Product->find('all', array ("conditions" => array ("type" => "product")));
-        
-        foreach ($data as $key => $value) {
-            $this->Product->id = $value['Product']['id'];
-            
-            $name = "iphone " . rand (3, 5);
-            $this->Product->set (array(
-                    "name" => $name,
-                    "slug" => preg_replace ("/ +/i", "-", $name) . "-" . $key,
-                    "price" => rand (20, 100) . ".07",
-            ));
-            
-            $this->Product->save();
-        }
-        
-        
-        
-        $log = $this->Product->getDataSource()->getLog(false, false);
-        print_r ($log);
-        
-        exit;
-        */
-        
-        $data = $this->Product->find('first', array ("conditions" => array ("slug" => $slug)));
-        
-        if (empty ($data)) {
+          $data = $this->Product->find('all', array ("conditions" => array ("type" => "product")));
+
+          foreach ($data as $key => $value) {
+          $this->Product->id = $value['Product']['id'];
+
+          $name = "iphone " . rand (3, 5);
+          $this->Product->set (array(
+          "name" => $name,
+          "slug" => preg_replace ("/ +/i", "-", $name) . "-" . $key,
+          "price" => rand (20, 100) . ".07",
+          ));
+
+          $this->Product->save();
+          }
+
+
+
+          $log = $this->Product->getDataSource()->getLog(false, false);
+          print_r ($log);
+
+          exit;
+         */
+
+        $data = $this->Product->find('first', array("conditions" => array("slug" => $slug)));
+
+        if (empty($data)) {
             $this->redirect("/");
             exit;
         }
-        
+
         $data = $data['Product'];
         $data['featured'] = unserialize($data['featured']);
-        
-        
-        $this->set ("title", env ("SERVER_NAME") . " | product | $slug");
-        $this->set ("data", $data);
+
+
+        $this->set("title", env("SERVER_NAME") . " | product | $slug");
+        $this->set("data", $data);
     }
 
     public function category($slug) {
 
         $this->loadModel('Category');
-        
-        $guid= $this->Category->findBySlug($slug, array ('guid'));
 
-        if (empty($guid)) {
+        $data = $this->Category->find('first', array("conditions" => array("slug" => $slug)));
+
+        if (empty($data)) {
             $this->redirect("/");
             exit;
         }
 
-        if (count($guid) > 1) {
-            $guid = $guid[0]['Category']['guid'];
-        } else {
-            $guid = $guid['Category']['guid'];
+        $guid = $data['Category']['guid'];
+        if (!empty($data) && $data['Category']['level'] > 0) {
+            $parent = $this->Category->find('first', array("conditions" => array("guid" => $data['Category']['parent_guid'])));
+            $this->set('breadcrumbs', array(
+                $parent,
+                $data,
+            ));
         }
 
         if ($this->request->is('ajax')) {
             $this->layout = false;
-            
+
+
             /*
-            $categories = $this->Category->find('all', array(
-                "conditions" => array('level' => 0),
-                "order" => array('order ASC')
-            ));*/
-            
+              $categories = $this->Category->find('all', array(
+              "conditions" => array('level' => 0),
+              "order" => array('order ASC')
+              )); */
+
             $categories = $this->Category->find('all', array(
                 "conditions" => array('parent_guid' => $guid),
                 "order" => array('order ASC')
@@ -112,7 +117,7 @@ class CatalogueController extends AppController {
                     }
                 }
             }
-            
+
             foreach ($return as $key => $value) {
                 if ($value['Category']['guid'] == $guid) {
                     $value['Category']['_active'] = true;
@@ -120,9 +125,9 @@ class CatalogueController extends AppController {
                     break;
                 }
             }
-            $this->set ('slug', $slug);
-            $this->set ('data', $return);
-            $this->render ("category.ajax");
+            $this->set('slug', $slug);
+            $this->set('data', $return);
+            $this->render("category.ajax");
             return;
         }
 
@@ -151,9 +156,9 @@ class CatalogueController extends AppController {
                 $data[$key] = $value;
             }
         }
-        
-        $this->set ("title", env ("SERVER_NAME") . " | category | $slug");
-        $this->set ("slug", $slug);
+
+        $this->set("title", env("SERVER_NAME") . " | category | $slug");
+        $this->set("slug", $slug);
         $this->set("data", $data);
     }
 
@@ -175,4 +180,5 @@ class CatalogueController extends AppController {
             }
         }
     }
+
 }

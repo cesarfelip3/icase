@@ -115,7 +115,12 @@ $js_themes = array(
     
     function cart_init() {
         $.shoppingcart.init();
-
+        cart_count ();
+    }
+    
+    function cart_count () {
+        console.log ($.shoppingcart.total());
+        $("#cart-indicator-value").html("(" + $.shoppingcart.total() + ")");
     }
 
 </script>

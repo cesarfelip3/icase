@@ -262,7 +262,8 @@
                                 guid = guid + "-" + file;
                             }
                             $.shoppingcart.removeall(guid);
-                            cart_reload();
+                            window.location.href="";
+                            //cart_reload();
                             break;
                     }
                 }

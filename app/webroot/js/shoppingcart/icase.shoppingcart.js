@@ -23,6 +23,7 @@
         init: null,
         set: null,
         get: null,
+        total: null,
         remove: null,
         clear: null,
         cookie: null,
@@ -68,6 +69,18 @@
         }
 
         return orders;
+    }
+    
+    ShoppingCart.prototype.total = function () {
+        var orders = storage.get(this.cookie_orders);
+        
+        if (orders == null || orders == "undefined" || orders == "") {
+            return 0;
+        }
+        
+        var total = orders.split (",");
+        return total.length;
+
     }
 
     ShoppingCart.prototype.remove = function(id) {

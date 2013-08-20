@@ -1,4 +1,20 @@
-
+<div class="row-fluid">
+    <?php if (isset($breadcrumbs)) : $n = count ($breadcrumbs) - 1;?>
+    <ul class="breadcrumb">
+        <?php foreach ($breadcrumbs as $key => $value): ?>
+        <li <?php if ($key == $n) echo 'class="active"'; ?>>
+            <a 
+                href="<?php echo $this->webroot;?>category/<?php echo $value['Category']['slug']; ?>"
+                style="text-transform:uppercase;"
+                >
+                    <?php echo $value['Category']['name']; ?> 
+                <?php if ($key != $n) : ?><span class="divider" style="border:none;">/</span><?php endif; ?>
+            </a>
+        </li>
+        <?php endforeach; ?>
+    </ul>
+    <?php endif; ?>
+</div>
 <div class="row-fluid">
 
     <div class="span3">
@@ -7,7 +23,7 @@
 
         </div>
     </div>
-    <div class="span6 category_right">
+    <div class="span9 category_right">
         <?php
         $i = 0;
         $j = 0;

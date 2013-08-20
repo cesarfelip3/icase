@@ -23,7 +23,8 @@ if (isset ($this->params['slug'])) {
                 <li><a class="hd-txt" href='<?php echo $this->webroot; ?>logout'>Logout</a></li>
                 <?php endif; ?>
                 <li><a class="hd-txt" href='<?php echo $this->webroot; ?>user'>My Account</a></li>
-                <li><a class="hd-txt" href="#" id="btn-my-cart">My Cart <span class="value">(0)</span></a></li>
+                <li><a class="hd-txt" href="<?php echo $this->webroot; ?>shop/checkout" id="btn-my-cart">My Cart <span class="value" id="cart-indicator-value">(0)</span></a></li>
+                <li>&nbsp;&nbsp;</li>
             </ul>
             <div style="clear:both"></div>
             <nav class="navbar">

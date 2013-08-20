@@ -193,7 +193,8 @@ $admin_product = $base . "product";
             } else {
                 //$(result.element).parent().parent().removeClass('error');
                 //$(result.element).next(".help-inline").html("");
-                category_load();
+                window.location.href="";
+                //category_load();
             }
 
         }).fail(function() {
