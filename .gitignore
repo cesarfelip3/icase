@@ -1,9 +1,11 @@
 tmp/*
 app/config/core.php
-app/config/database.php
+app/Config/database.php
 app/tmp/*
 app/tmp/cache/*
 app/tmp/persistent/*
 !empty
 /nbproject/private/
-app/webroot/uploads/*
+app/webroot/uploads/
+/nbproject
+!nbproject
