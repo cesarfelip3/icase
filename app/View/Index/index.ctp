@@ -6,20 +6,33 @@
 <div class="clear:both;"></div>
 <div class="row-fluid">
     <div class="span9 fullwide">
+	
+
+	
+	<div class="banner"><img src="<?php echo $this->webroot . "img/banner.jpg" ?>" alt="Placeholder" class=""></div>
+	<div class="threestep">
+		<h2>3 steps <span>to create your case</span></h2>
+		
+		
+		<a href="#"><div class="stepone"><b>choose</b><br>a case</div></a>
+		<a href="#"><div class="steptwo"><b>upload </b><br>your image</div></a>
+		<a href="#"><div class="stepthree"><b>We print</b><br>high quality</div></a>
+		
+	</div>
         <div class="row-fluid">
-            <h1 style="color:orange">Best Sell of the week</h1>
+            <h1 class="title">FEATURE PRODUCTS</h1>
         </div>
         <div class="row-fluid hotproperties">
             <?php if (!empty ($data)) : ?>
             <?php foreach ($data as $value) : ?>
             <div class="span4 set-equal-heights-js">
                 <div class="thumbnail">
-                    <a href="<?php echo $this->webroot . "product/" . $value['Product']['slug']; ?>"><img src="<?php echo $this->webroot . "uploads/product/" . $value['Product']['featured']['150w'][0]; ?>" alt="Placeholder" class=""></a>
+                    <a class="thumimg" href="<?php echo $this->webroot . "product/" . $value['Product']['slug']; ?>"><img src="<?php echo $this->webroot . "uploads/product/" . $value['Product']['featured']['150w'][0]; ?>" alt="Placeholder" class=""></a>
                     <div class="caption">
                         <a href="property.html" class="prop-title" style="text-transform: uppercase;"><?php echo $value['Product']['name']; ?></a>
                         <p class="price">$<?php echo $value['Product']['price']; ?></p>
                         <ul class="list-btns">
-                            <li><a href="<?php echo $this->webroot . "product/" . $value['Product']['slug']; ?>">View Details</a></li>
+                            <li ><a class="buynow" href="<?php echo $this->webroot . "product/" . $value['Product']['slug']; ?>">View Details</a></li>
                         </ul>
                     </div>
                 </div>

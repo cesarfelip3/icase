@@ -26,21 +26,7 @@ if (isset ($this->params['slug'])) {
                 <li><a class="hd-txt" href="#" id="btn-my-cart">My Cart <span class="value">(0)</span></a></li>
             </ul>
             <div style="clear:both"></div>
-            <abbr title="Phone" id="call-phone">
-                <div class="searchwrapper">    
-                    <form name="form1" method="post" action="">
-                        <input type="text" name="search" id="search" onfocus="if (this.defaultValue == this.value)
-                                    this.value = '';" onblur="if ('' == this.value)
-                                    this.value = this.defaultValue;" value="Search inside the box">
-                        <input class="btn btn-mini btn-peach colwhite" type="submit" name="Search" id="submit" value="Search">
-                    </form>
-                </div>    
-            </abbr>
-        </div>    
-        <div style="clear:both"></div>
-    </div><!--end logo area-->
-    <!--nav bar start-->
-    <nav class="navbar">
+            <nav class="navbar">
         <div class="navbar-inner" style="border-radius:0px 0px 0px 0px;background-image:none;background-color:#efefef;">
             <div class="container">
                 <!--mobile nav icon (hidden:CSS)-->
@@ -72,5 +58,30 @@ if (isset ($this->params['slug'])) {
                 </div><!-- end nav-collapse -->
             </div><!-- end container-->
         </div><!-- end navbar-inner -->
-    </nav><!--end nav bar-->
+    </nav>
+            
+            
+            
+            
+            
+        </div>    
+		<div style="clear:both"></div>
+        <div id="slogansearch">
+	            <div id="slogan">Custom Phone Cases</div>
+            
+    	        <div id="search"><abbr title="Phone" id="call-phone">
+                <div class="searchwrapper">    
+                    <form name="form1" method="post" action="">
+                        <input type="text" name="search" id="search" onfocus="if (this.defaultValue == this.value)
+                                    this.value = '';" onblur="if ('' == this.value)
+                                    this.value = this.defaultValue;" value="Search inside the box">
+                        <input class="btn btn-mini btn-peach colwhite" type="submit" name="Search" id="submit" value="Search">
+                    </form>
+                </div>    
+            </abbr></div>
+            </div>
+        <div style="clear:both"></div>
+    </div><!--end logo area-->
+    <!--nav bar start-->
+    <!--end nav bar-->
 </header>
