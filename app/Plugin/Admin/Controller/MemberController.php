@@ -11,12 +11,10 @@ class MemberController extends AdminAppController {
 
     public function beforeFilter() {
         $this->Auth->deny();
-        $this->Auth->allow('login');
+        parent::beforeFilter();
     }
 
     public function index() {
-
-        parent::beforeFilter();
         
         $page = $this->request->query('page');
         $limit = $this->request->query('limit');
