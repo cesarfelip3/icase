@@ -209,6 +209,8 @@
                     var action = $(this).data('action');
                     var guid = $(this).data('guid');
                     var file = $(this).data('file');
+                    var type = $(this).data('type');
+                    
                     var i = 0;
                     var price = 0;
 
@@ -222,7 +224,7 @@
                             i = parseInt(jQuery.trim(i));
                             i++;
                             jQuery(this).next().text(i);
-                            if (file == "") {
+                            if (file == "" || type == 'product') {
                                 guid = guid;
                             } else {
                                 guid = guid + "-" + file;
@@ -243,7 +245,7 @@
                                 break;
                             }
                             jQuery(this).prev().text(i);
-                            if (file == "") {
+                            if (file == "" || type == 'product') {
                                 guid = guid;
                             } else {
                                 guid = guid + "-" + file;
@@ -254,7 +256,7 @@
                             $(this).parent().prev().text(price.toFixed(2));
                             break;
                         case 'remove' :
-                            if (file == "") {
+                            if (file == "" || type == 'product') {
                                 guid = guid;
                             } else {
                                 guid = guid + "-" + file;

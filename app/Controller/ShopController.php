@@ -17,7 +17,7 @@ class ShopController extends AppController {
         $this->Auth->allow();
         parent::beforeFilter();
         $this->set('load_shop_cart', true);
-        
+
         if (!$this->request->is('ajax')) {
             $this->layoutInit();
         }
@@ -75,9 +75,13 @@ class ShopController extends AppController {
             $this->Product->beginTransaction();
 
             foreach ($guids as $k => $value) {
-                $key = explode("-", $k);
-                if (is_array($key)) {
-                    $guid = $key[0];
+                if (strpos($k, "-") != false) {
+                    $key = explode("-", $k);
+                    if (is_array($key)) {
+                        $guid = $key[0];
+                    }
+                } else {
+                    $guid = $k;
                 }
 
                 $data[$i] = $this->Product->findByGuid($guid);
@@ -152,7 +156,7 @@ class ShopController extends AppController {
                     $this->_error['message'] = $response->error_message;
                     exit(json_encode($this->_error));
                 }
-                
+
                 // create user - guest
                 $user_guid = null;
                 $user_guest = false;
@@ -378,9 +382,13 @@ class ShopController extends AppController {
             $quantity = 0;
 
             foreach ($guids as $k => $value) {
-                $key = explode("-", $k);
-                if (is_array($key)) {
-                    $guid = $key[0];
+                if (strpos($k, "-") != false) {
+                    $key = explode("-", $k);
+                    if (is_array($key)) {
+                        $guid = $key[0];
+                    }
+                } else {
+                    $guid = $k;
                 }
 
                 $data[$i] = $this->Product->findByGuid($guid);
@@ -443,6 +451,7 @@ class ShopController extends AppController {
             $action = $this->request->query('action');
 
             $orders = isset($_COOKIE['orders']) ? $_COOKIE['orders'] : "";
+            
 
             if ($action == "single") {
                 $orders = $_COOKIE['current-product-id'];
@@ -473,11 +482,16 @@ class ShopController extends AppController {
 
             $this->loadModel("Product");
             $i = 0;
+            
+            foreach ($guids as $k => $value) {
 
-            foreach ($guids as $key => $value) {
-                $key = explode("-", $key);
-                if (is_array($key)) {
-                    $guid = $key[0];
+                if (strpos($k, "-") != false) {
+                    $key = explode("-", $k);
+                    if (is_array($key)) {
+                        $guid = $key[0];
+                    }
+                } else {
+                    $guid = $k;
                 }
 
                 $data[$i] = $this->Product->find('first', array("conditions" => array("guid" => $guid)));
@@ -487,10 +501,15 @@ class ShopController extends AppController {
                     continue;
                 }
 
-                if (isset($key[1])) {
+                if (is_array ($key) && isset($key[1])) {
                     $data[$i]['Product']['file'] = $key[1];
                 } else {
-                    $data[$i]['Product']['file'] = "";
+                    if (!empty ($data[$i]['Product']['featured'])) {
+                        $data[$i]['Product']['featured'] = unserialize($data[$i]['Product']['featured']);
+                        $data[$i]['Product']['file'] = $data[$i]['Product']['featured']['150w'][0];
+                    } else {
+                        $data[$i]['Product']['file'] = "";
+                    }
                 }
                 $data[$i]['Product']['quantity'] = $value;
                 $i++;

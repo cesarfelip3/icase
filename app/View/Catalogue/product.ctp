@@ -14,7 +14,7 @@
                     <div data-lstyle="case_description" data-l="case_description" class="case-desc case_description" style="height:200px;overflow: auto;"><?php echo $data['description']; ?></div>
                     <hr class="black"><br>
 
-                    <button class="btn btn-danger">Add To Cart</button>
+                    <a class="btn btn-danger" id="btn-cart" data-guid="<?php echo $data['guid']; ?>" data-file="">Add To Cart</a>
 
                     <div class="social_wrapper">
                         <!-- AddThis Button BEGIN -->
@@ -52,3 +52,21 @@
 
 
 <!-- /container -->
+
+<script>
+    $(document).ready (
+        function () {
+            jQuery("#btn-cart").click(
+                function() {
+                    var orderId = null;
+                    orderId = jQuery(this).data('guid');
+
+                    $.shoppingcart.set(orderId);
+
+                    window.open("<?php echo $this->webroot; ?>shop/checkout?action=cart", "_blank");
+                    window.focus();
+                });
+    });
+    
+    
+</script>
