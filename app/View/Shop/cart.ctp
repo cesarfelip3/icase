@@ -1,5 +1,5 @@
 <div class="span12">
-    <div class="qbox">
+    <div class="qbox" style="background-color:white;">
         <h1 style="height:30px;border-bottom:2px solid white;">My Cart</h1>
         <div style="overflow: auto;max-height:400px;">
             <table class="table table-striped">

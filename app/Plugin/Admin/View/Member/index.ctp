@@ -40,11 +40,11 @@ $member_delete = $base . "member" . DS . "delete";
         </div>
         <div class="row">
             <div class="span12 listing-buttons">
-<!--                <a href="<?php echo $this->webroot; ?>admin/product/add" class="btn btn-primary">New User</a>-->
+                <a href="<?php echo $this->webroot; ?>admin/member/add" class="btn btn-primary">New Customer</a>
             </div>
             <div class="span12">
                 <div class="slate">
-                    <div class="page-header">
+                    <div class="page-header hide">
                         <div class="btn-group pull-right">
                             <button class="btn dropdown-toggle" data-toggle="dropdown">
                                 <i class="icon-download-alt"></i> Export
@@ -105,4 +105,4 @@ $member_delete = $base . "member" . DS . "delete";
         </div>
     </div>
 </div>
-<?php echo $this->element("action_del", array ("plugin"=>"Admin", "actionUrl" => $base . "product/delete/", "form" => "#form-filter", "message" => "Are you sure to remove this product?")); ?>
+<?php echo $this->element("action_del", array ("plugin"=>"Admin", "actionUrl" => $base . "member/delete/", "form" => "#form-filter", "message" => "Are you sure to remove this customer")); ?>

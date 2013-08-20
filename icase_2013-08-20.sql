@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.29)
 # Database: icase
-# Generation Time: 2013-08-15 14:53:02 +0000
+# Generation Time: 2013-08-20 07:18:04 +0000
 # ************************************************************
 
 
@@ -31,21 +31,22 @@ CREATE TABLE `admins` (
   `name` varchar(32) DEFAULT NULL,
   `email` varchar(128) DEFAULT NULL,
   `password` varchar(128) DEFAULT NULL,
+  `type` varchar(32) NOT NULL DEFAULT 'guest',
   `email_verfied` int(11) NOT NULL DEFAULT '0',
   `verfied_code` varchar(128) DEFAULT NULL,
   `verfied_expire` int(11) DEFAULT NULL,
-  `type` varchar(32) NOT NULL DEFAULT 'guest',
+  `subscribe` int(11) NOT NULL DEFAULT '0',
+  `subscribe_content` text,
+  `subscribe_schedule` varchar(32) NOT NULL DEFAULT 'daily',
   `firstname` varchar(32) DEFAULT NULL,
   `lastname` varchar(32) DEFAULT NULL,
-  `address` varchar(1024) DEFAULT NULL,
   `phone` varchar(64) DEFAULT NULL,
   `country` varchar(32) DEFAULT NULL,
   `state` varchar(32) DEFAULT NULL,
   `city` varchar(32) DEFAULT NULL,
+  `address` varchar(1024) DEFAULT NULL,
+  `zipcode` varchar(32) DEFAULT NULL,
   `orders` int(11) NOT NULL DEFAULT '0',
-  `subscribe` int(11) NOT NULL DEFAULT '0',
-  `subscribe_content` text,
-  `subscribe_schedule` varchar(32) NOT NULL DEFAULT 'daily',
   `active` int(11) NOT NULL DEFAULT '1',
   `created` int(11) DEFAULT NULL,
   `modified` int(11) DEFAULT NULL,
@@ -75,6 +76,17 @@ CREATE TABLE `categories` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+LOCK TABLES `categories` WRITE;
+/*!40000 ALTER TABLE `categories` DISABLE KEYS */;
+
+INSERT INTO `categories` (`id`, `guid`, `parent_guid`, `group_guid`, `name`, `slug`, `description`, `level`, `children`, `order`, `seo_keywords`, `seo_description`)
+VALUES
+	(1,'5212eda360719','','5212eda3606f7','iphone','iphone',NULL,0,2,0,'iphone','iphone'),
+	(2,'5212f1cbee7b0','5212eda360719','5212eda3606f7','iphone4','iphone4',NULL,1,0,0,'iphone4','iphone4'),
+	(3,'5212f51f7d3c3','5212eda360719','5212eda3606f7','iphone5','iphone5',NULL,1,0,0,'iphone5','iphone5');
+
+/*!40000 ALTER TABLE `categories` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table category_to_object
@@ -92,7 +104,10 @@ LOCK TABLES `category_to_object` WRITE;
 
 INSERT INTO `category_to_object` (`category_guid`, `object_guid`)
 VALUES
-	('5209154a2178a','5209156bda4d1');
+	('5209154a2178a','5209156bda4d1'),
+	('5212eda360719','5212dc0edd949'),
+	('5212f1cbee7b0','5212dc0edd949'),
+	('5212f51f7d3c3','5212dc0edd949');
 
 /*!40000 ALTER TABLE `category_to_object` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -193,6 +208,7 @@ CREATE TABLE `orders` (
   `product_guid` char(13) DEFAULT NULL,
   `buyer_guid` char(13) DEFAULT NULL,
   `deliver_guid` char(13) DEFAULT NULL,
+  `bill_guid` char(13) DEFAULT NULL,
   `title` text,
   `description` varchar(1024) DEFAULT NULL,
   `type` varchar(32) NOT NULL DEFAULT 'product',
@@ -202,13 +218,14 @@ CREATE TABLE `orders` (
   `tax` decimal(11,2) NOT NULL DEFAULT '0.00',
   `express_fee` decimal(11,2) NOT NULL DEFAULT '0.00',
   `express_type` varchar(11) NOT NULL DEFAULT 'free',
-  `payment_gateway` varchar(128) DEFAULT NULL,
-  `transaction_type` varchar(11) NOT NULL DEFAULT 'paypal',
+  `payment_gateway` varchar(128) DEFAULT 'paypal',
+  `transaction_type` varchar(11) DEFAULT NULL,
   `transaction_id` varchar(128) DEFAULT NULL,
   `cc_number` varchar(512) DEFAULT NULL,
   `cc_expired` varchar(128) DEFAULT NULL,
   `attachement` text,
   `notification` varchar(32) DEFAULT '',
+  `notification_email` varchar(256) DEFAULT NULL,
   `created` int(11) DEFAULT NULL,
   `modified` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -242,6 +259,7 @@ CREATE TABLE `products` (
   `type` varchar(16) NOT NULL DEFAULT 'product',
   `status` varchar(11) NOT NULL DEFAULT 'draft',
   `active` int(11) NOT NULL DEFAULT '1',
+  `is_featured` int(11) NOT NULL DEFAULT '0',
   `seo_keywords` varchar(512) DEFAULT NULL,
   `seo_description` varchar(512) DEFAULT NULL,
   `created` int(11) DEFAULT NULL,
@@ -252,9 +270,10 @@ CREATE TABLE `products` (
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
 
-INSERT INTO `products` (`id`, `guid`, `user_guid`, `sku`, `name`, `slug`, `image`, `featured`, `description`, `price`, `tax`, `discount`, `quantity`, `is_special`, `special_price`, `special_start`, `special_end`, `type`, `status`, `active`, `seo_keywords`, `seo_description`, `created`, `modified`)
+INSERT INTO `products` (`id`, `guid`, `user_guid`, `sku`, `name`, `slug`, `image`, `featured`, `description`, `price`, `tax`, `discount`, `quantity`, `is_special`, `special_price`, `special_start`, `special_end`, `type`, `status`, `active`, `is_featured`, `seo_keywords`, `seo_description`, `created`, `modified`)
 VALUES
-	(10,'520cbb87b2a25',NULL,NULL,'iphone5',NULL,'a:2:{s:10:\"foreground\";s:14:\"iphone5_fg.png\";s:10:\"background\";s:14:\"iphone5_bg.png\";}',NULL,'iphone5 case',34.99,0.00,0,0,0,NULL,NULL,NULL,'template','published',1,NULL,NULL,1376566151,1376566151);
+	(12,'5212dbb0e0ddc',NULL,NULL,'iphone5',NULL,'a:2:{s:10:\"foreground\";s:14:\"iphone5_fg.png\";s:10:\"background\";s:14:\"iphone5_bg.png\";}',NULL,'iphone5 case',34.99,0.00,0,65535,0,NULL,NULL,NULL,'template','published',1,0,NULL,NULL,1376967600,1376967600),
+	(13,'5212dc0edd949',NULL,NULL,'test','test','','a:2:{s:6:\"origin\";a:4:{i:0;s:17:\"5212dc09f0c06.png\";i:1;s:17:\"5212dc0a89197.png\";i:2;s:17:\"5212dc0adb5a8.png\";i:3;s:17:\"5212dc0b31b75.png\";}s:4:\"150w\";a:4:{i:0;s:21:\"5212dc09f0c06_150.png\";i:1;s:21:\"5212dc0a89197_150.png\";i:2;s:21:\"5212dc0adb5a8_150.png\";i:3;s:21:\"5212dc0b31b75_150.png\";}}','<p>test</p>',22.00,0.00,0,65535,0,NULL,NULL,NULL,'product','published',1,1,NULL,NULL,1376967694,1376974191);
 
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -279,6 +298,28 @@ CREATE TABLE `templates` (
 
 
 
+# Dump of table user_bill_infos
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `user_bill_infos`;
+
+CREATE TABLE `user_bill_infos` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `guid` char(13) DEFAULT NULL,
+  `name` varchar(128) DEFAULT NULL,
+  `phone` varchar(64) DEFAULT NULL,
+  `address` varchar(1024) DEFAULT NULL,
+  `cc_number` varchar(128) DEFAULT NULL,
+  `cc_expire` varchar(128) DEFAULT NULL,
+  `country` varchar(128) DEFAULT NULL,
+  `state` varchar(128) DEFAULT NULL,
+  `city` varchar(128) DEFAULT NULL,
+  `created` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
 # Dump of table user_deliver_infos
 # ------------------------------------------------------------
 
@@ -288,6 +329,7 @@ CREATE TABLE `user_deliver_infos` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `guid` char(13) DEFAULT NULL,
   `user_guid` char(13) DEFAULT NULL,
+  `email` varchar(256) DEFAULT NULL,
   `firstname` varchar(32) DEFAULT NULL,
   `lastname` varchar(32) DEFAULT NULL,
   `address` varchar(1024) DEFAULT NULL,
@@ -323,11 +365,12 @@ CREATE TABLE `users` (
   `subscribe_schedule` varchar(32) NOT NULL DEFAULT 'daily',
   `firstname` varchar(32) DEFAULT NULL,
   `lastname` varchar(32) DEFAULT NULL,
-  `address` varchar(1024) DEFAULT NULL,
   `phone` varchar(64) DEFAULT NULL,
   `country` varchar(32) DEFAULT NULL,
   `state` varchar(32) DEFAULT NULL,
   `city` varchar(32) DEFAULT NULL,
+  `address` varchar(1024) DEFAULT NULL,
+  `zipcode` varchar(32) DEFAULT NULL,
   `orders` int(11) NOT NULL DEFAULT '0',
   `active` int(11) NOT NULL DEFAULT '1',
   `created` int(11) DEFAULT NULL,
@@ -335,6 +378,15 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+
+INSERT INTO `users` (`id`, `guid`, `name`, `email`, `password`, `type`, `email_verfied`, `verfied_code`, `verfied_expire`, `subscribe`, `subscribe_content`, `subscribe_schedule`, `firstname`, `lastname`, `phone`, `country`, `state`, `city`, `address`, `zipcode`, `orders`, `active`, `created`, `modified`)
+VALUES
+	(2,'5213153457aad','kkkkkk','kkkkkk@gmail.com','','register',0,NULL,NULL,0,NULL,'daily','dddddd','dddddd','dddddd','US','dddddd','dddddd',' dddddd','dddddd',0,1,1376982324,1376982342);
+
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 

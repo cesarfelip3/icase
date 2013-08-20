@@ -198,6 +198,26 @@ class OrderController extends AdminAppController {
         $Email->subject($subject);
         $Email->send();
     }
+    
+    public function fetch ()
+    {
+        $id = $this->request->query('id');
+        $action = $this->request->query ('action');
+        
+        if ($action == "user" && $this->request->is ('ajax')) {
+            $this->loadModel('Order');
+            $orders = $this->Order->find('all', array('conditions' => array('buyer_guid' => $id)));
+            
+            if (!empty ($orders)) {
+                $this->set ('data', $orders);
+            } else {
+                $this->set ('data', null);
+            }
+            
+            $this->layout = false;
+            $this->render ('fetch.user');
+        }
+    }
 
 }
 

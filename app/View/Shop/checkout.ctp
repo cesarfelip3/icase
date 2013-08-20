@@ -8,6 +8,10 @@
     form.info input {
         display:inline;
     }
+    
+    .qbox {
+        background-color:white;
+    }
 </style>
 <?php if (!isset($paid)) : ?>
     <form id="form-payment" class="info" action="<?php echo $this->webroot; ?>shop/checkout/?action=<?php echo $action; ?>" method="post">

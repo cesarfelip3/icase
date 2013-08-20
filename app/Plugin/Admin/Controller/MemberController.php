@@ -1,8 +1,15 @@
 <?php
 
 class MemberController extends AdminAppController {
-    
-        public function beforeFilter() {
+
+    protected $error = array(
+        'error' => 0,
+        'element' => '',
+        'message' => '',
+        'data' => ''
+    );
+
+    public function beforeFilter() {
         $this->Auth->allow();
         $this->Auth->allow('guest');
         parent::beforeFilter();
@@ -72,7 +79,7 @@ class MemberController extends AdminAppController {
             );
             foreach ($data as $key => $value) {
 
-                if ($value['User']['type'] == 'product') {
+                if ($value['User']['type'] == 'user') {
                     $value['User']['featured'] = unserialize($value['User']['featured']);
                     $value['User']['image'] = count($value['User']['featured']) > 0 ? $value['User']['featured'][0] : "";
                     $data[$key] = $value;
@@ -104,336 +111,180 @@ class MemberController extends AdminAppController {
     }
 
     public function add() {
-        $error = array(
-            'error' => 0,
-            'element' => '',
-            'message' => '',
-            'data' => ''
-        );
 
         if ($this->request->is('ajax') && $this->request->is('post')) {
             $this->autoRender = false;
 
-            $data = $this->request->data('product');
-            $category = $this->request->data('category');
+            $data = $this->request->data('user');
             $action = $this->request->query('action');
 
             if (empty($data['name'])) {
-                $error['error'] = 1;
-                $error['element'] = 'input[name="product[name]"]';
-                $error['message'] = 'User name is required';
-                exit(json_encode($error));
+                $this->error['error'] = 1;
+                $this->error['element'] = 'input[name="user[name]"]';
+                $this->error['message'] = 'Customer name is required';
+                exit(json_encode($this->error));
             }
 
-            if (preg_match("/^[0-9]{1,}\.?[0-9]{0,2}$/i", $data['price']) == false) {
-                $error['error'] = 1;
-                $error['element'] = 'input[name="product[price]"]';
-                $error['message'] = 'Invalid price number';
-                exit(json_encode($error));
+            if (preg_match("/^[a-z]{1,}|[a-z]{1,}[0-9]{1,}$/i", $data['name']) == false) {
+                $this->error['error'] = 1;
+                $this->error['element'] = 'input[name="user[name]"]';
+                $this->error['message'] = 'Invalid name, [a-z]...[0-9]...';
+                exit(json_encode($this->error));
             }
 
-            if (preg_match("/^[0-9]{1,}\.?[0-9]{0,2}$/i", $data['tax']) == false) {
-                $error['error'] = 1;
-                $error['element'] = 'input[name="product[tax]"]';
-                $error['message'] = 'Invalid tax number';
-                exit(json_encode($error));
+            if (empty($data['email'])) {
+                $this->error['error'] = 1;
+                $this->error['element'] = 'input[name="user[email]"]';
+                $this->error['message'] = 'Email is required';
+                exit(json_encode($this->error));
             }
 
-            if (preg_match("/^[0-9]{1,2}$/i", $data['discount']) == false) {
-                $error['error'] = 1;
-                $error['element'] = 'input[name="product[discount]"]';
-                $error['message'] = 'Invalid discount number';
-                exit(json_encode($error));
+            if (preg_match("/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/i", $data['email']) == false) {
+                $this->error['error'] = 1;
+                $this->error['element'] = 'input[name="user[email]"]';
+                $this->error['message'] = 'Invalid email address';
+                exit(json_encode($this->error));
             }
 
-            $is_special = 0;
-            if (isset($data['is_special'])) {
-                $is_special = 1;
-                if (preg_match("/^[0-9]{1,}\.?[0-9]{0,2}$/i", $data['special_price']) == false) {
-                    $error['error'] = 1;
-                    $error['element'] = 'input[name="product[special_price]"]';
-                    $error['message'] = 'Invalid special price number';
-                    exit(json_encode($error));
-                }
+            if (empty($data['password'])) {
+                $this->error['error'] = 1;
+                $this->error['element'] = 'input[name="user[password]"]';
+                $this->error['message'] = 'Password is required';
+                exit(json_encode($this->error));
             }
 
-            if (!isset($data['type'])) {
-                $data['type'] = "product";
-            } else {
-                $data['type'] = "template";
-            }
-
-            if (isset($data['status'])) {
-                $data['status'] = 'published';
-            } else {
-                $data['status'] = 'draft';
+            if (!isset($data['active'])) {
+                $data['active'] = 0;
             }
 
             $this->loadModel('User');
+            $result = $this->User->find('first', array("conditions" => array("OR" => array("name" => $data['name'], "email" => $data['email']))));
 
-            if (!empty($data['featured'])) {
-                $data['featured'] = trim($data['featured'], "-");
-                $data['featured'] = serialize(explode("-", $data['featured']));
+            if (!empty($result)) {
+                $this->error['error'] = 1;
+                $this->error['element'] = '';
+                $this->error['message'] = 'User name or email exists';
+                exit(json_encode($this->error));
             }
 
-            if ($is_special == 1) {
-                $data = array_merge(
-                        $data, array(
-                    "is_special" => 1,
-                    "special_price" => $data['special_price'],
-                    "special_start" => strtotime($data['special_start']),
-                    "special_end" => strtotime($data['special_end'])
-                        )
-                );
-            }
+            $data['name'] = strtolower($data['name']);
+            $passwordHasher = new SimplePasswordHasher();
+            $data['password'] = $passwordHasher->hash($data['password']);
 
-            $data['slug'] = preg_replace("/ +/i", "-", $data['name']) . "-" . uniqid();
-
-            if ($action == "update" && !empty($data['guid'])) {
-                $count = $this->User->find('count', array("conditions" => array("guid" => $data['guid'])));
-                if ($count == 0) {
-                    $data['guid'] = uniqid();
-                    $data['created'] = time();
-                    $data['modified'] = time();
-                } else {
-                    $data['modified'] = time();
-                    $this->User->updateAll(array($product), array("conditions" => array("guid" => $data['guid'])));
-
-                    if (!empty($category)) {
-                        $this->loadModel('CategoryToObject');
-                        $this->CategoryToObject->deleteAll(array("object_guid" => $data['guid']));
-
-                        $data = array();
-                        foreach ($category as $value) {
-                            $data[] = array(
-                                "category_guid" => $value,
-                                "object_guid" => $data['guid']
-                            );
-                        }
-
-                        $this->CategoryToObject->create();
-                        $this->CategoryToObject->saveMany($data);
-                    }
-                    exit(json_encode($error));
-                }
-            } else {
-                $data['guid'] = uniqid();
-                $data['created'] = time();
-                $data['modified'] = time();
-            }
+            $data['guid'] = uniqid();
+            $data['created'] = time();
+            $data['modified'] = time();
+            $data['type'] = "register";
 
             $this->User->create();
             $this->User->save($data);
-            $error['data'] = $data['guid'];
+            $this->error['data'] = $this->User->id;
 
-            if (!empty($category)) {
-
-                $this->loadModel('CategoryToObject');
-
-                foreach ($category as $value) {
-                    $categories[] = array(
-                        "category_guid" => $value,
-                        "object_guid" => $data['guid']
-                    );
-                }
-
-                $this->CategoryToObject->create();
-                $this->CategoryToObject->saveMany($categories);
-            }
-
-            $error['element'] = 'input';
-            exit(json_encode($error));
+            $this->error['error'] = 0;
+            $this->error['element'] = 'input';
+            exit(json_encode($this->error));
         }
     }
 
     public function edit() {
-        $error = array(
-            'error' => 0,
-            'element' => '',
-            'message' => '',
-            'data' => ''
-        );
-
+        
         if ($this->request->is('ajax') && $this->request->is('post')) {
             $this->autoRender = false;
 
-            $data = $this->request->data('product');
-            $category = $this->request->data('category');
+            $data = $this->request->data('user');
             $action = $this->request->query('action');
 
             if (empty($data['name'])) {
-                $error['error'] = 1;
-                $error['element'] = 'input[name="product[name]"]';
-                $error['message'] = 'User name is required';
-                exit(json_encode($error));
+                $this->error['error'] = 1;
+                $this->error['element'] = 'input[name="user[name]"]';
+                $this->error['message'] = 'Customer name is required';
+                exit(json_encode($this->error));
             }
 
-            if (preg_match("/^[0-9]{1,}\.?[0-9]{0,2}$/i", $data['price']) == false) {
-                $error['error'] = 1;
-                $error['element'] = 'input[name="product[price]"]';
-                $error['message'] = 'Invalid price number';
-                exit(json_encode($error));
+            if (preg_match("/^[a-z]{1,}|[a-z]{1,}[0-9]{1,}$/i", $data['name']) == false) {
+                $this->error['error'] = 1;
+                $this->error['element'] = 'input[name="user[name]"]';
+                $this->error['message'] = 'Invalid name, [a-z]...[0-9]...';
+                exit(json_encode($this->error));
             }
 
-            if (preg_match("/^[0-9]{1,}\.?[0-9]{0,2}$/i", $data['tax']) == false) {
-                $error['error'] = 1;
-                $error['element'] = 'input[name="product[tax]"]';
-                $error['message'] = 'Invalid tax number';
-                exit(json_encode($error));
+            if (empty($data['email'])) {
+                $this->error['error'] = 1;
+                $this->error['element'] = 'input[name="user[email]"]';
+                $this->error['message'] = 'Email is required';
+                exit(json_encode($this->error));
             }
 
-            if (preg_match("/^[0-9]{1,2}$/i", $data['discount']) == false) {
-                $error['error'] = 1;
-                $error['element'] = 'input[name="product[discount]"]';
-                $error['message'] = 'Invalid discount number';
-                exit(json_encode($error));
+            if (preg_match("/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/i", $data['email']) == false) {
+                $this->error['error'] = 1;
+                $this->error['element'] = 'input[name="user[email]"]';
+                $this->error['message'] = 'Invalid email address';
+                exit(json_encode($this->error));
             }
 
-            $is_special = 0;
-            if (isset($data['is_special'])) {
-                $is_special = 1;
-                if (preg_match("/^[0-9]{1,}\.?[0-9]{0,2}$/i", $data['special_price']) == false) {
-                    $error['error'] = 1;
-                    $error['element'] = 'input[name="product[special_price]"]';
-                    $error['message'] = 'Invalid special price number';
-                    exit(json_encode($error));
-                }
-            }
-
-            if (!isset($data['type'])) {
-                $data['type'] = "product";
-            } else {
-                $data['type'] = "template";
-            }
-
-            if (isset($data['status'])) {
-                $data['status'] = 'published';
-            } else {
-                $data['status'] = 'draft';
+            if (!isset($data['active'])) {
+                $data['active'] = 0;
             }
 
             $this->loadModel('User');
+            $result = $this->User->find('first', array("conditions" => array("OR" => array("name" => $data['name'], "email" => $data['email']))));
 
-            if (!empty($data['featured'])) {
-                $data['featured'] = trim($data['featured'], "-");
-                $data['featured'] = serialize(explode("-", $data['featured']));
+            if (empty($result)) {
+                $this->error['error'] = 1;
+                $this->error['element'] = '';
+                $this->error['message'] = 'User name or email doesn\'t exists';
+                exit(json_encode($this->error));
             }
 
-            if ($is_special == 1) {
-                $data = array_merge(
-                        $data, array(
-                    "is_special" => 1,
-                    "special_price" => $data['special_price'],
-                    "special_start" => strtotime($data['special_start']),
-                    "special_end" => strtotime($data['special_end'])
-                        )
-                );
+            $data['name'] = strtolower($data['name']);
+            
+            if (!empty ($data['password'])) {
+                $passwordHasher = new SimplePasswordHasher();
+                $data['password'] = $passwordHasher->hash($data['password']);
             }
 
-            if ($action == "update" && !empty($data['guid'])) {
-                $count = $this->User->find('count', array("conditions" => array("guid" => $data['guid'])));
-                if ($count == 0) {
-                    $data['guid'] = uniqid();
-                    $data['created'] = time();
-                    $data['modified'] = time();
-                } else {
-                    $data['modified'] = time();
-                    $this->User->updateAll(array($product), array("conditions" => array("guid" => $data['guid'])));
+            $data['modified'] = time();
+            $data['type'] = "register";
 
-                    if (!empty($category)) {
-                        $this->loadModel('CategoryToObject');
-                        $this->CategoryToObject->deleteAll(array("object_guid" => $data['guid']));
-
-                        $data = array();
-                        foreach ($category as $value) {
-                            $data[] = array(
-                                "category_guid" => $value,
-                                "object_guid" => $product_guid
-                            );
-                        }
-
-                        $this->CategoryToObject->create();
-                        $this->CategoryToObject->saveMany($data);
-                    }
-                    exit(json_encode($error));
-                }
-            } else {
-                $data['guid'] = uniqid();
-                $data['created'] = time();
-                $data['modified'] = time();
+            if (isset ($data['guid'])) {
+                unset ($data['guid']);
             }
+            
+            $this->User->id = $result['User']['id'];
+            $this->User->set($data);
+            $this->User->save ();
 
-            $this->User->create();
-            $this->User->save($product);
-            $error['data'] = $data['guid'];
-
-            if (!empty($category)) {
-
-                $this->loadModel('CategoryToObject');
-
-                $data = array();
-                foreach ($category as $value) {
-                    $data[] = array(
-                        "category_guid" => $value,
-                        "object_guid" => $product_guid
-                    );
-                }
-
-                $this->CategoryToObject->create();
-                $this->CategoryToObject->saveMany($data);
-            }
-
-            $error['element'] = 'input';
-            exit(json_encode($error));
+            $this->error['error'] = 0;
+            $this->error['element'] = 'input';
+            exit(json_encode($this->error));
         }
-
-
-        $guid = $this->request->query("id");
-        if (empty($guid)) {
-            $this->set('data', null);
-            return;
+        
+        $guid = $this->request->query ('id');
+        if (empty ($guid)) {
+            $this->redirect ($this->base . "/admin/member/");
+            //exit;
         }
-
+        
         $this->loadModel('User');
-
         $data = $this->User->find('first', array("conditions" => array("guid" => $guid)));
+        
+        if (empty ($data)) {
+            $this->redirect (array ("plugin"=>"admin", "controller"=>"member", "action"=>"index"));
+        }
+        
         $data = $data['User'];
-
-        $this->set('data', $data);
+        $this->set ('data', $data);
+        
     }
 
     public function delete() {
         $id = $this->request->query('id');
         $this->loadModel('User');
 
-        $data = $this->User->find('first', array("conditions" => array("id" => $id)));
-        if (!empty($data)) {
-
-            $data['User']['featured'] = unserialize($data['User']['featured']);
-            if (!empty($data['User']['featured'])) {
-
-                foreach ($data['User']['featured'] as $value) {
-                    @unlink(ROOT . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'uploads' . DS . $value);
-                    $value = @preg_replace("/\./i", "_150.", $value);
-                    @unlink(ROOT . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'uploads' . DS . $value);
-                }
-            }
-
-            if (!empty($data['User']['image'])) {
-                $value = $data['User']['image'];
-                @unlink(ROOT . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'uploads' . DS . $value);
-                $value = @preg_replace("/\./i", "_150.", $value);
-                @unlink(ROOT . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'uploads' . DS . $value);
-            }
-        }
-
         $this->User->delete($id);
         exit;
     }
 
-    
-    public function profile () {
-        
-    }
 }
+
 ?>

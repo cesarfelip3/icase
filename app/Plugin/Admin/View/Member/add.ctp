@@ -1,6 +1,6 @@
 <?php
 $admin_home = $base;
-$admin_product = $base . "product";
+$admin_member = $base . "member";
 ?>
 <div class="secondary-masthead">
     <div class="container">
@@ -10,7 +10,7 @@ $admin_product = $base . "product";
                 <span class="divider">/</span>
             </li>
             <li class="active">
-                <a href="<?php echo $admin_product; ?>">Products</a> 
+                <a href="<?php echo $admin_member; ?>">Customers</a> 
                 <span class="divider">/</span>
             </li>
             <li class="active">Add</li>
@@ -20,9 +20,9 @@ $admin_product = $base . "product";
 <div class="main-area dashboard">
     <div class="container">
         <form class="form-horizontal" id="form-new">
-            <input type="hidden" name="product[featured]" value="" />
-            <input type="hidden" name="product[image]" value="" />
-            <input type="hidden" name="product[guid]" value='' />
+            <input type="hidden" name="user[featured]" value="" />
+            <input type="hidden" name="user[image]" value="" />
+            <input type="hidden" name="user[guid]" value='' />
             <div class="alert alert-info hide">
                 <a class="close" data-dismiss="alert" href="#">x</a>
                 <h4 class="alert-heading">Information</h4>
@@ -31,149 +31,51 @@ $admin_product = $base . "product";
                 <div class="span8">
                     <div class="slate">
                         <div class="page-header">
-                            <h2>New Product</h2>
+                            <h2>New Customer</h2>
                         </div>
                         <fieldset>
                             <div class="control-group">
                                 <label class="control-label" for="focusedInput">Name</label>
                                 <div class="controls">
-                                    <input class="input-xlarge focused" id="focusedInput" type="text" name="product[name]" >
+                                    <input class="input-medium focused" id="focusedInput" type="text" name="user[name]" >
                                     <span class="help-inline"></span>
                                 </div>
                             </div>
                             <div class="control-group">
-                                <label class="control-label" for="disabledInput">Description</label>
+                                <label class="control-label" for="focusedInput">Email</label>
                                 <div class="controls">
-                                    <textarea class="ckeditor" cols="80" id="editor1" name="product[description]" rows="10"></textarea>
+                                    <input class="input-medium focused" id="focusedInput" type="text" name="user[email]" >
+                                    <span class="help-inline"></span>
                                 </div>
                             </div>
                             <div class="control-group">
-                                <label class="control-label" for="optionsCheckbox2">Template</label>
+                                <label class="control-label" for="focusedInput">Password</label>
+                                <div class="controls">
+                                    <input class="input-medium focused" id="focusedInput" type="password" name="user[password]" >
+                                    <span class="help-inline"></span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="optionsCheckbox2">Active</label>
                                 <div class="controls">
                                     <label class="checkbox">
-                                        <input type="checkbox" id="optionsCheckbox2" name="product[type]" value="template">
+                                        <input type="checkbox" id="optionsCheckbox2" name="user[active]" value="1" checked="checked">
                                         Yes
-                                        <span class="help-inline"><b><em style="color:green">Template means this product is only for cusomized case</em></b></span>
+                                        <span class="help-inline"></span>
                                     </label>
                                 </div>
                             </div>
                             <div class="control-group warning">
-                                <label class="control-label" for="inputWarning">Price</label>
+                                <label class="control-label" for="inputWarning"></label>
                                 <div class="controls">
-                                    <input type="text" class="input-mini" name="product[price]" placeholder="xxxx.xx">
-                                    <span class="help-inline"></span>
-                                </div>
-                            </div>
-                            <div class="control-group warning">
-                                <label class="control-label" for="inputWarning">Tax</label>
-                                <div class="controls">
-                                    <input type="text" class="input-mini" name="product[tax]" value="0.00">
-                                    <span class="help-inline"></span>
-                                </div>
-                            </div>
-                            <div class="control-group warning">
-                                <label class="control-label" for="inputWarning" >Discount</label>
-                                <div class="controls">
-                                    <input type="text" class="input-mini" name="product[discount]" value="0">
-                                    <span class="help-inline"></span>
-                                </div>
-                            </div>
-                            <div class="control-group warning">
-                                <label class="control-label" for="inputWarning" >Quantity</label>
-                                <div class="controls">
-                                    <input type="text" class="input-mini" name="product[quantity]" value="65535">
-                                    <span class="help-inline">65535 means unlimited</span>
-                                </div>
-                            </div>
-                            <div class="page-header">
-                                <h3>Special Offer</h3>
-                            </div>
-                            <div class="control-group">
-                                <label class="control-label" for="optionsCheckbox2">Special</label>
-                                <div class="controls">
-                                    <label class="checkbox">
-                                        <input type="checkbox" id="optionsCheckbox2" name="product[is_special]">
-                                        Yes
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <label class="control-label" for="optionsCheckbox2">Start Date</label>
-                                <div class="controls">
-                                    <input type="text" class="datepicker input-small" name="product[special_start]"/>
-                                    <span class="help-inline"></span>
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <label class="control-label" for="optionsCheckbox2">End Date</label>
-                                <div class="controls">
-                                    <input type="text" class="datepicker input-small" name="product[special_end]" />
-                                    <span class="help-inline"></span>
-                                </div>
-                            </div>
-                            <div class="control-group warning">
-                                <label class="control-label" for="inputWarning">Price</label>
-                                <div class="controls">
-                                    <input type="text" class="input-mini" name="product[special_price]" placeholder="xxxx.xx">
-                                    <span class="help-inline"></span>
-                                </div>
-                            </div>
-                            <div class="control-group warning">
-                                <label class="control-label" for="inputWarning">Save Option</label>
-                                <div class="controls">
-                                    <label class="checkbox">
-                                        <input type="checkbox" class="input-mini" name="product[status]" value="published">Published
-                                    </label>
                                     <a href='javascript:' class='btn btn-primary' data-loading-text="Saving..." onclick="save('create');" id="btn-save">Create</a>
-                                    <a href='javascript:' class='btn btn-primary' data-loading-text="Saving..." onclick="save('update');" id="btn-save">Update</a>
-                                    <span class="help-inline">Create new one or update current one</span>
+                                    <span class="help-inline"></span>
                                 </div>
-                            </div>
-                            <div class='well'>
-                                <p>If "Special" is checked, the sale will start in duration, and use special price, when it's end, it will go back to the original price. All special offers will be on the top of the home product page, to promote sales.</p>
                             </div>
                         </fieldset>
                     </div>
                 </div>
                 <div class="span4">
-                    <div class="slate" id='box-category'>
-                        <div class="page-header">
-                            <h2>Category</h2>
-                        </div>
-                        <div class='body' style="height:150px;overflow: auto;">
-
-                        </div>
-                    </div>
-                    <div class="slate">
-                        <div class="page-header">
-                            <h2>Template Image</h2>
-                        </div>
-                        <div id="template-image-uploader" style="padding:0px;margin:0px;">
-                            <div id="template-image-list" style="padding:0px;margin:0px;margin-bottom:10px;"></div>
-                            <div class="progress" style="height:2px;display:block;width:100%;margin-top:10px;"><div class="bar bar-warning" id="template-image-progress-bar" style="width: 0%; height:2px;"></div></div>
-                            <p>
-                                <a href="javascript:" id="btn-select-template-image" class="btn btn-block btn-info">Select</a> 
-                                <a href="javascript:" id="btn-upload-template-image" class="btn btn-block btn-info" onclick="template_image_start_upload();">Upload</a>
-                            </p>
-                            <div id="box-template-image" class="row-fluid"></div>
-                        </div>
-                    </div>
-                    <div class="slate">
-                        <div class="page-header" id='box-featured-images'>
-                            <h2>Featured Images</h2>
-                        </div>
-                        <div id="featured-image-uploader" style="padding:0px;margin:0px;">
-                            <div id="featured-image-list" style="padding:0px;margin:0px;margin-bottom:10px;"></div>
-                            <div class="progress" style="height:2px;display:block;width:100%;margin-top:10px;"><div class="bar bar-warning" id="featured-image-progress-bar" style="width: 0%; height:2px;"></div></div>
-                            <p>
-                                <a href="javascript:" id="btn-select-featured-image" class="btn btn-block btn-info">Select</a> 
-                                <a href="javascript:" id="btn-upload-featured-image" class="btn btn-block btn-info" onclick="featured_image_start_upload();">Upload</a>
-                            </p>
-                            <div id="box-featured-image" class="row-fluid">
-
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </form>
@@ -195,25 +97,14 @@ $admin_product = $base . "product";
 <script type='text/javascript'>
     $(document).ready(
             function() {
-                jQuery.ajax({
-                    url: "<?php echo $base; ?>product/category/?action=checkbox",
-                    type: "GET",
-                    beforeSend: function(xhr) {
-                    }
-                }).done(function(data) {
-                    jQuery("#box-category .body").html(data);
-                    $("#form-new").serialize();
-
-                }).fail(function() {
-                });
+                
             }
     );
 
     function save(action) {
 
-        CKEDITOR.instances.editor1.updateElement();
         jQuery.ajax({
-            url: "<?php echo $base; ?>product/add/?action=" + action,
+            url: "<?php echo $base; ?>member/add/?action=" + action,
             data: $("#form-new").serialize(),
             type: "POST",
             beforeSend: function(xhr) {
@@ -223,18 +114,13 @@ $admin_product = $base . "product";
             $("#btn-save").button('reset');
 
             var result = $.parseJSON(data);
-            console.log(result);
             if (result.error == 1) {
-                console.log(result.element);
+                $(".help-inline").html("");
                 $(result.element).next(".help-inline").html(result.message);
                 $(result.element).parent().parent().addClass('error');
                 showAlert(result.message);
             } else {
-                if (action == 'create') {
-                    $("input[name='product[guid]'").val(result.data);
-                }
-                $(result.element).parent().parent().removeClass('error');
-                $(result.element).next(".help-inline").html("");
+                window.location.href="";
             }
 
         }).fail(function() {
@@ -314,7 +200,7 @@ $js_pluploader = array(
                 if (result.error == 0) {
                     console.log(result.files.url);
                     $("#box-template-image").html('<div class="span8"><a class="featured-thumbnail"><img src="' + result.files.url + '" style="width:60px" /></a></div>');
-                    $('input[name="product[image]"]').val(result.files.target);
+                    $('input[name="user[image]"]').val(result.files.target);
                 }
                 //jQuery('#progress-bar').css('width', "0%");
             }
@@ -388,8 +274,8 @@ $js_pluploader = array(
                 if (result.error == 0) {
                     //console.log(result.files.url);
                     $("#box-featured-image").append('<div class="thumbnail" style="width:24%;float:left;margin-left:5px;margin-bottom:10px;"><a class="featured-thumbnail"><img src="' + result.files.url150 + '" style="" /></a><div class="caption"><p><a class="btn btn-success" data-image="' + result.files.target + '" onclick="featured_image_delete(this);">Delete</a></p></div></div>');
-                    $("input[name='product[featured]']").val($("input[name='product[featured]']").val() + "-" + result.files.target);
-                    //console.log ($("input[name='product[featured]']").val());
+                    $("input[name='user[featured]']").val($("input[name='user[featured]']").val() + "-" + result.files.target);
+                    //console.log ($("input[name='user[featured]']").val());
                     init();
                 }
                 //jQuery('#progress-bar').css('width', "0%");
@@ -404,7 +290,7 @@ $js_pluploader = array(
         uploader2.start();
         $('#box-featured-image').html("");
         $('#featured-image-list').html("");
-        $('input[name="product[featured]"]').val("");
+        $('input[name="user[featured]"]').val("");
     }
 
     function featured_image_delete(id)
@@ -413,12 +299,12 @@ $js_pluploader = array(
         jQuery(id).parent().parent().parent().remove();
 
         var image = $(id).data('image');
-        var images = $('input[name="product[featured]"]').val();
+        var images = $('input[name="user[featured]"]').val();
 
         image = "-" + image;
         images = images.replace(image, "");
 
-        $('input[name="product[featured]"]').val(images);
+        $('input[name="user[featured]"]').val(images);
         console.log(image + ":" + images);
     }
 </script>
