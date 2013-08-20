@@ -18,8 +18,7 @@ class ReportController extends AdminAppController {
     );
         
     public function beforeFilter() {
-        $this->Auth->allow();
-        $this->Auth->allow('guest');
+        $this->Auth->deny();
         parent::beforeFilter();
     }
 

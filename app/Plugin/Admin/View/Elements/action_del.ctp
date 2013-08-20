@@ -15,7 +15,14 @@
             beforeSend: function(xhr) {
             }
         }).done(function(data) {
-            $("<?php echo $form; ?>").submit ();
+            
+            var ret = $.parseJSON(data);
+            
+            if (ret.error == 1) {
+                showAlert (ret.message);
+            } else {
+                $("<?php echo $form; ?>").submit ();
+            }
         }).fail(function() {
         });
     }

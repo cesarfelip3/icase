@@ -45,7 +45,7 @@ $admin_product = $base . "product";
     function save ()
     {
         jQuery.ajax({
-            url: "<?php echo $base; ?>admin/login",
+            url: "<?php echo $base; ?>index/login",
             data: $("#user-form").serialize(),
             type: "POST",
             beforeSend: function(xhr) {
@@ -59,7 +59,7 @@ $admin_product = $base . "product";
             if (result.error == 1) {
                 
             } else {
-                window.location.href="<?php echo $base; ?>";
+                window.location.href="";
             }
         }).fail(function() {
         });

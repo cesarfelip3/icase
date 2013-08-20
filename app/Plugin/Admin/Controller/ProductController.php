@@ -10,8 +10,7 @@ class ProductController extends AdminAppController {
     );
 
     public function beforeFilter() {
-        $this->Auth->allow();
-        $this->Auth->allow('guest');
+        $this->Auth->deny();
         parent::beforeFilter();
     }
 
@@ -466,7 +465,7 @@ class ProductController extends AdminAppController {
         }
 
         $this->Product->delete($id);
-        exit;
+        exit (json_encode($this->error));
     }
 
     //======================================================

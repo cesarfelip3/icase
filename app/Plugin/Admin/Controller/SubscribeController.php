@@ -1,10 +1,9 @@
 <?php
 
 class SubscribeController extends AdminAppController {
-    
-        public function beforeFilter() {
-        $this->Auth->allow();
-        $this->Auth->allow('guest');
+
+    public function beforeFilter() {
+        $this->Auth->deny();
         parent::beforeFilter();
     }
 
@@ -431,9 +430,10 @@ class SubscribeController extends AdminAppController {
         exit;
     }
 
-    
-    public function profile () {
+    public function profile() {
         
     }
+
 }
+
 ?>

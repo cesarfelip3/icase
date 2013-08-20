@@ -1,6 +1,6 @@
 <?php
 
-class MemberController extends AdminAppController {
+class AdministratorController extends AdminAppController {
 
     protected $error = array(
         'error' => 0,
@@ -11,13 +11,11 @@ class MemberController extends AdminAppController {
 
     public function beforeFilter() {
         $this->Auth->deny();
-        $this->Auth->allow('login');
+        parent::beforeFilter();
     }
 
     public function index() {
 
-        parent::beforeFilter();
-        
         $page = $this->request->query('page');
         $limit = $this->request->query('limit');
 
@@ -65,24 +63,24 @@ class MemberController extends AdminAppController {
 
 
         //=========================================================
-        $this->loadModel('User');
-        $total = $this->User->find("count", array("conditions" => $conditions));
+        $this->loadModel('Admin');
+        $total = $this->Admin->find("count", array("conditions" => $conditions));
 
         if ($total <= 0) {
             $data = array();
         } else {
-            $data = $this->User->find('all', array(
+            $data = $this->Admin->find('all', array(
                 'limit' => $limit,
                 'page' => $page + 1,
                 'conditions' => $conditions,
-                'fields' => array("User.*")
+                'fields' => array("Admin.*")
                     )
             );
             foreach ($data as $key => $value) {
 
-                if ($value['User']['type'] == 'user') {
-                    $value['User']['featured'] = unserialize($value['User']['featured']);
-                    $value['User']['image'] = count($value['User']['featured']) > 0 ? $value['User']['featured'][0] : "";
+                if ($value['Admin']['type'] == 'user') {
+                    $value['Admin']['featured'] = unserialize($value['Admin']['featured']);
+                    $value['Admin']['image'] = count($value['Admin']['featured']) > 0 ? $value['Admin']['featured'][0] : "";
                     $data[$key] = $value;
                 }
             }
@@ -93,9 +91,6 @@ class MemberController extends AdminAppController {
         $pages = ceil($total / $limit);
 
         $filters = array(
-            "type='register'" => "Registered",
-            "type='guest'" => "Guest",
-            "orders > 0" => "Has Orders"
         );
 
         $this->set(array(
@@ -158,13 +153,13 @@ class MemberController extends AdminAppController {
                 $data['active'] = 0;
             }
 
-            $this->loadModel('User');
-            $result = $this->User->find('first', array("conditions" => array("OR" => array("name" => $data['name'], "email" => $data['email']))));
+            $this->loadModel('Admin');
+            $result = $this->Admin->find('first', array("conditions" => array("OR" => array("name" => $data['name'], "email" => $data['email']))));
 
             if (!empty($result)) {
                 $this->error['error'] = 1;
                 $this->error['element'] = '';
-                $this->error['message'] = 'User name or email exists';
+                $this->error['message'] = 'Admin name or email exists';
                 exit(json_encode($this->error));
             }
 
@@ -177,9 +172,9 @@ class MemberController extends AdminAppController {
             $data['modified'] = time();
             $data['type'] = "register";
 
-            $this->User->create();
-            $this->User->save($data);
-            $this->error['data'] = $this->User->id;
+            $this->Admin->create();
+            $this->Admin->save($data);
+            $this->error['data'] = $this->Admin->id;
 
             $this->error['error'] = 0;
             $this->error['element'] = 'input';
@@ -227,13 +222,13 @@ class MemberController extends AdminAppController {
                 $data['active'] = 0;
             }
 
-            $this->loadModel('User');
-            $result = $this->User->find('first', array("conditions" => array("OR" => array("name" => $data['name'], "email" => $data['email']))));
+            $this->loadModel('Admin');
+            $result = $this->Admin->find('first', array("conditions" => array("OR" => array("name" => $data['name'], "email" => $data['email']))));
 
             if (empty($result)) {
                 $this->error['error'] = 1;
                 $this->error['element'] = '';
-                $this->error['message'] = 'User name or email doesn\'t exists';
+                $this->error['message'] = 'Admin name or email doesn\'t exists';
                 exit(json_encode($this->error));
             }
 
@@ -251,9 +246,9 @@ class MemberController extends AdminAppController {
                 unset ($data['guid']);
             }
             
-            $this->User->id = $result['User']['id'];
-            $this->User->set($data);
-            $this->User->save ();
+            $this->Admin->id = $result['Admin']['id'];
+            $this->Admin->set($data);
+            $this->Admin->save ();
 
             $this->error['error'] = 0;
             $this->error['element'] = 'input';
@@ -266,23 +261,30 @@ class MemberController extends AdminAppController {
             //exit;
         }
         
-        $this->loadModel('User');
-        $data = $this->User->find('first', array("conditions" => array("guid" => $guid)));
+        $this->loadModel('Admin');
+        $data = $this->Admin->find('first', array("conditions" => array("guid" => $guid)));
         
         if (empty ($data)) {
             $this->redirect (array ("plugin"=>"admin", "controller"=>"member", "action"=>"index"));
         }
         
-        $data = $data['User'];
+        $data = $data['Admin'];
         $this->set ('data', $data);
         
     }
 
     public function delete() {
         $id = $this->request->query('id');
-        $this->loadModel('User');
+        $this->loadModel('Admin');
 
-        $this->User->delete($id);
+        $count = $this->Admin->find ('count', array ("conditions" => array ('active' => 1)));
+        if ($count <= 1) {
+            $this->error['error'] = 1;
+            $this->error['message'] = "This is the last admin account, you can't delete it.";
+            exit (json_encode($this->error));
+        }
+        
+        $this->Admin->delete($id);
         exit (json_encode($this->error));
     }
 

@@ -10,7 +10,8 @@ class AdminAppController extends Controller {
     public $components = array(
         'Auth' => array(
             'loginAction' => array(
-                'controller' => 'admin',
+                'plugin' => 'admin',
+                'controller' => 'index',
                 'action' => 'login'
             ),
             'authError' => 'Did you really think you are allowed to see that?',
@@ -35,10 +36,12 @@ class AdminAppController extends Controller {
         if ($this->Auth->loggedIn()) {
             $user = array (
                 'name' => $this->Auth->user ('name'),
-                'guid' => $this->Auth->user ('guid')
+                'guid' => $this->Auth->user ('guid'),
+                'email' => $this->Auth->user ('email'),
+                'id' => $this->Auth->user ('id')
             );
             
-            $this->set ('_identity', $user);
-        }
+            $this->set ('identity', $user);
+        } 
     }
 }
