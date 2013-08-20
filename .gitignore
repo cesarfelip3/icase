@@ -1,6 +1,6 @@
 tmp/*
 app/config/core.php
-app/Config/database.php
+app/config/database.php
 app/tmp/*
 app/tmp/cache/*
 app/tmp/persistent/*
