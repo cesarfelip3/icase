@@ -73,6 +73,10 @@
                     <?php endif; ?>
                 </div>
             <?php endfor; ?>
+        <?php else :  ?>
+        <div>
+            <h1>Sorry, we don't have these products yet.</h1>
+        </div>
         <?php endif; ?>
     </div>
 </div>
