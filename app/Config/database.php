@@ -65,7 +65,9 @@ class DATABASE_CONFIG {
 		'database' => 'beautahf_site',
 		'prefix' => '',
 		//'encoding' => 'utf8',
-	);*/
+	);
+ * 
+ */
     
         public $default = array(
 		'datasource' => 'Database/Mysql',
