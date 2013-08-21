@@ -54,6 +54,10 @@ class CatalogueController extends AppController {
                 )
         );
         
+        print_r ($conditions);
+        $log = $this->Product->getDataSource()->getLog(false, false);
+          print_r ($log);
+        
         $this->set ('data', $data);
         
     }
