@@ -80,29 +80,3 @@
         <?php endif; ?>
     </div>
 </div>
-</div>
-<script type="text/javascript">
-    $(document).ready(
-            function() {
-                //alert ("hello");
-                category_load();
-            });
-
-    function category_load() {
-        jQuery.ajax({
-            url: "<?php echo $this->webroot; ?>catalogue/category/<?php echo $slug; ?>",
-            type: "GET",
-            beforeSend: function(xhr) {
-                //showAlert2("Loading category data now......");
-            }
-        }).done(function(data) {
-            //alert (data);
-            //hideAlert();
-            //alert(data);
-            jQuery("#box-category").html(data);
-
-        }).fail(function() {
-            //hideAlert();
-        });
-    }
-</script>
