@@ -132,6 +132,7 @@ class ShopController extends AppController {
             $i = 0;
             if (!empty($data)) {
 
+                /*
                 $amount = 0;
                 foreach ($data as $value) {
                     $amount += round($value['Product']['price'] * $value['Product']['quantity'], 2, PHP_ROUND_HALF_DOWN) + "";
@@ -156,7 +157,8 @@ class ShopController extends AppController {
                     $this->_error['message'] = $response->error_message;
                     exit(json_encode($this->_error));
                 }
-
+                */
+                
                 // create user - guest
                 $user_guid = null;
                 $user_guest = false;
