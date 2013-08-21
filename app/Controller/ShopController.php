@@ -140,7 +140,7 @@ class ShopController extends AppController {
 
                 require_once APP . DS . 'Vendor' . DS . 'AuthorizeNet/AuthorizeNet.php'; // Make sure this path is correct.
                 define("AUTHORIZENET_SANDBOX", false);
-                $transaction = new AuthorizeNetAIM('9c22BSeN', '234k5bjzGPc8NN33');
+                $transaction = new AuthorizeNetAIM('9c22BSeN', '752eHX2G6hk9Y36J');
                 $transaction->setSandbox(false);
                 $transaction->amount = $amount;
                 $transaction->card_num = $bill['cc_number'];
