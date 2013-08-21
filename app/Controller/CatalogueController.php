@@ -20,6 +20,44 @@ class CatalogueController extends AppController {
         }
     }
 
+    public function search($keywords) {
+
+        $keywords = trim($keywords);
+
+        if (empty($keywords)) {
+            $this->_error['error'] = 1;
+            $this->_error['message'] = "Your keywords are empty";
+            exit(json_encode($this->_error));
+        }
+        
+        $keywords = @preg_match ("/ +/", " ", $keywords);
+        $keywords = explode(" ", $keywords);
+        
+        if (empty ($keywords)) {
+            $this->_error['error'] = 1;
+            $this->_error['message'] = "Your keywords are empty";
+            exit(json_encode($this->_error));
+        }
+        
+        foreach ($keywords as $keyword) {
+            $conditions['or'][] = array ('name LIKE' => "%$keyword%");
+            $conditions['or'][] = array ('description LIKE' => "%$keyword%");
+        }
+        
+        $this->loadModel ("Product");
+        
+        $data = $this->Product->find ('all',
+                array (
+                    "conditions" => $conditions,
+                    "limit" => $limit,
+                    "page" => $page + 1
+                )
+        );
+        
+        $this->set ('data', $data);
+        
+    }
+
     public function product($slug) {
         $this->loadModel('Product');
 

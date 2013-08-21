@@ -43,6 +43,13 @@ Router::connect(
         'pass' => array('slug'),
     )
 );
+Router::connect(
+    '/search/:keywords', // E.g. /blog/3-CakePHP_Rocks
+    array('controller' => 'catalogue', 'action' => 'search'), 
+    array(
+        'pass' => array('keywords'),
+    )
+);
 Router::connect('/signin', array('controller' => 'index', 'action' => 'signin'));
 Router::connect('/signup', array('controller' => 'index', 'action' => 'signup'));
 Router::connect('/logout', array('controller' => 'index', 'action' => 'logout'));
