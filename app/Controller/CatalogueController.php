@@ -30,8 +30,12 @@ class CatalogueController extends AppController {
             exit(json_encode($this->_error));
         }
         
+        print_r ($keywords);
+        
         $keywords = @preg_match ("/ +/", " ", $keywords);
         $keywords = explode(" ", $keywords);
+        
+        print_r ($keywords);
         
         if (empty ($keywords)) {
             $this->_error['error'] = 1;
@@ -40,8 +44,8 @@ class CatalogueController extends AppController {
         }
         
         foreach ($keywords as $keyword) {
-            $conditions['or'][] = array ('name LIKE' => "%$keyword%");
-            $conditions['or'][] = array ('description LIKE' => "%$keyword%");
+            $conditions['or'][] = array ('name LIKE' => "%{$keyword}%");
+            $conditions['or'][] = array ('description LIKE' => "%{$keyword}%");
         }
         
         $this->loadModel ("Product");
