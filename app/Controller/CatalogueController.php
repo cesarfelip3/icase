@@ -45,6 +45,13 @@ class CatalogueController extends AppController {
             $this->autoRender = false;
             exit(json_encode($this->_error));
         }
+        
+        $page = $this->request->query ('page');
+        if (empty ($page)) {
+            $page = 0;
+        } else {
+            $page = intval ($page);
+        }
 
         $keywords = @preg_replace("/ +/i", " ", $keywords);
         $keywords = $keywords;
@@ -61,11 +68,13 @@ class CatalogueController extends AppController {
 
         $data = $this->Product->find('all', array(
             "conditions" => $cond,
-            "limit" => 50,
-            "page" => 1,
+            "limit" => 24,
+            "page" => $page + 1,
             "order" => "created DESC"
                 )
         );
+        
+        $pages = $this->Product->find('count', array ("conditions" => $cond));
 
         //$log = $this->Product->getDataSource()->getLog(false, false);
         //print_r ($log);
@@ -77,7 +86,14 @@ class CatalogueController extends AppController {
             }
         }
 
-        $this->set('data', $data);
+        $set = array (
+            "data" => $data,
+            "page" => $page,
+            "pages" => $pages,
+            "limit" => 24
+        );
+                
+        $this->set($set);
     }
 
     public function product($slug) {

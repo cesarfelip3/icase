@@ -6,7 +6,7 @@
     <!--begin head-->
     <head>
         <meta charset="utf-8">
-        <title><?php if (!empty ($title)) echo $title . $this->params['controller']; else echo env("SERVER_NAME") . "| Best iphone, ipod, ipad..."; ?></title>
+        <title><?php if (!empty ($title)) echo $title; else echo env("SERVER_NAME") . " | Best mobile, iphone, ipod, galaxy, mug cases shop"; ?></title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- set content to full screen on iphones -->
         <meta name="apple-mobile-web-app-capable" content="yes">
