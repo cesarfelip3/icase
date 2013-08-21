@@ -31,11 +31,9 @@ class CatalogueController extends AppController {
                 exit(json_encode($this->_error));
             }
 
-
             $keywords = @preg_replace("/ +/i", " ", $keywords);
             $keywords = $keywords;
             $keywords = explode(" ", $keywords);
-
 
             if (empty($keywords)) {
                 $this->_error['error'] = 1;
@@ -46,6 +44,10 @@ class CatalogueController extends AppController {
             $this->_error['error'] = 0;
             exit(json_encode($this->_error));
         }
+        
+        $keywords = @preg_replace("/ +/i", " ", $keywords);
+            $keywords = $keywords;
+            $keywords = explode(" ", $keywords);
 
         foreach ($keywords as $keyword) {
             $conditions['or'][] = array('name LIKE' => "%{$keyword}%");
