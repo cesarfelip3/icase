@@ -24,54 +24,57 @@ class CatalogueController extends AppController {
 
         $keywords = trim($keywords);
 
-        if (empty($keywords)) {
-            $this->_error['error'] = 1;
-            $this->_error['message'] = "Your keywords are empty";
+        if ($this->request->is('ajax')) {
+            if (empty($keywords)) {
+                $this->_error['error'] = 1;
+                $this->_error['message'] = "Your keywords are empty";
+                exit(json_encode($this->_error));
+            }
+
+
+            $keywords = @preg_replace("/ +/i", " ", $keywords);
+            $keywords = $keywords;
+            $keywords = explode(" ", $keywords);
+
+
+            if (empty($keywords)) {
+                $this->_error['error'] = 1;
+                $this->_error['message'] = "Your keywords are empty";
+                exit(json_encode($this->_error));
+            }
+            
+            $this->_error['error'] = 0;
             exit(json_encode($this->_error));
         }
-        
-        
-        $keywords = @preg_replace ("/ +/i", " ", $keywords);
-        $keywords = $keywords;
-        $keywords = explode(" ", $keywords);
-        
-        
-        if (empty ($keywords)) {
-            $this->_error['error'] = 1;
-            $this->_error['message'] = "Your keywords are empty";
-            exit(json_encode($this->_error));
-        }
-        
+
         foreach ($keywords as $keyword) {
-            $conditions['or'][] = array ('name LIKE' => "%{$keyword}%");
-            $conditions['or'][] = array ('description LIKE' => "%{$keyword}%");
+            $conditions['or'][] = array('name LIKE' => "%{$keyword}%");
+            $conditions['or'][] = array('description LIKE' => "%{$keyword}%");
         }
-        
-        $cond = array ("AND" => array ("type" => "product", $conditions));
-        
-        $this->loadModel ("Product");
-        
-        $data = $this->Product->find ('all',
-                array (
-                    "conditions" => $cond,
-                    "limit" => 50,
-                    "page" => 1,
-                    "order" => "created DESC"
+
+        $cond = array("AND" => array("type" => "product", $conditions));
+
+        $this->loadModel("Product");
+
+        $data = $this->Product->find('all', array(
+            "conditions" => $cond,
+            "limit" => 50,
+            "page" => 1,
+            "order" => "created DESC"
                 )
         );
-        
+
         //$log = $this->Product->getDataSource()->getLog(false, false);
-          //print_r ($log);
-        
+        //print_r ($log);
+
         if (!empty($data)) {
             foreach ($data as $key => $value) {
                 $value['Product']['featured'] = unserialize($value['Product']['featured']);
                 $data[$key] = $value;
             }
         }
-        
-        $this->set ('data', $data);
-        
+
+        $this->set('data', $data);
     }
 
     public function product($slug) {
