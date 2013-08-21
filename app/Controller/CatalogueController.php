@@ -134,7 +134,7 @@ class CatalogueController extends AppController {
         $data['featured'] = unserialize($data['featured']);
 
 
-        $this->set("title", env("SERVER_NAME") . " | product | $slug");
+        $this->set("title", env("SERVER_NAME") . " | Best Mobile Case iphone, galaxy | $slug");
         $this->set("data", $data);
     }
 
@@ -233,7 +233,7 @@ class CatalogueController extends AppController {
             }
         }
 
-        $this->set("title", env("SERVER_NAME") . " | category | $slug");
+        $this->set("title", env("SERVER_NAME") . " | Best Mobile Case iphone, galaxy | $slug");
         $this->set("slug", $slug);
         $this->set("data", $data);
     }
