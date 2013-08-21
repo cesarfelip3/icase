@@ -203,7 +203,7 @@ class OrderController extends AdminAppController {
         $id = $this->request->query('id');
         $action = $this->request->query ('action');
         
-        if ($action == "user") { //&& $this->request->is ('ajax')) {
+        if ($action == "user" && $this->request->is ('ajax')) {
             $this->loadModel('Order');
             $orders = $this->Order->find('all', array('conditions' => array('buyer_guid' => $id)));
             
@@ -212,9 +212,6 @@ class OrderController extends AdminAppController {
             } else {
                 $this->set ('data', null);
             }
-            
-            print_r ($orders);
-            exit;
             
             $this->layout = false;
             $this->render ('fetch.user');
