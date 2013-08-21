@@ -429,14 +429,15 @@ class ShopController extends AppController {
     }
 
     protected function email($from, $to, $subject, $content, $template, $vars = array()) {
-        $Email = new CakeEmail();
-        $Email->template($template);
-        $Email->viewVars($vars);
-        $Email->emailFormat('html');
-        $Email->from($from);
-        $Email->to($to);
-        $Email->subject($subject);
-        $Email->send();
+        $email = new CakeEmail();
+        $email->config('Smtp');
+        $email->template($template);
+        $email->viewVars($vars);
+        $email->emailFormat('html');
+        $email->from($from);
+        $email->to($to);
+        $email->subject($subject);
+        $email->send();
     }
 
     /*
