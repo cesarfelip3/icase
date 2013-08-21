@@ -144,7 +144,7 @@ class ShopController extends AppController {
                 $transaction->setSandbox(false);
                 $transaction->amount = $amount;
                 $transaction->card_num = $bill['cc_number'];
-                $transaction->exp_date = $bill['cc_expired'];
+                $transaction->exp_date = $bill['cc_expired']['month'] . "/" . $bill['cc_expired']['year'];
 
                 $response = $transaction->authorizeAndCapture();
 
@@ -338,6 +338,7 @@ class ShopController extends AppController {
                     $this->_error['message'] = "All fields in bill info are required";
                     exit(json_encode($this->_error));
                 }
+                
             }
 
             $orders = isset($_COOKIE['orders']) ? $_COOKIE['orders'] : "";
