@@ -60,6 +60,13 @@ class CatalogueController extends AppController {
         //$log = $this->Product->getDataSource()->getLog(false, false);
           //print_r ($log);
         
+        if (!empty($data)) {
+            foreach ($data as $key => $value) {
+                $value['Product']['featured'] = unserialize($value['Product']['featured']);
+                $data[$key] = $value;
+            }
+        }
+        
         $this->set ('data', $data);
         
     }
