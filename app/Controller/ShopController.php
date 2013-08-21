@@ -301,7 +301,10 @@ class ShopController extends AppController {
                     $var = array('data' => $orders);
                     $this->email($from, $to, $subject, $content, "checkout_order_seller");
                 } catch (Exception $e) {
-                    
+                    $this->Product->rollTransaction();
+                    $this->_error['error'] = 1;
+                    $this->_error['message'] = $e->getMessage();
+                    exit(json_encode($this->_error));
                 }
 
                 $this->layout = false;
