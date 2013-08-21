@@ -82,7 +82,15 @@ if (isset($this->params['slug'])) {
 <script type='text/javascript'>
     function header_search ()
     {
-        var keywords = $("#search").val();
+        var keywords = $("input[name=search]").val();
+        
+        console.log (keywords);
+        
+        keywords = $.trim(keywords);
+        if (keywords == '') {
+            alert ("Keywords are required.");
+            return;
+        }
         
         jQuery.ajax({
             url: "<?php echo $this->webroot; ?>search/" + keywords,
