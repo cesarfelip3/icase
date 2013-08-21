@@ -43,17 +43,20 @@ class CatalogueController extends AppController {
         }
         
         foreach ($keywords as $keyword) {
-            $conditions['or '][] = array ('name LIKE' => "%{$keyword}%");
+            $conditions['or'][] = array ('name LIKE' => "%{$keyword}%");
             $conditions['or'][] = array ('description LIKE' => "%{$keyword}%");
         }
+        
+        $cond = array ("AND" => array ("type" => "product", $conditions));
         
         $this->loadModel ("Product");
         
         $data = $this->Product->find ('all',
                 array (
-                    "conditions" => $conditions,
+                    "conditions" => $cond,
                     "limit" => 50,
-                    "page" => 1
+                    "page" => 1,
+                    "order" => "created DESC"
                 )
         );
         
