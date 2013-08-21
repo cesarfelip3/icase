@@ -22,6 +22,12 @@ class CatalogueController extends AppController {
 
     public function search($keywords) {
 
+        
+        $search = $this->request->query ('search');
+        if (!empty ($search)) {
+            $keywords = $search;
+        }
+        
         $keywords = trim($keywords);
 
         if ($this->request->is('ajax')) {

@@ -65,11 +65,11 @@ if (isset($this->params['slug'])) {
             <div id="slogan">Custom Phone Cases</div>
             <div id="search"><abbr title="Phone" id="call-phone">
                     <div class="searchwrapper">    
-                        <form name="form1" method="GET" action="/search">
+                        <form name="form1" action='<?php echo $this->webroot; ?>search/a'>
                             <input type="text" name="search" id="search" onfocus="if (this.defaultValue == this.value)
                                     this.value = '';" onblur="if ('' == this.value)
                                     this.value = this.defaultValue;" value="Search inside the box">
-                            <input class="btn btn-mini btn-peach colwhite" type="button" name="Search" id="submit" value="Search" onclick='header_search();'>
+                             <input class="btn btn-mini btn-peach colwhite" type="button" name="Search" id="submit" value="Search" onclick='header_search();' onkeypress='header_search();' />
                         </form>
                     </div>    
                 </abbr></div>
