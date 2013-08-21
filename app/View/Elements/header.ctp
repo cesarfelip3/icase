@@ -67,7 +67,7 @@ if (isset ($this->params['slug'])) {
             
         </div>    
 		<div style="clear:both"></div>
-        <div id="slogansearch">
+        <div id="slogansearch" class="desktop">
 	            <div id="slogan">Custom Phone Cases</div>
             
     	        <div id="search"><abbr title="Phone" id="call-phone">
@@ -81,6 +81,10 @@ if (isset ($this->params['slug'])) {
                 </div>    
             </abbr></div>
             </div>
+
+
+
+            
         <div style="clear:both"></div>
     </div><!--end logo area-->
     <!--nav bar start-->
