@@ -30,13 +30,11 @@ class CatalogueController extends AppController {
             exit(json_encode($this->_error));
         }
         
-        print_r ($keywords);
         
-        $keywords = @preg_match ("/ +/", " ", $keywords);
-        $keywords = $keywords . " ";
+        $keywords = @preg_replace ("/ +/i", " ", $keywords);
+        $keywords = $keywords;
         $keywords = explode(" ", $keywords);
         
-        print_r ($keywords);
         
         if (empty ($keywords)) {
             $this->_error['error'] = 1;
@@ -59,9 +57,8 @@ class CatalogueController extends AppController {
                 )
         );
         
-        print_r ($conditions);
-        $log = $this->Product->getDataSource()->getLog(false, false);
-          print_r ($log);
+        //$log = $this->Product->getDataSource()->getLog(false, false);
+          //print_r ($log);
         
         $this->set ('data', $data);
         
