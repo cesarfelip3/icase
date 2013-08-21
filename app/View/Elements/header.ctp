@@ -46,7 +46,7 @@ if (isset ($this->params['slug'])) {
                         if ($controller == "case" && $action == "newcase")
                             echo "active";
                         ?>">
-                            <a href="<?php echo $this->Html->Url("/design", false); ?>">Design</a>
+                            <a href="<?php echo $this->Html->Url("/design", false); ?>">Create My Case</a>
                         </li>
                         <?php if (!empty ($top_header)) : ?>
                         <?php foreach ($top_header as $value) : ?>
