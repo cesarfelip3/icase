@@ -80,7 +80,7 @@
                         </p>
                         <p>
                             <label>Expired</label>
-                            <select name="bill[cc_expired]['month']">
+                            <select name="bill[cc_expired]['month']" class='input-mini'>
                                 <option value="01">01</option>
                                 <option value="02">02</option>
                                 <option value="03">03</option>
@@ -94,7 +94,7 @@
                                 <option value="11">11</option>
                                 <option value="12">12</option>
                             </select>
-                            <select name="bill[cc_expired]['year']">
+                            <select name="bill[cc_expired]['year']" class='input-mini'>
                                 <option value="13">13</option>
                                 <option value="14">14</option>
                                 <option value="15">15</option>
@@ -111,7 +111,7 @@
                         </p>
                         <p>
                             <label>Phone</label>
-                            <input type="text" class="input-large" name="bill[phone]" placeholder='Credit Card Number' />
+                            <input type="text" class="input-large" name="bill[phone]" placeholder='Phone' />
                         </p
                         <p>
                             <label>Address</label>
