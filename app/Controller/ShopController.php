@@ -292,12 +292,12 @@ class ShopController extends AppController {
                     $subject = "Your Order is Confirmed";
                     $vars = array('deliver' => $deliver, 'bill' => $bill);
                     $content = null;
-                    $this->email($from, $to, $subject, $content, "checkout_order_buyer", $vars);
+                    $this->email("", $to, $subject, $content, "checkout_order_buyer", $vars);
 
                     $to = "cesarfelip3@gmail.com";
                     $subject = "There new orders come";
                     $var = array('data' => $orders);
-                    $this->email($from, $to, $subject, $content, "checkout_order_seller");
+                    $this->email("", $to, $subject, $content, "checkout_order_seller");
                 } catch (Exception $e) {
                     $this->Product->rollTransaction();
                     $this->_error['error'] = 1;
@@ -437,7 +437,7 @@ class ShopController extends AppController {
         $email->template($template);
         $email->viewVars($vars);
         $email->emailFormat('html');
-        $email->from($from);
+        $email->from("sales@beautahfulcreations.com");
         $email->to($to);
         $email->subject($subject);
         $email->send();
