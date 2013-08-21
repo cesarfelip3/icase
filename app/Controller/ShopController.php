@@ -435,7 +435,7 @@ class ShopController extends AppController {
 
     protected function email($from, $to, $subject, $content, $template, $vars = array()) {
         $email = new CakeEmail();
-        $email->config('Smtp');
+        $email->config('smtp');
         $email->template($template);
         $email->viewVars($vars);
         $email->emailFormat('html');
