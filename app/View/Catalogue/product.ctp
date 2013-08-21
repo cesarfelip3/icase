@@ -61,9 +61,10 @@
                             orderId = jQuery(this).data('guid');
 
                             $.shoppingcart.set(orderId);
-
-                            window.open("<?php echo $this->webroot; ?>shop/checkout?action=cart", "_blank");
-                            window.focus();
+                            
+                            window.location.href = "<?php echo $this->webroot; ?>shop/checkout?action=cart";
+                            //window.open("<?php echo $this->webroot; ?>shop/checkout?action=cart", "_self");
+                            //window.focus();
                         });
             });
 
