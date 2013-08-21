@@ -67,6 +67,7 @@ class DATABASE_CONFIG {
 		//'encoding' => 'utf8',
 	);
  * 
+ * 
  */
     
         public $default = array(
