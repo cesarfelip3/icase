@@ -78,7 +78,7 @@ $admin_product = $base . "product";
                                 </div>
                             </div>
                             <?php endif; ?>
-                            <div class="control-group warning hide">
+                            <div class="control-group warning">
                                 <label class="control-label" for="inputWarning">Price</label>
                                 <div class="controls">
                                     <input type="text" class="input-mini" name="product[price]" placeholder="xxxx.xx" value="<?php echo $data['price']; ?>">
@@ -92,7 +92,7 @@ $admin_product = $base . "product";
                                     <span class="help-inline"></span>
                                 </div>
                             </div>
-                            <div class="control-group warning">
+                            <div class="control-group warning hide">
                                 <label class="control-label" for="inputWarning" >Discount</label>
                                 <div class="controls">
                                     <input type="text" class="input-mini" name="product[discount]" value="<?php echo $data['discount']; ?>">
