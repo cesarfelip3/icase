@@ -66,7 +66,7 @@ if (isset($this->params['slug'])) {
             <div id="search"><abbr title="Phone" id="call-phone">
                     <div class="searchwrapper">    
                         <form name="form1" method="GET" action="/search">
-                            <input type="text" name="search" id='keywords' id="search" onfocus="if (this.defaultValue == this.value)
+                            <input type="text" name="search" id="search" onfocus="if (this.defaultValue == this.value)
                                     this.value = '';" onblur="if ('' == this.value)
                                     this.value = this.defaultValue;" value="Search inside the box">
                             <input class="btn btn-mini btn-peach colwhite" type="button" name="Search" id="submit" value="Search" onclick='search();'>
@@ -82,7 +82,7 @@ if (isset($this->params['slug'])) {
 <script type='text/javascript'>
     function search ()
     {
-        var keywords = $("#keywords").val();
+        var keywords = $("#search").val();
         
         jQuery.ajax({
             url: "<?php echo $this->webroot; ?>search/" + keywords,
