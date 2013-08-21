@@ -8,7 +8,7 @@
     form.info input {
         display:inline;
     }
-    
+
     .qbox {
         background-color:white;
     }
@@ -53,7 +53,58 @@
                     <p>
                         <label>State</label>
                         <select name="deliver[state]">
-                            <option value="Utah">Utah</option>
+                            <option value="" selected="selected">Select a State</option> 
+                            <option value="AL">Alabama</option> 
+                            <option value="AK">Alaska</option> 
+                            <option value="AZ">Arizona</option> 
+                            <option value="AR">Arkansas</option> 
+                            <option value="CA">California</option> 
+                            <option value="CO">Colorado</option> 
+                            <option value="CT">Connecticut</option> 
+                            <option value="DE">Delaware</option> 
+                            <option value="DC">District Of Columbia</option> 
+                            <option value="FL">Florida</option> 
+                            <option value="GA">Georgia</option> 
+                            <option value="HI">Hawaii</option> 
+                            <option value="ID">Idaho</option> 
+                            <option value="IL">Illinois</option> 
+                            <option value="IN">Indiana</option> 
+                            <option value="IA">Iowa</option> 
+                            <option value="KS">Kansas</option> 
+                            <option value="KY">Kentucky</option> 
+                            <option value="LA">Louisiana</option> 
+                            <option value="ME">Maine</option> 
+                            <option value="MD">Maryland</option> 
+                            <option value="MA">Massachusetts</option> 
+                            <option value="MI">Michigan</option> 
+                            <option value="MN">Minnesota</option> 
+                            <option value="MS">Mississippi</option> 
+                            <option value="MO">Missouri</option> 
+                            <option value="MT">Montana</option> 
+                            <option value="NE">Nebraska</option> 
+                            <option value="NV">Nevada</option> 
+                            <option value="NH">New Hampshire</option> 
+                            <option value="NJ">New Jersey</option> 
+                            <option value="NM">New Mexico</option> 
+                            <option value="NY">New York</option> 
+                            <option value="NC">North Carolina</option> 
+                            <option value="ND">North Dakota</option> 
+                            <option value="OH">Ohio</option> 
+                            <option value="OK">Oklahoma</option> 
+                            <option value="OR">Oregon</option> 
+                            <option value="PA">Pennsylvania</option> 
+                            <option value="RI">Rhode Island</option> 
+                            <option value="SC">South Carolina</option> 
+                            <option value="SD">South Dakota</option> 
+                            <option value="TN">Tennessee</option> 
+                            <option value="TX">Texas</option> 
+                            <option value="UT">Utah</option> 
+                            <option value="VT">Vermont</option> 
+                            <option value="VA">Virginia</option> 
+                            <option value="WA">Washington</option> 
+                            <option value="WV">West Virginia</option> 
+                            <option value="WI">Wisconsin</option> 
+                            <option value="WY">Wyoming</option>
                         </select>
                     </p>
                     <p>
@@ -126,7 +177,58 @@
                         <p>
                             <label>State</label>
                             <select name="bill[state]">
-                                <option value="Utah">Utah</option>
+                                <option value="" selected="selected">Select a State</option> 
+                                <option value="AL">Alabama</option> 
+                                <option value="AK">Alaska</option> 
+                                <option value="AZ">Arizona</option> 
+                                <option value="AR">Arkansas</option> 
+                                <option value="CA">California</option> 
+                                <option value="CO">Colorado</option> 
+                                <option value="CT">Connecticut</option> 
+                                <option value="DE">Delaware</option> 
+                                <option value="DC">District Of Columbia</option> 
+                                <option value="FL">Florida</option> 
+                                <option value="GA">Georgia</option> 
+                                <option value="HI">Hawaii</option> 
+                                <option value="ID">Idaho</option> 
+                                <option value="IL">Illinois</option> 
+                                <option value="IN">Indiana</option> 
+                                <option value="IA">Iowa</option> 
+                                <option value="KS">Kansas</option> 
+                                <option value="KY">Kentucky</option> 
+                                <option value="LA">Louisiana</option> 
+                                <option value="ME">Maine</option> 
+                                <option value="MD">Maryland</option> 
+                                <option value="MA">Massachusetts</option> 
+                                <option value="MI">Michigan</option> 
+                                <option value="MN">Minnesota</option> 
+                                <option value="MS">Mississippi</option> 
+                                <option value="MO">Missouri</option> 
+                                <option value="MT">Montana</option> 
+                                <option value="NE">Nebraska</option> 
+                                <option value="NV">Nevada</option> 
+                                <option value="NH">New Hampshire</option> 
+                                <option value="NJ">New Jersey</option> 
+                                <option value="NM">New Mexico</option> 
+                                <option value="NY">New York</option> 
+                                <option value="NC">North Carolina</option> 
+                                <option value="ND">North Dakota</option> 
+                                <option value="OH">Ohio</option> 
+                                <option value="OK">Oklahoma</option> 
+                                <option value="OR">Oregon</option> 
+                                <option value="PA">Pennsylvania</option> 
+                                <option value="RI">Rhode Island</option> 
+                                <option value="SC">South Carolina</option> 
+                                <option value="SD">South Dakota</option> 
+                                <option value="TN">Tennessee</option> 
+                                <option value="TX">Texas</option> 
+                                <option value="UT">Utah</option> 
+                                <option value="VT">Vermont</option> 
+                                <option value="VA">Virginia</option> 
+                                <option value="WA">Washington</option> 
+                                <option value="WV">West Virginia</option> 
+                                <option value="WI">Wisconsin</option> 
+                                <option value="WY">Wyoming</option>
                             </select>
                         </p>
                         <p>
@@ -208,258 +310,258 @@
         </div>
     </form>
 
-<script type="text/javascript">
-    jQuery(document).ready(
-            function() {
-                checkout_cart();
-                $("#btn-signup").click(
-                        function() {
-                            $("#box-signup").show();
-                            $("#box-signin").hide();
-                        });
+    <script type="text/javascript">
+                                    jQuery(document).ready(
+                                            function() {
+                                                checkout_cart();
+                                                $("#btn-signup").click(
+                                                        function() {
+                                                            $("#box-signup").show();
+                                                            $("#box-signin").hide();
+                                                        });
 
-                $("#btn-signin").click(
-                        function() {
-                            $("#box-signup").hide();
-                            $("#box-signin").show();
-                        });
+                                                $("#btn-signin").click(
+                                                        function() {
+                                                            $("#box-signup").hide();
+                                                            $("#box-signin").show();
+                                                        });
 
-                jQuery(".datepicker").datepicker({format: 'mm/yy'});
-            }
-    );
+                                                jQuery(".datepicker").datepicker({format: 'mm/yy'});
+                                            }
+                                    );
 
-    function checkout_cart() {
-        cart_reload('cart');
-    }
+                                    function checkout_cart() {
+                                        cart_reload('cart');
+                                    }
 
-    function cart_config() {
+                                    function cart_config() {
 
-        jQuery("#box-cart a").off('click');
-        jQuery("#box-cart a").click(
-                function() {
-                    var action = $(this).data('action');
-                    var guid = $(this).data('guid');
-                    var file = $(this).data('file');
-                    var type = $(this).data('type');
-                    
-                    var i = 0;
-                    var price = 0;
+                                        jQuery("#box-cart a").off('click');
+                                        jQuery("#box-cart a").click(
+                                                function() {
+                                                    var action = $(this).data('action');
+                                                    var guid = $(this).data('guid');
+                                                    var file = $(this).data('file');
+                                                    var type = $(this).data('type');
 
-                    switch (action) {
-                        case 'close':
-                            jQuery("#box-cart").hide(0);
-                            break;
-                        case 'plus' :
-                            i = jQuery(this).next().text();
-                            console.log(i);
-                            i = parseInt(jQuery.trim(i));
-                            i++;
-                            jQuery(this).next().text(i);
-                            if (file == "" || type == 'product') {
-                                guid = guid;
-                            } else {
-                                guid = guid + "-" + file;
-                            }
-                            $.shoppingcart.set(guid);
-                            price = $(this).data('price');
-                            price = parseFloat(price) * i;
-                            $(this).parent().prev().text(price.toFixed(2));
-                            break;
-                        case 'minus' :
-                            i = jQuery(this).prev().text();
-                            console.log(i);
-                            i = parseInt(jQuery.trim(i));
-                            i--;
-                            if (i <= 0) {
-                                $.shoppingcart.removeall(guid);
-                                cart_reload();
-                                break;
-                            }
-                            jQuery(this).prev().text(i);
-                            if (file == "" || type == 'product') {
-                                guid = guid;
-                            } else {
-                                guid = guid + "-" + file;
-                            }
-                            $.shoppingcart.remove(guid);
-                            price = $(this).data('price');
-                            price = parseFloat(price) * i;
-                            $(this).parent().prev().text(price.toFixed(2));
-                            break;
-                        case 'remove' :
-                            if (file == "" || type == 'product') {
-                                guid = guid;
-                            } else {
-                                guid = guid + "-" + file;
-                            }
-                            $.shoppingcart.removeall(guid);
-                            window.location.href="";
-                            //cart_reload();
-                            break;
-                    }
-                }
-        );
-    }
+                                                    var i = 0;
+                                                    var price = 0;
 
-    function cart_reload(single) {
+                                                    switch (action) {
+                                                        case 'close':
+                                                            jQuery("#box-cart").hide(0);
+                                                            break;
+                                                        case 'plus' :
+                                                            i = jQuery(this).next().text();
+                                                            console.log(i);
+                                                            i = parseInt(jQuery.trim(i));
+                                                            i++;
+                                                            jQuery(this).next().text(i);
+                                                            if (file == "" || type == 'product') {
+                                                                guid = guid;
+                                                            } else {
+                                                                guid = guid + "-" + file;
+                                                            }
+                                                            $.shoppingcart.set(guid);
+                                                            price = $(this).data('price');
+                                                            price = parseFloat(price) * i;
+                                                            $(this).parent().prev().text(price.toFixed(2));
+                                                            break;
+                                                        case 'minus' :
+                                                            i = jQuery(this).prev().text();
+                                                            console.log(i);
+                                                            i = parseInt(jQuery.trim(i));
+                                                            i--;
+                                                            if (i <= 0) {
+                                                                $.shoppingcart.removeall(guid);
+                                                                cart_reload();
+                                                                break;
+                                                            }
+                                                            jQuery(this).prev().text(i);
+                                                            if (file == "" || type == 'product') {
+                                                                guid = guid;
+                                                            } else {
+                                                                guid = guid + "-" + file;
+                                                            }
+                                                            $.shoppingcart.remove(guid);
+                                                            price = $(this).data('price');
+                                                            price = parseFloat(price) * i;
+                                                            $(this).parent().prev().text(price.toFixed(2));
+                                                            break;
+                                                        case 'remove' :
+                                                            if (file == "" || type == 'product') {
+                                                                guid = guid;
+                                                            } else {
+                                                                guid = guid + "-" + file;
+                                                            }
+                                                            $.shoppingcart.removeall(guid);
+                                                            window.location.href = "";
+                                                            //cart_reload();
+                                                            break;
+                                                    }
+                                                }
+                                        );
+                                    }
 
-        jQuery.ajax({
-            url: "<?php echo $this->webroot; ?>shop/cart/?action=" + single,
-            data: {"user": $.shoppingcart.getuuid()},
-            type: "POST",
-            beforeSend: function(xhr) {
-            }
-        }).done(function(data) {
-            $("#box-cart").html(data);
-            $("#box-cart").show();
+                                    function cart_reload(single) {
 
-            var hasorder = $("input[name=hasorder]").val();
-            if (hasorder == "1") {
-                $("#btn-paynow").parent().remove();
-                $("#box-bill-details").html($("#box-bill-details").html() + '<p><a class="btn btn-peach" onclick="javascript:cart_check()" id="btn-paynow">Pay Now</a></p>');
-            }
+                                        jQuery.ajax({
+                                            url: "<?php echo $this->webroot; ?>shop/cart/?action=" + single,
+                                            data: {"user": $.shoppingcart.getuuid()},
+                                            type: "POST",
+                                            beforeSend: function(xhr) {
+                                            }
+                                        }).done(function(data) {
+                                            $("#box-cart").html(data);
+                                            $("#box-cart").show();
 
-            cart_config();
+                                            var hasorder = $("input[name=hasorder]").val();
+                                            if (hasorder == "1") {
+                                                $("#btn-paynow").parent().remove();
+                                                $("#box-bill-details").html($("#box-bill-details").html() + '<p><a class="btn btn-peach" onclick="javascript:cart_check()" id="btn-paynow">Pay Now</a></p>');
+                                            }
 
-        }).fail(function() {
+                                            cart_config();
 
-        });
-    }
+                                        }).fail(function() {
 
-    function cart_check()
-    {
-        jQuery.ajax({
-            url: "<?php echo $this->webroot; ?>shop/checkout/?action=check",
-            data: $("#form-payment").serialize(),
-            type: "POST",
-            beforeSend: function(xhr) {
-                showAlert2("Working....");
-            }
-        }).done(function(data) {
-            
-                
-            try {
-                var result = $.parseJSON(data);
-                if (result.error == 1) {
-                    showAlert(result.message);
-                } else {
+                                        });
+                                    }
 
-                }
-            } 
-            catch(e) {
-                hideAlert();
-                $(".checkout").hide(0)
-                $("#box-order-confirm").show(0);
-                $("#box-order-confirm").html(data);
-            }
+                                    function cart_check()
+                                    {
+                                        jQuery.ajax({
+                                            url: "<?php echo $this->webroot; ?>shop/checkout/?action=check",
+                                            data: $("#form-payment").serialize(),
+                                            type: "POST",
+                                            beforeSend: function(xhr) {
+                                                showAlert2("Working....");
+                                            }
+                                        }).done(function(data) {
 
-        }).fail(function() {
-            hideAlert();
-        });
-    }
-    
-    function cart_pay ()
-    {
-        jQuery.ajax({
-            url: "<?php echo $this->webroot; ?>shop/checkout/?action=pay",
-            data: $("#form-payment").serialize(),
-            type: "POST",
-            beforeSend: function(xhr) {
-                showAlert2("Working....");
-            }
-        }).done(function(data) {
-            
-                
-            try {
-                var result = $.parseJSON(data);
-                if (result.error == 1) {
-                    showAlert(result.message);
-                } else {
 
-                }
-            } 
-            catch(e) {
-                hideAlert();
-                $(".checkout").hide(0)
-                $("#box-order-confirm").hide(0);
-                $("#box-order-success").show(0);
-                $("#box-order-success").html(data);
-            }
+                                            try {
+                                                var result = $.parseJSON(data);
+                                                if (result.error == 1) {
+                                                    showAlert(result.message);
+                                                } else {
 
-        }).fail(function() {
-            hideAlert();
-        });        
-    }
+                                                }
+                                            }
+                                            catch (e) {
+                                                hideAlert();
+                                                $(".checkout").hide(0)
+                                                $("#box-order-confirm").show(0);
+                                                $("#box-order-confirm").html(data);
+                                            }
 
-    //===================================
-    function login()
-    {
-        jQuery.ajax({
-            url: "<?php echo $this->webroot; ?>signin/",
-            data: $("#form-payment").serialize(),
-            type: "POST",
-            beforeSend: function(xhr) {
-                showAlert2("Working....");
-            }
-        }).done(function(data) {
+                                        }).fail(function() {
+                                            hideAlert();
+                                        });
+                                    }
 
-            var result = $.parseJSON(data);
-            if (result.error == 1) {
-                showAlert(result.message);
-            } else {
-                window.location.href = "";
-            }
+                                    function cart_pay()
+                                    {
+                                        jQuery.ajax({
+                                            url: "<?php echo $this->webroot; ?>shop/checkout/?action=pay",
+                                            data: $("#form-payment").serialize(),
+                                            type: "POST",
+                                            beforeSend: function(xhr) {
+                                                showAlert2("Working....");
+                                            }
+                                        }).done(function(data) {
 
-        }).fail(function() {
-            hideAlert();
-        });
-    }
 
-    function signup()
-    {
-        jQuery.ajax({
-            url: "<?php echo $this->webroot; ?>signup/",
-            data: $("#form-payment").serialize(),
-            type: "POST",
-            beforeSend: function(xhr) {
-                showAlert2("Working....");
-            }
-        }).done(function(data) {
+                                            try {
+                                                var result = $.parseJSON(data);
+                                                if (result.error == 1) {
+                                                    showAlert(result.message);
+                                                } else {
 
-            var result = $.parseJSON(data);
-            if (result.error == 1) {
-                showAlert(result.message);
-            } else {
-                window.location.href = "";
-            }
+                                                }
+                                            }
+                                            catch (e) {
+                                                hideAlert();
+                                                $(".checkout").hide(0)
+                                                $("#box-order-confirm").hide(0);
+                                                $("#box-order-success").show(0);
+                                                $("#box-order-success").html(data);
+                                            }
 
-        }).fail(function() {
-            hideAlert();
-        });
-    }
+                                        }).fail(function() {
+                                            hideAlert();
+                                        });
+                                    }
 
-    function logout()
-    {
-        jQuery.ajax({
-            url: "<?php echo $this->webroot; ?>logout/",
-            type: "GET",
-            beforeSend: function(xhr) {
-                showAlert2("Working....");
-            }
-        }).done(function(data) {
+                                    //===================================
+                                    function login()
+                                    {
+                                        jQuery.ajax({
+                                            url: "<?php echo $this->webroot; ?>signin/",
+                                            data: $("#form-payment").serialize(),
+                                            type: "POST",
+                                            beforeSend: function(xhr) {
+                                                showAlert2("Working....");
+                                            }
+                                        }).done(function(data) {
 
-            var result = $.parseJSON(data);
-            if (result.error == 1) {
-                showAlert(result.message);
-            } else {
-                window.location.href = "";
-            }
+                                            var result = $.parseJSON(data);
+                                            if (result.error == 1) {
+                                                showAlert(result.message);
+                                            } else {
+                                                window.location.href = "";
+                                            }
 
-        }).fail(function() {
-            hideAlert();
-        });
-    }
-</script>
+                                        }).fail(function() {
+                                            hideAlert();
+                                        });
+                                    }
+
+                                    function signup()
+                                    {
+                                        jQuery.ajax({
+                                            url: "<?php echo $this->webroot; ?>signup/",
+                                            data: $("#form-payment").serialize(),
+                                            type: "POST",
+                                            beforeSend: function(xhr) {
+                                                showAlert2("Working....");
+                                            }
+                                        }).done(function(data) {
+
+                                            var result = $.parseJSON(data);
+                                            if (result.error == 1) {
+                                                showAlert(result.message);
+                                            } else {
+                                                window.location.href = "";
+                                            }
+
+                                        }).fail(function() {
+                                            hideAlert();
+                                        });
+                                    }
+
+                                    function logout()
+                                    {
+                                        jQuery.ajax({
+                                            url: "<?php echo $this->webroot; ?>logout/",
+                                            type: "GET",
+                                            beforeSend: function(xhr) {
+                                                showAlert2("Working....");
+                                            }
+                                        }).done(function(data) {
+
+                                            var result = $.parseJSON(data);
+                                            if (result.error == 1) {
+                                                showAlert(result.message);
+                                            } else {
+                                                window.location.href = "";
+                                            }
+
+                                        }).fail(function() {
+                                            hideAlert();
+                                        });
+                                    }
+    </script>
 <?php else: ?>
     <div class="row-fluid">
         <div class="span12">
