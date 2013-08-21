@@ -33,6 +33,7 @@ class CatalogueController extends AppController {
         print_r ($keywords);
         
         $keywords = @preg_match ("/ +/", " ", $keywords);
+        $keywords = $keywords . " ";
         $keywords = explode(" ", $keywords);
         
         print_r ($keywords);
@@ -44,7 +45,7 @@ class CatalogueController extends AppController {
         }
         
         foreach ($keywords as $keyword) {
-            $conditions['or'][] = array ('name LIKE' => "%{$keyword}%");
+            $conditions['or '][] = array ('name LIKE' => "%{$keyword}%");
             $conditions['or'][] = array ('description LIKE' => "%{$keyword}%");
         }
         
