@@ -40,14 +40,15 @@ class CatalogueController extends AppController {
                 $this->_error['message'] = "Your keywords are empty";
                 exit(json_encode($this->_error));
             }
-            
+
             $this->_error['error'] = 0;
+            $this->autoRender = false;
             exit(json_encode($this->_error));
         }
-        
+
         $keywords = @preg_replace("/ +/i", " ", $keywords);
-            $keywords = $keywords;
-            $keywords = explode(" ", $keywords);
+        $keywords = $keywords;
+        $keywords = explode(" ", $keywords);
 
         foreach ($keywords as $keyword) {
             $conditions['or'][] = array('name LIKE' => "%{$keyword}%");
