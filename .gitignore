@@ -8,3 +8,4 @@ tmp/*
 /nbproject/private/
 /app/webroot/uploads/
 /nbproject
+database.php
