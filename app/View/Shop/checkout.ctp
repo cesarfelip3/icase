@@ -300,11 +300,11 @@
                 <?php endif; ?>
             </div>           
         </div>
-        <div class="container" id="box-order-confirm">
+        <div id="box-order-confirm">
 
 
         </div>
-        <div class="container" id="box-order-success">
+        <div id="box-order-success">
 
 
         </div>
