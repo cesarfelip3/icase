@@ -49,8 +49,8 @@ class CatalogueController extends AppController {
         $data = $this->Product->find ('all',
                 array (
                     "conditions" => $conditions,
-                    "limit" => $limit,
-                    "page" => $page + 1
+                    "limit" => 50,
+                    "page" => 1
                 )
         );
         
