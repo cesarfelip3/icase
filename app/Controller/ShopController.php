@@ -167,7 +167,7 @@ class ShopController extends AppController {
 
                     $user_guest = true;
 
-                    $User_guid = uniqid();
+                    $user_guid = uniqid();
                     $user = array(
                         "guid" => $user_guid,
                         "type" => "guest",
