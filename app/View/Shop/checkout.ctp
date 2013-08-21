@@ -310,258 +310,6 @@
         </div>
     </form>
 
-    <script type="text/javascript">
-                                    jQuery(document).ready(
-                                            function() {
-                                                checkout_cart();
-                                                $("#btn-signup").click(
-                                                        function() {
-                                                            $("#box-signup").show();
-                                                            $("#box-signin").hide();
-                                                        });
-
-                                                $("#btn-signin").click(
-                                                        function() {
-                                                            $("#box-signup").hide();
-                                                            $("#box-signin").show();
-                                                        });
-
-                                                jQuery(".datepicker").datepicker({format: 'mm/yy'});
-                                            }
-                                    );
-
-                                    function checkout_cart() {
-                                        cart_reload('cart');
-                                    }
-
-                                    function cart_config() {
-
-                                        jQuery("#box-cart a").off('click');
-                                        jQuery("#box-cart a").click(
-                                                function() {
-                                                    var action = $(this).data('action');
-                                                    var guid = $(this).data('guid');
-                                                    var file = $(this).data('file');
-                                                    var type = $(this).data('type');
-
-                                                    var i = 0;
-                                                    var price = 0;
-
-                                                    switch (action) {
-                                                        case 'close':
-                                                            jQuery("#box-cart").hide(0);
-                                                            break;
-                                                        case 'plus' :
-                                                            i = jQuery(this).next().text();
-                                                            console.log(i);
-                                                            i = parseInt(jQuery.trim(i));
-                                                            i++;
-                                                            jQuery(this).next().text(i);
-                                                            if (file == "" || type == 'product') {
-                                                                guid = guid;
-                                                            } else {
-                                                                guid = guid + "-" + file;
-                                                            }
-                                                            $.shoppingcart.set(guid);
-                                                            price = $(this).data('price');
-                                                            price = parseFloat(price) * i;
-                                                            $(this).parent().prev().text(price.toFixed(2));
-                                                            break;
-                                                        case 'minus' :
-                                                            i = jQuery(this).prev().text();
-                                                            console.log(i);
-                                                            i = parseInt(jQuery.trim(i));
-                                                            i--;
-                                                            if (i <= 0) {
-                                                                $.shoppingcart.removeall(guid);
-                                                                cart_reload();
-                                                                break;
-                                                            }
-                                                            jQuery(this).prev().text(i);
-                                                            if (file == "" || type == 'product') {
-                                                                guid = guid;
-                                                            } else {
-                                                                guid = guid + "-" + file;
-                                                            }
-                                                            $.shoppingcart.remove(guid);
-                                                            price = $(this).data('price');
-                                                            price = parseFloat(price) * i;
-                                                            $(this).parent().prev().text(price.toFixed(2));
-                                                            break;
-                                                        case 'remove' :
-                                                            if (file == "" || type == 'product') {
-                                                                guid = guid;
-                                                            } else {
-                                                                guid = guid + "-" + file;
-                                                            }
-                                                            $.shoppingcart.removeall(guid);
-                                                            window.location.href = "";
-                                                            //cart_reload();
-                                                            break;
-                                                    }
-                                                }
-                                        );
-                                    }
-
-                                    function cart_reload(single) {
-
-                                        jQuery.ajax({
-                                            url: "<?php echo $this->webroot; ?>shop/cart/?action=" + single,
-                                            data: {"user": $.shoppingcart.getuuid()},
-                                            type: "POST",
-                                            beforeSend: function(xhr) {
-                                            }
-                                        }).done(function(data) {
-                                            $("#box-cart").html(data);
-                                            $("#box-cart").show();
-
-                                            var hasorder = $("input[name=hasorder]").val();
-                                            if (hasorder == "1") {
-                                                $("#btn-paynow").parent().remove();
-                                                $("#box-bill-details").html($("#box-bill-details").html() + '<p><a class="btn btn-peach" onclick="javascript:cart_check()" id="btn-paynow">Pay Now</a></p>');
-                                            }
-
-                                            cart_config();
-
-                                        }).fail(function() {
-
-                                        });
-                                    }
-
-                                    function cart_check()
-                                    {
-                                        jQuery.ajax({
-                                            url: "<?php echo $this->webroot; ?>shop/checkout/?action=check",
-                                            data: $("#form-payment").serialize(),
-                                            type: "POST",
-                                            beforeSend: function(xhr) {
-                                                showAlert2("Working....");
-                                            }
-                                        }).done(function(data) {
-
-
-                                            try {
-                                                var result = $.parseJSON(data);
-                                                if (result.error == 1) {
-                                                    showAlert(result.message);
-                                                } else {
-
-                                                }
-                                            }
-                                            catch (e) {
-                                                hideAlert();
-                                                $(".checkout").hide(0)
-                                                $("#box-order-confirm").show(0);
-                                                $("#box-order-confirm").html(data);
-                                            }
-
-                                        }).fail(function() {
-                                            hideAlert();
-                                        });
-                                    }
-
-                                    function cart_pay()
-                                    {
-                                        jQuery.ajax({
-                                            url: "<?php echo $this->webroot; ?>shop/checkout/?action=pay",
-                                            data: $("#form-payment").serialize(),
-                                            type: "POST",
-                                            beforeSend: function(xhr) {
-                                                showAlert2("Working....");
-                                            }
-                                        }).done(function(data) {
-
-
-                                            try {
-                                                var result = $.parseJSON(data);
-                                                if (result.error == 1) {
-                                                    showAlert(result.message);
-                                                } else {
-
-                                                }
-                                            }
-                                            catch (e) {
-                                                hideAlert();
-                                                $(".checkout").hide(0)
-                                                $("#box-order-confirm").hide(0);
-                                                $("#box-order-success").show(0);
-                                                $("#box-order-success").html(data);
-                                            }
-
-                                        }).fail(function() {
-                                            hideAlert();
-                                        });
-                                    }
-
-                                    //===================================
-                                    function login()
-                                    {
-                                        jQuery.ajax({
-                                            url: "<?php echo $this->webroot; ?>signin/",
-                                            data: $("#form-payment").serialize(),
-                                            type: "POST",
-                                            beforeSend: function(xhr) {
-                                                showAlert2("Working....");
-                                            }
-                                        }).done(function(data) {
-
-                                            var result = $.parseJSON(data);
-                                            if (result.error == 1) {
-                                                showAlert(result.message);
-                                            } else {
-                                                window.location.href = "";
-                                            }
-
-                                        }).fail(function() {
-                                            hideAlert();
-                                        });
-                                    }
-
-                                    function signup()
-                                    {
-                                        jQuery.ajax({
-                                            url: "<?php echo $this->webroot; ?>signup/",
-                                            data: $("#form-payment").serialize(),
-                                            type: "POST",
-                                            beforeSend: function(xhr) {
-                                                showAlert2("Working....");
-                                            }
-                                        }).done(function(data) {
-
-                                            var result = $.parseJSON(data);
-                                            if (result.error == 1) {
-                                                showAlert(result.message);
-                                            } else {
-                                                window.location.href = "";
-                                            }
-
-                                        }).fail(function() {
-                                            hideAlert();
-                                        });
-                                    }
-
-                                    function logout()
-                                    {
-                                        jQuery.ajax({
-                                            url: "<?php echo $this->webroot; ?>logout/",
-                                            type: "GET",
-                                            beforeSend: function(xhr) {
-                                                showAlert2("Working....");
-                                            }
-                                        }).done(function(data) {
-
-                                            var result = $.parseJSON(data);
-                                            if (result.error == 1) {
-                                                showAlert(result.message);
-                                            } else {
-                                                window.location.href = "";
-                                            }
-
-                                        }).fail(function() {
-                                            hideAlert();
-                                        });
-                                    }
-    </script>
 <?php else: ?>
     <div class="row-fluid">
         <div class="span12">
@@ -577,3 +325,256 @@
     </script>
 <?php endif; ?>
 
+
+<script type="text/javascript">
+    jQuery(document).ready(
+            function() {
+                checkout_cart();
+                $("#btn-signup").click(
+                        function() {
+                            $("#box-signup").show();
+                            $("#box-signin").hide();
+                        });
+
+                $("#btn-signin").click(
+                        function() {
+                            $("#box-signup").hide();
+                            $("#box-signin").show();
+                        });
+
+                jQuery(".datepicker").datepicker({format: 'mm/yy'});
+            }
+    );
+
+    function checkout_cart() {
+        cart_reload('cart');
+    }
+
+    function cart_config() {
+
+        jQuery("#box-cart a").off('click');
+        jQuery("#box-cart a").click(
+                function() {
+                    var action = $(this).data('action');
+                    var guid = $(this).data('guid');
+                    var file = $(this).data('file');
+                    var type = $(this).data('type');
+
+                    var i = 0;
+                    var price = 0;
+
+                    switch (action) {
+                        case 'close':
+                            jQuery("#box-cart").hide(0);
+                            break;
+                        case 'plus' :
+                            i = jQuery(this).next().text();
+                            console.log(i);
+                            i = parseInt(jQuery.trim(i));
+                            i++;
+                            jQuery(this).next().text(i);
+                            if (file == "" || type == 'product') {
+                                guid = guid;
+                            } else {
+                                guid = guid + "-" + file;
+                            }
+                            $.shoppingcart.set(guid);
+                            price = $(this).data('price');
+                            price = parseFloat(price) * i;
+                            $(this).parent().prev().text(price.toFixed(2));
+                            break;
+                        case 'minus' :
+                            i = jQuery(this).prev().text();
+                            console.log(i);
+                            i = parseInt(jQuery.trim(i));
+                            i--;
+                            if (i <= 0) {
+                                $.shoppingcart.removeall(guid);
+                                cart_reload();
+                                break;
+                            }
+                            jQuery(this).prev().text(i);
+                            if (file == "" || type == 'product') {
+                                guid = guid;
+                            } else {
+                                guid = guid + "-" + file;
+                            }
+                            $.shoppingcart.remove(guid);
+                            price = $(this).data('price');
+                            price = parseFloat(price) * i;
+                            $(this).parent().prev().text(price.toFixed(2));
+                            break;
+                        case 'remove' :
+                            if (file == "" || type == 'product') {
+                                guid = guid;
+                            } else {
+                                guid = guid + "-" + file;
+                            }
+                            $.shoppingcart.removeall(guid);
+                            window.location.href = "";
+                            //cart_reload();
+                            break;
+                    }
+                }
+        );
+    }
+
+    function cart_reload(single) {
+
+        jQuery.ajax({
+            url: "<?php echo $this->webroot; ?>shop/cart/?action=" + single,
+            data: {"user": $.shoppingcart.getuuid()},
+            type: "POST",
+            beforeSend: function(xhr) {
+            }
+        }).done(function(data) {
+            $("#box-cart").html(data);
+            $("#box-cart").show();
+
+            var hasorder = $("input[name=hasorder]").val();
+            if (hasorder == "1") {
+                $("#btn-paynow").parent().remove();
+                $("#box-bill-details").html($("#box-bill-details").html() + '<p><a class="btn btn-peach" onclick="javascript:cart_check()" id="btn-paynow">Pay Now</a></p>');
+            }
+
+            cart_config();
+
+        }).fail(function() {
+
+        });
+    }
+
+    function cart_check()
+    {
+        jQuery.ajax({
+            url: "<?php echo $this->webroot; ?>shop/checkout/?action=check",
+            data: $("#form-payment").serialize(),
+            type: "POST",
+            beforeSend: function(xhr) {
+                showAlert2("Working....");
+            }
+        }).done(function(data) {
+
+
+            try {
+                var result = $.parseJSON(data);
+                if (result.error == 1) {
+                    showAlert(result.message);
+                } else {
+
+                }
+            }
+            catch (e) {
+                hideAlert();
+                $(".checkout").hide(0)
+                $("#box-order-confirm").show(0);
+                $("#box-order-confirm").html(data);
+            }
+
+        }).fail(function() {
+            hideAlert();
+        });
+    }
+
+    function cart_pay()
+    {
+        jQuery.ajax({
+            url: "<?php echo $this->webroot; ?>shop/checkout/?action=pay",
+            data: $("#form-payment").serialize(),
+            type: "POST",
+            beforeSend: function(xhr) {
+                showAlert2("Working....");
+            }
+        }).done(function(data) {
+
+
+            try {
+                var result = $.parseJSON(data);
+                if (result.error == 1) {
+                    showAlert(result.message);
+                } else {
+
+                }
+            }
+            catch (e) {
+                hideAlert();
+                $(".checkout").hide(0)
+                $("#box-order-confirm").hide(0);
+                $("#box-order-success").show(0);
+                $("#box-order-success").html(data);
+            }
+
+        }).fail(function() {
+            hideAlert();
+        });
+    }
+
+    //===================================
+    function login()
+    {
+        jQuery.ajax({
+            url: "<?php echo $this->webroot; ?>signin/",
+            data: $("#form-payment").serialize(),
+            type: "POST",
+            beforeSend: function(xhr) {
+                showAlert2("Working....");
+            }
+        }).done(function(data) {
+
+            var result = $.parseJSON(data);
+            if (result.error == 1) {
+                showAlert(result.message);
+            } else {
+                window.location.href = "";
+            }
+
+        }).fail(function() {
+            hideAlert();
+        });
+    }
+
+    function signup()
+    {
+        jQuery.ajax({
+            url: "<?php echo $this->webroot; ?>signup/",
+            data: $("#form-payment").serialize(),
+            type: "POST",
+            beforeSend: function(xhr) {
+                showAlert2("Working....");
+            }
+        }).done(function(data) {
+
+            var result = $.parseJSON(data);
+            if (result.error == 1) {
+                showAlert(result.message);
+            } else {
+                window.location.href = "";
+            }
+
+        }).fail(function() {
+            hideAlert();
+        });
+    }
+
+    function logout()
+    {
+        jQuery.ajax({
+            url: "<?php echo $this->webroot; ?>logout/",
+            type: "GET",
+            beforeSend: function(xhr) {
+                showAlert2("Working....");
+            }
+        }).done(function(data) {
+
+            var result = $.parseJSON(data);
+            if (result.error == 1) {
+                showAlert(result.message);
+            } else {
+                window.location.href = "";
+            }
+
+        }).fail(function() {
+            hideAlert();
+        });
+    }
+</script>

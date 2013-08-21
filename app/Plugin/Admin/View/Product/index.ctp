@@ -86,9 +86,9 @@ $product_delete = $base . "product" . DS . "delete";
                                 <td><?php echo $value['Product']['type']; ?></td>
                                 <td><a class="thumbnail"><img src='<?php echo $this->webroot . "uploads/" . $value['Product']['image']; ?>' style="width:32px" /></a></td>
                                 <td>$<?php echo $value['Product']['price']; ?></td>
-<!--                                <td><?php echo $value['Product']['quantity']; ?></td>
-                                <td>$<?php echo $value['Product']['tax']; ?></td>-->
-                                <td><?php echo $value['Product']['discount']; ?>%</td>
+                               <td><?php echo $value['Product']['quantity']; ?></td>
+                                <!-- <td>$<?php echo $value['Product']['tax']; ?></td>
+                                <td><?php echo $value['Product']['discount']; ?>%</td>-->
                                 <td><?php echo date ("Y-m-d H:i:s", $value['Product']['created']); ?></td>
                                 <td class="actions">
                                     <a class="btn btn-small btn-danger" onclick="del('<?php echo $value['Product']['id']; ?>')">Remove</a>
