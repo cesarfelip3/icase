@@ -189,7 +189,7 @@ Configure::write('App.encoding', 'UTF-8');
  */
 Configure::write('Session', array(
     'defaults' => 'php',
-    'timeout' => 1440 //1 days
+    'timeout' => 259200 //1 days
 ));
 
 /**

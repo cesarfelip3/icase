@@ -64,13 +64,12 @@
 <!--                                            <li><a href="<?php echo $base; ?>enquiry/">Manage Enquiries</a></li>-->
                                         </ul>
                                     </li>
-<!--                                    <li class="dropdown">
-                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-signal"></i> Reports <b class="caret"></b></a>
+                                    <li class="dropdown">
+                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-signal"></i> Case Design Tools <b class="caret"></b></a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="<?php echo $base; ?>report/sales">Sales Reports</a></li>
-                                            <li><a href="<?php echo $base; ?>report/visits">Visits Reports</a></li>
+                                            <li><a href="<?php echo $base; ?>creator/">Manage Template</a></li>
                                         </ul>
-                                    </li>-->
+                                    </li>
                                     <li class="dropdown">
                                         <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-group"></i> Members <b class="caret"></b></a>
                                         <ul class="dropdown-menu">
@@ -113,27 +112,27 @@
         });
     </script>
     <script type="text/javascript">
-                $(function() {
-            var d1 = [];
-            d1.push([0, 20]);
-            d1.push([1, 16]);
-            d1.push([2, 17]);
-            d1.push([3, 25]);
-            d1.push([4, 51]);
-            d1.push([5, 57]);
-            d1.push([6, 46]);
-            d1.push([7, 36]);
-            d1.push([8, 27]);
-            d1.push([9, 36]);
-            d1.push([10, 38]);
-            d1.push([11, 41]);
-            d1.push([12, 45]);
-            d1.push([13, 48]);
-            d1.push([14, 40]);
-            d1.push([15, 36]);
-            d1.push([16, 34]);
-            $.plot($("#placeholder"), [d1], {grid: {backgroundColor: 'white', color: '#999', borderWidth: 1, borderColor: '#DDD'}, colors: ["#6ECBE2"], series: {lines: {show: true, fill: true, fillColor: "rgba(110, 203, 226, 0.5)"}}});
-        });
+//                $(function() {
+//            var d1 = [];
+//            d1.push([0, 20]);
+//            d1.push([1, 16]);
+//            d1.push([2, 17]);
+//            d1.push([3, 25]);
+//            d1.push([4, 51]);
+//            d1.push([5, 57]);
+//            d1.push([6, 46]);
+//            d1.push([7, 36]);
+//            d1.push([8, 27]);
+//            d1.push([9, 36]);
+//            d1.push([10, 38]);
+//            d1.push([11, 41]);
+//            d1.push([12, 45]);
+//            d1.push([13, 48]);
+//            d1.push([14, 40]);
+//            d1.push([15, 36]);
+//            d1.push([16, 34]);
+//            $.plot($("#placeholder"), [d1], {grid: {backgroundColor: 'white', color: '#999', borderWidth: 1, borderColor: '#DDD'}, colors: ["#6ECBE2"], series: {lines: {show: true, fill: true, fillColor: "rgba(110, 203, 226, 0.5)"}}});
+//        });
     </script>
 
     <div class="row hide" id="box-message" style="position: fixed;top:0px;left:0px;z-index:1030;margin-bottom:0;">

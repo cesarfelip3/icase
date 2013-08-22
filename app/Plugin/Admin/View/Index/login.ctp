@@ -5,7 +5,7 @@ $admin_product = $base . "product";
 <div class="main-area dashboard">
     <div class="container">
         <div class="row">
-            <div class="span6 offset3">
+            <div class="span8 offset2">
                 <div class="slate">
                     <div class="page-header">
                         <h2>Login</h2>
