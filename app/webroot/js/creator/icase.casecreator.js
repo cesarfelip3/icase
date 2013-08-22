@@ -15,6 +15,9 @@ var mememaker = {
     // methods
     init: null,
     mousedown: null,
+    save: null,
+    save_callback: null,
+    reload: null,
     // object memeber
     tools: {
         container: '.tools',
@@ -126,6 +129,21 @@ mememaker.init = function(id) {
      )*/
 }
 
+mememaker.save = function()
+{
+    var json = JSON.stringify(mememaker.canvas.toJSON());
+    mememaker.save_callback(json);
+}
+
+mememaker.reload = function(json)
+{
+    mememaker.canvas.loadFromJSON(json);
+    mememaker.canvas.renderAll();
+
+    // optional
+    mememaker.canvas.calculateOffset();
+}
+
 // tools
 mememaker.tools.init = function(id, previewUrl, modal) {
     if (id != null) {
@@ -141,7 +159,7 @@ mememaker.tools.init = function(id, previewUrl, modal) {
             function(evt) {
                 var action = jQuery(this).data('action');
 
-                console.log (action);
+                console.log(action);
                 switch (action) {
                     case 'new':
                         mememaker.tools.new ();
@@ -415,7 +433,7 @@ mememaker.tools.newtext = function() {
     mememaker.canvas.add(text);
     text.center();
     text.scaleToWidth(300);
-    
+
     //mememaker.lastTextX += 10;
 //    mememaker.lastTextY += 10;
 //
@@ -443,17 +461,17 @@ mememaker.tools.addpic = function(url) {
         //oImg.set('originY', 'top');
         //oImg.left = mememaker.lastImageX + oImg.getWidth() / 2;
         //oImg.top = mememaker.lastImageY + oImg.getHeight() / 2;
-        
+
         //oImg.scaleToWidth(300);
         //oImg.center();
-        console.log (oImg);
-        
+        console.log(oImg);
+
         mememaker.canvas.add(oImg);
         oImg.center();
         oImg.scaleToWidth(400);
         mememaker.canvas.renderAll();
-        
-        
+
+
 //        mememaker.lastImageX += 10;
 //        mememaker.lastImageY += 10;
 //
@@ -469,8 +487,8 @@ mememaker.tools.addpic = function(url) {
                     mememaker.imageeditor.imageselected();
                 }
         );
-            
-        hideAlert ();
+
+        hideAlert();
 
     });
 }

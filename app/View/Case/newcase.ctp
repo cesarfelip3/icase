@@ -9,14 +9,18 @@
             <div style="display:block;width:100%;height:30px">
                 <div class="pull-left tools" id="uploader" style="padding:0px;margin:0px;">
                     <div id="filelist" style="display:none;padding:0px;margin:0px;"></div>
-                    <a href="javascript:" id="pickfiles" class="btn btn-info btn-large"><i class="icon-laptop icon-1x"></i>Image From Computer</a> 
-                    <a href="javascript:" class="btn btn-success btn-large"><i class="icon-picture icon-1x"></i>Image From Service&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                    <a href="javascript:" class="btn btn-info btn-large " data-action="new" title="remove"><i class="icon-remove-sign icon-1x"></i> <span>clear canvas</span></a>
-                    <a href="javascript:" class="btn btn-info btn-large " data-action="preview" title="remove"><i class="icon-eye-open icon-1x"></i> preview</a>
+                    <a href="javascript:" id="pickfiles"><i class="icon-picture icon-2x"></i> From Computer</a> 
+                    <a href="javascript:"><i class="icon-picture icon-2x"></i> From Service</a>
+                    <a href="javascript:" data-action="new" title="remove"><i class="icon-remove-sign icon-2x"></i> <span>clear canvas</span></a>
+                    <a href="javascript:" data-action="preview" title="remove"><i class="icon-eye-open icon-2x"></i> preview</a>
+                    <?php if (isset ($identity)) : ?>
+                    <a href="javascript:" data-action="save" title="remove"><i class="icon-save icon-2x"></i> save</a>
+                    <a href="javascript:" data-action="reload" title="remove"><i class="icon-upload-alt icon-2x"></i> load</a>
+                    <?php endif; ?>
                 </div>
                 <div class="tools pull-right">
-                    <a class="btn btn-warning btn-large " id="btn-order" onclick="order();">
-                        <i class="icon-mobile-phone icon-1x"></i> 
+                    <a id="btn-order" onclick="order();" style="background-color:orange;padding:2px;padding-left:12px; padding-right:10px; color:white;text-shadow: none;" href="javascript:">
+                        <i class="icon-shopping-cart icon-2x"></i> 
                         <span>Order Now</span>
                     </a>
                 </div>
@@ -304,6 +308,18 @@ $js_case = array(
                 });
 
                 newcase_init();
+                
+                $("#btn-save").click (
+                    function () {
+                        mememaker.save_callback = save_canvas;
+                        mememaker.save();
+                });
+                
+                $("#btn-reload").click (
+                    function () {
+                        reload_canvas();
+                });
+                
             }
     );
 
@@ -311,7 +327,9 @@ $js_case = array(
 
         jQuery("#btn-cart").click(
                 function() {
-                    jQuery("#btn-cart").off("click");
+            
+                    //
+                    
                     var orderId = null;
                     orderId = jQuery("#modal-preview #product-info").data('guid');
                     var image = jQuery("#modal-preview #product-info").data('file');
@@ -342,6 +360,45 @@ $js_case = array(
         jQuery(".ajax-loading-indicator").hide(0);
         jQuery("#btn-order").show(1000);
         jQuery(".creator-parts").delay(1000).show(0).css('visibility', 'visible');
+    }
+    
+    //===========================================================
+    //
+    //===========================================================
+    
+    function save_canvas (json)
+    {
+        jQuery.ajax({
+            url: "<?php $this->webroot; ?>creator/save",
+            data: {'json' : json},
+            type: "POST",
+            beforeSend: function(xhr) {
+
+            }
+        }).done(function(data) {
+
+
+        }).fail(function() {
+            //$("#template-list").prev().children(":first-child").hide(0);
+        });
+    }
+    
+    function reload_canvas ()
+    {
+        jQuery.ajax({
+            url: "<?php $this->webroot; ?>creator/reload",
+            type: "GET",
+            beforeSend: function(xhr) {
+
+            }
+        }).done(function(data) {
+
+            console.log (data);
+            mememaker.reload(data);
+
+        }).fail(function() {
+            //$("#template-list").prev().children(":first-child").hide(0);
+        });
     }
 
     //===========================================================
