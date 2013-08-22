@@ -13,9 +13,9 @@
                     <a href="javascript:"><i class="icon-picture icon-2x"></i> From Service</a>
                     <a href="javascript:" data-action="new" title="remove"><i class="icon-remove-sign icon-2x"></i> <span>clear canvas</span></a>
                     <a href="javascript:" data-action="preview" title="remove"><i class="icon-eye-open icon-2x"></i> preview</a>
-                    <?php if (isset ($identity)) : ?>
-                    <a href="javascript:" data-action="save" title="remove"><i class="icon-save icon-2x"></i> save</a>
-                    <a href="javascript:" data-action="reload" title="remove"><i class="icon-upload-alt icon-2x"></i> load</a>
+                    <?php if (isset($identity)) : ?>
+                        <a href="javascript:" data-action="save" title="remove"><i class="icon-save icon-2x"></i> save</a>
+                        <a href="javascript:" data-action="reload" title="remove"><i class="icon-upload-alt icon-2x"></i> load</a>
                     <?php endif; ?>
                 </div>
                 <div class="tools pull-right">
@@ -308,18 +308,7 @@ $js_case = array(
                 });
 
                 newcase_init();
-                
-                $("#btn-save").click (
-                    function () {
-                        mememaker.save_callback = save_canvas;
-                        mememaker.save();
-                });
-                
-                $("#btn-reload").click (
-                    function () {
-                        reload_canvas();
-                });
-                
+
             }
     );
 
@@ -327,9 +316,9 @@ $js_case = array(
 
         jQuery("#btn-cart").click(
                 function() {
-            
+
                     //
-                    
+
                     var orderId = null;
                     orderId = jQuery("#modal-preview #product-info").data('guid');
                     var image = jQuery("#modal-preview #product-info").data('file');
@@ -350,6 +339,9 @@ $js_case = array(
         mememaker.init('c1');
         mememaker.tools.init(".tools");
         mememaker.tools.generate = preview;
+
+        mememaker.save_callback = save_canvas;
+
         mememaker.texteditor.init(".text-editor");
         mememaker.imageeditor.init(".image-editor");
         mememaker.draweditor.init(".draw-editor");
@@ -361,16 +353,16 @@ $js_case = array(
         jQuery("#btn-order").show(1000);
         jQuery(".creator-parts").delay(1000).show(0).css('visibility', 'visible');
     }
-    
+
     //===========================================================
     //
     //===========================================================
-    
-    function save_canvas (json)
+
+    function save_canvas(json)
     {
         jQuery.ajax({
             url: "<?php $this->webroot; ?>creator/save",
-            data: {'json' : json},
+            data: {'json': json},
             type: "POST",
             beforeSend: function(xhr) {
 
@@ -382,8 +374,8 @@ $js_case = array(
             //$("#template-list").prev().children(":first-child").hide(0);
         });
     }
-    
-    function reload_canvas ()
+
+    function reload_canvas()
     {
         jQuery.ajax({
             url: "<?php $this->webroot; ?>creator/reload",
@@ -393,7 +385,7 @@ $js_case = array(
             }
         }).done(function(data) {
 
-            console.log (data);
+            console.log(data);
             mememaker.reload(data);
 
         }).fail(function() {

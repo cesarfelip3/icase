@@ -213,6 +213,8 @@ mememaker.tools.init = function(id, previewUrl, modal) {
                     case 'draw':
                         mememaker.draweditor.enable(jQuery(this));
                         break;
+                    case 'reload':
+                        break;
                     default:
                         break;
                 }

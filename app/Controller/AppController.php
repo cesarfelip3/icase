@@ -33,6 +33,7 @@ class AppController extends Controller {
         
         $this->set ("load_shop_cart", true);
         $this->set ("_sitedomain", $this->_sitedomain);
+        $this->_identity = null;
         
         if ($this->Auth->loggedIn()) {
             $user = array (

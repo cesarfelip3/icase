@@ -86,6 +86,7 @@ class IndexController extends AppController {
                     exit(json_encode($this->error));
                 }
 
+                unset ($result['User']['data']);
                 $this->Auth->login($result['User']);
                 exit(json_encode($this->error));
             }

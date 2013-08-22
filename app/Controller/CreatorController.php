@@ -22,23 +22,65 @@ class CreatorController extends AppController {
             $this->layoutInit();
         }
     }
-    
-    public function save()
-    {
+
+    public function save() {
         if ($this->request->is('ajax') && $this->request->is('post')) {
             $this->autoRender = false;
-            
+
+            if (empty($this->_identity)) {
+                $this->_error['error'] = 1;
+                $this->_error['message'] = "Not logged in yet.";
+
+                exit(json_encode($this->_error));
+            }
+
             $json = $this->request->data('json');
-            
-            @file_put_contents (dirname (__FILE__) . "/canvas", $json);
+
+            if (empty($json)) {
+                $this->_error['error'] = 1;
+                $this->_error['message'] = "Invalid json";
+
+                exit(json_encode($this->_error));
+            }
+
+            $this->loadModel('User');
+            $this->User->id = $this->_identity['id'];
+            $this->User->set(array('data' => $json));
+            $this->User->save();
         }
     }
-    
-    public function reload ()
-    {
+
+    public function reload() {
         if ($this->request->is('ajax')) {
             $this->autoRender = false;
-            exit (@file_get_contents (dirname (__FILE__) . "/canvas"));
+
+            if (empty($this->_identity)) {
+                $this->_error['error'] = 1;
+                $this->_error['message'] = "Not logged in yet.";
+
+                exit(json_encode($this->_error));
+            }
+
+            $json = $this->request->data('json');
+
+            if (empty($json)) {
+                $this->_error['error'] = 1;
+                $this->_error['message'] = "Invalid json";
+
+                exit(json_encode($this->_error));
+            }
+
+            $this->loadModel('User');
+            $data = $this->User->findById($this->_identity['id'], array("data"));
+            if (!empty($data)) {
+                $this->_error['data']['json'] = $data;
+                exit(json_encode($this->_error));
+            }
+            
+            $this->_error['error'] = 1;
+            $this->_error['message'] = "No saved data yet.";
+
+            exit(json_encode($this->_error));
         }
     }
 
@@ -116,7 +158,7 @@ class CreatorController extends AppController {
             $image = substr_replace($image, pack("cnn", 1, 300, 300), 13, 5);
 
             file_put_contents($targetDir . DIRECTORY_SEPARATOR . $filename, $image);
-            
+
             $this->loadModel('Product');
             $data = $this->Product->find('first', array(
                 'conditions' => array('guid' => $product, 'type' => 'template')
