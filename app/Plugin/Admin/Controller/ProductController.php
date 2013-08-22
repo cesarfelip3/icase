@@ -11,6 +11,7 @@ class ProductController extends AdminAppController {
 
     public function beforeFilter() {
         $this->Auth->deny();
+        $this->Auth->allow('install');
         parent::beforeFilter();
     }
 
