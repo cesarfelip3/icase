@@ -409,10 +409,14 @@ mememaker.tools.newtext = function() {
     text.fontFamily = jQuery("#text-font-family").val();
     text.originX = "center";
     text.originY = "center";
-    text.left = mememaker.lastTextX + text.getWidth() / 2;
-    text.top = mememaker.lastTextY + text.getHeight() / 2;
+    //text.left = mememaker.lastTextX + text.getWidth() / 2;
+    //text.top = mememaker.lastTextY + text.getHeight() / 2;
 
     mememaker.canvas.add(text);
+    text.center();
+    text.scaleToWidth(300);
+    mememaker.canvas.renderAll();
+    
     //mememaker.lastTextX += 10;
     mememaker.lastTextY += 10;
 
