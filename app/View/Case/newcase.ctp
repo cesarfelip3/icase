@@ -100,7 +100,7 @@
         </div>
         <div class="row-fluid">
             <div class="image-editor editor span9 hide" style="width:100%;border:1px solid #ccc;margin-top:10px;padding:5px;clear:both;">
-                <div style="display:inline"><span style="display:inline-block;width:60px;">ZOOM</span><input type="text" value="" data-slider-min="50" data-slider-max="300" data-slider-step="1" data-slider-value="100" data-slider-id="RC" id="image-zoom" data-slider-selection="none" data-slider-tooltip="show" data-slider-handle="square" style="width:150px"></div>
+                <div style="display:inline"><span style="display:inline-block;width:60px;">ZOOM</span><input type="text" value="" data-slider-min="10" data-slider-max="300" data-slider-step="1" data-slider-value="100" data-slider-id="RC" id="image-zoom" data-slider-selection="none" data-slider-tooltip="show" data-slider-handle="square" style="width:150px"></div>
                 <div style="display:inline;margin-left:20px;"><span style="display:inline-block;width:90px;">ROTATION</span><input type="text" value="" data-slider-min="0" data-slider-max="360" data-slider-step="1" data-slider-value="0" data-slider-id="RC" id="image-rotation" data-slider-selection="none" data-slider-tooltip="show" data-slider-handle="square" style="width:150px" ></div>
             </div><!-- Image Editor -->
         </div>

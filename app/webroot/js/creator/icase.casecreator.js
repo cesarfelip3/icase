@@ -107,6 +107,7 @@ mememaker.init = function(id) {
     mememaker.canvas = new fabric.Canvas(mememaker.canvasId);
     mememaker.canvas.backgroundColor = mememaker.backgroundColor = 'white';
     mememaker.canvas.selection = true;
+    mememaker.canvas.controlsAboveOverlay = true;
     mememaker.canvas.clear();
 
     /*
@@ -436,10 +437,18 @@ mememaker.tools.addpic = function(url) {
         // scale image down, and flip it, before adding it onto canvas
         //oImg.set('originX', 'left');
         //oImg.set('originY', 'top');
-        oImg.left = mememaker.lastImageX + oImg.getWidth() / 2;
-        oImg.top = mememaker.lastImageY + oImg.getHeight() / 2;
-
+        //oImg.left = mememaker.lastImageX + oImg.getWidth() / 2;
+        //oImg.top = mememaker.lastImageY + oImg.getHeight() / 2;
+        
+        //oImg.scaleToWidth(300);
+        //oImg.center();
+        console.log (oImg);
+        
         mememaker.canvas.add(oImg);
+        oImg.center();
+        oImg.scaleToWidth(400);
+        mememaker.canvas.renderAll();
+        
         mememaker.lastImageX += 10;
         mememaker.lastImageY += 10;
 
