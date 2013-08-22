@@ -127,8 +127,8 @@ $js_themes = array(
 
     <div class="row hide" id="box-alert" style="position: fixed;top:0px;left:0px;z-index:1030;margin-bottom:0;">
         <div class="span4 offset4">
-            <div style="background-color:yellow;min-height:30px;border:1px black solid; ">
-                <p style="margin-top:5px;margin-left:20px;"><strong><span class="body"></span></strong></p>
+            <div style="background-color:white;border:1px #ccc solid;padding:5px; ">
+                <p style="margin:0;padding:0px;color:blue"><strong><span class="body"></span></strong></p>
             </div>
         </div>
     </div>

@@ -271,6 +271,7 @@ $js_pluploader = array(
                                     console.log(result);
                                     if (result.error == 0) {
                                         console.log(result.files.url);
+                                        showAlert2("Loading image....");
                                         mememaker.tools.addpic(result.files.url);
                                     }
                                     //jQuery('#progress-bar').css('width', "0%");

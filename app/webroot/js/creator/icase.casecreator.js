@@ -415,16 +415,15 @@ mememaker.tools.newtext = function() {
     mememaker.canvas.add(text);
     text.center();
     text.scaleToWidth(300);
-    mememaker.canvas.renderAll();
     
     //mememaker.lastTextX += 10;
-    mememaker.lastTextY += 10;
-
-    if (mememaker.lastTextX >= 400) {
-        mememaker.textTotal += 1;
-        mememaker.lastTextX = mememaker.textTotal * 10;
-        mememaker.lastTextY = mememaker.textTotal * 10;
-    }
+//    mememaker.lastTextY += 10;
+//
+//    if (mememaker.lastTextX >= 400) {
+//        mememaker.textTotal += 1;
+//        mememaker.lastTextX = mememaker.textTotal * 10;
+//        mememaker.lastTextY = mememaker.textTotal * 10;
+//    }
 
     mememaker.canvas.renderAll();
 
@@ -454,14 +453,15 @@ mememaker.tools.addpic = function(url) {
         oImg.scaleToWidth(400);
         mememaker.canvas.renderAll();
         
-        mememaker.lastImageX += 10;
-        mememaker.lastImageY += 10;
-
-        if (mememaker.lastImageX >= 400) {
-            mememaker.imageTotal += 1;
-            mememaker.lastImageX = mememaker.textTotal * 10;
-            mememaker.lastImageY = mememaker.textTotal * 10;
-        }
+        
+//        mememaker.lastImageX += 10;
+//        mememaker.lastImageY += 10;
+//
+//        if (mememaker.lastImageX >= 400) {
+//            mememaker.imageTotal += 1;
+//            mememaker.lastImageX = mememaker.textTotal * 10;
+//            mememaker.lastImageY = mememaker.textTotal * 10;
+//        }
 
         oImg.on(
                 'selected',
@@ -469,6 +469,8 @@ mememaker.tools.addpic = function(url) {
                     mememaker.imageeditor.imageselected();
                 }
         );
+            
+        hideAlert ();
 
     });
 }
