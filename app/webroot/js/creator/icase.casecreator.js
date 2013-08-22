@@ -105,7 +105,7 @@ mememaker.init = function(id) {
     mememaker.canvasId = id;
 
     mememaker.canvas = new fabric.Canvas(mememaker.canvasId);
-    mememaker.canvas.backgroundColor = mememaker.backgroundColor = 'white';
+    mememaker.canvas.backgroundColor = mememaker.backgroundColor = '#DDDDDD';
     mememaker.canvas.selection = true;
     mememaker.canvas.controlsAboveOverlay = true;
     mememaker.canvas.clear();
@@ -134,6 +134,7 @@ mememaker.tools.init = function(id, previewUrl, modal) {
 
     jQuery("#canvas-background-color").colorpicker().on('changeColor', function(ev) {
         mememaker.tools.backgroundcolor(ev.color.toHex());
+        jQuery(this).css("background-color", ev.color.toHex());
     });
 
     jQuery(mememaker.tools.container + " a").click(
@@ -189,7 +190,7 @@ mememaker.tools.init = function(id, previewUrl, modal) {
                         //mememaker.tools.backgroundcolor ();
                         break;
                     case 'backgroundimage':
-                        mememaker.tools.backgroundimage("img/muffin.png");
+                        //mememaker.tools.backgroundimage("img/muffin.png");
                         break;
                     case 'draw':
                         mememaker.draweditor.enable(jQuery(this));
@@ -202,7 +203,6 @@ mememaker.tools.init = function(id, previewUrl, modal) {
 }
 
 mememaker.tools.new = function() {
-    mememaker.backgroundColor = 'white';
     mememaker.lastTextX = 150;
     mememaker.lastTextY = 10;
     mememaker.lastImageX = 10;

@@ -89,5 +89,4 @@
         endforeach;
     endif;
     ?>
-
-</div>
+</ul>

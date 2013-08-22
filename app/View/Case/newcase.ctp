@@ -37,7 +37,7 @@
                         <a href="javascript:" data-action="group" title="group"><i class="icon-resize-small icon-2x"></i> group</a>
                         <a href="javascript:" data-action="newtext" title="remove"><i class="icon-font icon-2x"></i> new text</a>
                         <a href="javascript:" data-action="draw" title="remove"><i class="icon-pencil icon-2x"></i> draw</a>
-                        <input id="canvas-background-color" type="text" class="input-mini" readonly="readonly" placeholder="background" />
+                        <a id="canvas-background-color" type="text" class="input-mini" readonly="readonly" placeholder="background" style="width:20px;height:40px;background-color:#ccc;border:1px solid black;" href="javascript:">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
                     </div>
                 </div>
             </div> 
@@ -213,7 +213,7 @@ $js_pluploader = array(
 ?>
 
 <?php echo $this->Html->script($js_pluploader); ?>
-
+<div></div>
 <script type="text/javascript">
                         function PL(id) {
                             return document.getElementById(id);
@@ -331,12 +331,12 @@ $js_case = array(
         mememaker.imageeditor.init(".image-editor");
         mememaker.draweditor.init(".draw-editor");
         //mememaker.tools.backgroundcolor("red");
-
+        
+        templatelist_load();
+        
         jQuery(".ajax-loading-indicator").hide(0);
         jQuery("#btn-order").show(1000);
         jQuery(".creator-parts").delay(1000).show(0).css('visibility', 'visible');
-
-        templatelist_load();
     }
 
     //===========================================================
@@ -352,18 +352,7 @@ $js_case = array(
             }
         }).done(function(data) {
 
-            /*
-             $("#template-list").prev().children(":first-child").hide(0);
-             result = jQuery.parseJSON(data);
-             $(result).each(
-             function(index, value) {
-             var html = jQuery("#template-list").html() + '<span class="label label-warning">' + value.Product.name + ' ' + value.Product.price + '$</span><a href="javascript:" class="thumbnail" data-price="' + value.Product.price + '" data-guid="' + value.Product.guid + '"><img src="' + value.Product.image + '" /></a><br/>';
-             jQuery("#template-list").html(html);
-             }
-             ); */
-
             $("#box-template-list").html(data);
-
             templatelist_config();
 
         }).fail(function() {
@@ -376,19 +365,13 @@ $js_case = array(
         jQuery("#template-list a").off('click');
         jQuery("#template-list a").click(
                 function() {
-                    /*
-                     var url = $(this).children(":first-child").attr('src');
-                     mememaker.tools.newtemplate(url);
-                     $("#current-item").val($(this).data('guid'));
-                     $.shoppingcart.setCurrentProductId($(this).data('guid'));
-                     $("#btn-order span").text("Order Now " + $(this).data('price') + "$");
-                     */
+            
                     var bg = $(this).data('bg');
                     var fg = $(this).data('fg');
 
                     //mememaker.tools.backgroundimage(bg);
-                    mememaker.tools.backgroundcolor("#333");
                     mememaker.tools.newtemplate(fg);
+                    mememaker.tools.backgroundcolor("#DDDDDD");
 
                     $("#current-item").val($(this).data('guid'));
                     $.shoppingcart.setCurrentProductId($(this).data('guid'));
