@@ -399,7 +399,7 @@ $js_case = array(
     function templatelist_load()
     {
         jQuery.ajax({
-            url: "<?php $this->webroot; ?>shop/gettemplates",
+            url: "<?php $this->webroot; ?>creator/templates",
             type: "GET",
             beforeSend: function(xhr) {
 
@@ -460,7 +460,7 @@ $js_case = array(
         jQuery("#modal-preview").modal();
 
         jQuery.ajax({
-            url: "<?php echo $this->webroot; ?>shop/preview",
+            url: "<?php echo $this->webroot; ?>creator/preview",
             data: {"image-extension": "jpeg", "image-data": preview, "user": $.shoppingcart.getuuid(), "product": jQuery("#current-item").val()},
             type: "POST",
             beforeSend: function(xhr) {

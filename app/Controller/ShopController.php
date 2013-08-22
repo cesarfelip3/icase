@@ -706,37 +706,6 @@ class ShopController extends AppController {
         }
     }
 
-    /*
-     * @function: getTemplates - get all templates 
-     */
-
-    public function getTemplates() {
-
-        if ($this->request->is('ajax')) {
-            $this->layout = false;
-
-            $this->loadModel('Product');
-            $data = $this->Product->find("all", array(
-                "conditions" => array(
-                    "type" => "template"
-                ),
-                "order" => array(
-                    "order ASC",
-            )));
-
-            foreach ($data as $key => $value) {
-                $value['Product']['image'] = unserialize($value['Product']['image']);
-                $value['Product']['foreground'] = $value['Product']['image']['foreground'];
-                $value['Product']['background'] = $value['Product']['image']['background'];
-                $data[$key] = $value;
-            }
-
-            $this->set('data', $data);
-            $this->render("gettemplates.ajax");
-            return;
-            //echo json_encode($data);
-        }
-    }
 
     protected function _json($data = array()) {
         return json_encode($data); //, JSON_UNESCAPED_SLASHES);

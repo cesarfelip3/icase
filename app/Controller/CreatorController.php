@@ -84,10 +84,6 @@ class CreatorController extends AppController {
         }
     }
 
-    /*
-     * @function: preview - generate preview image for designed case
-     */
-
     public function preview() {
         if ($this->request->is('ajax')) {
             $this->layout = false;
@@ -172,12 +168,8 @@ class CreatorController extends AppController {
             return;
         }
     }
-
-    /*
-     * @function: getTemplates - get all templates 
-     */
-
-    public function getTemplates() {
+    
+    public function templates () {
 
         if ($this->request->is('ajax')) {
             $this->layout = false;
