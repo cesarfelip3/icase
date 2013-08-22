@@ -77,7 +77,7 @@ class ProductController extends AdminAppController {
                 'fields' => array("Product.*")
                     )
             );
-            
+
             foreach ($data as $key => $value) {
 
                 if ($value['Product']['type'] == 'product') {
@@ -293,7 +293,7 @@ class ProductController extends AdminAppController {
             } else {
                 $data['featured'] = "";
             }
-            
+
             $data['created'] = date("F j, Y, g:i a", $data['created']);
             $data['modified'] = date("F j, Y, g:i a", $data['modified']);
         }
@@ -393,7 +393,6 @@ class ProductController extends AdminAppController {
                         if ($data['featured'] == $element['Product']['featured']) {
                             unset($data['featured']);
                         } else {
-
                             
                         }
                     }
@@ -444,29 +443,24 @@ class ProductController extends AdminAppController {
         $id = $this->request->query('id');
         $this->loadModel('Product');
 
-        $data = $this->Product->find('first', array("conditions" => array("id" => $id)));
+        $data = $this->Product->find('first', array("conditions" => array("id" => $id, 'type' => 'product')));
         if (!empty($data)) {
 
-            $data['Product']['featured'] = unserialize($data['Product']['featured']);
             if (!empty($data['Product']['featured'])) {
 
-                foreach ($data['Product']['featured'] as $value) {
-                    @unlink(ROOT . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'uploads' . DS . "product" . DS . $value);
-                    $value = @preg_replace("/\./i", "_150.", $value);
-                    @unlink(ROOT . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'uploads' . DS . "product" . DS . $value);
+                $data['Product']['featured'] = unserialize($data['Product']['featured']);
+                foreach ($data['Product']['featured']['origin'] as $value) {
+                    if (file_exists(APP . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'uploads' . DS . "product" . DS . $value)) {
+                        @unlink(APP . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'uploads' . DS . "product" . DS . $value);
+                        $value = @str_replace(".", "_150.", $value);
+                        @unlink(APP . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'uploads' . DS . "product" . DS . $value);
+                    }
                 }
-            }
-
-            if (!empty($data['Product']['image'])) {
-                $value = $data['Product']['image'];
-                @unlink(ROOT . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'uploads' . DS . "template" . DS . $value);
-                $value = @preg_replace("/\./i", "_150.", $value);
-                @unlink(ROOT . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'uploads' . DS . "template" . DS . $value);
             }
         }
 
         $this->Product->delete($id);
-        exit (json_encode($this->error));
+        exit(json_encode($this->error));
     }
 
     //======================================================
@@ -569,55 +563,52 @@ class ProductController extends AdminAppController {
         $this->redirect(array("plugin" => "admin", "controller" => "product", "action" => "index"));
         echo "Successfully all templates created";
     }
-    
-    public function repair ()
-    {
+
+    public function repair() {
         exit;
-        
+
         $this->loadModel('Product');
-        
-        $data = $this->Product->find ('all', array ("conditions" => array ("type" => "product")));
-        
+
+        $data = $this->Product->find('all', array("conditions" => array("type" => "product")));
+
         $image = array();
-        
+
         //print_r ($data);
-        
+
         foreach ($data as $value) {
-            
+
             $value['Product']['featured'] = unserialize($value['Product']['featured']);
-            
-            if (!empty ($value['Product']['featured'])) {
-                
+
+            if (!empty($value['Product']['featured'])) {
+
                 $origin = null;
                 $w150 = null;
-                
+
                 $origin = array();
-                $w150 = array ();
-                
+                $w150 = array();
+
                 $images = $value['Product']['featured'];
-                
+
                 foreach ($images as $key => $val) {
                     $origin[] = $val;
                     $w150[] = str_replace(".", "_150.", $val);
                 }
             }
-            
-            
-            $image = array (
+
+
+            $image = array(
                 "origin" => $origin,
                 "150w" => $w150
             );
-            
-            print_r ($image);
-            
+
+            print_r($image);
+
             $this->Product->id = $value['Product']['id'];
-            $this->Product->set (array ('featured' => serialize($image)));
-            $this->Product->save ();
-            
+            $this->Product->set(array('featured' => serialize($image)));
+            $this->Product->save();
+
             $image = null;
         }
-        
-        
     }
 
 }
