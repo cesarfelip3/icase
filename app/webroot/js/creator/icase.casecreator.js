@@ -140,6 +140,7 @@ mememaker.tools.init = function(id, previewUrl, modal) {
             function(evt) {
                 var action = jQuery(this).data('action');
 
+                console.log (action);
                 switch (action) {
                     case 'new':
                         mememaker.tools.new ();
