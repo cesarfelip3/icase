@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.29)
 # Database: icase
-# Generation Time: 2013-08-20 08:37:19 +0000
+# Generation Time: 2013-08-22 09:13:13 +0000
 # ************************************************************
 
 
@@ -270,6 +270,7 @@ CREATE TABLE `products` (
   `status` varchar(11) NOT NULL DEFAULT 'draft',
   `active` int(11) NOT NULL DEFAULT '1',
   `is_featured` int(11) NOT NULL DEFAULT '0',
+  `order` int(11) NOT NULL DEFAULT '0',
   `seo_keywords` varchar(512) DEFAULT NULL,
   `seo_description` varchar(512) DEFAULT NULL,
   `created` int(11) DEFAULT NULL,
@@ -280,10 +281,15 @@ CREATE TABLE `products` (
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
 
-INSERT INTO `products` (`id`, `guid`, `user_guid`, `sku`, `name`, `slug`, `image`, `featured`, `description`, `price`, `tax`, `discount`, `quantity`, `is_special`, `special_price`, `special_start`, `special_end`, `type`, `status`, `active`, `is_featured`, `seo_keywords`, `seo_description`, `created`, `modified`)
+INSERT INTO `products` (`id`, `guid`, `user_guid`, `sku`, `name`, `slug`, `image`, `featured`, `description`, `price`, `tax`, `discount`, `quantity`, `is_special`, `special_price`, `special_start`, `special_end`, `type`, `status`, `active`, `is_featured`, `order`, `seo_keywords`, `seo_description`, `created`, `modified`)
 VALUES
-	(12,'5212dbb0e0ddc',NULL,NULL,'iphone5',NULL,'a:2:{s:10:\"foreground\";s:14:\"iphone5_fg.png\";s:10:\"background\";s:14:\"iphone5_bg.png\";}',NULL,'iphone5 case',34.99,0.00,0,65535,0,NULL,NULL,NULL,'template','published',1,0,NULL,NULL,1376967600,1376967600),
-	(13,'5212dc0edd949',NULL,NULL,'test','test','','a:2:{s:6:\"origin\";a:4:{i:0;s:17:\"5212dc09f0c06.png\";i:1;s:17:\"5212dc0a89197.png\";i:2;s:17:\"5212dc0adb5a8.png\";i:3;s:17:\"5212dc0b31b75.png\";}s:4:\"150w\";a:4:{i:0;s:21:\"5212dc09f0c06_150.png\";i:1;s:21:\"5212dc0a89197_150.png\";i:2;s:21:\"5212dc0adb5a8_150.png\";i:3;s:21:\"5212dc0b31b75_150.png\";}}','<p>test</p>',22.00,0.00,0,65535,0,NULL,NULL,NULL,'product','published',1,1,NULL,NULL,1376967694,1376974191);
+	(13,'5212dc0edd949',NULL,NULL,'test','test','','a:2:{s:6:\"origin\";a:4:{i:0;s:17:\"5212dc09f0c06.png\";i:1;s:17:\"5212dc0a89197.png\";i:2;s:17:\"5212dc0adb5a8.png\";i:3;s:17:\"5212dc0b31b75.png\";}s:4:\"150w\";a:4:{i:0;s:21:\"5212dc09f0c06_150.png\";i:1;s:21:\"5212dc0a89197_150.png\";i:2;s:21:\"5212dc0adb5a8_150.png\";i:3;s:21:\"5212dc0b31b75_150.png\";}}','<p>test</p>',22.00,0.00,0,65535,0,NULL,NULL,NULL,'product','published',1,1,0,NULL,NULL,1376967694,1376974191),
+	(45,'5215b099dcac6',NULL,NULL,'iphone5','iphone5','a:2:{s:10:\"foreground\";s:14:\"iphone5_fg.png\";s:10:\"background\";s:14:\"iphone5_bg.png\";}','','<p>iphone5 case</p>',14.99,0.00,0,65535,0,NULL,NULL,NULL,'template','published',1,0,0,NULL,NULL,1377153177,1377157192),
+	(46,'5215b099e92c7',NULL,NULL,'iphone4',NULL,'a:2:{s:10:\"foreground\";s:14:\"iphone4_fg.png\";s:10:\"background\";s:14:\"iphone4_bg.png\";}',NULL,'iphone4 case',34.99,0.00,0,65535,0,NULL,NULL,NULL,'template','published',1,0,1,NULL,NULL,1377153177,1377153177),
+	(47,'5215b099eaca1',NULL,NULL,'samsung galaxy 3',NULL,'a:2:{s:10:\"foreground\";s:26:\"samsung galaxy 3-outer.png\";s:10:\"background\";s:26:\"samsung galaxy 3-inner.png\";}',NULL,'iphone5 case',34.99,0.00,0,65535,0,NULL,NULL,NULL,'template','published',1,0,2,NULL,NULL,1377153177,1377153177),
+	(48,'5215b099ec2a6',NULL,NULL,'samsung galaxy 4',NULL,'a:2:{s:10:\"foreground\";s:26:\"samsung galaxy 4-outer.png\";s:10:\"background\";s:26:\"samsung galaxy 4-inner.png\";}',NULL,'samsung galaxy 4',34.99,0.00,0,65535,0,NULL,NULL,NULL,'template','published',1,0,3,NULL,NULL,1377153177,1377153177),
+	(49,'5215b09a06b0c',NULL,NULL,'Bottle 17oz',NULL,'a:2:{s:10:\"foreground\";s:23:\"bottle17oz_steel_fg.png\";s:10:\"background\";s:23:\"bottle17oz_steel_bg.png\";}',NULL,'Bottle 17oz Steel',34.99,0.00,0,65535,0,NULL,NULL,NULL,'template','published',1,0,5,NULL,NULL,1377153178,1377153178),
+	(50,'5215b09a0963a',NULL,NULL,'Mug',NULL,'a:2:{s:10:\"foreground\";s:26:\"Mug 11oz Ceramic-outer.png\";s:10:\"background\";s:26:\"Mug 11oz Ceramic-inner.png\";}',NULL,'Mug 11oz Ceramic',34.99,0.00,0,65535,0,NULL,NULL,NULL,'template','published',1,0,6,NULL,NULL,1377153178,1377153178);
 
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
