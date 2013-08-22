@@ -21,7 +21,7 @@
 <?php endif; ?>
 <ul class="nav nav-list" id="template-list">
     <?php foreach ($data as $key => $value) : ?>
-        <li>
+        <li style="border-bottom:1px solid #ccc">
             <a tabindex="-1" href="javascript:" 
                data-fg="<?php echo $this->webroot . "img/template/" . $value['Product']['foreground']; ?>" 
                data-bg="<?php echo $this->webroot . "img/template/" . $value['Product']['background']; ?>" 

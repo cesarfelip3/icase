@@ -132,9 +132,9 @@ mememaker.tools.init = function(id, previewUrl, modal) {
         mememaker.tools.container = id;
     }
 
-    //jQuery("#canvas-background-color").colorpicker().on('changeColor', function (ev) {
-    //    mememaker.tools.backgroundcolor (ev.color.toHex());    
-    //});
+    jQuery("#canvas-background-color").colorpicker().on('changeColor', function(ev) {
+        mememaker.tools.backgroundcolor(ev.color.toHex());
+    });
 
     jQuery(mememaker.tools.container + " a").click(
             function(evt) {

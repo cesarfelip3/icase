@@ -29,14 +29,15 @@
                     <div style="padding:5px;">
                         <a href="javascript:" data-action="backward" title="backward"><i class="icon-chevron-down icon-2x"></i> backward</a>
                         <a href="javascript:" data-action="forward" title="forward"><i class="icon-chevron-up icon-2x"></i> forward</a>
-                        <a href="javascript:" data-action="back" title="bottom"><i class="icon-circle-arrow-down icon-2x"></i> back</a></label>
+                        <a href="javascript:" data-action="back" title="bottom"><i class="icon-circle-arrow-down icon-2x"></i> back</a>
                         <a href="javascript:" data-action="front" title="top"><i class="icon-circle-arrow-up icon-2x"></i> front</a>
                         <a href="javascript:" data-action="flipx"><i class="icon-resize-horizontal icon-2x"></i> <b>flip 90</b></a>
                         <a href="javascript:" data-action="flipy" style="margin-left:5px;"><i class="icon-resize-vertical icon-2x"></i> <b>flip 180</b></a>
                         <a href="javascript:" data-action="remove" title="remove"><i class="icon-remove-sign icon-2x"></i> remove</a>
                         <a href="javascript:" data-action="group" title="group"><i class="icon-resize-small icon-2x"></i> group</a>
                         <a href="javascript:" data-action="newtext" title="remove"><i class="icon-font icon-2x"></i> new text</a>
-                        <a href="javascript:" data-action="draw" title="remove"><i class="icon-pencil icon-2x"></i> draw</a></label>
+                        <a href="javascript:" data-action="draw" title="remove"><i class="icon-pencil icon-2x"></i> draw</a>
+                        <input id="canvas-background-color" type="text" class="input-mini" readonly="readonly" placeholder="background" />
                     </div>
                 </div>
             </div> 
@@ -384,7 +385,8 @@ $js_case = array(
                     var bg = $(this).data('bg');
                     var fg = $(this).data('fg');
 
-                    mememaker.tools.backgroundimage(bg);
+                    //mememaker.tools.backgroundimage(bg);
+                    mememaker.tools.backgroundcolor("#333");
                     mememaker.tools.newtemplate(fg);
 
                     $("#current-item").val($(this).data('guid'));

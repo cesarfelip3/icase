@@ -482,8 +482,74 @@ class ProductController extends AdminAppController {
                 ),
                 "type" => "template",
                 "status" => "published",
-                "quantity" => 65535
-            )
+                "quantity" => 65535,
+                "order" => 0,
+            ),
+            "iphone4" => array(
+                "name" => "iphone4",
+                "description" => "iphone4 case",
+                "price" => "34.99",
+                "image" => array(
+                    "foreground" => "iphone4_fg.png",
+                    "background" => "iphone4_bg.png",
+                ),
+                "type" => "template",
+                "status" => "published",
+                "quantity" => 65535,
+                "order" => 1
+            ),
+            "samsung galaxy 3" => array(
+                "name" => "samsung galaxy 3",
+                "description" => "iphone5 case",
+                "price" => "34.99",
+                "image" => array(
+                    "foreground" => "samsung galaxy 3-outer.png",
+                    "background" => "samsung galaxy 3-inner.png",
+                ),
+                "type" => "template",
+                "status" => "published",
+                "quantity" => 65535,
+                "order" => 2,
+            ),
+            "samsung galaxy 4" => array(
+                "name" => "samsung galaxy 4",
+                "description" => "samsung galaxy 4",
+                "price" => "34.99",
+                "image" => array(
+                    "foreground" => "samsung galaxy 4-outer.png",
+                    "background" => "samsung galaxy 4-inner.png",
+                ),
+                "type" => "template",
+                "status" => "published",
+                "quantity" => 65535,
+                "order" => 3
+            ),
+            "Bottle 17oz" => array(
+                "name" => "Bottle 17oz",
+                "description" => "Bottle 17oz Steel",
+                "price" => "34.99",
+                "image" => array(
+                    "foreground" => "bottle17oz_steel_fg.png",
+                    "background" => "bottle17oz_steel_bg.png",
+                ),
+                "type" => "template",
+                "status" => "published",
+                "quantity" => 65535,
+                "order" => 5,
+            ),
+            "Mug" => array(
+                "name" => "Mug",
+                "description" => "Mug 11oz Ceramic",
+                "price" => "34.99",
+                "image" => array(
+                    "foreground" => "Mug 11oz Ceramic-outer.png",
+                    "background" => "Mug 11oz Ceramic-inner.png",
+                ),
+                "type" => "template",
+                "status" => "published",
+                "quantity" => 65535,
+                "order" => 6
+            ),
         );
 
         $this->loadModel("Product");

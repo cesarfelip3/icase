@@ -727,8 +727,7 @@ class ShopController extends AppController {
                     "type" => "template"
                 ),
                 "order" => array(
-                    "created DESC",
-                    'id DESC'
+                    "order ASC",
             )));
 
             foreach ($data as $key => $value) {
