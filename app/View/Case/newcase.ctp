@@ -298,6 +298,11 @@ $js_case = array(
 <script type="text/javascript">
     jQuery(document).ready(
             function() {
+
+                $(window).on('beforeunload', function() {
+                    return 'Are you sure you want to leave? Your design isn\'t saved yet.';
+                });
+
                 newcase_init();
             }
     );
@@ -331,9 +336,9 @@ $js_case = array(
         mememaker.imageeditor.init(".image-editor");
         mememaker.draweditor.init(".draw-editor");
         //mememaker.tools.backgroundcolor("red");
-        
+
         templatelist_load();
-        
+
         jQuery(".ajax-loading-indicator").hide(0);
         jQuery("#btn-order").show(1000);
         jQuery(".creator-parts").delay(1000).show(0).css('visibility', 'visible');
@@ -365,7 +370,7 @@ $js_case = array(
         jQuery("#template-list a").off('click');
         jQuery("#template-list a").click(
                 function() {
-            
+
                     var bg = $(this).data('bg');
                     var fg = $(this).data('fg');
 
