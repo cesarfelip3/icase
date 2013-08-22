@@ -162,6 +162,10 @@ class CategoryController extends AdminAppController {
         $this->loadModel('Category');
         $data = $this->request->data('category');
 
+        if ($data['level'] == 0) {
+            Cache::delete("category_top");
+        }
+        
         $this->Category->id = $data['id'];
         unset($data['id']);
         unset($data['guid']);
