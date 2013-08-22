@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.29)
 # Database: icase
-# Generation Time: 2013-08-22 09:13:13 +0000
+# Generation Time: 2013-08-22 18:52:22 +0000
 # ************************************************************
 
 
@@ -26,8 +26,8 @@
 DROP TABLE IF EXISTS `admins`;
 
 CREATE TABLE `admins` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `guid` char(13) DEFAULT NULL,
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `guid` char(128) DEFAULT NULL,
   `name` varchar(32) DEFAULT NULL,
   `email` varchar(128) DEFAULT NULL,
   `password` varchar(128) DEFAULT NULL,
@@ -71,10 +71,10 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `categories`;
 
 CREATE TABLE `categories` (
-  `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
-  `guid` char(13) DEFAULT NULL,
-  `parent_guid` char(13) DEFAULT NULL,
-  `group_guid` char(13) DEFAULT NULL,
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `guid` char(128) DEFAULT NULL,
+  `parent_guid` char(128) DEFAULT NULL,
+  `group_guid` char(128) DEFAULT NULL,
   `name` varchar(256) DEFAULT NULL,
   `slug` varchar(256) DEFAULT NULL,
   `description` varchar(1024) DEFAULT NULL,
@@ -105,8 +105,8 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `category_to_object`;
 
 CREATE TABLE `category_to_object` (
-  `category_guid` char(13) DEFAULT NULL,
-  `object_guid` char(13) DEFAULT NULL
+  `category_guid` char(128) DEFAULT NULL,
+  `object_guid` char(128) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 LOCK TABLES `category_to_object` WRITE;
@@ -123,14 +123,33 @@ VALUES
 UNLOCK TABLES;
 
 
+# Dump of table creations
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `creations`;
+
+CREATE TABLE `creations` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `guid` char(128) DEFAULT NULL,
+  `user_guid` char(128) DEFAULT NULL,
+  `product_guid` char(128) DEFAULT NULL,
+  `name` varchar(512) NOT NULL DEFAULT '',
+  `data` text NOT NULL,
+  `created` int(11) DEFAULT NULL,
+  `modified` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
 # Dump of table enquiries
 # ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `enquiries`;
 
 CREATE TABLE `enquiries` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `user_guid` char(13) DEFAULT NULL,
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_guid` char(128) DEFAULT NULL,
   `title` varchar(512) DEFAULT NULL,
   `email` varchar(256) DEFAULT NULL,
   `phone` varchar(128) DEFAULT NULL,
@@ -148,9 +167,9 @@ CREATE TABLE `enquiries` (
 DROP TABLE IF EXISTS `invoices`;
 
 CREATE TABLE `invoices` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `guid` char(13) DEFAULT NULL,
-  `order_guid` char(13) DEFAULT NULL,
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `guid` char(128) DEFAULT NULL,
+  `order_guid` char(128) DEFAULT NULL,
   `seller_id` int(11) DEFAULT NULL,
   `buyer_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -164,8 +183,8 @@ CREATE TABLE `invoices` (
 DROP TABLE IF EXISTS `media_to_object`;
 
 CREATE TABLE `media_to_object` (
-  `object_guid` char(13) NOT NULL DEFAULT '',
-  `media_guid` char(13) NOT NULL DEFAULT '',
+  `object_guid` char(128) NOT NULL DEFAULT '',
+  `media_guid` char(128) NOT NULL DEFAULT '',
   `type` varchar(32) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -177,9 +196,9 @@ CREATE TABLE `media_to_object` (
 DROP TABLE IF EXISTS `medias`;
 
 CREATE TABLE `medias` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `guid` char(13) DEFAULT NULL,
-  `name` varchar(128) DEFAULT NULL,
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `guid` char(128) DEFAULT NULL,
+  `name` varchar(512) DEFAULT NULL,
   `description` varchar(512) DEFAULT NULL,
   `original` varchar(256) DEFAULT NULL,
   `filename` varchar(256) DEFAULT NULL,
@@ -199,7 +218,7 @@ CREATE TABLE `medias` (
 DROP TABLE IF EXISTS `options`;
 
 CREATE TABLE `options` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` text,
   `value` text,
   PRIMARY KEY (`id`)
@@ -213,13 +232,14 @@ CREATE TABLE `options` (
 DROP TABLE IF EXISTS `orders`;
 
 CREATE TABLE `orders` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `guid` char(13) DEFAULT NULL,
-  `product_guid` char(13) DEFAULT NULL,
-  `buyer_guid` char(13) DEFAULT NULL,
-  `deliver_guid` char(13) DEFAULT NULL,
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `guid` char(128) DEFAULT NULL,
+  `product_guid` char(128) DEFAULT NULL,
+  `buyer_guid` char(128) DEFAULT NULL,
+  `seller_guid` char(128) DEFAULT NULL,
+  `deliver_guid` char(128) DEFAULT NULL,
   `bill_guid` char(13) DEFAULT NULL,
-  `title` text,
+  `title` varchar(512) DEFAULT '',
   `description` varchar(1024) DEFAULT NULL,
   `type` varchar(32) NOT NULL DEFAULT 'product',
   `status` varchar(11) NOT NULL DEFAULT 'paid',
@@ -295,32 +315,13 @@ VALUES
 UNLOCK TABLES;
 
 
-# Dump of table templates
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `templates`;
-
-CREATE TABLE `templates` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `guid` char(13) DEFAULT NULL,
-  `name` varchar(256) DEFAULT NULL,
-  `attributes` text,
-  `content` text,
-  `type` varchar(32) NOT NULL DEFAULT 'email',
-  `usage` varchar(64) DEFAULT NULL,
-  `created` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
 # Dump of table user_bill_infos
 # ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `user_bill_infos`;
 
 CREATE TABLE `user_bill_infos` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `guid` char(13) DEFAULT NULL,
   `name` varchar(128) DEFAULT NULL,
   `phone` varchar(64) DEFAULT NULL,
@@ -342,9 +343,9 @@ CREATE TABLE `user_bill_infos` (
 DROP TABLE IF EXISTS `user_deliver_infos`;
 
 CREATE TABLE `user_deliver_infos` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `guid` char(13) DEFAULT NULL,
-  `user_guid` char(13) DEFAULT NULL,
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `guid` char(128) DEFAULT NULL,
+  `user_guid` char(128) DEFAULT NULL,
   `email` varchar(256) DEFAULT NULL,
   `firstname` varchar(32) DEFAULT NULL,
   `lastname` varchar(32) DEFAULT NULL,
@@ -367,8 +368,8 @@ CREATE TABLE `user_deliver_infos` (
 DROP TABLE IF EXISTS `users`;
 
 CREATE TABLE `users` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `guid` char(13) DEFAULT NULL,
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `guid` char(128) DEFAULT NULL,
   `name` varchar(32) DEFAULT NULL,
   `email` varchar(128) DEFAULT NULL,
   `password` varchar(128) DEFAULT NULL,
