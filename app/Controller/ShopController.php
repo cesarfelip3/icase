@@ -133,32 +133,32 @@ class ShopController extends AppController {
             if (!empty($data)) {
 
                 /*
-                $amount = 0;
-                foreach ($data as $value) {
-                    $amount += round($value['Product']['price'] * $value['Product']['quantity'], 2, PHP_ROUND_HALF_DOWN) + "";
-                }
+                  $amount = 0;
+                  foreach ($data as $value) {
+                  $amount += round($value['Product']['price'] * $value['Product']['quantity'], 2, PHP_ROUND_HALF_DOWN) + "";
+                  }
 
 
-                require_once APP . DS . 'Vendor' . DS . 'AuthorizeNet/AuthorizeNet.php'; // Make sure this path is correct.
-                define("AUTHORIZENET_SANDBOX", false);
-                $transaction = new AuthorizeNetAIM('9c22BSeN', '752eHX2G6hk9Y36J');
-                $transaction->setSandbox(false);
-                $transaction->amount = $amount;
-                $transaction->card_num = $bill['cc_number'];
-                $transaction->exp_date = $bill['cc_expired']['month'] . "/" . $bill['cc_expired']['year'];
+                  require_once APP . DS . 'Vendor' . DS . 'AuthorizeNet/AuthorizeNet.php'; // Make sure this path is correct.
+                  define("AUTHORIZENET_SANDBOX", false);
+                  $transaction = new AuthorizeNetAIM('9c22BSeN', '752eHX2G6hk9Y36J');
+                  $transaction->setSandbox(false);
+                  $transaction->amount = $amount;
+                  $transaction->card_num = $bill['cc_number'];
+                  $transaction->exp_date = $bill['cc_expired']['month'] . "/" . $bill['cc_expired']['year'];
 
-                $response = $transaction->authorizeAndCapture();
+                  $response = $transaction->authorizeAndCapture();
 
-                if ($response->approved) {
-                    
-                } else {
-                    $this->Product->rollTransaction();
-                    $this->_error['error'] = 1;
-                    $this->_error['message'] = $response->error_message;
-                    exit(json_encode($this->_error));
-                }
-                */
-                
+                  if ($response->approved) {
+
+                  } else {
+                  $this->Product->rollTransaction();
+                  $this->_error['error'] = 1;
+                  $this->_error['message'] = $response->error_message;
+                  exit(json_encode($this->_error));
+                  }
+                 */
+
                 // create user - guest
                 $user_guid = null;
                 $user_guest = false;
@@ -341,7 +341,6 @@ class ShopController extends AppController {
                     $this->_error['message'] = "All fields in bill info are required";
                     exit(json_encode($this->_error));
                 }
-                
             }
 
             $orders = isset($_COOKIE['orders']) ? $_COOKIE['orders'] : "";
@@ -456,7 +455,7 @@ class ShopController extends AppController {
             $action = $this->request->query('action');
 
             $orders = isset($_COOKIE['orders']) ? $_COOKIE['orders'] : "";
-            
+
 
             if ($action == "single") {
                 $orders = $_COOKIE['current-product-id'];
@@ -487,7 +486,7 @@ class ShopController extends AppController {
 
             $this->loadModel("Product");
             $i = 0;
-            
+
             foreach ($guids as $k => $value) {
 
                 if (strpos($k, "-") != false) {
@@ -506,10 +505,10 @@ class ShopController extends AppController {
                     continue;
                 }
 
-                if (is_array ($key) && isset($key[1])) {
+                if (is_array($key) && isset($key[1])) {
                     $data[$i]['Product']['file'] = $key[1];
                 } else {
-                    if (!empty ($data[$i]['Product']['featured'])) {
+                    if (!empty($data[$i]['Product']['featured'])) {
                         $data[$i]['Product']['featured'] = unserialize($data[$i]['Product']['featured']);
                         $data[$i]['Product']['file'] = $data[$i]['Product']['featured']['150w'][0];
                     } else {
@@ -626,6 +625,19 @@ class ShopController extends AppController {
         if ($this->request->is('ajax')) {
             $this->layout = false;
 
+            error_reporting(0);
+            register_shutdown_function(
+                    function () {
+
+                        $last_error = error_get_last();
+
+                        if (!is_null($last_error)) {
+                            $this->_error['error'] = 1;
+                            $this->_error['message'] = $last_error['message'];
+                            exit(json_encode($this->_error));
+                        }
+                    });
+
             header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
             header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
             header("Cache-Control: no-store, no-cache, must-revalidate");
@@ -673,30 +685,12 @@ class ShopController extends AppController {
                     //'mime' => $mime
             );
 
-            /*
-              $size = getimagesize($targetDir . DIRECTORY_SEPARATOR . $filename);
+            $path = $targetDir . DIRECTORY_SEPARATOR . $filename;
+            $image = file_get_contents($targetDir . DIRECTORY_SEPARATOR . $filename);
 
-              $current_width = $size[0];
-              $current_height = $size[1];
+            $image = substr_replace($image, pack("cnn", 1, 300, 300), 13, 5);
 
-              $left = 100;
-              $top = 5;
-
-              $crop_width = 248;
-              $crop_height = 437;
-
-              $canvas = imagecreatetruecolor($crop_width, $crop_height);
-              $current_image = imagecreatefromjpeg($targetDir . DIRECTORY_SEPARATOR . $filename);
-              imagecopy($canvas, $current_image, 0, 0, $left, $top, $current_width, $current_height);
-              imagejpeg($canvas, $targetDir . DIRECTORY_SEPARATOR . $filename, 100);
-
-              $path = $targetDir . DIRECTORY_SEPARATOR . $filename;
-              $image = file_get_contents($targetDir . DIRECTORY_SEPARATOR . $filename);
-
-              $image = substr_replace($image, pack("cnn", 1, 300, 300), 13, 5);
-
-              file_put_contents($targetDir . DIRECTORY_SEPARATOR . $filename, $image);
-             */
+            file_put_contents($targetDir . DIRECTORY_SEPARATOR . $filename, $image);
 
             $this->loadModel('Product');
             $data = $this->Product->find('first', array(
