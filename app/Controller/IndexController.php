@@ -242,7 +242,7 @@ class IndexController extends AppController {
             }
 
             try {
-                $var = array ('data', $data['User']);
+                $var = array('data', $data['User']);
                 $this->email("", $data['User']['email'], "Reset your password now", null, "signup_verification", $var);
             } catch (Exception $e) {
                 $this->_error['error'] = 0;
@@ -253,6 +253,37 @@ class IndexController extends AppController {
 
             $this->_error['error'] = 0;
             $this->_error['message'] = "We have sent you email to reset your password.";
+            exit(json_encode($this->_error));
+        }
+    }
+
+    public function activelink() {
+
+        if ($this->request->is('ajax')) {
+
+            $this->loadModel('User');
+            $user = $this->User->find('first', array("conditions" => array("guid" => $this->_identity['guid'])));
+            $user = $user['User'];
+
+            $this->User->id = $user['id'];
+            $this->set(
+                    array(
+                        "verfied_code" => sha1(uniqid()),
+                        "verified_expire" => time()
+            ));
+            $this->User->save();
+
+            try {
+                $var = array('data' => $user);
+                $this->email("", $data['email'], "Your account is ready, active it now", null, "user_signup", $var);
+            } catch (Exception $e) {
+                $this->_error['error'] = 1;
+                $this->_error['message'] = $e->getMessage();
+                exit(json_encode($this->_error));
+            }
+
+            $this->_error['error'] = 0;
+            $this->_error['message'] = $e->getMessage();
             exit(json_encode($this->_error));
         }
     }

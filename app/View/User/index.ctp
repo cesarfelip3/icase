@@ -26,9 +26,11 @@
             </div>
         </div>
         <div class="row-fluid" style="margin-top:20px;background-color:white;border:1px solid #ccc;padding:15px;border-radius: 5px;">
-            <div class="span12">
-                <h1>Products - Your might interested</h1>
+            <?php if ($_identity['active'] == 0) : ?>
+            <div class='alert' style='font-size:14px;'>
+                <div>Your account email address isn't verifed yet, you can resend  <a href=''>active link</a> now to active your account</div>
             </div>
+            <?php endif; ?>
         </div>
     </div>
 </div>
