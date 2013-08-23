@@ -5,7 +5,7 @@ App::uses('AppController', 'Controller');
 class IndexController extends AppController {
 
     public $uses = null;
-    protected $error = array(
+    protected $_error = array(
         'error' => 0,
         'message' => 'success'
     );
@@ -70,9 +70,9 @@ class IndexController extends AppController {
                         "password" => $password
                     );
                 } else {
-                    $this->error['error'] = 1;
-                    $this->error['message'] = "invalid user name or email";
-                    exit(json_encode($this->error));
+                    $this->_error['error'] = 1;
+                    $this->_error['message'] = "invalid user name or email";
+                    exit(json_encode($this->_error));
                 }
 
                 $this->loadModel('User');
@@ -81,19 +81,19 @@ class IndexController extends AppController {
                 );
 
                 if (empty($result)) {
-                    $this->error['error'] = 1;
-                    $this->error['message'] = "Your user/email isn't found";
-                    exit(json_encode($this->error));
+                    $this->_error['error'] = 1;
+                    $this->_error['message'] = "Your user/email isn't found";
+                    exit(json_encode($this->_error));
                 }
 
                 unset ($result['User']['data']);
                 $this->Auth->login($result['User']);
-                exit(json_encode($this->error));
+                exit(json_encode($this->_error));
             }
 
-            $this->error['error'] = 1;
-            $this->error['message'] = "Not a validate input";
-            exit(json_encode($this->error));
+            $this->_error['error'] = 1;
+            $this->_error['message'] = "Not a validate input";
+            exit(json_encode($this->_error));
         }
     }
 
@@ -121,28 +121,28 @@ class IndexController extends AppController {
                     );
 
                     if (!empty($result)) {
-                        $this->error['error'] = 1;
-                        $this->error['message'] = "User name or email already exists";
-                        exit(json_encode($this->error));
+                        $this->_error['error'] = 1;
+                        $this->_error['message'] = "User name or email already exists";
+                        exit(json_encode($this->_error));
                     }
 
                     $data['name'] = strtolower($data['name']);
                     if (preg_match("/^[a-zA-Z]{3,3}[0-9_a-zA-Z]*$/i", $data['name']) == false) {
-                        $this->error['error'] = 1;
-                        $this->error['message'] = "Invalid name";
-                        exit(json_encode($this->error));
+                        $this->_error['error'] = 1;
+                        $this->_error['message'] = "Invalid name";
+                        exit(json_encode($this->_error));
                     }
 
                     if (preg_match("/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/i", $data['email']) == false) {
-                        $this->error['error'] = 1;
-                        $this->error['message'] = "Invalid email address";
-                        exit(json_encode($this->error));
+                        $this->_error['error'] = 1;
+                        $this->_error['message'] = "Invalid email address";
+                        exit(json_encode($this->_error));
                     }
                     
                     if (empty($data['password'])) {
-                        $this->error['error'] = 1;
-                        $this->error['message'] = "Password is required";
-                        exit(json_encode($this->error));
+                        $this->_error['error'] = 1;
+                        $this->_error['message'] = "Password is required";
+                        exit(json_encode($this->_error));
                     }
 
                     App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
@@ -157,6 +157,9 @@ class IndexController extends AppController {
                         'modified' => time(),
                         'type' => 'registered',
                         'guid' => uniqid(),
+                        'verified_code' => sha1(uniqid()),
+                        'verified_expire' => time () + 1000 * 60 * 60 * 24,
+                        'active' => 0,
                     );
 
                     $this->loadModel('User');
@@ -166,26 +169,48 @@ class IndexController extends AppController {
                     $user = array_merge(array("id" => $id), $user);
                     $this->Auth->login($user);
                     //$this->redirect($this->webroot . "user/");
+                    
+                    $var = array ('user' => $user);
+                    try {
+                    $this->email ("", $data['email'], "Confirm your signup now", null, "signup_verification", $var);
+                    }
+                    catch (Exception $e) {
+                        $this->_error['error'] = 1;
+                        $this->_error['message'] = $e->getMessage();
+                        exit(json_encode($this->_error));
+                    }
 
-                    exit(json_encode($this->error));
+                    $this->_error['error'] = 0;
+                    exit(json_encode($this->_error));
                 }
 
-                $this->error['error'] = 1;
-                $this->error['message'] = "Not a validate input";
-                exit(json_encode($this->error));
+                $this->_error['error'] = 1;
+                $this->_error['message'] = "Not a validate input";
+                exit(json_encode($this->_error));
             }
 
             $this->layout = false;
             $this->render("signup.ajax");
         }
     }
+    
+    protected function email($from, $to, $subject, $content, $template, $vars = array()) {
+        $Email = new CakeEmail();
+        $Email->template ($template);
+        $Email->viewVars($vars);
+        $Email->emailFormat('html');
+        $Email->from($from);
+        $Email->to($to);
+        $Email->subject($subject);
+        $Email->send();
+    }
 
     function logout() {
         if ($this->request->is('ajax')) {
             $this->Auth->logout();
-            $this->error['error'] = 0;
-            $this->error['message'] = "";
-            exit(json_encode($this->error));
+            $this->_error['error'] = 0;
+            $this->_error['message'] = "";
+            exit(json_encode($this->_error));
         }
         
         $this->redirect($this->Auth->logout());

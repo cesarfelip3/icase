@@ -14,10 +14,17 @@
 <div class="row-fluid">
     <div class="span7">
         <div class="qbox" style="background:transparent;box-shadow: none;border:none;">
-            <h1 class='text-primary'>Best Offer Ever!</h1>
-            <p>
-                Slogan is here!!
-            </p>
+            <h1 class='text-primary' style="text-transform:none;">Want to save your creations, Sign in Now!</h1>
+            <div>
+                <ul style="font-size:14px;">
+                    <li>Your will have unlimited space to save your creator progress</li>
+                    <li>Your will have unlimited space to save your final creations and download it</li>
+                    <li>Faster checkout without enter deliver message twice</li>
+                    <li>Get your order status immediately</li>
+                    <li>Change your email as you want</li>
+                    <li>More advantages from our upgrades</li>
+                </ul>
+            </div>
         </div>
     </div>
     <div class="span5">

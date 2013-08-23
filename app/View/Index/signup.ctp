@@ -14,10 +14,20 @@
 <div class="row-fluid">
     <div class="span7">
         <div class="qbox" style="background:transparent;box-shadow: none;border:none;">
-            <h1 class='text-primary'>Best Offer Ever!</h1>
-            <p>
-                Slogan is here!!
-            </p>
+            <h1 class='text-primary' style="text-transform:none;">Want to save your creations? Sign up Now!</h1>
+            <div>
+                <ul style="font-size:14px;">
+                    <li>Your will have unlimited space to save your creator progress</li>
+                    <li>Your will have unlimited space to save your final creations and download it</li>
+                    <li>Faster checkout without enter deliver message twice</li>
+                    <li>Get your order status immediately</li>
+                    <li>Change your email as you want</li>
+                    <li>More advantages from our upgrades</li>
+                </ul>
+            </div>
+            <div class="well" style="margin-top:20px;">
+                <p style="font-size:14px;font-weight: normal;">We will send a link to verify your email address, so please enter a valid email address.</p>
+            </div>
         </div>
     </div>
     <div class="span5">
@@ -65,6 +75,7 @@
         }).done(function(data) {
             $("#btn-signup").button("reset");
             
+            var result = $.parseJSON(data);
             if (result.error == 1) {
                 
             } else {
