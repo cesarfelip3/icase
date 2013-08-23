@@ -3,25 +3,15 @@
 App::uses('AppController', 'Controller');
 
 class CatalogueController extends AppController {
-
+    
     public $uses = false;
-    protected $_error = array(
-        "error" => 1,
-        "message" => "",
-        "files" => array(),
-    );
 
     public function beforeFilter() {
         $this->Auth->allow();
         parent::beforeFilter();
-
-        if (!$this->request->is('ajax')) {
-            $this->layoutInit();
-        }
     }
 
     public function search($keywords) {
-
         
         $search = $this->request->query ('search');
         if (!empty ($search)) {
@@ -103,44 +93,26 @@ class CatalogueController extends AppController {
     }
 
     public function product($slug) {
-        $this->loadModel('Product');
 
         /*
-          $data = $this->Product->find('all', array ("conditions" => array ("type" => "product")));
-
-          foreach ($data as $key => $value) {
-          $this->Product->id = $value['Product']['id'];
-
-          $name = "iphone " . rand (3, 5);
-          $this->Product->set (array(
-          "name" => $name,
-          "slug" => preg_replace ("/ +/i", "-", $name) . "-" . $key,
-          "price" => rand (20, 100) . ".07",
-          ));
-
-          $this->Product->save();
-          }
-
-
-
           $log = $this->Product->getDataSource()->getLog(false, false);
           print_r ($log);
-
-          exit;
          */
+        
+        $this->loadModel('Product');
 
         $data = $this->Product->find('first', array("conditions" => array("slug" => $slug)));
 
         if (empty($data)) {
-            $this->redirect("/");
-            exit;
+            $this->redirect(array ("controller" => "index", "action" => "index"));
         }
 
         $data = $data['Product'];
+        
         $data['featured'] = unserialize($data['featured']);
 
-
-        $this->set("title", env("SERVER_NAME") . " | Best Mobile Case iphone, galaxy | $slug");
+        $this->set("_title", $this->_title . "|" . $slug);
+        $this->set("_description", $data['seo_description']);
         $this->set("data", $data);
     }
 
@@ -151,7 +123,7 @@ class CatalogueController extends AppController {
         $data = $this->Category->find('first', array("conditions" => array("slug" => $slug)));
 
         if (empty($data)) {
-            $this->redirect("/");
+            $this->redirect(array ("controller" => "index", "action" => "index"));
             exit;
         }
 

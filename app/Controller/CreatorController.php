@@ -6,33 +6,23 @@ App::uses('CakeEmail', 'Network/Email');
 class CreatorController extends AppController {
 
     public $uses = false;
-    protected $_error = array(
-        "error" => 0,
-        "message" => "",
-        "files" => array(),
-        "data" => array(),
-    );
 
     public function beforeFilter() {
         $this->Auth->allow();
         parent::beforeFilter();
-
-        if (!$this->request->is('ajax')) {
-            $this->layoutInit();
-        }
     }
 
     public function index() {
-        $this->set('load_shop_cart', true);
         
         $guid = $this->request->query ('id');
+        $load = 1;
         
         if (empty ($guid)) {
             $guid = uniqid();
-        } else {
-            $this->set ('canvas_load', true);
-        }
+            $load = 0;
+        } 
         
+        $this->set('canvas_load', $load);
         $this->set('canvas_guid', $guid);
     }
 
@@ -41,7 +31,7 @@ class CreatorController extends AppController {
         if ($this->request->is('ajax') && $this->request->is('post')) {
             $this->autoRender = false;
 
-            if (empty($this->_identity)) {
+            if (empty($this->_meta['_identity'])) {
                 $this->_error['error'] = 1;
                 $this->_error['message'] = "Not logged in yet.";
 
@@ -90,7 +80,7 @@ class CreatorController extends AppController {
                 "guid" => $guid,
                 "user_guid" => $this->_identity['guid'],
                 "product_guid" => $product_guid,
-                "name" => $name . "_" . $guid,
+                "name" => $name,
                 "data" => $json,
                 "type" => "progress",
                 "created" => time(),
@@ -108,7 +98,7 @@ class CreatorController extends AppController {
         if ($this->request->is('ajax')) {
             $this->autoRender = false;
             
-            if (empty($this->_identity)) {
+            if (empty($this->_meta['_identity'])) {
                 $this->_error['error'] = 1;
                 $this->_error['message'] = "Not logged in yet.";
 
@@ -131,14 +121,13 @@ class CreatorController extends AppController {
                 
                 $this->_error['data']['json'] = $data['Creation']['data'];
                 $this->_error['data']['product'] = $data['Creation']['product_guid'];
-                $this->_error['data']['name'] = @preg_replace ("/_.?*/i", $data['Creation']['name']);
+                $this->_error['data']['name'] = $data['Creation']['name'];
                 $this->_error['error'] = 0;
                 exit(json_encode($this->_error));
             }
 
             $this->_error['error'] = 1;
             $this->_error['message'] = "No saved data yet.";
-
             exit(json_encode($this->_error));
         }
     }
@@ -250,7 +239,7 @@ class CreatorController extends AppController {
             }
 
             $this->set('data', $data);
-            $this->render("gettemplates.ajax");
+            $this->render("templates.ajax");
             return;
             //echo json_encode($data);
         }

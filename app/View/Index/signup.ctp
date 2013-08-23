@@ -1,11 +1,11 @@
 <style type="text/css">
-    form#user-form label {
+    form#form-signup label {
         display:inline-block;
         width:70px;
         font-size:14px;
     }
 
-    form#user-form p {
+    form#form-signup p {
         line-height: 20px;
         font-size: 14px
     }
@@ -32,7 +32,7 @@
     </div>
     <div class="span5">
         <div class="qbox" style="background:transparent;box-shadow: none;font-size:14px">
-            <form id="user-form" style="margin-top:20px;">
+            <form id="form-signup" style="margin-top:20px;">
                 <fieldset>
                     <p>
                         <label>User</label>
@@ -47,41 +47,41 @@
                         <input type="password" class="input-large" name='signup[password]' />
                     </p>
                     <p>
-                        <a href='javascript:' class='btn btn-primary' data-loading-text="Working..." onclick="save();" id="btn-signup">Sign up</a>
+                        <a href='javascript:' class='btn btn-primary' data-loading-text="Working..." onclick="signup_submit();" id="btn-signup">Sign up</a>
                     </p>
                     <p>
                         <span>Already had account? Go </span>
                         <a href='<?php echo $this->webroot; ?>signin'>Sign In Now</a>
                     </p>
+                    <p class="text-error" style="color:darkred">
+                    
+                </p>
                 </fieldset>
             </form>
         </div>
     </div>
 </div>
 <script type="text/javascript">
-    $(document).ready(
-            
-    );
-    
-    function save ()
+
+    function signup_submit()
     {
         jQuery.ajax({
             url: "<?php echo $this->webroot; ?>index/signup",
-            data: $("#user-form").serialize(),
+            data: $("#form-signup").serialize(),
             type: "POST",
             beforeSend: function(xhr) {
                 $("#btn-signup").button("loading");
             }
         }).done(function(data) {
             $("#btn-signup").button("reset");
-            
+
             var result = $.parseJSON(data);
             if (result.error == 1) {
-                
+                $(".text-error").html(result.message);
             } else {
-                window.location.href="<?php $this->webroot . "user/"; ?>";
+                window.location.href = "<?php $this->webroot . "user/"; ?>";
             }
         }).fail(function() {
         });
-    }
+     }
 </script>

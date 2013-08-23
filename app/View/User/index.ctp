@@ -7,8 +7,8 @@
             <h3 style="border-bottom:1px solid #ccc">My Dashboard</h3>
             <ul class="nav nav-list">
                 <li class="active"><a href="<?php echo $this->webroot; ?>user/">Dashboard</a></li>
-                <li><a href="<?php echo $this->webroot; ?>user/order">Orders</a></li>
-                <li><a href="<?php echo $this->webroot; ?>user/creation">Creations</a></li>
+                <li><a href="<?php echo $this->webroot; ?>order/">Orders</a></li>
+                <li><a href="<?php echo $this->webroot; ?>creation/">Creations</a></li>
                 <li><a href="<?php echo $this->webroot; ?>user/profile">Profile</a></li>
             </ul>
         </div>

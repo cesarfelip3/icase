@@ -1,26 +1,18 @@
 <?php
+/*
+ * This could be the most complex part of the application
+ */
+
 
 App::uses('AppController', 'Controller');
-App::uses('CakeEmail', 'Network/Email');
 
 class ShopController extends AppController {
 
     public $uses = false;
-    protected $_error = array(
-        "error" => 0,
-        "message" => "",
-        "files" => array(),
-        "data" => array(),
-    );
 
     public function beforeFilter() {
         $this->Auth->allow();
         parent::beforeFilter();
-        $this->set('load_shop_cart', true);
-
-        if (!$this->request->is('ajax')) {
-            $this->layoutInit();
-        }
     }
 
     //==============================================================

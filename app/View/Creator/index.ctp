@@ -9,14 +9,11 @@
             <div style="display:block;width:100%;height:30px">
                 <div class="pull-left tools" id="uploader" style="padding:0px;margin:0px;">
                     <div id="filelist" style="display:none;padding:0px;margin:0px;"></div>
-                    <a href="javascript:" id="pickfiles"><i class="icon-picture icon-2x"></i> From Computer</a> 
+                    <a href="javascript:" id="btn-upload-image"><i class="icon-picture icon-2x"></i> From Computer</a> 
                     <a href="javascript:"><i class="icon-picture icon-2x"></i> From Service</a>
                     <a href="javascript:" data-action="new" title="remove"><i class="icon-remove-sign icon-2x"></i> <span>clear canvas</span></a>
                     <a href="javascript:" data-action="preview" title="remove"><i class="icon-eye-open icon-2x"></i> preview</a>
-                    <?php if (isset($identity)) : ?>
-                        <a href="javascript:" data-action="save" title="remove"><i class="icon-save icon-2x"></i> save</a>
-<!--                        <a href="javascript:" data-action="reload" title="remove"><i class="icon-upload-alt icon-2x"></i> load</a>-->
-                    <?php endif; ?>
+                    <a href="javascript:" data-action="save" title="remove"><i class="icon-save icon-2x"></i> save</a>
                 </div>
                 <div class="tools pull-right">
                     <a id="btn-order" onclick="order();" style="background-color:orange;padding:2px;padding-left:12px; padding-right:10px; color:white;text-shadow: none;" href="javascript:">
@@ -46,9 +43,10 @@
                 </div>
             </div> 
         </div>
+        <!-- canvas -->
         <div class="progress" style="height:2px;display:block;width:100%;margin-top:10px;"><div class="bar bar-warning" id="progress-bar" style="width: 0%; height:2px;"></div></div>
         <input type="hidden" id="current-item" style="display:none;" />
-        <input type="hidden" name="canvas_guid" id="canvas_guid" style="display:none;" value="<?php echo $canvas_guid; ?>" />
+        <input type="hidden" name="canvas_guid" id="canvas_guid" style="display:none;" value="<?php echo $canvas_guid; ?>" data-reload="<?php echo $canvas_load; ?>" />
         <div class="row-fluid">
             <div class="span10" style="width:780px;">
                 <div>
@@ -60,6 +58,7 @@
 
             </div>
         </div>
+        <!-- editor -->
         <div class="row-fluid">
             <div class="text-editor editor span9 hide" style="width:100%;border:1px solid #ccc;margin-top:10px;padding:5px;">
                 <form class="form-inline">
@@ -109,93 +108,6 @@
             </div><!-- draw editor -->
         </div>
 
-        <div class="qbox hide" style="display: none;">
-            <h3><i class="icon-search pull-right"></i>Filters</h3>
-            <form>
-                <!-- Multiple Checkboxes -->
-                <div class="control-group">
-                    <label class="control-label" for="checkboxes"></label>
-                    <div class="controls">
-                        <label class="checkbox" for="checkboxes-0">
-                            <input type="checkbox" name="checkboxes" id="checkboxes-0" value="Grayscale:">
-                            Grayscale
-                        </label>
-                        <label class="checkbox" for="checkboxes-1">
-                            <input type="checkbox" name="checkboxes" id="checkboxes-1" value="Invert:">
-                            Invert
-                        </label>
-                        <label class="checkbox" for="checkboxes-2">
-                            <input type="checkbox" name="checkboxes" id="checkboxes-2" value="Sepia:">
-                            Sepia
-                        </label>
-
-                        <label class="checkbox" for="checkboxes-3">
-                            <input type="checkbox" name="checkboxes" id="checkboxes-3" value="Sepia2:">
-                            Sepia2
-                        </label>
-
-                        <label class="checkbox" for="checkboxes-0">
-                            <input type="checkbox" name="checkboxes" id="checkboxes-0" value="Grayscale:">
-                            Blur
-                        </label>
-                        <label class="checkbox" for="checkboxes-1">
-                            <input type="checkbox" name="checkboxes" id="checkboxes-1" value="Invert:">
-                            Sharpen
-                        </label>
-                        <label class="checkbox" for="checkboxes-2">
-                            <input type="checkbox" name="checkboxes" id="checkboxes-2" value="Sepia:">
-                            Emboss:
-                        </label>
-
-                        <label class="checkbox" for="checkboxes-3">
-                            <input type="checkbox" name="checkboxes" id="checkboxes-3" value="Sepia2:">
-                            Waterize:
-                        </label>
-
-                        <label class="checkbox" for="checkboxes-4">
-                            <input type="checkbox" name="checkboxes" id="checkboxes-4" value="Remove white:">
-                            Remove white:
-                        </label>
-                        <label>Distance: <input type="range" id="remove-white-distance" value="10" min="0" max="255"></label>
-
-
-                        <label class="checkbox" for="checkboxes-5">
-                            <input type="checkbox" name="checkboxes" id="checkboxes-5" value="Remove-white">
-                            Brightness:
-                        </label>
-                        <label>Value: <input type="range" id="remove-white-distance" value="10" min="0" max="255"></label>
-
-                        <label class="checkbox" for="checkboxes-6">
-                            <input type="checkbox" name="checkboxes" id="checkboxes-6" value="Noise">
-                            Noise:
-                        </label>
-                        <label>Value: <input type="range" id="remove-white-distance" value="10" min="0" max="255"></label>
-
-
-                        <label class="checkbox" for="checkboxes-7">
-                            <input type="checkbox" name="checkboxes" id="checkboxes-7" value="GradientTransparency">
-                            GradientTransparency:
-                        </label>
-                        <label>Value: <input type="range" id="gradientTransparency" value="10" min="0" max="255"></label>
-
-                        <label class="checkbox" for="checkboxes-7">
-                            <input type="checkbox" name="checkboxes" id="checkboxes-7" value="Pixelate">
-                            Pixelate:
-                        </label>
-                        <label>Value: <input type="range" id="Pixelate" value="10" min="0" max="255"></label>
-
-                        <label>Amplitude: <input type="range" id="Amplitude" value="10" min="0" max="255"></label>
-                        <label>Frequency: <input type="range" id="Frequency" value="10" min="0" max="255"></label>
-                        <label>Offset: <input type="range" id="Offset" value="10" min="0" max="255"></label>
-
-                    </div>
-                </div>   
-            </form>
-        </div>	
-        <!--                </div>-->
-        <!--            </div>-->
-        <!--/end my short list-->
-
     </div>
     <!-- end fluid-container -->
 </div>
@@ -223,7 +135,7 @@ $js_pluploader = array(
 
     var uploader = new plupload.Uploader({
         runtimes: 'gears,html5,browserplus',
-        browse_button: 'pickfiles',
+        browse_button: 'btn-upload-image',
         container: 'uploader',
         max_file_size: '10mb',
         url: '<?php echo $this->webroot; ?>media/upload',
@@ -346,10 +258,10 @@ $js_case = array(
         //mememaker.tools.backgroundcolor("red");
 
         templatelist_load();
-        
-        <?php if (isset ($identity)) : ?>
-                reload_canvas ();
-        <?php endif; ?>
+
+        if ($("#canvas_guid").data('reload') == "1") {
+            reload_canvas ();
+        }
 
         jQuery(".ajax-loading-indicator").hide(0);
         jQuery("#btn-order").show(1000);
@@ -359,20 +271,18 @@ $js_case = array(
     //===========================================================
     //
     //===========================================================
-    
-    <?php if (isset ($identity)) : ?>
 
     function save_canvas(json)
     {
-        var id = $("#canvas_guid").val ();
+        var id = $("#canvas_guid").val();
         var name = $("#current-item").data('name');
         var guid = $("#current-item").val();
-        
+
         if ($("#current-item").val() == "") {
-            alert ("You don't have to save an empty canvas.");
+            alert("You don't have to save an empty canvas.");
             return false;
         }
-        
+
         jQuery.ajax({
             url: "<?php echo $this->webroot; ?>creator/save/?id=" + id,
             data: {'json': json, 'name': name, 'product': guid},
@@ -384,13 +294,14 @@ $js_case = array(
 
             var result = $.parseJSON(data);
             if (result.error == 1) {
-                
+                $("#modal-user").modal();
+                formuser_load ();
             } else {
                 $("#canvas_guid").val(result.data.guid);
                 $("#canvas_guid").data('saved', '1');
-                alert ("Your progress just saved");
+                alert("Your progress just saved");
             }
-            
+
         }).fail(function() {
             //$("#template-list").prev().children(":first-child").hide(0);
         });
@@ -399,7 +310,7 @@ $js_case = array(
     function reload_canvas()
     {
         var guid = $("#canvas_guid").val();
-        
+
         jQuery.ajax({
             url: "<?php echo $this->webroot; ?>creator/reload",
             data: {'guid': guid},
@@ -410,10 +321,11 @@ $js_case = array(
         }).done(function(data) {
 
             //console.log (data);
-            var result = $.parseJSON (data);
+            var result = $.parseJSON(data);
             //console.log(data);
-            
+
             if (result.error == 1) {
+
             } else {
                 //console.log (result.data.json);
                 $("#current-item").data('name', result.data.name);
@@ -425,8 +337,6 @@ $js_case = array(
             //$("#template-list").prev().children(":first-child").hide(0);
         });
     }
-    
-    <?php endif; ?>
 
     //===========================================================
     // template list
@@ -521,6 +431,68 @@ $js_case = array(
         $.shoppingcart.setCurrentProductId(orderId + "-" + image);
         return true;
     }
+    
+    //===================================================
+    
+    function formuser_load ()
+    {
+        jQuery.ajax({
+            url: "<?php echo $this->webroot; ?>index/formuser",
+            type: "GET",
+            beforeSend: function(xhr) {
+            }
+        }).done(function(data) {
+            
+            $("#modal-user .modal-body").html (data);
+
+        }).fail(function() {
+            jQuery(".ajax-loading-indicator").hide(0);
+        });
+    }
+    
+        function signup_submit()
+    {
+        jQuery.ajax({
+            url: "<?php echo $this->webroot; ?>index/signup",
+            data: $("#form-signup").serialize(),
+            type: "POST",
+            beforeSend: function(xhr) {
+                $("#btn-signup").button("loading");
+            }
+        }).done(function(data) {
+            $("#btn-signup").button("reset");
+
+            var result = $.parseJSON(data);
+            if (result.error == 1) {
+                $("#form-signup .text-error").html(result.message);
+            } else {
+                $("#modal-user").modal('hide');
+            }
+        }).fail(function() {
+        });
+    }
+
+    function signin_submit()
+    {
+        jQuery.ajax({
+            url: "<?php echo $this->webroot; ?>index/signin",
+            data: $("#form-signin").serialize(),
+            type: "POST",
+            beforeSend: function(xhr) {
+                $("#btn-signin").button("loading");
+            }
+        }).done(function(data) {
+            $("#btn-signin").button("reset");
+
+            var result = $.parseJSON(data);
+            if (result.error == 1) {
+                $("#form-signin .text-error").html(result.message);
+            } else {
+                $("#modal-user").modal('hide');
+            }
+        }).fail(function() {
+        });
+    }
 
 </script>
 
@@ -534,6 +506,20 @@ $js_case = array(
         <div class="ajax-loading-indicator hide" style=""><a href="javascript:" style="font-size:14px;"><i class="icon-refresh icon-spin"></i> Loading ....</a></div>
     </div>
     <div class="modal-footer">
+    </div>
+</div>
+
+<!-- user modal -->
+<div id="modal-user" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">User</h3>
+    </div>
+    <div class="modal-body" style='background:url("<?php echo $this->webroot; ?>img/pattern/whitey.png") repeat scroll 0 0 transparent;'>
+        <div class="ajax-loading-indicator hide" style=""><a href="javascript:" style="font-size:14px;"><i class="icon-refresh icon-spin"></i> Loading ....</a></div>
+    </div>
+    <div class="modal-footer">
+        <p class="text-error">You have to sign in to save your progress.</p>
     </div>
 </div>
 

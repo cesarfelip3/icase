@@ -4,25 +4,17 @@ App::uses('AppController', 'Controller');
 
 class IndexController extends AppController {
 
-    public $uses = null;
-    protected $_error = array(
-        'error' => 0,
-        'message' => 'success'
-    );
+    public $uses = false;
 
     public function beforeFilter() {
-        $this->Auth->allow("signin", "signup", "reset", "index");
+        $this->Auth->allow("signin", "signup", "reset", "index", "formuser");
         $this->Auth->deny("logout");
         parent::beforeFilter();
 
-        if (!$this->request->is('ajax')) {
-            $this->layoutInit();
-        }
-        
         if ($this->Auth->loggedIn()) {
             if (in_array(strtolower($this->request->action), array("signin", "signup"))) {
 
-                $this->redirect("/user/");
+                $this->redirect(array("controller" => "user", "action" => "index"));
             }
         }
     }
@@ -86,8 +78,10 @@ class IndexController extends AppController {
                     exit(json_encode($this->_error));
                 }
 
-                unset ($result['User']['data']);
+                unset($result['User']['data']);
                 $this->Auth->login($result['User']);
+
+                $this->_error['error'] = 0;
                 exit(json_encode($this->_error));
             }
 
@@ -138,7 +132,7 @@ class IndexController extends AppController {
                         $this->_error['message'] = "Invalid email address";
                         exit(json_encode($this->_error));
                     }
-                    
+
                     if (empty($data['password'])) {
                         $this->_error['error'] = 1;
                         $this->_error['message'] = "Password is required";
@@ -158,7 +152,7 @@ class IndexController extends AppController {
                         'type' => 'registered',
                         'guid' => uniqid(),
                         'verified_code' => sha1(uniqid()),
-                        'verified_expire' => time () + 1000 * 60 * 60 * 24,
+                        'verified_expire' => time() + 1000 * 60 * 60 * 24,
                         'active' => 0,
                     );
 
@@ -169,18 +163,16 @@ class IndexController extends AppController {
                     $user = array_merge(array("id" => $id), $user);
                     $this->Auth->login($user);
                     //$this->redirect($this->webroot . "user/");
-                    
-                    $var = array ('user' => $user);
-                    
-                    /*
+
+                    $var = array('data' => $user);
+
                     try {
-                        $this->email ("", $data['email'], "Confirm your signup now", null, "signup_verification", $var);
-                    }
-                    catch (Exception $e) {
-                        $this->_error['error'] = 1;
+                        $this->email("", $data['email'], "Your account is ready, active it now", null, "user_signup", $var);
+                    } catch (Exception $e) {
+                        $this->_error['error'] = 0;
                         $this->_error['message'] = $e->getMessage();
                         exit(json_encode($this->_error));
-                    }*/
+                    }
 
                     $this->_error['error'] = 0;
                     exit(json_encode($this->_error));
@@ -190,40 +182,32 @@ class IndexController extends AppController {
                 $this->_error['message'] = "Not a validate input";
                 exit(json_encode($this->_error));
             }
-
-            $this->layout = false;
-            $this->render("signup.ajax");
         }
     }
-    
-    protected function email($from, $to, $subject, $content, $template, $vars = array()) {
-        $Email = new CakeEmail();
-        $Email->template ($template);
-        $Email->viewVars($vars);
-        $Email->emailFormat('html');
-        $Email->from($from);
-        $Email->to($to);
-        $Email->subject($subject);
-        $Email->send();
+
+    public function formuser() {
+        if ($this->request->is('ajax')) {
+            $this->layout = false;
+            $this->render("formuser.ajax");
+        }
     }
-    
-    public function verify ()
-    {
-        $id = $this->request->query ('id');
-        if (empty ($id)) {
+
+    public function verify() {
+        $id = $this->request->query('id');
+        if (empty($id)) {
             return;
         }
-        
+
         $this->loadModel('User');
-        $data = $this->User->find ('first', array ("conditions" => array ('verfied_code' => $id)));
-        
-        if (!empty ($data)) {
+        $data = $this->User->find('first', array("conditions" => array('verfied_code' => $id)));
+
+        if (!empty($data)) {
             if ($data['User']['verfied_expire'] > time()) {
-                $this->set ('success', true);
+                $this->set('success', true);
                 return;
             }
         }
-        
+
         return;
     }
 
@@ -234,16 +218,43 @@ class IndexController extends AppController {
             $this->_error['message'] = "";
             exit(json_encode($this->_error));
         }
-        
+
         $this->redirect($this->Auth->logout());
     }
 
     function reset() {
-        
-    }
+        if ($this->request->is('ajax') && $this->request->is('post')) {
+            $data = $this->request->data('reset');
 
-    function subscribe() {
-        
+            if (empty($data['email']) || preg_match("/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/i", $data['email']) == false) {
+                $this->_error['error'] = 1;
+                $this->_error['message'] = "Invalid email address";
+                exit(json_encode($this->_error));
+            }
+
+            $this->loadModel('User');
+            $data = $this->User->find('first', array("conditions" => array("email" => $data['email'])));
+
+            if (empty($data)) {
+                $this->_error['error'] = 1;
+                $this->_error['message'] = "Your email isn't in registration";
+                exit(json_encode($this->_error));
+            }
+
+            try {
+                $var = array ('data', $data['User']);
+                $this->email("", $data['User']['email'], "Reset your password now", null, "signup_verification", $var);
+            } catch (Exception $e) {
+                $this->_error['error'] = 0;
+                $this->_error['message'] = $e->getMessage();
+                exit(json_encode($this->_error));
+            }
+
+
+            $this->_error['error'] = 0;
+            $this->_error['message'] = "We have sent you email to reset your password.";
+            exit(json_encode($this->_error));
+        }
     }
 
 }

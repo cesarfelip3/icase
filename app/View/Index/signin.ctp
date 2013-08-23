@@ -1,11 +1,11 @@
 <style type="text/css">
-    form#user-form label {
+    form#form-signin label {
         display:inline-block;
         width:100px;
         font-size:14px;
     }
     
-    form#user-form p {
+    form#form-signin p {
         line-height: 20px;
         font-size: 14px
     }
@@ -29,7 +29,7 @@
     </div>
     <div class="span5">
         <div class="qbox" style="background:transparent;box-shadow: none;font-size:14px">
-        <form id="user-form" style="margin-top:20px;">
+        <form id="form-signin" style="margin-top:20px;">
             <fieldset>
                 <p>
                     <label>User/Email</label>
@@ -40,7 +40,7 @@
                     <input type="password" class="input-large" name='signin[password]' />
                 </p>
                 <p>
-                    <a href='javascript:' class='btn btn-primary' data-loading-text="Working..." onclick="save();" id="btn-signup">Sign in</a>
+                    <a href='javascript:' class='btn btn-primary' data-loading-text="Working..." onclick="signin_submit();" id="btn-signin">Sign in</a>
                 </p>
                 <p>
                     <a href='<?php echo $this->webroot; ?>index/reset'><span>Forget Password?</span></a>
@@ -49,32 +49,32 @@
                     <span>Don't have account yet?</span>
                     <a href='<?php echo $this->webroot; ?>signup'>Sign Up Now</a>
                 </p>
+                <p class="text-error" style="color:darkred">
+                    
+                </p>
             </fieldset>
         </form>
         </div>
     </div>
 </div>
 <script type="text/javascript">
-    $(document).ready(
-            
-    );
     
-    function save ()
+    function signin_submit ()
     {
         jQuery.ajax({
             url: "<?php echo $this->webroot; ?>index/signin",
-            data: $("#user-form").serialize(),
+            data: $("#form-signin").serialize(),
             type: "POST",
             beforeSend: function(xhr) {
-                $("#btn-signup").button("loading");
+                $("#btn-signin").button("loading");
             }
         }).done(function(data) {
             console.log (data);
-            $("#btn-signup").button("reset");
+            $("#btn-signin").button("reset");
             
             var result = $.parseJSON(data);
             if (result.error == 1) {
-                
+                $(".text-error").html(result.message);
             } else {
                 window.location.href="<?php $this->webroot . "user/"; ?>";
             }
