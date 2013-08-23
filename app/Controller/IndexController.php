@@ -9,10 +9,11 @@ class IndexController extends AppController {
     public function beforeFilter() {
         $this->Auth->allow("signin", "signup", "reset", "index", "formuser");
         $this->Auth->deny("logout");
+        $this->Auth->deny("activelink");
         parent::beforeFilter();
 
         if ($this->Auth->loggedIn()) {
-            if (in_array(strtolower($this->request->action), array("signin", "signup"))) {
+            if (in_array(strtolower($this->request->action), array("signin", "signup", "reset"))) {
 
                 $this->redirect(array("controller" => "user", "action" => "index"));
             }
@@ -262,10 +263,10 @@ class IndexController extends AppController {
         if ($this->request->is('ajax')) {
 
             $this->loadModel('User');
-            $user = $this->User->find('first', array("conditions" => array("guid" => $this->_identity['guid'])));
-            $user = $user['User'];
+            $data = $this->User->find('first', array("conditions" => array("guid" => $this->_identity['guid'])));
+            $data = $data['User'];
 
-            $this->User->id = $user['id'];
+            $this->User->id = $data['id'];
             $this->set(
                     array(
                         "verfied_code" => sha1(uniqid()),
@@ -274,7 +275,7 @@ class IndexController extends AppController {
             $this->User->save();
 
             try {
-                $var = array('data' => $user);
+                $var = array('data' => $data);
                 $this->email("", $data['email'], "Your account is ready, active it now", null, "user_signup", $var);
             } catch (Exception $e) {
                 $this->_error['error'] = 1;

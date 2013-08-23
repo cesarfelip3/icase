@@ -12,7 +12,11 @@ class UserController extends AppController {
     }
 
     public function index() {
+        $this->loadModel('Creation');
+        $count = $this->Creation->find ('count', array ("conditions" => array ("guid" => $this->_identity['guid'])));
         
+        $this->set ('orders', $this->_identity['orders']);
+        $this->set ('count', $count);
     }
 
     public function profile() {
