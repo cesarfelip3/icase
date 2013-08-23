@@ -125,6 +125,8 @@ class UserController extends AppController {
         }
 
         if ($this->request->is('ajax')) {
+            $this->autoRender = false;
+            
             switch ($action) {
                 case "list" :
                     $this->order_list();
@@ -142,18 +144,10 @@ class UserController extends AppController {
     protected function order_list() {
 
         $this->layout = false;
-
-        $guid = $this->request->query('id');
-
-        if (empty($guid)) {
-            $this->set('data', null);
-            $this->render('order_list.ajax');
-            return;
-        }
-
+        
         $this->loadModel("Order");
-        $data = $this->Order->find('all', array("conditions" => array("user_guid" => $this->_identity['guid'])));
-
+        $data = $this->Order->find('all', array("order" => "modified DESC", "conditions" => array("buyer_guid" => $this->_identity['guid'])));
+        
         $this->set('data', $data);
         $this->render('order_list.ajax');
     }
