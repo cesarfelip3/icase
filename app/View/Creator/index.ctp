@@ -15,7 +15,7 @@
                     <a href="javascript:" data-action="preview" title="remove"><i class="icon-eye-open icon-2x"></i> preview</a>
                     <?php if (isset($identity)) : ?>
                         <a href="javascript:" data-action="save" title="remove"><i class="icon-save icon-2x"></i> save</a>
-                        <a href="javascript:" data-action="reload" title="remove"><i class="icon-upload-alt icon-2x"></i> load</a>
+<!--                        <a href="javascript:" data-action="reload" title="remove"><i class="icon-upload-alt icon-2x"></i> load</a>-->
                     <?php endif; ?>
                 </div>
                 <div class="tools pull-right">
@@ -48,6 +48,7 @@
         </div>
         <div class="progress" style="height:2px;display:block;width:100%;margin-top:10px;"><div class="bar bar-warning" id="progress-bar" style="width: 0%; height:2px;"></div></div>
         <input type="hidden" id="current-item" style="display:none;" />
+        <input type="hidden" name="canvas_guid" id="canvas_guid" style="display:none;" value="<?php echo $canvas_guid; ?>" />
         <div class="row-fluid">
             <div class="span10" style="width:780px;">
                 <div>
@@ -70,8 +71,6 @@
                         <option value="Arial">Arial</option>
                         <option value="Verdana">Verdana</option>
                     </select>
-<!--                        <input id="text-stroke-fill" type="text" class="input-small" readonly="readonly" placeholder="stroke color" />
-                    <input type="text" value="" data-slider-min="50" data-slider-max="300" data-slider-step="1" data-slider-value="100" data-slider-id="RC" id="text-stroke-width" data-slider-selection="none" data-slider-tooltip="show" data-slider-handle="square" style="width:150px">-->
                     <div class="display:inline">
                         <a href="javascript:" class="btn btn-small" data-action="bold" data-toggle="button"><i class="icon-bold"></i></a>
                         <a href="javascript:" class="btn btn-small" data-action="italic" data-toggle="button"><i class="icon-italic"></i></a>
@@ -217,73 +216,72 @@ $js_pluploader = array(
 ?>
 
 <?php echo $this->Html->script($js_pluploader); ?>
-<div></div>
 <script type="text/javascript">
-                        function PL(id) {
-                            return document.getElementById(id);
-                        }
+    function PL(id) {
+        return document.getElementById(id);
+    }
 
-                        var uploader = new plupload.Uploader({
-                            runtimes: 'gears,html5,browserplus',
-                            browse_button: 'pickfiles',
-                            container: 'uploader',
-                            max_file_size: '10mb',
-                            url: 'media/upload',
-                            multi_selection: false,
-                            //resize: {width: 640, height: 240, quality: 100},
-                            //flash_swf_url: 'js/uploader/plupload.flash.swf',
-                            //silverlight_xap_url : 'js/uploader/plupload.silverlight.xap',
-                            filters: [
-                                {title: "Image Files", extensions: "png,jpeg,jpg,gif"}
-                            ]
-                        });
+    var uploader = new plupload.Uploader({
+        runtimes: 'gears,html5,browserplus',
+        browse_button: 'pickfiles',
+        container: 'uploader',
+        max_file_size: '10mb',
+        url: '<?php echo $this->webroot; ?>media/upload',
+        multi_selection: false,
+        //resize: {width: 640, height: 240, quality: 100},
+        //flash_swf_url: 'js/uploader/plupload.flash.swf',
+        //silverlight_xap_url : 'js/uploader/plupload.silverlight.xap',
+        filters: [
+            {title: "Image Files", extensions: "png,jpeg,jpg,gif"}
+        ]
+    });
 
-                        uploader.bind('Init', function(up, params) {
-                            //$('filelist').innerHTML = "<div>Current runtime: " + params.runtime + "</div>";
-                        });
+    uploader.bind('Init', function(up, params) {
+        //$('filelist').innerHTML = "<div>Current runtime: " + params.runtime + "</div>";
+    });
 
-                        uploader.init();
+    uploader.init();
 
-                        uploader.bind('FilesAdded', function(up, files) {
+    uploader.bind('FilesAdded', function(up, files) {
 
-                            console.log("hello");
-                            if (uploader.files.length == 2) {
-                                uploader.removeFile(uploader.files[0]);
-                            }
+        console.log("hello");
+        if (uploader.files.length == 2) {
+            uploader.removeFile(uploader.files[0]);
+        }
 
-                            for (var i in files) {
-                                //document.getElementById('filelist').innerHTML = '<div id="' + files[i].id + '">' + files[i].name + ' (' + plupload.formatSize(files[i].size) + ') <b></b></div>';
-                            }
-                            jQuery('#progress-bar').css('width', "0%");
-                            uploader.start();
-                        });
+        for (var i in files) {
+            //document.getElementById('filelist').innerHTML = '<div id="' + files[i].id + '">' + files[i].name + ' (' + plupload.formatSize(files[i].size) + ') <b></b></div>';
+        }
+        jQuery('#progress-bar').css('width', "0%");
+        uploader.start();
+    });
 
-                        uploader.bind('UploadProgress', function(up, file) {
-                            //$(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
-                            jQuery('#progress-bar').css('width', file.percent + "%");
+    uploader.bind('UploadProgress', function(up, file) {
+        //$(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
+        jQuery('#progress-bar').css('width', file.percent + "%");
 
-                        });
+    });
 
-                        uploader.bind('FileUploaded', function(up, file, response) {
-                            plupload.each(response, function(value, key) {
+    uploader.bind('FileUploaded', function(up, file, response) {
+        plupload.each(response, function(value, key) {
 
-                                console.log(key);
-                                console.log(value);
+            console.log(key);
+            console.log(value);
 
-                                if (key == "response") {
-                                    var result = jQuery.parseJSON(value);
-                                    console.log(result);
-                                    if (result.error == 0) {
-                                        console.log(result.files.url);
-                                        showAlert2("Loading image....");
-                                        mememaker.tools.addpic(result.files.url);
-                                    }
-                                    //jQuery('#progress-bar').css('width', "0%");
-                                }
-                            });
+            if (key == "response") {
+                var result = jQuery.parseJSON(value);
+                console.log(result);
+                if (result.error == 0) {
+                    console.log(result.files.url);
+                    showAlert2("Loading image....");
+                    mememaker.tools.addpic(result.files.url);
+                }
+                //jQuery('#progress-bar').css('width', "0%");
+            }
+        });
 
-                            //alert($.parseJSON(response.response).result);
-                        });
+        //alert($.parseJSON(response.response).result);
+    });
 
 </script>
 
@@ -304,7 +302,7 @@ $js_case = array(
             function() {
 
                 $(window).on('beforeunload', function() {
-                    return 'Are you sure you want to leave? Your design isn\'t saved yet.';
+                    //return 'Are you sure you want to leave? Your design isn\'t saved yet.';
                 });
 
                 newcase_init();
@@ -348,6 +346,10 @@ $js_case = array(
         //mememaker.tools.backgroundcolor("red");
 
         templatelist_load();
+        
+        <?php if (isset ($identity)) : ?>
+                reload_canvas ();
+        <?php endif; ?>
 
         jQuery(".ajax-loading-indicator").hide(0);
         jQuery("#btn-order").show(1000);
@@ -357,19 +359,38 @@ $js_case = array(
     //===========================================================
     //
     //===========================================================
+    
+    <?php if (isset ($identity)) : ?>
 
     function save_canvas(json)
     {
+        var id = $("#canvas_guid").val ();
+        var name = $("#current-item").data('name');
+        var guid = $("#current-item").val();
+        
+        if ($("#current-item").val() == "") {
+            alert ("You don't have to save an empty canvas.");
+            return false;
+        }
+        
         jQuery.ajax({
-            url: "<?php $this->webroot; ?>creator/save",
-            data: {'json': json},
+            url: "<?php echo $this->webroot; ?>creator/save/?id=" + id,
+            data: {'json': json, 'name': name, 'product': guid},
             type: "POST",
             beforeSend: function(xhr) {
 
             }
         }).done(function(data) {
 
-
+            var result = $.parseJSON(data);
+            if (result.error == 1) {
+                
+            } else {
+                $("#canvas_guid").val(result.data.guid);
+                $("#canvas_guid").data('saved', '1');
+                alert ("Your progress just saved");
+            }
+            
         }).fail(function() {
             //$("#template-list").prev().children(":first-child").hide(0);
         });
@@ -377,21 +398,35 @@ $js_case = array(
 
     function reload_canvas()
     {
+        var guid = $("#canvas_guid").val();
+        
         jQuery.ajax({
-            url: "<?php $this->webroot; ?>creator/reload",
-            type: "GET",
+            url: "<?php echo $this->webroot; ?>creator/reload",
+            data: {'guid': guid},
+            type: "POST",
             beforeSend: function(xhr) {
 
             }
         }).done(function(data) {
 
-            console.log(data);
-            mememaker.reload(data);
+            //console.log (data);
+            var result = $.parseJSON (data);
+            //console.log(data);
+            
+            if (result.error == 1) {
+            } else {
+                //console.log (result.data.json);
+                $("#current-item").data('name', result.data.name);
+                $("#current-item").val(result.data.product);
+                mememaker.reload(result.data.json);
+            }
 
         }).fail(function() {
             //$("#template-list").prev().children(":first-child").hide(0);
         });
     }
+    
+    <?php endif; ?>
 
     //===========================================================
     // template list
@@ -399,7 +434,7 @@ $js_case = array(
     function templatelist_load()
     {
         jQuery.ajax({
-            url: "<?php $this->webroot; ?>creator/templates",
+            url: "<?php echo $this->webroot; ?>creator/templates",
             type: "GET",
             beforeSend: function(xhr) {
 
@@ -428,6 +463,7 @@ $js_case = array(
                     mememaker.tools.backgroundcolor("#DDDDDD");
 
                     $("#current-item").val($(this).data('guid'));
+                    $("#current-item").data('name', $(this).data('name'));
                     $.shoppingcart.setCurrentProductId($(this).data('guid'));
                     $("#btn-order span").text("Order Now " + $(this).data('price') + "$");
                 }
@@ -498,9 +534,6 @@ $js_case = array(
         <div class="ajax-loading-indicator hide" style=""><a href="javascript:" style="font-size:14px;"><i class="icon-refresh icon-spin"></i> Loading ....</a></div>
     </div>
     <div class="modal-footer">
-        <span class="pull-left">To save your design, you have to login</span>
-        <a href="javascript:">Login</a> Or
-        <a href="javascript:">register</a>
     </div>
 </div>
 

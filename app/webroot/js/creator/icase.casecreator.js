@@ -141,7 +141,7 @@ mememaker.reload = function(json)
     mememaker.canvas.renderAll();
 
     // optional
-    mememaker.canvas.calculateOffset();
+    //mememaker.canvas.calculateOffset();
 }
 
 // tools
@@ -212,6 +212,9 @@ mememaker.tools.init = function(id, previewUrl, modal) {
                         break;
                     case 'draw':
                         mememaker.draweditor.enable(jQuery(this));
+                        break;
+                    case 'save':
+                        mememaker.save ();
                         break;
                     case 'reload':
                         break;

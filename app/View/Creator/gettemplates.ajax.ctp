@@ -7,6 +7,7 @@
                data-bg="<?php echo $this->webroot . "img/template/" . $value['Product']['background']; ?>" 
                data-price="<?php echo $value['Product']['price']; ?>" 
                data-guid="<?php echo $value['Product']['guid']; ?>"
+               data-name="<?php echo $value['Product']['name']; ?>"
                style="text-transform: uppercase;">
                    <?php echo $value['Product']['name']; ?>
             </a>

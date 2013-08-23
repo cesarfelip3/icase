@@ -21,23 +21,24 @@
                     <tr>
                         <th>#</th>
                         <th>Name</th>
-                        <th>Sample</th>
-                        <th>Created</th>
+                        <th>Modified</th>
                         <th class="pull-right">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td></td>
-                        <td><img src="" /></td>
-                        <td>2013-08-07 23:03:05</td>
-                        <td class="pull-right">
-                            <a href="javascript:" class="btn btn-info btn-small">Load</a>&nbsp;&nbsp;
-                            <a href="javascript:" class="btn btn-info btn-small">Download</a>&nbsp;&nbsp;
-                            <a class="btn btn-info btn-small">Delete</a>
-                        </td>
-                    </tr>
+                    <?php if (!empty($data)) : $i = 0; ?>
+                        <?php foreach ($data as $value) : ?>
+                            <tr>
+                                <td><?php echo ++$i; ?></td>
+                                <td><?php echo $value['Creation']['name']; ?></td>
+                                <td><?php echo date ("m/d/y g:i:s A", $value['Creation']['modified']); ?></td>
+                                <td class="pull-right">
+                                    <a href="<?php echo $this->webroot; ?>create/?id=<?php echo $value['Creation']['guid']; ?>" class="btn btn-info btn-small">Load</a>&nbsp;&nbsp;
+                                    <a class="btn btn-info btn-small">Delete</a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
                 </tbody>
             </table>
         </div>

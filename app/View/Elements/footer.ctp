@@ -26,10 +26,10 @@ if (isset ($this->params['slug'])) {
                                         <div class="nav-collapse">
                                             <ul id="top-navbar" class="nav">
                                                 <li class="<?php
-                                                if ($controller == "case" && $action == "newcase")
+                                                if ($controller == "creator" && $action == "index")
                                                     echo "active";
                                                 ?>">
-                                                    <a href="<?php echo $this->Html->Url("/design", false); ?>">Create</a>
+                                                    <a href="<?php echo $this->Html->Url("/create", false); ?>">Create</a>
                                                 </li>
                                                 <?php if (!empty($top_header)) : ?>
                                                     <?php foreach ($top_header as $value) : ?>

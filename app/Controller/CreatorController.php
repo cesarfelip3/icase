@@ -7,7 +7,7 @@ class CreatorController extends AppController {
 
     public $uses = false;
     protected $_error = array(
-        "error" => 1,
+        "error" => 0,
         "message" => "",
         "files" => array(),
         "data" => array(),
@@ -16,14 +16,28 @@ class CreatorController extends AppController {
     public function beforeFilter() {
         $this->Auth->allow();
         parent::beforeFilter();
-        $this->set('load_shop_cart', true);
 
         if (!$this->request->is('ajax')) {
             $this->layoutInit();
         }
     }
 
+    public function index() {
+        $this->set('load_shop_cart', true);
+        
+        $guid = $this->request->query ('id');
+        
+        if (empty ($guid)) {
+            $guid = uniqid();
+        } else {
+            $this->set ('canvas_load', true);
+        }
+        
+        $this->set('canvas_guid', $guid);
+    }
+
     public function save() {
+
         if ($this->request->is('ajax') && $this->request->is('post')) {
             $this->autoRender = false;
 
@@ -34,7 +48,20 @@ class CreatorController extends AppController {
                 exit(json_encode($this->_error));
             }
 
-            $json = $this->request->data('json');
+            $guid = $this->request->query('id');
+
+            if (empty($guid)) {
+                $this->_error['error'] = 1;
+                $this->_error['message'] = "Invalid canvas.";
+
+                exit(json_encode($this->_error));
+            }
+
+            $data = $this->request->data;
+
+            $json = $data['json'];
+            $name = $data['name'];
+            $product_guid = $data['product'];
 
             if (empty($json)) {
                 $this->_error['error'] = 1;
@@ -43,17 +70,44 @@ class CreatorController extends AppController {
                 exit(json_encode($this->_error));
             }
 
-            $this->loadModel('User');
-            $this->User->id = $this->_identity['id'];
-            $this->User->set(array('data' => $json));
-            $this->User->save();
+            $this->loadModel('Creation');
+            $data = $this->Creation->find('first', array("conditions" => array("guid" => $guid)));
+
+            if (!empty($data)) {
+                $this->Creation->id = $data['Creation']['id'];
+                $this->Creation->set(array("data" => $json, "type" => "progress", "modified" => time()));
+                $this->Creation->save();
+
+                $this->_error['error'] = 0;
+                $this->_error['data'] = array('guid' => $data['Creation']['guid']);
+                exit(json_encode($this->_error));
+            }
+
+            $this->Creation->create();
+
+            $guid = uniqid();
+            $creation = array(
+                "guid" => $guid,
+                "user_guid" => $this->_identity['guid'],
+                "product_guid" => $product_guid,
+                "name" => $name . "_" . $guid,
+                "data" => $json,
+                "type" => "progress",
+                "created" => time(),
+                "modified" => time()
+            );
+
+            $this->Creation->save($creation);
+            $this->_error['error'] = 0;
+            $this->_error['data'] = array('guid' => $guid);
+            exit(json_encode($this->_error));
         }
     }
 
     public function reload() {
         if ($this->request->is('ajax')) {
             $this->autoRender = false;
-
+            
             if (empty($this->_identity)) {
                 $this->_error['error'] = 1;
                 $this->_error['message'] = "Not logged in yet.";
@@ -61,22 +115,27 @@ class CreatorController extends AppController {
                 exit(json_encode($this->_error));
             }
 
-            $json = $this->request->data('json');
-
-            if (empty($json)) {
-                $this->_error['error'] = 1;
-                $this->_error['message'] = "Invalid json";
-
-                exit(json_encode($this->_error));
-            }
-
-            $this->loadModel('User');
-            $data = $this->User->findById($this->_identity['id'], array("data"));
-            if (!empty($data)) {
-                $this->_error['data']['json'] = $data;
-                exit(json_encode($this->_error));
-            }
+            $guid = $this->request->data ('guid');
             
+            if (empty ($guid)) {
+                $this->_error['error'] = 1;
+                $this->_error['message'] = "Invalid param.";
+
+                exit(json_encode($this->_error));
+            }
+
+            $this->loadModel('Creation');
+            $data = $this->Creation->find ('first', array ("conditions" => array ("user_guid" => $this->_identity['guid'], "guid" => $guid)));
+            
+            if (!empty($data)) {
+                
+                $this->_error['data']['json'] = $data['Creation']['data'];
+                $this->_error['data']['product'] = $data['Creation']['product_guid'];
+                $this->_error['data']['name'] = @preg_replace ("/_.?*/i", $data['Creation']['name']);
+                $this->_error['error'] = 0;
+                exit(json_encode($this->_error));
+            }
+
             $this->_error['error'] = 1;
             $this->_error['message'] = "No saved data yet.";
 
@@ -168,8 +227,8 @@ class CreatorController extends AppController {
             return;
         }
     }
-    
-    public function templates () {
+
+    public function templates() {
 
         if ($this->request->is('ajax')) {
             $this->layout = false;

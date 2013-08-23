@@ -212,6 +212,11 @@ class UserController extends AppController {
 
     public function creation() {
         
+        $this->loadModel('Creation');
+        
+        $data = $this->Creation->find ('all', array ("order" => "modified DESC", "conditions" => array ("user_guid" => $this->_identity['guid'])));
+        
+        $this->set ('data', $data);
     }
 
     protected function creation_progress() {

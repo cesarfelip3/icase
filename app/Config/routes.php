@@ -28,7 +28,7 @@
  */
 Router::connect('/', array('controller' => 'index', 'action' => 'index', 'home'));
 // Icases Routes
-Router::connect('/design', array('controller' => 'case', 'action' => 'newcase'));
+Router::connect('/create', array('controller' => 'creator', 'action' => 'index'));
 Router::connect(
     '/category/:slug', 
     array('controller' => 'catalogue', 'action' => 'category'), 

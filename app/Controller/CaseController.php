@@ -5,7 +5,9 @@ class CaseController extends AppController {
         $this->Auth->allow ();
 	parent::beforeFilter();
         
-        $this->layoutInit();
+        if (!$this->request->is ('ajax')) {
+            $this->layoutInit();
+        }
     }
     
     public function newcase () {
