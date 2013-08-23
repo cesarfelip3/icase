@@ -28,12 +28,12 @@
                     <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-51937361798a0638"></script>
                     <!-- AddThis Button END -->
                 </div>
-
-
                 <div class="thumwrapper">
-                    <?php foreach ($data['featured']['150w'] as $image) : ?>
-                        <img src="<?php echo $this->webroot . "uploads/product/" . $image; ?>">
-                    <?php endforeach; ?>
+                    <?php if (!empty($data['featured']['150w'])) : ?>
+                        <?php foreach ($data['featured']['150w'] as $image) : ?>
+                            <img src="<?php echo $this->webroot . "uploads/product/" . $image; ?>">
+                        <?php endforeach; ?>
+                    <?php endif; ?>
                 </div>
             </div>			
         </div>

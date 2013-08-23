@@ -310,6 +310,13 @@ class ShopController extends AppController {
                 return;
             }
         }
+        
+        if (!empty ($this->_identity)) {
+            $this->loadModel ("User");
+            $data = $this->User->find ('first', array ("conditions" => array ("guid" => $this->_identity['guid'])));
+            
+            $this->set ('deliver', $data['User']);
+        }
     }
 
     protected function _checkout($action) {

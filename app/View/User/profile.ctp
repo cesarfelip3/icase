@@ -59,7 +59,7 @@
                             <label class="control-label" for="focusedInput">Email</label>
                             <div class="controls">
                                 <input class="input-medium focused" id="focusedInput" type="text" name="user[email2]" placeholder="Email"  value="<?php echo $data['email2']; ?>">
-                                <span class="help-inline"></span>
+                                <span class="help-inline">Notify your order status</span>
                             </div>
                         </div>
                         <div class="control-group">
