@@ -213,9 +213,28 @@ class UserController extends AppController {
     public function creation() {
         
         $this->loadModel('Creation');
-        
         $data = $this->Creation->find ('all', array ("order" => "modified DESC", "conditions" => array ("user_guid" => $this->_identity['guid'])));
         
+        $guid = $this->_identity['guid'];
+        
+        $this->loadModel("Media");
+        $data2 = $this->Media->find('all', array(
+            'joins' => array(
+                array(
+                    'table' => 'media_to_object',
+                    'alias' => 'MediaToObject',
+                    'type' => 'inner',
+                    'foreignKey' => false,
+                    'conditions' => array("MediaToObject.object_guid = '{$guid}'")
+                ),
+            ),
+            'conditions' => array(
+                "MediaToObject.type" => "user.design",
+            ),
+            'fields' => array("Media.*")
+        ));
+        
+        $this->set ('data2', $data2);
         $this->set ('data', $data);
     }
 

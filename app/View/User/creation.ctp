@@ -38,6 +38,11 @@
                                 </td>
                             </tr>
                         <?php endforeach; ?>
+                    <?php else : ?>
+                            <tr>
+                                <td colspan="4"><em class="text-warning">No data yet.</em></td>
+                            </tr>  
+                            
                     <?php endif; ?>
                 </tbody>
             </table>
@@ -48,20 +53,30 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Name</th>
                         <th>Sample</th>
                         <th>Created</th>
                         <th class="pull-right">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td></td>
-                        <td><img src="" /></td>
-                        <td>2013-08-07 23:03:05</td>
-                        <td class="pull-right"><a href="javascript:" class="btn btn-info btn-small">Download</a>&nbsp;&nbsp;<a class="btn btn-info btn-small">Delete</a></td>
-                    </tr>
+                    <?php if (!empty($data2)) : $i = 0; ?>
+                        <?php foreach ($data2 as $value) : ?>
+                            <tr>
+                                <td><?php echo ++$i; ?></td>
+                                <td><img src="<?php echo $this->webroot . "uploads/user/" . $value['Media']['filename']; ?>" style="width:300px;border:1px solid #ccc;" /></td>
+                                <td><?php echo date ("m/d/y g:i:s A", $value['Media']['modified']); ?></td>
+                                <td class="pull-right">
+                                    <a href="" class="btn btn-info btn-small">Download</a>&nbsp;&nbsp;
+                                    <a class="btn btn-info btn-small">Delete</a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php else : ?>
+                            <tr>
+                                <td colspan="4"><em class="text-warning">No data yet.</em></td>
+                            </tr>  
+                            
+                    <?php endif; ?>
                 </tbody>
             </table>
         </div>

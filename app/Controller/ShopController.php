@@ -195,8 +195,8 @@ class ShopController extends AppController {
                     );
 
                     $this->User->id = $this->_identity['id'];
-                    $this->user->set($user);
-                    $this->user->save();
+                    $this->User->set($user);
+                    $this->User->save();
                 }
 
                 // deliver info
@@ -241,11 +241,16 @@ class ShopController extends AppController {
                         "created" => time(),
                         "modified" => time(),
                     );
+                    
+                    if ($value['Product']['type'] == 'template') {
+                        @copy (APP . DS . "webroot" . DS . "uploads" . DS . "preview" . DS . $value['Product']['file'], APP . DS . "webroot" . DS . "uploads" . DS . "user" . DS . $value['Product']['file']);
+                    }
 
                     if ($value['Product']['type'] == 'template' && !$user_guest) {
 
+                        $media_guid = uniqid();
                         $media[$j] = array(
-                            "guid" => uniqid(),
+                            "guid" => $media_guid,
                             "filename" => $value['Product']['file'],
                             "type" => "user.design",
                             "created" => time(),
@@ -264,17 +269,18 @@ class ShopController extends AppController {
                     $i++;
                 }
 
-                $this->loadModel('Order');
-                $this->Order->saveMany($orders);
-
-                if (!$user_guest) {
+                if (!$user_guest && !empty ($media)) {
                     $this->loadModel('Media');
                     $this->Media->create();
                     $this->Media->saveMany($media);
 
                     $this->loadModel('MediaToObject');
-                    $this->MediaToObject->save($m2o);
+                    $this->MediaToObject->create ();
+                    $this->MediaToObject->saveMany($m2o);
                 }
+                
+                $this->loadModel('Order');
+                $this->Order->saveMany($orders);
 
                 $this->Product->commitTransaction();
 
@@ -283,7 +289,10 @@ class ShopController extends AppController {
                     foreach ($cookies as $cookie) {
                         $parts = explode('=', $cookie);
                         $name = trim($parts[0]);
-                        setcookie($name, '', time() - 1000, '/');
+                        
+                        if ($name == 'orders') {
+                            setcookie($name, '', time() - 1000, '/');
+                        }
                     }
                 }
 
