@@ -67,7 +67,7 @@ class IndexController extends AppController {
                 } else if (preg_match("/^[a-zA-Z]{3,3}[0-9_a-zA-Z]*$/i", $data['name']) == true) {
                     $conditions = array(
                         "name" => $data['name'],
-                        "password" => $password
+                        "password" => $password,
                     );
                 } else {
                     $this->_error['error'] = 1;
@@ -203,6 +203,26 @@ class IndexController extends AppController {
         $Email->to($to);
         $Email->subject($subject);
         $Email->send();
+    }
+    
+    public function verify ()
+    {
+        $id = $this->request->query ('id');
+        if (empty ($id)) {
+            return;
+        }
+        
+        $this->loadModel('User');
+        $data = $this->User->find ('first', array ("conditions" => array ('verfied_code' => $id)));
+        
+        if (!empty ($data)) {
+            if ($data['User']['verfied_expire'] > time()) {
+                $this->set ('success', true);
+                return;
+            }
+        }
+        
+        return;
     }
 
     function logout() {
