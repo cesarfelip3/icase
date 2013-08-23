@@ -67,27 +67,41 @@ class CreationController extends AppController {
         $guid = $this->request->query('id');
 
         if (empty($guid)) {
-            $this->_error['error'] = 1;
-            $this->_error['message'] = "";
-            exit(json_encode($this->_error));
+            $this->redirect(array ("controller" => "creation", "action" => "index"));
         }
+        
+        $this->loadModel('Creation');
+        $this->Creation->query ("DELETE FROM creations WHERE guid='$guid'");
 
-        $this->loadModel("Order");
-        $data = $this->Order->find("first", array("conditions" => array("guid" => $guid)));
+        $this->redirect(array ("controller" => "creation", "action" => "index"));
+    }
+    
+    public function del()
+    {
+        $guid = $this->request->query('id');
 
-        if (!empty($data)) {
-            $this->loadModel("UserBillInfo");
-            $this->UserBillInfo->query("DELETE FROM user_bill_infos WHERE guid='{$data['bill_guid']}'");
-
-            $this->loadModel("UserDeliverInfo");
-            $this->UserDeliverInfo->query("DELETE FROM user_deliver_infos WHERE guid='{$data['deliver_guid']}'");
-
-            exit(json_encode($this->_error));
+        if (empty($guid)) {
+            $this->redirect(array ("controller" => "creation", "action" => "index"));
         }
+        
+        $this->loadModel('Media');
+        $data = $this->Media->find ('first', array ("conditions" => array ("guid" => $guid)));
+        if (!empty ($data)) {
+            if (file_exists(APP . DS . "webroot" . DS . "uploads" . DS . "user" . DS . $data['Media']['filename'])) {
+                @unlink(APP . DS . "webroot" . DS . "uploads" . DS . "user" . DS . $data['Media']['filename']);
+            }
+            
+            if (file_exists(APP . DS . "webroot" . DS . "uploads" . DS . "preview" . DS . $data['Media']['filename'])) {
+                @unlink(APP . DS . "webroot" . DS . "uploads" . DS . "preview" . DS . $data['Media']['filename']);
+            }
+        }
+        
+        $this->Media->query ("DELETE FROM creations WHERE guid='$guid'");
+        
+        $this->loadModel("MediaToObject");
+        $this->MediaToObject->query ("DELETE FROM media_to_object WHERE media_guid='$guid'");
 
-        $this->_error['error'] = 1;
-        $this->_error['message'] = "";
-        exit(json_encode($this->_error));
+        $this->redirect(array ("controller" => "creation", "action" => "index"));        
     }
 
 }

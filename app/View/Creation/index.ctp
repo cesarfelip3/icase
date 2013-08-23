@@ -7,8 +7,8 @@
             <h3 style="border-bottom:1px solid #ccc">My Dashboard</h3>
             <ul class="nav nav-list">
                 <li><a href="<?php echo $this->webroot; ?>user/">Dashboard</a></li>
-                <li><a href="<?php echo $this->webroot; ?>user/order">Orders</a></li>
-                <li class="active"><a href="<?php echo $this->webroot; ?>user/creation">Creations</a></li>
+                <li><a href="<?php echo $this->webroot; ?>order/">Orders</a></li>
+                <li class="active"><a href="<?php echo $this->webroot; ?>creation/">Creations</a></li>
                 <li><a href="<?php echo $this->webroot; ?>user/profile">Profile</a></li>
             </ul>
         </div>
@@ -34,7 +34,7 @@
                                 <td><?php echo date ("m/d/y g:i:s A", $value['Creation']['modified']); ?></td>
                                 <td class="pull-right">
                                     <a href="<?php echo $this->webroot; ?>create/?id=<?php echo $value['Creation']['guid']; ?>" class="btn btn-info btn-small">Load</a>&nbsp;&nbsp;
-                                    <a class="btn btn-info btn-small">Delete</a>
+                                    <a class="btn btn-info btn-small" href='<?php echo $this->webroot; ?>creation/delete/?id=<?php echo $value['Creation']['guid']; ?>'>Delete</a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -67,7 +67,7 @@
                                 <td><?php echo date ("m/d/y g:i:s A", $value['Media']['modified']); ?></td>
                                 <td class="pull-right">
                                     <a href="" class="btn btn-info btn-small">Download</a>&nbsp;&nbsp;
-                                    <a class="btn btn-info btn-small">Delete</a>
+                                    <a class="btn btn-info btn-small" href='<?php echo $this->webroot; ?>creation/del/?id=<?php echo $value['Media']['guid']; ?>'>Delete</a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

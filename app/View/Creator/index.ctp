@@ -467,6 +467,7 @@ $js_case = array(
                 $("#form-signup .text-error").html(result.message);
             } else {
                 $("#modal-user").modal('hide');
+                alert ("Now click 'save'to save your progress");
             }
         }).fail(function() {
         });
@@ -489,6 +490,7 @@ $js_case = array(
                 $("#form-signin .text-error").html(result.message);
             } else {
                 $("#modal-user").modal('hide');
+                alert ("Now click 'save'to save your progress");
             }
         }).fail(function() {
         });
