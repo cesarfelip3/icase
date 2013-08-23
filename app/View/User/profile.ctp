@@ -42,23 +42,6 @@
                                 <span class="help-inline"></span>
                             </div>
                         </div>
-                        <div class="control-group">
-                            <label class="control-label" for="optionsCheckbox2">Active</label>
-                            <div class="controls">
-                                <label class="checkbox">
-                                    <input type="checkbox" id="optionsCheckbox2" name="user[active]" value="1" checked="checked">
-                                    Yes
-                                    <span class="help-inline"></span>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label" for="optionsCheckbox2">Type</label>
-                            <div class="controls">
-                                <input type="text" class="input-small" readonly="readonly" value="<?php echo $data['type']; ?>" />
-                                <span class="help-inline"></span>
-                            </div>
-                        </div>
                         <div>
                             <h3>Default Deliver Info</h3>
                             <hr/>
