@@ -15,7 +15,7 @@
     </div>
     <div class='span8'>
         <div class="row-fluid" style="margin-top:20px;background-color:white;border:1px solid #ccc;padding:15px;border-radius: 5px;">
-            <h2>Progress</h2>
+            <h2>In Progress</h2>
             <table class="table">
                 <thead>
                     <tr>
