@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.29)
 # Database: icase
-# Generation Time: 2013-08-22 19:10:18 +0000
+# Generation Time: 2013-08-23 06:32:18 +0000
 # ************************************************************
 
 
@@ -161,6 +161,8 @@ CREATE TABLE `creations` (
   `product_guid` char(128) DEFAULT NULL,
   `name` varchar(512) NOT NULL DEFAULT '',
   `data` text NOT NULL,
+  `type` varchar(32) DEFAULT NULL,
+  `status` varchar(32) DEFAULT NULL,
   `created` int(11) DEFAULT NULL,
   `modified` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
