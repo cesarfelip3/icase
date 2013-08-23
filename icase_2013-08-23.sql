@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.29)
 # Database: icase
-# Generation Time: 2013-08-23 06:32:18 +0000
+# Generation Time: 2013-08-23 14:48:29 +0000
 # ************************************************************
 
 
@@ -161,6 +161,7 @@ CREATE TABLE `creations` (
   `product_guid` char(128) DEFAULT NULL,
   `name` varchar(512) NOT NULL DEFAULT '',
   `data` text NOT NULL,
+  `sample` text,
   `type` varchar(32) DEFAULT NULL,
   `status` varchar(32) DEFAULT NULL,
   `created` int(11) DEFAULT NULL,
@@ -289,26 +290,6 @@ CREATE TABLE `orders` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `orders` WRITE;
-/*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-
-INSERT INTO `orders` (`id`, `guid`, `product_guid`, `buyer_guid`, `seller_guid`, `deliver_guid`, `bill_guid`, `title`, `description`, `type`, `status`, `quantity`, `amount`, `tax`, `express_fee`, `express_type`, `payment_gateway`, `transaction_type`, `transaction_id`, `cc_number`, `cc_expired`, `attachement`, `notification`, `notification_email`, `created`, `modified`)
-VALUES
-	(1,'520ec506bccac','520ec27d44972',NULL,NULL,'520ec506b9d55','520ec506bc44c','iphone5',NULL,'template','paid',1,34.99,0.00,0.00,'free','AuthorizeNet',NULL,NULL,NULL,NULL,'520ec4c825fc3.jpeg','','tom@gmail.com',1376699654,1376699654),
-	(2,'520ed07414f28','520ec27d44972',NULL,NULL,'520ed07411219','520ed0741489f','iphone5',NULL,'template','paid',1,34.99,0.00,0.00,'free','AuthorizeNet','auth_captur','0',NULL,NULL,'520ec7df4a7ff.jpeg','','dd@h.com',1376702580,1376702580),
-	(3,'520ed07414f85','520ec27d44972',NULL,NULL,'520ed07411219','520ed0741489f','iphone5',NULL,'template','paid',1,34.99,0.00,0.00,'free','AuthorizeNet','auth_captur','0',NULL,NULL,'520ec954b4fc1.jpeg','','dd@h.com',1376702580,1376702580),
-	(4,'520ed07414fca','520ec27d44972',NULL,NULL,'520ed07411219','520ed0741489f','iphone5',NULL,'template','paid',1,34.99,0.00,0.00,'free','AuthorizeNet','auth_captur','0',NULL,NULL,'520ecfd722245.jpeg','','dd@h.com',1376702580,1376702580),
-	(5,'520ed0741500d','520ec27d44972',NULL,NULL,'520ed07411219','520ed0741489f','iphone5',NULL,'template','paid',1,34.99,0.00,0.00,'free','AuthorizeNet','auth_captur','0',NULL,NULL,'520ed04fb5874.jpeg','','dd@h.com',1376702580,1376702580),
-	(6,'520ed218c9292','520ec27d44972',NULL,NULL,'520ed218c6180','520ed218c8bc7','iphone5',NULL,'template','paid',1,34.99,0.00,0.00,'free','AuthorizeNet','auth_captur','0',NULL,NULL,'520ed1b2b5291.jpeg','','cesarfelip3@gmail.com',1376703000,1376703000),
-	(7,'52142555020e9','5214168078724','520ec506bccbc',NULL,'52142554eb119','52142555018d6','teste',NULL,'product','paid',2,0.50,0.00,0.00,'free','AuthorizeNet','auth_captur','5475797207',NULL,NULL,'','','cesarfelip3@gmail.com',1377051989,1377051989),
-	(8,'521431c01460a','5214168078724','521431bfe6e3c',NULL,'521431c010d08','521431c013dce','teste',NULL,'product','paid',1,0.25,0.00,0.00,'free','AuthorizeNet',NULL,NULL,NULL,NULL,'','','cesarfelip3@gmail.com',1377055168,1377055168),
-	(9,'521432c105cbc','5214168078724','521432c0e6954',NULL,'521432c0f15c7','521432c105563','teste',NULL,'product','paid',1,0.25,0.00,0.00,'free','AuthorizeNet',NULL,NULL,NULL,NULL,'','','cesarfelip3@gmail.com',1377055425,1377055425),
-	(10,'5214339254720','5214168078724','52143392487b2',NULL,'5214339250d7e','5214339253fb8','teste',NULL,'product','paid',1,0.25,0.00,0.00,'free','AuthorizeNet',NULL,NULL,NULL,NULL,'','','cesarfelip3@gmail.com',1377055634,1377055634),
-	(11,'5214348c6dbf9','5214168078724','5214348c42724',NULL,'5214348c64663','5214348c69ce7','teste',NULL,'product','paid',1,0.25,0.00,0.00,'free','AuthorizeNet',NULL,NULL,NULL,NULL,'','','cesarfelip3@gmail.com',1377055884,1377055884),
-	(12,'521435f198e8a','5214168078724','521435f18ad79',NULL,'521435f194f78','521435f198678','teste',NULL,'product','paid',1,0.25,0.00,0.00,'free','AuthorizeNet',NULL,NULL,NULL,NULL,'','','cesarfelip3@gmail.com',1377056241,1377056241);
-
-/*!40000 ALTER TABLE `orders` ENABLE KEYS */;
-UNLOCK TABLES;
 
 
 # Dump of table products
@@ -396,15 +377,10 @@ LOCK TABLES `user_bill_infos` WRITE;
 
 INSERT INTO `user_bill_infos` (`id`, `guid`, `name`, `phone`, `address`, `cc_number`, `cc_expire`, `country`, `state`, `city`, `created`)
 VALUES
-	(1,'520ec506bc44c','tom','22232323','tom','4222222222222222',NULL,'US','Utah','kkkkkkk',1376699654),
-	(2,'520ed0741489f','ddddd','dddd','dddd','dddd',NULL,'US','Utah','dddd',1376702580),
-	(3,'520ed218c8bc7','dddd','dddddd','ddd','4222222222222222',NULL,'US','Utah','dddd',1376703000),
-	(4,'52142555018d6','Cesar Felipe Silva','8018542228','828 W Montague Avenue','4758 2412 7387 7114',NULL,'US','UT','Salt Lake City',1377051989),
-	(5,'521431c013dce','hello','232323','hello','adfasdf',NULL,'US','AK','hello',1377055168),
-	(6,'521432c105563','adsfasdfasdf','adfasdf','dfasdfasdf','asdfasdf',NULL,'US','AK','asdfas',1377055425),
-	(7,'5214339253fb8','dddd','ddd','dddd','ddd',NULL,'US','AZ','ddd',1377055634),
-	(8,'5214348c69ce7','dddd','ddd','ddd','ddd',NULL,'US','AZ','ddd',1377055884),
-	(9,'521435f198678','asdfasdfasdf','asdfasdf','adfasdf','asdfasdf',NULL,'US','AZ','asdfasdf',1377056241);
+	(1,'52176c1729b8b','dddd','dddd','dddd','ddd',NULL,'US','AZ','dddd',1377266711),
+	(2,'52176c75e83fa','dddd','ddd','dddd','ddd',NULL,'US','AZ','ddddd',1377266805),
+	(3,'52176e1740edb','ddddd','dddd','ddddd','dddd',NULL,'US','AL','dddd',1377267223),
+	(4,'52176f9488c7a','ddddd','ddddd','dddd','ddddd',NULL,'US','AR','dddddd',1377267604);
 
 /*!40000 ALTER TABLE `user_bill_infos` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -438,15 +414,10 @@ LOCK TABLES `user_deliver_infos` WRITE;
 
 INSERT INTO `user_deliver_infos` (`id`, `guid`, `user_guid`, `email`, `firstname`, `lastname`, `address`, `phone`, `zipcode`, `country`, `state`, `city`, `created`, `modified`)
 VALUES
-	(1,'520ec506b9d55',NULL,'tom@gmail.com','tom','tom','tom','99999999','322222','US','Utah','kkkkk',1376699654,1376699654),
-	(2,'520ed07411219',NULL,'dd@h.com','dddd','dddd','ddddd','dddd','ddddd','US','Utah','ddd',1376702580,1376702580),
-	(3,'520ed218c6180',NULL,'cesarfelip3@gmail.com','dddd','dddd','ddddd','dddddd','dddd','US','Utah','dddd',1376703000,1376703000),
-	(4,'52142554eb119',NULL,'cesarfelip3@gmail.com','Cesar Felipe','Silva','828 W Montague Avenue','8018484848','84104','US','UT','Salt Lake CIty',1377051988,1377051988),
-	(5,'521431c010d08','521431bfe6e3c','cesarfelip3@gmail.com','hello','hello','hello','2232323','232323','US','AK','hello',1377055168,1377055168),
-	(6,'521432c0f15c7','521432c0e6954','cesarfelip3@gmail.com','tom','tyom','xcasdfasdf','asdfasdf','adsfasdf','US','AZ','adf',1377055424,1377055424),
-	(7,'5214339250d7e','52143392487b2','cesarfelip3@gmail.com','dddd','dddd','dddddd','dddd','dddd','US','AZ','ddd',1377055634,1377055634),
-	(8,'5214348c64663','5214348c42724','cesarfelip3@gmail.com','dddd','ddd','dddd','dddd','dddd','US','AZ','ddd',1377055884,1377055884),
-	(9,'521435f194f78','521435f18ad79','cesarfelip3@gmail.com','adfasdf','asdfasdf','adfasdf','asdfasdf','asdfasdf','US','AK','adfasdf',1377056241,1377056241);
+	(1,'52176c171a17a','52174779805e7','dddddd@gmail.com','dddd','ddd','    dddd','dddd','ddd','US','AK','ddd',1377266711,1377266711),
+	(2,'52176c75e39af','52174779805e7','dddddd@gmail.com','dddd','ddd','    dddd','dddd','ddd','US','AZ','ddd',1377266805,1377266805),
+	(3,'52176e173cb61','52174779805e7','dddddd@gmail.com','dddd','ddd','    dddd','dddd','ddd','US','AK','ddd',1377267223,1377267223),
+	(4,'52176f947f945','52174779805e7','dddddd@gmail.com','dddd','ddd','    dddd','dddd','ddd','US','AZ','ddd',1377267604,1377267604);
 
 /*!40000 ALTER TABLE `user_deliver_infos` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -472,6 +443,7 @@ CREATE TABLE `users` (
   `subscribe_schedule` varchar(32) NOT NULL DEFAULT 'daily',
   `firstname` varchar(32) DEFAULT NULL,
   `lastname` varchar(32) DEFAULT NULL,
+  `email2` varchar(512) DEFAULT NULL,
   `phone` varchar(64) DEFAULT NULL,
   `country` varchar(32) DEFAULT NULL,
   `state` varchar(32) DEFAULT NULL,
@@ -488,15 +460,9 @@ CREATE TABLE `users` (
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 
-INSERT INTO `users` (`id`, `guid`, `name`, `email`, `password`, `type`, `email_verfied`, `verfied_code`, `verfied_expire`, `subscribe`, `subscribe_content`, `subscribe_schedule`, `firstname`, `lastname`, `phone`, `country`, `state`, `city`, `address`, `zipcode`, `orders`, `active`, `created`, `modified`)
+INSERT INTO `users` (`id`, `guid`, `name`, `email`, `password`, `type`, `email_verfied`, `verfied_code`, `verfied_expire`, `subscribe`, `subscribe_content`, `subscribe_schedule`, `firstname`, `lastname`, `email2`, `phone`, `country`, `state`, `city`, `address`, `zipcode`, `orders`, `active`, `created`, `modified`)
 VALUES
-	(2,'5213153457aad','kkkkkk','kkkkkk@gmail.com','','register',0,NULL,NULL,0,NULL,'daily','dddddd','dddddd','dddddd','US','dddddd','dddddd',' dddddd','dddddd',0,1,1376982324,1376982342),
-	(3,'520ec506bccbc',NULL,'cesarfelip3@gmail.com',NULL,'guest',0,NULL,NULL,0,NULL,'daily','Cesar Felipe','Silva','8018484848','US','UT','Salt Lake CIty','828 W Montague Avenue','84104',1,1,1377051988,1377051988),
-	(4,'521431bfe6e3c',NULL,'cesarfelip3@gmail.com',NULL,'guest',0,NULL,NULL,0,NULL,'daily','hello','hello','2232323','US','AK','hello','hello','232323',1,1,1377055167,1377055167),
-	(5,'521432c0e6954',NULL,'cesarfelip3@gmail.com',NULL,'guest',0,NULL,NULL,0,NULL,'daily','tom','tyom','asdfasdf','US','AZ','adf','xcasdfasdf','adsfasdf',1,1,1377055424,1377055424),
-	(6,'52143392487b2',NULL,'cesarfelip3@gmail.com',NULL,'guest',0,NULL,NULL,0,NULL,'daily','dddd','dddd','dddd','US','AZ','ddd','dddddd','dddd',1,1,1377055634,1377055634),
-	(7,'5214348c42724',NULL,'cesarfelip3@gmail.com',NULL,'guest',0,NULL,NULL,0,NULL,'daily','dddd','ddd','dddd','US','AZ','ddd','dddd','dddd',1,1,1377055884,1377055884),
-	(8,'521435f18ad79',NULL,'cesarfelip3@gmail.com',NULL,'guest',0,NULL,NULL,0,NULL,'daily','adfasdf','asdfasdf','asdfasdf','US','AK','adfasdf','adfasdf','asdfasdf',1,1,1377056241,1377056241);
+	(1,'52174779805e7','kkkkkk','kkkkkk@gmail.com','3c9bf1830df9a92b94110d619948889851c95c69','registered',0,NULL,NULL,0,NULL,'daily','dddd','ddd','dddddd@gmail.com','dddd','US','','ddd','    dddd','ddd',2,0,1377257337,1377267604);
 
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
