@@ -7,7 +7,7 @@ class ShopController extends AppController {
 
     public $uses = false;
     protected $_error = array(
-        "error" => 1,
+        "error" => 0,
         "message" => "",
         "files" => array(),
         "data" => array(),

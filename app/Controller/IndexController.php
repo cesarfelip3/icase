@@ -171,14 +171,16 @@ class IndexController extends AppController {
                     //$this->redirect($this->webroot . "user/");
                     
                     $var = array ('user' => $user);
+                    
+                    /*
                     try {
-                    $this->email ("", $data['email'], "Confirm your signup now", null, "signup_verification", $var);
+                        $this->email ("", $data['email'], "Confirm your signup now", null, "signup_verification", $var);
                     }
                     catch (Exception $e) {
                         $this->_error['error'] = 1;
                         $this->_error['message'] = $e->getMessage();
                         exit(json_encode($this->_error));
-                    }
+                    }*/
 
                     $this->_error['error'] = 0;
                     exit(json_encode($this->_error));

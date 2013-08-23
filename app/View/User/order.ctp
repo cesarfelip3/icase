@@ -13,26 +13,29 @@
             </ul>
         </div>
     </div>
-    <div class='span8'>
-        <div class="row-fluid" style="margin-top:20px;background-color:white;border:1px solid #ccc;padding:15px;border-radius: 5px;">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>title</th>
-                        <th>Status</th>
-                        <th>Details</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+    <div class='span8' id="box-orders">
+        
     </div>
 </div>
+
+<script>
+    $(document).ready (
+        function () {
+            user_order_load ();
+    });
+    
+    
+    function user_order_load () {
+        jQuery.ajax({
+            url: "<?php echo $this->webroot; ?>user/order/?action=list",
+            type: "GET",
+            beforeSend: function(xhr) {
+            }
+        }).done(function(data) {
+            $("#box-orders").html (data);
+
+        }).fail(function() {
+
+        });
+    }
+</script>
