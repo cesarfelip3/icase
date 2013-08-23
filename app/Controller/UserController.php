@@ -27,6 +27,11 @@ class UserController extends AppController {
         
     }
     
+    public function creation ()
+    {
+        
+    }
+    
     public function buy ()
     {
         
