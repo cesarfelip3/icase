@@ -148,7 +148,7 @@ $js_themes = array(
 <link rel="stylesheet" href="<?php echo $this->webroot; ?>js/datepicker/css/datepicker.css">
 <script type="text/javascript" src="<?php echo $this->webroot; ?>js/datepicker/js/bootstrap-datepicker.js"></script>
 
-<script src="<?php echo $this->webroot; ?>js/shoppingcart/icase.shoppingcart.js"></script>
+<script src="<?php echo $this->webroot; ?>js/site/icase.shoppingcart.js"></script>
 <script type="text/javascript">
     jQuery(document).ready(
             function() {

@@ -42,7 +42,7 @@
     }
 
     ShoppingCart.prototype.init = function() {
-
+        return this;
     }
 
     ShoppingCart.prototype.set = function(orderId) {
@@ -56,7 +56,7 @@
             orders[orders.length] = orderId;
         }
 
-        console.log (orders);
+        //console.log (orders);
         orders = orders.join(",");
         storage.set(this.cookie_orders, orders);
     }
@@ -80,7 +80,6 @@
         
         var total = orders.split (",");
         return total.length;
-
     }
 
     ShoppingCart.prototype.remove = function(id) {
@@ -107,7 +106,7 @@
         }
 
         orders = orders.join(",");
-        console.log (orders);
+        //console.log (orders);
         storage.set(this.cookie_orders, orders);
     }
 
@@ -125,17 +124,17 @@
                         if (value == id) {
                             return;
                         } else {
-                            console.log (value);
+                            //console.log (value);
                             left[j] = value;
                             j++;
                         }
                     }
             )
         }
-        console.log("ShoppingCart.removeall");
-        console.log("guid = " + id);
-        console.log("left = " + left);
-        console.log("left.length" + left.length);
+        //console.log("ShoppingCart.removeall");
+        //console.log("guid = " + id);
+        //console.log("left = " + left);
+        //console.log("left.length" + left.length);
 
         orders = null;
         orders = left;
@@ -165,13 +164,13 @@
     }
 
     ShoppingCart.prototype.setuuid = function(uuid) {
-        console.log (uuid);
+        //console.log (uuid);
         storage.set(this.cookie_uuid, uuid);
     }
 
     ShoppingCart.prototype.getuuid = function() {
         var uuid = storage.get(this.cookie_uuid);
-        console.log (uuid);
+        //console.log (uuid);
         
         if (uuid == null || uuid == 'undefined') {
             return null;

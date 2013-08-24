@@ -11,11 +11,6 @@
 class MediaController extends AppController {
 
     protected $_targetDir = null;
-    protected $_error = array(
-        "error" => 0,
-        "message" => "",
-        "files" => array(),
-    );
 
     public function beforeFilter() {
         $this->Auth->allow();
