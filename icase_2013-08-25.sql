@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.29)
 # Database: icase
-# Generation Time: 2013-08-23 14:48:29 +0000
+# Generation Time: 2013-08-24 18:49:40 +0000
 # ************************************************************
 
 
@@ -58,7 +58,8 @@ LOCK TABLES `admins` WRITE;
 
 INSERT INTO `admins` (`id`, `guid`, `name`, `email`, `password`, `type`, `email_verfied`, `verfied_code`, `verfied_expire`, `subscribe`, `subscribe_content`, `subscribe_schedule`, `firstname`, `lastname`, `phone`, `country`, `state`, `city`, `address`, `zipcode`, `orders`, `active`, `created`, `modified`)
 VALUES
-	(3,'521416317b2c4','miller','admin@admin.com','5f4806e34c0f98a6a237f350a80e3a8c7759e24a','register',0,NULL,NULL,0,NULL,'daily',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,1,1377048113,1377048113);
+	(3,'521416317b2c4','miller','admin@admin.com','5f4806e34c0f98a6a237f350a80e3a8c7759e24a','register',0,NULL,NULL,0,NULL,'daily',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,1,1377048113,1377048113),
+	(4,'5218f12327cf8','kkkkkk','kkkkkk@gmail.com','3c9bf1830df9a92b94110d619948889851c95c69','register',0,NULL,NULL,0,NULL,'daily',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,1,1377366307,1377366307);
 
 /*!40000 ALTER TABLE `admins` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -290,6 +291,15 @@ CREATE TABLE `orders` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+LOCK TABLES `orders` WRITE;
+/*!40000 ALTER TABLE `orders` DISABLE KEYS */;
+
+INSERT INTO `orders` (`id`, `guid`, `product_guid`, `buyer_guid`, `seller_guid`, `deliver_guid`, `bill_guid`, `title`, `description`, `type`, `status`, `quantity`, `amount`, `tax`, `express_fee`, `express_type`, `payment_gateway`, `transaction_type`, `transaction_id`, `cc_number`, `cc_expired`, `attachement`, `notification`, `notification_email`, `created`, `modified`)
+VALUES
+	(1,'5218f1ac475ba','5215b5a67d5d7','5218f1ac1ce26',NULL,'5218f1ac315e9','5218f1ac45947','iphone4',NULL,'template','paid',1,34.99,0.00,0.00,'free','AuthorizeNet',NULL,NULL,NULL,NULL,'5218f17271c1a.jpeg','','dddddd@gmail.com',1377366444,1377366444);
+
+/*!40000 ALTER TABLE `orders` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table products
@@ -380,7 +390,8 @@ VALUES
 	(1,'52176c1729b8b','dddd','dddd','dddd','ddd',NULL,'US','AZ','dddd',1377266711),
 	(2,'52176c75e83fa','dddd','ddd','dddd','ddd',NULL,'US','AZ','ddddd',1377266805),
 	(3,'52176e1740edb','ddddd','dddd','ddddd','dddd',NULL,'US','AL','dddd',1377267223),
-	(4,'52176f9488c7a','ddddd','ddddd','dddd','ddddd',NULL,'US','AR','dddddd',1377267604);
+	(4,'52176f9488c7a','ddddd','ddddd','dddd','ddddd',NULL,'US','AR','dddddd',1377267604),
+	(5,'5218f1ac45947','ddddd','dddd','ddddd','ddddd',NULL,'US','AK','dddddd',1377366444);
 
 /*!40000 ALTER TABLE `user_bill_infos` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -417,7 +428,8 @@ VALUES
 	(1,'52176c171a17a','52174779805e7','dddddd@gmail.com','dddd','ddd','    dddd','dddd','ddd','US','AK','ddd',1377266711,1377266711),
 	(2,'52176c75e39af','52174779805e7','dddddd@gmail.com','dddd','ddd','    dddd','dddd','ddd','US','AZ','ddd',1377266805,1377266805),
 	(3,'52176e173cb61','52174779805e7','dddddd@gmail.com','dddd','ddd','    dddd','dddd','ddd','US','AK','ddd',1377267223,1377267223),
-	(4,'52176f947f945','52174779805e7','dddddd@gmail.com','dddd','ddd','    dddd','dddd','ddd','US','AZ','ddd',1377267604,1377267604);
+	(4,'52176f947f945','52174779805e7','dddddd@gmail.com','dddd','ddd','    dddd','dddd','ddd','US','AZ','ddd',1377267604,1377267604),
+	(5,'5218f1ac315e9','5218f1ac1ce26','dddddd@gmail.com','dddddd','dddddd','dddddd','dddddd','dddddd','US','AK','dddddd',1377366444,1377366444);
 
 /*!40000 ALTER TABLE `user_deliver_infos` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -462,7 +474,8 @@ LOCK TABLES `users` WRITE;
 
 INSERT INTO `users` (`id`, `guid`, `name`, `email`, `password`, `type`, `email_verfied`, `verfied_code`, `verfied_expire`, `subscribe`, `subscribe_content`, `subscribe_schedule`, `firstname`, `lastname`, `email2`, `phone`, `country`, `state`, `city`, `address`, `zipcode`, `orders`, `active`, `created`, `modified`)
 VALUES
-	(1,'52174779805e7','kkkkkk','kkkkkk@gmail.com','3c9bf1830df9a92b94110d619948889851c95c69','registered',0,NULL,NULL,0,NULL,'daily','dddd','ddd','dddddd@gmail.com','dddd','US','','ddd','    dddd','ddd',2,0,1377257337,1377267604);
+	(1,'5217ac4c955b5','kkkkkk','kkkkkk@gmail.com','3c9bf1830df9a92b94110d619948889851c95c69','registered',0,NULL,NULL,0,NULL,'daily',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,0,1377283148,1377285609),
+	(2,'5218f1ac1ce26',NULL,'dddddd@gmail.com',NULL,'guest',0,NULL,NULL,0,NULL,'daily','dddddd','dddddd',NULL,'dddddd','US','AK','dddddd','dddddd','dddddd',1,1,1377366444,1377366444);
 
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
