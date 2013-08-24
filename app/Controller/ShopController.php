@@ -130,7 +130,6 @@ class ShopController extends AppController {
                     $amount += round($value['Product']['price'] * $value['Product']['quantity'], 2, PHP_ROUND_HALF_DOWN) + "";
                 }
 
-
                 require_once APP . DS . 'Vendor' . DS . 'AuthorizeNet/AuthorizeNet.php'; // Make sure this path is correct.
                 define("AUTHORIZENET_SANDBOX", false);
                 $transaction = new AuthorizeNetAIM('9c22BSeN', '752eHX2G6hk9Y36J');
