@@ -2,21 +2,20 @@
 
 class OrderController extends AdminAppController {
 
-    protected $status = array (
-            "awaiting" => "Awaiting Payment",
-            "paid" => "Paid",
-            "dispatch" => "Dispatched",
-            "cancel" => "Cancelled",
-            "refund" => "Refunded",
-            "fail" => "Failed"
-        );
-    
+    protected $status = array(
+        "awaiting" => "Awaiting Payment",
+        "paid" => "Paid",
+        "dispatch" => "Dispatched",
+        "cancel" => "Cancelled",
+        "refund" => "Refunded",
+        "fail" => "Failed"
+    );
     protected $error = array(
         'error' => 0,
         'element' => '',
         'message' => '',
     );
-        
+
     public function beforeFilter() {
         $this->Auth->deny();
         parent::beforeFilter();
@@ -99,7 +98,7 @@ class OrderController extends AdminAppController {
             "status='refund'" => "Refunded",
             "status='fail'" => "Failed"
         );
-        
+
 
         $this->set(array(
             "data" => $data,
@@ -127,40 +126,95 @@ class OrderController extends AdminAppController {
 
         $this->loadModel('UserDeliverInfo');
         $deliver = $this->UserDeliverInfo->find('first', array('conditions' => array('guid' => $order['Order']['deliver_guid'])));
-        
-        $this->loadModel('UserBillInfo');
-        $bill = $this->UserBillInfo->find ('first', array('conditions' => array('guid' => $order['Order']['bill_guid'])));
 
-        $this->set('data', $order);
-        $this->set('status', $this->status);
-        $this->set('deliver', $deliver['UserDeliverInfo']);
-        $this->set('bill', $bill['UserBillInfo']);
+        $this->loadModel('UserBillInfo');
+        $bill = $this->UserBillInfo->find('first', array('conditions' => array('guid' => $order['Order']['bill_guid'])));
+
+        $this->set(
+                array(
+                    "data" => $order['Order'],
+                    "status" => $this->status,
+                    "deliver" => $deliver['UserDeliverInfo'],
+                    "bill" => $bill['UserBillInfo']
+        ));
+
+        if ($order['Order']['type'] == 'template') {
+            $this->loadModel("Product");
+            $data = $this->Product->find('first', array("conditions" => array("guid" => $order['Order']['product_guid'])));
+
+            if (!empty($data)) {
+                $png1 = unserialize($data['Product']['image']);
+                $png1 = $png1['foreground'];
+
+                $filename = pathinfo($png1, PATHINFO_FILENAME);
+                $png2 = $filename . "_overlay.png";
+
+                $jpeg = $order['Order']['attachement'];
+                $filename = pathinfo($jpeg, PATHINFO_FILENAME);
+            }
+
+            $png1 = APP . DS . "webroot" . DS . "img" . DS . "template" . DS . $png1;
+            $png2 = APP . DS . "webroot" . DS . "img" . DS . "template" . DS . $png2;
+
+            $jpeg = APP . DS . "webroot" . DS . "uploads" . DS . "preview" . DS . $jpeg;
+
+            try {
+                $this->overlayImage($png1, $jpeg, $filename . "_user.jpeg");
+                $this->overlayImage($png2, $jpeg, $filename . "_admin.jpeg");
+            } catch (Exception $e) {
+                $this->Session->setFlash ($e->getMessage());
+            }
+        }
+    }
+
+    protected function overlayImage($overlay, $jpeg, $final) {
+        
+        $final = APP . DS . "webroot" . DS . "uploads" . DS . "preview" . DS . $final;
+        if (file_exists($final)) {
+            return;
+        }
+       
+        $png = imagecreatefrompng($overlay);
+        $jpeg = imagecreatefromjpeg($jpeg);
+
+        //list($width, $height) = getimagesize('./image.jpg');
+        //list($newwidth, $newheight) = getimagesize('./mark.png');
+        $out = imagecreatetruecolor(780, 780);
+        imagecopyresampled($out, $jpeg, 0, 0, 0, 0, 780, 780, 780, 780);
+        imagecopyresampled($out, $png, 0, 0, 0, 0, 780, 780, 780, 780);
+
+        imagejpeg($out, $final, 100);
+
+        $image = file_get_contents($final);
+        $image = substr_replace($image, pack("cnn", 1, 300, 300), 13, 5);
+
+        file_put_contents($final, $image);
     }
 
     public function edit() {
-        $id = $this->request->query ('id');
-        
-        if ($this->request->is ('ajax')) {
+        $id = $this->request->query('id');
+
+        if ($this->request->is('ajax')) {
             $this->autoRender = false;
-            $data = $this->request->data ('order');
+            $data = $this->request->data('order');
             $this->loadModel('Order');
-            
+
             if ($id == 0) {
-                if (isset ($data['selected'])) {
-                
+                if (isset($data['selected'])) {
+
                     foreach ($data['selected'] as $key => $value) {
                         $this->Order->id = $value;
-                        $this->Order->set (array("status" => $data[$value]['status']));
+                        $this->Order->set(array("status" => $data[$value]['status']));
                         $this->Order->save();
                     }
                 }
-                exit (json_encode($this->error));
+                exit(json_encode($this->error));
             }
-            
+
             $this->Order->id = $id;
-            
-            $this->Order->set (array("status"=>$data[$id]['status']));
-            $this->Order->save ();
+
+            $this->Order->set(array("status" => $data[$id]['status']));
+            $this->Order->save();
             exit(json_encode($this->error));
         }
     }
@@ -168,28 +222,26 @@ class OrderController extends AdminAppController {
     public function delete() {
         
     }
-    
-    public function notify () {
-        
-        $guid = $this->request->query ('id');
-        
-        $data = $this->find ('first', array ("conditions" => array ("guid" => $id)));
-        
-        if (!empty ($data)) {
-            
+
+    public function notify() {
+
+        $guid = $this->request->query('id');
+
+        $data = $this->find('first', array("conditions" => array("guid" => $id)));
+
+        if (!empty($data)) {
+
             $from = "";
             $to = $data['email'];
             $subject = "";
             $content = null;
             $template = "admin_order_notification";
-            
-            
         }
     }
-    
+
     protected function email($from, $to, $subject, $content, $template, $vars = array()) {
         $Email = new CakeEmail();
-        $Email->template ($template);
+        $Email->template($template);
         $Email->viewVars($vars);
         $Email->emailFormat('html');
         $Email->from($from);
@@ -197,24 +249,23 @@ class OrderController extends AdminAppController {
         $Email->subject($subject);
         $Email->send();
     }
-    
-    public function fetch ()
-    {
+
+    public function fetch() {
         $id = $this->request->query('id');
-        $action = $this->request->query ('action');
-        
-        if ($action == "user" && $this->request->is ('ajax')) {
+        $action = $this->request->query('action');
+
+        if ($action == "user" && $this->request->is('ajax')) {
             $this->loadModel('Order');
             $orders = $this->Order->find('all', array('conditions' => array('buyer_guid' => $id)));
-            
-            if (!empty ($orders)) {
-                $this->set ('data', $orders);
+
+            if (!empty($orders)) {
+                $this->set('data', $orders);
             } else {
-                $this->set ('data', null);
+                $this->set('data', null);
             }
-            
+
             $this->layout = false;
-            $this->render ('fetch.user');
+            $this->render('fetch.user');
         }
     }
 

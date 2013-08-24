@@ -30,10 +30,10 @@
                     <div class="page-header">
                         <h2>Order Details</h2>
                     </div>
-                    <p><strong>Order #:</strong> <?php echo $data['Order']['guid']; ?></p>
-                    <p><strong>Order Date:</strong> <?php echo date("F j, Y, g:i a", $data['Order']['created']); ?></p>
-                    <p><strong>Payment Method:</strong> <?php echo $data['Order']['payment_gateway']; ?></p>
-                    <p><strong>Transaction ID:</strong> <?php echo $data['Order']['transaction_id']; ?></p>
+                    <p><strong>Order #:</strong> <?php echo $data['guid']; ?></p>
+                    <p><strong>Order Date:</strong> <?php echo date("F j, Y, g:i a", $data['created']); ?></p>
+                    <p><strong>Payment Method:</strong> <?php echo $data['payment_gateway']; ?></p>
+                    <p><strong>Transaction ID:</strong> <?php echo $data['transaction_id']; ?></p>
                 </div>
             </div>
             <div class="span4">
@@ -87,14 +87,14 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><a href=""><?php echo $data['Order']['title']; ?></a> <span class="label label-info"><?php echo $data['Order']['status']; ?></span></td>
+                                    <td><a href=""><?php echo $data['title']; ?></a> <span class="label label-info"><?php echo $data['status']; ?></span></td>
                                     <td class="value">
-                                        $<?php echo $data['Order']['amount']; ?>
+                                        $<?php echo $data['amount']; ?>
                                     </td>
                                     <td>
-                                        <select class="input-medium" name="order[<?php echo $data['Order']['id']; ?>][status]" onchange="save('edit/?id=<?php echo $data['Order']['id']; ?>')">
+                                        <select class="input-medium" name="order[<?php echo $data['id']; ?>][status]" onchange="save('edit/?id=<?php echo $data['id']; ?>')">
                                             <?php foreach ($status as $key => $state) : ?>
-                                                <option value="<?php echo $key; ?>" <?php if ($data['Order']['status'] == $key) echo 'selected="selected"'; ?>><?php echo $state; ?></option>
+                                                <option value="<?php echo $key; ?>" <?php if ($data['status'] == $key) echo 'selected="selected"'; ?>><?php echo $state; ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </td>
@@ -108,13 +108,20 @@
                 </div>
             </div>
         </form>
+        <?php if ($data['type'] == 'template') : ?>
         <div class="row">
             <div class="span12">
-                <?php if (!empty($data['Order']['attachement'])) : ?>
-                    <a class="thumbnail"><img src="<?php echo $this->webroot . "uploads/preview/" . $data['Order']['attachement']; ?>" /></a>
+                <?php if (!empty($data['attachement'])) : ?>
+                    <a class="thumbnail"><img src="<?php echo $this->webroot . "uploads/preview/" . str_replace (".", "_admin.", $data['attachement']); ?>" /></a>
+                <?php endif; ?>
+            </div>
+            <div class="span12">
+                <?php if (!empty($data['attachement'])) : ?>
+                    <a class="thumbnail"><img src="<?php echo $this->webroot . "uploads/preview/" . str_replace (".", "_user.", $data['attachement']); ?>" /></a>
                 <?php endif; ?>
             </div>
         </div>
+        <?php endif; ?>
     </div>
 </div>
 <div id="myModal" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -127,7 +134,7 @@
             <fieldset>
                 <div class="input-prepend">
                     <span class="add-on" style="width:80px;">Email</span>
-                    <input class="input-medium" id="prependedInput" type="text" value="<?php echo $data['Order']['notification_email']; ?>" placeholder="User email">
+                    <input class="input-medium" id="prependedInput" type="text" value="<?php echo $data['notification_email']; ?>" placeholder="User email">
                 </div>
                 <div class="input-prepend">
                     <span class="add-on" style="width:80px;">Subject</span>

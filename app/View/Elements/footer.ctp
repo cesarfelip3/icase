@@ -152,7 +152,7 @@ $js_themes = array(
 <script type="text/javascript">
     jQuery(document).ready(
             function() {
-                $.shoppingcart.inituuid(uuid_init_callback);
+                //$.shoppingcart.inituuid(uuid_init_callback);
                 cart_init();
                 window.prettyPrint && prettyPrint();
             }

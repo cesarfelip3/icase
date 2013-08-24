@@ -10,7 +10,7 @@ class AdministratorController extends AdminAppController {
     );
 
     public function beforeFilter() {
-        $this->Auth->allow();
+        $this->Auth->deny();
         parent::beforeFilter();
     }
 

@@ -11,6 +11,7 @@ var mememaker = {
     textTotal: 0,
     imageTotal: 0,
     backgroundColor: 'white',
+    overlayImage: null,
     defaultText: null,
     // methods
     init: null,
@@ -202,7 +203,7 @@ mememaker.tools.init = function(id, previewUrl, modal) {
                         mememaker.tools.resize(false, this);
                         break;
                     case 'preview':
-                        mememaker.tools.preview(mememaker.tools.generate);
+                        mememaker.tools.preview();
                         break;
                     case 'backgroundcolor':
                         //mememaker.tools.backgroundcolor ();
@@ -214,7 +215,7 @@ mememaker.tools.init = function(id, previewUrl, modal) {
                         mememaker.draweditor.enable(jQuery(this));
                         break;
                     case 'save':
-                        mememaker.save ();
+                        mememaker.save();
                         break;
                     case 'reload':
                         break;
@@ -498,12 +499,6 @@ mememaker.tools.addpic = function(url) {
     });
 }
 
-mememaker.tools.newtemplate = function(url) {
-
-    mememaker.canvas.setOverlayImage(url, mememaker.canvas.renderAll.bind(mememaker.canvas));
-
-}
-
 mememaker.tools.resize = function(plus, evt) {
 
     var height = jQuery('#' + jQuery(evt).data('prefix') + '-height').val();
@@ -534,10 +529,12 @@ mememaker.tools.resize = function(plus, evt) {
     mememaker.canvas.setDimensions({width: 460, height: mememaker.canvas.getHeight() + height});
 }
 
-mememaker.tools.preview = function(callback) {
+mememaker.tools.preview = function() {
     // it will convert canvas to base64
     mememaker.canvas.deactivateAll();
 
+    mememaker.canvas.overlayImage = null;
+    mememaker.canvas.renderAll.bind(mememaker.canvas);
     var preview = mememaker.canvas.toDataURL(
             {
                 format: 'jpeg',
@@ -545,6 +542,7 @@ mememaker.tools.preview = function(callback) {
             }
     );
 
+    mememaker.tools.newtemplate(mememaker.overlayImage);
     if (mememaker.tools.generate == null) {
         return;
     }
@@ -566,6 +564,13 @@ mememaker.tools.backgroundimage = function(url) {
                 mememaker.canvas.renderAll();
             }, {'originX': 'left', 'originY': 'top', 'left': 0, 'top': 0}
     )
+}
+
+mememaker.tools.newtemplate = function(url) {
+
+    mememaker.overlayImage = url;
+    mememaker.canvas.setOverlayImage(url, mememaker.canvas.renderAll.bind(mememaker.canvas));
+
 }
 
 // text editor
