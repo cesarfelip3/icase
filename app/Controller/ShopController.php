@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This could be the most complex part of the application
  */
@@ -124,32 +125,30 @@ class ShopController extends AppController {
             $i = 0;
             if (!empty($data)) {
 
-                /*
-                  $amount = 0;
-                  foreach ($data as $value) {
-                  $amount += round($value['Product']['price'] * $value['Product']['quantity'], 2, PHP_ROUND_HALF_DOWN) + "";
-                  }
+                $amount = 0;
+                foreach ($data as $value) {
+                    $amount += round($value['Product']['price'] * $value['Product']['quantity'], 2, PHP_ROUND_HALF_DOWN) + "";
+                }
 
 
-                  require_once APP . DS . 'Vendor' . DS . 'AuthorizeNet/AuthorizeNet.php'; // Make sure this path is correct.
-                  define("AUTHORIZENET_SANDBOX", false);
-                  $transaction = new AuthorizeNetAIM('9c22BSeN', '752eHX2G6hk9Y36J');
-                  $transaction->setSandbox(false);
-                  $transaction->amount = $amount;
-                  $transaction->card_num = $bill['cc_number'];
-                  $transaction->exp_date = $bill['cc_expired']['month'] . "/" . $bill['cc_expired']['year'];
+                require_once APP . DS . 'Vendor' . DS . 'AuthorizeNet/AuthorizeNet.php'; // Make sure this path is correct.
+                define("AUTHORIZENET_SANDBOX", false);
+                $transaction = new AuthorizeNetAIM('9c22BSeN', '752eHX2G6hk9Y36J');
+                $transaction->setSandbox(false);
+                $transaction->amount = $amount;
+                $transaction->card_num = $bill['cc_number'];
+                $transaction->exp_date = $bill['cc_expired']['month'] . "/" . $bill['cc_expired']['year'];
 
-                  $response = $transaction->authorizeAndCapture();
+                $response = $transaction->authorizeAndCapture();
 
-                  if ($response->approved) {
-
-                  } else {
-                  $this->Product->rollTransaction();
-                  $this->_error['error'] = 1;
-                  $this->_error['message'] = $response->error_message;
-                  exit(json_encode($this->_error));
-                  }
-                 */
+                if ($response->approved) {
+                    
+                } else {
+                    $this->Product->rollTransaction();
+                    $this->_error['error'] = 1;
+                    $this->_error['message'] = $response->error_message;
+                    exit(json_encode($this->_error));
+                }
 
                 // create user - guest
                 $user_guid = null;
@@ -226,16 +225,16 @@ class ShopController extends AppController {
                         "amount" => round($value['Product']['price'] * $value['Product']['quantity'], 2, PHP_ROUND_HALF_DOWN),
                         "quantity" => $data[$i]['Product']['quantity'],
                         "attachement" => $value['Product']['file'],
-                        //"transaction_id" => $response->transaction_id,
-                        //"transaction_type" => $response->transaction_type,
+                        "transaction_id" => $response->transaction_id,
+                        "transaction_type" => $response->transaction_type,
                         "payment_gateway" => "AuthorizeNet",
                         "status" => "paid",
                         "created" => time(),
                         "modified" => time(),
                     );
-                    
+
                     if ($value['Product']['type'] == 'template') {
-                        @copy (APP . DS . "webroot" . DS . "uploads" . DS . "preview" . DS . $value['Product']['file'], APP . DS . "webroot" . DS . "uploads" . DS . "user" . DS . $value['Product']['file']);
+                        @copy(APP . DS . "webroot" . DS . "uploads" . DS . "preview" . DS . $value['Product']['file'], APP . DS . "webroot" . DS . "uploads" . DS . "user" . DS . $value['Product']['file']);
                     }
 
                     if ($value['Product']['type'] == 'template' && !$user_guest) {
@@ -261,16 +260,16 @@ class ShopController extends AppController {
                     $i++;
                 }
 
-                if (!$user_guest && !empty ($media)) {
+                if (!$user_guest && !empty($media)) {
                     $this->loadModel('Media');
                     $this->Media->create();
                     $this->Media->saveMany($media);
 
                     $this->loadModel('MediaToObject');
-                    $this->MediaToObject->create ();
+                    $this->MediaToObject->create();
                     $this->MediaToObject->saveMany($m2o);
                 }
-                
+
                 $this->loadModel('Order');
                 $this->Order->saveMany($orders);
 
@@ -281,7 +280,7 @@ class ShopController extends AppController {
                     foreach ($cookies as $cookie) {
                         $parts = explode('=', $cookie);
                         $name = trim($parts[0]);
-                        
+
                         if ($name == 'orders') {
                             setcookie($name, '', time() - 1000, '/');
                         }
@@ -311,12 +310,12 @@ class ShopController extends AppController {
                 return;
             }
         }
-        
-        if (!empty ($this->_identity)) {
-            $this->loadModel ("User");
-            $data = $this->User->find ('first', array ("conditions" => array ("guid" => $this->_identity['guid'])));
-            
-            $this->set ('deliver', $data['User']);
+
+        if (!empty($this->_identity)) {
+            $this->loadModel("User");
+            $data = $this->User->find('first', array("conditions" => array("guid" => $this->_identity['guid'])));
+
+            $this->set('deliver', $data['User']);
         }
     }
 
@@ -713,7 +712,6 @@ class ShopController extends AppController {
             return;
         }
     }
-
 
     protected function _json($data = array()) {
         return json_encode($data); //, JSON_UNESCAPED_SLASHES);
