@@ -138,8 +138,44 @@ mememaker.save = function()
 
 mememaker.reload = function(json)
 {
-    mememaker.canvas.loadFromJSON(json);
-    mememaker.canvas.renderAll();
+    mememaker.canvas.loadFromJSON(json,
+            function() {
+                mememaker.canvas.renderAll();
+                var objects = mememaker.canvas.getObjects();
+                console.log(objects);
+
+                $(objects).each(
+                        function(index, el) {
+
+                            if (el == null || el == undefined) {
+                                return;
+                            }
+
+                            console.log(el.type);
+
+                            if (el.type == "text") {
+                                el.on(
+                                        'selected',
+                                        function(options) {
+                                            mememaker.texteditor.textselected();
+                                        }
+                                )
+                            }
+
+                            if (el.type == "image") {
+                                el.on(
+                                        'selected',
+                                        function(options) {
+                                            mememaker.imageeditor.imageselected();
+                                        }
+                                );
+                            }
+
+
+                        });
+            });
+
+
 
     // optional
     //mememaker.canvas.calculateOffset();

@@ -5,37 +5,21 @@ iCase
 Update
 ========
 
-2013.08.06 - 2013.08.12
+1. Order / Email
+2. Email / Content
+3. Category / Pagenation
 
-Planed - 1 day (Admin Complete)
-
-1. Admin/Member - Edit/Delete
-
-2. Admin/Report - Google Analyzer  
-
-3. Admin/Setting
-
-4. Admin/Enquiries
-
-5. Designer - Filter
-
-Optional
-
-1. Admin/Marketing - Email/Export - Email/Verification - Email/Send - Email/Feedback
+5. Media Location (optional)
+4. Error Handler
 
 SEO basic --
 
-0. page title
-
-1. meta keywords
-
-2. meta description
-
-3. img alt
-
-4. a title
-
-5. URL name 
+1. page title
+2. meta keywords
+3. meta description
+4. img alt
+5. a title
+6. URL name 
 
     1). http://domain.com/ #must full domain name
 
@@ -43,13 +27,8 @@ SEO basic --
 
     3). http://domain.com/products/category-url-key-C[id]/product-url-key-P[id]
 
-6. Content
+7. Content
 
-2013.08.12
-
-Issues --- 
-
-1. Order, 
 
 
 
