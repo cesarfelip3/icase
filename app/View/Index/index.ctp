@@ -41,42 +41,6 @@
             </div>
             <?php endforeach; ?>
             <?php endif; ?>
-<!--            <div class="span4 set-equal-heights-js">
-                <div class="thumbnail">
-                    <a href="property.html"><img src="http://www.casetagram.com/usr/7705/217705/221463.png.240x240.png" alt="Placeholder" class=""></a>
-                    <div class="caption">
-                        <a href="property.html" class="prop-title">Property Name, Toronto ON</a>
-                        <p class="price">$259,000</p>
-                        <ul class="list-btns">
-                            <li><button class="btn btn-small btn-inverse colwhite"><a href="property.html">View Details</a></button></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="span4 set-equal-heights-js">
-                <div class="thumbnail">
-                    <a href="property.html"><img src="http://www.casetagram.com/usr/7705/217705/221463.png.240x240.png" alt="Placeholder" class=""></a>
-                    <div class="caption">
-                        <a href="property.html" class="prop-title">Property Name, Toronto ON</a>
-                        <p class="price">$259,000</p>
-                        <ul class="list-btns">
-                            <li><button class="btn btn-small btn-inverse colwhite"><a href="property.html">View Details</a></button></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="span4 set-equal-heights-js">
-                <div class="thumbnail">
-                    <a href="property.html"><img src="http://www.casetagram.com/usr/7705/217705/221463.png.240x240.png" alt="Placeholder" class=""></a>
-                    <div class="caption">
-                        <a href="property.html" class="prop-title">Property Name, Toronto ON</a>
-                        <p class="price">$259,000</p>
-                        <ul class="list-btns">
-                            <li><button class="btn btn-small btn-inverse colwhite"><a href="property.html">View Details</a></button></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>-->
             <div class="clearfix"></div>
         </div>
         <div class="clearfix"></div>
