@@ -31,7 +31,7 @@
             <?php endforeach; ?>
             <?php else :  ?>
             <tr>
-                <td colspan="4"><em class="text-warning">No orders yet</em></td>
+                <td colspan="8"><em class="text-warning">No orders yet</em></td>
             </tr>
             <?php endif; ?>
         </tbody>
