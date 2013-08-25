@@ -1,3 +1,8 @@
+<?php
+$signup_url = $this->webroot . "signup";
+$signin_url = $this->webroot . "signin";
+$reset_url = $this->webroot . "auth/reset";
+?>
 <style type="text/css">
     form#form-signup label {
         display:inline-block;
@@ -51,7 +56,7 @@
                     </p>
                     <p>
                         <span>Already had account? Go </span>
-                        <a href='<?php echo $this->webroot; ?>signin'>Sign In Now</a>
+                        <a href='<?php echo $signin_url; ?>'>Sign In Now</a>
                     </p>
                     <p class="text-error" style="color:darkred">
                     
@@ -66,7 +71,7 @@
     function signup_submit()
     {
         jQuery.ajax({
-            url: "<?php echo $this->webroot; ?>index/signup",
+            url: "<?php echo $signup_url; ?>",
             data: $("#form-signup").serialize(),
             type: "POST",
             beforeSend: function(xhr) {

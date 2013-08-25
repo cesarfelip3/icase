@@ -57,9 +57,9 @@ Router::connect(
     array('controller' => 'catalogue', 'action' => 'search')
 );
 
-Router::connect('/signin', array('controller' => 'index', 'action' => 'signin'));
-Router::connect('/signup', array('controller' => 'index', 'action' => 'signup'));
-Router::connect('/logout', array('controller' => 'index', 'action' => 'logout'));
+Router::connect('/signin', array('controller' => 'auth', 'action' => 'signin'));
+Router::connect('/signup', array('controller' => 'auth', 'action' => 'signup'));
+Router::connect('/logout', array('controller' => 'auth', 'action' => 'logout'));
 /**
  * Load all plugin routes. See the CakePlugin documentation on
  * how to customize the loading of plugin routes.

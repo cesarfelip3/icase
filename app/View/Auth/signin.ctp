@@ -1,3 +1,9 @@
+<?php
+$signup_url = $this->webroot . "signup";
+$signin_url = $this->webroot . "signin";
+$reset_url = $this->webroot . "auth/reset";
+?>
+
 <style type="text/css">
     form#form-signin label {
         display:inline-block;
@@ -43,11 +49,11 @@
                     <a href='javascript:' class='btn btn-primary' data-loading-text="Working..." onclick="signin_submit();" id="btn-signin">Sign in</a>
                 </p>
                 <p>
-                    <a href='<?php echo $this->webroot; ?>index/reset'><span>Forget Password?</span></a>
+                    <a href='<?php echo $reset_url; ?>'><span>Forget Password?</span></a>
                 </p>
                 <p>
                     <span>Don't have account yet?</span>
-                    <a href='<?php echo $this->webroot; ?>signup'>Sign Up Now</a>
+                    <a href='<?php echo $signup_url; ?>'>Sign Up Now</a>
                 </p>
                 <p class="text-error" style="color:darkred">
                     
@@ -62,7 +68,7 @@
     function signin_submit ()
     {
         jQuery.ajax({
-            url: "<?php echo $this->webroot; ?>index/signin",
+            url: "<?php echo $signin_url; ?>",
             data: $("#form-signin").serialize(),
             type: "POST",
             beforeSend: function(xhr) {

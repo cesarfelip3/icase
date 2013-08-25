@@ -120,7 +120,19 @@ class CreatorController extends AppController {
             $data = $this->Creation->find('first', array("conditions" => array("user_guid" => $this->_identity['guid'], "guid" => $guid)));
 
             if (!empty($data)) {
-
+                $this->loadModel ('Product');
+                $product = $this->Product->find ('first', array (
+                    "conditions" => array (
+                        "guid" => $data['Creation']['product_guid']
+                    )
+                ));
+                
+                if (!empty ($product)) {
+                    $product['Product']['image'] = unserialize($product['Product']['image']);
+                    $overlay = $this->webroot . "img/template/" . $product['Product']['image']['foreground'];
+                }
+                
+                $this->_error['data']['overlay'] = $overlay;
                 $this->_error['data']['json'] = $data['Creation']['data'];
                 $this->_error['data']['product'] = $data['Creation']['product_guid'];
                 $this->_error['data']['name'] = $data['Creation']['name'];

@@ -1,4 +1,8 @@
-
+<?php
+$signup_url = $this->webroot . "signup";
+$signin_url = $this->webroot . "signin";
+$reset_url = $this->webroot . "auth/reset";
+?>
 <div class='row-fluid'>
     <div class='span8 offset3'>
         <form class="form-inline" style="margin-top:20px;" id="form-reset">
@@ -17,7 +21,7 @@
     function reset_submit()
     {
         jQuery.ajax({
-            url: "<?php echo $this->webroot; ?>index/reset",
+            url: "<?php echo $reset_url; ?>",
             data: $("#form-reset").serialize(),
             type: "POST",
             beforeSend: function(xhr) {

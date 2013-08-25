@@ -242,7 +242,7 @@ class ShopController extends AppController {
                         $media[$j] = array(
                             "guid" => $media_guid,
                             "filename" => $value['Product']['file'],
-                            "type" => "user.design",
+                            "type" => "user.creation",
                             "created" => time(),
                             "modified" => time()
                         );
@@ -250,7 +250,7 @@ class ShopController extends AppController {
                         $m2o[$j] = array(
                             'media_guid' => $media_guid,
                             "object_guid" => $user_guid,
-                            "type" => "user.design"
+                            "type" => "user.creation"
                         );
 
                         $j++;

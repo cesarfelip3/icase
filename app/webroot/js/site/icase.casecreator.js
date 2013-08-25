@@ -578,6 +578,7 @@ mememaker.tools.preview = function() {
             }
     );
 
+    console.log(mememaker.overlayImage);
     mememaker.tools.newtemplate(mememaker.overlayImage);
     if (mememaker.tools.generate == null) {
         return;

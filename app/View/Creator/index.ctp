@@ -1,3 +1,18 @@
+<?php
+$loginform_url = $this->webroot . "auth/formuser";
+$signin_url = $this->webroot . "signin";
+$signup_url = $this->webroot . "signup";
+
+$template_url = $this->webroot . "creator/templates";
+$preview_url = $this->webroot . "creator/preview";
+$save_url = $this->webroot . "creator/save";
+$reload_url = $this->webroot . "creator/reload";
+
+$uploader_url = $this->webroot . "media/upload";
+
+$checkout_url = $this->webroot . "shop/checkout?action=cart";
+?>
+
 <style>
     .tools a {text-decoration:none;margin-right:10px;}
     /*.tools label {width:100px;display:inline-block;}*/
@@ -138,7 +153,7 @@ $js_pluploader = array(
         browse_button: 'btn-upload-image',
         container: 'uploader',
         max_file_size: '10mb',
-        url: '<?php echo $this->webroot; ?>media/upload',
+        url: '<?php echo $uploader_url; ?>',
         multi_selection: false,
         //resize: {width: 640, height: 240, quality: 100},
         //flash_swf_url: 'js/uploader/plupload.flash.swf',
@@ -227,8 +242,6 @@ $js_case = array(
         jQuery("#btn-cart").click(
                 function() {
 
-                    //
-
                     var orderId = null;
                     orderId = jQuery("#modal-preview #product-info").data('guid');
                     var image = jQuery("#modal-preview #product-info").data('file');
@@ -238,7 +251,7 @@ $js_case = array(
                     jQuery("#modal-preview").modal('hide');
                     cart_count();
 
-                    window.open("<?php echo $this->webroot; ?>shop/checkout?action=cart", "_blank");
+                    window.open("<?php echo $checkout_url; ?>", "_blank");
                     window.focus();
                 }
         )
@@ -284,7 +297,7 @@ $js_case = array(
         }
 
         jQuery.ajax({
-            url: "<?php echo $this->webroot; ?>creator/save/?id=" + id,
+            url: "<?php echo $save_url; ?>/?id=" + id,
             data: {'json': json, 'name': name, 'product': guid},
             type: "POST",
             beforeSend: function(xhr) {
@@ -312,7 +325,7 @@ $js_case = array(
         var guid = $("#canvas_guid").val();
 
         jQuery.ajax({
-            url: "<?php echo $this->webroot; ?>creator/reload",
+            url: "<?php echo $reload_url; ?>",
             data: {'guid': guid},
             type: "POST",
             beforeSend: function(xhr) {
@@ -328,8 +341,10 @@ $js_case = array(
 
             } else {
                 //console.log (result.data.json);
+                $("#current-item").data('overlay', result.data.overlay);
                 $("#current-item").data('name', result.data.name);
                 $("#current-item").val(result.data.product);
+                mememaker.overlayImage = result.data.overlay;
                 mememaker.reload(result.data.json);
             }
 
@@ -344,7 +359,7 @@ $js_case = array(
     function templatelist_load()
     {
         jQuery.ajax({
-            url: "<?php echo $this->webroot; ?>creator/templates",
+            url: "<?php echo $template_url; ?>",
             type: "GET",
             beforeSend: function(xhr) {
 
@@ -406,7 +421,7 @@ $js_case = array(
         jQuery("#modal-preview").modal();
 
         jQuery.ajax({
-            url: "<?php echo $this->webroot; ?>creator/preview",
+            url: "<?php echo $preview_url; ?>",
             data: {"image-extension": "jpeg", "image-data": preview, "user": $.shoppingcart.getuuid(), "product": jQuery("#current-item").val()},
             type: "POST",
             beforeSend: function(xhr) {
@@ -437,7 +452,7 @@ $js_case = array(
     function formuser_load ()
     {
         jQuery.ajax({
-            url: "<?php echo $this->webroot; ?>index/formuser",
+            url: "<?php echo $loginform_url; ?>",
             type: "GET",
             beforeSend: function(xhr) {
             }
@@ -450,10 +465,10 @@ $js_case = array(
         });
     }
     
-        function signup_submit()
+    function signup_submit()
     {
         jQuery.ajax({
-            url: "<?php echo $this->webroot; ?>index/signup",
+            url: "<?php echo $signup_url; ?>",
             data: $("#form-signup").serialize(),
             type: "POST",
             beforeSend: function(xhr) {
@@ -476,7 +491,7 @@ $js_case = array(
     function signin_submit()
     {
         jQuery.ajax({
-            url: "<?php echo $this->webroot; ?>index/signin",
+            url: "<?php echo $signin_url; ?>",
             data: $("#form-signin").serialize(),
             type: "POST",
             beforeSend: function(xhr) {

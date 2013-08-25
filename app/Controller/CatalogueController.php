@@ -3,7 +3,7 @@
 App::uses('AppController', 'Controller');
 
 class CatalogueController extends AppController {
-    
+
     public $uses = false;
 
     public function beforeFilter() {
@@ -12,12 +12,12 @@ class CatalogueController extends AppController {
     }
 
     public function search($keywords) {
-        
-        $search = $this->request->query ('search');
-        if (!empty ($search)) {
+
+        $search = $this->request->query('search');
+        if (!empty($search)) {
             $keywords = $search;
         }
-        
+
         $keywords = trim($keywords);
 
         if ($this->request->is('ajax')) {
@@ -41,12 +41,12 @@ class CatalogueController extends AppController {
             $this->autoRender = false;
             exit(json_encode($this->_error));
         }
-        
-        $page = $this->request->query ('page');
-        if (empty ($page)) {
+
+        $page = $this->request->query('page');
+        if (empty($page)) {
             $page = 0;
         } else {
-            $page = intval ($page);
+            $page = intval($page);
         }
 
         $keywords = @preg_replace("/ +/i", " ", $keywords);
@@ -69,8 +69,8 @@ class CatalogueController extends AppController {
             "order" => "created DESC"
                 )
         );
-        
-        $pages = $this->Product->find('count', array ("conditions" => $cond));
+
+        $pages = $this->Product->find('count', array("conditions" => $cond));
 
         //$log = $this->Product->getDataSource()->getLog(false, false);
         //print_r ($log);
@@ -82,67 +82,62 @@ class CatalogueController extends AppController {
             }
         }
 
-        $set = array (
+        $set = array(
             "data" => $data,
             "page" => $page,
             "pages" => $pages,
             "limit" => 24
         );
-                
+
         $this->set($set);
     }
 
     public function product($slug) {
 
-        /*
-          $log = $this->Product->getDataSource()->getLog(false, false);
-          print_r ($log);
-         */
-        
+
         $this->loadModel('Product');
 
-        $data = $this->Product->find('first', array("conditions" => array("slug" => $slug)));
+        $data = $this->Product->find('first', array(
+            "conditions" => array("slug" => $slug)
+        ));
 
         if (empty($data)) {
-            $this->redirect(array ("controller" => "index", "action" => "index"));
+            $this->redirect(array("controller" => "index", "action" => "index"));
         }
 
         $data = $data['Product'];
-        
+
         $data['featured'] = unserialize($data['featured']);
 
         $this->set("_title", $this->_meta['_title'] . "|" . $slug);
         $this->set("_description", $data['seo_description']);
         $this->set("data", $data);
     }
-    
-    public function single ()
-    {
-       /*
-          $log = $this->Product->getDataSource()->getLog(false, false);
-          print_r ($log);
-         */
-        
-        $guid = $this->request->query ('id');
-        if (empty ($guid)) {
-            $this->redirect (array ('controller' => "index", "action" => "index"));
+
+    public function single() {
+
+        $guid = $this->request->query('id');
+        if (empty($guid)) {
+            $this->redirect(array('controller' => "index", "action" => "index"));
         }
-        
+
         $this->loadModel('Product');
 
-        $data = $this->Product->find('first', array("conditions" => array("guid" => $guid)));
+        $data = $this->Product->find('first', array(
+            "conditions" => array("guid" => $guid)
+        ));
 
         if (empty($data)) {
-            $this->redirect(array ("controller" => "index", "action" => "index"));
+            $this->redirect(array("controller" => "index", "action" => "index"));
         }
 
         $data = $data['Product'];
-        
+
         $data['featured'] = unserialize($data['featured']);
 
         $this->set("_title", $this->_meta['_title'] . "|" . $data['name']);
         $this->set("_description", $data['seo_description']);
-        $this->set("data", $data);       
+        $this->set("data", $data);
     }
 
     public function category($slug) {
@@ -152,7 +147,7 @@ class CatalogueController extends AppController {
         $data = $this->Category->find('first', array("conditions" => array("slug" => $slug)));
 
         if (empty($data)) {
-            $this->redirect(array ("controller" => "index", "action" => "index"));
+            $this->redirect(array("controller" => "index", "action" => "index"));
             exit;
         }
 

@@ -26,7 +26,7 @@ class AppController extends Controller {
         'Session',
         'Auth' => array(
             'loginAction' => array(
-                'controller' => 'index',
+                'controller' => 'auth',
                 'action' => 'signin'
             ),
             'authError' => 'Did you really think you are allowed to see that?',
@@ -79,7 +79,10 @@ class AppController extends Controller {
         
     }
 
-    protected function email($from, $to, $subject, $content, $template, $vars = array()) {
+    //=================================================
+    // helper functions
+    //=================================================
+    protected function _email($from, $to, $subject, $content, $template, $vars = array()) {
         $Email = new CakeEmail();
         $Email->template($template);
         $Email->viewVars($vars);
@@ -88,6 +91,23 @@ class AppController extends Controller {
         $Email->to($to);
         $Email->subject($subject);
         $Email->send();
+    }
+    
+    protected function _validate ($type, $value)
+    {
+        $ret = false;
+        switch ($type) {
+            case "email" : 
+                $ret = @preg_match("/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/i", $value);
+                break;
+            case "username" : 
+                $ret = @preg_match("/^[a-z]{1,}|[a-z]{1,}[0-9]{1,}$/i", $value);
+                break;
+            default:
+                break;
+        }
+        
+        return $ret;
     }
 
 }
