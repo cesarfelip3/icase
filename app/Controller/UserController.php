@@ -18,7 +18,10 @@ class UserController extends AppController {
         $this->loadModel("MediaToObject");
         $count2 = $this->MediaToObject->find ('count', array ("object_guid" => $this->_identity['guid']));
         
-        $this->set ('orders', $this->_identity['orders']);
+        $this->loadModel("Order");
+        $count3 = $this->Order->find ('count', array ("conditions" => array ("buyer_guid" => $this->_identity['guid'])));
+        
+        $this->set ('orders', $count3);
         $this->set ('count', $count + $count2);
     }
 

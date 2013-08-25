@@ -111,9 +111,38 @@ class CatalogueController extends AppController {
         
         $data['featured'] = unserialize($data['featured']);
 
-        $this->set("_title", $this->_title . "|" . $slug);
+        $this->set("_title", $this->_meta['_title'] . "|" . $slug);
         $this->set("_description", $data['seo_description']);
         $this->set("data", $data);
+    }
+    
+    public function single ()
+    {
+       /*
+          $log = $this->Product->getDataSource()->getLog(false, false);
+          print_r ($log);
+         */
+        
+        $guid = $this->request->query ('id');
+        if (empty ($guid)) {
+            $this->redirect (array ('controller' => "index", "action" => "index"));
+        }
+        
+        $this->loadModel('Product');
+
+        $data = $this->Product->find('first', array("conditions" => array("guid" => $guid)));
+
+        if (empty($data)) {
+            $this->redirect(array ("controller" => "index", "action" => "index"));
+        }
+
+        $data = $data['Product'];
+        
+        $data['featured'] = unserialize($data['featured']);
+
+        $this->set("_title", $this->_meta['_title'] . "|" . $data['name']);
+        $this->set("_description", $data['seo_description']);
+        $this->set("data", $data);       
     }
 
     public function category($slug) {

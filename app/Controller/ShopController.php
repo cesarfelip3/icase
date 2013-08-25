@@ -135,7 +135,7 @@ class ShopController extends AppController {
                 $transaction = new AuthorizeNetAIM('9c22BSeN', '752eHX2G6hk9Y36J');
                 $transaction->setSandbox(false);
                 $transaction->amount = $amount;
-                $transaction->card_num = $bill['cc_number'];
+                $transaction->card_num = $bill['cc_number']; //4007000000027 - 10/16
                 $transaction->exp_date = $bill['cc_expired']['month'] . "/" . $bill['cc_expired']['year'];
 
                 $response = $transaction->authorizeAndCapture();

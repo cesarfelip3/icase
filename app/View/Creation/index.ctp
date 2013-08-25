@@ -33,7 +33,7 @@
                                 <td><?php echo $value['Creation']['name']; ?></td>
                                 <td><?php echo date ("m/d/y g:i:s A", $value['Creation']['modified']); ?></td>
                                 <td class="pull-right">
-                                    <a href="<?php echo $this->webroot; ?>create/?id=<?php echo $value['Creation']['guid']; ?>" class="btn btn-info btn-small">Load</a>&nbsp;&nbsp;
+                                    <a href="<?php echo $this->webroot; ?>create/?id=<?php echo $value['Creation']['guid']; ?>" class="btn btn-info btn-small">Load</a>
                                     <a class="btn btn-info btn-small" href='<?php echo $this->webroot; ?>creation/delete/?id=<?php echo $value['Creation']['guid']; ?>'>Delete</a>
                                 </td>
                             </tr>
@@ -47,6 +47,7 @@
                 </tbody>
             </table>
         </div>
+        <?php if (false) : ?>
         <div class="row-fluid" style="margin-top:20px;background-color:white;border:1px solid #ccc;padding:15px;border-radius: 5px;">
             <h2>Final Creations</h2>
             <table class="table">
@@ -63,11 +64,9 @@
                         <?php foreach ($data2 as $value) : ?>
                             <tr>
                                 <td><?php echo ++$i; ?></td>
-                                <td><img src="<?php echo $this->webroot . "uploads/user/" . $value['Media']['filename']; ?>" style="width:300px;border:1px solid #ccc;" /></td>
-                                <td><?php echo date ("m/d/y g:i:s A", $value['Media']['modified']); ?></td>
+                                <td><img src="<?php echo $this->webroot . "uploads/user/" . $value['Order']['file']; ?>" style="width:300px;border:1px solid #ccc;" /></td>
+                                <td><?php echo date ("m/d/y g:i:s A", $value['Order']['modified']); ?></td>
                                 <td class="pull-right">
-                                    <a href="" class="btn btn-info btn-small">Download</a>&nbsp;&nbsp;
-                                    <a class="btn btn-info btn-small" href='<?php echo $this->webroot; ?>creation/del/?id=<?php echo $value['Media']['guid']; ?>'>Delete</a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -80,5 +79,6 @@
                 </tbody>
             </table>
         </div>
+        <?php endif; ?>
     </div>
 </div>
