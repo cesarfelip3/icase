@@ -8,7 +8,7 @@ $preview_url = $this->webroot . "creator/preview";
 $save_url = $this->webroot . "creator/save";
 $reload_url = $this->webroot . "creator/reload";
 
-$uploader_url = $this->webroot . "media/upload";
+$uploader_url = $this->webroot . "creator/upload";
 
 $checkout_url = $this->webroot . "shop/checkout?action=cart";
 ?>
