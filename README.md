@@ -38,3 +38,19 @@ Test
 2. AuthController
 3. IndexController
 
+Discussion
+=============
+
+To save the space, and utilize the resource of server - 
+
+About Media (uploaded) - 
+
+1. product/template image - /img/template
+2. product/product image - /uploads/product (when product deleted, should be removed)
+
+3. creator/preview image - /uploads/preview (all images should be removed on cron job)
+4. creator/order image - /uploads/order
+5. creator/user image - /uploads/user (when user deleted, should be removed)
+
+6. misc - /uploads (all images should be removed on cron job)
+
