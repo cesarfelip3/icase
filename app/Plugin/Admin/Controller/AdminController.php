@@ -30,7 +30,7 @@ class AdminController extends AdminAppController {
                     }
                     
                     $this->loadModel('User');
-                    $statistics['members'] = $this->User->find ('count', array ('conditions' => array ('type' => 'register')));
+                    $statistics['members'] = $this->User->find ('count', array ('conditions' => array ('type' => 'registered')));
                     $statistics['subscribes'] = $this->User->find ('count', array ('conditions' => array ('subscribe' => 1)));
                     
                     
@@ -45,6 +45,13 @@ class AdminController extends AdminAppController {
                     $this->set ('data', $data);
                     $this->layout = false;
                     $this->render ("index.stock");
+                    break;
+                case 'register' :
+                    $this->loadModel('User');
+                    $data = $this->User->find ('all', array ("conditions" => array ("type" => "registered"), "order" => "created DESC", "limit" => 7, "page" => 0));
+                    $this->set ('data', $data);
+                    $this->layout = false;
+                    $this->render ("index.registerations");
                     break;
             }
         }

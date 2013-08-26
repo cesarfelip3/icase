@@ -9,16 +9,12 @@
                         <span>Open Orders</span>
                     </a>
                     <a class="stat-column" href="#">
-                        <span class="number" id="label-members">0</span>
-                        <span>Members</span>
-                    </a>
-                    <a class="stat-column" href="#">
                         <span class="number" id="label-revenue">$0</span>
                         <span>Revenue</span>
                     </a>
                     <a class="stat-column" href="#">
-                        <span class="number" id="label-subscribes">0</span>
-                        <span>Subscribers</span>
+                        <span class="number" id="label-members">0</span>
+                        <span>Members</span>
                     </a>
                 </div>
             </div>
@@ -49,19 +45,9 @@
             <div class="span6">
                 <div class="slate">
                     <div class="page-header">
-                        <h2><i class="icon-envelope pull-right"></i>Latest Subscribe</h2>
-                    </div>
-                    <div>
-                        
-                    </div>
-                </div>
-            </div>
-            <div class="span6">
-                <div class="slate">
-                    <div class="page-header">
                         <h2><i class="icon-user pull-right"></i>Latest Registeration</h2>
                     </div>
-                    <div>
+                    <div id="box-users">
                         
                     </div>
                 </div>
@@ -113,11 +99,28 @@
 
             $("#box-stock").html (data);
             hideAlert ();
+            init_users ();
 
         }).fail(function() {
             hideAlert();
         });
     }
     
-    
+    function init_users ()
+    {
+        jQuery.ajax({
+            url: "<?php echo $base; ?>/?action=register",
+            type: "GET",
+            beforeSend: function(xhr) {
+                showAlert2 ("Loading...");
+            }
+        }).done(function(data) {
+
+            $("#box-users").html (data);
+            hideAlert ();
+
+        }).fail(function() {
+            hideAlert();
+        });
+    }
 </script>

@@ -9,7 +9,7 @@
                     #<?php echo $value['Order']['guid']; ?> - <?php echo $value['Order']['title']; ?>
                 </a> <span class="label label-info"><?php echo $value['Order']['status']; ?></span>
             </td>
-            <td><?php echo $value['Order']['amount']; ?></td>
+            <td class="pull-right"><?php echo $value['Order']['amount']; ?></td>
         </tr>
         <?php endforeach; ?>
         <tr>
@@ -22,4 +22,4 @@
         <?php endif; ?>
     </tbody>
 </table>
-<input type="hidden" id="data-statistics" data-orders="<?php echo $statistics['orders']; ?>" data-members="<?php echo $statistics['members']; ?>" data-revenue="<?php echo $statistics['total']; ?>" data-subscribes="<?php echo $statistics['subscribes']; ?>" />
+<input type="hidden" id="data-statistics" data-orders="<?php echo $statistics['orders']; ?>" data-members="<?php echo $statistics['members']; ?>" data-revenue="<?php echo $statistics['total']; ?>" data-subscribes="" />

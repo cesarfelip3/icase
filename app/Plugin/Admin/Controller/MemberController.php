@@ -173,7 +173,7 @@ class MemberController extends AdminAppController {
             $data['guid'] = uniqid();
             $data['created'] = time();
             $data['modified'] = time();
-            $data['type'] = "register";
+            $data['type'] = "registered";
 
             $this->User->create();
             $this->User->save($data);
