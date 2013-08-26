@@ -33,26 +33,28 @@ class ShopController extends AppController {
 
             $deliver = $this->request->data('deliver');
             $bill = $this->request->data('bill');
-            
-            require_once APP . 'Vendor' . DS . 'HtmlPurifier/library/HTMLPurifier.auto.php'; 
+
+            require_once APP . 'Vendor' . DS . 'HtmlPurifier/library/HTMLPurifier.auto.php';
             $config = HTMLPurifier_Config::createDefault();
             $purifier = new HTMLPurifier($config);
-            
+
             foreach ($bill as $key => $value) {
+                if ($key == 'cc_expired') {
+                    continue;
+                }
                 $bill[$key] = $purifier->purify($value);
             }
-            
+
             foreach ($deliver as $key => $value) {
                 if ($key == 'email') {
                     continue;
                 }
                 $deliver[$key] = $purifier->purify($value);
             }
-            
+
             $guids = $this->_checkout($action);
-            
+
             $this->loadModel('Product');
-            $this->Product->beginTransaction();
 
             $i = 0;
             $data = null;
@@ -77,13 +79,15 @@ class ShopController extends AppController {
                     $data[$i]['Product']['file'] = $data[$i]['Product']['image'];
                 }
 
-                if ($data[$i]['Product']['quantity'] != 65535) {
+                if ($data[$i]['Product']['quantity'] != 65535 && $data[$i]['Product']['quantity'] >= $value) {
+                    $this->Product->begin();
                     $this->Product->id = $data[$i]['Product']['id'];
                     $this->Product->set(array('quantity' => $data[$i]['Product']['quantity'] - $value));
                     $this->Product->save();
+                    $this->Product->commit();
                 }
 
-                $data[$i]['Product']['quantity'] = $value;
+                $data[$i]['Product']['_quantity'] = $value;
                 $i++;
             }
 
@@ -91,14 +95,39 @@ class ShopController extends AppController {
             $i = 0;
 
             if (!empty($data)) { // always exists
-
                 $amount = 0;
                 foreach ($data as $value) {
-                    $amount += round($value['Product']['price'] * $value['Product']['quantity'], 2, PHP_ROUND_HALF_DOWN) + "";
+                    $amount += round($value['Product']['price'] * $value['Product']['_quantity'], 2, PHP_ROUND_HALF_DOWN) + "";
                 }
-                
+
+                $payment_data = array(
+                    'amount' => $amount,
+                    'card' => array(
+                        'cc_number' => $bill['cc_number'],
+                        "cc_expired" => $bill['cc_expired']
+                ));
+
                 $payment_gateway = "AuthorizeNet";
-                $result = $this->_pay ($payment_gateway);
+                $payment_result = null;
+                $result = $this->_pay($payment_gateway, $payment_data, $payment_result);
+
+                if ($result == false) {
+                    foreach ($data as $value) {
+                        if ($value['Product']['quantity'] != 65535) {
+                            $this->Product->begin();
+                            $this->Product->id = $value['Product']['id'];
+                            $this->Product->set(array('quantity' => $value['Product']['quantity']));
+                            $this->Product->save();
+                            $this->Product->commit();
+                        }
+                    }
+                    exit(json_encode($this->_error));
+                } else {
+                    $result = array(
+                        "transactionId" => $payment_result->transaction_id,
+                        "transactionType" => $payment_result->transaction_type
+                    );
+                }
 
                 // create user - guest
                 $user_guid = null;
@@ -119,7 +148,7 @@ class ShopController extends AppController {
                         "state" => $deliver['state'],
                         "country" => $deliver['country'],
                         "phone" => $deliver['phone'],
-                        "email2" => $deliver['email2'],
+                        "email2" => $deliver['email'],
                         "zipcode" => $deliver['zipcode'],
                         "orders" => count($data),
                         "created" => time(),
@@ -225,8 +254,6 @@ class ShopController extends AppController {
                 $this->loadModel('Order');
                 $this->Order->saveMany($orders);
 
-                $this->Product->commitTransaction();
-
                 if (isset($_SERVER['HTTP_COOKIE'])) {
                     $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
                     foreach ($cookies as $cookie) {
@@ -244,22 +271,22 @@ class ShopController extends AppController {
                     $subject = "Your Order is Confirmed";
                     $vars = array('deliver' => $deliver, 'bill' => $bill);
                     $content = null;
-                    $this->email("", $to, $subject, $content, "checkout_order_buyer", $vars);
+                    $this->_email("", $to, $subject, $content, "checkout_order_buyer", $vars);
 
                     $this->loadModel('Admin');
-                    $admin = $this->Admin->find ('first', array (
-                        "conditions" => array (
+                    $admin = $this->Admin->find('first', array(
+                        "conditions" => array(
                             "active" => 1,
                         )
                     ));
-                    
-                    if (!empty ($admin)) {
+
+                    if (!empty($admin)) {
                         $to = $admin['Admin']['email'];
                     }
                     $to = "cesarfelip3@gmail.com";
                     $subject = "There new orders come";
                     $var = array('data' => $orders);
-                    $this->email("", $to, $subject, $content, "checkout_order_seller");
+                    $this->_email("", $to, $subject, $content, "checkout_order_seller");
                 } catch (Exception $e) {
                     $this->_error['error'] = 1;
                     $this->_error['message'] = $e->getMessage();
@@ -359,7 +386,7 @@ class ShopController extends AppController {
 
                 $i++;
             }
-            
+
             $deliver = $this->request->data('deliver');
 
             foreach ($deliver as $key => $value) {
@@ -387,15 +414,18 @@ class ShopController extends AppController {
                     exit(json_encode($this->_error));
                 }
             }
-            
-            require_once APP . 'Vendor' . DS . 'HtmlPurifier/library/HTMLPurifier.auto.php'; 
+
+            require_once APP . 'Vendor' . DS . 'HtmlPurifier/library/HTMLPurifier.auto.php';
             $config = HTMLPurifier_Config::createDefault();
             $purifier = new HTMLPurifier($config);
-            
+
             foreach ($bill as $key => $value) {
+                if ($key == 'cc_expired') {
+                    continue;
+                }
                 $bill[$key] = $purifier->purify($value);
             }
-            
+
             foreach ($deliver as $key => $value) {
                 $deliver[$key] = $purifier->purify($value);
             }
@@ -468,7 +498,7 @@ class ShopController extends AppController {
 
                 $i++;
             }
-            
+
             $deliver = $this->request->data('deliver');
 
             foreach ($deliver as $key => $value) {
@@ -501,32 +531,32 @@ class ShopController extends AppController {
             return $guids;
         }
     }
-    
-    protected function _pay ($type) {
-        
+
+    protected function _pay($type, $data, &$result) {
+
         if ($type == "AuthorizeNet") {
 
-                require_once APP . DS . 'Vendor' . DS . 'AuthorizeNet/AuthorizeNet.php'; // Make sure this path is correct.
-                define("AUTHORIZENET_SANDBOX", false);
-                $transaction = new AuthorizeNetAIM('9c22BSeN', '752eHX2G6hk9Y36J');
-                $transaction->setSandbox(false);
-                $transaction->amount = $amount;
-                $transaction->card_num = $bill['cc_number']; //4007000000027 - 10/16
-                $transaction->exp_date = $bill['cc_expired']['month'] . "/" . $bill['cc_expired']['year'];
+            require_once APP . DS . 'Vendor' . DS . 'AuthorizeNet/AuthorizeNet.php'; // Make sure this path is correct.
+            define("AUTHORIZENET_SANDBOX", false);
+            $transaction = new AuthorizeNetAIM('9c22BSeN', '752eHX2G6hk9Y36J');
+            $transaction->setSandbox(false);
+            $transaction->amount = $data['amount'];
+            $transaction->card_num = $data['card']['cc_number']; //4007000000027 - 10/16
+            $transaction->exp_date = $data['card']['cc_expired']['month'] . "/" . $data['card']['cc_expired']['year'];
 
-                $response = $transaction->authorizeAndCapture();
+            $response = $transaction->authorizeAndCapture();
 
-                if ($response->approved) {
-                    
-                } else {
-                    $this->Product->rollTransaction();
-                    $this->autoRender = false;
-                    $this->_error['error'] = 1;
-                    $this->_error['message'] = $response->error_message;
-                    exit(json_encode($this->_error));
-                }
+            if ($response->approved) {
                 
-                return array ('transactionId' => $response->transaction_id, "transactionType" => $response->transaction_type);
+            } else {
+                $this->autoRender = false;
+                $this->_error['error'] = 1;
+                $this->_error['message'] = $response->error_message;
+                return false;
+            }
+
+            $result = $response;
+            return true;
         }
     }
 

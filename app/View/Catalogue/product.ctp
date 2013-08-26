@@ -74,7 +74,9 @@ $checkout_cart_url = $this->webroot . "shop/checkout/?action=cart";
                                     alert("Sorry, we don't have enough products in stock")
                                     return;
                                 }
+                                console.log (count);
                                 $.shoppingcart.set(orderId, count);
+                                console.log ($.shoppingcart.get());
                             } else {
                                 alert("Please input a valid quantity");
                                 return false;

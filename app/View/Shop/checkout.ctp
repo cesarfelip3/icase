@@ -536,6 +536,7 @@ $checkout_confirm_url = $this->webroot . "shop/checkout/?action=check";
 
     function cart_confirm()
     {
+        //cart_reload ();
         jQuery.ajax({
             url: "<?php echo $checkout_confirm_url; ?>",
             data: $("#form-payment").serialize(),
