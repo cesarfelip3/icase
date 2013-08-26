@@ -68,7 +68,7 @@ class OrderController extends AppController {
                 $jpeg = APP . DS . "webroot" . DS . "uploads" . DS . "preview" . DS . $jpeg;
 
                 try {
-                    $this->overlayImage($png1, $jpeg, $filename . "_user.jpeg");
+                    $this->_overlayImage($png1, $jpeg, $filename . "_user.jpeg");
                     //$this->overlayImage($png2, $jpeg, $filename . "_admin.jpeg");
                 } catch (Exception $e) {
                     $this->Session->setFlash($e->getMessage());
@@ -83,7 +83,7 @@ class OrderController extends AppController {
         $this->render('view.ajax');
     }
     
-    protected function overlayImage($overlay, $jpeg, $final) {
+    protected function _overlayImage($overlay, $jpeg, $final) {
         
         $final = APP . DS . "webroot" . DS . "uploads" . DS . "preview" . DS . $final;
         if (file_exists($final)) {

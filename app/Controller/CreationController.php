@@ -149,10 +149,10 @@ class CreationController extends AppController {
             }
         }
 
-        $this->Media->query("DELETE FROM creations WHERE guid='$guid'");
+        $this->Media->query("DELETE FROM creations WHERE guid='{$data['Media']['guid']}'");
 
         $this->loadModel("MediaToObject");
-        $this->MediaToObject->query("DELETE FROM media_to_object WHERE media_guid='$guid'");
+        $this->MediaToObject->query("DELETE FROM media_to_object WHERE media_guid='{$data['Media']['guid']}'");
 
         $this->redirect(array("controller" => "creation", "action" => "index"));
     }
