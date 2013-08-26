@@ -24,7 +24,7 @@
                     <td><?php echo $i++; ?></td>
                     <td style="text-transform: uppercase;"><?php echo "#" . $value['Product']['guid']; ?></td>
                     <td><?php echo $value['Product']['name']; ?></td>
-                    <td><a href="javascript:" class="thumbnail" style="width:80px;"><img src="<?php if($value['Product']['type'] == 'template') echo $this->webroot . "uploads/preview/{$value['Product']['file']}"; else echo $this->webroot . "uploads/product/{$value['Product']['file']}"; ?>" style="width:60px;" /></a></td>
+                    <td><a href="javascript:" class="thumbnail" style="width:80px;"><img src="<?php if($value['Product']['type'] == 'template') echo $this->webroot . "uploads/preview/" . str_replace (".", "_user.", $value['Product']['file']); else echo $this->webroot . "uploads/product/{$value['Product']['file']}"; ?>" style="width:60px;" /></a></td>
                     <td style="min-width:100px"><?php echo $value['Product']['price'] * $value['Product']['quantity']; ?></td>
                     <td>
                         <a href="javascript:" 
