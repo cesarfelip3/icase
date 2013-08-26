@@ -52,6 +52,13 @@ $reset_url = $this->webroot . "auth/reset";
                         <input type="password" class="input-large" name='signup[password]' />
                     </p>
                     <p>
+                        <img id="captcha" src="<?php echo $this->webroot . 'auth/captcha'; ?>" alt="" /> 
+                        <a href="javascript:void(0);" onclick="javascript:document.images.captcha.src = '<?php echo $this->webroot . 'auth/captcha'; ?>?' + Math.round(Math.random(0) * 1000) + 1">Reload image</a>
+                    </p>
+                    <p>
+                        <input type="text" name="signup[captcha]" />
+                    </p>
+                    <p>
                         <a href='javascript:' class='btn btn-primary' data-loading-text="Working..." onclick="signup_submit();" id="btn-signup">Sign up</a>
                     </p>
                     <p>
@@ -59,8 +66,8 @@ $reset_url = $this->webroot . "auth/reset";
                         <a href='<?php echo $signin_url; ?>'>Sign In Now</a>
                     </p>
                     <p class="text-error" style="color:darkred">
-                    
-                </p>
+
+                    </p>
                 </fieldset>
             </form>
         </div>
@@ -68,25 +75,25 @@ $reset_url = $this->webroot . "auth/reset";
 </div>
 <script type="text/javascript">
 
-    function signup_submit()
-    {
-        jQuery.ajax({
-            url: "<?php echo $signup_url; ?>",
-            data: $("#form-signup").serialize(),
-            type: "POST",
-            beforeSend: function(xhr) {
-                $("#btn-signup").button("loading");
-            }
-        }).done(function(data) {
-            $("#btn-signup").button("reset");
+                            function signup_submit()
+                            {
+                                jQuery.ajax({
+                                    url: "<?php echo $signup_url; ?>",
+                                    data: $("#form-signup").serialize(),
+                                    type: "POST",
+                                    beforeSend: function(xhr) {
+                                        $("#btn-signup").button("loading");
+                                    }
+                                }).done(function(data) {
+                                    $("#btn-signup").button("reset");
 
-            var result = $.parseJSON(data);
-            if (result.error == 1) {
-                $(".text-error").html(result.message);
-            } else {
-                window.location.href = "<?php $this->webroot . "user/"; ?>";
-            }
-        }).fail(function() {
-        });
-     }
+                                    var result = $.parseJSON(data);
+                                    if (result.error == 1) {
+                                        $(".text-error").html(result.message);
+                                    } else {
+                                        window.location.href = "<?php $this->webroot . "user/"; ?>";
+                                    }
+                                }).fail(function() {
+                                });
+                            }
 </script>

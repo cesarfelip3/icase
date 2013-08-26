@@ -40,7 +40,8 @@ class AppController extends Controller {
                     )
                 )
             )
-        )
+        ),
+        'Captcha'
     );
 
     public function beforeFilter() {

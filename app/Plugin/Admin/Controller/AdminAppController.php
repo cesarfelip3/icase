@@ -7,6 +7,7 @@ class AdminAppController extends Controller {
     protected $_base_plugin;
     
     public $components = array(
+        'Session',
         'Auth' => array(
             'loginAction' => array(
                 'plugin' => 'admin',
@@ -24,7 +25,8 @@ class AdminAppController extends Controller {
                     )
                 )
             )
-        )
+        ),
+        'Captcha'
     );
     
     public function beforeFilter() {

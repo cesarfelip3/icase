@@ -53,6 +53,19 @@ class AuthController extends AppController {
                     $this->_error['message'] = "invalid user name or email";
                     exit(json_encode($this->_error));
                 }
+                
+                if (empty ($data['captcha'])) {
+                    $this->_error['error'] = 1;
+                    $this->_error['message'] = "Type correctly below captcha image";
+                    exit(json_encode($this->_error));
+                }
+                
+                if (!$this->Captcha->check ($data['captcha'])) {
+                    $this->_error['error'] = 1;
+                    $this->_error['message'] = "Type correctly below captcha image";
+                    exit(json_encode($this->_error));
+                }
+                
 
                 $this->loadModel('User');
                 $result = $this->User->find("first", array(
@@ -114,6 +127,18 @@ class AuthController extends AppController {
                 if (empty($data['password'])) {
                     $this->_error['error'] = 1;
                     $this->_error['message'] = "Password is required";
+                    exit(json_encode($this->_error));
+                }
+                
+                if (empty ($data['captcha'])) {
+                    $this->_error['error'] = 1;
+                    $this->_error['message'] = "Type correctly below captcha image";
+                    exit(json_encode($this->_error));
+                }
+                
+                if (!$this->Captcha->check ($data['captcha'])) {
+                    $this->_error['error'] = 1;
+                    $this->_error['message'] = "Type correctly below captcha image";
                     exit(json_encode($this->_error));
                 }
 
@@ -258,6 +283,11 @@ class AuthController extends AppController {
             $this->_error['message'] = $e->getMessage();
             exit(json_encode($this->_error));
         }
+    }
+    
+    public function captcha ()
+    {
+        $this->Captcha->image();
     }
 
 }

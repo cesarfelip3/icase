@@ -2,7 +2,7 @@
 
 class IndexController extends AdminAppController {
 
-    protected $error = array(
+    protected $_error = array(
         'error' => 0,
         'element' => '',
         'message' => '',
@@ -36,15 +36,27 @@ class IndexController extends AdminAppController {
                 $conditions = array();
 
                 if (empty($data['name'])) {
-                    $this->error['error'] = 1;
-                    $this->error['message'] = "Name or email is required";
-                    exit(json_encode($this->error));
+                    $this->_error['error'] = 1;
+                    $this->_error['message'] = "Name or email is required";
+                    exit(json_encode($this->_error));
                 }
 
                 if (empty($data['password'])) {
-                    $this->error['error'] = 1;
-                    $this->error['message'] = "Password is required";
-                    exit(json_encode($this->error));
+                    $this->_error['error'] = 1;
+                    $this->_error['message'] = "Password is required";
+                    exit(json_encode($this->_error));
+                }
+                
+                if (empty ($data['captcha'])) {
+                    $this->_error['error'] = 1;
+                    $this->_error['message'] = "Type correctly below captcha image";
+                    exit(json_encode($this->_error));
+                }
+                
+                if (!$this->Captcha->check ($data['captcha'])) {
+                    $this->_error['error'] = 1;
+                    $this->_error['message'] = "Type correctly below captcha image";
+                    exit(json_encode($this->_error));
                 }
 
                 if (preg_match("/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/i", $data['name']) == true) {
@@ -67,29 +79,33 @@ class IndexController extends AdminAppController {
                 );
 
                 if (empty($result)) {
-                    $this->error['error'] = 1;
-                    $this->error['message'] = "Wrong user/email or password.";
-                    exit(json_encode($this->error));
+                    $this->_error['error'] = 1;
+                    $this->_error['message'] = "Wrong user/email or password.";
+                    exit(json_encode($this->_error));
                 }
 
                 $this->Auth->login($result['Admin']);
-                exit(json_encode($this->error));
+                exit(json_encode($this->_error));
             }
 
-            $this->error['error'] = 1;
-            $this->error['message'] = "Not a validate input";
-            exit(json_encode($this->error));
+            $this->_error['error'] = 1;
+            $this->_error['message'] = "Not a validate input";
+            exit(json_encode($this->_error));
         }
     }
 
-    public function logout () {
-        
+    public function logout() {
+
         if (!$this->Auth->loggedIn()) {
             $this->redirect(array("controller" => "index", "action" => "index"));
         }
-        
+
         $this->Auth->logout();
         $this->redirect(array("plugin" => "admin", "controller" => "index", "action" => "login"));
+    }
+
+    public function captcha() {
+        $this->Captcha->image();
     }
 
 }
