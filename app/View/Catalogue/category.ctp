@@ -69,7 +69,9 @@
         <div class="pagination pull-right">
             <ul>
                 <li><a href="<?php echo $this->webroot . "category/$slug?page=" . ($page > 1 ? $page - 1 : 0); ?>">Prev</a></li>
-                <?php for ($i = 0; $i < $pages; ++$i) : ?>
+                <?php $min = $page - 5; $max = $page + 5; ?>
+                <?php $min = $min < 0 ? 0 : $min; $max = $max > $pages ? $pages : $max; ?>
+                <?php for ($i = $min; $i < $max; ++$i) : ?>
                     <li <?php if ($i == $page) echo 'class="active"'; ?>><a href="<?php echo $this->webroot . "category/$slug?page=$i"; ?>"><?php echo $i + 1; ?></a></li>
                 <?php endfor; ?>
                 <li><a href="<?php echo $this->webroot . "category/$slug?page=" . ($page < $pages - 1 ? $page + 1 : $pages - 1); ?>">Next</a></li>
