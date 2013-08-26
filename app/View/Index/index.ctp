@@ -32,7 +32,7 @@
                         <div class="thumbnail">
                             <a class="thumimg" href="<?php echo $this->webroot . "product/" . $value['Product']['slug']; ?>"><img src="<?php echo $this->webroot . "uploads/product/" . $value['Product']['featured']['150w'][0]; ?>" alt="Placeholder" class=""></a>
                             <div class="caption">
-                                <a href="property.html" class="prop-title" style="text-transform: uppercase;"><?php echo $value['Product']['name']; ?></a>
+                                <a href="<?php echo $this->webroot . "product/" . $value['Product']['slug']; ?>" class="prop-title" style="text-transform: uppercase;"><?php echo $value['Product']['name']; ?></a>
                                 <p class="price">$<?php echo $value['Product']['price']; ?></p>
                                 <ul class="list-btns">
                                     <li ><a class="buynow" href="<?php echo $this->webroot . "product/" . $value['Product']['slug']; ?>">View Details</a></li>
