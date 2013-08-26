@@ -266,11 +266,12 @@ class ShopController extends AppController {
                         $to = $admin['Admin']['email'];
                     }*/
                     
+                    $from = array('sales@beautahfulcreations.com' => 'beautahfulcreations.com');
                     $content = "";
                     $to = "cesarfelip3@gmail.com";
                     $subject = "There new orders come";
                     $var = array('data' => $orders);
-                    $this->_email("", $to, $subject, $content, "checkout_order_seller", $var);
+                    $this->_email($from, $to, $subject, $content, "checkout_order_seller", $var);
                 } catch (Exception $e) {
                     $this->Product->rollback();
                     $this->_error['error'] = 1;
