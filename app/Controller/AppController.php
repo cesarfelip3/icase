@@ -85,6 +85,7 @@ class AppController extends Controller {
     //=================================================
     protected function _email($from, $to, $subject, $content, $template, $vars = array()) {
         $Email = new CakeEmail();
+        $Email->config ('smtp');
         $Email->template($template);
         $Email->viewVars($vars);
         $Email->emailFormat('html');

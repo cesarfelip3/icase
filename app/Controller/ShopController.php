@@ -247,12 +247,12 @@ class ShopController extends AppController {
                 $this->Order->saveMany($orders);
 
                 try {
-                    /*
+                    $from = array('sales@beautahfulcreations.com' => 'beautahfulcreations.com');
                     $to = $deliver['email'];
                     $subject = "Your Order is Confirmed";
                     $vars = array('deliver' => $deliver, 'bill' => $bill);
                     $content = null;
-                    $this->_email("", $to, $subject, $content, "checkout_order_buyer", $vars);
+                    $this->_email($from, $to, $subject, $content, "checkout_order_buyer", $vars);
                     
                     
                     $this->loadModel('Admin');
@@ -264,7 +264,7 @@ class ShopController extends AppController {
 
                     if (!empty($admin)) {
                         $to = $admin['Admin']['email'];
-                    }*/
+                    }
                     
                     $from = array('sales@beautahfulcreations.com' => 'beautahfulcreations.com');
                     $content = "";
