@@ -395,7 +395,7 @@ $js_case = array(
                     $("#current-item").val($(this).data('guid'));
                     $("#current-item").data('name', $(this).data('name'));
                     //$.shoppingcart.setCurrentProductId($(this).data('guid'));
-                    $("#btn-order span").text("Order Now " + $(this).data('price') + "$");
+                    $("#btn-order span").text("Order Now " + "$" + $(this).data('price'));
                 }
         );
     }
