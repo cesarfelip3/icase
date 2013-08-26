@@ -1,20 +1,4 @@
-<div class="row-fluid hide">
-    <?php if (isset($breadcrumbs)) : $n = count($breadcrumbs) - 1; ?>
-        <ul class="breadcrumb">
-            <?php foreach ($breadcrumbs as $key => $value): ?>
-                <li <?php if ($key == $n) echo 'class="active"'; ?>>
-                    <a 
-                        href="<?php echo $this->webroot; ?>category/<?php echo $value['Category']['slug']; ?>"
-                        style="text-transform:uppercase;"
-                        >
-                            <?php echo $value['Category']['name']; ?> 
-                        <?php if ($key != $n) : ?><span class="divider" style="border:none;">/</span><?php endif; ?>
-                    </a>
-                </li>
-            <?php endforeach; ?>
-        </ul>
-    <?php endif; ?>
-</div>
+
 <div class="row-fluid">
     <div class="span3">
         <!-- Upload image -->
@@ -33,7 +17,7 @@
                         <div class="span4 set-equal-heights-js">
                             <div class="thumbnail">
                                 <a class="thumimg" href="<?php echo $this->webroot; ?>product/<?php echo $data[$i]['Product']['slug']; ?>">
-                                    <img src="<?php echo $this->webroot; ?>uploads/product/<?php echo $data[$i]['Product']['featured']['150w'][0]; ?>" alt="<?php echo $data[$i]['Product']['name'];?>" class="">
+                                    <img src="<?php echo $this->webroot; ?>uploads/product/<?php echo $data[$i]['Product']['featured']['150w'][0]; ?>" alt="<?php echo $data[$i]['Product']['name']; ?>" class="">
                                 </a>
                                 <div class="caption">
                                     <a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i]['Product']['slug']; ?>" class="prop-title" style="text-transform: uppercase"><?php echo $data[$i]['Product']['name']; ?></a>
@@ -48,7 +32,7 @@
                     <?php if (isset($data[$i + 1])) : ?>
                         <div class="span4 set-equal-heights-js">
                             <div class="thumbnail">
-                                <a class="thumimg" href="<?php echo $this->webroot; ?>product/<?php echo $data[$i + 1]['Product']['slug']; ?>"><img src="<?php echo $this->webroot; ?>uploads/product/<?php echo $data[$i + 1]['Product']['featured']['150w'][0]; ?>" alt="<?php echo $data[$i + 1]['Product']['name'];?>" class=""></a>
+                                <a class="thumimg" href="<?php echo $this->webroot; ?>product/<?php echo $data[$i + 1]['Product']['slug']; ?>"><img src="<?php echo $this->webroot; ?>uploads/product/<?php echo $data[$i + 1]['Product']['featured']['150w'][0]; ?>" alt="<?php echo $data[$i + 1]['Product']['name']; ?>" class=""></a>
                                 <div class="caption">
                                     <a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i + 1]['Product']['slug']; ?>" class="prop-title" style="text-transform: uppercase"><?php echo $data[$i + 1]['Product']['name']; ?></a>
                                     <p class="price">$<?php echo $data[$i + 1]['Product']['price']; ?></p>
@@ -63,7 +47,7 @@
                         <div class="span4 set-equal-heights-js">
                             <div class="thumbnail">
                                 <a class="thumimg" href="<?php echo $this->webroot; ?>product/<?php echo $data[$i + 2]['Product']['slug']; ?>">
-                                    <img src="<?php echo $this->webroot; ?>uploads/product/<?php echo $data[$i + 2]['Product']['featured']['150w'][0]; ?>" alt="<?php echo $data[$i]['Product']['name'];?>" class="">
+                                    <img src="<?php echo $this->webroot; ?>uploads/product/<?php echo $data[$i + 2]['Product']['featured']['150w'][0]; ?>" alt="<?php echo $data[$i]['Product']['name']; ?>" class="">
                                 </a>
                                 <div class="caption">
                                     <a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i + 2]['Product']['slug']; ?>" class="prop-title" style="text-transform: uppercase"><?php echo $data[$i + 2]['Product']['name']; ?></a>
@@ -80,6 +64,18 @@
         <?php endif; ?>
     </div>
 </div>
+<div class="row-fluid">
+    <div class="span11">
+        <div class="pagination pull-right">
+            <ul>
+                <li><a href="<?php echo $this->webroot . "category/$slug?page=" . ($page > 1 ? $page - 1 : 0); ?>">Prev</a></li>
+                <?php for ($i = 0; $i < $pages; ++$i) : ?>
+                    <li <?php if ($i == $page) echo 'class="active"'; ?>><a href="<?php echo $this->webroot . "category/$slug?page=$i"; ?>"><?php echo $i + 1; ?></a></li>
+                <?php endfor; ?>
+                <li><a href="<?php echo $this->webroot . "category/$slug?page=" . ($page < $pages - 1 ? $page + 1 : $pages - 1); ?>">Next</a></li>
+            </ul>
+        </div>
+    </div>
 </div>
 <script type="text/javascript">
     $(document).ready(
@@ -87,7 +83,7 @@
                 //alert ("hello");
                 category_load();
             });
-            
+
     function category_load() {
         jQuery.ajax({
             url: "<?php echo $this->webroot; ?>catalogue/categorylist/?id=<?php echo $category_groupguid; ?>&cur=<?php echo $category_guid; ?>",

@@ -1,14 +1,7 @@
-<!-- Slider start-->
 
-
-<!-- end slider -->		 
-<!-- single column -->
 <div class="clear:both;"></div>
 <div class="row-fluid">
     <div class="span9 fullwide">
-
-
-
         <div class="banner"><img src="<?php echo $this->webroot . "img/banner.jpg" ?>" alt="Placeholder" class=""></div>
         <div class="threestep">
             <h2>3 steps <span>to create your case</span></h2>

@@ -148,20 +148,28 @@ class CatalogueController extends AppController {
 
         if (empty($data)) {
             $this->redirect(array("controller" => "index", "action" => "index"));
-            exit;
+        }
+        
+        $page = $this->request->query ('page');
+        
+        if (empty ($page)) {
+            $page = 0;
+        } else {
+            $page = intval($page);
         }
 
         $guid = $data['Category']['guid'];
         $this->set('category_groupguid', $data['Category']['group_guid']);
         $this->set('category_guid', $data['Category']['guid']);
 
+        /*
         if (!empty($data) && $data['Category']['level'] > 0) {
             $parent = $this->Category->find('first', array("conditions" => array("guid" => $data['Category']['parent_guid'])));
             $this->set('breadcrumbs', array(
                 $parent,
                 $data,
             ));
-        }
+        }*/
 
         $this->loadModel('Product');
 
@@ -180,6 +188,30 @@ class CatalogueController extends AppController {
                 "Product.type" => "product",
                 "Product.quantity >" => 0,
             ),
+            'order' => 'modified DESC',
+            'limit' => 24,
+            'page' => $page + 1,
+            'fields' => array("Product.*")
+        ));
+        
+        $pages = $this->Product->find('count', array(
+            'joins' => array(
+                array(
+                    'table' => 'category_to_object',
+                    'alias' => 'CategoryToObject',
+                    'type' => 'inner',
+                    'foreignKey' => false,
+                    'conditions' => array('CategoryToObject.object_guid = Product.guid')
+                ),
+            ),
+            'conditions' => array(
+                "CategoryToObject.category_guid" => $guid,
+                "Product.type" => "product",
+                "Product.quantity >" => 0,
+            ),
+            'order' => 'modified DESC',
+            'limit' => 24,
+            'page' => $page + 1,
             'fields' => array("Product.*")
         ));
 
@@ -192,6 +224,8 @@ class CatalogueController extends AppController {
 
         $this->set("title", env("SERVER_NAME") . " | Best Mobile Case iphone, galaxy | $slug");
         $this->set("slug", $slug);
+        $this->set("page", $page);
+        $this->set("pages", ceil($pages / 24));
         $this->set("data", $data);
     }
 
