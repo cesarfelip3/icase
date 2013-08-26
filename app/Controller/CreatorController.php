@@ -25,7 +25,7 @@ class CreatorController extends AppController {
             $load = 0;
         }
         
-        if (empty ($this->_identity)) {
+        if (empty ($this->_identity) && !empty($guid)) {
             $load = 0;
             $this->redirect (array ("controller" => "creator", "action" => "index"));
         }
