@@ -68,58 +68,85 @@ $checkout_url = $this->webroot . "shop/checkout?action=cart";
                     <canvas class="upper-canvas " style="border: 1px #ccc dashed; -moz-user-select: none; cursor: crosshair;" width="780" height="780" id="c1"></canvas>				   
                 </div>
             </div>
-            <div class="span2" id="box-template-list" style="border:1px #ccc dashed;width:130px;padding:5px;background-color:white;">
-                <div id="ajax-template-list" style="padding:10px;"><a href="javascript:" style="font-size:14px;"><i class="icon-refresh icon-spin"></i> Loading ....</a></div>
+            <div class="span2">
+                <div id="box-template-list" style="border:1px #ccc dashed;width:130px;padding:5px;background-color:white;">
+                    <div id="ajax-template-list" style="padding:10px;"><a href="javascript:" style="font-size:14px;"><i class="icon-refresh icon-spin"></i> Loading ....</a></div>
+                </div>
+                <div class="text-editor editor hide" style="border:1px #ccc dashed;width:130px;padding:5px;background-color:white;margin-top:20px;">
+                    <h2 style="border-bottom:1px solid #333;padding-bottom:5px;">Text Editor</h2>
+                    <form>
+                        <fieldset>
+                            <label></label>
+                            <input type="text" class="span12" id="text-text" placeholder="text" />
+                            <label></label>
+                            <a href="javascript:" class="btn btn-small" data-action="bold" data-toggle="button"><i class="icon-bold"></i></a>
+                            <a href="javascript:" class="btn btn-small" data-action="italic" data-toggle="button"><i class="icon-italic"></i></a>
+                            <label></label>
+                            <select id="text-font-family" style="width:auto !important;margin-top:1px;">
+                                <option value="Impact">Impact</option>
+                                <option value="Helvitica">Helvitica</option>
+                                <option value="Arial">Arial</option>
+                                <option value="Verdana">Verdana</option>
+                            </select>
+                            <input id="text-fill" type="text" class="input-mini" readonly="readonly" placeholder="font color" />
+                        </fieldset>
+                    </form>
+                </div><!-- end of text editor -->
+                <div class="image-editor editor hide" style="border:1px #ccc dashed;width:130px;padding:5px;background-color:white;margin-top:20px;">
+                    <h2 style="border-bottom:1px solid #333;padding-bottom:5px;">Image Editor</h2>
+                    <div>
+                        <span style="display:inline-block;">ZOOM</span>
+                    </div>
+                    <div style="padding-left:8px;">
+                        <input type="text" value="" data-slider-min="10" data-slider-max="300" data-slider-step="1" data-slider-value="100" data-slider-id="RC" id="image-zoom" data-slider-selection="none" data-slider-tooltip="show" data-slider-handle="square" style="width:100px;">
+                    </div>
+                    <div><span style="display:inline-block;">ROTATION</span></div>
+                    <div style="padding-left:8px;">
+                        <input type="text" value="" data-slider-min="0" data-slider-max="360" data-slider-step="1" data-slider-value="0" data-slider-id="RC" id="image-rotation" data-slider-selection="none" data-slider-tooltip="show" data-slider-handle="square" style="width:100px;" >
+                    </div>
+                </div><!-- Image Editor -->
+                <div class="draw-editor hide" style="border:1px #ccc dashed;width:130px;padding:5px;background-color:white;margin-top:20px;">
+                    <h2 style="border-bottom:1px solid #333;padding-bottom:5px;">Draw Editor</h2>
+                    <div>
+                        <span style="display:inline-block;"><b>LINE WIDTH</b></span>
+                    </div>
+                    <div style="padding-left:8px;">
+                        <input type="text" value="" data-slider-min="1" data-slider-max="30" data-slider-step="1" data-slider-value="1" data-slider-id="RC" id="draw-width" data-slider-selection="none" data-slider-tooltip="show" data-slider-handle="square" style="width:100px;">
+                    </div>
+                    <div>
+                        <span style="display:inline-block;"><b>SHADOW WIDTH</b></span>
+                    </div>
+                    <div style="padding-left:8px;">
+                        <input type="text" value="" data-slider-min="1" data-slider-max="30" data-slider-step="1" data-slider-value="1" data-slider-id="RC" id="draw-shadow-width" data-slider-selection="none" data-slider-tooltip="show" data-slider-handle="square"  style="width:100px;" >
+                    </div>
+                    <div style="clear:both"></div>
+                    <div style="padding-left:8px;display:block;padding-top:10px;">
+                        <select id="draw-mode-selector" style="width:auto !important;margin-top:1px;">
+                            <option>Pencil</option>
+                            <option>Circle</option>
+                            <option>Spray</option>
+                            <option>Pattern</option>
+
+                            <option>hline</option>
+                            <option>vline</option>
+                            <option>square</option>
+                            <option>diamond</option>
+                            <option>texture</option>
+                        </select>
+                        <input id="draw-fill" type="text" class="input-mini" readonly="readonly" placeholder="color" value="#000000" />
+
+                    </div>
+                </div><!-- draw editor -->
             </div>
         </div>
         <!-- editor -->
         <div class="row-fluid">
-            <div class="text-editor editor span9 hide" style="width:100%;border:1px solid #ccc;margin-top:10px;padding:5px;">
-                <form class="form-inline">
-                    <input type="text" class="input-xlarge" id="text-text" placeholder="text" />
-                    <input id="text-fill" type="text" class="input-mini" readonly="readonly" placeholder="font color" />
-                    <select id="text-font-family" style="width:auto !important;margin-top:1px;">
-                        <option value="Impact">Impact</option>
-                        <option value="Helvitica">Helvitica</option>
-                        <option value="Arial">Arial</option>
-                        <option value="Verdana">Verdana</option>
-                    </select>
-                    <div class="display:inline">
-                        <a href="javascript:" class="btn btn-small" data-action="bold" data-toggle="button"><i class="icon-bold"></i></a>
-                        <a href="javascript:" class="btn btn-small" data-action="italic" data-toggle="button"><i class="icon-italic"></i></a>
-                    </div>
-                </form>
-            </div><!-- end of text editor -->
+
             <div style="clear:both;"></div>
         </div>
-        <div class="row-fluid">
-            <div class="image-editor editor span9 hide" style="width:100%;border:1px solid #ccc;margin-top:10px;padding:5px;clear:both;">
-                <div style="display:inline"><span style="display:inline-block;width:60px;">ZOOM</span><input type="text" value="" data-slider-min="10" data-slider-max="300" data-slider-step="1" data-slider-value="100" data-slider-id="RC" id="image-zoom" data-slider-selection="none" data-slider-tooltip="show" data-slider-handle="square" style="width:150px"></div>
-                <div style="display:inline;margin-left:20px;"><span style="display:inline-block;width:90px;">ROTATION</span><input type="text" value="" data-slider-min="0" data-slider-max="360" data-slider-step="1" data-slider-value="0" data-slider-id="RC" id="image-rotation" data-slider-selection="none" data-slider-tooltip="show" data-slider-handle="square" style="width:150px" ></div>
-            </div><!-- Image Editor -->
-        </div>
-        <div class="row-fluid">
-            <div class="draw-editor span9 hide" style="width:100%;border:1px solid #ccc;margin-top:10px;padding:5px;margin-bottom:20px;">
-                <div style="display:inline"><span style="display:inline-block;width:100px;"><b>LINE WIDTH</b></span><input type="text" value="" data-slider-min="1" data-slider-max="30" data-slider-step="1" data-slider-value="1" data-slider-id="RC" id="draw-width" data-slider-selection="none" data-slider-tooltip="show" data-slider-handle="square" style="width:150px"></div>
-                <div style="display:inline;margin-left:10px;"><span style="display:inline-block;width:130px;"><b>SHADOW WIDTH</b></span><input type="text" value="" data-slider-min="1" data-slider-max="30" data-slider-step="1" data-slider-value="1" data-slider-id="RC" id="draw-shadow-width" data-slider-selection="none" data-slider-tooltip="show" data-slider-handle="square" style="width:150px" ></div>
-                <div style="clear:both"></div>
-                <div style="margin-top:10px;display:block;">
-                    <input id="draw-fill" type="text" class="input-mini" readonly="readonly" placeholder="color" value="#000000" />
 
-                    <select id="draw-mode-selector" style="width:auto !important;margin-top:1px;">
-                        <option>Pencil</option>
-                        <option>Circle</option>
-                        <option>Spray</option>
-                        <option>Pattern</option>
+        <div class="row-fluid">
 
-                        <option>hline</option>
-                        <option>vline</option>
-                        <option>square</option>
-                        <option>diamond</option>
-                        <option>texture</option>
-                    </select>
-                </div>
-            </div><!-- draw editor -->
         </div>
 
     </div>
@@ -290,8 +317,8 @@ $js_case = array(
             alert("You don't have to save an empty canvas.");
             return false;
         }
-        
-        showAlert2 ("Saving......");
+
+        showAlert2("Saving......");
 
         jQuery.ajax({
             url: "<?php echo $save_url; ?>/?id=" + id,
@@ -311,17 +338,17 @@ $js_case = array(
                 $("#canvas_guid").data('saved', '1');
                 alert("Your progress just saved");
             }
-            hideAlert ();
+            hideAlert();
         }).fail(function() {
-            hideAlert ();
+            hideAlert();
         });
     }
 
     function reload_canvas()
     {
         var guid = $("#canvas_guid").val();
-        showAlert2 ("Loading progress......");
-        
+        showAlert2("Loading progress......");
+
         jQuery.ajax({
             url: "<?php echo $reload_url; ?>",
             data: {'guid': guid},
@@ -345,8 +372,8 @@ $js_case = array(
                 mememaker.overlayImage = result.data.overlay;
                 mememaker.reload(result.data.json);
             }
-            
-            hideAlert ();
+
+            hideAlert();
 
         }).fail(function() {
             //$("#template-list").prev().children(":first-child").hide(0);
@@ -369,7 +396,7 @@ $js_case = array(
 
             $("#box-template-list").html(data);
             templatelist_config();
-            
+
             $("#ajax-template-list").hide();
             if ($("#canvas_guid").data('reload') == "1") {
                 reload_canvas();

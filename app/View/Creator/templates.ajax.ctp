@@ -1,4 +1,6 @@
-
+<h2 style="border-bottom:1px solid #333;padding-bottom:5px;">
+    <a href="javascript:" style="text-decoration: none;" id="btn-template-list-expend" onclick="$('#template-list').toggle();">Templates <i class="icon-chevron-down pull-right"></i></a>
+</h2>
 <ul class="nav nav-list" id="template-list">
     <?php foreach ($data as $key => $value) : ?>
         <li style="border-bottom:1px solid #ccc">
