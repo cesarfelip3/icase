@@ -333,6 +333,10 @@ class CreatorController extends AppController {
         header("Pragma: no-cache");
 
         $targetDir = $this->_targetDir = ROOT . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'uploads';
+        
+        if (!empty ($this->_identity)) {
+            $targetDir .= DS . "user";
+        }
 
         $cleanupTargetDir = true; // Remove old files
         $maxFileAge = 5 * 3600; // Temp file age in seconds
