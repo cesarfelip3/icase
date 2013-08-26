@@ -290,6 +290,8 @@ $js_case = array(
             alert("You don't have to save an empty canvas.");
             return false;
         }
+        
+        showAlert2 ("Saving......");
 
         jQuery.ajax({
             url: "<?php echo $save_url; ?>/?id=" + id,
@@ -309,9 +311,9 @@ $js_case = array(
                 $("#canvas_guid").data('saved', '1');
                 alert("Your progress just saved");
             }
-
+            hideAlert ();
         }).fail(function() {
-            //$("#template-list").prev().children(":first-child").hide(0);
+            hideAlert ();
         });
     }
 
