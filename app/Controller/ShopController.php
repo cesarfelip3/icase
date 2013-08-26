@@ -33,7 +33,6 @@ class ShopController extends AppController {
 
             $deliver = $this->request->data('deliver');
             $bill = $this->request->data('bill');
-            $guids = $this->_checkout($action);
             
             require_once APP . 'Vendor' . DS . 'HtmlPurifier/library/HTMLPurifier.auto.php'; 
             $config = HTMLPurifier_Config::createDefault();
@@ -49,6 +48,11 @@ class ShopController extends AppController {
                 }
                 $deliver[$key] = $purifier->purify($value);
             }
+            
+            $guids = $this->_checkout($action);
+            
+            $this->loadModel('Product');
+            $this->Product->beginTransaction();
 
             $i = 0;
             $data = null;
@@ -279,33 +283,6 @@ class ShopController extends AppController {
     protected function _checkout($action) {
         if ($this->request->is('ajax') && $this->request->is('post') && $action == "check") {
 
-            $deliver = $this->request->data('deliver');
-
-            foreach ($deliver as $key => $value) {
-                if (empty($value)) {
-                    $this->_error['error'] = 1;
-                    $this->_error['message'] = "DELIVER INFO : $key is required";
-                    exit(json_encode($this->_error));
-                }
-
-                if ($key == "email") {
-                    if ($this->_validate('email', $value) == false) {
-                        $this->_error['error'] = 1;
-                        $this->_error['message'] = "Email format is incorrect";
-                        exit(json_encode($this->_error));
-                    }
-                }
-            }
-
-            $bill = $this->request->data('bill');
-
-            foreach ($bill as $key => $value) {
-                if (empty($value)) {
-                    $this->_error['error'] = 1;
-                    $this->_error['message'] = "BILL INFO : $key is required";
-                    exit(json_encode($this->_error));
-                }
-            }
 
             $orders = isset($_COOKIE['orders']) ? $_COOKIE['orders'] : "";
             $data = array();
@@ -383,6 +360,34 @@ class ShopController extends AppController {
                 $i++;
             }
             
+            $deliver = $this->request->data('deliver');
+
+            foreach ($deliver as $key => $value) {
+                if (empty($value)) {
+                    $this->_error['error'] = 1;
+                    $this->_error['message'] = "DELIVER INFO : $key is required";
+                    exit(json_encode($this->_error));
+                }
+
+                if ($key == "email") {
+                    if ($this->_validate('email', $value) == false) {
+                        $this->_error['error'] = 1;
+                        $this->_error['message'] = "Email format is incorrect";
+                        exit(json_encode($this->_error));
+                    }
+                }
+            }
+
+            $bill = $this->request->data('bill');
+
+            foreach ($bill as $key => $value) {
+                if (empty($value)) {
+                    $this->_error['error'] = 1;
+                    $this->_error['message'] = "BILL INFO : $key is required";
+                    exit(json_encode($this->_error));
+                }
+            }
+            
             require_once APP . 'Vendor' . DS . 'HtmlPurifier/library/HTMLPurifier.auto.php'; 
             $config = HTMLPurifier_Config::createDefault();
             $purifier = new HTMLPurifier($config);
@@ -437,8 +442,6 @@ class ShopController extends AppController {
             $this->loadModel("Product");
             $i = 0;
 
-            $this->Product->beginTransaction();
-
             foreach ($guids as $k => $value) {
                 if (strpos($k, "-") != false) {
                     $key = explode("-", $k);
@@ -452,20 +455,46 @@ class ShopController extends AppController {
 
                 $data[$i] = $this->Product->findByGuid($guid);
                 if (empty($data[$i])) {
-                    $this->Product->rollTransaction();
                     $this->_error['error'] = 1;
                     $this->_error['message'] = "Product - " . $data[$i]['Product']['name'] . " - is off shelf, please remove it and try again.";
                     exit(json_encode($this->_error));
                 }
 
                 if ($data[$i]['Product']['quantity'] != 65535 && $data[$i]['Product']['quantity'] < $value) {
-                    $this->Product->rollTransaction();
                     $this->_error['error'] = 1;
                     $this->_error['message'] = "Product - " . $data[$i]['Product']['name'] . " - is out of stock, please change quantity before action, max is {$data[$i]['Product']['quantity']}.";
                     exit(json_encode($this->_error));
                 }
 
                 $i++;
+            }
+            
+            $deliver = $this->request->data('deliver');
+
+            foreach ($deliver as $key => $value) {
+                if (empty($value)) {
+                    $this->_error['error'] = 1;
+                    $this->_error['message'] = "DELIVER INFO : $key is required";
+                    exit(json_encode($this->_error));
+                }
+
+                if ($key == "email") {
+                    if ($this->_validate('email', $value) == false) {
+                        $this->_error['error'] = 1;
+                        $this->_error['message'] = "Email format is incorrect";
+                        exit(json_encode($this->_error));
+                    }
+                }
+            }
+
+            $bill = $this->request->data('bill');
+
+            foreach ($bill as $key => $value) {
+                if (empty($value)) {
+                    $this->_error['error'] = 1;
+                    $this->_error['message'] = "BILL INFO : $key is required";
+                    exit(json_encode($this->_error));
+                }
             }
 
             $this->autoRender = false;

@@ -125,7 +125,7 @@
                             
                             if (i <= 0) {
                                 $.shoppingcart.removeall(guid);
-                                cart_reload();
+                                window.location.href = "";
                                 break;
                             }
                             jQuery(this).prev().text(i);
