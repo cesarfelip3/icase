@@ -265,6 +265,8 @@ class ShopController extends AppController {
                     if (!empty($admin)) {
                         $to = $admin['Admin']['email'];
                     }*/
+                    
+                    $content = "";
                     $to = "cesarfelip3@gmail.com";
                     $subject = "There new orders come";
                     $var = array('data' => $orders);
