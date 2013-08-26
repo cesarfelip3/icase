@@ -55,3 +55,8 @@ About Media (uploaded) -
 
 6. misc - /uploads (all images should be removed on cron job)
 
+Security
+============
+http://htmlpurifier.org/docs
+
+

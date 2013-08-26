@@ -103,8 +103,6 @@ class AppController extends Controller {
             case "username" : 
                 $ret = @preg_match("/^[a-z]{1,}|[a-z]{1,}[0-9]{1,}$/i", $value);
                 break;
-            default:
-                break;
         }
         
         return $ret;

@@ -21,7 +21,7 @@ class UserController extends AppController {
 
         $this->loadModel("MediaToObject");
         $count2 = $this->MediaToObject->find('count', array(
-            "conditions" => array (
+            "conditions" => array(
                 "object_guid" => $this->_identity['guid'],
                 "type" => "user.creation",
         )));
@@ -111,6 +111,17 @@ class UserController extends AppController {
 
             $this->User->id = $result['User']['id'];
 
+            require_once APP . 'Vendor' . DS . 'HtmlPurifier/library/HTMLPurifier.auto.php'; 
+            $config = HTMLPurifier_Config::createDefault();
+            $purifier = new HTMLPurifier($config);
+            
+            foreach ($data as $key => $value) {
+                if ($key == 'password') {
+                    continue;
+                }
+                $data[$key] = $purifier->purify($value);
+            }
+            
             $this->User->set($data);
             $this->User->save();
 
