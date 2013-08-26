@@ -71,6 +71,7 @@ class ShopController extends AppController {
                     $guid = $k;
                 }
 
+                $this->Product->begin();
                 $data[$i] = $this->Product->findByGuid($guid);
 
                 if (isset($key[1]) && $data[$i]['Product']['type'] == 'template') {
@@ -80,11 +81,9 @@ class ShopController extends AppController {
                 }
 
                 if ($data[$i]['Product']['quantity'] != 65535 && $data[$i]['Product']['quantity'] >= $value) {
-                    $this->Product->begin();
                     $this->Product->id = $data[$i]['Product']['id'];
                     $this->Product->set(array('quantity' => $data[$i]['Product']['quantity'] - $value));
                     $this->Product->save();
-                    $this->Product->commit();
                 }
 
                 $data[$i]['Product']['_quantity'] = $value;
@@ -111,18 +110,12 @@ class ShopController extends AppController {
                 $payment_result = null;
                 $result = $this->_pay($payment_gateway, $payment_data, $payment_result);
 
+                //$result = true;
                 if ($result == false) {
-                    foreach ($data as $value) {
-                        if ($value['Product']['quantity'] != 65535) {
-                            $this->Product->begin();
-                            $this->Product->id = $value['Product']['id'];
-                            $this->Product->set(array('quantity' => $value['Product']['quantity']));
-                            $this->Product->save();
-                            $this->Product->commit();
-                        }
-                    }
+                    $this->Product->rollback();
                     exit(json_encode($this->_error));
                 } else {
+                    $this->Product->commit();
                     $result = array(
                         "transactionId" => $payment_result->transaction_id,
                         "transactionType" => $payment_result->transaction_type
