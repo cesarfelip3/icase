@@ -246,18 +246,6 @@ class ShopController extends AppController {
                 $this->loadModel('Order');
                 $this->Order->saveMany($orders);
 
-                if (isset($_SERVER['HTTP_COOKIE'])) {
-                    $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
-                    foreach ($cookies as $cookie) {
-                        $parts = explode('=', $cookie);
-                        $name = trim($parts[0]);
-
-                        if ($name == 'orders') {
-                            setcookie($name, '', time() - 1000, '/');
-                        }
-                    }
-                }
-
                 try {
                     $to = $deliver['email'];
                     $subject = "Your Order is Confirmed";
@@ -287,7 +275,19 @@ class ShopController extends AppController {
                 }
                 
                 $this->Product->commit();
+                
+                if (isset($_SERVER['HTTP_COOKIE'])) {
+                    $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
+                    foreach ($cookies as $cookie) {
+                        $parts = explode('=', $cookie);
+                        $name = trim($parts[0]);
 
+                        if ($name == 'orders') {
+                            setcookie($name, '', time() - 1000, '/');
+                        }
+                    }
+                }
+                
                 $this->layout = false;
                 $this->render("checkout.success");
                 return;
