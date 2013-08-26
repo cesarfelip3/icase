@@ -115,7 +115,6 @@ class ShopController extends AppController {
                     $this->Product->rollback();
                     exit(json_encode($this->_error));
                 } else {
-                    $this->Product->commit();
                     $result = array(
                         "transactionId" => $payment_result->transaction_id,
                         "transactionType" => $payment_result->transaction_type
@@ -281,10 +280,13 @@ class ShopController extends AppController {
                     $var = array('data' => $orders);
                     $this->_email("", $to, $subject, $content, "checkout_order_seller");
                 } catch (Exception $e) {
+                    $this->Product->rollback();
                     $this->_error['error'] = 1;
-                    $this->_error['message'] = $e->getMessage();
+                    $this->_error['message'] = "We can't send email to you, make sure your email is valid";// . $e->getMessage()
                     exit(json_encode($this->_error));
                 }
+                
+                $this->Product->commit();
 
                 $this->layout = false;
                 $this->render("checkout.success");
