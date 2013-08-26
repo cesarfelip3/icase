@@ -27,11 +27,15 @@
         background-color:none;
         text-transform:uppercase
     }
+    
+    ul.media-body-list li.active {
+    }
 
     ul.media-body-list li.active a {
         margin:0px;
         padding:2px;
         display:block;
+        /*border-bottom: 1px solid #ccc;*/
         background-color:#2fa4e7;
         color:white;
         text-transform:uppercase
@@ -75,14 +79,20 @@
         margin-left:95px;
     }
 </style>
-<h3 style="border-bottom:1px solid #ccc">Categories</h3>
 <ul class="media-list media-body-list">
     <?php
     if (!empty($data)) :
         foreach ($data as $value) :
             ?>
             <li class="media level<?php echo $value['Category']['level']; ?> <?php if (isset($value['Category']['_active'])) echo 'active'; ?>">
-                <a href="<?php echo $this->webroot; ?>category/<?php echo $value['Category']['slug']; ?>" data-guid="<?php echo $value['Category']['guid']; ?>" data-name="<?php echo $value['Category']['name']; ?>" data-order="<?php echo $value['Category']['order']; ?>" class="t<?php echo $value['Category']['parent_guid']; ?>"> <?php echo $value['Category']['name']; ?><?php if ($value['Category']['children'] > 0 && false) : ?><i class="icon-chevron-down indicator-expension"></i><?php else: ?><?php endif; ?></a>
+                <a 
+                    href="<?php echo $this->webroot; ?>category/<?php echo $value['Category']['slug']; ?>" 
+                    data-guid="<?php echo $value['Category']['guid']; ?>" 
+                    data-name="<?php echo $value['Category']['name']; ?>" 
+                    data-order="<?php echo $value['Category']['order']; ?>" 
+                    class="t<?php echo $value['Category']['parent_guid']; ?>"> 
+                        <?php echo $value['Category']['name']; ?><?php if ($value['Category']['children'] > 0 && false) : ?><i class="icon-chevron-down indicator-expension"></i><?php else: ?><?php endif; ?>
+                </a>
 
             </li>
             <?php

@@ -1,4 +1,4 @@
-<div class="row-fluid">
+<div class="row-fluid hide">
     <?php if (isset($breadcrumbs)) : $n = count($breadcrumbs) - 1; ?>
         <ul class="breadcrumb">
             <?php foreach ($breadcrumbs as $key => $value): ?>
@@ -83,9 +83,10 @@
                 //alert ("hello");
                 category_load();
             });
+            
     function category_load() {
         jQuery.ajax({
-            url: "<?php echo $this->webroot; ?>catalogue/category/<?php echo $slug; ?>",
+            url: "<?php echo $this->webroot; ?>catalogue/categorylist/?id=<?php echo $category_groupguid; ?>&cur=<?php echo $category_guid; ?>",
             type: "GET",
             beforeSend: function(xhr) {
                 //showAlert2("Loading category data now......");

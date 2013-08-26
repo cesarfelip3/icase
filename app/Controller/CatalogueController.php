@@ -152,61 +152,15 @@ class CatalogueController extends AppController {
         }
 
         $guid = $data['Category']['guid'];
+        $this->set('category_groupguid', $data['Category']['group_guid']);
+        $this->set('category_guid', $data['Category']['guid']);
+
         if (!empty($data) && $data['Category']['level'] > 0) {
             $parent = $this->Category->find('first', array("conditions" => array("guid" => $data['Category']['parent_guid'])));
             $this->set('breadcrumbs', array(
                 $parent,
                 $data,
             ));
-        }
-
-        if ($this->request->is('ajax')) {
-            $this->layout = false;
-
-
-            /*
-              $categories = $this->Category->find('all', array(
-              "conditions" => array('level' => 0),
-              "order" => array('order ASC')
-              )); */
-
-            $categories = $this->Category->find('all', array(
-                "conditions" => array('parent_guid' => $guid),
-                "order" => array('order ASC')
-            ));
-
-            $return = array();
-            if (!empty($categories)) {
-
-                foreach ($categories as $category) {
-                    if ($category['Category']['children'] > 0) {
-                        $result = $this->Category->find('all', array(
-                            "conditions" => array('parent_guid' => $category['Category']['guid']),
-                            "order" => array('order ASC')
-                                )
-                        );
-
-                        if (!empty($result)) {
-                            $return[] = $category;
-                            $this->_categoryList($result, $return);
-                        }
-                    } else {
-                        $return[] = $category;
-                    }
-                }
-            }
-
-            foreach ($return as $key => $value) {
-                if ($value['Category']['guid'] == $guid) {
-                    $value['Category']['_active'] = true;
-                    $return[$key] = $value;
-                    break;
-                }
-            }
-            $this->set('slug', $slug);
-            $this->set('data', $return);
-            $this->render("category.ajax");
-            return;
         }
 
         $this->loadModel('Product');
@@ -239,6 +193,61 @@ class CatalogueController extends AppController {
         $this->set("title", env("SERVER_NAME") . " | Best Mobile Case iphone, galaxy | $slug");
         $this->set("slug", $slug);
         $this->set("data", $data);
+    }
+
+    public function categorylist() {
+
+        if ($this->request->is('ajax')) {
+            $this->layout = false;
+            $guid = $this->request->query('id');
+            $current = $this->request->query ('cur');
+
+            if (empty($guid) || empty ($current)) {
+                $this->set('slug', null);
+                $this->set('data', null);
+                $this->render("category.ajax");
+                return;
+            }
+
+            $this->loadModel('Category');
+            $categories = $this->Category->find('all', array(
+                "conditions" => array('level' => 0, 'group_guid' => $guid),
+                "order" => array('order ASC')
+            ));
+
+            $return = array();
+            if (!empty($categories)) {
+
+                foreach ($categories as $category) {
+                    if ($category['Category']['children'] > 0) {
+                        $result = $this->Category->find('all', array(
+                            "conditions" => array('parent_guid' => $category['Category']['guid']),
+                            "order" => array('order ASC')
+                                )
+                        );
+
+                        if (!empty($result)) {
+                            $return[] = $category;
+                            $this->_categoryList($result, $return);
+                        }
+                    } else {
+                        $return[] = $category;
+                    }
+                }
+            }
+
+            foreach ($return as $key => $value) {
+                if ($value['Category']['guid'] == $current) {
+                    $value['Category']['_active'] = true;
+                    $return[$key] = $value;
+                    break;
+                }
+            }
+            //$this->set('slug', $slug);
+            $this->set('data', $return);
+            $this->render("category.ajax");
+            return;
+        }
     }
 
     protected function _categoryList($data, &$return) {
