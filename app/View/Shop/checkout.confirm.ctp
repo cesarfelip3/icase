@@ -1,11 +1,14 @@
+<?php 
+$checkout_pay_url = $this->webroot . "shop/checkout/?action=pay";
+?>
+
 <div class="row-fluid">
     <div class="qbox">
         <h1>Order Confirmation</h1>
         <div>
-            <p>Welcome....</p>
+            <p>Thanks for your order.</p>
         </div>
         <div>
-            <p>Order : #2000231213</p>
             <p>Date  : <?php echo date ("l jS \of F Y h:i:s A", time()); ?></p>
         </div>
     </div>
@@ -63,5 +66,39 @@
         $(".checkout").toggle();
     }
     
-    
+    function cart_pay()
+    {
+        jQuery.ajax({
+            url: "<?php echo $checkout_pay_url; ?>",
+            data: $("#form-payment").serialize(),
+            type: "POST",
+            beforeSend: function(xhr) {
+                $("#btn-continue").button("loading");
+                $("#btn-edit").hide();
+                showAlert2("Working....");
+            }
+        }).done(function(data) {
+
+            $("#btn-continue").button("reset");
+            $("#btn-edit").show();
+            try {
+                var result = $.parseJSON(data);
+                if (result.error == 1) {
+                    showAlert(result.message);
+                } else {
+
+                }
+            }
+            catch (e) {
+                hideAlert();
+                $(".checkout").hide(0)
+                $("#box-order-confirm").hide(0);
+                $("#box-order-success").show(0);
+                $("#box-order-success").html(data);
+            }
+
+        }).fail(function() {
+            hideAlert();
+        });
+    }  
 </script>

@@ -180,7 +180,8 @@ class ProductController extends AdminAppController {
 
                 $data['featured'] = array();
                 $data['featured']['origin'] = $images;
-
+                $data['image'] = $images[0];
+                
                 $data['featured']['150w'] = array();
 
                 foreach ($images as $value) {
@@ -381,7 +382,8 @@ class ProductController extends AdminAppController {
 
                         $data['featured'] = array();
                         $data['featured']['origin'] = $images;
-
+                        $data['image'] = $images[0];
+                        
                         $data['featured']['150w'] = array();
 
                         foreach ($images as $value) {

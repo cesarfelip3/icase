@@ -6,10 +6,12 @@
                 <thead>
                   <tr>
                     <th>#</th>
-                    <th>Your Design</th>
+                    <th>SKU</th>
+                    <th>Name</th>
+                    <th>Picture</th>
                     <th>Amount</th>
                     <th>Quantity</th>
-                    <th>tax</th>
+<!--                    <th>tax</th>-->
                     <th>Shipment</th>
                     <th></th>
                   </tr>
@@ -20,6 +22,8 @@
                     <?php foreach ($data as $key=>$value) : ?>
                   <tr>
                     <td><?php echo $i++; ?></td>
+                    <td style="text-transform: uppercase;"><?php echo "#" . $value['Product']['guid']; ?></td>
+                    <td><?php echo $value['Product']['name']; ?></td>
                     <td><a href="javascript:" class="thumbnail" style="width:80px;"><img src="<?php if($value['Product']['type'] == 'template') echo $this->webroot . "uploads/preview/{$value['Product']['file']}"; else echo $this->webroot . "uploads/product/{$value['Product']['file']}"; ?>" style="width:60px;" /></a></td>
                     <td style="min-width:100px"><?php echo $value['Product']['price'] * $value['Product']['quantity']; ?></td>
                     <td>
@@ -28,7 +32,8 @@
                            data-type="<?php echo $value['Product']['type']; ?>"
                            data-guid="<?php echo $value['Product']['guid']; ?>" 
                            data-price="<?php echo $value['Product']['price']; ?>"
-                           data-file="<?php echo $value['Product']['file']; ?>" 
+                           data-file="<?php echo $value['Product']['file']; ?>"
+                           data-quantity="<?php echo $value['Product']['max']; ?>"
                            style="text-decoration:none;" >
                             <i class="icon-plus icon-1x"></i>
                         </a>
@@ -40,12 +45,13 @@
                            data-type="<?php echo $value['Product']['type']; ?>"
                            data-guid="<?php echo $value['Product']['guid']; ?>" 
                            data-price="<?php echo $value['Product']['price']; ?>" 
-                           data-file="<?php echo $value['Product']['file']; ?>" 
+                           data-file="<?php echo $value['Product']['file']; ?>"
+                           data-quantity="<?php echo $value['Product']['max']; ?>" 
                            style="text-decoration:none;">
                             <i class="icon-minus icon-1x"></i>
                         </a>
                     </td>
-                    <td>0.00</td>
+<!--                    <td>0.00</td>-->
                     <td>To be determined</td>
                     <th><a href="javascript:" 
                            data-action="remove" 
@@ -69,3 +75,77 @@
         </div>
     </div>
 </div>
+<script>
+    function cart_config() {
+
+        jQuery("#box-cart a").off('click');
+        jQuery("#box-cart a").click(
+                function() {
+                    var action = $(this).data('action');
+                    var guid = $(this).data('guid');
+                    var file = $(this).data('file');
+                    var type = $(this).data('type');
+
+                    var i = 0;
+                    var price = 0;
+
+                    switch (action) {
+                        case 'close':
+                            jQuery("#box-cart").hide(0);
+                            break;
+                        case 'plus' :
+                            i = jQuery(this).next().text();
+                            console.log(i);
+                            i = parseInt(jQuery.trim(i));
+                            i++;
+                            if (i > parseInt($(this).data('quantity'))) {
+                                alert ("Sorry, quantity exceed stocks");
+                                return;
+                            }
+                            jQuery(this).next().text(i);
+                            if (file == "" || type == 'product') {
+                                guid = guid;
+                            } else {
+                                guid = guid + "-" + file;
+                            }
+                            $.shoppingcart.set(guid, 1);
+                            price = $(this).data('price');
+                            price = parseFloat(price) * i;
+                            $(this).parent().prev().text(price.toFixed(2));
+                            break;
+                        case 'minus' :
+                            i = jQuery(this).prev().text();
+                            i = parseInt(jQuery.trim(i));
+                            i--;
+                            if (file == "" || type == 'product') {
+                                guid = guid;
+                            } else {
+                                guid = guid + "-" + file;
+                            }
+                            
+                            if (i <= 0) {
+                                $.shoppingcart.removeall(guid);
+                                cart_reload();
+                                break;
+                            }
+                            jQuery(this).prev().text(i);
+                            $.shoppingcart.remove(guid);
+                            price = $(this).data('price');
+                            price = parseFloat(price) * i;
+                            $(this).parent().prev().text(price.toFixed(2));
+                            break;
+                        case 'remove' :
+                            if (file == "" || type == 'product') {
+                                guid = guid;
+                            } else {
+                                guid = guid + "-" + file;
+                            }
+                            $.shoppingcart.removeall(guid);
+                            window.location.href = "";
+                            //cart_reload();
+                            break;
+                    }
+                }
+        );
+    }
+</script>

@@ -7,7 +7,6 @@ $template_url = $this->webroot . "creator/templates";
 $preview_url = $this->webroot . "creator/preview";
 $save_url = $this->webroot . "creator/save";
 $reload_url = $this->webroot . "creator/reload";
-
 $uploader_url = $this->webroot . "creator/upload";
 
 $checkout_url = $this->webroot . "shop/checkout?action=cart";
@@ -246,7 +245,7 @@ $js_case = array(
                     orderId = jQuery("#modal-preview #product-info").data('guid');
                     var image = jQuery("#modal-preview #product-info").data('file');
 
-                    $.shoppingcart.set(orderId + "-" + image);
+                    $.shoppingcart.set(orderId + "-" + image, 1);
 
                     jQuery("#modal-preview").modal('hide');
                     cart_count();
@@ -389,7 +388,7 @@ $js_case = array(
 
                     $("#current-item").val($(this).data('guid'));
                     $("#current-item").data('name', $(this).data('name'));
-                    $.shoppingcart.setCurrentProductId($(this).data('guid'));
+                    //$.shoppingcart.setCurrentProductId($(this).data('guid'));
                     $("#btn-order span").text("Order Now " + $(this).data('price') + "$");
                 }
         );
@@ -422,7 +421,7 @@ $js_case = array(
 
         jQuery.ajax({
             url: "<?php echo $preview_url; ?>",
-            data: {"image-extension": "jpeg", "image-data": preview, "user": $.shoppingcart.getuuid(), "product": jQuery("#current-item").val()},
+            data: {"image-extension": "jpeg", "image-data": preview, "product": jQuery("#current-item").val()},
             type: "POST",
             beforeSend: function(xhr) {
             }
@@ -430,21 +429,10 @@ $js_case = array(
             jQuery(".ajax-loading-indicator").hide(0);
             jQuery("#modal-preview .modal-body").html(data);
             order_config();
-            order_current();
 
         }).fail(function() {
             jQuery(".ajax-loading-indicator").hide(0);
         });
-    }
-
-    function order_current()
-    {
-        var orderId = null;
-        orderId = jQuery("#modal-preview #product-info").data('guid');
-        var image = jQuery("#modal-preview #product-info").data('file');
-
-        $.shoppingcart.setCurrentProductId(orderId + "-" + image);
-        return true;
     }
     
     //===================================================

@@ -16,7 +16,7 @@ class IndexController extends AppController {
         // here could use file cache
         $this->loadModel('Product');
         $data = $this->Product->find('all', array(
-            "conditions" => array("type" => "product", "is_featured" => 1),
+            "conditions" => array("type" => "product", "is_featured" => 1, "quantity >" => 0),
             "order" => array("modified" => "DESC"),
             "limit" => 8,
             "page" => 0

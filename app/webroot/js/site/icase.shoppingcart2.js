@@ -2,19 +2,20 @@
 // by default, cookie is independent from each tab...
 
 (function($) {
-
-    $.cookie.defaults = {path: '/'};
-    var storage = {get: null, set: null};
+    
+    $.cookie.defaults = {path:'/'};
+    var storage = {get:null, set:null};
     storage.get = $.cookie;
     storage.set = $.cookie;
-
-    var ShoppingCart = function() {
+    
+    var ShoppingCart = function () {
         // this - refer to class
     }
-
+            
     ShoppingCart.prototype = {
         constructor: ShoppingCart,
         storage: storage,
+                
         // orders
         cookie_orders: "orders",
         orders: [],
@@ -44,131 +45,111 @@
         return this;
     }
 
-    ShoppingCart.prototype.set = function(orderId, count) {
+    ShoppingCart.prototype.set = function(orderId) {
         var orders = storage.get(this.cookie_orders);
 
         if (orders == null || orders == "undefined" || orders == "") {
             orders = [];
+            orders[0] = orderId;
         } else {
-            orders = JSON.parse(orders);
+            orders = orders.split(',');
+            orders[orders.length] = orderId;
         }
 
-        var had = false;
-        for (var i = 0; i < orders.length; ++i) {
-            var order = orders[i];
-            if (order.id == orderId) {
-                order.quantity += count;
-                orders[i] = order;
-                had = true;
-            }
-        }
-
-        if (!had) {
-            var order = new Object();
-            order.id = orderId;
-            order.quantity = count;
-            orders[orders.length] = order;
-        }
-
-        orders = JSON.stringify(orders);
-        console.log(orders);
+        //console.log (orders);
+        orders = orders.join(",");
         storage.set(this.cookie_orders, orders);
     }
 
     ShoppingCart.prototype.get = function() {
         var orders = storage.get(this.cookie_orders);
-
+        
         if (orders == null || orders == "undefined" || orders == "") {
             return null;
         }
 
         return orders;
     }
-
-    ShoppingCart.prototype.total = function() {
+    
+    ShoppingCart.prototype.total = function () {
         var orders = storage.get(this.cookie_orders);
-
+        
         if (orders == null || orders == "undefined" || orders == "") {
             return 0;
         }
-
-        orders = JSON.parse(orders);
-        return orders.length;
+        
+        var total = orders.split (",");
+        return total.length;
     }
 
-    ShoppingCart.prototype.remove = function(orderId) {
+    ShoppingCart.prototype.remove = function(id) {
         var orders = storage.get(this.cookie_orders);
         var i = 0;
 
         if (orders == null || orders == "undefined" || orders == "") {
-            return;
+            //storage.remove(this.cookie_orders);
         } else {
-            
-            orders = JSON.parse(orders);
-            var j = 0;
-            var o = [];
-            
-            for (var i = 0; i < orders.length; ++i) {
-                var order = orders[i];
-                
-                if (order.id == orderId) {
-                    order.quantity -= 1;
-                    if (order.quantity > 0) {
-                        o[j] = order;
-                        j++;
+            orders = orders.split(',');
+            $(orders).each(
+                    function(index, value) {
+                        if (value == id) {
+                            i = index;
+                        }
                     }
-                }
-            }
+            )
         }
-        
-        orders = null;
-        orders = o;
-        
-        if (orders.length == 0) {
-            orders = "";
-        } else {
-            orders = JSON.stringify(orders);
+
+        orders.splice(i, 1);
+        if (orders.length < 1) {
+            storage.remove(this.cookie_orders);
+            return;
         }
-        console.log (orders);
+
+        orders = orders.join(",");
+        //console.log (orders);
         storage.set(this.cookie_orders, orders);
     }
 
-    ShoppingCart.prototype.removeall = function(orderId) {
+    ShoppingCart.prototype.removeall = function(id) {
         var orders = storage.get(this.cookie_orders);
-        var i = 0;
-
+        var j = 0;
+        var left = [];
+        
         if (orders == null || orders == "undefined" || orders == "") {
-            return;
+            storage.remove(this.cookie_orders);
         } else {
-            
-            orders = JSON.parse(orders);
-            var o = [];
-            var j = 0;
-            
-            for (var i = 0; i < orders.length; ++i) {
-                var order = orders[i];
-                
-                if (order.id == orderId) {
-                    continue;
-                } else {
-                    o[j] = order;
-                    j++;
-                }
-            }
+            orders = orders.split(',');
+            $(orders).each(
+                    function(i, value) {
+                        if (value == id) {
+                            return;
+                        } else {
+                            //console.log (value);
+                            left[j] = value;
+                            j++;
+                        }
+                    }
+            )
+        }
+        //console.log("ShoppingCart.removeall");
+        //console.log("guid = " + id);
+        //console.log("left = " + left);
+        //console.log("left.length" + left.length);
+
+        orders = null;
+        orders = left;
+
+        if (orders.length < 1) {
+            storage.set(this.cookie_orders, "");
+            return;
         }
 
-        orders = o;
-        if (orders.length == 0) {
-            orders = "";
-        } else {
-            orders = JSON.stringify(orders);
-        }
-        console.log (orders);
+        orders = orders.join(",");
         storage.set(this.cookie_orders, orders);
     }
 
     ShoppingCart.prototype.clear = function() {
-        storage.set(this.cookie_orders, JSON.stringify({}));
+        storage.set(this.cookie_orders, "");
         //storage.removeAll();
     }
 
@@ -190,7 +171,7 @@
     ShoppingCart.prototype.getuuid = function() {
         var uuid = storage.get(this.cookie_uuid);
         //console.log (uuid);
-
+        
         if (uuid == null || uuid == 'undefined') {
             return null;
         }
@@ -234,10 +215,10 @@
         this.product = id;
         return this.product;
     }
-
+    
     // an instance <= a class - $.shoppingcart._proto_ = ShoppingCart.prototype
-    $.shoppingcart = new ShoppingCart();
-
+    $.shoppingcart = new ShoppingCart ();
+    
 
 }(window.jQuery));
 

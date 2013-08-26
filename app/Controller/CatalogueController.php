@@ -224,6 +224,7 @@ class CatalogueController extends AppController {
             'conditions' => array(
                 "CategoryToObject.category_guid" => $guid,
                 "Product.type" => "product",
+                "Product.quantity >" => 0,
             ),
             'fields' => array("Product.*")
         ));

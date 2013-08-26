@@ -17,95 +17,42 @@ class ShopController extends AppController {
     }
 
     //==============================================================
+    // checkout - three steps - cart / confirm / final 
+    //==============================================================
 
     public function checkout() {
         $action = $this->request->query("action");
 
         $this->set('action', $action);
 
-        $this->_checkout($action);
+        if ($action == "check") {
+            $this->_checkout("check");
+        }
 
         if ($this->request->is('ajax') && $this->request->is('post') && $action == "pay") {
 
             $deliver = $this->request->data('deliver');
             $bill = $this->request->data('bill');
+            $guids = $this->_checkout($action);
 
-            $orders = isset($_COOKIE['orders']) ? $_COOKIE['orders'] : "";
+            $i = 0;
+            $data = null;
             $data = array();
-
-            if (empty($orders)) {
-                $this->_error['error'] = 1;
-                $this->_error['message'] = "Your orders are empty, don't clear cookie before order";
-                exit(json_encode($this->_error));
-            }
-
-            $orders = explode(",", $orders);
-
-            if (empty($orders)) {
-                $this->_error['error'] = 1;
-                $this->_error['message'] = "Your orders are empty, don't clear cookie before order";
-                exit(json_encode($this->_error));
-            }
-
-            $guids = array_flip($orders);
-            $i = 0;
-
-            foreach ($guids as $key => $value) {
-                $guids[$key] = 0;
-            }
-
-            foreach ($guids as $key => $value) {
-                foreach ($orders as $order) {
-                    if ($order == $key) {
-                        $guids[$key]++;
-                    }
-                }
-            }
-
-            $this->loadModel("Product");
-            $i = 0;
-
-            $this->Product->beginTransaction();
-
             foreach ($guids as $k => $value) {
+
                 if (strpos($k, "-") != false) {
                     $key = explode("-", $k);
                     if (is_array($key)) {
                         $guid = $key[0];
                     }
                 } else {
+                    $key = $k;
                     $guid = $k;
                 }
 
                 $data[$i] = $this->Product->findByGuid($guid);
-                if (empty($data[$i])) {
-                    $this->Product->rollTransaction();
-                    $this->_error['error'] = 1;
-                    $this->_error['message'] = "Product - " . $data[$i]['Product']['name'] . " - is off shelf, please remove it and try again.";
-                    exit(json_encode($this->_error));
-                }
 
-                if ($data[$i]['Product']['quantity'] < $value) {
-                    $this->Product->rollTransaction();
-                    $this->_error['error'] = 1;
-                    $this->_error['message'] = "Product - " . $data[$i]['Product']['name'] . " - is out of stock, please remove it and try again.";
-                    exit(json_encode($this->_error));
-                }
-
-                $i++;
-            }
-
-            $i = 0;
-            foreach ($guids as $k => $value) {
-
-                $key = explode("-", $k);
-                if (is_array($key)) {
-                    $guid = $key[0];
-                }
-
-                $data[$i] = $this->Product->findByGuid($guid);
-
-                if (isset($key[1])) {
+                if (isset($key[1]) && $data[$i]['Product']['type'] == 'template') {
                     $data[$i]['Product']['file'] = $key[1];
                 } else {
                     $data[$i]['Product']['file'] = $data[$i]['Product']['image'];
@@ -123,31 +70,16 @@ class ShopController extends AppController {
 
             $orders = array();
             $i = 0;
-            if (!empty($data)) {
+
+            if (!empty($data)) { // always exists
 
                 $amount = 0;
                 foreach ($data as $value) {
                     $amount += round($value['Product']['price'] * $value['Product']['quantity'], 2, PHP_ROUND_HALF_DOWN) + "";
                 }
-
-                require_once APP . DS . 'Vendor' . DS . 'AuthorizeNet/AuthorizeNet.php'; // Make sure this path is correct.
-                define("AUTHORIZENET_SANDBOX", false);
-                $transaction = new AuthorizeNetAIM('9c22BSeN', '752eHX2G6hk9Y36J');
-                $transaction->setSandbox(false);
-                $transaction->amount = $amount;
-                $transaction->card_num = $bill['cc_number']; //4007000000027 - 10/16
-                $transaction->exp_date = $bill['cc_expired']['month'] . "/" . $bill['cc_expired']['year'];
-
-                $response = $transaction->authorizeAndCapture();
-
-                if ($response->approved) {
-                    
-                } else {
-                    $this->Product->rollTransaction();
-                    $this->_error['error'] = 1;
-                    $this->_error['message'] = $response->error_message;
-                    exit(json_encode($this->_error));
-                }
+                
+                $payment_gateway = "AuthorizeNet";
+                $result = $this->_pay ($payment_gateway);
 
                 // create user - guest
                 $user_guid = null;
@@ -163,11 +95,13 @@ class ShopController extends AppController {
                     $user = array(
                         "guid" => $user_guid,
                         "type" => "guest",
-                        "address" => $bill['address'],
-                        "city" => $bill['city'],
-                        "state" => $bill['state'],
-                        "country" => $bill['country'],
-                        "phone" => $bill['phone'],
+                        "address" => $deliver['address'],
+                        "city" => $deliver['city'],
+                        "state" => $deliver['state'],
+                        "country" => $deliver['country'],
+                        "phone" => $deliver['phone'],
+                        "email2" => $deliver['email2'],
+                        "zipcode" => $deliver['zipcode'],
                         "orders" => count($data),
                         "created" => time(),
                         "modified" => time()
@@ -224,9 +158,9 @@ class ShopController extends AppController {
                         "amount" => round($value['Product']['price'] * $value['Product']['quantity'], 2, PHP_ROUND_HALF_DOWN),
                         "quantity" => $data[$i]['Product']['quantity'],
                         "attachement" => $value['Product']['file'],
-                        "transaction_id" => $response->transaction_id,
-                        "transaction_type" => $response->transaction_type,
-                        "payment_gateway" => "AuthorizeNet",
+                        "transaction_id" => $result['transactionId'],
+                        "transaction_type" => $result['transactionType'],
+                        "payment_gateway" => $payment_gateway,
                         "status" => "paid",
                         "created" => time(),
                         "modified" => time(),
@@ -293,12 +227,21 @@ class ShopController extends AppController {
                     $content = null;
                     $this->email("", $to, $subject, $content, "checkout_order_buyer", $vars);
 
+                    $this->loadModel('Admin');
+                    $admin = $this->Admin->find ('first', array (
+                        "conditions" => array (
+                            "active" => 1,
+                        )
+                    ));
+                    
+                    if (!empty ($admin)) {
+                        $to = $admin['Admin']['email'];
+                    }
                     $to = "cesarfelip3@gmail.com";
                     $subject = "There new orders come";
                     $var = array('data' => $orders);
                     $this->email("", $to, $subject, $content, "checkout_order_seller");
                 } catch (Exception $e) {
-                    $this->Product->rollTransaction();
                     $this->_error['error'] = 1;
                     $this->_error['message'] = $e->getMessage();
                     exit(json_encode($this->_error));
@@ -326,12 +269,12 @@ class ShopController extends AppController {
             foreach ($deliver as $key => $value) {
                 if (empty($value)) {
                     $this->_error['error'] = 1;
-                    $this->_error['message'] = $key . " is required";
+                    $this->_error['message'] = "DELIVER INFO : $key is required";
                     exit(json_encode($this->_error));
                 }
 
                 if ($key == "email") {
-                    if (preg_match("/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/i", $value) == false) {
+                    if ($this->_validate('email', $value) == false) {
                         $this->_error['error'] = 1;
                         $this->_error['message'] = "Email format is incorrect";
                         exit(json_encode($this->_error));
@@ -344,7 +287,7 @@ class ShopController extends AppController {
             foreach ($bill as $key => $value) {
                 if (empty($value)) {
                     $this->_error['error'] = 1;
-                    $this->_error['message'] = "All fields in bill info are required";
+                    $this->_error['message'] = "BILL INFO : $key is required";
                     exit(json_encode($this->_error));
                 }
             }
@@ -354,41 +297,33 @@ class ShopController extends AppController {
 
             if (empty($orders)) {
                 $this->_error['error'] = 1;
-                $this->_error['message'] = "You have to enable cookie to pay your cart";
+                $this->_error['message'] = "There are no orders in cart now";
                 exit(json_encode($this->_error));
             }
 
-            $orders = explode(",", $orders);
+            $orders = json_decode($orders);
 
             if (empty($orders)) {
                 $this->_error['error'] = 1;
-                $this->_error['message'] = "You have to enable cookie to pay your cart";
+                $this->_error['message'] = "There are no orders in cart now";
                 exit(json_encode($this->_error));
             }
 
-            $guids = array_flip($orders);
-            $i = 0;
-
-            foreach ($guids as $key => $value) {
-                $guids[$key] = 0;
-            }
-
-            foreach ($guids as $key => $value) {
-                foreach ($orders as $order) {
-                    if ($order == $key) {
-                        $guids[$key] += 1;
-                    }
+            $guids = array();
+            foreach ($orders as $value) {
+                if ($value->quantity <= 0) {
+                    continue;
                 }
+                $guids[$value->id] = $value->quantity;
             }
 
             $this->loadModel("Product");
             $i = 0;
-
-            $this->_error['error'] = 0;
-
             $data = array();
             $total = 0;
             $quantity = 0;
+
+            $this->_error['error'] = 0;
 
             foreach ($guids as $k => $value) {
                 if (strpos($k, "-") != false) {
@@ -397,20 +332,28 @@ class ShopController extends AppController {
                         $guid = $key[0];
                     }
                 } else {
+                    $key = $k;
                     $guid = $k;
                 }
 
                 $data[$i] = $this->Product->findByGuid($guid);
                 if (empty($data[$i])) {
                     $this->_error['error'] = 1;
-                    $this->_error['message'] = "Product doesn't exist";
+                    $this->_error['message'] = "Sorry, this product was just off shelf";
+                    $this->_error['data'][] = $key;
+                    exit(json_encode($this->_error));
+                }
+
+                if ($data[$i]['Product']['quantity'] != 65535 && $data[$i]['Product']['quantity'] == 0) {
+                    $this->_error['error'] = 1;
+                    $this->_error['message'] = "Sorry, product(SKU#{$data[$i]['Product']['guid']}) just sold out";
                     $this->_error['data'][] = $key;
                     exit(json_encode($this->_error));
                 }
 
                 if ($data[$i]['Product']['quantity'] != 65535 && $data[$i]['Product']['quantity'] < $value) {
                     $this->_error['error'] = 1;
-                    $this->_error['message'] = "Product Quantity is not enough";
+                    $this->_error['message'] = "Sorry, we only have {$data[$i]['Product']['quantity']} for product(SKU#{$data[$i]['Product']['guid']}), you ordered {$value}";
                     $this->_error['data'][] = $key;
                     exit(json_encode($this->_error));
                 }
@@ -434,18 +377,101 @@ class ShopController extends AppController {
             return;
             //exit(json_encode($this->_error));
         }
-    }
 
-    protected function email($from, $to, $subject, $content, $template, $vars = array()) {
-        $email = new CakeEmail();
-        $email->config('smtp');
-        $email->template($template);
-        $email->viewVars($vars);
-        $email->emailFormat('html');
-        $email->from("sales@beautahfulcreations.com");
-        $email->to($to);
-        $email->subject($subject);
-        $email->send();
+        if ($this->request->is('ajax') && $this->request->is('post') && $action == "pay") {
+            $deliver = $this->request->data('deliver');
+            $bill = $this->request->data('bill');
+
+            $orders = isset($_COOKIE['orders']) ? $_COOKIE['orders'] : "";
+            $data = array();
+
+            if (empty($orders)) {
+                $this->_error['error'] = 1;
+                $this->_error['message'] = "There are no orders in cart now";
+                exit(json_encode($this->_error));
+            }
+
+            $orders = json_decode($orders);
+
+            if (empty($orders)) {
+                $this->_error['error'] = 1;
+                $this->_error['message'] = "There are no orders in cart now";
+                exit(json_encode($this->_error));
+            }
+
+            $guids = array();
+            foreach ($orders as $value) {
+                if ($value->quantity <= 0) {
+                    continue;
+                }
+                $guids[$value->id] = $value->quantity;
+            }
+
+            $this->loadModel("Product");
+            $i = 0;
+
+            $this->Product->beginTransaction();
+
+            foreach ($guids as $k => $value) {
+                if (strpos($k, "-") != false) {
+                    $key = explode("-", $k);
+                    if (is_array($key)) {
+                        $guid = $key[0];
+                    }
+                } else {
+                    $key = $k;
+                    $guid = $k;
+                }
+
+                $data[$i] = $this->Product->findByGuid($guid);
+                if (empty($data[$i])) {
+                    $this->Product->rollTransaction();
+                    $this->_error['error'] = 1;
+                    $this->_error['message'] = "Product - " . $data[$i]['Product']['name'] . " - is off shelf, please remove it and try again.";
+                    exit(json_encode($this->_error));
+                }
+
+                if ($data[$i]['Product']['quantity'] != 65535 && $data[$i]['Product']['quantity'] < $value) {
+                    $this->Product->rollTransaction();
+                    $this->_error['error'] = 1;
+                    $this->_error['message'] = "Product - " . $data[$i]['Product']['name'] . " - is out of stock, please change quantity before action, max is {$data[$i]['Product']['quantity']}.";
+                    exit(json_encode($this->_error));
+                }
+
+                $i++;
+            }
+
+            $this->autoRender = false;
+            return $guids;
+        }
+    }
+    
+    protected function _pay ($type) {
+        
+        if ($type == "AuthorizeNet") {
+
+                require_once APP . DS . 'Vendor' . DS . 'AuthorizeNet/AuthorizeNet.php'; // Make sure this path is correct.
+                define("AUTHORIZENET_SANDBOX", false);
+                $transaction = new AuthorizeNetAIM('9c22BSeN', '752eHX2G6hk9Y36J');
+                $transaction->setSandbox(false);
+                $transaction->amount = $amount;
+                $transaction->card_num = $bill['cc_number']; //4007000000027 - 10/16
+                $transaction->exp_date = $bill['cc_expired']['month'] . "/" . $bill['cc_expired']['year'];
+
+                $response = $transaction->authorizeAndCapture();
+
+                if ($response->approved) {
+                    
+                } else {
+                    $this->Product->rollTransaction();
+                    $this->autoRender = false;
+                    $this->_error['error'] = 1;
+                    $this->_error['message'] = $response->error_message;
+                    exit(json_encode($this->_error));
+                }
+                
+                return array ('transactionId' => $response->transaction_id, "transactionType" => $response->transaction_type);
+        }
     }
 
     /*
@@ -459,39 +485,32 @@ class ShopController extends AppController {
             //$orders = $this->request->data('orders');
 
             $action = $this->request->query('action');
-
             $orders = isset($_COOKIE['orders']) ? $_COOKIE['orders'] : "";
 
-
-            if ($action == "single") {
-                $orders = $_COOKIE['current-product-id'];
+            if (empty($orders)) {
+                $this->set('data', null);
+                return;
             }
 
             $data = array();
-            $orders = explode(",", $orders);
+            $orders = json_decode($orders);
 
             if (empty($orders)) {
                 $this->set('data', $data);
                 return;
             }
 
-            $guids = array_flip($orders);
-            $i = 0;
-
-            foreach ($guids as $key => $value) {
-                $guids[$key] = 0;
-            }
-
-            foreach ($guids as $key => $value) {
-                foreach ($orders as $order) {
-                    if ($order == $key) {
-                        $guids[$key]++;
-                    }
+            $guids = array();
+            foreach ($orders as $value) {
+                if ($value->quantity <= 0) {
+                    continue;
                 }
+                $guids[$value->id] = $value->quantity;
             }
 
             $this->loadModel("Product");
             $i = 0;
+
 
             foreach ($guids as $k => $value) {
 
@@ -501,7 +520,8 @@ class ShopController extends AppController {
                         $guid = $key[0];
                     }
                 } else {
-                    $guid = $k;
+                    $key = $k;
+                    $guid = $key;
                 }
 
                 $data[$i] = $this->Product->find('first', array("conditions" => array("guid" => $guid)));
@@ -521,6 +541,13 @@ class ShopController extends AppController {
                         $data[$i]['Product']['file'] = "";
                     }
                 }
+
+                if ($data[$i]['Product']['quantity'] != 65535 && $data[$i]['Product']['quantity'] < $value) {
+                    $value = $data[$i]['Product']['quantity'];
+                    $data[$i]['Product']['quantity_exceed'] = true;
+                }
+
+                $data[$i]['Product']['max'] = $data[$i]['Product']['quantity'];
                 $data[$i]['Product']['quantity'] = $value;
                 $i++;
             }
@@ -529,186 +556,6 @@ class ShopController extends AppController {
                 $data = array();
             }
             $this->set('data', $data);
-        }
-    }
-
-    /*
-     * @function order - deprecated
-     */
-
-    public function order() {
-        if ($this->request->is("ajax")) {
-            $this->layout = false;
-            $orders = $this->request->data['orders'];
-            $data = array();
-
-            $user = $this->request->data['user'];
-
-            if (empty($orders)) {
-                $this->set('data', $data);
-                return;
-            }
-
-            $orders = explode(",", $orders);
-
-            if (empty($orders)) {
-                $this->set('data', $data);
-                return;
-            }
-
-            $guids = array_flip($orders);
-            $i = 0;
-
-            foreach ($guids as $key => $value) {
-                $guids[$key] = 0;
-            }
-
-            foreach ($guids as $key => $value) {
-                foreach ($orders as $order) {
-                    if ($order == $key) {
-                        $guids[$key]++;
-                    }
-                }
-            }
-
-            $this->loadModel("Product");
-            $i = 0;
-
-            foreach ($guids as $key => $value) {
-                $key = explode("-", $key);
-                if (is_array($key)) {
-                    $guid = $key[0];
-                }
-
-                $data[$i] = $this->Product->findByGuid($guid);
-                if (empty($data[$i])) {
-                    $data = null;
-                    break;
-                }
-
-                if (isset($key[1])) {
-                    $data[$i]['Product']['file'] = $key[1];
-                } else {
-                    $data[$i]['Product']['file'] = $data[$i]['Product']['image'];
-                }
-                $data[$i]['Product']['quantity'] = $value;
-                $i++;
-            }
-
-            $orders = array();
-            $i = 0;
-            if (!empty($data)) {
-                foreach ($data as $value) {
-                    $orders[$i] = array(
-                        "guid" => uniqid(),
-                        "buyer_guid" => $user,
-                        "created" => time(),
-                        "modified" => time(),
-                        "amount" => round($value['Product']['price'] * $value['Product']['quantity'], 2, PHP_ROUND_HALF_DOWN),
-                        "quantity" => $data[$i]['Product']['quantity'],
-                        "file" => $value['Product']['file'] == "" ? $value['Product']['image'] : $value['Product']['file'],
-                    );
-                    $i++;
-                }
-            }
-
-            $amount = 0;
-            foreach ($orders as $order) {
-                $amount += $order['amount'];
-            }
-
-
-            $this->set('stripe_key', $this->_stripe['publishable_key']);
-            $this->set(array('data' => $orders, 'amount' => $amount));
-        }
-    }
-
-    /*
-     * @function: preview - generate preview image for designed case
-     */
-
-    public function preview() {
-        if ($this->request->is('ajax')) {
-            $this->layout = false;
-
-            error_reporting(0);
-            register_shutdown_function(
-                    function () {
-
-                        $last_error = error_get_last();
-
-                        if (!is_null($last_error)) {
-                            $this->_error['error'] = 1;
-                            $this->_error['message'] = $last_error['message'];
-                            exit(json_encode($this->_error));
-                        }
-                    });
-
-            header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
-            header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-            header("Cache-Control: no-store, no-cache, must-revalidate");
-            header("Cache-Control: post-check=0, pre-check=0", false);
-            header("Pragma: no-cache");
-
-            $product = $this->request->data('product');
-            $data = array();
-            if (empty($product)) {
-                $this->set('data', $data);
-                return;
-            }
-
-            $targetDir = $this->_targetDir = ROOT . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'uploads' . DS . 'preview';
-
-            $cleanupTargetDir = true; // Remove old files
-            $maxFileAge = 5 * 3600; // Temp file age in seconds
-            @set_time_limit(0);
-
-            $imageData = $_POST['image-data'];
-            $extension = $_POST['image-extension'];
-
-            $imageData = str_replace("data:image/" . $extension . ";base64,", "", $imageData);
-
-            $filename = uniqid() . "." . $extension;
-            $file = base64_encode($imageData);
-            $out = @fopen($targetDir . DIRECTORY_SEPARATOR . $filename, "wb");
-
-            if ($out) {
-                fwrite($out, base64_decode($imageData));
-                @fclose($out);
-            } else {
-                $this->_error['error'] = 1;
-                $this->_error['message'] = 'open write handler faild';
-                $this->set(array('data' => $data, 'image' => $this->_error));
-            }
-
-            $this->_error['error'] = 0;
-            $this->_error['message'] = 'success';
-            $this->_error['files'] = array(
-                'original' => "",
-                'target' => $filename,
-                'url' => "uploads/preview/" . $filename,
-                'extension' => $extension,
-                    //'mime' => $mime
-            );
-
-            $path = $targetDir . DIRECTORY_SEPARATOR . $filename;
-            $image = file_get_contents($targetDir . DIRECTORY_SEPARATOR . $filename);
-
-            $image = substr_replace($image, pack("cnn", 1, 300, 300), 13, 5);
-
-            file_put_contents($targetDir . DIRECTORY_SEPARATOR . $filename, $image);
-
-            $this->loadModel('Product');
-            $data = $this->Product->find('first', array(
-                'conditions' => array('guid' => $product, 'type' => 'template')
-            ));
-
-            if (empty($data)) {
-                $this->_error['error'] = 1;
-            }
-
-            $this->set(array('data' => $data['Product'], 'error' => $this->_error));
-            return;
         }
     }
 

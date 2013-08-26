@@ -37,6 +37,7 @@ Test
 1. AppController
 2. AuthController
 3. IndexController
+4. ShopController - cart, checkout
 
 Discussion
 =============
