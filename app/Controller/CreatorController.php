@@ -24,6 +24,11 @@ class CreatorController extends AppController {
             $guid = uniqid();
             $load = 0;
         }
+        
+        if (empty ($this->_identity)) {
+            $load = 0;
+            $this->redirect (array ("controller" => "creator", "action" => "index"));
+        }
 
         $this->set('canvas_load', $load);
         $this->set('canvas_guid', $guid);
