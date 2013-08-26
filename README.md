@@ -7,7 +7,6 @@ Update
 
 1. Admin / Order / Email Notification
 2. Email / Content
-3. Category / Pagenation
 
 5. Media Location (optional)
 4. Error Handler (final)
