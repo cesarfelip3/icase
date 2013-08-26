@@ -64,7 +64,7 @@ $checkout_url = $this->webroot . "shop/checkout?action=cart";
         <div class="row-fluid">
             <div class="span10" style="width:780px;">
                 <div>
-                    <div class="ajax-loading-indicator" style="position: absolute;"><a href="javascript:" style="font-size:14px;"><i class="icon-refresh icon-spin"></i> Loading Canvas...</a></div>
+                    <div class="ajax-loading-indicator" style="position: absolute;padding:10px;"><a href="javascript:" style="font-size:14px;"><i class="icon-refresh icon-spin"></i> Loading Canvas...</a></div>
                     <canvas class="upper-canvas " style="border: 1px #ccc dashed; -moz-user-select: none; cursor: crosshair;" width="780" height="780" id="c1"></canvas>				   
                 </div>
             </div>
