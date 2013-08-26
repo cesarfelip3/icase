@@ -169,7 +169,8 @@ class AuthController extends AppController {
                 $var = array('data' => $user);
 
                 try {
-                    $this->_email("", $data['email'], "Your account is ready, active it now", null, "user_signup", $var);
+                    $from = array('sales@beautahfulcreations.com' => 'beautahfulcreations.com');
+                    $this->_email($from, $data['email'], "Your account is ready, active it now", null, "user_signup", $var);
                 } catch (Exception $e) {
                     $this->_error['error'] = 0;
                     $this->_error['message'] = $e->getMessage();
@@ -239,8 +240,9 @@ class AuthController extends AppController {
             }
 
             try {
+                $from = array('sales@beautahfulcreations.com' => 'beautahfulcreations.com');
                 $var = array('data', $data['User']);
-                $this->_email("", $data['User']['email'], "Reset your password now", null, "signup_verification", $var);
+                $this->_email($from, $data['User']['email'], "Reset your password now", null, "signup_verification", $var);
             } catch (Exception $e) {
                 $this->_error['error'] = 0;
                 $this->_error['message'] = $e->getMessage();
@@ -271,8 +273,9 @@ class AuthController extends AppController {
             $this->User->save();
 
             try {
+                $from = array('sales@beautahfulcreations.com' => 'beautahfulcreations.com');
                 $var = array('data' => $data);
-                $this->_email("", $data['email'], "Your account is ready, active it now", null, "user_signup", $var);
+                $this->_email($from, $data['email'], "Your account is ready, active it now", null, "user_signup", $var);
             } catch (Exception $e) {
                 $this->_error['error'] = 1;
                 $this->_error['message'] = $e->getMessage();
