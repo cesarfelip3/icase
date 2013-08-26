@@ -195,7 +195,7 @@ $js_themes = array(
 <div class="row hide" id="box-alert" style="position: fixed;top:0px;left:0px;z-index:1030;margin-bottom:0;">
     <div class="span8 offset3">
         <div style="background-color:white;border:1px #EEE solid;padding:5px; ">
-            <p style="margin:0;padding:0px;color:orange"><strong><span class="body"></span></strong></p>
+            <p style="margin:0;padding:0px;color:orangered;font-size:16px;"><strong><span class="body"></span></strong></p>
         </div>
     </div>
 </div>
