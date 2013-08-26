@@ -34,6 +34,21 @@ class ShopController extends AppController {
             $deliver = $this->request->data('deliver');
             $bill = $this->request->data('bill');
             $guids = $this->_checkout($action);
+            
+            require_once APP . 'Vendor' . DS . 'HtmlPurifier/library/HTMLPurifier.auto.php'; 
+            $config = HTMLPurifier_Config::createDefault();
+            $purifier = new HTMLPurifier($config);
+            
+            foreach ($bill as $key => $value) {
+                $bill[$key] = $purifier->purify($value);
+            }
+            
+            foreach ($deliver as $key => $value) {
+                if ($key == 'email') {
+                    continue;
+                }
+                $deliver[$key] = $purifier->purify($value);
+            }
 
             $i = 0;
             $data = null;
@@ -366,6 +381,18 @@ class ShopController extends AppController {
                 $total += $data[$i]['Product']['total'];
 
                 $i++;
+            }
+            
+            require_once APP . 'Vendor' . DS . 'HtmlPurifier/library/HTMLPurifier.auto.php'; 
+            $config = HTMLPurifier_Config::createDefault();
+            $purifier = new HTMLPurifier($config);
+            
+            foreach ($bill as $key => $value) {
+                $bill[$key] = $purifier->purify($value);
+            }
+            
+            foreach ($deliver as $key => $value) {
+                $deliver[$key] = $purifier->purify($value);
             }
 
             $this->layout = false;
