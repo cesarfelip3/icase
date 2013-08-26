@@ -266,11 +266,11 @@ class ShopController extends AppController {
                     $to = "cesarfelip3@gmail.com";
                     $subject = "There new orders come";
                     $var = array('data' => $orders);
-                    $this->_email("", $to, $subject, $content, "checkout_order_seller");
+                    $this->_email("", $to, $subject, $content, "checkout_order_seller", $var);
                 } catch (Exception $e) {
                     $this->Product->rollback();
                     $this->_error['error'] = 1;
-                    $this->_error['message'] = "We can't send email to you, make sure your email is valid";// . $e->getMessage()
+                    $this->_error['message'] = "We can't send email to you, make sure your email is valid. ({$deliver['email']})";// . $e->getMessage()
                     exit(json_encode($this->_error));
                 }
                 
