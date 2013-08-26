@@ -318,7 +318,8 @@ $js_case = array(
     function reload_canvas()
     {
         var guid = $("#canvas_guid").val();
-
+        showAlert2 ("Loading canvas......");
+        
         jQuery.ajax({
             url: "<?php echo $reload_url; ?>",
             data: {'guid': guid},
@@ -342,6 +343,8 @@ $js_case = array(
                 mememaker.overlayImage = result.data.overlay;
                 mememaker.reload(result.data.json);
             }
+            
+            hideAlert ();
 
         }).fail(function() {
             //$("#template-list").prev().children(":first-child").hide(0);
