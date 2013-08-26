@@ -1,4 +1,5 @@
 <?php
+
 /*
  * 
  */
@@ -120,18 +121,18 @@ class CreatorController extends AppController {
             $data = $this->Creation->find('first', array("conditions" => array("user_guid" => $this->_identity['guid'], "guid" => $guid)));
 
             if (!empty($data)) {
-                $this->loadModel ('Product');
-                $product = $this->Product->find ('first', array (
-                    "conditions" => array (
+                $this->loadModel('Product');
+                $product = $this->Product->find('first', array(
+                    "conditions" => array(
                         "guid" => $data['Creation']['product_guid']
                     )
                 ));
-                
-                if (!empty ($product)) {
+
+                if (!empty($product)) {
                     $product['Product']['image'] = unserialize($product['Product']['image']);
                     $overlay = $this->webroot . "img/template/" . $product['Product']['image']['foreground'];
                 }
-                
+
                 $this->_error['data']['overlay'] = $overlay;
                 $this->_error['data']['json'] = $data['Creation']['data'];
                 $this->_error['data']['product'] = $data['Creation']['product_guid'];
@@ -210,25 +211,70 @@ class CreatorController extends AppController {
                     //'mime' => $mime
             );
 
-            $path = $targetDir . DIRECTORY_SEPARATOR . $filename;
-            $image = file_get_contents($targetDir . DIRECTORY_SEPARATOR . $filename);
+            /*
+              $path = $targetDir . DIRECTORY_SEPARATOR . $filename;
+              $image = file_get_contents($targetDir . DIRECTORY_SEPARATOR . $filename);
 
-            $image = substr_replace($image, pack("cnn", 1, 300, 300), 13, 5);
+              $image = substr_replace($image, pack("cnn", 1, 300, 300), 13, 5);
 
-            file_put_contents($targetDir . DIRECTORY_SEPARATOR . $filename, $image);
+              file_put_contents($targetDir . DIRECTORY_SEPARATOR . $filename, $image);
+
+             */
 
             $this->loadModel('Product');
             $data = $this->Product->find('first', array(
                 'conditions' => array('guid' => $product, 'type' => 'template')
             ));
 
-            if (empty($data)) {
+            if (!empty($data)) {
+                $png1 = unserialize($data['Product']['image']);
+                $png1 = $png1['foreground'];
+
+                $png1 = APP . DS . "webroot" . DS . "img" . DS . "template" . DS . $png1;
+
+                $jpeg = $targetDir . DIRECTORY_SEPARATOR . $filename;
+                ;
+
+                try {
+                    $this->_overlayImage($png1, $jpeg, pathinfo($filename, PATHINFO_FILENAME) . "_user.jpeg");
+                    $this->_error['error'] = 0;
+                    $this->_error['files']['url'] = "uploads/preview/" . pathinfo($filename, PATHINFO_FILENAME) . "_user.jpeg";
+                } catch (Exception $e) {
+                    //$this->Session->setFlash($e->getMessage());
+                    $this->_error['message'] = $e->getMessage();
+                    $this->_error['error'] = 1;
+                }
+            } else {
                 $this->_error['error'] = 1;
             }
 
             $this->set(array('data' => $data['Product'], 'error' => $this->_error));
             return;
         }
+    }
+
+    protected function _overlayImage($overlay, $jpeg, $final) {
+
+        $final = APP . DS . "webroot" . DS . "uploads" . DS . "preview" . DS . $final;
+        if (file_exists($final)) {
+            return;
+        }
+
+        $png = imagecreatefrompng($overlay);
+        $jpeg = imagecreatefromjpeg($jpeg);
+
+        //list($width, $height) = getimagesize('./image.jpg');
+        //list($newwidth, $newheight) = getimagesize('./mark.png');
+        $out = imagecreatetruecolor(780, 780);
+        imagecopyresampled($out, $jpeg, 0, 0, 0, 0, 780, 780, 780, 780);
+        imagecopyresampled($out, $png, 0, 0, 0, 0, 780, 780, 780, 780);
+
+        imagejpeg($out, $final, 100);
+
+        $image = file_get_contents($final);
+        $image = substr_replace($image, pack("cnn", 1, 300, 300), 13, 5);
+
+        file_put_contents($final, $image);
     }
 
     public function templates() {
