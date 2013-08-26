@@ -318,7 +318,7 @@ $js_case = array(
     function reload_canvas()
     {
         var guid = $("#canvas_guid").val();
-        showAlert2 ("Loading canvas......");
+        showAlert2 ("Loading progress......");
         
         jQuery.ajax({
             url: "<?php echo $reload_url; ?>",
