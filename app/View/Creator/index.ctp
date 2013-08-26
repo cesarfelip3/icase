@@ -69,7 +69,7 @@ $checkout_url = $this->webroot . "shop/checkout?action=cart";
                 </div>
             </div>
             <div class="span2" id="box-template-list" style="border:1px #ccc dashed;width:130px;padding:5px;background-color:white;">
-                <div class="ajax-loading-indicator" style="padding:10px;"><a href="javascript:" style="font-size:14px;"><i class="icon-refresh icon-spin"></i> Loading ....</a></div>
+                <div id="ajax-template-list" style="padding:10px;"><a href="javascript:" style="font-size:14px;"><i class="icon-refresh icon-spin"></i> Loading ....</a></div>
             </div>
         </div>
         <!-- editor -->
@@ -353,6 +353,7 @@ $js_case = array(
     //===========================================================
     function templatelist_load()
     {
+        $("#ajax-template-list").show();
         jQuery.ajax({
             url: "<?php echo $template_url; ?>",
             type: "GET",
@@ -363,14 +364,15 @@ $js_case = array(
 
             $("#box-template-list").html(data);
             templatelist_config();
-
-
+            
+            $("#ajax-template-list").hide();
             if ($("#canvas_guid").data('reload') == "1") {
                 reload_canvas();
             }
 
         }).fail(function() {
             //$("#template-list").prev().children(":first-child").hide(0);
+            $("#ajax-template-list").hide();
         });
     }
 
