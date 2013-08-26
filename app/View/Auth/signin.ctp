@@ -47,13 +47,13 @@ $reset_url = $this->webroot . "auth/reset";
                     </p>
                     <p>
                         <img id="captcha" src="<?php echo $this->webroot . 'auth/captcha'; ?>" alt="" /> 
-                        <a href="javascript:void(0);" onclick="javascript:document.images.captcha.src = '<?php echo $this->webroot . 'auth/captcha'; ?>?' + Math.round(Math.random(0) * 1000) + 1">Reload image</a>
+                        <a tabindex="-1" href="javascript:void(0);" onclick="javascript:document.images.captcha.src = '<?php echo $this->webroot . 'auth/captcha'; ?>?' + Math.round(Math.random(0) * 1000) + 1" class="btn btn-info"><i class="icon-refresh"></i></a>
                     </p>
                     <p>
                         <input type="text" name="signin[captcha]" />
                     </p>
                     <p>
-                        <a href='javascript:' class='btn btn-primary' data-loading-text="Working..." onclick="signin_submit();" id="btn-signin">Sign in</a>
+                        <a href='javascript:' class='btn btn-primary' data-loading-text="Working..." onclick="signin_submit();" id="btn-signin" >Sign in</a>
                     </p>
                     <p>
                         <a href='<?php echo $reset_url; ?>'><span>Forget Password?</span></a>
