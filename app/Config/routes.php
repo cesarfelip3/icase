@@ -57,6 +57,8 @@ Router::connect(
     array('controller' => 'catalogue', 'action' => 'search')
 );
 
+//Router::connect("/panel/*", array ("plugin"=>"admin"));
+
 Router::connect('/signin', array('controller' => 'auth', 'action' => 'signin'));
 Router::connect('/signup', array('controller' => 'auth', 'action' => 'signup'));
 Router::connect('/logout', array('controller' => 'auth', 'action' => 'logout'));

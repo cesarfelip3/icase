@@ -28,7 +28,7 @@
         ?>
         <?php if (!empty($data)) : ?>
             <?php for ($i = 0; $i < count($data); $i += 3) : ?>
-                <div class="row-fluid" style='margin-top:20px;'>
+                <div class="row-fluid hotproperties" style='margin-top:20px;'>
                     <?php if (isset($data[$i])) : ?>
                         <div class="span4 set-equal-heights-js">
                             <div class="thumbnail">
