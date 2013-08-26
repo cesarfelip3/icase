@@ -143,71 +143,71 @@ $js_pluploader = array(
 
 <?php echo $this->Html->script($js_pluploader); ?>
 <script type="text/javascript">
-    function PL(id) {
-        return document.getElementById(id);
-    }
+                        function PL(id) {
+                            return document.getElementById(id);
+                        }
 
-    var uploader = new plupload.Uploader({
-        runtimes: 'gears,html5,browserplus',
-        browse_button: 'btn-upload-image',
-        container: 'uploader',
-        max_file_size: '10mb',
-        url: '<?php echo $uploader_url; ?>',
-        multi_selection: false,
-        //resize: {width: 640, height: 240, quality: 100},
-        //flash_swf_url: 'js/uploader/plupload.flash.swf',
-        //silverlight_xap_url : 'js/uploader/plupload.silverlight.xap',
-        filters: [
-            {title: "Image Files", extensions: "png,jpeg,jpg,gif"}
-        ]
-    });
+                        var uploader = new plupload.Uploader({
+                            runtimes: 'gears,html5,browserplus',
+                            browse_button: 'btn-upload-image',
+                            container: 'uploader',
+                            max_file_size: '10mb',
+                            url: '<?php echo $uploader_url; ?>',
+                            multi_selection: false,
+                            //resize: {width: 640, height: 240, quality: 100},
+                            //flash_swf_url: 'js/uploader/plupload.flash.swf',
+                            //silverlight_xap_url : 'js/uploader/plupload.silverlight.xap',
+                            filters: [
+                                {title: "Image Files", extensions: "png,jpeg,jpg,gif"}
+                            ]
+                        });
 
-    uploader.bind('Init', function(up, params) {
-        //$('filelist').innerHTML = "<div>Current runtime: " + params.runtime + "</div>";
-    });
+                        uploader.bind('Init', function(up, params) {
+                            //$('filelist').innerHTML = "<div>Current runtime: " + params.runtime + "</div>";
+                        });
 
-    uploader.init();
+                        uploader.init();
 
-    uploader.bind('FilesAdded', function(up, files) {
+                        uploader.bind('FilesAdded', function(up, files) {
 
-        console.log("hello");
-        if (uploader.files.length == 2) {
-            uploader.removeFile(uploader.files[0]);
-        }
+                            console.log("hello");
+                            if (uploader.files.length == 2) {
+                                uploader.removeFile(uploader.files[0]);
+                            }
 
-        for (var i in files) {
-            //document.getElementById('filelist').innerHTML = '<div id="' + files[i].id + '">' + files[i].name + ' (' + plupload.formatSize(files[i].size) + ') <b></b></div>';
-        }
-        jQuery('#progress-bar').css('width', "0%");
-        uploader.start();
-    });
+                            for (var i in files) {
+                                //document.getElementById('filelist').innerHTML = '<div id="' + files[i].id + '">' + files[i].name + ' (' + plupload.formatSize(files[i].size) + ') <b></b></div>';
+                            }
+                            jQuery('#progress-bar').css('width', "0%");
+                            uploader.start();
+                        });
 
-    uploader.bind('UploadProgress', function(up, file) {
-        //$(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
-        jQuery('#progress-bar').css('width', file.percent + "%");
+                        uploader.bind('UploadProgress', function(up, file) {
+                            //$(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
+                            jQuery('#progress-bar').css('width', file.percent + "%");
 
-    });
+                        });
 
-    uploader.bind('FileUploaded', function(up, file, response) {
-        plupload.each(response, function(value, key) {
+                        uploader.bind('FileUploaded', function(up, file, response) {
+                            plupload.each(response, function(value, key) {
 
-            console.log(key);
-            console.log(value);
+                                console.log(key);
+                                console.log(value);
 
-            if (key == "response") {
-                var result = jQuery.parseJSON(value);
-                console.log(result);
-                if (result.error == 0) {
-                    console.log(result.files.url);
-                    showAlert2("Loading image....");
-                    mememaker.tools.addpic(result.files.url);
-                }
-                //jQuery('#progress-bar').css('width', "0%");
-            }
-        });
+                                if (key == "response") {
+                                    var result = jQuery.parseJSON(value);
+                                    console.log(result);
+                                    if (result.error == 0) {
+                                        console.log(result.files.url);
+                                        showAlert2("Loading image....");
+                                        mememaker.tools.addpic(result.files.url);
+                                    }
+                                    //jQuery('#progress-bar').css('width', "0%");
+                                }
+                            });
 
-        //alert($.parseJSON(response.response).result);
-    });
+                            //alert($.parseJSON(response.response).result);
+                        });
 
 </script>
 
@@ -271,10 +271,6 @@ $js_case = array(
 
         templatelist_load();
 
-        if ($("#canvas_guid").data('reload') == "1") {
-            reload_canvas ();
-        }
-
         jQuery(".ajax-loading-indicator").hide(0);
         jQuery("#btn-order").show(1000);
         jQuery(".creator-parts").delay(1000).show(0).css('visibility', 'visible');
@@ -307,7 +303,7 @@ $js_case = array(
             var result = $.parseJSON(data);
             if (result.error == 1) {
                 $("#modal-user").modal();
-                formuser_load ();
+                formuser_load();
             } else {
                 $("#canvas_guid").val(result.data.guid);
                 $("#canvas_guid").data('saved', '1');
@@ -367,6 +363,11 @@ $js_case = array(
 
             $("#box-template-list").html(data);
             templatelist_config();
+
+
+            if ($("#canvas_guid").data('reload') == "1") {
+                reload_canvas();
+            }
 
         }).fail(function() {
             //$("#template-list").prev().children(":first-child").hide(0);
@@ -434,10 +435,10 @@ $js_case = array(
             jQuery(".ajax-loading-indicator").hide(0);
         });
     }
-    
+
     //===================================================
-    
-    function formuser_load ()
+
+    function formuser_load()
     {
         jQuery.ajax({
             url: "<?php echo $loginform_url; ?>",
@@ -445,14 +446,14 @@ $js_case = array(
             beforeSend: function(xhr) {
             }
         }).done(function(data) {
-            
-            $("#modal-user .modal-body").html (data);
+
+            $("#modal-user .modal-body").html(data);
 
         }).fail(function() {
             jQuery(".ajax-loading-indicator").hide(0);
         });
     }
-    
+
     function signup_submit()
     {
         jQuery.ajax({
@@ -470,7 +471,7 @@ $js_case = array(
                 $("#form-signup .text-error").html(result.message);
             } else {
                 $("#modal-user").modal('hide');
-                alert ("Now click 'save'to save your progress");
+                alert("Now click 'save'to save your progress");
             }
         }).fail(function() {
         });
@@ -493,7 +494,7 @@ $js_case = array(
                 $("#form-signin .text-error").html(result.message);
             } else {
                 $("#modal-user").modal('hide');
-                alert ("Now click 'save'to save your progress");
+                alert("Now click 'save'to save your progress");
             }
         }).fail(function() {
         });
