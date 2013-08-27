@@ -473,13 +473,25 @@ class CreatorController extends AppController {
 
         $this->_error['error'] = 0;
         $this->_error['message'] = 'Success';
-        $this->_error['files'] = array(
+        
+        
+        if (!empty ($this->_identity)) {
+            $this->_error['files'] = array(
+            'original' => $original,
+            'target' => $name,
+            'url' => $this->base . "/uploads/user/" . $name,
+            'extension' => $extension,
+                //'mime' => $mime
+        );
+        } else {
+            $this->_error['files'] = array(
             'original' => $original,
             'target' => $name,
             'url' => $this->base . "/uploads/" . $name,
             'extension' => $extension,
                 //'mime' => $mime
         );
+        }
 
         die($this->_json($this->_error));
     }
