@@ -6,7 +6,7 @@ $checkout_cart_url = $this->webroot . "shop/checkout/?action=cart";
         <!-- 2 columns -->
         <div class="row-fluid">
             <div class="span6">
-                <p><img src="<?php echo $this->webroot . "uploads/product/" . $data['featured']['origin'][0]; ?>" style="width:100%;"></p>
+                <a class="thumbnail"><img src="<?php echo $this->webroot . "uploads/product/" . str_replace (".", "_500.", $data['featured']['origin'][0]); ?>" style="width:90%;"></a>
             </div>
             <div class="span6">
                 <h3><strong><span style="text-transform: uppercase;"><?php echo $data['name']; ?></span></strong> </h3>

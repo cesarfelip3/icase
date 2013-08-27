@@ -23,9 +23,9 @@ class CreatorController extends AppController {
         if (empty($guid)) {
             $guid = uniqid();
             $load = 0;
-        } else if (empty ($this->_identity)) {
+        } else if (empty($this->_identity)) {
             $load = 0;
-            $this->redirect (array ("controller" => "creator", "action" => "index"));
+            $this->redirect(array("controller" => "creator", "action" => "index"));
         }
 
         $this->set('canvas_load', $load);
@@ -333,8 +333,8 @@ class CreatorController extends AppController {
         header("Pragma: no-cache");
 
         $targetDir = $this->_targetDir = ROOT . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'uploads';
-        
-        if (!empty ($this->_identity)) {
+
+        if (!empty($this->_identity)) {
             $targetDir .= DS . "user" . DS . "uploads";
         }
 
@@ -473,24 +473,24 @@ class CreatorController extends AppController {
 
         $this->_error['error'] = 0;
         $this->_error['message'] = 'Success';
-        
-        
-        if (!empty ($this->_identity)) {
+
+
+        if (!empty($this->_identity)) {
             $this->_error['files'] = array(
-            'original' => $original,
-            'target' => $name,
-            'url' => $this->base . "/uploads/user/" . $name,
-            'extension' => $extension,
-                //'mime' => $mime
-        );
+                'original' => $original,
+                'target' => $name,
+                'url' => $this->base . "/uploads/user/" . $name,
+                'extension' => $extension,
+                    //'mime' => $mime
+            );
         } else {
             $this->_error['files'] = array(
-            'original' => $original,
-            'target' => $name,
-            'url' => $this->base . "/uploads/" . $name,
-            'extension' => $extension,
-                //'mime' => $mime
-        );
+                'original' => $original,
+                'target' => $name,
+                'url' => $this->base . "/uploads/" . $name,
+                'extension' => $extension,
+                    //'mime' => $mime
+            );
         }
 
         die($this->_json($this->_error));

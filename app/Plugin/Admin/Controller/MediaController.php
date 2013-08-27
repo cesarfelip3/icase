@@ -194,6 +194,8 @@ class MediaController extends AdminAppController {
             $resize_500 = true;
         }
         
+        $resize_500 = true;
+        
         require_once APP . 'Vendor' . DS . "Zebra/Zebra_Image.php";
         $image = new Zebra_Image();
 
