@@ -268,7 +268,7 @@ $signup_url = $this->webroot . "signup";
                             </p>
                             <p>
                                 <label>Zip code</label>
-                                <input type="text" placeholder="City" name="bill[zipcode]" />
+                                <input type="text" placeholder="Zip code" name="bill[zipcode]" />
                             </p>
                         </div>
                     </div>
@@ -497,7 +497,7 @@ $signup_url = $this->webroot . "signup";
                             </p>
                             <p>
                                 <label>Zip code</label>
-                                <input type="text" placeholder="City" name="bill[zipcode]" />
+                                <input type="text" placeholder="Zip code" name="bill[zipcode]" />
                             </p>
                         </div>
                     </div>
