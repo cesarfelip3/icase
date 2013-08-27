@@ -54,7 +54,6 @@ if (isset($this->params['slug'])) {
             <div class="logo-area">
                 <span id="logo"></span>
                 <div class="sec_logo_phone">
-                    <span id="secondary-logo"></span>
                     <ul  id="user-nav" class="list-none">
 <?php if (empty($_identity)) : ?>
                             <li><a id="btn-register" class="hd-txt" href='<?php echo $this->webroot; ?>signup'>Sign up</a></li>
