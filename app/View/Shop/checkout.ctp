@@ -501,12 +501,6 @@ $signup_url = $this->webroot . "signup";
                             </p>
                         </div>
                     </div>
-                    <div class="qbox" style="height:auto !important;min-height:30px !important;height:100px;">
-                        <div>
-                            <p style="font-size:14px;font-weight:normal;">You don't need to create an account to check out, but if you want easy access to your order history and status click<a href="javascript:" onclick="formuser_load();"> HERE </a>to create an account.</p>
-                            <p style="font-size:14px;font-weight:normal;">If you have an account with us click <a href="javascript:" onclick="formuser_load();">HERE</a> to sign in.</p>
-                        </div>
-                    </div>
                 </div>           
             </div>
         <?php endif; ?>

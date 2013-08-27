@@ -2,7 +2,7 @@
     <div class="qbox" style="background-color:white;">
         <h1 style="height:30px;border-bottom:2px solid white;">My Cart</h1>
         <div style="overflow: auto;max-height:400px;">
-            <table class="table table-striped">
+            <table class="table">
                 <thead>
                   <tr>
                     <th>#</th>
@@ -61,11 +61,6 @@
                            style="text-decoration:none;"><i class="icon-remove-sign icon-2x"></i></a></th>
                   </tr>
                   <?php endforeach; ?>
-                  <?php if (empty ($_identity)) : ?>
-                  <tr>
-                      <td colspan="8">If you have an account with us click <a href="javascript:" onclick="formuser_load();">HERE</a> to sign in</td>
-                  </tr>
-                  <?php endif; ?>
                   <?php else: ?>
                   <tr>
                       <td colspan='8'>
@@ -78,6 +73,14 @@
                 </tbody>
               </table>
         </div>
+          <?php if (empty ($_identity) && !empty ($data)) : ?>
+        <hr/>
+          <div style="width:50%;line-height: 18px;">
+
+                    <p style="font-size:14px;font-weight:normal;">You don't need to create an account to check out, but if you want easy access to your order history and status click<a href="javascript:" onclick="formuser_load();"> HERE </a>to create an account.</p>
+                    <p style="font-size:14px;font-weight:normal;">If you have an account with us click <a href="javascript:" onclick="formuser_load();">HERE</a> to sign in.</p>
+          </div>
+          <?php endif; ?>
     </div>
 </div>
 <script>
