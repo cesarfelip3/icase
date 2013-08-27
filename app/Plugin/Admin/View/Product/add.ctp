@@ -242,7 +242,7 @@ $admin_product = $base . "product";
             } else {
                 if (action == 'create') {
                     $("input[name='product[id]'").val(result.data);
-                    window.location.href="";
+                    window.location.href="<?php echo $this->webroot . "admin/product/"; ?>";
                 }
                 $(result.element).parent().parent().removeClass('error');
                 $(result.element).next(".help-inline").html("");
