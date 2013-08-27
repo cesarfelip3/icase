@@ -266,6 +266,10 @@ $signup_url = $this->webroot . "signup";
                                 <label>City</label>
                                 <input type="text" placeholder="City" name="bill[city]" />
                             </p>
+                            <p>
+                                <label>Zip code</label>
+                                <input type="text" placeholder="City" name="bill[zipcode]" />
+                            </p>
                         </div>
                     </div>
                 </div>           
@@ -491,6 +495,10 @@ $signup_url = $this->webroot . "signup";
                                 <label>City</label>
                                 <input type="text" placeholder="City" name="bill[city]" />
                             </p>
+                            <p>
+                                <label>Zip code</label>
+                                <input type="text" placeholder="City" name="bill[zipcode]" />
+                            </p>
                         </div>
                     </div>
                     <div class="qbox" style="height:auto !important;min-height:30px !important;height:100px;">
@@ -607,7 +615,7 @@ $signup_url = $this->webroot . "signup";
                         $("input[name='bill[city]']").val ($("input[name='deliver[city]']").val ());
                         
                         //console.log ($("input[name='deliver[address]']").val());
-                        
+                        $("input[name='bill[zipcode]']").val ($("input[name='deliver[zipcode]']").val ());
                         $("select[name='bill[state]']").val($("select[name='deliver[state]']").val());
                     });
             }
