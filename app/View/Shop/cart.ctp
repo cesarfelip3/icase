@@ -61,9 +61,14 @@
                            style="text-decoration:none;"><i class="icon-remove-sign icon-2x"></i></a></th>
                   </tr>
                   <?php endforeach; ?>
+                  <?php if (empty ($_identity)) : ?>
+                  <tr>
+                      <td colspan="8">If you have an account with us click <a href="javascript:" onclick="formuser_load();">HERE</a> to sign in</td>
+                  </tr>
+                  <?php endif; ?>
                   <?php else: ?>
                   <tr>
-                      <td colspan='7'>
+                      <td colspan='8'>
                           <input type="hidden" name="hasorder" value="0" />
                           <em class='text-warning'>There is no product in the cart now</em>
                       </td>

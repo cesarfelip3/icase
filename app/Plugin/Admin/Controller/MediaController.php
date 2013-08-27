@@ -187,6 +187,13 @@ class MediaController extends AdminAppController {
             'extension' => $extension,
         );
 
+        $image_size = getimagesize ($target);
+        
+        $resize_500 = false;
+        if ($image_size[0] > 500) {
+            $resize_500 = true;
+        }
+        
         require_once APP . 'Vendor' . DS . "Zebra/Zebra_Image.php";
         $image = new Zebra_Image();
 
@@ -203,6 +210,41 @@ class MediaController extends AdminAppController {
         // (read more in the overview section or in the documentation)
         //  and if there is an error, check what the error is about
         if (!$image->resize(150, 0, ZEBRA_IMAGE_CROP_CENTER)) {
+
+            // if there was an error, let's see what the error is about
+            switch ($image->error) {
+
+                case 1:
+                    //echo 'Source file could not be found!';
+                    break;
+                case 2:
+                    //echo 'Source file is not readable!';
+                    break;
+                case 3:
+                    //echo 'Could not write target file!';
+                    break;
+                case 4:
+                    //echo 'Unsupported source file format!';
+                    break;
+                case 5:
+                    //echo 'Unsupported target file format!';
+                    break;
+                case 6:
+                    //echo 'GD library version does not support target file format!';
+                    break;
+                case 7:
+                    //echo 'GD library is not installed!';
+                    break;
+                case 8:
+                    //echo '"chmod" command is disabled via configuration!';
+                    break;
+            }
+
+            // if no errors
+        }
+        
+        $image->target_path = $targetDir . DIRECTORY_SEPARATOR . $filename . "_500." . $extension;
+        if ($resize_500 && !$image->resize(500, 0, ZEBRA_IMAGE_CROP_CENTER)) {
 
             // if there was an error, let's see what the error is about
             switch ($image->error) {

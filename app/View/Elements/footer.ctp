@@ -38,6 +38,12 @@ if (isset($this->params['slug'])) {
                                                         </li>
                                                     <?php endforeach; ?>
                                                 <?php endif; ?>
+                                                <li class="<?php
+                                                if ($controller == "index" && $action == "about")
+                                                    echo "active";
+                                                ?>">
+                                                    <a href="<?php echo $this->webroot; ?>index/about/">About</a>
+                                                </li>
                                             </ul>
                                         </div><!-- end nav-collapse -->
                                     </div><!-- end container-->

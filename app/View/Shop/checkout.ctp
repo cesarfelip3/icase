@@ -2,6 +2,10 @@
 $cart_url = $this->webroot . "shop/cart/?action=cart";
 $checkout_cart_url = $this->webroot . "shop/checkout/?action=cart";
 $checkout_confirm_url = $this->webroot . "shop/checkout/?action=check";
+
+$loginform_url = $this->webroot . "auth/formuser";
+$signin_url = $this->webroot . "signin";
+$signup_url = $this->webroot . "signup";
 ?>
 <style>
     form.info label {
@@ -145,6 +149,9 @@ $checkout_confirm_url = $this->webroot . "shop/checkout/?action=check";
                     <div class="qbox">
                         <h1>Billing<span>All fields are required</span></h1>
                         <div id="payment-stripe">
+                            <p>
+                                <label class="checkout" style="width:100%;"><input type="checkbox" name="bill[same]" id="checkbox-same" /> billing same as shippment</label>
+                            </p>
                             <p>
                                 <label>Name</label>
                                 <input type="text" class="input-large" name="bill[name]" placeholder='' />
@@ -368,6 +375,9 @@ $checkout_confirm_url = $this->webroot . "shop/checkout/?action=check";
                         <h1>Billing<span>All fields are required</span></h1>
                         <div id="payment-stripe">
                             <p>
+                                <label class="checkout" style="width:100%;"><input type="checkbox" name="bill[same]" id="checkbox-same" /> billing same as shippment</label>
+                            </p>
+                            <p>
                                 <label>Name</label>
                                 <input type="text" class="input-large" name="bill[name]" placeholder='' />
                             </p>
@@ -483,6 +493,13 @@ $checkout_confirm_url = $this->webroot . "shop/checkout/?action=check";
                             </p>
                         </div>
                     </div>
+                    <div class="qbox" style="height:auto !important;min-height:30px !important;height:100px;">
+                        <h1>Do you want create an account?</h1>
+                        <div>
+                            <a class="btn" onclick="formuser_load();">Yes</a>
+<!--                            <a class="btn">No</a>-->
+                        </div>
+                    </div>
                 </div>           
             </div>
         <?php endif; ?>
@@ -497,13 +514,102 @@ $checkout_confirm_url = $this->webroot . "shop/checkout/?action=check";
     </form>
 </div>
 
+<!-- user modal -->
+<div id="modal-user" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">User</h3>
+    </div>
+    <div class="modal-body" style='background:url("<?php echo $this->webroot; ?>img/pattern/whitey.png") repeat scroll 0 0 transparent;'>
+        <div class="ajax-loading-indicator hide" style=""><a href="javascript:" style="font-size:14px;"><i class="icon-refresh icon-spin"></i> Loading ....</a></div>
+    </div>
+    <div class="modal-footer">
+        <p class="text-error"></p>
+    </div>
+</div>
+<script>
+       //===================================================
 
+    function formuser_load()
+    {
+        $("#modal-user").modal();
+        jQuery.ajax({
+            url: "<?php echo $loginform_url; ?>",
+            type: "GET",
+            beforeSend: function(xhr) {
+            }
+        }).done(function(data) {
 
+            $("#modal-user .modal-body").html(data);
+
+        }).fail(function() {
+            jQuery(".ajax-loading-indicator").hide(0);
+        });
+    }
+
+    function signup_submit()
+    {
+        jQuery.ajax({
+            url: "<?php echo $signup_url; ?>",
+            data: $("#form-signup").serialize(),
+            type: "POST",
+            beforeSend: function(xhr) {
+                $("#btn-signup").button("loading");
+            }
+        }).done(function(data) {
+            $("#btn-signup").button("reset");
+
+            var result = $.parseJSON(data);
+            if (result.error == 1) {
+                $("#form-signup .text-error").html(result.message);
+            } else {
+                $("#modal-user").modal('hide');
+                window.location.href="<?php echo $checkout_cart_url; ?>";
+            }
+        }).fail(function() {
+        });
+    }
+
+    function signin_submit()
+    {
+        jQuery.ajax({
+            url: "<?php echo $signin_url; ?>",
+            data: $("#form-signin").serialize(),
+            type: "POST",
+            beforeSend: function(xhr) {
+                $("#btn-signin").button("loading");
+            }
+        }).done(function(data) {
+            $("#btn-signin").button("reset");
+
+            var result = $.parseJSON(data);
+            if (result.error == 1) {
+                $("#form-signin .text-error").html(result.message);
+            } else {
+                $("#modal-user").modal('hide');
+                window.location.href="<?php echo $checkout_cart_url; ?>";
+            }
+        }).fail(function() {
+        });
+    }
+</script>
 <script type="text/javascript">
     jQuery(document).ready(
             function() {
                 checkout_cart();
                 jQuery(".datepicker").datepicker({format: 'mm/yy'});
+                
+                $("#checkbox-same").click (
+                    function () {
+                        $("input[name='bill[name]']").val ($("input[name='deliver[firstname]']").val () + " " + $("input[name='deliver[lastname]']").val ());
+                        $("input[name='bill[phone]']").val ($("input[name='deliver[phone]']").val ());
+                        $("textarea[name='bill[address]']").val($("textarea[name='deliver[address]']").val ());
+                        $("input[name='bill[city]']").val ($("input[name='deliver[city]']").val ());
+                        
+                        //console.log ($("input[name='deliver[address]']").val());
+                        
+                        $("select[name='bill[state]']").val($("select[name='deliver[state]']").val());
+                    });
             }
     );
 
@@ -526,7 +632,7 @@ $checkout_confirm_url = $this->webroot . "shop/checkout/?action=check";
             var hasorder = $("input[name=hasorder]").val();
             if (hasorder == "1") {
                 $("#btn-paynow").parent().remove();
-                $("#box-bill-details").html($("#box-bill-details").html() + '<p><a class="btn btn-peach" onclick="javascript:cart_confirm()" id="btn-paynow">Pay Now</a></p>');
+                $("#box-bill-details").html($("#box-bill-details").html() + '<p><a class="btn btn-peach" onclick="javascript:cart_confirm()" id="btn-paynow">Continue</a></p>');
             }
 
             cart_config();
