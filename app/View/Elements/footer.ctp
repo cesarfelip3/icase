@@ -54,7 +54,7 @@ if (isset($this->params['slug'])) {
                 </div>
             </div>
             <div class="span12 contact-info">
-                <span class="span9">beautahful creations<strong> Phone:</strong> 123 4567 890 • <a href="mailto:info@beautahfulcreations.com"> info@beautahfulcreations.com</a>
+                <span class="span9">beautahful creations<strong> Phone:</strong> 801 590 9693 • <a href="mailto:info@beautahfulcreations.com"> info@beautahfulcreations.com</a>
                 </span>
                 <ul class="span3 social-network">
                     <li><a href="javascript:void(0)"><i class="icon-linkedin-sign"></i></a></li>
