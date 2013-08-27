@@ -14,10 +14,10 @@
             <?php for ($i = 0; $i < count($data); $i += 3) : ?>
                 <div class="row-fluid hotproperties" style='margin-top:20px;'>
                     <?php if (isset($data[$i])) : ?>
-                        <div class="span4 set-equal-heights-js">
+                        <div class="span4">
                             <div class="thumbnail">
-                                <a class="thumimg" href="<?php echo $this->webroot; ?>product/<?php echo $data[$i]['Product']['slug']; ?>">
-                                    <img src="<?php echo $this->webroot; ?>uploads/product/<?php echo $data[$i]['Product']['featured']['150w'][0]; ?>" alt="<?php echo $data[$i]['Product']['name']; ?>" class="">
+                                <a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i]['Product']['slug']; ?>">
+                                    <img src="<?php echo $this->webroot; ?>uploads/product/<?php echo $data[$i]['Product']['featured']['150w'][0]; ?>" alt="<?php echo $data[$i]['Product']['name']; ?>" style="width:100%;height:200px;">
                                 </a>
                                 <div class="caption">
                                     <a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i]['Product']['slug']; ?>" class="prop-title" style="text-transform: uppercase"><?php echo $data[$i]['Product']['name']; ?></a>
@@ -30,9 +30,9 @@
                         </div>
                     <?php endif; ?>
                     <?php if (isset($data[$i + 1])) : ?>
-                        <div class="span4 set-equal-heights-js">
+                        <div class="span4">
                             <div class="thumbnail">
-                                <a class="thumimg" href="<?php echo $this->webroot; ?>product/<?php echo $data[$i + 1]['Product']['slug']; ?>"><img src="<?php echo $this->webroot; ?>uploads/product/<?php echo $data[$i + 1]['Product']['featured']['150w'][0]; ?>" alt="<?php echo $data[$i + 1]['Product']['name']; ?>" class=""></a>
+                                <a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i + 1]['Product']['slug']; ?>"><img src="<?php echo $this->webroot; ?>uploads/product/<?php echo $data[$i + 1]['Product']['featured']['150w'][0]; ?>" alt="<?php echo $data[$i + 1]['Product']['name']; ?>"  style="width:100%;height:200px;"></a>
                                 <div class="caption">
                                     <a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i + 1]['Product']['slug']; ?>" class="prop-title" style="text-transform: uppercase"><?php echo $data[$i + 1]['Product']['name']; ?></a>
                                     <p class="price">$<?php echo $data[$i + 1]['Product']['price']; ?></p>
@@ -46,8 +46,8 @@
                     <?php if (isset($data[$i + 2])) : ?>
                         <div class="span4 set-equal-heights-js">
                             <div class="thumbnail">
-                                <a class="thumimg" href="<?php echo $this->webroot; ?>product/<?php echo $data[$i + 2]['Product']['slug']; ?>">
-                                    <img src="<?php echo $this->webroot; ?>uploads/product/<?php echo $data[$i + 2]['Product']['featured']['150w'][0]; ?>" alt="<?php echo $data[$i]['Product']['name']; ?>" class="">
+                                <a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i + 2]['Product']['slug']; ?>">
+                                    <img src="<?php echo $this->webroot; ?>uploads/product/<?php echo $data[$i + 2]['Product']['featured']['150w'][0]; ?>" alt="<?php echo $data[$i]['Product']['name']; ?>"  style="width:100%;height:200px;">
                                 </a>
                                 <div class="caption">
                                     <a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i + 2]['Product']['slug']; ?>" class="prop-title" style="text-transform: uppercase"><?php echo $data[$i + 2]['Product']['name']; ?></a>
