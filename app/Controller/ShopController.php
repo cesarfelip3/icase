@@ -154,6 +154,7 @@ class ShopController extends AppController {
                 } else {
                     $user_guid = $this->_identity['guid'];
 
+                    /*
                     $user = array(
                         "orders" => ($this->_identity['orders'] + count($data))
                     );
@@ -161,6 +162,8 @@ class ShopController extends AppController {
                     $this->User->id = $this->_identity['id'];
                     $this->User->set($user);
                     $this->User->save();
+                     
+                     */
                 }
 
                 // deliver info
