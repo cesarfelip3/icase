@@ -61,7 +61,7 @@ class MediaController extends AdminAppController {
                 //  and if there is an error, check what the error is about
                 $message = "";
 
-                if (!$image->crop($param->x, $param->y, $param->x2, $param->y2)) {
+                if (!$image->crop($param->x, $param->y, $param->x + $param->w, $param->y + $param->w)) {
 
                     // if there was an error, let's see what the error is about
                     switch ($image->error) {

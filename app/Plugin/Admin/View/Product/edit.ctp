@@ -472,7 +472,7 @@ $js_pluploader = array(
     });
 
     var crop_data;
-    var crop_action = "";
+    var crop_action = "product_edit";
     
     function featured_image_start_upload()
     {
@@ -500,6 +500,9 @@ $js_pluploader = array(
         $("#box-crop").hide();
     }
     
+    
+    var crop_api;
+    
     function featured_image_crop(id)
     {
         var image = $(id).data('image');
@@ -513,9 +516,10 @@ $js_pluploader = array(
             onSelect: featured_image_cropped,
             onChange: featured_image_cropped,
             onRelease: featured_image_cropped,
+        }, function () {
+             jcrop_api = this;
+             jcrop_api.setOptions({ aspectRatio: 1 });
         });
-        
-         
         
     }
     
