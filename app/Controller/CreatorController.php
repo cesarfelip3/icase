@@ -143,10 +143,14 @@ class CreatorController extends AppController {
                     )
                 ));
 
-                if (!empty($product)) {
-                    $product['Product']['image'] = unserialize($product['Product']['image']);
-                    $overlay = $this->webroot . "img/template/" . $product['Product']['image']['foreground'];
+                if (empty($product)) {
+                    $this->_error['error'] = 1;
+                    $this->_error['message'] = "Wrong template";
+                    exit (json_encode($this->_error));
                 }
+                
+                $product['Product']['image'] = unserialize($product['Product']['image']);
+                $overlay = $this->webroot . "img/template/" . $product['Product']['image']['foreground'];
 
                 $this->_error['data']['overlay'] = $overlay;
                 $this->_error['data']['json'] = $data['Creation']['data'];
