@@ -19,6 +19,7 @@ class BugFixController extends AppController {
         $data = $this->Category->find('all');
 
         foreach ($data as $key => $value) {
+            print_r ($value['Category']['slug']);
             if (strpos("/", $value['Category']['slug']) !== false) {
                 print_r ($value['Category']['slug']);
                 $value['Category']['slug'] = preg_replace("/\/+/i", "-", $value['Category']['slug']);
