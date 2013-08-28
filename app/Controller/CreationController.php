@@ -42,16 +42,11 @@ class CreationController extends AppController {
                             $png1 = unserialize($data['Product']['image']);
                             $png1 = $png1['foreground'];
 
-                            $filename = pathinfo($png1, PATHINFO_FILENAME);
-                            $png2 = $filename . "_overlay.png";
-
                             $jpeg = $order['Order']['attachement'];
                             $filename = pathinfo($jpeg, PATHINFO_FILENAME);
                         }
 
                         $png1 = APP . DS . "webroot" . DS . "img" . DS . "template" . DS . $png1;
-                        $png2 = APP . DS . "webroot" . DS . "img" . DS . "template" . DS . $png2;
-
                         $jpeg = APP . DS . "webroot" . DS . "uploads" . DS . "preview" . DS . $jpeg;
 
                         try {
@@ -85,36 +80,6 @@ class CreationController extends AppController {
         imagecopyresampled($out, $png, 0, 0, 0, 0, 780, 780, 780, 780);
 
         imagejpeg($out, $final, 100);
-
-        $image = file_get_contents($final);
-        $image = substr_replace($image, pack("cnn", 1, 300, 300), 13, 5);
-
-        file_put_contents($final, $image);
-    }
-
-    public function view() {
-        $guid = $this->request->query('id');
-
-        if (empty($guid)) {
-            $this->_error['error'] = 1;
-            $this->_error['message'] = "";
-            exit(json_encode($this->_error));
-        }
-
-        $this->loadModel("Order");
-        $data = $this->Order->find("first", array("conditions" => array("guid" => $guid)));
-
-        if (!empty($data)) {
-            $this->loadModel("UserBillInfo");
-            $bill = $this->UserBillInfo->find("first", array("conditions" => array("guid" => $data['bill_guid'])));
-
-            $this->loadModel("UserDeliverInfo");
-            $deliver = $this->UserDeliverInfo->find("first", array("conditions" => array("guid" => $data['deliver_guid'])));
-
-            $this->set(array('bill' => $bill, 'deliver' => $deliver));
-        }
-
-        $this->set('data', $data);
     }
 
     public function delete() {
@@ -139,14 +104,8 @@ class CreationController extends AppController {
 
         $this->loadModel('Media');
         $data = $this->Media->find('first', array("conditions" => array("guid" => $guid)));
-        if (!empty($data)) {
-            if (file_exists(APP . DS . "webroot" . DS . "uploads" . DS . "user" . DS . $data['Media']['filename'])) {
-                @unlink(APP . DS . "webroot" . DS . "uploads" . DS . "user" . DS . $data['Media']['filename']);
-            }
-
-            if (file_exists(APP . DS . "webroot" . DS . "uploads" . DS . "preview" . DS . $data['Media']['filename'])) {
-                @unlink(APP . DS . "webroot" . DS . "uploads" . DS . "preview" . DS . $data['Media']['filename']);
-            }
+        if (empty($data)) {
+            $this->redirect(array("controller"=>"creation", "action"=>"index"));
         }
 
         $this->Media->query("DELETE FROM creations WHERE guid='{$data['Media']['guid']}'");
