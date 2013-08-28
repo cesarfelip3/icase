@@ -43,18 +43,8 @@ class UserController extends AppController {
 
             $data = $this->request->data('user');
 
-            if (empty($data['name'])) {
-                $this->_error['error'] = 1;
-                $this->_error['element'] = 'input[name="user[name]"]';
-                $this->_error['message'] = 'Customer name is required';
-                exit(json_encode($this->_error));
-            }
-
-            if (preg_match("/^[a-z]{1,}|[a-z]{1,}[0-9]{1,}$/i", $data['name']) == false) {
-                $this->_error['error'] = 1;
-                $this->_error['element'] = 'input[name="user[name]"]';
-                $this->_error['message'] = 'Invalid name, [a-z]...[0-9]...';
-                exit(json_encode($this->_error));
+            if (isset ($data['name'])) {
+                unset ($data['name']);
             }
 
             if (empty($data['email'])) {
@@ -83,16 +73,16 @@ class UserController extends AppController {
             }
 
             $this->loadModel('User');
-            $result = $this->User->find('first', array("conditions" => array("OR" => array("name" => $data['name'], "email" => $data['email']))));
+            $result = $this->User->find('first', array("conditions" => array("guid" => $this->_identity['guid'])));
 
             if (empty($result)) {
                 $this->_error['error'] = 1;
                 $this->_error['element'] = '';
-                $this->_error['message'] = 'User name or email doesn\'t exists';
+                $this->_error['message'] = 'Something wrong with your account.';
                 exit(json_encode($this->_error));
             }
 
-            $data['name'] = strtolower($data['name']);
+            //$data['name'] = strtolower($data['name']);
 
             if (!empty($data['password'])) {
                 $passwordHasher = new SimplePasswordHasher();
