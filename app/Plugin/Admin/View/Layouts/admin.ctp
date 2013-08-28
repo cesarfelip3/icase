@@ -60,8 +60,14 @@
                                         <ul class="dropdown-menu">
                                             <li><a href="<?php echo $base; ?>product/">Manage Catalogue</a></li>
                                             <li><a href="<?php echo $base; ?>category/">Manage Categories</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown">
+                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-shopping-cart"></i> Sales <b class="caret"></b></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="<?php echo $base; ?>coupon/">Manage Coupons</a></li>
                                             <li><a href="<?php echo $base; ?>order/">Manage Orders</a></li>
-<!--                                            <li><a href="<?php echo $base; ?>enquiry/">Manage Enquiries</a></li>-->
+                                            
                                         </ul>
                                     </li>
                                     <li class="dropdown">
