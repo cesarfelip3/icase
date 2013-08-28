@@ -20,7 +20,7 @@ class BugFixController extends AppController {
 
         foreach ($data as $key => $value) {
             print_r ($value['Category']['slug'] . "<br/>");
-            if (strpos("\/", $value['Category']['slug']) !== false) {
+            if (preg_match("/\//i", $value['Category']['slug'], $matches)) {
                 print_r ($value['Category']['slug']);
                 $value['Category']['slug'] = preg_replace("/\/+/i", "-", $value['Category']['slug']);
                 //$data[$key] = $value;
