@@ -5,6 +5,12 @@ App::uses('Controller', 'Controller');
 class AdminAppController extends Controller {
     
     protected $_base_plugin;
+     protected $_error = array(
+        'error' => 0,
+        'element' => '',
+        'message' => '',
+        'data' => ''
+    );
     
     public $components = array(
         'Session',
