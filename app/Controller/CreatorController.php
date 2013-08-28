@@ -65,6 +65,18 @@ class CreatorController extends AppController {
 
                 exit(json_encode($this->_error));
             }
+            
+            $this->loadModel('Product');
+            $product = $this->Product->find('first', array (
+                "conditions" => array (
+                    "guid" => $product_guid
+            )));
+            
+            if (empty ($product) || $product['Product']['type'] != 'template') {
+                $this->_error['error'] = 1;
+                $this->_error['message'] = 'Wrong template';
+                exit(json_encode($this->_error));
+            }
 
             $this->loadModel('Creation');
             $data = $this->Creation->find('first', array("conditions" => array("guid" => $guid)));
