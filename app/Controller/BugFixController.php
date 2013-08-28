@@ -12,6 +12,8 @@ class BugFixController extends AppController {
     }
 
     public function fix() {
+        exit;
+        
         $this->loadModel('Category');
 
         /*
