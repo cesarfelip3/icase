@@ -4,7 +4,7 @@
         <!-- 2 columns -->
         <div class="row-fluid">
             <div class="span6">
-                <p><img src="<?php echo $this->webroot . "uploads/product/" . $data['featured']['150w'][0]; ?>"></p>
+                <p><img src="<?php echo $this->webroot . "uploads/product/" . str_replace (".", "_500.", $data['featured']['origin'][0]); ?> ?>"></p>
             </div>
             <div class="span6">
                 <h3><strong><span style="text-transform: uppercase;"><?php echo $data['name']; ?></span></strong> </h3>
