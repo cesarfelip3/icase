@@ -20,46 +20,28 @@ class CreationController extends AppController {
         )));
 
         $guid = $this->_identity['guid'];
+        
+        $this->loadModel("Media");
+        $medias = $this->Media->find('all', array(
+            'joins' => array(
+                array(
+                    'table' => 'media_to_object',
+                    'alias' => 'MediaToObject',
+                    'type' => 'inner',
+                    'foreignKey' => false,
+                    'conditions' => array('MediaToObject.object_guid = Media.guid')
+                ),
+            ),
+            'conditions' => array(
+                "MediaToObject.object_guid" => $this->_identity['guid'],
+            ),
+            'order' => 'modified DESC',
+            'limit' => 200,
+            'page' => 1,
+            'fields' => array("Media.*")
+        ));
 
-        $this->loadModel("Order");
-
-        if (false) {
-            $orders = $this->Order->find('all', array(
-                "order" => "created DESC",
-                "conditions" => array(
-                    "buyer_guid" => $this->_identity['guid'],
-                    "type" => "template",
-            )));
-
-            if (!empty($orders)) {
-
-                foreach ($orders as $order) {
-                    if ($order['Order']['type'] == 'template') {
-                        $this->loadModel("Product");
-                        $data = $this->Product->find('first', array("conditions" => array("guid" => $order['Order']['product_guid'])));
-
-                        if (!empty($data)) {
-                            $png1 = unserialize($data['Product']['image']);
-                            $png1 = $png1['foreground'];
-
-                            $jpeg = $order['Order']['attachement'];
-                            $filename = pathinfo($jpeg, PATHINFO_FILENAME);
-                        }
-
-                        $png1 = APP . DS . "webroot" . DS . "img" . DS . "template" . DS . $png1;
-                        $jpeg = APP . DS . "webroot" . DS . "uploads" . DS . "preview" . DS . $jpeg;
-
-                        try {
-                            $this->overlayImage($png1, $jpeg, $filename . "_user.jpeg");
-                            //$this->overlayImage($png2, $jpeg, $filename . "_admin.jpeg");
-                        } catch (Exception $e) {
-                            $this->Session->setFlash($e->getMessage());
-                        }
-                    }
-                }
-            }
-        }
-        //$this->set('data2', $orders);
+        $this->set('data2', $medias);
         $this->set('data', $creations);
     }
 

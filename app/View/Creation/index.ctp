@@ -47,7 +47,7 @@
                 </tbody>
             </table>
         </div>
-        <?php if (false) : ?>
+        <?php if (true) : ?>
         <div class="row-fluid" style="margin-top:20px;background-color:white;border:1px solid #ccc;padding:15px;border-radius: 5px;">
             <h2>Final Creations</h2>
             <table class="table">
@@ -64,8 +64,8 @@
                         <?php foreach ($data2 as $value) : ?>
                             <tr>
                                 <td><?php echo ++$i; ?></td>
-                                <td><img src="<?php echo $this->webroot . "uploads/user/" . $value['Order']['file']; ?>" style="width:300px;border:1px solid #ccc;" /></td>
-                                <td><?php echo date ("m/d/y g:i:s A", $value['Order']['modified']); ?></td>
+                                <td><img src="<?php echo $this->webroot . "uploads/user/" . str_replace (".", "_user.", $value['Media']['filename']); ?>" style="width:300px;border:1px solid #ccc;" /></td>
+                                <td><?php echo date ("m/d/y g:i:s A", $value['Media']['modified']); ?></td>
                                 <td class="pull-right">
                                 </td>
                             </tr>
