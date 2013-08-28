@@ -48,10 +48,16 @@ class BugFixController extends AppController {
             }
             closedir($handle);
         }
+        
+        if (empty ($images)) {
+            print_r ("no images");
+            exit;
+        }
 
         require_once APP . 'Vendor' . DS . "Zebra/Zebra_Image.php";
-        foreach ($images as $image) {
-            if (preg_match("/^[0-9a-zA-Z]{1,}$/i", $img)) {
+        
+        foreach ($images as $img) {
+            if (preg_match("/^[0-9a-zA-Z]{1,}$/i", pathinfo($img, PATHINFO_FILENAME))) {
                 $image_500 = str_replace(".", "_500.", $img);
                 if (!file_exists($dir . $image_500)) {
                     
