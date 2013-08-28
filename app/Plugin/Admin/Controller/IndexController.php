@@ -2,12 +2,6 @@
 
 class IndexController extends AdminAppController {
 
-    protected $_error = array(
-        'error' => 0,
-        'element' => '',
-        'message' => '',
-        'data' => ''
-    );
 
     public function beforeFilter() {
         $this->Auth->allow();
