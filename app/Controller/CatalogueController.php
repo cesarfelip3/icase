@@ -210,8 +210,6 @@ class CatalogueController extends AppController {
                 "Product.quantity >" => 0,
             ),
             'order' => 'modified DESC',
-            'limit' => 24,
-            'page' => $page + 1,
             'fields' => array("Product.*")
         ));
 
