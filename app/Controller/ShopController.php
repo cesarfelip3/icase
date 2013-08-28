@@ -213,7 +213,7 @@ class ShopController extends AppController {
                         @copy(APP . "webroot" . DS . "uploads" . DS . "preview" . DS . $value['Product']['file'], APP . DS . "webroot" . DS . "uploads" . DS . "user" . DS . $value['Product']['file']);
                         @copy(APP . "webroot" . DS . "uploads" . DS . "preview" . DS . str_replace (".", "_user.", $value['Product']['file']), APP . DS . "webroot" . DS . "uploads" . DS . "user" . DS . str_replace (".", "_user.", $value['Product']['file']));
                         
-                        @copy(APP . "webroot" . DS . "uploads" . DS . "preview" . DS . $value['Product']['file'], APP . "webroot" . DS . "uploads" . DS . "user" . DS . $value['Product']['file']);
+                        @copy(APP . "webroot" . DS . "uploads" . DS . "preview" . DS . $value['Product']['file'], APP . "webroot" . DS . "uploads" . DS . "order" . DS . $value['Product']['file']);
                         @copy(APP . "webroot" . DS . "uploads" . DS . "preview" . DS . str_replace (".", "_user.", $value['Product']['file']), APP . "webroot" . DS . "uploads" . DS . "order" . DS . str_replace (".", "_user.", $value['Product']['file']));
                     }
 
