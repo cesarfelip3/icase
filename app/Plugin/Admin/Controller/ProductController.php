@@ -164,11 +164,16 @@ class ProductController extends AdminAppController {
                 }
             }
 
+            $data['slug'] = trim ($data['slug']);
+            $data['name'] = trim ($data['name']);
             if (empty($data['slug'])) {
                 $data['slug'] = preg_replace("/ +/i", "-", $data['name']);
             } else {
                 $data['slug'] = preg_replace("/ +/i", "-", $data['slug']);
             }
+            
+            $data['slug'] = @preg_replace("/\/+/i", "-", $data['slug']);
+            
 
             $data['type'] = isset($data['type']) ? $data['type'] : 'product';
             $data['status'] = isset($data['status']) ? $data['status'] : 'draft';
@@ -349,11 +354,15 @@ class ProductController extends AdminAppController {
                 }
             }
 
+            $data['slug'] = trim ($data['slug']);
+            $data['name'] = trim ($data['name']);
             if (empty($data['slug'])) {
-                $data['slug'] = preg_replace("/ +/i", "-", $data['name']);
+                $data['slug'] = @preg_replace("/ +/i", "-", $data['name']);
             } else {
-                $data['slug'] = preg_replace("/ +/i", "-", $data['slug']);
+                $data['slug'] = @preg_replace("/ +/i", "-", $data['slug']);
             }
+            
+            $data['slug'] = @preg_replace("/\/+/i", "-", $data['slug']);
 
             $data['type'] = isset($data['type']) ? $data['type'] : 'product';
             $data['status'] = isset($data['status']) ? $data['status'] : 'draft';

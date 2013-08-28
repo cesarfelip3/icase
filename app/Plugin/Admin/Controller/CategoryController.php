@@ -16,11 +16,11 @@ class CategoryController extends AdminAppController {
     public function index() {
 
         if ($this->request->is('ajax')) {
-            
+
             $this->layout = false;
             $action = $this->request->query('action');
             $id = $this->request->query('id');
-            
+
             $this->loadModel('Category');
             $categories = $this->Category->find('all', array(
                 "conditions" => array('level' => 0),
@@ -53,22 +53,22 @@ class CategoryController extends AdminAppController {
                         break;
                 }
             }
-            
-            if (!empty ($id)) {
+
+            if (!empty($id)) {
                 $this->loadModel('CategoryToObject');
                 $data = $this->CategoryToObject->find('all', array("conditions" => array("object_guid" => $id)));
                 foreach ($return as $key => $value) {
-                    
+
                     $value['Category']['selected'] = false;
                     foreach ($data as $category) {
                         if ($value['Category']['guid'] == $category['CategoryToObject']['category_guid']) {
                             $value['Category']['selected'] = true;
-                        } 
+                        }
                     }
                     $return[$key] = $value;
                 }
             }
-            
+
             $this->set('data', $return);
             $this->render('index.ajax');
         }
@@ -114,7 +114,7 @@ class CategoryController extends AdminAppController {
                 $this->Category->save();
             }
         }
-        
+
         if ($level == 0) {
             Cache::delete("category_top");
         }
@@ -133,11 +133,15 @@ class CategoryController extends AdminAppController {
                 )
         );
 
+        $data['slug'] = trim($data['slug']);
+        $data['name'] = trim($data['name']);
         if (empty($data['slug'])) {
             $data['slug'] = preg_replace("/ +/i", "-", $data['name']);
         } else {
             $data['slug'] = preg_replace("/ +/i", "-", $data['slug']);
         }
+
+        $data['slug'] = @preg_replace("/\/+/i", "-", $data['slug']);
 
         $this->Category->save($data);
         exit(json_encode($this->error));
@@ -159,13 +163,23 @@ class CategoryController extends AdminAppController {
             exit(json_encode($this->error));
         }
 
+        $data['slug'] = trim($data['slug']);
+        $data['name'] = trim($data['name']);
+        if (empty($data['slug'])) {
+            $data['slug'] = preg_replace("/ +/i", "-", $data['name']);
+        } else {
+            $data['slug'] = preg_replace("/ +/i", "-", $data['slug']);
+        }
+
+        $data['slug'] = @preg_replace("/\/+/i", "-", $data['slug']);
+
         $this->loadModel('Category');
         $data = $this->request->data('category');
 
         if ($data['level'] == 0) {
             Cache::delete("category_top");
         }
-        
+
         $this->Category->id = $data['id'];
         unset($data['id']);
         unset($data['guid']);
@@ -235,6 +249,6 @@ class CategoryController extends AdminAppController {
             }
         }
     }
+
 }
 
-    
