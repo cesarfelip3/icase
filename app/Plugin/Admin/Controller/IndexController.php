@@ -91,10 +91,6 @@ class IndexController extends AdminAppController {
 
     public function logout() {
 
-        if (!$this->Auth->loggedIn()) {
-            $this->redirect(array("controller" => "index", "action" => "index"));
-        }
-
         $this->Auth->logout();
         $this->redirect(array("plugin" => "admin", "controller" => "index", "action" => "login"));
     }
