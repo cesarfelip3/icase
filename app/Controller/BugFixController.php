@@ -24,8 +24,8 @@ class BugFixController extends AppController {
                 print_r ($value['Category']['slug']);
                 $value['Category']['slug'] = preg_replace("/\/+/i", "-", $value['Category']['slug']);
                 //$data[$key] = $value;
-                $this->Product->id = $value['Category']['id'];
-                $this->Product->save(array('slug' => $value['Category']['slug']));
+                $this->Category->id = $value['Category']['id'];
+                $this->Category->save(array('slug' => $value['Category']['slug']));
             }
         }
         
