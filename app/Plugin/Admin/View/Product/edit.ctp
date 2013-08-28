@@ -210,6 +210,7 @@ $admin_product = $base . "product";
                                         <img src="<?php echo $this->webroot . "uploads/product/" . $data['featured2']['150w'][$key]; ?>" style=""></a>
                                     <div class="caption">
                                         <p><a href="javascript:" data-image="<?php echo $image; ?>" onclick="featured_image_delete(this);">Delete</a></p>
+                                        <p><a href="javascript:" data-image="<?php echo $image; ?>" onclick="featured_image_crop(this);">Crop</a></p>
                                     </div>
                                 </div>
                                 <?php endforeach; ?>
@@ -222,16 +223,12 @@ $admin_product = $base . "product";
             </div>
         </form>
     </div>
-</div>
-<div class="navbar navbar-fixed-bottom hide">
-    <div class="navbar-inner">
-        <div class="container" style="width: auto; padding: 0 20px;">
-            <a class="brand" href="#">Title</a>
-            <ul class="nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">Link</a></li>
-                <li><a href="#">Link</a></li>
-            </ul>
+    <div id="box-crop" class="hide">
+        <div style="padding:10px;height:50px;">
+            <a href="javascript:" class="btn btn-info pull-right" onclick="featured_image_crop_ajax()">Crop</a>
+        </div>
+        <div class="thumbnail">
+            <img src="" id="img-crop" />
         </div>
     </div>
 </div>
@@ -283,6 +280,7 @@ $admin_product = $base . "product";
                 }
                 $(result.element).parent().parent().removeClass('error');
                 $(result.element).next(".help-inline").html("");
+                window.location.href = "<?php echo $base; ?>product/"
             }
 
         }).fail(function() {
@@ -297,11 +295,14 @@ $js_pluploader = array(
     //"pluploader/plupload.flash.js",
     "pluploader/plupload.browserplus.js",
     "pluploader/plupload.html4.js",
-    "pluploader/plupload.html5.js"
+    "pluploader/plupload.html5.js",
+    "jcrop/js/jquery.jcrop.min.js"
 );
 ?>
 
 <?php echo $this->Html->script($js_pluploader); ?>
+<link rel="stylesheet" href="<?php echo $this->webroot; ?>js/jcrop/css/jquery.Jcrop.css" type="text/css" />
+
 
 <script type="text/javascript">
     // Custom example logic
@@ -458,7 +459,7 @@ $js_pluploader = array(
                     if (url == "") {
                         url = result.files.url;
                     }
-                    $("#box-featured-image").append('<div class="thumbnail" style="width:20%;float:left;margin-left:5px;margin-bottom:10px;"><a class="featured-thumbnail"><img src="' + url + '" style="" /></a><div class="caption"><p><a href="javascript:" data-image="' + result.files.target + '" onclick="featured_image_delete(this);">Delete</a></p></div></div>');
+                    $("#box-featured-image").append('<div class="thumbnail" style="width:20%;float:left;margin-left:5px;margin-bottom:10px;"><a class="featured-thumbnail"><img src="' + url + '" style="" /></a><div class="caption"><p><a href="javascript:" data-image="' + result.files.target + '" onclick="featured_image_delete(this);">Delete</a></p><a href="javascript:" data-image="' + result.files.target + '" onclick="featured_image_crop(this);">Crop</a></p></div></div>');
                     $("input[name='product[featured]']").val($("input[name='product[featured]']").val() + "-" + result.files.target);
                     //console.log ($("input[name='product[featured]']").val());
                     init();
@@ -470,12 +471,17 @@ $js_pluploader = array(
         //alert($.parseJSON(response.response).result);
     });
 
+    var crop_data;
+    var crop_action = "";
+    
     function featured_image_start_upload()
     {
         uploader2.start();
         $('#box-featured-image').html("");
         $('#featured-image-list').html("");
         $('input[name="product[featured]"]').val("");
+        
+        crop_action = "";
     }
 
     function featured_image_delete(id)
@@ -490,6 +496,74 @@ $js_pluploader = array(
         images = images.replace(image, "");
 
         $('input[name="product[featured]"]').val(images);
-        console.log(image + ":" + images);
+        $("#img-crop").attr('src', "");
+        $("#box-crop").hide();
     }
+    
+    function featured_image_crop(id)
+    {
+        var image = $(id).data('image');
+        $("#img-crop").attr('src', "");
+        $("#box-crop").show();
+        
+        $("#img-crop").attr('src', "<?php echo $this->webroot; ?>uploads/" + image);
+        $("#img-crop").css('width', $(id).data('width') + "px !important");
+        $('#img-crop').Jcrop({ 
+        
+            onSelect: featured_image_cropped,
+            onChange: featured_image_cropped,
+            onRelease: featured_image_cropped,
+        });
+        
+         
+        
+    }
+    
+    function featured_image_cropped (c)
+    {
+        console.log (c);
+        crop_data = c;
+    }
+    
+    function featured_image_crop_ajax ()
+    {
+        var data = new Object();
+        
+        if (crop_data == null) {
+            return;
+        }
+        
+        if ($("#img-crop").attr('src') == "") {
+            return;
+        }
+        
+        data.json = crop_data;
+        data.file = $("#img-crop").attr('src');
+        
+        jQuery.ajax({
+            url: "<?php echo $base; ?>media/crop/?action=" + crop_action,
+            data: {'json':JSON.stringify(data)},
+            type: "POST",
+            beforeSend: function(xhr) {
+                showAlert2 ("Croping......");
+            }
+        }).done(function(data) {
+            $("#btn-save").button('reset');
+
+            var result = $.parseJSON(data);
+            console.log(result);
+            if (result.error == 1) {
+                showAlert (result.message);
+            } else {
+                alert ("Cropped successfully.")
+                //$("#img-crop").attr('src', result.files.url);
+            }
+            
+            hideAlert ();
+
+        }).fail(function() {
+            showAlert ("failed");
+        });       
+    }
+    
 </script>

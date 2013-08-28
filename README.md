@@ -7,6 +7,7 @@ Update
 
 1. Admin / Order / Email Notification
 2. Email / Content
+3. Admin / Product / Add - Image - crop hint?
 
 5. Media Location (optional)
 4. Error Handler (final)

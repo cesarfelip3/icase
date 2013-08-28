@@ -188,16 +188,12 @@ $admin_product = $base . "product";
             </div>
         </form>
     </div>
-</div>
-<div class="navbar navbar-fixed-bottom hide">
-    <div class="navbar-inner">
-        <div class="container" style="width: auto; padding: 0 20px;">
-            <a class="brand" href="#">Title</a>
-            <ul class="nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">Link</a></li>
-                <li><a href="#">Link</a></li>
-            </ul>
+    <div id="box-crop">
+        <div style="padding:10px;height:50px;">
+            <a href="javascript:" class="btn btn-info pull-right" onclick="featured_image_crop_ajax()">Crop</a>
+        </div>
+        <div class="thumbnail">
+            <img src="" id="img-crop" />
         </div>
     </div>
 </div>
@@ -260,11 +256,13 @@ $js_pluploader = array(
     //"pluploader/plupload.flash.js",
     "pluploader/plupload.browserplus.js",
     "pluploader/plupload.html4.js",
-    "pluploader/plupload.html5.js"
+    "pluploader/plupload.html5.js",
+    "jcrop/js/jquery.jcrop.min.js"
 );
 ?>
 
 <?php echo $this->Html->script($js_pluploader); ?>
+<link rel="stylesheet" href="<?php echo $this->webroot; ?>js/jcrop/css/jquery.Jcrop.css" type="text/css" />
 
 <script type="text/javascript">
     // Custom example logic
@@ -412,7 +410,7 @@ $js_pluploader = array(
                         url = result.files.url;
                     }
                     
-                    $("#box-featured-image").append('<div class="thumbnail" style="width:24%;float:left;margin-left:5px;margin-bottom:10px;"><a class="featured-thumbnail"><img src="' + url + '" style="" /></a><div class="caption"><p><a class="btn btn-success" data-image="' + result.files.target + '" onclick="featured_image_delete(this);">Delete</a></p></div></div>');
+                    $("#box-featured-image").append('<div class="thumbnail" style="width:24%;float:left;margin-left:5px;margin-bottom:10px;"><a class="featured-thumbnail"><img src="' + url + '" style="" /></a><div class="caption"><p><a class="btn btn-success" data-image="' + result.files.target + '" onclick="featured_image_delete(this);">Delete</a></p><p><a class="btn btn-success" data-image="' + result.files.target + '" data-width="' + result.files.width + '" onclick="featured_image_crop(this);">Crop</a></p></div></div>');
                     $("input[name='product[featured]']").val($("input[name='product[featured]']").val() + "-" + result.files.target);
                     //console.log ($("input[name='product[featured]']").val());
                     init();
@@ -445,5 +443,76 @@ $js_pluploader = array(
 
         $('input[name="product[featured]"]').val(images);
         console.log(image + ":" + images);
+        $("#img-crop").attr('src', "");
+        $("#box-crop").hide();
     }
+    
+    function featured_image_crop(id)
+    {
+        var image = $(id).data('image');
+        $("#img-crop").attr('src', "");
+        $("#box-crop").show();
+        
+        $("#img-crop").attr('src', "<?php echo $this->webroot; ?>uploads/" + image);
+        $("#img-crop").css('width', $(id).data('width') + "px !important");
+        $('#img-crop').Jcrop({ 
+        
+            onSelect: featured_image_cropped,
+            onChange: featured_image_cropped,
+            onRelease: featured_image_cropped,
+        });
+        
+         
+        
+    }
+    
+    var crop_data;
+    
+    function featured_image_cropped (c)
+    {
+        console.log (c);
+        crop_data = c;
+    }
+    
+    function featured_image_crop_ajax ()
+    {
+        var data = new Object();
+        
+        if (crop_data == null) {
+            return;
+        }
+        
+        if ($("#img-crop").attr('src') == "") {
+            return;
+        }
+        
+        data.json = crop_data;
+        data.file = $("#img-crop").attr('src');
+        
+        jQuery.ajax({
+            url: "<?php echo $base; ?>media/crop/",
+            data: {'json':JSON.stringify(data)},
+            type: "POST",
+            beforeSend: function(xhr) {
+                showAlert2 ("Croping......");
+            }
+        }).done(function(data) {
+            $("#btn-save").button('reset');
+
+            var result = $.parseJSON(data);
+            console.log(result);
+            if (result.error == 1) {
+                showAlert (result.message);
+            } else {
+                alert ("Cropped successfully.")
+                //$("#img-crop").attr('src', result.files.url);
+            }
+            
+            hideAlert ();
+
+        }).fail(function() {
+            showAlert ("failed");
+        });       
+    }
+    
 </script>

@@ -14,11 +14,175 @@ class MediaController extends AdminAppController {
         parent::beforeFilter();
     }
 
+    public function crop() {
+
+        if ($this->request->is('ajax')) {
+            if ($this->request->is('post')) {
+
+                $data = $this->request->data('json');
+
+                if (empty($data)) {
+                    $this->_error['error'] = 1;
+                    $this->_error['message'] = "No data";
+                    exit(json_encode($this->_error));
+                }
+
+                $data = json_decode($data);
+                $param = $data->json;
+                $file = $data->file;
+
+
+                $filename = pathinfo($file, PATHINFO_FILENAME);
+                $extension = pathinfo($file, PATHINFO_EXTENSION);
+
+                $targetDir = APP . "webroot/uploads/";
+                
+                $action = $this->request->query ('action');
+                if ($action == 'product_edit') {
+                    $targetDir .= "product/";
+                }
+
+                require_once APP . 'Vendor' . DS . "Zebra/Zebra_Image.php";
+                $image = new Zebra_Image();
+
+                $image->source_path = $targetDir . $filename . "." . $extension;
+                $image->target_path = $targetDir . $filename . "_crop." . $extension;
+
+                $image->jpeg_quality = 100;
+
+                $image->preserve_aspect_ratio = true;
+                $image->enlarge_smaller_images = true;
+                $image->preserve_time = true;
+
+                ;
+
+                // resize the image to exactly 100x100 pixels by using the "crop from center" method
+                // (read more in the overview section or in the documentation)
+                //  and if there is an error, check what the error is about
+                $message = "";
+
+                if (!$image->crop($param->x, $param->y, $param->x2, $param->y2)) {
+
+                    // if there was an error, let's see what the error is about
+                    switch ($image->error) {
+
+                        case 1:
+                            $message = 'Source file could not be found!';
+                            break;
+                        case 2:
+                            $message = 'Source file is not readable!';
+                            break;
+                        case 3:
+                            $message = 'Could not write target file!';
+                            break;
+                        case 4:
+                            $message = 'Unsupported source file format!';
+                            break;
+                        case 5:
+                            $message = 'Unsupported target file format!';
+                            break;
+                        case 6:
+                            $message = 'GD library version does not support target file format!';
+                            break;
+                        case 7:
+                            $message = 'GD library is not installed!';
+                            break;
+                        case 8:
+                            $message = '"chmod" command is disabled via configuration!';
+                            break;
+                    }
+
+                    // if no errors
+                } else {
+                    $image->source_path = $targetDir . $filename . "_crop." . $extension;
+                    $image->target_path = $targetDir . $filename . "_150." . $extension;
+                    if (!$image->resize(150, 0, ZEBRA_IMAGE_CROP_CENTER)) {
+
+                        // if there was an error, let's see what the error is about
+                        switch ($image->error) {
+
+                            case 1:
+                                $message = 'Source file could not be found!';
+                                break;
+                            case 2:
+                                $message = 'Source file is not readable!';
+                                break;
+                            case 3:
+                                $message = 'Could not write target file!';
+                                break;
+                            case 4:
+                                $message = 'Unsupported source file format!';
+                                break;
+                            case 5:
+                                $message = 'Unsupported target file format!';
+                                break;
+                            case 6:
+                                $message = 'GD library version does not support target file format!';
+                                break;
+                            case 7:
+                                $message = 'GD library is not installed!';
+                                break;
+                            case 8:
+                                $message = '"chmod" command is disabled via configuration!';
+                                break;
+                        }
+                    }
+                    
+
+                    $image->target_path = $targetDir . $filename . "_500." . $extension;
+                    if (!$image->resize(500, 0, ZEBRA_IMAGE_CROP_CENTER)) {
+
+                        // if there was an error, let's see what the error is about
+                        switch ($image->error) {
+
+                            case 1:
+                                $message = 'Source file could not be found!';
+                                break;
+                            case 2:
+                                $message = 'Source file is not readable!';
+                                break;
+                            case 3:
+                                $message = 'Could not write target file!';
+                                break;
+                            case 4:
+                                $message = 'Unsupported source file format!';
+                                break;
+                            case 5:
+                                $message = 'Unsupported target file format!';
+                                break;
+                            case 6:
+                                $message = 'GD library version does not support target file format!';
+                                break;
+                            case 7:
+                                $message = 'GD library is not installed!';
+                                break;
+                            case 8:
+                                $message = '"chmod" command is disabled via configuration!';
+                                break;
+                        }
+                    }
+                    // if no errors
+                }
+
+                if (!empty($message)) {
+                    $this->_error['error'] = 1;
+                    $this->_error['message'] = $message;
+                }
+
+                exit(json_encode($this->_error));
+            }
+        }
+    }
+
     public function uploadimage() {
 
         $action = $this->request->query("action");
         if (!empty($action)) {
-            $action = DS . $action;
+            if ($action == 'product') {
+                $action = "";
+            } else {
+                $action = DS . $action;
+            }
         }
 
         error_reporting(0);
@@ -40,6 +204,7 @@ class MediaController extends AdminAppController {
         header("Cache-Control: no-store, no-cache, must-revalidate");
         header("Cache-Control: post-check=0, pre-check=0", false);
         header("Pragma: no-cache");
+
 
         $targetDir = $this->_targetDir = ROOT . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'uploads' . $action;
 
@@ -185,17 +350,22 @@ class MediaController extends AdminAppController {
             'url' => $this->base . "/uploads/$action/" . $name,
             'url150' => "",
             'extension' => $extension,
+            "width" => 150,
+            "height" => 150,
         );
 
-        $image_size = getimagesize ($target);
-        
+        $image_size = getimagesize($target);
+        $this->_error['files']['width'] = $image_size[0];
+        $this->_error['files']['width'] = $image_size[1];
+
+
         $resize_500 = false;
         if ($image_size[0] > 500) {
             $resize_500 = true;
         }
-        
+
         $resize_500 = true;
-        
+
         require_once APP . 'Vendor' . DS . "Zebra/Zebra_Image.php";
         $image = new Zebra_Image();
 
@@ -244,7 +414,7 @@ class MediaController extends AdminAppController {
 
             // if no errors
         }
-        
+
         $image->target_path = $targetDir . DIRECTORY_SEPARATOR . $filename . "_500." . $extension;
         if ($resize_500 && !$image->resize(500, 0, ZEBRA_IMAGE_CROP_CENTER)) {
 

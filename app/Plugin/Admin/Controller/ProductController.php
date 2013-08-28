@@ -74,6 +74,7 @@ class ProductController extends AdminAppController {
                 'limit' => $limit,
                 'page' => $page + 1,
                 'conditions' => $conditions,
+                'order' => 'modified DESC',
                 'fields' => array("Product.*")
                     )
             );
@@ -164,16 +165,16 @@ class ProductController extends AdminAppController {
                 }
             }
 
-            $data['slug'] = trim ($data['slug']);
-            $data['name'] = trim ($data['name']);
+            $data['slug'] = trim($data['slug']);
+            $data['name'] = trim($data['name']);
             if (empty($data['slug'])) {
                 $data['slug'] = preg_replace("/ +/i", "-", $data['name']);
             } else {
                 $data['slug'] = preg_replace("/ +/i", "-", $data['slug']);
             }
-            
+
             $data['slug'] = @preg_replace("/\/+/i", "-", $data['slug']);
-            
+
 
             $data['type'] = isset($data['type']) ? $data['type'] : 'product';
             $data['status'] = isset($data['status']) ? $data['status'] : 'draft';
@@ -186,11 +187,15 @@ class ProductController extends AdminAppController {
                 $data['featured'] = array();
                 $data['featured']['origin'] = $images;
                 $data['image'] = $images[0];
-                
+
                 $data['featured']['150w'] = array();
 
                 foreach ($images as $value) {
                     $data['featured']['150w'][] = str_replace(".", "_150.", $value);
+                    @copy(APP . 'webroot/uploads/' . $value, APP . 'webroot/uploads/product/' . $value);
+                    @copy(APP . 'webroot/uploads/' . str_replace(".", "_150.", $value), APP . 'webroot/uploads/product/' . str_replace(".", "_150.", $value));
+                    @copy(APP . 'webroot/uploads/' . str_replace(".", "_500.", $value), APP . 'webroot/uploads/product/' . str_replace(".", "_500.", $value));
+                    @copy(APP . 'webroot/uploads/' . str_replace(".", "_crop.", $value), APP . "webroot/uploads/product/" . str_replace(".", "_crop.", $value));
                 }
 
                 $data['featured'] = serialize($data['featured']);
@@ -354,14 +359,14 @@ class ProductController extends AdminAppController {
                 }
             }
 
-            $data['slug'] = trim ($data['slug']);
-            $data['name'] = trim ($data['name']);
+            $data['slug'] = trim($data['slug']);
+            $data['name'] = trim($data['name']);
             if (empty($data['slug'])) {
                 $data['slug'] = @preg_replace("/ +/i", "-", $data['name']);
             } else {
                 $data['slug'] = @preg_replace("/ +/i", "-", $data['slug']);
             }
-            
+
             $data['slug'] = @preg_replace("/\/+/i", "-", $data['slug']);
 
             $data['type'] = isset($data['type']) ? $data['type'] : 'product';
@@ -385,18 +390,32 @@ class ProductController extends AdminAppController {
 
                 if (!empty($element)) {
 
+
                     if (!empty($data['featured'])) {
+                        if (!empty($element['Product']['featured'])) {
+                            $images = unserialize($element['Product']['featured']);
+                            foreach ($images['origin'] as $value) {
+                                @unlink(APP . 'webroot/uploads/product/' . $value);
+                                @unlink(APP . 'webroot/uploads/product/' . str_replace(".", "_500.", $value));
+                                @unlink(APP . 'webroot/uploads/product/' . str_replace(".", "_150.", $value));
+                                @unlink(APP . 'webroot/uploads/product/' . str_replace(".", "_crop.", $value));
+                            }
+                        }
                         $data['featured'] = trim($data['featured'], "-");
                         $images = explode("-", $data['featured']);
 
                         $data['featured'] = array();
                         $data['featured']['origin'] = $images;
                         $data['image'] = $images[0];
-                        
+
                         $data['featured']['150w'] = array();
 
                         foreach ($images as $value) {
                             $data['featured']['150w'][] = str_replace(".", "_150.", $value);
+                            @copy(APP . 'webroot/uploads/' . $value, APP . 'webroot/uploads/product/' . $value);
+                            @copy(APP . 'webroot/uploads/' . str_replace(".", "_150.", $value), APP . 'webroot/uploads/product/' . str_replace(".", "_150.", $value));
+                            @copy(APP . 'webroot/uploads/' . str_replace(".", "_500.", $value), APP . 'webroot/uploads/product/' . str_replace(".", "_500.", $value));
+                            @copy(APP . 'webroot/uploads/' . str_replace(".", "_crop.", $value), APP . "webroot/uploads/product/" . str_replace(".", "_crop.", $value));
                         }
 
                         $data['featured'] = serialize($data['featured']);
