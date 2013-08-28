@@ -21,7 +21,7 @@
         <div class="row-fluid hotproperties">
             <?php if (!empty($data)) : ?>
                 <?php foreach ($data as $value) : ?>
-                    <div class="span4">
+                    <div class="span3">
                         <div class="thumbnail">
                             <a href="<?php echo $this->webroot . "product/" . $value['Product']['slug']; ?>">
                                 <img src="<?php echo $this->webroot . "uploads/product/" . $value['Product']['featured']['150w'][0]; ?>" alt="<?php echo $value['Product']['name']; ?>" style="width:100%;height:150px;">
