@@ -93,25 +93,6 @@ class AuthController extends AppController {
             if ($this->request->is('post')) {
                 $data = $this->request->data('signup');
 
-                $conditions = array(
-                    "OR" => array(
-                        "name" => $data['name'],
-                        "email" => $data['email']
-                    )
-                );
-
-                $this->loadModel('User');
-                $result = $this->User->find("first", array(
-                    "conditions" => $conditions
-                ));
-
-                if (!empty($result)) {
-                    $this->_error['error'] = 1;
-                    $this->_error['message'] = "User name or email already exists";
-                    exit(json_encode($this->_error));
-                }
-
-                $data['name'] = strtolower($data['name']);
                 if (empty($data['name']) || $this->_validate('username', $data['name']) == false) {
                     $this->_error['error'] = 1;
                     $this->_error['message'] = "Invalid user name";
@@ -139,6 +120,24 @@ class AuthController extends AppController {
                 if (!$this->Captcha->check ($data['captcha'])) {
                     $this->_error['error'] = 1;
                     $this->_error['message'] = "Type correctly below captcha image";
+                    exit(json_encode($this->_error));
+                }
+
+                $conditions = array(
+                    "OR" => array(
+                        "name" => $data['name'],
+                        "email" => $data['email']
+                    )
+                );
+
+                $this->loadModel('User');
+                $result = $this->User->find("first", array(
+                    "conditions" => $conditions
+                ));
+
+                if (!empty($result)) {
+                    $this->_error['error'] = 1;
+                    $this->_error['message'] = "User name or email already exists";
                     exit(json_encode($this->_error));
                 }
 
