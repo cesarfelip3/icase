@@ -42,10 +42,43 @@ class AdminAppController extends Controller {
                 'name' => $this->Auth->user ('name'),
                 'guid' => $this->Auth->user ('guid'),
                 'email' => $this->Auth->user ('email'),
-                'id' => $this->Auth->user ('id')
+                'id' => $this->Auth->user ('id'),
+                'active' => $this->Auth->user ('active')
             );
             
             $this->set ('identity', $user);
         } 
     }
+    
+    //=================================================
+    // helper functions
+    //=================================================
+    protected function _email($from, $to, $subject, $content, $template, $vars = array()) {
+        $Email = new CakeEmail();
+        $Email->config ('smtp');
+        $Email->template($template);
+        $Email->viewVars($vars);
+        $Email->emailFormat('html');
+        $Email->from($from);
+        $Email->to($to);
+        $Email->subject($subject);
+        $Email->send();
+    }
+    
+    protected function _validate ($type, $value)
+    {
+        $ret = false;
+        switch ($type) {
+            case "email" : 
+                $ret = @preg_match("/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/i", $value);
+                break;
+            case "username" : 
+                $ret = @preg_match("/^[a-z]{1,}|[a-z]{1,}[0-9]{1,}$/i", $value);
+                break;
+        }
+        
+        return $ret;
+    }
+
+}
 }
