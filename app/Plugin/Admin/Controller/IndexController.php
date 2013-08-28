@@ -24,8 +24,6 @@ class IndexController extends AdminAppController {
 
             if ($this->request->is('post')) {
 
-                $passwordHasher = new SimplePasswordHasher();
-                $password = $passwordHasher->hash($data['password']);
 
                 $conditions = array();
 
@@ -53,7 +51,10 @@ class IndexController extends AdminAppController {
                     exit(json_encode($this->_error));
                 }
 
-                if (preg_match("/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/i", $data['name']) == true) {
+                $passwordHasher = new SimplePasswordHasher();
+                $password = $passwordHasher->hash($data['password']);
+
+                if ($this->_validate ('email', $data['name']) == true) {
                     $conditions = array(
                         "email" => $data['name'],
                         "password" => $password,
