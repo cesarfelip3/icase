@@ -64,12 +64,8 @@ class UserController extends AppController {
             if (preg_match("/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/i", $data['email2']) == false) {
                 $this->_error['error'] = 1;
                 $this->_error['element'] = 'input[name="user[email2]"]';
-                $this->_error['message'] = 'Invalid email address';
+                $this->_error['message'] = 'Invalid deliver email address';
                 exit(json_encode($this->_error));
-            }
-
-            if (!isset($data['active'])) {
-                $data['active'] = 0;
             }
 
             $this->loadModel('User');
@@ -87,6 +83,8 @@ class UserController extends AppController {
             if (!empty($data['password'])) {
                 $passwordHasher = new SimplePasswordHasher();
                 $data['password'] = $passwordHasher->hash($data['password']);
+            } else {
+                unset ($data['password']);
             }
 
             $data['modified'] = time();
