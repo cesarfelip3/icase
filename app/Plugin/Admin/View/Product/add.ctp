@@ -188,7 +188,7 @@ $admin_product = $base . "product";
             </div>
         </form>
     </div>
-    <div id="box-crop">
+    <div id="box-crop" class="hide">
         <div style="padding:10px;height:50px;">
             <a href="javascript:" class="btn btn-info pull-right" onclick="featured_image_crop_ajax()">Crop</a>
         </div>
