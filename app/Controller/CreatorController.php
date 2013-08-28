@@ -196,7 +196,7 @@ class CreatorController extends AppController {
                 return;
             }
 
-            $targetDir = $this->_targetDir = ROOT . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'uploads' . DS . 'preview';
+            $targetDir = APP . 'webroot' . DIRECTORY_SEPARATOR . 'uploads' . DS . 'preview';
 
             $cleanupTargetDir = true; // Remove old files
             $maxFileAge = 5 * 3600; // Temp file age in seconds
@@ -290,10 +290,10 @@ class CreatorController extends AppController {
 
         imagejpeg($out, $final, 100);
 
-        $image = file_get_contents($final);
-        $image = substr_replace($image, pack("cnn", 1, 300, 300), 13, 5);
+        //$image = file_get_contents($final);
+        //$image = substr_replace($image, pack("cnn", 1, 300, 300), 13, 5);
 
-        file_put_contents($final, $image);
+        //file_put_contents($final, $image);
     }
 
     public function templates() {
