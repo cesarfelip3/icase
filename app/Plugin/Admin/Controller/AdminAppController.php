@@ -87,4 +87,3 @@ class AdminAppController extends Controller {
     }
 
 }
-}

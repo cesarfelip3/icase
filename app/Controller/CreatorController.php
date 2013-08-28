@@ -83,7 +83,7 @@ class CreatorController extends AppController {
 
             if (!empty($data)) {
                 $this->Creation->id = $data['Creation']['id'];
-                $this->Creation->set(array("data" => $json, "type" => "progress", "product_guid"=>$product_guid, "modified" => time()));
+                $this->Creation->set(array("data" => $json, "type" => "progress", "product_guid"=>$product_guid, "name" => $product['Product']['name'], "modified" => time()));
                 $this->Creation->save();
 
                 $this->_error['error'] = 0;
@@ -98,7 +98,7 @@ class CreatorController extends AppController {
                 "guid" => $guid,
                 "user_guid" => $this->_identity['guid'],
                 "product_guid" => $product_guid,
-                "name" => $name,
+                "name" => $product['Product']['name'],
                 "data" => $json,
                 "type" => "progress",
                 "created" => time(),
