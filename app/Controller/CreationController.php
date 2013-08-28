@@ -47,7 +47,7 @@ class CreationController extends AppController {
 
     protected function overlayImage($overlay, $jpeg, $final) {
 
-        $final = APP . DS . "webroot" . DS . "uploads" . DS . "preview" . DS . $final;
+        $final = APP . "webroot" . DS . "uploads" . DS . "preview" . DS . $final;
         if (file_exists($final)) {
             return;
         }

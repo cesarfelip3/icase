@@ -399,12 +399,12 @@ class CreatorController extends AdminAppController {
             if (!empty($data['Product']['image'])) {
                 $images = unserialize($data['Product']['image']);
                 
-                if (file_exists(APP . DS . 'webroot' . DS . 'img' . DS . "template" . DS . $images['background'])) {
-                    @unlink(APP . DS . 'webroot' . DS . 'img' . DS . "template" . DS . $images['background']);
+                if (file_exists(APP . 'webroot' . DS . 'img' . DS . "template" . DS . $images['background'])) {
+                    @unlink(APP . 'webroot' . DS . 'img' . DS . "template" . DS . $images['background']);
                 }
                 
-                if (file_exists(APP . DS . 'webroot' . DS . 'img' . DS . "template" . DS . $images['foreground'])) {
-                    @unlink(APP . DS . 'webroot' . DS . 'img' . DS . "template" . DS . $images['foreground']);
+                if (file_exists(APP . 'webroot' . DS . 'img' . DS . "template" . DS . $images['foreground'])) {
+                    @unlink(APP . 'webroot' . DS . 'img' . DS . "template" . DS . $images['foreground']);
                 }
             }
         }

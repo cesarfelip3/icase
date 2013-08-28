@@ -210,8 +210,8 @@ class ShopController extends AppController {
                     );
 
                     if ($value['Product']['type'] == 'template') {
-                        @copy(APP . "webroot" . DS . "uploads" . DS . "preview" . DS . $value['Product']['file'], APP . DS . "webroot" . DS . "uploads" . DS . "user" . DS . $value['Product']['file']);
-                        @copy(APP . "webroot" . DS . "uploads" . DS . "preview" . DS . str_replace (".", "_user.", $value['Product']['file']), APP . DS . "webroot" . DS . "uploads" . DS . "user" . DS . str_replace (".", "_user.", $value['Product']['file']));
+                        @copy(APP . "webroot" . DS . "uploads" . DS . "preview" . DS . $value['Product']['file'], APP . "webroot" . DS . "uploads" . DS . "user" . DS . $value['Product']['file']);
+                        @copy(APP . "webroot" . DS . "uploads" . DS . "preview" . DS . str_replace (".", "_user.", $value['Product']['file']), APP . "webroot" . DS . "uploads" . DS . "user" . DS . str_replace (".", "_user.", $value['Product']['file']));
                         
                         @copy(APP . "webroot" . DS . "uploads" . DS . "preview" . DS . $value['Product']['file'], APP . "webroot" . DS . "uploads" . DS . "order" . DS . $value['Product']['file']);
                         @copy(APP . "webroot" . DS . "uploads" . DS . "preview" . DS . str_replace (".", "_user.", $value['Product']['file']), APP . "webroot" . DS . "uploads" . DS . "order" . DS . str_replace (".", "_user.", $value['Product']['file']));
@@ -543,7 +543,7 @@ class ShopController extends AppController {
 
         if ($type == "AuthorizeNet") {
 
-            require_once APP . DS . 'Vendor' . DS . 'AuthorizeNet/AuthorizeNet.php'; // Make sure this path is correct.
+            require_once APP . 'Vendor' . DS . 'AuthorizeNet/AuthorizeNet.php'; // Make sure this path is correct.
             define("AUTHORIZENET_SANDBOX", false);
             $transaction = new AuthorizeNetAIM('9c22BSeN', '752eHX2G6hk9Y36J');
             $transaction->setSandbox(false);

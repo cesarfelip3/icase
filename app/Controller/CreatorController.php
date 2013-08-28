@@ -249,7 +249,7 @@ class CreatorController extends AppController {
                 $png1 = unserialize($data['Product']['image']);
                 $png1 = $png1['foreground'];
 
-                $png1 = APP . DS . "webroot" . DS . "img" . DS . "template" . DS . $png1;
+                $png1 = APP . "webroot" . DS . "img" . DS . "template" . DS . $png1;
 
                 $jpeg = $targetDir . DIRECTORY_SEPARATOR . $filename;
                 ;
@@ -274,7 +274,7 @@ class CreatorController extends AppController {
 
     protected function _overlayImage($overlay, $jpeg, $final) {
 
-        $final = APP . DS . "webroot" . DS . "uploads" . DS . "preview" . DS . $final;
+        $final = APP . "webroot" . DS . "uploads" . DS . "preview" . DS . $final;
         if (file_exists($final)) {
             return;
         }

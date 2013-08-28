@@ -59,8 +59,8 @@ class OrderController extends AppController {
                     $filename = pathinfo($jpeg, PATHINFO_FILENAME);
                 }
 
-                $png1 = APP . DS . "webroot" . DS . "img" . DS . "template" . DS . $png1;
-                $jpeg = APP . DS . "webroot" . DS . "uploads" . DS . "preview" . DS . $jpeg;
+                $png1 = APP . "webroot" . DS . "img" . DS . "template" . DS . $png1;
+                $jpeg = APP . "webroot" . DS . "uploads" . DS . "preview" . DS . $jpeg;
 
                 try {
                     $this->_overlayImage($png1, $jpeg, $filename . "_user.jpeg");
@@ -80,7 +80,7 @@ class OrderController extends AppController {
     
     protected function _overlayImage($overlay, $jpeg, $final) {
         
-        $final = APP . DS . "webroot" . DS . "uploads" . DS . "preview" . DS . $final;
+        $final = APP . "webroot" . DS . "uploads" . DS . "preview" . DS . $final;
         if (file_exists($final)) {
             return;
         }
