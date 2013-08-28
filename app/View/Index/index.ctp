@@ -19,8 +19,9 @@
             <h1 class="title">FEATURE PRODUCTS</h1>
         </div>
         <div class="row-fluid hotproperties">
-            <?php if (!empty($data)) : ?>
+            <?php if (!empty($data)) : $i = 0; ?>
                 <?php foreach ($data as $value) : ?>
+                <?php if ($i++ < 4) : ?>
                     <div class="span3">
                         <div class="thumbnail">
                             <a href="<?php echo $this->webroot . "product/" . $value['Product']['slug']; ?>">
@@ -35,6 +36,30 @@
                             </div>
                         </div>
                     </div>
+                <?php endif; ?>
+                <?php endforeach; ?>
+            <?php endif; ?>
+            <div class="clearfix"></div>
+        </div>
+        <div class="row-fluid hotproperties">
+            <?php if (!empty($data)) : $i = 0; ?>
+                <?php foreach ($data as $value) : ?>
+                <?php if ($i++ >= 4) : ?>
+                    <div class="span3">
+                        <div class="thumbnail">
+                            <a href="<?php echo $this->webroot . "product/" . $value['Product']['slug']; ?>">
+                                <img src="<?php echo $this->webroot . "uploads/product/" . $value['Product']['featured']['150w'][0]; ?>" alt="<?php echo $value['Product']['name']; ?>" style="width:100%;height:150px;">
+                            </a>
+                            <div class="caption">
+                                <a href="<?php echo $this->webroot . "product/" . $value['Product']['slug']; ?>" class="prop-title" style="text-transform: uppercase;"><?php echo $value['Product']['name']; ?></a>
+                                <p class="price">$<?php echo $value['Product']['price']; ?></p>
+                                <ul class="list-btns">
+                                    <li ><a class="buynow" href="<?php echo $this->webroot . "product/" . $value['Product']['slug']; ?>">View Details</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif; ?>
                 <?php endforeach; ?>
             <?php endif; ?>
             <div class="clearfix"></div>
