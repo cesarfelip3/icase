@@ -5,6 +5,11 @@ App::uses('AppController', 'Controller');
 class BugFixController extends AppController {
 
     public $uses = false;
+    
+    public function beforeFilter() {
+        $this->Auth->allow();
+        parent::beforeFilter();
+    }
 
     public function fix() {
         $this->loadModel('Category');
@@ -15,12 +20,12 @@ class BugFixController extends AppController {
             if (strpos("/", $value['Category']['slug']) != false) {
                 $value['Category']['slug'] = preg_replace("/\/+/i", "-", $value['Category']['slug']);
                 //$data[$key] = $value;
+                print_r ($value['Category']['slug']);
                 $this->Product->id = $value['Category']['id'];
                 $this->Product->save(array('slug' => $value['Category']['slug']));
             }
         }
+        
+        exit;
     }
-
 }
-
-?>
