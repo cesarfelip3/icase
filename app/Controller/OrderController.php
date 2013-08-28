@@ -55,16 +55,11 @@ class OrderController extends AppController {
                     $png1 = unserialize($data['Product']['image']);
                     $png1 = $png1['foreground'];
 
-                    $filename = pathinfo($png1, PATHINFO_FILENAME);
-                    $png2 = $filename . "_overlay.png";
-
                     $jpeg = $order['attachement'];
                     $filename = pathinfo($jpeg, PATHINFO_FILENAME);
                 }
 
                 $png1 = APP . DS . "webroot" . DS . "img" . DS . "template" . DS . $png1;
-                $png2 = APP . DS . "webroot" . DS . "img" . DS . "template" . DS . $png2;
-
                 $jpeg = APP . DS . "webroot" . DS . "uploads" . DS . "preview" . DS . $jpeg;
 
                 try {
@@ -101,38 +96,10 @@ class OrderController extends AppController {
 
         imagejpeg($out, $final, 100);
 
-        $image = file_get_contents($final);
-        $image = substr_replace($image, pack("cnn", 1, 300, 300), 13, 5);
+        //$image = file_get_contents($final);
+        //$image = substr_replace($image, pack("cnn", 1, 300, 300), 13, 5);
 
-        file_put_contents($final, $image);
-    }
-
-    public function delete() {
-        $guid = $this->request->query('id');
-
-        if (empty($guid)) {
-            $this->_error['error'] = 1;
-            $this->_error['message'] = "";
-            exit(json_encode($this->_error));
-        }
-
-        $this->loadModel("Order");
-        $data = $this->Order->find("first", array("conditions" => array("guid" => $guid)));
-
-        if (!empty($data)) {
-            $data = $data['Order'];
-            $this->loadModel("UserBillInfo");
-            $this->UserBillInfo->query("DELETE FROM user_bill_infos WHERE guid='{$data['bill_guid']}'");
-
-            $this->loadModel("UserDeliverInfo");
-            $this->UserDeliverInfo->query("DELETE FROM user_deliver_infos WHERE guid='{$data['deliver_guid']}'");
-
-            exit(json_encode($this->_error));
-        }
-
-        $this->_error['error'] = 1;
-        $this->_error['message'] = "";
-        exit(json_encode($this->_error));
+        //file_put_contents($final, $image);
     }
 
 }
