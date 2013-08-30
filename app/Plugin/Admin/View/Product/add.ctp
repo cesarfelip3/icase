@@ -135,7 +135,7 @@ $admin_product = $base . "product";
                                 <label class="control-label" for="inputWarning">Save Option</label>
                                 <div class="controls">
                                     <label class="checkbox">
-                                        <input type="checkbox" class="input-mini" name="product[status]" value="published">Published
+                                        <input type="checkbox" class="input-mini" name="product[status]" value="published" checked="true">Published
                                     </label>
                                     <a href='javascript:' class='btn btn-primary' data-loading-text="Saving..." onclick="save('create');" id="btn-save">Create</a>
 <!--                                    <a href='javascript:' class='btn btn-primary' data-loading-text="Saving..." onclick="save('update');" id="btn-save">Update</a>-->
@@ -152,20 +152,6 @@ $admin_product = $base . "product";
                         </div>
                         <div class='body' style="height:150px;overflow: auto;">
 
-                        </div>
-                    </div>
-                    <div class="slate hide">
-                        <div class="page-header">
-                            <h2>Template Image</h2>
-                        </div>
-                        <div id="template-image-uploader" style="padding:0px;margin:0px;">
-                            <div id="template-image-list" style="padding:0px;margin:0px;margin-bottom:10px;"></div>
-                            <div class="progress" style="height:2px;display:block;width:100%;margin-top:10px;"><div class="bar bar-warning" id="template-image-progress-bar" style="width: 0%; height:2px;"></div></div>
-                            <p>
-                                <a href="javascript:" id="btn-select-template-image" class="btn btn-block btn-info">Select</a> 
-                                <a href="javascript:" id="btn-upload-template-image" class="btn btn-block btn-info" onclick="template_image_start_upload();">Upload</a>
-                            </p>
-                            <div id="box-template-image" class="row-fluid"></div>
                         </div>
                     </div>
                     <div class="slate">
@@ -264,91 +250,6 @@ $js_pluploader = array(
 <?php echo $this->Html->script($js_pluploader); ?>
 <link rel="stylesheet" href="<?php echo $this->webroot; ?>js/jcrop/css/jquery.Jcrop.css" type="text/css" />
 
-<script type="text/javascript">
-    // Custom example logic
-
-    function PL(id) {
-        return document.getElementById(id);
-    }
-
-    var uploader = new plupload.Uploader({
-        runtimes: 'gears,html5,browserplus',
-        browse_button: 'btn-select-template-image',
-        container: 'template-image-uploader',
-        max_file_size: '10mb',
-        url: '<?php echo $base; ?>media/uploadimage/?action=template',
-        multi_selection: false,
-        //resize: {width: 640, height: 240, quality: 100},
-        //flash_swf_url: 'js/uploader/plupload.flash.swf',
-        //silverlight_xap_url : 'js/uploader/plupload.silverlight.xap',
-        filters: [
-            {title: "Image Files", extensions: "png,jpeg,jpg,gif"}
-        ]
-    });
-
-    uploader.bind('Init', function(up, params) {
-        //$('filelist').innerHTML = "<div>Current runtime: " + params.runtime + "</div>";
-    });
-
-    uploader.init();
-
-    uploader.bind('FilesAdded', function(up, files) {
-
-        if (uploader.files.length == 2) {
-            uploader.removeFile(uploader.files[0]);
-        }
-
-        for (var i in files) {
-            document.getElementById('template-image-list').innerHTML = '<div id="' + files[i].id + '">' + files[i].name + ' (' + plupload.formatSize(files[i].size) + ') <b></b></div>';
-        }
-        jQuery('#template-image-progress-bar').css('width', "0%");
-        //uploader.start();
-    });
-
-    uploader.bind('UploadProgress', function(up, file) {
-        //$(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
-        jQuery('#template-image-progress-bar').css('width', file.percent + "%");
-
-    });
-
-    uploader.bind('FileUploaded', function(up, file, response) {
-        plupload.each(response, function(value, key) {
-
-            console.log(key);
-            console.log(value);
-
-            if (key == "response") {
-                var result = jQuery.parseJSON(value);
-                console.log(result);
-                if (result.error == 0) {
-                    
-                    var url = result.files.url150;
-                    if (url == "") {
-                        url = result.files.url;
-                    }
-                    
-                    $("#box-template-image").html('<div class="span8"><a class="featured-thumbnail"><img src="' + url + '" style="width:60px" /></a></div>');
-                    $('input[name="product[image]"]').val(result.files.target);
-                } else {
-                    showAlert (result.message);
-                    $("#box-template-image").html('<div class="span8"><a class="featured-thumbnail"><img src="' + result.files.url + '" style="width:60px" /></a></div>');
-                    $('input[name="product[image]"]').val(result.files.target);
-                }
-                //jQuery('#progress-bar').css('width', "0%");
-            }
-        });
-
-        //alert($.parseJSON(response.response).result);
-    });
-
-    function template_image_start_upload()
-    {
-        uploader.start();
-        $("#template-image-list").html("");
-        $("#box-template-image").html("");
-    }
-
-</script>
 
 <script type="text/javascript">
     var total = 0;
@@ -415,6 +316,8 @@ $js_pluploader = array(
                     //console.log ($("input[name='product[featured]']").val());
                     //<p><a class="btn btn-success" data-image="' + result.files.target + '" data-width="' + result.files.width + '" onclick="featured_image_crop(this);">Crop</a></p>
                     init();
+                } else {
+                    showAlert (result.message);
                 }
                 //jQuery('#progress-bar').css('width', "0%");
             }

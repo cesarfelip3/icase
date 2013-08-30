@@ -339,7 +339,7 @@ class MediaController extends AdminAppController {
             rename("{$filePath}.part", $target);
         }
 
-        $url150 = $this->base . "/uploads/$action/" . $filename . "_150." . $extension;
+        $url150 = $this->base . "/uploads/$action/" . $filename . "_150.png";
 
         $this->_error['error'] = 0;
         $this->_error['message'] = 'Success';
@@ -384,7 +384,7 @@ class MediaController extends AdminAppController {
         }
         
         $image->target_path = $targetDir . DIRECTORY_SEPARATOR . $filename . "_150.png";
-        if ($image->resize(200, 200, ZEBRA_IMAGE_BOXED, -1)) {
+        if (!$image->resize(200, 200, ZEBRA_IMAGE_BOXED, -1)) {
 
             $this->_error['error'] = 1;
             $this->_error['message'] = "Resize to 200 wrong";
