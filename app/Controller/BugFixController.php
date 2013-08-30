@@ -49,199 +49,148 @@ class BugFixController extends AppController {
                     }
                 });
 
+        require_once APP . 'Vendor' . DS . "Zebra/Zebra_Image.php";
+        $image = new Zebra_Image();
+        
+        print_r ($images);
+        
         foreach ($images as $img) {
-            print_r($img . "<br/>");
-            if (preg_match("/\_500\./i", $img)) {
-                print_r($img . "<br/>");
+            
+            if (!preg_match ("/^[0-9a-z]{1,}$/i", pathinfo($dir . $img, PATHINFO_FILENAME))) {
+                continue;
+            }
+            
+            print_r ($img);
+            
+            $extension = pathinfo ($dir . $img, PATHINFO_EXTENSION);
+            $filename = pathinfo(dir . $img, PATHINFO_FILENAME);
 
-                //$image_500 = str_replace(".", "_500.", $img);
-                $image_500 = $img;
+            $image->source_path = $dir . $img;
+            $image->jpeg_quality = 100;
 
-                print_r($dir . $image_500 . "<br/>");
+            $image->preserve_aspect_ratio = true;
+            $image->enlarge_smaller_images = true;
+            $image->preserve_time = true;
 
-                if (file_exists($dir . $image_500)) {
+            // resize the image to exactly 100x100 pixels by using the "crop from center" method
+            // (read more in the overview section or in the documentation)
+            //  and if there is an error, check what the error is about
 
-                    $width = array();
-                    $path = $dir . $image_500;
+            $size = getimagesize($dir . $img);
 
-                    try {
-                        $width = getimagesize($path);
-                    } catch (Exception $e) {
-                        print_r($e->getMessage());
-                    }
+            $image->target_path = $dir . $filename . "_500." . $extension;
 
-                    //print_r ($width);
-                    //exit;
+            if ($image->resize(500, 0, ZEBRA_IMAGE_CROP_CENTER)) {
 
+                $size = getimagesize($image->target_path);
+                $width = $size[0];
+                $height = $size[1];
 
-                    $w = $width[0];
-                    $h = $width[1];
+                if ($width == $height) {
+                    
+                } else {
 
-                    //print_r ($width);
-                    //exit;
-                    //$png = imagecreatefrompng(APP . 'webroot/img/background/500.png');
-                    //$source = null;
+                    $height2 = 500 - $height;
 
-                    $ext = pathinfo($image_500, PATHINFO_EXTENSION);
+                    if ($height2 > 0) {
+                        $ext = $extension;
 
-                    //print_r($ext);
-                    //print_r ($dir . $image_500);
-                    //print_r ($source);
-                    //exit;
+                        if (strtolower($ext) == 'jpg' || strtolower($ext) == 'jpeg') {
+                            $source = imagecreatefromjpeg($image->target_path);
+                        }
 
-                    if (strtolower($ext) == 'jpg' || strtolower($ext) == 'jpeg') {
-                        $source = imagecreatefromjpeg($dir . $image_500);
-                        continue;
-                    }
-
-
-                    if (strtolower($ext) == 'png') {
-                        $source = imagecreatefrompng($dir . $image_500);
-                        //continue;
-                    }
-
-                    //exit;
-                    //print_r ($source);
-                    //exit;
-
-                    if ($w == $h) {
-                        continue;
-                    }
-
-                    $dst_y = 500 - $h;
-                    if ($dst_y > 0) {
-                        //$out = imagecreatetruecolor(500, 500);
-                        $dst_y = ceil($dst_y / 2);
+                        if (strtolower($ext) == 'png') {
+                            $source = imagecreatefrompng($image->target_path);
+                            //continue;
+                        }
 
                         $out = imagecreatetruecolor(500, 500);
-                        //$red = imagecolorallocate($im, 255, 0, 0);
                         $black = imagecolorallocate($out, 0, 0, 0);
                         imagecolortransparent($out, $black);
 
-                        //imagecopyresampled($out, $png, 0, 0, 0, 0, 500, 500, 500, 500);
-                        imagecopyresampled($out, $source, 0, $dst_y, 0, 0, $w, $h, $w, $h);
-                        imagepng($out, $dir . $image_500, 0);
-                        print_r($image_500);
-                        //exit;
-                    } else if ($dst_y == 0) {
-                        
-                    } else {
-                        $dst_x = $h - 500;
-                        $dst_x = ceil($dst_x / 2);
+                        imagecopyresampled($out, $source, 0, ceil($height2 / 2), 0, 0, $width, $height, $width, $height);
+                        imagepng($out, $dir . $filename . "_500.png");
+                        imagecolortransparent($out, $black);
+                    }
 
-                        $out = imagecreatetruecolor($h, $h);
-                        //$red = imagecolorallocate($im, 255, 0, 0);
+                    if ($height2 < 0) {
+                        $ext = $extension;
+
+                        if (strtolower($ext) == 'jpg' || strtolower($ext) == 'jpeg') {
+                            $source = imagecreatefromjpeg($image->target_path);
+                        }
+
+                        if (strtolower($ext) == 'png') {
+                            $source = imagecreatefrompng($image->target_path);
+                            //continue;
+                        }
+
+                        $out = imagecreatetruecolor($height, $height);
                         $black = imagecolorallocate($out, 0, 0, 0);
                         imagecolortransparent($out, $black);
 
-                        //imagecopyresampled($out, $png, 0, 0, 0, 0, 500, 500, 500, 500);
-                        imagecopyresampled($out, $source, $dst_x, 0, 0, 0, $w, $h, $w, $h);
-                        imagepng($out, $dir . $image_500, 0);
-                        print_r($image_500);
+                        imagecopyresampled($out, $source, ceil(abs($height2) / 2), 0, 0, 0, $width, $height, $width, $height);
+                        imagepng($out, $dir . $filename . "_500.png");
                     }
                 }
             }
-        }
 
-        exit;
-    }
+            $image->target_path = $dir . $filename . "_150." . $extension;
+            if ($image->resize(200, 0, ZEBRA_IMAGE_CROP_CENTER)) {
 
-    public function do150() {
-        $dir = APP . "webroot/uploads/product/";
+                $size = getimagesize($image->target_path);
+                $width = $size[0];
+                $height = $size[1];
 
-        print_r("bugfix.category");
+                if ($width == $height) {
+                    
+                } else {
 
-        $images = array();
+                    $height2 = 200 - $height;
 
-        if (($handle = opendir($dir . ".")) != false) {
-            while (false !== ($entry = readdir($handle))) {
-                if ($entry != "." && $entry != "..") {
-                    $images[] = $entry;
-                }
-            }
-            closedir($handle);
-        }
+                    if ($height2 > 0) {
+                        $ext = $extension;
 
-        if (empty($images)) {
-            print_r("no images");
-            exit;
-        }
+                        if (strtolower($ext) == 'jpg' || strtolower($ext) == 'jpeg') {
+                            $source = imagecreatefromjpeg($image->target_path);
+                        }
 
-        //print_r ($images);
-        //exit;
-
-        error_reporting(0);
-        register_shutdown_function(
-                function () {
-
-                    $last_error = error_get_last();
-
-                    if (!is_null($last_error)) {
-                        $this->_error['error'] = 1;
-                        $this->_error['message'] = $last_error['message'];
-                        exit(json_encode($this->_error));
-                    }
-                });
-
-        foreach ($images as $img) {
-            print_r($img . "<br/>");
-            if (preg_match("/\_500\./i", $img)) {
-                print_r($img . "<br/>");
-
-                //$image_500 = str_replace(".", "_500.", $img);
-                $image_500 = $img;
-
-                print_r($dir . $image_500 . "<br/>");
-
-                if (file_exists($dir . $image_500)) {
-
-                    $width = array();
-                    $path = $dir . $image_500;
-
-                    try {
-                        $width = getimagesize($path);
-                    } catch (Exception $e) {
-                        print_r($e->getMessage());
-                    }
-
-                    $w = $width[0];
-                    $h = $width[1];
-
-                    $ext = pathinfo($image_500, PATHINFO_EXTENSION);
-
-                    //print_r($ext);
-                    //print_r ($dir . $image_500);
-                    //print_r ($source);
-                    //exit;
-
-                    if (strtolower($ext) == 'jpg' || strtolower($ext) == 'jpeg') {
-                        $source = imagecreatefromjpeg($dir . $image_500);
-                        //continue;
-                    }
-
-
-                    if (strtolower($ext) == 'png') {
-                        $source = imagecreatefrompng($dir . $image_500);
-                        //continue;
-                    }
-
-                    if ($width[0] == $width[1]) {
-
-                        //$dst_y = ceil($dst_y / 2);
+                        if (strtolower($ext) == 'png') {
+                            $source = imagecreatefrompng($image->target_path);
+                            //continue;
+                        }
 
                         $out = imagecreatetruecolor(200, 200);
-                        //$red = imagecolorallocate($im, 255, 0, 0);
                         $black = imagecolorallocate($out, 0, 0, 0);
                         imagecolortransparent($out, $black);
 
-                        //imagecopyresampled($out, $png, 0, 0, 0, 0, 500, 500, 500, 500);
-                        imagecopyresampled($out, $source, 0, 0, 0, 0, 200, 200, $w, $h);
-                        imagepng($out, $dir . str_replace("_500", "_150", $image_500), 0);
-                        //print_r($image_500);
+                        imagecopyresampled($out, $source, 0, ceil($height2 / 2), 0, 0, $width, $height, $width, $height);
+                        imagepng($out, $dir . $filename . "_150.png");
+                    }
+
+                    if ($height2 < 0) {
+                        $ext = $extension;
+
+                        if (strtolower($ext) == 'jpg' || strtolower($ext) == 'jpeg') {
+                            $source = imagecreatefromjpeg($image->target_path);
+                        }
+
+                        if (strtolower($ext) == 'png') {
+                            $source = imagecreatefrompng($image->target_path);
+                            //continue;
+                        }
+
+                        $out = imagecreatetruecolor($height, $height);
+                        $black = imagecolorallocate($out, 0, 0, 0);
+                        imagecolortransparent($out, $black);
+
+                        imagecopyresampled($out, $source, ceil(abs($height2) / 2), 0, 0, 0, $width, $height, $width, $height);
+                        imagepng($out, $dir . $filename . "_150.png");
                     }
                 }
             }
         }
+
         exit;
     }
 

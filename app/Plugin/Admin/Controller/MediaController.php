@@ -36,8 +36,8 @@ class MediaController extends AdminAppController {
                 $extension = pathinfo($file, PATHINFO_EXTENSION);
 
                 $targetDir = APP . "webroot/uploads/";
-                
-                $action = $this->request->query ('action');
+
+                $action = $this->request->query('action');
                 if ($action == 'product_edit') {
                     $targetDir .= "product/";
                 }
@@ -127,7 +127,7 @@ class MediaController extends AdminAppController {
                                 break;
                         }
                     }
-                    
+
 
                     $image->target_path = $targetDir . $filename . "_500." . $extension;
                     if (!$image->resize(500, 0, ZEBRA_IMAGE_CROP_CENTER)) {
@@ -381,79 +381,131 @@ class MediaController extends AdminAppController {
         // resize the image to exactly 100x100 pixels by using the "crop from center" method
         // (read more in the overview section or in the documentation)
         //  and if there is an error, check what the error is about
-        if (!$image->resize(150, 0, ZEBRA_IMAGE_CROP_CENTER)) {
 
-            // if there was an error, let's see what the error is about
-            switch ($image->error) {
-
-                case 1:
-                    //echo 'Source file could not be found!';
-                    break;
-                case 2:
-                    //echo 'Source file is not readable!';
-                    break;
-                case 3:
-                    //echo 'Could not write target file!';
-                    break;
-                case 4:
-                    //echo 'Unsupported source file format!';
-                    break;
-                case 5:
-                    //echo 'Unsupported target file format!';
-                    break;
-                case 6:
-                    //echo 'GD library version does not support target file format!';
-                    break;
-                case 7:
-                    //echo 'GD library is not installed!';
-                    break;
-                case 8:
-                    //echo '"chmod" command is disabled via configuration!';
-                    break;
-            }
-
-            // if no errors
-        }
+        $size = getimagesize($target);
 
         $image->target_path = $targetDir . DIRECTORY_SEPARATOR . $filename . "_500." . $extension;
-        if ($resize_500 && !$image->resize(500, 0, ZEBRA_IMAGE_CROP_CENTER)) {
 
-            // if there was an error, let's see what the error is about
-            switch ($image->error) {
+        if ($image->resize(500, 0, ZEBRA_IMAGE_CROP_CENTER)) {
 
-                case 1:
-                    //echo 'Source file could not be found!';
-                    break;
-                case 2:
-                    //echo 'Source file is not readable!';
-                    break;
-                case 3:
-                    //echo 'Could not write target file!';
-                    break;
-                case 4:
-                    //echo 'Unsupported source file format!';
-                    break;
-                case 5:
-                    //echo 'Unsupported target file format!';
-                    break;
-                case 6:
-                    //echo 'GD library version does not support target file format!';
-                    break;
-                case 7:
-                    //echo 'GD library is not installed!';
-                    break;
-                case 8:
-                    //echo '"chmod" command is disabled via configuration!';
-                    break;
+            $size = getimagesize($image->target_path);
+            $width = $size[0];
+            $height = $size[1];
+
+            if ($width == $height) {
+                
+            } else {
+
+                $height2 = 500 - $height;
+
+                if ($height2 > 0) {
+                    $ext = $extension;
+
+                    if (strtolower($ext) == 'jpg' || strtolower($ext) == 'jpeg') {
+                        $source = imagecreatefromjpeg($image->target_path);
+                    }
+
+                    if (strtolower($ext) == 'png') {
+                        $source = imagecreatefrompng($image->target_path);
+                        //continue;
+                    }
+
+                    $out = imagecreatetruecolor(500, 500);
+                    $black = imagecolorallocate($out, 0, 0, 0);
+                    imagecolortransparent($out, $black);
+
+                    imagecopyresampled($out, $source, 0, ceil($height2 / 2), 0, 0, $width, $height, $width, $height);
+                    imagepng($out, $targetDir . DIRECTORY_SEPARATOR . $filename . "_500.png");
+                    imagecolortransparent($out, $black);
+                    
+                }
+                
+                if ($height2 < 0) {
+                    $ext = $extension;
+
+                    if (strtolower($ext) == 'jpg' || strtolower($ext) == 'jpeg') {
+                        $source = imagecreatefromjpeg($image->target_path);
+                    }
+
+                    if (strtolower($ext) == 'png') {
+                        $source = imagecreatefrompng($image->target_path);
+                        //continue;
+                    }
+
+                    $out = imagecreatetruecolor($height, $height);
+                    $black = imagecolorallocate($out, 0, 0, 0);
+                    imagecolortransparent($out, $black);
+
+                    imagecopyresampled($out, $source, ceil(abs($height2) / 2), 0, 0, 0, $width, $height, $width, $height);
+                    imagepng($out, $targetDir . DIRECTORY_SEPARATOR . $filename . "_500.png");              
+                }
             }
+        }
+        
+        $image->target_path = $targetDir . DIRECTORY_SEPARATOR . $filename . "_150." . $extension;
+        if ($image->resize(200, 0, ZEBRA_IMAGE_CROP_CENTER)) {
 
-            // if no errors
+            $size = getimagesize($image->target_path);
+            $width = $size[0];
+            $height = $size[1];
+
+            if ($width == $height) {
+                
+            } else {
+
+                $height2 = 200 - $height;
+
+                if ($height2 > 0) {
+                    $ext = $extension;
+
+                    if (strtolower($ext) == 'jpg' || strtolower($ext) == 'jpeg') {
+                        $source = imagecreatefromjpeg($image->target_path);
+                    }
+
+                    if (strtolower($ext) == 'png') {
+                        $source = imagecreatefrompng($image->target_path);
+                        //continue;
+                    }
+
+                    $out = imagecreatetruecolor(200, 200);
+                    $black = imagecolorallocate($out, 0, 0, 0);
+                    imagecolortransparent($out, $black);
+
+                    imagecopyresampled($out, $source, 0, ceil($height2 / 2), 0, 0, $width, $height, $width, $height);
+                    imagepng($out, $targetDir . DIRECTORY_SEPARATOR . $filename . "_150.png");
+                    
+                    
+                }
+                
+                if ($height2 < 0) {
+                    $ext = $extension;
+
+                    if (strtolower($ext) == 'jpg' || strtolower($ext) == 'jpeg') {
+                        $source = imagecreatefromjpeg($image->target_path);
+                    }
+
+                    if (strtolower($ext) == 'png') {
+                        $source = imagecreatefrompng($image->target_path);
+                        //continue;
+                    }
+
+                    $out = imagecreatetruecolor($height, $height);
+                    $black = imagecolorallocate($out, 0, 0, 0);
+                    imagecolortransparent($out, $black);
+
+                    imagecopyresampled($out, $source, ceil(abs($height2) / 2), 0, 0, 0, $width, $height, $width, $height);
+                    imagepng($out, $targetDir . DIRECTORY_SEPARATOR . $filename . "_150.png");              
+                }
+            }
         }
 
         $this->_error['files']['url150'] = $url150;
         exit($this->_json($this->_error));
     }
 
+    //=======================================================
+    // upload for template uploaded
+    //=======================================================
     public function uploadimage2() {
 
         error_reporting(0);
