@@ -119,6 +119,21 @@ class BugFixController extends AppController {
                         imagepng($out, $dir . $image_500, 0);
                         print_r($image_500);
                         //exit;
+                    } else if ($dst_y == 0 ) {
+                        
+                    } else {
+                        $dst_x = $h - 500;
+                        $dst_x = ceil($dst_x / 2);
+
+                        $out = imagecreatetruecolor($h, $h);
+                        //$red = imagecolorallocate($im, 255, 0, 0);
+                        $black = imagecolorallocate($out, 0, 0, 0);
+                        imagecolortransparent($out, $black);
+
+                        //imagecopyresampled($out, $png, 0, 0, 0, 0, 500, 500, 500, 500);
+                        imagecopyresampled($out, $source, $dst_x, 0, 0, 0, $w, $h, $w, $h);
+                        imagepng($out, $dir . $image_500, 0);
+                        print_r($image_500);
                     }
                 }
             }
