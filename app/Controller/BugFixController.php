@@ -61,10 +61,13 @@ class BugFixController extends AppController {
         }
 
         foreach ($images as $img) {
-            if (preg_match("/^[0-9a-zA-Z]{1,}$/i", pathinfo($img, PATHINFO_FILENAME))) {
+                
+            if (preg_match("/[_]500/i", pathinfo($img, PATHINFO_FILENAME))) {
                 print_r ($img);
                 
                 $image_500 = str_replace(".", "_500.", $img);
+                $image_500 = $img;
+                
                 if (file_exists($dir . $image_500)) {
                     $width = getimagesize($dir . $image_500);
                     $w = $width[0];
