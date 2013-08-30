@@ -370,7 +370,6 @@ class MediaController extends AdminAppController {
         $image = new Zebra_Image();
 
         $image->source_path = $target;
-        $image->target_path = $targetDir . DIRECTORY_SEPARATOR . $filename . "_150." . $extension;
 
         $image->jpeg_quality = 100;
 
@@ -384,7 +383,7 @@ class MediaController extends AdminAppController {
 
         $size = getimagesize($target);
 
-        $image->target_path = $targetDir . DIRECTORY_SEPARATOR . $filename . "_500." . $extension;
+        $image->target_path = $targetDir . DIRECTORY_SEPARATOR . $filename . "_500.png";
 
         if ($image->resize(500, 0, ZEBRA_IMAGE_CROP_CENTER)) {
 
@@ -442,7 +441,7 @@ class MediaController extends AdminAppController {
             }
         }
         
-        $image->target_path = $targetDir . DIRECTORY_SEPARATOR . $filename . "_150." . $extension;
+        $image->target_path = $targetDir . DIRECTORY_SEPARATOR . $filename . "_150.png";
         if ($image->resize(200, 0, ZEBRA_IMAGE_CROP_CENTER)) {
 
             $size = getimagesize($image->target_path);

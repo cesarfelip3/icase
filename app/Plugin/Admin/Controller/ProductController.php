@@ -191,11 +191,9 @@ class ProductController extends AdminAppController {
                 $data['featured']['150w'] = array();
 
                 foreach ($images as $value) {
-                    if (file_exists(APP . "webroot/uploads/" . pathinfo($value, PATHINFO_FILENAME) . "_150.png")) {
-                        $value = pathinfo($value, PATHINFO_FILENAME) . ".png";
-                    }
-                    $data['featured']['150w'][] = str_replace(".", "_150.", $value);
                     @copy(APP . 'webroot/uploads/' . $value, APP . 'webroot/uploads/product/' . $value);
+                    $value = pathinfo($value, PATHINFO_FILENAME) . ".png";
+                    $data['featured']['150w'][] = str_replace(".", "_150.", $value);
                     @copy(APP . 'webroot/uploads/' . str_replace(".", "_150.", $value), APP . 'webroot/uploads/product/' . str_replace(".", "_150.", $value));
                     @copy(APP . 'webroot/uploads/' . str_replace(".", "_500.", $value), APP . 'webroot/uploads/product/' . str_replace(".", "_500.", $value));
                 }
@@ -416,11 +414,9 @@ class ProductController extends AdminAppController {
                         $data['featured']['150w'] = array();
 
                         foreach ($images as $value) {
-                            if (file_exists(APP . "webroot/uploads/" . pathinfo($value, PATHINFO_FILENAME) . "_150.png")) {
-                                $value = pathinfo($value, PATHINFO_FILENAME) . ".png";
-                            }
-                            $data['featured']['150w'][] = str_replace(".", "_150.", $value);
                             @copy(APP . 'webroot/uploads/' . $value, APP . 'webroot/uploads/product/' . $value);
+                            $value = pathinfo($value, PATHINFO_FILENAME) . ".png";
+                            $data['featured']['150w'][] = str_replace(".", "_150.", $value);
                             @copy(APP . 'webroot/uploads/' . str_replace(".", "_150.", $value), APP . 'webroot/uploads/product/' . str_replace(".", "_150.", $value));
                             @copy(APP . 'webroot/uploads/' . str_replace(".", "_500.", $value), APP . 'webroot/uploads/product/' . str_replace(".", "_500.", $value));
                         }
