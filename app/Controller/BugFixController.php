@@ -63,12 +63,11 @@ class BugFixController extends AppController {
                     }
                     
                     print_r($source);
-                    exit;
                     
                     if (strtolower($ext) == 'png') {
                         $source = imagecreatefrompng($dir . $image_500);
                     }
-
+                    
                     $dst_y = 500 - $h;
                     if ($dst_y > 0) {
                         //$out = imagecreatetruecolor(500, 500);
