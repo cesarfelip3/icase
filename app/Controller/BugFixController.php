@@ -32,7 +32,7 @@ class BugFixController extends AppController {
             print_r("no images");
             exit;
         }
-        
+
         //print_r ($images);
         //exit;
 
@@ -45,35 +45,35 @@ class BugFixController extends AppController {
                 $image_500 = $img;
 
                 if (file_exists($dir . $image_500)) {
-                    
-                    $width = array ();
+
+                    $width = array();
                     $width = getimagesize($dir . $image_500);
                     $w = $width[0];
                     $h = $width[1];
-                  
+
                     //$png = imagecreatefrompng(APP . 'webroot/img/background/500.png');
                     $source = null;
 
                     $ext = pathinfo($image_500, PATHINFO_EXTENSION);
-                    
-                    print_r ($ext);
-                    //exit;
+
+                    print_r($ext);
                     
                     if (strtolower($ext) == 'jpg' || strtolower($ext) == 'jpeg') {
                         $source = imagecreatefromjpeg($dir . $image_500);
                     }
-
+                    
+                    print_r($source);
+                    exit;
+                    
                     if (strtolower($ext) == 'png') {
                         $source = imagecreatefrompng($dir . $image_500);
-                        print_r ($source);
-                        exit;
                     }
 
                     $dst_y = 500 - $h;
                     if ($dst_y > 0) {
                         //$out = imagecreatetruecolor(500, 500);
-                        $dst_y = ceil ($dst_y / 2);
-                        
+                        $dst_y = ceil($dst_y / 2);
+
                         $out = imagecreatetruecolor(500, 500);
                         imagealphablending($out, false);
                         $col = imagecolorallocatealpha($out, 255, 255, 255, 127);
