@@ -48,6 +48,7 @@ class BugFixController extends AppController {
                     $width = getimagesize($dir . $image_500);
                     $w = $width[0];
                     $h = $width[1];
+                    exit;
 
                     //$png = imagecreatefrompng(APP . 'webroot/img/background/500.png');
                     $jpeg = null;
@@ -66,7 +67,6 @@ class BugFixController extends AppController {
                     }
 
                     $dst_y = 500 - $h;
-                    exit;
                     if ($dst_y > 0) {
                         //$out = imagecreatetruecolor(500, 500);
                         $dst_y = ceil ($dst_y / 2);
