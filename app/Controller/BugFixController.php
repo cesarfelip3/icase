@@ -43,7 +43,7 @@ class BugFixController extends AppController {
 
         //exit;
 
-        if ($handle = opendir($dir . ".")) {
+        if (($handle = opendir($dir . ".")) != false) {
             while (false !== ($entry = readdir($handle))) {
                 if ($entry != "." && $entry != "..") {
                     $images[] = $entry;
@@ -64,7 +64,7 @@ class BugFixController extends AppController {
             if (preg_match("/\_500\./i", $img)) {
                 print_r($img);
 
-                $image_500 = str_replace(".", "_500.", $img);
+                //$image_500 = str_replace(".", "_500.", $img);
                 $image_500 = $img;
 
                 if (file_exists($dir . $image_500)) {
@@ -86,4 +86,27 @@ class BugFixController extends AppController {
                     if (empty($jpeg)) {
                         print_r("unknow extension");
                         exit;
-}}}}}}
+                    }
+
+                    $dst_y = 500 - $h;
+                    if ($dst_y > 0) {
+                        //$out = imagecreatetruecolor(500, 500);
+
+                        $out = imagecreatetruecolor(500, 500);
+                        imagealphablending($out, false);
+                        $col = imagecolorallocatealpha($out, 255, 255, 255, 127);
+                        imagefilledrectangle($out, 0, 0, 500, 500, $col);
+                        imagealphablending($out, true);
+
+                        //imagecopyresampled($out, $png, 0, 0, 0, 0, 500, 500, 500, 500);
+                        imagecopyresampled($out, $jpeg, 0, ceil($dst_y / 2), 0, 0, $w, $h, $w, $h);
+                        imagepng($out, $dir . $image_500, 100);
+                        print_r($image_500);
+                        exit;
+                    }
+                }
+            }
+        }
+    }
+
+}
