@@ -91,7 +91,8 @@ class BugFixController extends AppController {
                     $dst_y = 500 - $h;
                     if ($dst_y > 0) {
                         //$out = imagecreatetruecolor(500, 500);
-
+                        $dst_y = ceil ($dst_y / 2);
+                        
                         $out = imagecreatetruecolor(500, 500);
                         imagealphablending($out, false);
                         $col = imagecolorallocatealpha($out, 255, 255, 255, 127);
@@ -99,7 +100,7 @@ class BugFixController extends AppController {
                         imagealphablending($out, true);
 
                         //imagecopyresampled($out, $png, 0, 0, 0, 0, 500, 500, 500, 500);
-                        imagecopyresampled($out, $jpeg, 0, ceil($dst_y / 2), 0, 0, $w, $h, $w, $h);
+                        imagecopyresampled($out, $jpeg, 0, $dst_y, 0, 0, $w, $h, $w, $h);
                         imagepng($out, $dir . $image_500, 100);
                         print_r($image_500);
                         exit;
