@@ -58,14 +58,14 @@ $admin_coupon = $base . "coupon";
                             <div class="control-group warning">
                                 <label class="control-label" for="inputWarning">Value</label>
                                 <div class="controls">
-                                    <input type="text" class="input-mini" name="coupon[value]" placeholder="xxxx.xx" value="<?php echo $data['value']; ?>">
+                                    <input type="text" class="input-mini" name="coupon[value]" placeholder="xxxx.xx" value="<?php echo $data['value']; ?>" value="0">
                                     <span class="help-inline"></span>
                                 </div>
                             </div>
                             <div class="control-group warning">
                                 <label class="control-label" for="inputWarning" >Discount</label>
                                 <div class="controls">
-                                    <input type="text" class="input-mini" name="coupon[discount]" value="<?php echo intval($data['discount']); ?>">
+                                    <input type="text" class="input-mini" name="coupon[discount]" value="<?php echo intval($data['discount']); ?>">%
                                     <span class="help-inline"></span>
                                 </div>
                             </div>

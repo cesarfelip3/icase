@@ -96,7 +96,29 @@ class ShopController extends AppController {
             if (!empty($data)) { // always exists
                 $amount = 0;
                 foreach ($data as $value) {
-                    $amount += round($value['Product']['price'] * $value['Product']['_quantity'], 2, PHP_ROUND_HALF_DOWN) + "";
+                    $amount += round($value['Product']['price'] * $value['Product']['_quantity'] + 2.49, 2, PHP_ROUND_HALF_DOWN) + "";
+                }
+                
+                $coupon = $this->request->data('coupon');
+                if (empty ($coupon)) {
+                    
+                } else {
+                    if (!empty ($coupon['name'])) {
+                        $coupon = $coupon['name'];
+                        
+                        $this->loadModel('Coupon');
+                        $coupon = $this->Coupon->find ('first', array (
+                            "conditions" => array (
+                                "name" => $coupon
+                            )
+                        ));
+                        
+                        if (!empty ($coupon)) {
+                            $discount = (100 - $coupon['Coupon']['discount']) / 100;
+                            $amount = round ($discount * $amount, 2, PHP_ROUND_HALF_DOWN);
+                        }
+                        
+                    }
                 }
 
                 $payment_data = array(

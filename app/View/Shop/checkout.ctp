@@ -44,6 +44,17 @@ $signup_url = $this->webroot . "signup";
             </div>
         </div>
 
+        <div class="row-fluid checkout">
+            <div class="span12">
+                <h2>Discount Codes</h2>
+                <p>Enter your coupon code if you have one.</p>
+                <p>
+                    <label style="width:150px;">Your Coupon</label>
+                    <input type="text" class="input-medium" name="coupon[name]" value="" />
+                    <span class="text-warning" style="text-shadow:none;"></span>
+                </p>
+            </div>
+        </div>
         <!-- checkout form -->
         <?php if (isset($deliver)) : ?>
             <div class="row-fluid checkout">
