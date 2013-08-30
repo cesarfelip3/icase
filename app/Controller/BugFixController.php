@@ -13,7 +13,6 @@ class BugFixController extends AppController {
 
     public function fix() {
         //exit;
-
         //$this->loadModel('Category');
 
         /*
@@ -41,7 +40,7 @@ class BugFixController extends AppController {
         print_r("bugfix.category");
 
         $images = array();
-        
+
         //exit;
 
         if ($handle = opendir($dir . ".")) {
@@ -52,8 +51,8 @@ class BugFixController extends AppController {
             }
             closedir($handle);
         }
-        
-        
+
+
 
         if (empty($images)) {
             print_r("no images");
@@ -61,13 +60,13 @@ class BugFixController extends AppController {
         }
 
         foreach ($images as $img) {
-            print_r ($img);    
+            print_r($img);
             if (preg_match("/\_500\./i", $img)) {
-                print_r ($img);
-                
+                print_r($img);
+
                 $image_500 = str_replace(".", "_500.", $img);
                 $image_500 = $img;
-                
+
                 if (file_exists($dir . $image_500)) {
                     $width = getimagesize($dir . $image_500);
                     $w = $width[0];
@@ -88,9 +87,9 @@ class BugFixController extends AppController {
                         print_r("unknow extension");
                         exit;
                     }
-                    
-                    if (empty ($png)) {
-                        print_r ("unknow source");
+
+                    if (empty($png)) {
+                        print_r("unknow source");
                         exit;
                     }
 
@@ -100,30 +99,30 @@ class BugFixController extends AppController {
                         imagecopyresampled($out, $png, 0, 0, 0, 0, 500, 500, 500, 500);
                         imagecopyresampled($out, $jpeg, 0, $dst_y, 0, 0, $w, $h, $w, $h);
                         imagejpeg($out, $dir . $image_500, 100);
-                        print_r ($image_500);
+                        print_r($image_500);
                         exit;
                     }
-                    
                 }
             }
+        }
 
-            exit;
-            
-            $final = APP . "webroot" . DS . "uploads" . DS . "preview" . DS . $final;
-            if (file_exists($final)) {
-                return;
-            }
+        exit;
 
-            $png = imagecreatefrompng($overlay);
-            $jpeg = imagecreatefromjpeg($jpeg);
+        $final = APP . "webroot" . DS . "uploads" . DS . "preview" . DS . $final;
+        if (file_exists($final)) {
+            return;
+        }
 
-            //list($width, $height) = getimagesize('./image.jpg');
-            //list($newwidth, $newheight) = getimagesize('./mark.png');
-            $out = imagecreatetruecolor(500, 500);
-            imagecopyresampled($out, $png, 0, 0, 0, 0, 500, 500, 500, 780);
-            imagecopyresampled($out, $jpeg, 0, 0, 0, 0, 780, 780, 780, 780);
+        $png = imagecreatefrompng($overlay);
+        $jpeg = imagecreatefromjpeg($jpeg);
 
-            imagejpeg($out, $final, 100);
+        //list($width, $height) = getimagesize('./image.jpg');
+        //list($newwidth, $newheight) = getimagesize('./mark.png');
+        $out = imagecreatetruecolor(500, 500);
+        imagecopyresampled($out, $png, 0, 0, 0, 0, 500, 500, 500, 780);
+        imagecopyresampled($out, $jpeg, 0, 0, 0, 0, 780, 780, 780, 780);
+
+        imagejpeg($out, $final, 100);
         }
 
         require_once APP . 'Vendor' . DS . "Zebra/Zebra_Image.php";
