@@ -62,7 +62,7 @@ class BugFixController extends AppController {
 
         foreach ($images as $img) {
             print_r ($img);    
-            if (preg_match("/[_]500[.]/i", $img)) {
+            if (preg_match("/\_500\./i", $img)) {
                 print_r ($img);
                 
                 $image_500 = str_replace(".", "_500.", $img);
