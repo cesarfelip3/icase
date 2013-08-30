@@ -210,7 +210,6 @@ $admin_product = $base . "product";
                                         <img src="<?php echo $this->webroot . "uploads/product/" . $data['featured2']['150w'][$key]; ?>" style=""></a>
                                     <div class="caption">
                                         <p><a href="javascript:" data-image="<?php echo $image; ?>" onclick="featured_image_delete(this);">Delete</a></p>
-                                        <p><a href="javascript:" data-image="<?php echo $image; ?>" onclick="featured_image_crop(this);">Crop</a></p>
                                     </div>
                                 </div>
                                 <?php endforeach; ?>

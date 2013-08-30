@@ -83,12 +83,9 @@ class ProductController extends AdminAppController {
 
                 if ($value['Product']['type'] == 'product') {
                     $value['Product']['featured'] = unserialize($value['Product']['featured']);
-                    $value['Product']['image'] = count($value['Product']['featured']) > 0 ? $value['Product']['featured']['150w'][0] : "";
+                    $value['Product']['image'] = $value['Product']['featured']['150w'][0];
                     $value['Product']['image'] = $this->webroot . "uploads/product/" . $value['Product']['image'];
-                } else {
-                    $images = unserialize($value['Product']['image']);
-                    $value['Product']['image'] = $this->webroot . "img/template/" . $images['foreground'];
-                }
+                } 
 
                 $data[$key] = $value;
             }
