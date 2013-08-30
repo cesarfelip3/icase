@@ -41,14 +41,22 @@ $checkout_pay_url = $this->webroot . "shop/checkout/?action=pay";
             <?php foreach ($data as $value) : ?>
             <tr>
                 <td><?php echo $value['Product']['name']; ?></td>
-                <td><?php echo $value['Product']['price']; ?></td>
+                <td>$<?php echo $value['Product']['price']; ?></td>
                 <td><?php echo $value['Product']['quantity']; ?></td>
-                <td><?php echo round($value['Product']['price'] * $value['Product']['quantity'], 2, PHP_ROUND_HALF_DOWN); ?></td>
+                <td>$<?php echo round($value['Product']['price'] * $value['Product']['quantity'], 2, PHP_ROUND_HALF_DOWN); ?></td>
             </tr>
             <?php endforeach; ?>
             <tr>
+                <td colspan="3" style="text-align:left;">Subtotal: </td>
+                <td>$<?php echo $subtotal; ?></td>
+            </tr>
+            <tr>
+                <td colspan="3" style="text-align:left;">Shipment: </td>
+                <td>$<?php echo $shipment; ?></td>
+            </tr>
+            <tr>
                 <td colspan="3" style="text-align:left;">Total: </td>
-                <td><?php echo $total; ?></td>
+                <td>$<?php echo $total; ?></td>
             </tr>
             <?php endif; ?>
         </tbody>
