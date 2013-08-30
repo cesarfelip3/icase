@@ -296,7 +296,7 @@ $js_pluploader = array(
     "pluploader/plupload.browserplus.js",
     "pluploader/plupload.html4.js",
     "pluploader/plupload.html5.js",
-    "jcrop/js/jquery.jcrop.min.js"
+    "jcrop/js/jquery.Jcrop.min.js"
 );
 ?>
 
