@@ -69,6 +69,21 @@ class CategoryController extends AdminAppController {
                 }
             }
 
+            foreach ($return as $key => $value) {
+
+                $id = $value['Category']['id'];
+
+                //print_r ($value['Category']['slug']);
+
+                if (preg_match("/\-C$id/", trim($value['Category']['slug']))) {
+                    $value['Category']['slug'] = str_replace("-C" . $value['Category']['id'], "", $value['Category']['slug']);
+                }
+                $return[$key] = $value;
+            }
+
+            //print_r($return);
+            //exit;
+
             $this->set('data', $return);
             $this->render('index.ajax');
         }
@@ -144,6 +159,12 @@ class CategoryController extends AdminAppController {
         $data['slug'] = @preg_replace("/\/+/i", "-", $data['slug']);
 
         $this->Category->save($data);
+        $id = $this->Category->id;
+
+        $data['slug'] = trim($data['slug'], "-");
+        $this->Category->set(array('slug' => $data['slug'] . "-C" . $id));
+        $this->Category->save();
+
         exit(json_encode($this->error));
     }
 
@@ -181,6 +202,9 @@ class CategoryController extends AdminAppController {
         }
 
         $this->Category->id = $data['id'];
+        $data['slug'] = trim($data['slug'], "-");
+        $data['slug'] = $data['slug'] . "-C" . $data['id'];
+
         unset($data['id']);
         unset($data['guid']);
         unset($data['parent_guid']);
