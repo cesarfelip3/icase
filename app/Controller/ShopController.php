@@ -441,8 +441,8 @@ class ShopController extends AppController {
             $this->set("data", $data);
             $this->set("bill", $bill);
             $this->set("subtotal", $total);
-            $this->set("shipment", 3.22);
-            $this->set("total", $total + 3.22);
+            $this->set("shipment", 2.49);
+            $this->set("total", $total + 2.49);
             $this->set("deliver", $deliver);
             $this->render("checkout.confirm");
             return;
@@ -657,8 +657,8 @@ class ShopController extends AppController {
             }
             
             $this->set('subtotal', $subtotal);
-            $this->set('shipment', 3.22);
-            $this->set('total',  round($subtotal + 3.22, 2, PHP_ROUND_HALF_DOWN));
+            $this->set('shipment', 2.49);
+            $this->set('total',  round($subtotal + 2.49, 2, PHP_ROUND_HALF_DOWN));
             $this->set('data', $data);
         }
     }
