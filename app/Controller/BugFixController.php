@@ -12,36 +12,12 @@ class BugFixController extends AppController {
     }
 
     public function fix() {
-        //exit;
-        //$this->loadModel('Category');
-
-        /*
-          print_r("bugfix.category");
-
-          $data = $this->Category->find('all');
-
-          foreach ($data as $key => $value) {
-          print_r($value['Category']['slug'] . "<br/>");
-          if (preg_match("/\//i", $value['Category']['slug'], $matches)) {
-          print_r($value['Category']['slug']);
-          $value['Category']['slug'] = preg_replace("/\/+/i", "-", $value['Category']['slug']);
-          //$data[$key] = $value;
-          $this->Category->id = $value['Category']['id'];
-          $this->Category->save(array('slug' => $value['Category']['slug']));
-          }
-          }
-
-          exit;
-
-         */
 
         $dir = APP . "webroot/uploads/product/";
 
         print_r("bugfix.category");
 
         $images = array();
-
-        //exit;
 
         if (($handle = opendir($dir . ".")) != false) {
             while (false !== ($entry = readdir($handle))) {
@@ -52,12 +28,13 @@ class BugFixController extends AppController {
             closedir($handle);
         }
 
-
-
         if (empty($images)) {
             print_r("no images");
             exit;
         }
+        
+        print_r ($images);
+        exit;
 
         foreach ($images as $img) {
             print_r($img);
