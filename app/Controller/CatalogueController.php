@@ -217,11 +217,10 @@ class CatalogueController extends AppController {
             foreach ($data as $key => $value) {
                 if (!empty($value['Product']['featured'])) {
                     $value['Product']['featured'] = unserialize($value['Product']['featured']);
-                    if (file_exists(APP . "webroot/uploads/product/" . $value['Product']['featured']['150w'][0])){
-                        
-                    } else {
+                    if (file_exists(APP . "webroot/uploads/product/" . pathinfo($value['Product']['featured']['150w'][0], PATHINFO_FILENAME) . ".png")) {
+
                         $value["Product"]['featured']['150w'] = pathinfo($value['Product']['featured']['150w'][0], PATHINFO_FILENAME) . ".png";
-                    }
+                    } 
                     $data[$key]['Product']['image'] = $value['Product']['featured']['150w'][0];
                     
                 }
