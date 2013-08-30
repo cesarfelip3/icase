@@ -215,8 +215,11 @@ class CatalogueController extends AppController {
 
         if (!empty($data)) {
             foreach ($data as $key => $value) {
-                $value['Product']['featured'] = unserialize($value['Product']['featured']);
-                $data[$key] = $value;
+                if (!empty($value['Product']['featured'])) {
+                    $value['Product']['featured'] = unserialize($value['Product']['featured']);
+                    $data[$key]['Product']['image'] = pathinfo($value['Product']['featured']['150w'][0], PATHINFO_FILENAME) . ".png";
+                    
+                }
             }
         }
 
