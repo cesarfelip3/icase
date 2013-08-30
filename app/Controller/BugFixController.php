@@ -123,7 +123,6 @@ class BugFixController extends AppController {
         imagecopyresampled($out, $jpeg, 0, 0, 0, 0, 780, 780, 780, 780);
 
         imagejpeg($out, $final, 100);
-        }
 
         require_once APP . 'Vendor' . DS . "Zebra/Zebra_Image.php";
 
