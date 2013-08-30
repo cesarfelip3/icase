@@ -13,6 +13,8 @@ class BugFixController extends AppController {
 
     public function fix() {
 
+        exit;
+        
         set_time_limit(0);
         //Cache::delete("category_top");
         //exit;
