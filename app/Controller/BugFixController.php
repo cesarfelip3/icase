@@ -88,6 +88,10 @@ class BugFixController extends AppController {
                         exit;
                     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 04c151113a3b2d7dc656f5fcceaa529f4382ef09
                     $dst_y = 500 - $h;
                     if ($dst_y > 0) {
                         //$out = imagecreatetruecolor(500, 500);
