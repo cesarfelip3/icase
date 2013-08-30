@@ -27,7 +27,7 @@ class BugFixController extends AppController {
                     
                     if ($k2 == '150w' && is_array ($image)) {
                         foreach ($image as $k3 => $i) {
-                            $i = pathinfo($i, PATHINFO_FILENAME) . ".bbbpng";
+                            $i = pathinfo($i, PATHINFO_FILENAME) . ".png";
                             $image[$k3] = $i;
                         }
                     }
