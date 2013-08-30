@@ -25,7 +25,7 @@
                     <div class="span3">
                         <div class="thumbnail">
                             <a href="<?php echo $this->webroot . "product/" . $value['Product']['slug']; ?>">
-                                <img src="<?php echo $this->webroot . "uploads/product/" . str_replace (".", "_500.", $value['Product']['featured']['origin'][0]); ?>" alt="<?php echo $value['Product']['name']; ?>" style="width:100%;">
+                                <img src="<?php echo $this->webroot . "uploads/product/" . $value['Product']['image']; ?>" alt="<?php echo $value['Product']['name']; ?>" style="width:100%;">
                             </a>
                             <div class="caption">
                                 <a href="<?php echo $this->webroot . "product/" . $value['Product']['slug']; ?>" class="prop-title" style="text-transform: uppercase;"><?php echo $value['Product']['name']; ?></a>
@@ -48,7 +48,7 @@
                     <div class="span3">
                         <div class="thumbnail">
                             <a href="<?php echo $this->webroot . "product/" . $value['Product']['slug']; ?>">
-                                <img src="<?php echo $this->webroot . "uploads/product/" . str_replace (".", "_500.", $value['Product']['featured']['origin'][0]); ?>" alt="<?php echo $value['Product']['name']; ?>" style="width:100%;;">
+                                <img src="<?php echo $this->webroot . "uploads/product/" . $value['Product']['image']; ?>" alt="<?php echo $value['Product']['name']; ?>" style="width:100%;;">
                             </a>
                             <div class="caption">
                                 <a href="<?php echo $this->webroot . "product/" . $value['Product']['slug']; ?>" class="prop-title" style="text-transform: uppercase;"><?php echo $value['Product']['name']; ?></a>
