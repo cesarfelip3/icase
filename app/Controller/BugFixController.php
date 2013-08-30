@@ -12,7 +12,7 @@ class BugFixController extends AppController {
     }
 
     public function fix() {
-        
+
         set_time_limit(0);
 
         $dir = APP . "webroot/uploads/product/";
@@ -53,18 +53,18 @@ class BugFixController extends AppController {
 
         require_once APP . 'Vendor' . DS . "Zebra/Zebra_Image.php";
         $image = new Zebra_Image();
-        
-        print_r ($images);
-        
+
+        print_r($images);
+
         foreach ($images as $img) {
-            
-            if (!preg_match ("/^[0-9a-z]{1,}$/i", pathinfo($dir . $img, PATHINFO_FILENAME))) {
+
+            if (!preg_match("/^[0-9a-z]{1,}$/i", pathinfo($dir . $img, PATHINFO_FILENAME))) {
                 continue;
             }
-            
-            print_r ($img);
-            
-            $extension = pathinfo ($dir . $img, PATHINFO_EXTENSION);
+
+            print_r($img);
+
+            $extension = pathinfo($dir . $img, PATHINFO_EXTENSION);
             $filename = pathinfo($dir . $img, PATHINFO_FILENAME);
 
             $image->source_path = $dir . $img;
@@ -79,6 +79,26 @@ class BugFixController extends AppController {
             //  and if there is an error, check what the error is about
 
             $size = getimagesize($dir . $img);
+
+            //$_image_500 = "";
+            $_image_150 = $filename . "_150.png";
+            if (file_exists($dir . $_image_150)) {
+                $_size = getimagesize($dir . $_image_150);
+                if ($_size[0] == $_size[1]) {
+                    continue;
+                    ;
+                }
+            } else {
+
+                $_image_150 = $filename . "_150." . $extension;
+                if (file_exists($dir . $_image_150)) {
+                    $_size = getimagesize($dir . $_image_150);
+                    if ($_size[0] == $_size[1]) {
+                        continue;
+                        ;
+                    }
+                }
+            }
 
             $image->target_path = $dir . $filename . "_500." . $extension;
 
