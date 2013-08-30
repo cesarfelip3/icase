@@ -65,6 +65,8 @@ class BugFixController extends AppController {
 
                     if (strtolower($ext) == 'png') {
                         $jpeg = imagecreatefrompng($dir . $image_500);
+                        print_r ($jpeg);
+                        exit;
                     }
 
                     if (empty($jpeg)) {
