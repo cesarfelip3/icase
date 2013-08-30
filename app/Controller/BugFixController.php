@@ -12,9 +12,9 @@ class BugFixController extends AppController {
     }
 
     public function fix() {
-        exit;
+        //exit;
 
-        $this->loadModel('Category');
+        //$this->loadModel('Category');
 
         /*
           print_r("bugfix.category");
@@ -79,12 +79,17 @@ class BugFixController extends AppController {
                         print_r("unknow extension");
                         exit;
                     }
+                    
+                    if (empty ($png)) {
+                        print_r ("unknow source");
+                        exit;
+                    }
 
                     $dst_y = 500 - $h;
                     if ($dst_y >= 0) {
                         $out = imagecreatetruecolor(500, 500);
                         imagecopyresampled($out, $png, 0, 0, 0, 0, 500, 500, 500, 500);
-                        imagecopyresampled($out, $jpeg, 0,$dst_y, 0, 0, $w, $h, $w, $h);
+                        imagecopyresampled($out, $jpeg, 0, $dst_y, 0, 0, $w, $h, $w, $h);
                         imagejpeg($out, $dir . $image_500, 100);
                         print_r ($image_500);
                         exit;
