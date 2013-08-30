@@ -102,7 +102,7 @@ class BugFixController extends AppController {
             
             print_r ($img . "<br/>");
 
-            $image->target_path = $dir . $filename . "_500." . $extension;
+            $image->target_path = $dir . $filename . "_500.png";// . $extension;
 
             if ($image->resize(500, 0, ZEBRA_IMAGE_CROP_CENTER)) {
 
@@ -159,7 +159,7 @@ class BugFixController extends AppController {
                 }
             }
 
-            $image->target_path = $dir . $filename . "_150." . $extension;
+            $image->target_path = $dir . $filename . "_150.png";// . $extension;
             if ($image->resize(200, 0, ZEBRA_IMAGE_CROP_CENTER)) {
 
                 $size = getimagesize($image->target_path);
