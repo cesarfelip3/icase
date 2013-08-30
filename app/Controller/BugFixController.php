@@ -100,7 +100,7 @@ class BugFixController extends AppController {
 
                         //imagecopyresampled($out, $png, 0, 0, 0, 0, 500, 500, 500, 500);
                         imagecopyresampled($out, $jpeg, 0, ceil ($dst_y / 2), 0, 0, $w, $h, $w, $h);
-                        imagejpeg($out, $dir . $image_500, 100);
+                        imagepng($out, $dir . $image_500, 100);
                         print_r($image_500);
                         exit;
                     }
