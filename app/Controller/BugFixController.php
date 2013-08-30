@@ -33,7 +33,7 @@ class BugFixController extends AppController {
             exit;
         }
         
-        print_r ($images);
+        //print_r ($images);
         //exit;
 
         foreach ($images as $img) {
