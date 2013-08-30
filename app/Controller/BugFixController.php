@@ -63,7 +63,7 @@ class BugFixController extends AppController {
             print_r ($img);
             
             $extension = pathinfo ($dir . $img, PATHINFO_EXTENSION);
-            $filename = pathinfo(dir . $img, PATHINFO_FILENAME);
+            $filename = pathinfo($dir . $img, PATHINFO_FILENAME);
 
             $image->source_path = $dir . $img;
             $image->jpeg_quality = 100;
