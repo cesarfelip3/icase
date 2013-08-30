@@ -103,7 +103,7 @@ class BugFixController extends AppController {
                     //exit;
                     //print_r ($source);
                     //exit;
-                    
+
                     if ($w == $h) {
                         continue;
                     }
@@ -123,7 +123,7 @@ class BugFixController extends AppController {
                         imagepng($out, $dir . $image_500, 0);
                         print_r($image_500);
                         //exit;
-                    } else if ($dst_y == 0 ) {
+                    } else if ($dst_y == 0) {
                         
                     } else {
                         $dst_x = $h - 500;
@@ -143,6 +143,105 @@ class BugFixController extends AppController {
             }
         }
 
+        exit;
+    }
+
+    public function do150() {
+        $dir = APP . "webroot/uploads/product/";
+
+        print_r("bugfix.category");
+
+        $images = array();
+
+        if (($handle = opendir($dir . ".")) != false) {
+            while (false !== ($entry = readdir($handle))) {
+                if ($entry != "." && $entry != "..") {
+                    $images[] = $entry;
+                }
+            }
+            closedir($handle);
+        }
+
+        if (empty($images)) {
+            print_r("no images");
+            exit;
+        }
+
+        //print_r ($images);
+        //exit;
+
+        error_reporting(0);
+        register_shutdown_function(
+                function () {
+
+                    $last_error = error_get_last();
+
+                    if (!is_null($last_error)) {
+                        $this->_error['error'] = 1;
+                        $this->_error['message'] = $last_error['message'];
+                        exit(json_encode($this->_error));
+                    }
+                });
+
+        foreach ($images as $img) {
+            print_r($img . "<br/>");
+            if (preg_match("/\_500\./i", $img)) {
+                print_r($img . "<br/>");
+
+                //$image_500 = str_replace(".", "_500.", $img);
+                $image_500 = $img;
+
+                print_r($dir . $image_500 . "<br/>");
+
+                if (file_exists($dir . $image_500)) {
+
+                    $width = array();
+                    $path = $dir . $image_500;
+
+                    try {
+                        $width = getimagesize($path);
+                    } catch (Exception $e) {
+                        print_r($e->getMessage());
+                    }
+
+                    $w = $width[0];
+                    $h = $width[1];
+
+                    $ext = pathinfo($image_500, PATHINFO_EXTENSION);
+
+                    //print_r($ext);
+                    //print_r ($dir . $image_500);
+                    //print_r ($source);
+                    //exit;
+
+                    if (strtolower($ext) == 'jpg' || strtolower($ext) == 'jpeg') {
+                        $source = imagecreatefromjpeg($dir . $image_500);
+                        //continue;
+                    }
+
+
+                    if (strtolower($ext) == 'png') {
+                        $source = imagecreatefrompng($dir . $image_500);
+                        //continue;
+                    }
+
+                    if ($width[0] == $width[1]) {
+
+                        //$dst_y = ceil($dst_y / 2);
+
+                        $out = imagecreatetruecolor(200, 200);
+                        //$red = imagecolorallocate($im, 255, 0, 0);
+                        $black = imagecolorallocate($out, 0, 0, 0);
+                        imagecolortransparent($out, $black);
+
+                        //imagecopyresampled($out, $png, 0, 0, 0, 0, 500, 500, 500, 500);
+                        imagecopyresampled($out, $source, 0, 0, 0, 0, 200, 200, $w, $h);
+                        imagepng($out, $dir . str_replace("_500", "_150", $image_500), 0);
+                        //print_r($image_500);
+                    }
+                }
+            }
+        }
         exit;
     }
 
