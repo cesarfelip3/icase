@@ -56,8 +56,8 @@ class BugFixController extends AppController {
 
                     $ext = pathinfo($image_500, PATHINFO_EXTENSION);
                     
-                    //print_r ($ext);
-                    //exit;
+                    print_r ($ext);
+                    exit;
                     
                     if (strtolower($ext) == 'jpg' || strtolower($ext) == 'jpeg') {
                         $jpeg = imagecreatefromjpeg($dir . $image_500);
