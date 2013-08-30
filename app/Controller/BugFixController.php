@@ -52,28 +52,22 @@ class BugFixController extends AppController {
                     $h = $width[1];
                   
                     //$png = imagecreatefrompng(APP . 'webroot/img/background/500.png');
-                    $jpeg = null;
+                    $source = null;
 
                     $ext = pathinfo($image_500, PATHINFO_EXTENSION);
                     
                     print_r ($ext);
-                    exit;
+                    //exit;
                     
                     if (strtolower($ext) == 'jpg' || strtolower($ext) == 'jpeg') {
-                        $jpeg = imagecreatefromjpeg($dir . $image_500);
+                        $source = imagecreatefromjpeg($dir . $image_500);
                     }
 
                     if (strtolower($ext) == 'png') {
-                        $jpeg = imagecreatefrompng($dir . $image_500);
-                        print_r ($jpeg);
+                        $source = imagecreatefrompng($dir . $image_500);
+                        print_r ($source);
                         exit;
                     }
-
-                    if (empty($jpeg)) {
-                        print_r("unknow extension");
-                        exit;
-                    }
-                    exit;
 
                     $dst_y = 500 - $h;
                     if ($dst_y > 0) {
@@ -87,7 +81,7 @@ class BugFixController extends AppController {
                         imagealphablending($out, true);
 
                         //imagecopyresampled($out, $png, 0, 0, 0, 0, 500, 500, 500, 500);
-                        imagecopyresampled($out, $jpeg, 0, $dst_y, 0, 0, $w, $h, $w, $h);
+                        imagecopyresampled($out, $source, 0, $dst_y, 0, 0, $w, $h, $w, $h);
                         imagepng($out, $dir . $image_500, 100);
                         print_r($image_500);
                         exit;
