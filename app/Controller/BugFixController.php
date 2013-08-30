@@ -14,6 +14,36 @@ class BugFixController extends AppController {
     public function fix() {
 
         set_time_limit(0);
+        
+        $this->loadModel('Product');
+        
+        $data = $this->Product->find ('all', array("conditions" => array ("type" => "product")));
+        
+        foreach ($data as $value) {
+            
+            if (!empty ($value['Product']['featured'])) {
+                $images = unserialize($value['Product']['featured']);
+                foreach ($images as $k2 => $image) {
+                    
+                    if ($k2 == '150w' && is_array ($image)) {
+                        foreach ($image as $k3 => $i) {
+                            $i = pathinfo($i, PATHINFO_FILENAME) . ".bbbpng";
+                            $image[$k3] = $i;
+                        }
+                    }
+                    
+                    $images[$k2] = $image;
+                }
+                $images = serialize($images);
+                $value["Product"]['featured'] = $images;
+            }
+            
+            $this->Product->id = $value['Product']['id'];
+            $this->Product->set (array ("featured" => $value['Product']['featured']));
+            $this->Product->save ();
+        }
+        
+        exit;
 
         $dir = APP . "webroot/uploads/product/";
 
