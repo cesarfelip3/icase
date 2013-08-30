@@ -64,12 +64,13 @@ $coupon_delete = $base . "coupon" . DS . "delete";
                                 <th>#</th>
                                 <th>Name</th>
                                 <th>Type</th>
-                                <th>Picture</th>
-                                <th>Price</th>
+                                <th>Value</th>
+                                <th>Discount</th>
                                 <th>Quantity</th>
 <!--                                <th>Tax</th>
                                 <th>Discount</th>-->
                                 <th>Created</th>
+                                <th>Expired</th>
                                 <th class="actions">Actions</th>
                             </tr>
                         </thead>
@@ -83,15 +84,14 @@ $coupon_delete = $base . "coupon" . DS . "delete";
                                 <td><?php echo ++$i; ?></td>
                                 <td><?php echo $value['Coupon']['name']; ?></td>
                                 <td><?php echo $value['Coupon']['type']; ?></td>
-                                <td><a class="thumbnail"><img src='<?php echo $this->webroot . "uploads/" . $value['Coupon']['image']; ?>' style="width:32px" /></a></td>
-                                <td>$<?php echo $value['Coupon']['price']; ?></td>
+                                <td>$<?php echo $value['Coupon']['value']; ?></td>
+                                <td><?php echo $value['Coupon']['discount'] / 100; ?></td>
                                <td><?php echo $value['Coupon']['quantity']; ?></td>
-                                <!-- <td>$<?php echo $value['Coupon']['tax']; ?></td>
-                                <td><?php echo $value['Coupon']['discount']; ?>%</td>-->
                                 <td><?php echo date ("Y-m-d H:i:s", $value['Coupon']['created']); ?></td>
+                                <td><?php echo date ("Y-m-d H:i:s", $value['Coupon']['expired']); ?></td>
                                 <td class="actions">
                                     <a class="btn btn-small btn-danger" onclick="del('<?php echo $value['Coupon']['id']; ?>')">Remove</a>
-                                    <a class="btn btn-small btn-primary" href="<?php echo $coupon_edit; ?>?id=<?php echo $value['Coupon']['guid']; ?>" target="_blank">View Details</a>
+                                    <a class="btn btn-small btn-primary" href="<?php echo $coupon_edit; ?>?id=<?php echo $value['Coupon']['guid']; ?>" target="new">View Details</a>
                                 </td>
                             </tr>
                             <?php endforeach; endif; ?>

@@ -92,7 +92,7 @@ $product_delete = $base . "product" . DS . "delete";
                                 <td><?php echo date ("Y-m-d H:i:s", $value['Product']['created']); ?></td>
                                 <td class="actions">
                                     <a class="btn btn-small btn-danger" onclick="del('<?php echo $value['Product']['id']; ?>')">Remove</a>
-                                    <a class="btn btn-small btn-primary" href="<?php echo $product_edit; ?>?id=<?php echo $value['Product']['guid']; ?>" target="_blank">View Details</a>
+                                    <a class="btn btn-small btn-primary" href="<?php echo $product_edit; ?>?id=<?php echo $value['Product']['guid']; ?>" target="new">View Details</a>
                                 </td>
                             </tr>
                             <?php endforeach; endif; ?>

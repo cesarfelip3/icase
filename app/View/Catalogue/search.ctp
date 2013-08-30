@@ -12,12 +12,12 @@
                             <div class="thumbnail">
                                 <a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i]['Product']['slug']; ?>"><img src="<?php echo $this->webroot; ?>uploads/product/<?php echo $data[$i]['Product']['featured']['150w'][0]; ?>" alt="Placeholder" class=""></a>
                                 <div class="caption">
-                                    <a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i]['Product']['slug']; ?>" class="prop-title" target="_blank" style="text-transform: uppercase"><?php echo $data[$i]['Product']['name']; ?></a>
+                                    <a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i]['Product']['slug']; ?>" class="prop-title" target="new" style="text-transform: uppercase"><?php echo $data[$i]['Product']['name']; ?></a>
 
                                     <p class="price">$<?php echo $data[$i]['Product']['price']; ?></p>
 
                                     <ul class="list-btns">
-                                        <li><a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i]['Product']['slug']; ?>" target="_blank">View Details</a></li>
+                                        <li><a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i]['Product']['slug']; ?>" target="new">View Details</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -33,7 +33,7 @@
                                     <p class="price">$<?php echo $data[$i + 1]['Product']['price']; ?></p>
 
                                     <ul class="list-btns">
-                                        <li><a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i + 1]['Product']['slug']; ?>" target="_blank">View Details</a></li>
+                                        <li><a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i + 1]['Product']['slug']; ?>" target="new">View Details</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -49,7 +49,7 @@
                                     <p class="price">$<?php echo $data[$i + 2]['Product']['price']; ?></p>
 
                                     <ul class="list-btns">
-                                        <li><a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i + 2]['Product']['slug']; ?>" target="_blank">View Details</a></li>
+                                        <li><a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i + 2]['Product']['slug']; ?>" target="new">View Details</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -65,7 +65,7 @@
                                     <p class="price">$<?php echo $data[$i + 3]['Product']['price']; ?></p>
 
                                     <ul class="list-btns">
-                                        <li><a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i + 3]['Product']['slug']; ?>" target="_blank">View Details</a></li>
+                                        <li><a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i + 3]['Product']['slug']; ?>" target="new">View Details</a></li>
                                     </ul>
                                 </div>
                             </div>

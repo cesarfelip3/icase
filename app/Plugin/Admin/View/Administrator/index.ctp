@@ -88,7 +88,7 @@ $member_delete = $base . "administrator" . DS . "delete";
                                 <td><?php echo date ("Y-m-d H:i:s ", $value['Admin']['created']) . DS . date (" Y-m-d H:i:s", $value['Admin']['modified']); ?></td>
                                 <td class='actions'>
                                     <a class="btn btn-small btn-danger" onclick="del('<?php echo $value['Admin']['id']; ?>')">Remove</a>
-                                    <a class="btn btn-small btn-primary" href="<?php echo $member_edit; ?>?id=<?php echo $value['Admin']['guid']; ?>" target="_blank">View Admin</a>
+                                    <a class="btn btn-small btn-primary" href="<?php echo $member_edit; ?>?id=<?php echo $value['Admin']['guid']; ?>" target="new">View Admin</a>
                                 </td>
                             </tr>
                             <?php endforeach; endif; ?>

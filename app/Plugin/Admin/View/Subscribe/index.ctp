@@ -98,7 +98,7 @@ $subscribe_delete = $base . "subscribe" . DS . "delete";
                                 <td><?php echo date ("Y-m-d H:i:s ", $value['User']['created']) . DS . date (" Y-m-d H:i:s", $value['User']['modified']); ?></td>
                                 <td class='actions'>
                                     <a class="btn btn-small btn-danger" onclick="del('<?php echo $value['User']['id']; ?>')">Remove</a>
-                                    <a class="btn btn-small btn-primary" href="<?php echo $subscribe_edit; ?>?id=<?php echo $value['User']['guid']; ?>" target="_blank">View User</a>
+                                    <a class="btn btn-small btn-primary" href="<?php echo $subscribe_edit; ?>?id=<?php echo $value['User']['guid']; ?>" target="new">View User</a>
                                 </td>
                             </tr>
                             <?php endforeach; endif; ?>

@@ -26,7 +26,7 @@
                 <div class="masthead-top clearfix">
                     <ul class="nav nav-pills pull-right">
                         <li>
-                            <a href="<?php echo $this->webroot; ?>" target="_blank"><i class="icon-globe"></i> View Website</a>
+                            <a href="<?php echo $this->webroot; ?>" target="new"><i class="icon-globe"></i> View Website</a>
                         </li>
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-user"></i> <?php echo $identity['name']; ?> <b class="caret"></b>

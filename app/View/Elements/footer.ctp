@@ -105,7 +105,7 @@ if (isset($this->params['slug'])) {
 <div class="row-fluid hide" id="box-message" style="position: fixed;top:0px;left:0px;z-index:1030;margin-bottom:0;">
     <div class="alert">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <strong>Warning!</strong> We need "cookies enabled" to save your orders, seems your browser's cookies is disabled. See <a href="http://www.wikihow.com/Enable-Cookies-in-Your-Internet-Web-Browser" target="_blank">how to enable cookies in your browser</a>
+        <strong>Warning!</strong> We need "cookies enabled" to save your orders, seems your browser's cookies is disabled. See <a href="http://www.wikihow.com/Enable-Cookies-in-Your-Internet-Web-Browser" target="new">how to enable cookies in your browser</a>
     </div>
 </div>
 

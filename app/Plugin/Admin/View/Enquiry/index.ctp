@@ -82,7 +82,7 @@
                                 <td><?php echo date ("Y-m-d H:i:s", $value['Product']['created']); ?></td>
                                 <td class="actions">
                                     <a class="btn btn-small btn-danger" onclick="del('<?php echo $value['Product']['id']; ?>')">Remove</a>
-                                    <a class="btn btn-small btn-primary" href="javascript:" target="_blank">Replay</a>
+                                    <a class="btn btn-small btn-primary" href="javascript:" target="new">Replay</a>
                                 </td>
                             </tr>
                             <?php endforeach; endif; ?>
