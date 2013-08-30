@@ -12,6 +12,8 @@ class BugFixController extends AppController {
     }
 
     public function fix() {
+        
+        set_time_limit(0);
 
         $dir = APP . "webroot/uploads/product/";
 
