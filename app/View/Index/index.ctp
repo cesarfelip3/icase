@@ -23,7 +23,7 @@
                 <?php foreach ($data as $value) : ?>
                 <?php if ($i++ < 4) : ?>
                     <div class="span3">
-                        <div class="thumbnail">
+                        <div class="thumbnail" style="background-image:none;background-color:white;">
                             <a href="<?php echo $this->webroot . "product/" . $value['Product']['slug']; ?>">
                                 <img src="<?php echo $this->webroot . "uploads/product/" . $value['Product']['image']; ?>" alt="<?php echo $value['Product']['name']; ?>" style="width:100%;">
                             </a>
