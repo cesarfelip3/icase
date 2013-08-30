@@ -15,6 +15,18 @@ class BugFixController extends AppController {
 
         set_time_limit(0);
         
+        $this->loadModel('Category');
+        $data = $this->Category->find ('all');
+        
+        foreach ($data as $key => $value) {
+            $value['Category']['slug'] = trim($value['Category']['slug'], "-") . "-C" . $value['Category']['id'];
+            $this->Category->id = $value['Category']['id'];
+            $this->Category->set (array ("slug" => $value['Category']['slug']));
+            $this->Category->save ();
+        }
+        
+        exit;
+        
         $this->loadModel('Product');
         
         $data = $this->Product->find ('all', array("conditions" => array ("type" => "product")));
