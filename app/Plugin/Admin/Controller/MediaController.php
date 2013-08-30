@@ -359,13 +359,6 @@ class MediaController extends AdminAppController {
         $this->_error['files']['width'] = $image_size[1];
 
 
-        $resize_500 = false;
-        if ($image_size[0] > 500) {
-            $resize_500 = true;
-        }
-
-        $resize_500 = true;
-
         require_once APP . 'Vendor' . DS . "Zebra/Zebra_Image.php";
         $image = new Zebra_Image();
 
@@ -385,116 +378,16 @@ class MediaController extends AdminAppController {
 
         $image->target_path = $targetDir . DIRECTORY_SEPARATOR . $filename . "_500.png";
 
-        if ($image->resize(500, 0, ZEBRA_IMAGE_CROP_CENTER)) {
-
-            $size = getimagesize($image->target_path);
-            $width = $size[0];
-            $height = $size[1];
-
-            if ($width == $height) {
-                
-            } else {
-
-                $height2 = 500 - $height;
-
-                if ($height2 > 0) {
-                    $ext = $extension;
-
-                    if (strtolower($ext) == 'jpg' || strtolower($ext) == 'jpeg') {
-                        $source = imagecreatefromjpeg($image->target_path);
-                    }
-
-                    if (strtolower($ext) == 'png') {
-                        $source = imagecreatefrompng($image->target_path);
-                        //continue;
-                    }
-
-                    $out = imagecreatetruecolor(500, 500);
-                    $black = imagecolorallocate($out, 0, 0, 0);
-                    imagecolortransparent($out, $black);
-
-                    imagecopyresampled($out, $source, 0, ceil($height2 / 2), 0, 0, $width, $height, $width, $height);
-                    imagepng($out, $targetDir . DIRECTORY_SEPARATOR . $filename . "_500.png");
-                    imagecolortransparent($out, $black);
-                    
-                }
-                
-                if ($height2 < 0) {
-                    $ext = $extension;
-
-                    if (strtolower($ext) == 'jpg' || strtolower($ext) == 'jpeg') {
-                        $source = imagecreatefromjpeg($image->target_path);
-                    }
-
-                    if (strtolower($ext) == 'png') {
-                        $source = imagecreatefrompng($image->target_path);
-                        //continue;
-                    }
-
-                    $out = imagecreatetruecolor($height, $height);
-                    $black = imagecolorallocate($out, 0, 0, 0);
-                    imagecolortransparent($out, $black);
-
-                    imagecopyresampled($out, $source, ceil(abs($height2) / 2), 0, 0, 0, $width, $height, $width, $height);
-                    imagepng($out, $targetDir . DIRECTORY_SEPARATOR . $filename . "_500.png");              
-                }
-            }
+        if (!$image->resize(500, 500, ZEBRA_IMAGE_BOXED, -1)) {
+            $this->_error['error'] = 1;
+            $this->_error['message'] = "Resize to 500 wrong";
         }
         
         $image->target_path = $targetDir . DIRECTORY_SEPARATOR . $filename . "_150.png";
-        if ($image->resize(200, 0, ZEBRA_IMAGE_CROP_CENTER)) {
+        if ($image->resize(200, 200, ZEBRA_IMAGE_BOXED, -1)) {
 
-            $size = getimagesize($image->target_path);
-            $width = $size[0];
-            $height = $size[1];
-
-            if ($width == $height) {
-                
-            } else {
-
-                $height2 = 200 - $height;
-
-                if ($height2 > 0) {
-                    $ext = $extension;
-
-                    if (strtolower($ext) == 'jpg' || strtolower($ext) == 'jpeg') {
-                        $source = imagecreatefromjpeg($image->target_path);
-                    }
-
-                    if (strtolower($ext) == 'png') {
-                        $source = imagecreatefrompng($image->target_path);
-                        //continue;
-                    }
-
-                    $out = imagecreatetruecolor(200, 200);
-                    $black = imagecolorallocate($out, 0, 0, 0);
-                    imagecolortransparent($out, $black);
-
-                    imagecopyresampled($out, $source, 0, ceil($height2 / 2), 0, 0, $width, $height, $width, $height);
-                    imagepng($out, $targetDir . DIRECTORY_SEPARATOR . $filename . "_150.png");
-                    
-                }
-                
-                if ($height2 < 0) {
-                    $ext = $extension;
-
-                    if (strtolower($ext) == 'jpg' || strtolower($ext) == 'jpeg') {
-                        $source = imagecreatefromjpeg($image->target_path);
-                    }
-
-                    if (strtolower($ext) == 'png') {
-                        $source = imagecreatefrompng($image->target_path);
-                        //continue;
-                    }
-
-                    $out = imagecreatetruecolor($height, $height);
-                    $black = imagecolorallocate($out, 0, 0, 0);
-                    imagecolortransparent($out, $black);
-
-                    imagecopyresampled($out, $source, ceil(abs($height2) / 2), 0, 0, 0, $width, $height, $width, $height);
-                    imagepng($out, $targetDir . DIRECTORY_SEPARATOR . $filename . "_150.png");              
-                }
-            }
+            $this->_error['error'] = 1;
+            $this->_error['message'] = "Resize to 200 wrong";
         }
 
         $this->_error['files']['url150'] = $url150;

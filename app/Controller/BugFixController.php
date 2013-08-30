@@ -11,55 +11,75 @@ class BugFixController extends AppController {
         parent::beforeFilter();
     }
 
+    public function test() {
+        $dir = APP . "webroot/uploads/product/";
+        require_once APP . 'Vendor' . DS . "Zebra/Zebra_Image.php";
+        $image = new Zebra_Image();
+                
+        $image->source_path = $dir . "52204dc799ab3.png";
+        $image->jpeg_quality = 100;
+
+        $image->preserve_aspect_ratio = true;
+        $image->enlarge_smaller_images = true;
+        $image->preserve_time = true;
+
+
+        $image->target_path = $dir . "abcd_500.png"; // . $extension;
+
+        if ($image->resize(200, 200, ZEBRA_IMAGE_BOXED, -1)) {
+            
+        }
+    }
+
     public function fix() {
 
         exit;
-        
+
         set_time_limit(0);
         //Cache::delete("category_top");
         //exit;
-        
-        
+
+
         $this->loadModel('Product');
-        $data = $this->Product->find ('all', array ("conditions" => array ("type"=>"product")));
-        
+        $data = $this->Product->find('all', array("conditions" => array("type" => "product")));
+
         foreach ($data as $key => $value) {
             $value['Product']['slug'] = trim($value['Product']['slug'], "-P") . "-P" . $value['Product']['id'];
             $this->Product->id = $value['Product']['id'];
-            $this->Product->set (array ("slug" => $value['Product']['slug']));
-            $this->Product->save ();
+            $this->Product->set(array("slug" => $value['Product']['slug']));
+            $this->Product->save();
         }
-        
+
         exit;
-        
+
         $this->loadModel('Product');
-        
-        $data = $this->Product->find ('all', array("conditions" => array ("type" => "product")));
-        
+
+        $data = $this->Product->find('all', array("conditions" => array("type" => "product")));
+
         foreach ($data as $value) {
-            
-            if (!empty ($value['Product']['featured'])) {
+
+            if (!empty($value['Product']['featured'])) {
                 $images = unserialize($value['Product']['featured']);
                 foreach ($images as $k2 => $image) {
-                    
-                    if ($k2 == '150w' && is_array ($image)) {
+
+                    if ($k2 == '150w' && is_array($image)) {
                         foreach ($image as $k3 => $i) {
                             $i = pathinfo($i, PATHINFO_FILENAME) . ".png";
                             $image[$k3] = $i;
                         }
                     }
-                    
+
                     $images[$k2] = $image;
                 }
                 $images = serialize($images);
                 $value["Product"]['featured'] = $images;
             }
-            
+
             $this->Product->id = $value['Product']['id'];
-            $this->Product->set (array ("featured" => $value['Product']['featured']));
-            $this->Product->save ();
+            $this->Product->set(array("featured" => $value['Product']['featured']));
+            $this->Product->save();
         }
-        
+
         exit;
 
         $dir = APP . "webroot/uploads/product/";
@@ -146,10 +166,10 @@ class BugFixController extends AppController {
                     }
                 }
             }
-            
-            print_r ($img . "<br/>");
 
-            $image->target_path = $dir . $filename . "_500.png";// . $extension;
+            print_r($img . "<br/>");
+
+            $image->target_path = $dir . $filename . "_500.png"; // . $extension;
 
             if ($image->resize(500, 0, ZEBRA_IMAGE_CROP_CENTER)) {
 
@@ -206,7 +226,7 @@ class BugFixController extends AppController {
                 }
             }
 
-            $image->target_path = $dir . $filename . "_150.png";// . $extension;
+            $image->target_path = $dir . $filename . "_150.png"; // . $extension;
             if ($image->resize(200, 0, ZEBRA_IMAGE_CROP_CENTER)) {
 
                 $size = getimagesize($image->target_path);
