@@ -36,6 +36,19 @@ class BugFixController extends AppController {
         //print_r ($images);
         //exit;
 
+        error_reporting(0);
+        register_shutdown_function(
+                function () {
+
+                    $last_error = error_get_last();
+
+                    if (!is_null($last_error)) {
+                        $this->_error['error'] = 1;
+                        $this->_error['message'] = $last_error['message'];
+                        exit(json_encode($this->_error));
+                    }
+                });
+
         foreach ($images as $img) {
             print_r($img . "<br/>");
             if (preg_match("/\_500\./i", $img)) {
@@ -44,50 +57,73 @@ class BugFixController extends AppController {
                 //$image_500 = str_replace(".", "_500.", $img);
                 $image_500 = $img;
 
+                print_r($dir . $image_500 . "<br/>");
+
                 if (file_exists($dir . $image_500)) {
 
                     $width = array();
-                    $width = getimagesize($dir . $image_500);
+                    $path = $dir . $image_500;
+
+                    try {
+                        $width = getimagesize($path);
+                    } catch (Exception $e) {
+                        print_r($e->getMessage());
+                    }
+
+                    //print_r ($width);
+                    //exit;
+
+
                     $w = $width[0];
                     $h = $width[1];
 
+                    //print_r ($width);
+                    //exit;
                     //$png = imagecreatefrompng(APP . 'webroot/img/background/500.png');
-                    $source = null;
+                    //$source = null;
 
                     $ext = pathinfo($image_500, PATHINFO_EXTENSION);
 
-                    print_r($ext);
-                    
+                    //print_r($ext);
+                    //print_r ($dir . $image_500);
+                    //print_r ($source);
+                    //exit;
+
                     if (strtolower($ext) == 'jpg' || strtolower($ext) == 'jpeg') {
                         $source = imagecreatefromjpeg($dir . $image_500);
+                        continue;
                     }
-                    
-                    print_r($source);
-                    
+
+
                     if (strtolower($ext) == 'png') {
                         $source = imagecreatefrompng($dir . $image_500);
                     }
-                    
+
+                    //exit;
+                    //print_r ($source);
+                    //exit;
+
                     $dst_y = 500 - $h;
                     if ($dst_y > 0) {
                         //$out = imagecreatetruecolor(500, 500);
                         $dst_y = ceil($dst_y / 2);
 
                         $out = imagecreatetruecolor(500, 500);
-                        imagealphablending($out, false);
-                        $col = imagecolorallocatealpha($out, 255, 255, 255, 127);
-                        imagefilledrectangle($out, 0, 0, 500, 500, $col);
-                        imagealphablending($out, true);
+                        //$red = imagecolorallocate($im, 255, 0, 0);
+                        $black = imagecolorallocate($out, 0, 0, 0);
+                        imagecolortransparent($out, $black);
 
                         //imagecopyresampled($out, $png, 0, 0, 0, 0, 500, 500, 500, 500);
                         imagecopyresampled($out, $source, 0, $dst_y, 0, 0, $w, $h, $w, $h);
-                        imagepng($out, $dir . $image_500, 100);
+                        imagepng($out, $dir . $image_500, 0);
                         print_r($image_500);
-                        exit;
+                        //exit;
                     }
                 }
             }
         }
+
+        exit;
     }
 
 }
