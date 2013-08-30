@@ -12,6 +12,8 @@ class BugFixController extends AppController {
     }
 
     public function test() {
+        exit;
+        
         $dir = APP . "webroot/uploads/product/";
         require_once APP . 'Vendor' . DS . "Zebra/Zebra_Image.php";
         $image = new Zebra_Image();
