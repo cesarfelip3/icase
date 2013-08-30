@@ -54,7 +54,7 @@ class BugFixController extends AppController {
         require_once APP . 'Vendor' . DS . "Zebra/Zebra_Image.php";
         $image = new Zebra_Image();
 
-        print_r($images);
+        //print_r($images);
 
         foreach ($images as $img) {
 
@@ -62,7 +62,7 @@ class BugFixController extends AppController {
                 continue;
             }
 
-            print_r($img);
+            //print_r($img);
 
             $extension = pathinfo($dir . $img, PATHINFO_EXTENSION);
             $filename = pathinfo($dir . $img, PATHINFO_FILENAME);
@@ -99,6 +99,8 @@ class BugFixController extends AppController {
                     }
                 }
             }
+            
+            print_r ($img . "<br/>");
 
             $image->target_path = $dir . $filename . "_500." . $extension;
 
