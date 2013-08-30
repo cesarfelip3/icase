@@ -15,11 +15,56 @@
     </span><?php echo $bill['address']; ?><span class="s1"><br>
     </span><?php echo $bill['country']; ?><span class="s1"><br>
         <br>
-    </span>1x Classic Gunmetal - 46-50" waist / White for $28.95 each<span class="s1"><br>
-        <br>
-    </span>Subtotal  : $28.95 USD<span class="s1"><br>
-    </span>Shipping  : $5.35 USD<span class="s1"><br>
-    </span>Total     : $<?php echo $order['amount']; ?> USD</p>
+        
+    <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</td>
+                        <th>Name</th>
+                        <th>Amount</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if (!empty($orders)) : $i = 1; ?>
+                    <?php foreach ($orders as $key => $value) : ?>
+                        <tr>
+                            <td>#<?php echo $value['Order']['guid']; ?></td>
+                            <td><?php echo $value['Order']['title']; ?></td>
+                            <td><?php echo $value['Order']['amount']; ?></td>
+                            <td>
+                                    <?php echo $value['Order']['quantity']; ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                    <tr>
+                        <td>Items Subtotal: </td>
+                        <td colspan='3'>
+                            <span>$<?php echo $subtotal; ?> USD</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Shipment: </td>
+                        
+                        <td colspan='3'>
+                            <span>$<?php echo $shipment; ?> USD</span>
+                        </td>
+                    </tr>
+                    <?php if (isset ($discount)) : ?>
+                    <tr>
+                        <td>Discount: </td>
+                        <td colspan="3"><?php echo $discount . "%"; ?></td>
+                    </tr>
+                    <?php endif; ?>
+                    <tr>
+                        <td>Total: </td>
+                        <td colspan='7'>
+                            <span><?php echo $total; ?> USD</span>
+                        </td>
+                    </tr>
+                <?php endif; ?>
+                </tbody>
+            </table>
 <p class="p1"><br></p>
 <p class="p4"><b>Take care! If you have any questions, please contact us below:</b><br>
     <br>

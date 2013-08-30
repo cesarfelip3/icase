@@ -279,7 +279,12 @@ class ShopController extends AppController {
                     $from = array('sales@beautahfulcreations.com' => 'beautahfulcreations.com');
                     $to = $deliver['email'];
                     $subject = "Your Order is Confirmed";
-                    $vars = array('deliver' => $deliver, 'bill' => $bill);
+                    $vars = array('deliver' => $deliver, 'bill' => $bill, 'orders' => $orders, 'shipment' => 2.49, 'subtotal' => $amount - 2.49, 'total' => $amount);
+                    
+                    if (isset ($discount) && !empty ($discount)) {
+                        $vars['discount'] = $discount * 100;
+                    }
+                    
                     $content = null;
                     $this->_email($from, $to, $subject, $content, "checkout_order_buyer", $vars);
                     
