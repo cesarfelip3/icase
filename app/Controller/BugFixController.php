@@ -42,7 +42,7 @@ class BugFixController extends AppController {
 
         $images = array();
         
-        exit;
+        //exit;
 
         if ($handle = opendir($dir . ".")) {
             while (false !== ($entry = readdir($handle))) {
