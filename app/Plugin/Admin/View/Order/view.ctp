@@ -228,7 +228,7 @@
             } else {
                 //$(result.element).parent().parent().removeClass('error');
                 //$(result.element).next(".help-inline").html("");
-                window.location.href = "";
+                alert ("Your email has sent!")
             }
             
             hideAlert ();
