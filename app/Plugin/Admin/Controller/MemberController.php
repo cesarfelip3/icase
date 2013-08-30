@@ -91,7 +91,7 @@ class MemberController extends AdminAppController {
         $pages = ceil($total / $limit);
 
         $filters = array(
-            "type='register'" => "Registered",
+            "type='registered'" => "Registered",
             "type='guest'" => "Guest",
             "orders > 0" => "Has Orders"
         );
