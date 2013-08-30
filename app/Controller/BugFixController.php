@@ -45,14 +45,20 @@ class BugFixController extends AppController {
                 $image_500 = $img;
 
                 if (file_exists($dir . $image_500)) {
+                    
+                    $width = array ();
                     $width = getimagesize($dir . $image_500);
                     $w = $width[0];
                     $h = $width[1];
-
+                  
                     //$png = imagecreatefrompng(APP . 'webroot/img/background/500.png');
                     $jpeg = null;
 
                     $ext = pathinfo($image_500, PATHINFO_EXTENSION);
+                    
+                    print_r ($ext);
+                    exit;
+                    
                     if (in_array($ext, array('jpg', 'jpeg'))) {
                         $jpeg = imagecreatefromjpeg($dir . $image_500);
                     }
