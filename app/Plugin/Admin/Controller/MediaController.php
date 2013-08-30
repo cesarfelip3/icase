@@ -474,7 +474,6 @@ class MediaController extends AdminAppController {
                     imagecopyresampled($out, $source, 0, ceil($height2 / 2), 0, 0, $width, $height, $width, $height);
                     imagepng($out, $targetDir . DIRECTORY_SEPARATOR . $filename . "_150.png");
                     
-                    
                 }
                 
                 if ($height2 < 0) {
