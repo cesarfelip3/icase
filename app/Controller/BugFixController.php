@@ -37,9 +37,9 @@ class BugFixController extends AppController {
         //exit;
 
         foreach ($images as $img) {
-            print_r($img);
+            print_r($img . "<br/>");
             if (preg_match("/\_500\./i", $img)) {
-                print_r($img);
+                print_r($img . "<br/>");
 
                 //$image_500 = str_replace(".", "_500.", $img);
                 $image_500 = $img;
@@ -48,16 +48,16 @@ class BugFixController extends AppController {
                     $width = getimagesize($dir . $image_500);
                     $w = $width[0];
                     $h = $width[1];
-                    exit;
 
                     //$png = imagecreatefrompng(APP . 'webroot/img/background/500.png');
                     $jpeg = null;
 
-                    if (in_array(pathinfo($img, PATHINFO_EXTENSION), array('jpg', 'jpeg'))) {
+                    $ext = pathinfo($image_500, PATHINFO_EXTENSION);
+                    if (in_array($ext, array('jpg', 'jpeg'))) {
                         $jpeg = imagecreatefromjpeg($dir . $image_500);
                     }
 
-                    if (in_array(pathinfo($img, PATHINFO_EXTENSION), array('png'))) {
+                    if (in_array($ext, array('png'))) {
                         $jpeg = imagecreatefrompng($dir . $image_500);
                     }
 
@@ -65,6 +65,7 @@ class BugFixController extends AppController {
                         print_r("unknow extension");
                         exit;
                     }
+                    exit;
 
                     $dst_y = 500 - $h;
                     if ($dst_y > 0) {
