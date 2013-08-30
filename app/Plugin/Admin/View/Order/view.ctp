@@ -208,7 +208,7 @@
     function send_email ()
     {
         jQuery.ajax({
-            url: "<?php echo $base; ?>order/sendemail/?id=<?php echo $data['guid']; ?>",
+            url: "<?php echo $base; ?>order/notify/?id=<?php echo $data['guid']; ?>",
             data: data = $("#form-edit").serialize(),
             type: "POST",
             beforeSend: function(xhr) {

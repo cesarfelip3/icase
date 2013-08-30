@@ -163,18 +163,18 @@ class OrderController extends AdminAppController {
                 $this->overlayImage($png1, $jpeg, $filename . "_user.jpeg");
                 $this->overlayImage($png2, $jpeg, $filename . "_admin.jpeg");
             } catch (Exception $e) {
-                $this->Session->setFlash ($e->getMessage());
+                $this->Session->setFlash($e->getMessage());
             }
         }
     }
 
     protected function overlayImage($overlay, $jpeg, $final) {
-        
+
         $final = APP . "webroot" . DS . "uploads" . DS . "preview" . DS . $final;
         if (file_exists($final)) {
             return;
         }
-       
+
         $png = imagecreatefrompng($overlay);
         $jpeg = imagecreatefromjpeg($jpeg);
 
@@ -231,30 +231,38 @@ class OrderController extends AdminAppController {
         $this->loadModel('Order');
         $data = $this->Order->find('first', array("conditions" => array("guid" => $id)));
         $email = $this->request->data('email');
-        
+
         $this->loadModel('UserBillInfo');
         $bill = $this->UserBillInfo->find('first', array("conditions" => array("guid" => $data['Order']['bill_guid'])));
-        
+
         $this->loadModel('UserDeliverInfo');
         $deliver = $this->UserDeliverInfo->find('first', array("conditions" => array("guid" => $data['Order']['bill_guid'])));
         $deliver = $deliver['UserDeliverInfo'];
-        
-        if (empty ($email)) {
+
+        if (empty($email)) {
             $this->error['error'] = 1;
             $this->error['message'] = "";
-            exit (json_encode($this->error));
+            exit(json_encode($this->error));
         }
 
-        if (!empty($data)) {
+        try {
+            if (!empty($data)) {
 
-            $from = array ("orders@beautahfulcreations.com" => "beautahfulcreations.com");
-            $to = $email['email'];
-            $subject = $email['subject'];
-            $content = $email['content'];
-            $template = "order_status_changed";
-            $vars = array ("order" => $data['Order'], "bill" => $bill['UserBillInfo'], 'content' => $content, 'deliver' => $deliver);
-            $this->email($from, $to, $subject, $content, $template, $vars);
+                $from = array("orders@beautahfulcreations.com" => "beautahfulcreations.com");
+                $to = $email['email'];
+                $subject = $email['subject'];
+                $content = $email['content'];
+                $template = "order_status_changed";
+                $vars = array("order" => $data['Order'], "bill" => $bill['UserBillInfo'], 'content' => $content, 'deliver' => $deliver);
+                $this->email($from, $to, $subject, $content, $template, $vars);
+            }
+        } catch (Exception $e) {
+            $this->error['error'] = 1;
+            $this->error['message'] = $e->getMessage();
+            exit(json_encode($this->error));
         }
+        
+        exit(json_encode($this->error));
     }
 
     protected function email($from, $to, $subject, $content, $template, $vars = array()) {
