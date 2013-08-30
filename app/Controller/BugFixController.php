@@ -14,18 +14,18 @@ class BugFixController extends AppController {
     public function fix() {
 
         set_time_limit(0);
-        Cache::delete("category_top");
-        exit;
+        //Cache::delete("category_top");
+        //exit;
         
         
-        $this->loadModel('Category');
-        $data = $this->Category->find ('all');
+        $this->loadModel('Product');
+        $data = $this->Product->find ('all', array ("conditions" => array ("type"=>"product")));
         
         foreach ($data as $key => $value) {
-            $value['Category']['slug'] = trim($value['Category']['slug'], "-") . "-C" . $value['Category']['id'];
-            $this->Category->id = $value['Category']['id'];
-            $this->Category->set (array ("slug" => $value['Category']['slug']));
-            $this->Category->save ();
+            $value['Product']['slug'] = trim($value['Product']['slug'], "-P") . "-P" . $value['Product']['id'];
+            $this->Product->id = $value['Product']['id'];
+            $this->Product->set (array ("slug" => $value['Product']['slug']));
+            $this->Product->save ();
         }
         
         exit;

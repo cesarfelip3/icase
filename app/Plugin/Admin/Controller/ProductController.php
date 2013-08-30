@@ -215,48 +215,19 @@ class ProductController extends AdminAppController {
 
             $this->loadModel('Product');
 
-            if ($action == "update" && !empty($data['id'])) {
-                $element = $this->Product->find('first', array("conditions" => array("id" => $data['id'])));
-                if (!empty($element)) {
-
-                    $data['guid'] = $element['Product']['guid'];
-                    $data['modified'] = time();
-                    $this->Product->id = $data['id'];
-                    $this->Product->set($data);
-                    $this->Product->save();
-
-                    if (!empty($category)) {
-                        $this->loadModel('CategoryToObject');
-                        $this->CategoryToObject->query("DELETE FROM category_to_object WHERE object_guid='{$data['guid']}'");
-
-                        foreach ($category as $value) {
-                            $c[] = array(
-                                "category_guid" => $value,
-                                "object_guid" => $data['guid']
-                            );
-                        }
-
-                        $this->CategoryToObject->create();
-                        $this->CategoryToObject->saveMany($c);
-                    } else {
-                        $this->loadModel('CategoryToObject');
-                        $this->CategoryToObject->query("DELETE FROM category_to_object WHERE object_guid='{$data['guid']}'");
-                    }
-                    exit(json_encode($this->error));
-                }
-
-                $this->error['error'] = 1;
-                $this->error['message'] = "The Product doesn't exist anymore";
-                $this->error['element'] = "";
-                exit(json_encode($this->error));
-            }
-
             $data['guid'] = uniqid();
             $data['created'] = time();
             $data['modified'] = time();
 
             $this->Product->create();
             $this->Product->save($data);
+            $id = $this->Product->id;
+
+            $data['slug'] = trim($data['slug'], "-");
+            $data['slug'] = $data['slug'] . "-P" . $id;
+            $this->Product->set(array("slug" => $data['slug']));
+            $this->Product->save();
+
             $this->error['data'] = $this->Product->id;
 
             if (!empty($category)) {
@@ -307,6 +278,11 @@ class ProductController extends AdminAppController {
 
             $data['created'] = date("F j, Y, g:i a", $data['created']);
             $data['modified'] = date("F j, Y, g:i a", $data['modified']);
+        }
+        
+        $id = $data['id'];
+        if (preg_match("/\-P$id/", trim($data['slug']))) {
+            $data['slug'] = str_replace("-P" . $data['id'], "", $data['slug']);
         }
 
         $this->set(array('data' => $data));
@@ -433,6 +409,10 @@ class ProductController extends AdminAppController {
 
                     $data['modified'] = time();
                     $this->Product->id = $data['id'];
+                    
+                    $data['slug'] = trim($data['slug'], "-");
+                    $data['slug'] = $data['slug'] . "-P" . $data['id'];
+                    unset ($data['id']);
                     $this->Product->set($data);
                     $this->Product->save();
 
