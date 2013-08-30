@@ -29,7 +29,7 @@
                                         echo $this->webroot . "uploads/preview/" . str_replace(".", "_user.", $value['Product']['file']);
                                     else
                                         echo $this->webroot . "uploads/product/{$value['Product']['file']}";
-                                    ?>" style="width:60px;" /></a></td>
+                                    ?>" /></a></td>
                             <td style="min-width:100px">$<?php echo round($value['Product']['price'] * $value['Product']['quantity'], 2, PHP_ROUND_HALF_DOWN); ?></td>
                             <td>
                                 <a href="javascript:" 
