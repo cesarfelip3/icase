@@ -72,7 +72,7 @@ class BugFixController extends AppController {
                     $w = $width[0];
                     $h = $width[1];
 
-                    $png = imagecreatefrompng(APP . 'webroot/img/background/500.png');
+                    //$png = imagecreatefrompng(APP . 'webroot/img/background/500.png');
                     $jpeg = null;
 
                     if (in_array(pathinfo($img, PATHINFO_EXTENSION), array('jpg', 'jpeg'))) {
@@ -88,10 +88,6 @@ class BugFixController extends AppController {
                         exit;
                     }
 
-                    if (empty($png)) {
-                        print_r("unknow source");
-                        exit;
-                    }
 
                     $dst_y = 500 - $h;
                     if ($dst_y > 0) {
@@ -105,7 +101,7 @@ class BugFixController extends AppController {
 
                         //imagecopyresampled($out, $png, 0, 0, 0, 0, 500, 500, 500, 500);
                         imagecopyresampled($out, $jpeg, 0, ceil ($dst_y / 2), 0, 0, $w, $h, $w, $h);
-                        imagejpeg($out, $dir . $image_500, 100);
+                        imagepng($out, $dir . $image_500, 100);
                         print_r($image_500);
                         exit;
                     }
