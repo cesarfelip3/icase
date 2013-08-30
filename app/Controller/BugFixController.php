@@ -13,7 +13,7 @@ class BugFixController extends AppController {
 
     public function fix() {
         exit;
-        
+
         $this->loadModel('Category');
 
         /*
@@ -50,21 +50,77 @@ class BugFixController extends AppController {
             }
             closedir($handle);
         }
-        
-        if (empty ($images)) {
-            print_r ("no images");
+
+        if (empty($images)) {
+            print_r("no images");
             exit;
         }
 
+        foreach ($images as $Img) {
+            if (preg_match("/^[0-9a-zA-Z]{1,}$/i", pathinfo($img, PATHINFO_FILENAME))) {
+                $image_500 = str_replace(".", "_500.", $img);
+                if (file_exists($dir . $image_500)) {
+                    $width = getimagesize($dir . $image_500);
+                    $w = $width[0];
+                    $h = $width[1];
+
+                    $png = imagecreatefrompng(APP . 'webroot/img/background/500.png');
+                    $jpeg = null;
+
+                    if (in_array(pathinfo($img, PATHINFO_EXTENSION), array('jpg', 'jpeg'))) {
+                        $jpeg = imagecreatefromjpeg($dir . $image_500);
+                    }
+
+                    if (in_array(pathinfo($img, PATHINFO_EXTENSION), array('png'))) {
+                        $jpeg = imagecreatefrompng($dir . $image_500);
+                    }
+
+                    if (empty($jpeg)) {
+                        print_r("unknow extension");
+                        exit;
+                    }
+
+                    $dst_y = 500 - $h;
+                    if ($dst_y >= 0) {
+                        $out = imagecreatetruecolor(500, 500);
+                        imagecopyresampled($out, $png, 0, 0, 0, 0, 500, 500, 500, 500);
+                        imagecopyresampled($out, $jpeg, 0,$dst_y, 0, 0, $w, $h, $w, $h);
+                        imagejpeg($out, $dir . $image_500, 100);
+                        print_r ($image_500);
+                        exit;
+                    }
+                    
+                }
+            }
+
+            exit;
+            
+            $final = APP . "webroot" . DS . "uploads" . DS . "preview" . DS . $final;
+            if (file_exists($final)) {
+                return;
+            }
+
+            $png = imagecreatefrompng($overlay);
+            $jpeg = imagecreatefromjpeg($jpeg);
+
+            //list($width, $height) = getimagesize('./image.jpg');
+            //list($newwidth, $newheight) = getimagesize('./mark.png');
+            $out = imagecreatetruecolor(500, 500);
+            imagecopyresampled($out, $png, 0, 0, 0, 0, 500, 500, 500, 780);
+            imagecopyresampled($out, $jpeg, 0, 0, 0, 0, 780, 780, 780, 780);
+
+            imagejpeg($out, $final, 100);
+        }
+
         require_once APP . 'Vendor' . DS . "Zebra/Zebra_Image.php";
-        
+
         foreach ($images as $img) {
             if (preg_match("/^[0-9a-zA-Z]{1,}$/i", pathinfo($img, PATHINFO_FILENAME))) {
                 $image_500 = str_replace(".", "_500.", $img);
                 if (!file_exists($dir . $image_500)) {
-                    
-                    print_r ($img);
-                    
+
+                    print_r($img);
+
                     $image = new Zebra_Image();
 
                     $image->source_path = $dir . $img;
