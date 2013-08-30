@@ -14,6 +14,9 @@ class BugFixController extends AppController {
     public function fix() {
 
         set_time_limit(0);
+        Cache::delete("category_top");
+        exit;
+        
         
         $this->loadModel('Category');
         $data = $this->Category->find ('all');
