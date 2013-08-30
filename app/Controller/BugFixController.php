@@ -91,18 +91,22 @@ class BugFixController extends AppController {
 
                     if (strtolower($ext) == 'jpg' || strtolower($ext) == 'jpeg') {
                         $source = imagecreatefromjpeg($dir . $image_500);
-                        //continue;
+                        continue;
                     }
 
 
                     if (strtolower($ext) == 'png') {
-                        //$source = imagecreatefrompng($dir . $image_500);
-                        continue;
+                        $source = imagecreatefrompng($dir . $image_500);
+                        //continue;
                     }
 
                     //exit;
                     //print_r ($source);
                     //exit;
+                    
+                    if ($w == $h) {
+                        continue;
+                    }
 
                     $dst_y = 500 - $h;
                     if ($dst_y > 0) {
