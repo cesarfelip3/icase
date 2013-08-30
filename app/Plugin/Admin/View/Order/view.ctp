@@ -71,7 +71,7 @@
         </div>
         <form id="form-edit">
             <div class="row">
-                <div class="span12">
+                <div class="span7">
                     <div class="slate">
                         <div class="page-header">
                             <h2>Ordered Items</h2>
@@ -82,7 +82,7 @@
                                     <th>Orders</th>
                                     <th class="value">Value</th>
                                     <th class="value">Status</th>
-                                    <th class="actions">Actions</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -98,12 +98,33 @@
                                             <?php endforeach; ?>
                                         </select>
                                     </td>
-                                    <td class="actions">
-                                        <a href="javascript:" onclick="$('#myModal').modal();" class="btn btn-primary btn-small">Send Email</a>
+                                    <td>
+
+                                        <a class="btn btn-primary" onclick="send_email();" data-loading-text="Saving..." id="btn-sendemail">Send Email Now</a>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
+                </div>
+                <div class="span5">
+                    <div class="input-prepend">
+                        <span class="add-on" style="width:80px;">Email</span>
+                        <input class="input-medium" id="prependedInput" type="text" value="<?php echo $data['notification_email']; ?>" name="email[email]">
+                    </div>
+                    <div class="input-prepend">
+                        <span class="add-on" style="width:80px;">Subject</span>
+                        <input class="input-xlarge" id="prependedInput" type="text" value="The status of your order has changed" name="email[subject]">
+                    </div>
+                    <div>
+                        <textarea class="ckeditor" cols="80" id="editor1" name="email[content]" rows="10">
+<div>Thank you for your order from BeaUTAHful Creations<b>! </b>We wanted to let you know that your order was shipped via USPS, USPS Priority Mail on 7/27/2013.  You can track your package at any time using the link below.</div>
+<div>
+<b>Track Your Shipment:</b> <a href="https://tools.usps.com/go/TrackConfirmAction.action?tLabels=9405510200986104431161">9405510200986104431161</a><br></div>
+                        </textarea>
+                    </div>
+                    <div class="well">
+                        Edit email content to meet your requirement.
                     </div>
                 </div>
             </div>
@@ -124,7 +145,7 @@
         <?php endif; ?>
     </div>
 </div>
-<div id="myModal" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="myModal" class="modal hide" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h3 id="myModalLabel">Email Notification</h3>
@@ -132,17 +153,7 @@
     <div class="modal-body">
         <form>
             <fieldset>
-                <div class="input-prepend">
-                    <span class="add-on" style="width:80px;">Email</span>
-                    <input class="input-medium" id="prependedInput" type="text" value="<?php echo $data['notification_email']; ?>" placeholder="User email">
-                </div>
-                <div class="input-prepend">
-                    <span class="add-on" style="width:80px;">Subject</span>
-                    <input class="input-xlarge" id="prependedInput" type="text" placeholder="Username" value="The Status of Your Order Has Changed">
-                </div>
-                <div>
-                    <textarea class="ckeditor" cols="80" id="editor1" name="" rows="10"></textarea>
-                </div>
+                
             </fieldset>
         </form>
     </div>
@@ -152,45 +163,78 @@
     </div>
 </div>
 <script>
-                                            function save(action, button) {
+    function save(action, button) {
 
-                                                var data = "";
-                                                if (action.substring(0, 4) == "edit") {
-                                                    data = $("#form-edit").serialize();
-                                                }
+        var data = "";
+        if (action.substring(0, 4) == "edit") {
+            data = $("#form-edit").serialize();
+        }
 
-                                                if (action == "add") {
-                                                    data = $("#form-new").serialize();
-                                                }
+        if (action == "add") {
+            data = $("#form-new").serialize();
+        }
 
-                                                if (action == "delete") {
-                                                    data = $("#form-edit").serialize();
-                                                }
+        if (action == "delete") {
+            data = $("#form-edit").serialize();
+        }
 
-                                                jQuery.ajax({
-                                                    url: "<?php echo $base; ?>order/" + action,
-                                                    data: data,
-                                                    type: "POST",
-                                                    beforeSend: function(xhr) {
-                                                        $(button).button('loading');
-                                                    }
-                                                }).done(function(data) {
-                                                    $(button).button('reset');
+        jQuery.ajax({
+            url: "<?php echo $base; ?>order/" + action,
+            data: data,
+            type: "POST",
+            beforeSend: function(xhr) {
+                $(button).button('loading');
+            }
+        }).done(function(data) {
+            $(button).button('reset');
 
-                                                    var result = $.parseJSON(data);
-                                                    console.log(result);
-                                                    if (result.error == 1) {
-                                                        //console.log(result.element);
-                                                        //$(result.element).next(".help-inline").html(result.message);
-                                                        //$(result.element).parent().parent().addClass('error');
-                                                        showAlert(result.message);
-                                                    } else {
-                                                        //$(result.element).parent().parent().removeClass('error');
-                                                        //$(result.element).next(".help-inline").html("");
-                                                        window.location.href = "";
-                                                    }
+            var result = $.parseJSON(data);
+            console.log(result);
+            if (result.error == 1) {
+                //console.log(result.element);
+                //$(result.element).next(".help-inline").html(result.message);
+                //$(result.element).parent().parent().addClass('error');
+                showAlert(result.message);
+            } else {
+                //$(result.element).parent().parent().removeClass('error');
+                //$(result.element).next(".help-inline").html("");
+                window.location.href = "";
+            }
 
-                                                }).fail(function() {
-                                                });
-                                            }
+        }).fail(function() {
+        });
+    }
+    
+    function send_email ()
+    {
+        jQuery.ajax({
+            url: "<?php echo $base; ?>order/sendemail/?id=<?php echo $data['guid']; ?>",
+            data: data = $("#form-edit").serialize(),
+            type: "POST",
+            beforeSend: function(xhr) {
+                $("#btn-sendemail").button('loading');
+                showAlert2 ("Sending email......");
+            }
+        }).done(function(data) {
+            $("#btn-snedemail").button('reset');
+
+            var result = $.parseJSON(data);
+            console.log(result);
+            if (result.error == 1) {
+                //console.log(result.element);
+                //$(result.element).next(".help-inline").html(result.message);
+                //$(result.element).parent().parent().addClass('error');
+                showAlert(result.message);
+            } else {
+                //$(result.element).parent().parent().removeClass('error');
+                //$(result.element).next(".help-inline").html("");
+                window.location.href = "";
+            }
+            
+            hideAlert ();
+
+        }).fail(function() {
+            $("#btn-snedemail").button('reset');
+        });
+     }
 </script>

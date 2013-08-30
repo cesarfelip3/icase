@@ -38,12 +38,12 @@
             <div class="row">
                 <div class="span12 listing-buttons">
 <!--                    <a class="btn btn-primary" href="javascript:">Settings</a>-->
-                    <a class="btn btn-primary" onclick="save('edit/?id=0')" href="javascript:">Update Selected</a>
+<!--                    <a class="btn btn-primary" onclick="save('edit/?id=0')" href="javascript:">Update Selected</a>-->
                 </div>
                 <div class="span12">
                     <div class="slate">
                         <div class="page-header">
-                            <div class="btn-group pull-right">
+                            <div class="btn-group pull-right hide">
                                 <button class="btn dropdown-toggle" data-toggle="dropdown">
                                     <i class="icon-download-alt"></i> Export
                                     <span class="caret"></span>
@@ -80,15 +80,11 @@
                                             <td class="value">
                                                 $<?php echo $value['Order']['amount']; ?>
                                             </td>
-                                            <td class="value">
-                                                <select class="input-medium" name="order[<?php echo $value['Order']['id']; ?>][status]">
-                                                    <?php foreach ($status as $key => $state) : ?>
-                                                        <option value="<?php echo $key; ?>" <?php if ($value['Order']['status'] == $key) echo 'selected="selected"'; ?>><?php echo $state; ?></option>
-                                                    <?php endforeach; ?>
-                                                </select>
+                                            <td class="value" style="text-transform: capitalize;">
+                                                <?php echo $value['Order']['status']; ?>
                                             </td>
                                             <td class="actions">
-                                                <a class="btn btn-small btn-primary" onclick="save('edit/?id=<?php echo $value['Order']['id']; ?>')" href="javascript:">Update</a>
+<!--                                                <a class="btn btn-small btn-primary" onclick="save('edit/?id=<?php echo $value['Order']['id']; ?>')" href="javascript:">Update</a>-->
                                                 <a class="btn btn-small btn-primary" href="<?php echo $base; ?>order/view/?id=<?php echo $value['Order']['guid']; ?>">View Order</a>
                                             </td>
                                         </tr>
@@ -102,7 +98,7 @@
                     <?php echo $this->element("pagination", array("plugin" => "Admin", "page" => $page, "form" => "#form-filter")); ?>
                 </div>
                 <div class="span6 listing-buttons pull-right">
-                    <a class="btn btn-primary" onclick="save('edit/?id=0')" href="javascript:">Update Selected</a>
+<!--                    <a class="btn btn-primary" onclick="save('edit/?id=0')" href="javascript:">Update Selected</a>-->
                 </div>
             </div>
         </form>

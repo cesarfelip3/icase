@@ -1,13 +1,13 @@
 <p class="p5">
-    <span class="s2">Dear,</span><br>
-    <br>
-    Thank you for your order from BeaUTAHful Creations<b>! </b>We wanted to let you know that your order was shipped via USPS, USPS Priority Mail on 7/27/2013.  You can track your package at any time using the link below.<br>
+    <span class="s2">Dear, <?php echo $bill['name']; ?></span><br>
+<div>
+    <br><?php echo $content; ?><br>
+</div>
     <br>
     <b>Shipped To:</b><br>
 <p><?php echo $deliver['address']; ?></p>
 <p><?php echo $deilver['city']; ?> <?php echo $deilver['state']; ?> <?php echo $deliver['phone']; ?> <?php echo $deliver['country']; ?></p><br>
 <br>
-<b>Track Your Shipment:</b> <a href="https://tools.usps.com/go/TrackConfirmAction.action?tLabels=9405510200986104431161">9405510200986104431161</a><br>
 <br>
 This shipment includes the following items:</p>
 <table class="table">
@@ -19,7 +19,7 @@ This shipment includes the following items:</p>
         </tr>
     </thead>
     <tbody>
-        <?php if (!empty($orders)) : $i = 1; ?>
+        <?php if (!empty($orders)) : ?>
             <?php foreach ($orders as $key => $value) : ?>
                 <tr>
                     <td>#<?php echo $value['Order']['guid']; ?></td>

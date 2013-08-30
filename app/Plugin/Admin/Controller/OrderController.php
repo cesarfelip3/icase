@@ -72,6 +72,7 @@ class OrderController extends AdminAppController {
         $data = $this->Order->find('all', array(
             'limit' => $limit,
             'page' => $page + 1,
+            'order' => 'modified DESC',
             'conditions' => $conditions,
             'fields' => array("Order.*")
                 )
@@ -227,15 +228,32 @@ class OrderController extends AdminAppController {
 
         $guid = $this->request->query('id');
 
-        $data = $this->find('first', array("conditions" => array("guid" => $id)));
+        $this->loadModel('Order');
+        $data = $this->Order->find('first', array("conditions" => array("guid" => $id)));
+        $email = $this->request->data('email');
+        
+        $this->loadModel('UserBillInfo');
+        $bill = $this->UserBillInfo->find('first', array("conditions" => array("guid" => $data['Order']['bill_guid'])));
+        
+        $this->loadModel('UserDeliverInfo');
+        $deliver = $this->UserDeliverInfo->find('first', array("conditions" => array("guid" => $data['Order']['bill_guid'])));
+        $deliver = $deliver['UserDeliverInfo'];
+        
+        if (empty ($email)) {
+            $this->error['error'] = 1;
+            $this->error['message'] = "";
+            exit (json_encode($this->error));
+        }
 
         if (!empty($data)) {
 
-            $from = "";
-            $to = $data['email'];
-            $subject = "";
-            $content = null;
-            $template = "admin_order_notification";
+            $from = array ("orders@beautahfulcreations.com" => "beautahfulcreations.com");
+            $to = $email['email'];
+            $subject = $email['subject'];
+            $content = $email['content'];
+            $template = "order_status_changed";
+            $vars = array ("order" => $data['Order'], "bill" => $bill['UserBillInfo'], 'content' => $content, 'deliver' => $deliver);
+            $this->email($from, $to, $subject, $content, $template, $vars);
         }
     }
 
