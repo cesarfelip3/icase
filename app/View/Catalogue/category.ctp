@@ -15,7 +15,7 @@
                 <div class="row-fluid hotproperties" style='margin-top:20px;'>
                     <?php if (isset($data[$i])) : ?>
                         <div class="span4">
-                            <div class="thumbnail">
+                            <div class="thumbnail" style="background-image:none;background-color:white;">
                                 <a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i]['Product']['slug']; ?>">
                                     <img src="<?php echo $this->webroot; ?>uploads/product/<?php echo $data[$i]['Product']['image']; ?>" alt="<?php echo $data[$i]['Product']['name']; ?>" style="width:100%;">
                                 </a>
@@ -31,7 +31,7 @@
                     <?php endif; ?>
                     <?php if (isset($data[$i + 1])) : ?>
                         <div class="span4">
-                            <div class="thumbnail">
+                            <div class="thumbnail" style="background-image:none;background-color:white;">
                                 <a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i + 1]['Product']['slug']; ?>"><img src="<?php echo $this->webroot; ?>uploads/product/<?php echo $data[$i + 1]['Product']['image']; ?>" alt="<?php echo $data[$i + 1]['Product']['name']; ?>"  style="width:100%;"></a>
                                 <div class="caption">
                                     <a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i + 1]['Product']['slug']; ?>" class="prop-title" style="text-transform: uppercase"><?php echo $data[$i + 1]['Product']['name']; ?></a>
@@ -44,8 +44,8 @@
                         </div>
                     <?php endif; ?>
                     <?php if (isset($data[$i + 2])) : ?>
-                        <div class="span4 set-equal-heights-js">
-                            <div class="thumbnail">
+                        <div class="span4">
+                            <div class="thumbnail" style="background-image:none;background-color:white;">
                                 <a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i + 2]['Product']['slug']; ?>">
                                     <img src="<?php echo $this->webroot; ?>uploads/product/<?php echo $data[$i + 2]['Product']['image']; ?>" alt="<?php echo $data[$i]['Product']['name']; ?>"  style="">
                                 </a>
