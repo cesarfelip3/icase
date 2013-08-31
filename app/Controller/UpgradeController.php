@@ -5,10 +5,15 @@ App::uses('AppController', 'Controller');
 class UpgradeController extends AppController {
 
     public $uses = false;
+    public $upgrade = false;
 
     public function beforeFilter() {
         $this->Auth->allow();
         parent::beforeFilter();
+        
+        if (!$upgrade) {
+            $this->redirect (array ("controller" => "index", "action" => "index"));
+        }
     }
 
     public function to02() {

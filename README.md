@@ -13,7 +13,6 @@ Upgrade From 0.1 to 0.2
 3. Not tested yet
 
 
-
 SEO basic --
 
 1. page title
