@@ -370,6 +370,8 @@ $js_case = array(
                 $("#current-item").data('name', result.data.name);
                 $("#current-item").val(result.data.product);
                 mememaker.overlayImage = result.data.overlay;
+                
+                showAlert2 ("Loading content......");
                 mememaker.reload(result.data.json);
             }
 
