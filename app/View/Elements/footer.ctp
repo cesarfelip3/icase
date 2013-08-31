@@ -59,8 +59,8 @@ if (isset($this->params['slug'])) {
                 <ul class="span3 social-network">
                     <li><a href="javascript:void(0)"><i class="icon-linkedin-sign"></i></a></li>
                     <li><a href="javascript:void(0)"><i class="icon-pinterest-sign"></i></a></li>
-                    <li><a href="javascript:void(0)"><i class="icon-twitter-sign"></i></a></li>
-                    <li><a href="javascript:void(0)"><i class="icon-facebook-sign"></i></a></li>
+                    <li><a href="https://twitter.com/BeaUTAHful801"><i class="icon-twitter-sign"></i></a></li>
+                    <li><a href="https://www.facebook.com/BeaUTAHfulCreations"><i class="icon-facebook-sign"></i></a></li>
                     <li><a href="javascript:void(0)"><i class="icon-google-plus-sign"></i></a></li>
                 </ul>
             </div>
