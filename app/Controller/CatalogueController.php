@@ -128,7 +128,7 @@ class CatalogueController extends AppController {
         ));
 
         if (empty($data)) {
-            $this->redirect(array("controller" => "user", "action" => "order"));
+            $this->redirect(array("controller" => "order", "action" => "index"));
         }
 
         $data = $data['Product'];
