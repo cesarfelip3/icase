@@ -30,7 +30,6 @@ class IndexController extends AppController {
                 }
             }
         }
-
         $this->set('data', $data);
     }
 
