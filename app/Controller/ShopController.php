@@ -326,7 +326,7 @@ class ShopController extends AppController {
 
                     $from = array('sales@beautahfulcreations.com' => 'beautahfulcreations.com');
                     $content = "";
-                    $to = "cesarfelip3@gmail.com";
+                    $to = "orders@beautahfulcreations.com";
                     $subject = "There new orders come";
                     $var = array('data' => $orders);
                     $this->_email($from, $to, $subject, $content, "checkout_order_seller", $var);
