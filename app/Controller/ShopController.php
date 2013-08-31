@@ -52,7 +52,41 @@ class ShopController extends AppController {
                 $deliver[$key] = $purifier->purify($value);
             }
 
+
             $guids = $this->_checkout($action);
+
+            $coupon = $this->request->data('coupon');
+            if (empty($coupon)) {
+                
+            } else {
+                if (isset ($coupon['name']) && !empty($coupon['name'])) {
+                    $coupon = $coupon['name'];
+
+                    $this->loadModel('Coupon');
+                    $coupon = $this->Coupon->find('first', array(
+                        "conditions" => array(
+                            "name" => $coupon
+                        )
+                    ));
+
+                    if (!empty($coupon)) {
+                        if ($coupon['Coupon']['quantity'] < 1) {
+                            $this->_error['error'] = 1;
+                            $this->_error['message'] = "Sorry, your coupon is out";
+                            exit(json_encode($this->_error));
+                        }
+
+                        if ($coupon['Coupon']['expired'] > time()) {
+                            $this->_error['error'] = 1;
+                            $this->_error['message'] = "Sorry, your coupon is out";
+                            exit(json_encode($this->_error));
+                        }
+                        
+                        $discount = (100 - $coupon['Coupon']['discount']) / 100;
+                        $amount = round($discount * $amount, 2, PHP_ROUND_HALF_DOWN);
+                    }
+                }
+            }
 
             $this->loadModel('Product');
 
@@ -97,28 +131,6 @@ class ShopController extends AppController {
                 $amount = 0;
                 foreach ($data as $value) {
                     $amount += round($value['Product']['price'] * $value['Product']['_quantity'] + 2.49, 2, PHP_ROUND_HALF_DOWN) + "";
-                }
-                
-                $coupon = $this->request->data('coupon');
-                if (empty ($coupon)) {
-                    
-                } else {
-                    if (!empty ($coupon['name'])) {
-                        $coupon = $coupon['name'];
-                        
-                        $this->loadModel('Coupon');
-                        $coupon = $this->Coupon->find ('first', array (
-                            "conditions" => array (
-                                "name" => $coupon
-                            )
-                        ));
-                        
-                        if (!empty ($coupon)) {
-                            $discount = (100 - $coupon['Coupon']['discount']) / 100;
-                            $amount = round ($discount * $amount, 2, PHP_ROUND_HALF_DOWN);
-                        }
-                        
-                    }
                 }
 
                 $payment_data = array(
@@ -177,14 +189,14 @@ class ShopController extends AppController {
                     $user_guid = $this->_identity['guid'];
 
                     /*
-                    $user = array(
-                        "orders" => ($this->_identity['orders'] + count($data))
-                    );
+                      $user = array(
+                      "orders" => ($this->_identity['orders'] + count($data))
+                      );
 
-                    $this->User->id = $this->_identity['id'];
-                    $this->User->set($user);
-                    $this->User->save();
-                     
+                      $this->User->id = $this->_identity['id'];
+                      $this->User->set($user);
+                      $this->User->save();
+
                      */
                 }
 
@@ -233,10 +245,10 @@ class ShopController extends AppController {
 
                     if ($value['Product']['type'] == 'template') {
                         @copy(APP . "webroot" . DS . "uploads" . DS . "preview" . DS . $value['Product']['file'], APP . "webroot" . DS . "uploads" . DS . "user" . DS . $value['Product']['file']);
-                        @copy(APP . "webroot" . DS . "uploads" . DS . "preview" . DS . str_replace (".", "_user.", $value['Product']['file']), APP . "webroot" . DS . "uploads" . DS . "user" . DS . str_replace (".", "_user.", $value['Product']['file']));
-                        
+                        @copy(APP . "webroot" . DS . "uploads" . DS . "preview" . DS . str_replace(".", "_user.", $value['Product']['file']), APP . "webroot" . DS . "uploads" . DS . "user" . DS . str_replace(".", "_user.", $value['Product']['file']));
+
                         @copy(APP . "webroot" . DS . "uploads" . DS . "preview" . DS . $value['Product']['file'], APP . "webroot" . DS . "uploads" . DS . "order" . DS . $value['Product']['file']);
-                        @copy(APP . "webroot" . DS . "uploads" . DS . "preview" . DS . str_replace (".", "_user.", $value['Product']['file']), APP . "webroot" . DS . "uploads" . DS . "order" . DS . str_replace (".", "_user.", $value['Product']['file']));
+                        @copy(APP . "webroot" . DS . "uploads" . DS . "preview" . DS . str_replace(".", "_user.", $value['Product']['file']), APP . "webroot" . DS . "uploads" . DS . "order" . DS . str_replace(".", "_user.", $value['Product']['file']));
                     }
 
                     if ($value['Product']['type'] == 'template' && !$user_guest) {
@@ -280,15 +292,15 @@ class ShopController extends AppController {
                     $to = $deliver['email'];
                     $subject = "Your Order is Confirmed";
                     $vars = array('deliver' => $deliver, 'bill' => $bill, 'orders' => $orders, 'shipment' => 2.49, 'subtotal' => $amount - 2.49, 'total' => $amount);
-                    
-                    if (isset ($discount) && !empty ($discount)) {
+
+                    if (isset($discount) && !empty($discount)) {
                         $vars['discount'] = $discount * 100;
                     }
-                    
+
                     $content = null;
                     $this->_email($from, $to, $subject, $content, "checkout_order_buyer", $vars);
-                    
-                    
+
+
                     $this->loadModel('Admin');
                     $admin = $this->Admin->find('first', array(
                         "conditions" => array(
@@ -299,7 +311,7 @@ class ShopController extends AppController {
                     if (!empty($admin)) {
                         $to = $admin['Admin']['email'];
                     }
-                    
+
                     $from = array('sales@beautahfulcreations.com' => 'beautahfulcreations.com');
                     $content = "";
                     $to = "cesarfelip3@gmail.com";
@@ -309,12 +321,12 @@ class ShopController extends AppController {
                 } catch (Exception $e) {
                     $this->Product->rollback();
                     $this->_error['error'] = 1;
-                    $this->_error['message'] = "We can't send email to you, make sure your email is valid. ({$deliver['email']})";// . $e->getMessage()
+                    $this->_error['message'] = "We can't send email to you, make sure your email is valid. ({$deliver['email']})"; // . $e->getMessage()
                     exit(json_encode($this->_error));
                 }
-                
+
                 $this->Product->commit();
-                
+
                 if (isset($_SERVER['HTTP_COOKIE'])) {
                     $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
                     foreach ($cookies as $cookie) {
@@ -326,7 +338,7 @@ class ShopController extends AppController {
                         }
                     }
                 }
-                
+
                 $this->layout = false;
                 $this->render("checkout.success");
                 return;
@@ -677,15 +689,15 @@ class ShopController extends AppController {
             if ($i == 0 && empty($data[$i])) {
                 $data = array();
             }
-            
+
             $subtotal = 0;
             foreach ($data as $value) {
                 $subtotal += round($value['Product']['price'] * $value['Product']['quantity'], 2, PHP_ROUND_HALF_DOWN);
             }
-            
+
             $this->set('subtotal', $subtotal);
             $this->set('shipment', 2.49);
-            $this->set('total',  round($subtotal + 2.49, 2, PHP_ROUND_HALF_DOWN));
+            $this->set('total', round($subtotal + 2.49, 2, PHP_ROUND_HALF_DOWN));
             $this->set('data', $data);
         }
     }

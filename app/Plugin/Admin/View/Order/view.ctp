@@ -207,16 +207,17 @@
     
     function send_email ()
     {
+         CKEDITOR.instances.editor1.updateElement();
         jQuery.ajax({
             url: "<?php echo $base; ?>order/notify/?id=<?php echo $data['guid']; ?>",
-            data: data = $("#form-edit").serialize(),
+            data: $("#form-edit").serialize(),
             type: "POST",
             beforeSend: function(xhr) {
                 $("#btn-sendemail").button('loading');
                 showAlert2 ("Sending email......");
             }
         }).done(function(data) {
-            $("#btn-snedemail").button('reset');
+            $("#btn-sendemail").button('reset');
 
             var result = $.parseJSON(data);
             console.log(result);

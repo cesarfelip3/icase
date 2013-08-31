@@ -229,14 +229,14 @@ class OrderController extends AdminAppController {
         $guid = $this->request->query('id');
 
         $this->loadModel('Order');
-        $data = $this->Order->find('first', array("conditions" => array("guid" => $id)));
+        $data = $this->Order->find('first', array("conditions" => array("guid" => $guid)));
         $email = $this->request->data('email');
 
         $this->loadModel('UserBillInfo');
         $bill = $this->UserBillInfo->find('first', array("conditions" => array("guid" => $data['Order']['bill_guid'])));
 
         $this->loadModel('UserDeliverInfo');
-        $deliver = $this->UserDeliverInfo->find('first', array("conditions" => array("guid" => $data['Order']['bill_guid'])));
+        $deliver = $this->UserDeliverInfo->find('first', array("conditions" => array("guid" => $data['Order']['deliver_guid'])));
         $deliver = $deliver['UserDeliverInfo'];
 
         if (empty($email)) {
@@ -253,7 +253,7 @@ class OrderController extends AdminAppController {
                 $subject = $email['subject'];
                 $content = $email['content'];
                 $template = "order_status_changed";
-                $vars = array("order" => $data['Order'], "bill" => $bill['UserBillInfo'], 'content' => $content, 'deliver' => $deliver);
+                $vars = array("orders" => $data['Order'], "bill" => $bill['UserBillInfo'], 'email_content' => $content, 'deliver' => $deliver);
                 $this->email($from, $to, $subject, $content, $template, $vars);
             }
         } catch (Exception $e) {
@@ -267,6 +267,7 @@ class OrderController extends AdminAppController {
 
     protected function email($from, $to, $subject, $content, $template, $vars = array()) {
         $Email = new CakeEmail();
+        $Email->config('smtp');
         $Email->template($template);
         $Email->viewVars($vars);
         $Email->emailFormat('html');
