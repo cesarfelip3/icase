@@ -34,6 +34,21 @@ class AdminAppController extends Controller {
         ),
         'Captcha'
     );
+    
+    protected $_media_location = array(
+        "main" => "uploads/",
+        "product" => "uploads/product/",
+        "order" => "uploads/order/",
+        "user" => "uploads/user/",
+        "user.uploads" => "uploads/user/uploads/",
+    );
+    
+    protected $_media_size = array(
+        "product" => array(
+            "small" => 200,
+            "medium" => 500,
+        )
+    );
 
     public function beforeFilter() {
 
@@ -101,10 +116,10 @@ class AdminAppController extends Controller {
             $img = imagecreatefrompng($image_file);
         }
 
-        if (empty ($img)) {
+        if (empty($img)) {
             return false;
         }
-        
+
         $b_top = 0;
         $b_btm = 0;
         $b_lft = 0;
@@ -146,7 +161,6 @@ class AdminAppController extends Controller {
                 imagesx($img) - ($b_lft + $b_rt), imagesy($img) - ($b_top + $b_btm));
 
         imagecopy($newimg, $img, 0, 0, $b_lft, $b_top, imagesx($newimg), imagesy($newimg));
-
     }
 
 }

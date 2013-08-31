@@ -178,13 +178,13 @@ $admin_product = $base . "product";
                                 <a href="javascript:" id="btn-upload-featured-image" class="btn btn-block btn-info" onclick="featured_image_start_upload();">Upload</a>
                             </p>
                             <div id="box-featured-image" class="row-fluid">
-                                <?php if (!empty ($data['featured2'])) : $images = $data['featured2']['origin']; ?>
-                                <?php foreach ($images as $key => $image) : ?>
+                                <?php if (!empty ($data['featured2'])) :  ?>
+                                <?php foreach ($data['featured2'] as $key => $image) : ?>
                                 <div class="thumbnail" style="width:20%;float:left;margin-left:5px;margin-bottom:10px;">
                                     <a class="featured-thumbnail">
-                                        <img src="<?php echo $this->webroot . "uploads/product/" . $data['featured2']['150w'][$key]; ?>" style=""></a>
+                                        <img src="<?php echo $image['url'] ?>" style=""></a>
                                     <div class="caption">
-                                        <p><a href="javascript:" data-image="<?php echo $image; ?>" onclick="featured_image_delete(this);">Delete</a></p>
+                                        <p><a href="javascript:" data-image="<?php echo $image['image']; ?>" onclick="featured_image_delete(this);">Delete</a></p>
                                     </div>
                                 </div>
                                 <?php endforeach; ?>

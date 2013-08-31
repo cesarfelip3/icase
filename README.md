@@ -5,12 +5,12 @@ iCase
 Update
 ========
 
-1. Admin / Order / Email Notification
-2. Email / Content
-3. Admin / Product / Add - Image - crop hint?
 
-5. Media Location (optional)
-4. Error Handler (final)
+Upgrade From 0.1 to 0.2
+
+1. all product/images - small/medium/origin -named changed from _150 to _small, _500 to _medium
+2. remove product/featured (150w/origin) - too complex and poor reusability
+
 
 SEO basic --
 

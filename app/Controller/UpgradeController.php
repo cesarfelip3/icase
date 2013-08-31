@@ -2,7 +2,7 @@
 
 App::uses('AppController', 'Controller');
 
-class BugFixController extends AppController {
+class UpgradeController extends AppController {
 
     public $uses = false;
 
@@ -11,13 +11,111 @@ class BugFixController extends AppController {
         parent::beforeFilter();
     }
 
+    public function to02() {
+
+        set_time_limit(0);
+
+        print_r("Upgrading from 0.1 to 0.2......<br/>");
+        print_r("Stage 1 : upgrading images of products on server......<br/>");
+
+        $images = array();
+
+        print_r (WWW_ROOT . $this->_media_location['product'] . "<br/>");
+        
+        if (($handle = opendir(WWW_ROOT . $this->_media_location['product'] . ".")) != false) {
+            while (false !== ($entry = readdir($handle))) {
+                if ($entry != "." && $entry != "..") {
+                    $images[] = $entry;
+                }
+            }
+            closedir($handle);
+        }
+
+        if (empty($images)) {
+            print_r("no images");
+            exit;
+        }
+
+        $changes = 0;
+        
+        foreach ($images as $image) {
+            
+            $filename = pathinfo($image, PATHINFO_FILENAME);
+            $media_location_product = WWW_ROOT . $this->_media_location['product'];
+            $image = $media_location_product . $image;
+
+            $image_150 = $media_location_product . $filename . "_150.png";
+            $image_500 = $media_location_product . $filename . "_500.png";
+
+            $image_small = $media_location_product . $filename . "_small.png";
+            $image_medium = $media_location_product . $filename . "_medium.png";
+
+            if (file_exists($image) && is_file($image) && preg_match ("/^[0-9a-zA-Z]/i", $filename)) {
+                
+                if (file_exists($image_150) && !rename($image_150, $image_small)) {
+                    print_r("Rename $image_150 wrong.<br/>");
+                }
+
+                if (file_exists($image_500) && !rename($image_500, $image_medium)) {
+                    print_r("Rename $image_500 wrong.<br/>");
+                }
+            }
+        }
+        
+        print_r("Stage 2 : upgrading database/product/featured......<br/>");
+
+        $this->loadModel('Product');
+        $count = $this->Product->find('count');
+        
+        $changes = 0;
+
+        for ($i = 0; $i < $count; $i += 100) {
+            $data = $this->Product->find('all', array(
+                "conditions" => array(
+                    "type" => "product",
+                ),
+                "limit" => 100,
+                "page" => $i / 100 + 1,
+            ));
+
+            if (!empty($data)) {
+                foreach ($data as $key => $value) {
+                    if (!empty($value['Product']['featured'])) {
+                        $images = unserialize($value['Product']['featured']);
+                        
+                        if (!isset ($image['origin'])) {
+                            continue;
+                        }
+                        
+                        $value['Product']['featured'] = serialize($images['origin']);
+                        $data[$key] = $value;
+
+                        $this->Product->id = $value['Product']['id'];
+                        $this->Product->set(array(
+                            "featured" => $value['Product']['featured']
+                        ));
+                        $this->Product->save();
+                        $changes++;
+                    }
+                }
+            }
+        }
+
+        print_r ("$changes records changed!<br/>");
+        if ($changes == 0) {
+            print_r ("Your system is up to date.<br/>");
+        }
+        print_r("Complete! <br/>");
+        exit;
+    }
+
     public function test() {
         exit;
-        
+
         $dir = APP . "webroot/uploads/product/";
         require_once APP . 'Vendor' . DS . "Zebra/Zebra_Image.php";
         $image = new Zebra_Image();
-                
+
         $image->source_path = $dir . "52204dc799ab3.png";
         $image->jpeg_quality = 100;
 

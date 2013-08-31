@@ -2,17 +2,16 @@
 
 class ProductController extends AdminAppController {
 
-    protected $error = array(
-        'error' => 0,
-        'element' => '',
-        'message' => '',
-        'data' => ''
-    );
+    protected $media_location_main;
+    protected $media_location_product;
 
     public function beforeFilter() {
         $this->Auth->deny();
         $this->Auth->allow('install');
         parent::beforeFilter();
+
+        $this->media_location_main = WWW_ROOT . $this->_media_location['main'];
+        $this->media_location_product = WWW_ROOT . $this->_media_location['product'];
     }
 
     public function index() {
@@ -83,9 +82,12 @@ class ProductController extends AdminAppController {
 
                 if ($value['Product']['type'] == 'product') {
                     $value['Product']['featured'] = unserialize($value['Product']['featured']);
-                    $value['Product']['image'] = $value['Product']['featured']['150w'][0];
-                    $value['Product']['image'] = $this->webroot . "uploads/product/" . $value['Product']['image'];
-                } 
+                    $value['Product']['image'] = $value['Product']['featured'][0];
+
+                    $filename = pathinfo($value['Product']['image'], PATHINFO_FILENAME);
+                    $small = $filename . "_small.png";
+                    $value['Product']['image'] = $this->webroot . $this->_media_location['product'] . $small;
+                }
 
                 $data[$key] = $value;
             }
@@ -124,41 +126,41 @@ class ProductController extends AdminAppController {
             $action = $this->request->query('action');
 
             if (empty($data['name'])) {
-                $this->error['error'] = 1;
-                $this->error['element'] = 'input[name="product[name]"]';
-                $this->error['message'] = 'Product name is required';
-                exit(json_encode($this->error));
+                $this->_error['error'] = 1;
+                $this->_error['element'] = 'input[name="product[name]"]';
+                $this->_error['message'] = 'Product name is required';
+                exit(json_encode($this->_error));
             }
 
             if (preg_match("/^[0-9]{1,}\.?[0-9]{0,2}$/i", $data['price']) == false) {
-                $this->error['error'] = 1;
-                $this->error['element'] = 'input[name="product[price]"]';
-                $this->error['message'] = 'Invalid price number';
-                exit(json_encode($this->error));
+                $this->_error['error'] = 1;
+                $this->_error['element'] = 'input[name="product[price]"]';
+                $this->_error['message'] = 'Invalid price number';
+                exit(json_encode($this->_error));
             }
 
             if (preg_match("/^[0-9]{1,}\.?[0-9]{0,2}$/i", $data['tax']) == false) {
-                $this->error['error'] = 1;
-                $this->error['element'] = 'input[name="product[tax]"]';
-                $this->error['message'] = 'Invalid tax number';
-                exit(json_encode($this->error));
+                $this->_error['error'] = 1;
+                $this->_error['element'] = 'input[name="product[tax]"]';
+                $this->_error['message'] = 'Invalid tax number';
+                exit(json_encode($this->_error));
             }
 
             if (preg_match("/^[0-9]{1,2}$/i", $data['discount']) == false) {
-                $this->error['error'] = 1;
-                $this->error['element'] = 'input[name="product[discount]"]';
-                $this->error['message'] = 'Invalid discount number';
-                exit(json_encode($this->error));
+                $this->_error['error'] = 1;
+                $this->_error['element'] = 'input[name="product[discount]"]';
+                $this->_error['message'] = 'Invalid discount number';
+                exit(json_encode($this->_error));
             }
 
             $is_special = 0;
             if (isset($data['is_special'])) {
                 $is_special = 1;
                 if (preg_match("/^[0-9]{1,}\.?[0-9]{0,2}$/i", $data['special_price']) == false) {
-                    $this->error['error'] = 1;
-                    $this->error['element'] = 'input[name="product[special_price]"]';
-                    $this->error['message'] = 'Invalid special price number';
-                    exit(json_encode($this->error));
+                    $this->_error['error'] = 1;
+                    $this->_error['element'] = 'input[name="product[special_price]"]';
+                    $this->_error['message'] = 'Invalid special price number';
+                    exit(json_encode($this->_error));
                 }
             }
 
@@ -181,18 +183,18 @@ class ProductController extends AdminAppController {
                 $data['featured'] = trim($data['featured'], "-");
                 $images = explode("-", $data['featured']);
 
-                $data['featured'] = array();
-                $data['featured']['origin'] = $images;
+                $data['featured'] = $images;
                 $data['image'] = $images[0];
 
-                $data['featured']['150w'] = array();
-
                 foreach ($images as $value) {
-                    @copy(APP . 'webroot/uploads/' . $value, APP . 'webroot/uploads/product/' . $value);
-                    $value = pathinfo($value, PATHINFO_FILENAME) . ".png";
-                    $data['featured']['150w'][] = str_replace(".", "_150.", $value);
-                    @copy(APP . 'webroot/uploads/' . str_replace(".", "_150.", $value), APP . 'webroot/uploads/product/' . str_replace(".", "_150.", $value));
-                    @copy(APP . 'webroot/uploads/' . str_replace(".", "_500.", $value), APP . 'webroot/uploads/product/' . str_replace(".", "_500.", $value));
+
+                    $filename = pathinfo($value, PATHINFO_FILENAME);
+                    $small = $filename . "_small.png";
+                    $medium = $filename . "_medium.png";
+
+                    @copy($this->media_location_main . $value, $this->media_location_product . $value);
+                    @copy($this->media_location_main . $small, $this->media_location_product . $small);
+                    @copy($this->media_location_main . $medium, $this->media_location_product . $medium);
                 }
 
                 $data['featured'] = serialize($data['featured']);
@@ -225,7 +227,7 @@ class ProductController extends AdminAppController {
             $this->Product->set(array("slug" => $data['slug']));
             $this->Product->save();
 
-            $this->error['data'] = $this->Product->id;
+            $this->_error['data'] = $this->Product->id;
 
             if (!empty($category)) {
 
@@ -242,8 +244,8 @@ class ProductController extends AdminAppController {
                 $this->CategoryToObject->saveMany($c);
             }
 
-            $this->error['element'] = 'input';
-            exit(json_encode($this->error));
+            $this->_error['element'] = 'input';
+            exit(json_encode($this->_error));
         }
     }
 
@@ -266,9 +268,15 @@ class ProductController extends AdminAppController {
 
         if (!empty($data)) {
             $data['featured'] = unserialize($data['featured']);
-            $data['featured2'] = $data['featured'];
+            $data['featured2'] = array();
+
+            foreach ($data['featured'] as $key => $image) {
+                $data['featured2'][$key]['image'] = $image;
+                $data['featured2'][$key]['url'] = $this->webroot . $this->_media_location['product'] . pathinfo($image, PATHINFO_FILENAME) . "_small.png";
+            }
+
             if (!empty($data['featured'])) {
-                $data['featured'] = implode("-", $data['featured']['origin']);
+                $data['featured'] = implode("-", $data['featured']);
             } else {
                 $data['featured'] = "";
             }
@@ -276,12 +284,12 @@ class ProductController extends AdminAppController {
             $data['created'] = date("F j, Y, g:i a", $data['created']);
             $data['modified'] = date("F j, Y, g:i a", $data['modified']);
         }
-        
+
         $id = $data['id'];
         if (preg_match("/\-P$id/", trim($data['slug']))) {
             $data['slug'] = str_replace("-P" . $data['id'], "", $data['slug']);
         }
-
+        
         $this->set(array('data' => $data));
     }
 
@@ -294,41 +302,41 @@ class ProductController extends AdminAppController {
             $action = $this->request->query('action');
 
             if (empty($data['name'])) {
-                $this->error['error'] = 1;
-                $this->error['element'] = 'input[name="product[name]"]';
-                $this->error['message'] = 'Product name is required';
-                exit(json_encode($this->error));
+                $this->_error['error'] = 1;
+                $this->_error['element'] = 'input[name="product[name]"]';
+                $this->_error['message'] = 'Product name is required';
+                exit(json_encode($this->_error));
             }
 
             if (preg_match("/^[0-9]{1,}\.?[0-9]{0,2}$/i", $data['price']) == false) {
-                $this->error['error'] = 1;
-                $this->error['element'] = 'input[name="product[price]"]';
-                $this->error['message'] = 'Invalid price number';
-                exit(json_encode($this->error));
+                $this->_error['error'] = 1;
+                $this->_error['element'] = 'input[name="product[price]"]';
+                $this->_error['message'] = 'Invalid price number';
+                exit(json_encode($this->_error));
             }
 
             if (preg_match("/^[0-9]{1,}\.?[0-9]{0,2}$/i", $data['tax']) == false) {
-                $this->error['error'] = 1;
-                $this->error['element'] = 'input[name="product[tax]"]';
-                $this->error['message'] = 'Invalid tax number';
-                exit(json_encode($this->error));
+                $this->_error['error'] = 1;
+                $this->_error['element'] = 'input[name="product[tax]"]';
+                $this->_error['message'] = 'Invalid tax number';
+                exit(json_encode($this->_error));
             }
 
             if (preg_match("/^[0-9]{1,2}$/i", $data['discount']) == false) {
-                $this->error['error'] = 1;
-                $this->error['element'] = 'input[name="product[discount]"]';
-                $this->error['message'] = 'Invalid discount number';
-                exit(json_encode($this->error));
+                $this->_error['error'] = 1;
+                $this->_error['element'] = 'input[name="product[discount]"]';
+                $this->_error['message'] = 'Invalid discount number';
+                exit(json_encode($this->_error));
             }
 
             $is_special = 0;
             if (isset($data['is_special'])) {
                 $is_special = 1;
                 if (preg_match("/^[0-9]{1,}\.?[0-9]{0,2}$/i", $data['special_price']) == false) {
-                    $this->error['error'] = 1;
-                    $this->error['element'] = 'input[name="product[special_price]"]';
-                    $this->error['message'] = 'Invalid special price number';
-                    exit(json_encode($this->error));
+                    $this->_error['error'] = 1;
+                    $this->_error['element'] = 'input[name="product[special_price]"]';
+                    $this->_error['message'] = 'Invalid special price number';
+                    exit(json_encode($this->_error));
                 }
             }
 
@@ -358,58 +366,58 @@ class ProductController extends AdminAppController {
             }
 
             $this->loadModel('Product');
-            if ($action == "update" && !empty($data['guid'])) {
+            if (!empty($data['guid'])) {
+
                 $element = $this->Product->find('first', array("conditions" => array("guid" => $data['guid'])));
 
                 if (!empty($element)) {
 
-
                     if (!empty($data['featured'])) {
-                        if (!empty($element['Product']['featured'])) {
-                            $images = unserialize($element['Product']['featured']);
-                            foreach ($images['origin'] as $value) {
-                                @unlink(APP . 'webroot/uploads/product/' . $value);
-
-                                if (file_exists(APP . "webroot/uploads/product/" . pathinfo($value, PATHINFO_FILENAME) . "_150.png")) {
-                                    $value = pathinfo($value, PATHINFO_FILENAME) . ".png";
-                                }
-                                @unlink(APP . 'webroot/uploads/product/' . str_replace(".", "_500.", $value));
-                                @unlink(APP . 'webroot/uploads/product/' . str_replace(".", "_150.", $value));
-                            }
-                        }
                         $data['featured'] = trim($data['featured'], "-");
                         $images = explode("-", $data['featured']);
 
-                        $data['featured'] = array();
-                        $data['featured']['origin'] = $images;
-                        $data['image'] = $images[0];
-
-                        $data['featured']['150w'] = array();
-
-                        foreach ($images as $value) {
-                            @copy(APP . 'webroot/uploads/' . $value, APP . 'webroot/uploads/product/' . $value);
-                            $value = pathinfo($value, PATHINFO_FILENAME) . ".png";
-                            $data['featured']['150w'][] = str_replace(".", "_150.", $value);
-                            @copy(APP . 'webroot/uploads/' . str_replace(".", "_150.", $value), APP . 'webroot/uploads/product/' . str_replace(".", "_150.", $value));
-                            @copy(APP . 'webroot/uploads/' . str_replace(".", "_500.", $value), APP . 'webroot/uploads/product/' . str_replace(".", "_500.", $value));
-                        }
-
-                        $data['featured'] = serialize($data['featured']);
-
-                        if ($data['featured'] == $element['Product']['featured']) {
-                            unset($data['featured']);
-                        } else {
+                        if (serialize($images) == $element['featured']) {
                             
+                        } else {
+
+                            $data['featured'] = $images;
+                            $data['image'] = $images[0];
+
+                            foreach ($images as $value) {
+
+                                $filename = pathinfo($value, PATHINFO_FILENAME);
+                                $small = $filename . "_small.png";
+                                $medium = $filename . "_medium.png";
+
+                                @copy($this->media_location_main . $value, $this->media_location_product . $value);
+                                @copy($this->media_location_main . $small, $this->media_location_product . $small);
+                                @copy($this->media_location_main . $medium, $this->media_location_product . $medium);
+                            }
+
+                            if (!empty($element['Product']['featured'])) {
+                                $images = unserialize($element['Product']['featured']);
+                                foreach ($images as $value) {
+                                    $this->media_location_product = WWW_ROOT . $this->_media_location['product'];
+                                    $filename = pathinfo($value, PATHINFO_FILENAME);
+                                    $small = $filename . "_small.png";
+                                    $medium = $filename . "_medium.png";
+
+                                    @unlink($this->media_location_product . $value);
+                                    @unlink($this->media_location_product . $small);
+                                    @unlink($this->media_location_product . $medium);
+                                }
+                            }
+
+                            $data['featured'] = serialize($data['featured']);
                         }
                     }
 
-
                     $data['modified'] = time();
                     $this->Product->id = $data['id'];
-                    
+
                     $data['slug'] = trim($data['slug'], "-");
                     $data['slug'] = $data['slug'] . "-P" . $data['id'];
-                    unset ($data['id']);
+                    unset($data['id']);
                     $this->Product->set($data);
                     $this->Product->save();
 
@@ -430,18 +438,18 @@ class ProductController extends AdminAppController {
                         $this->loadModel('CategoryToObject');
                         $this->CategoryToObject->query("DELETE FROM category_to_object WHERE object_guid='{$data['guid']}'");
                     }
-                    exit(json_encode($this->error));
+                    exit(json_encode($this->_error));
                 }
 
-                $this->error['error'] = 1;
-                $this->error['message'] = "The Product doesn't exist anymore";
-                $this->error['element'] = "";
-                exit(json_encode($this->error));
+                $this->_error['error'] = 1;
+                $this->_error['message'] = "The Product doesn't exist anymore";
+                $this->_error['element'] = "";
+                exit(json_encode($this->_error));
             }
 
-            $this->error['error'] = 1;
-            $this->error['message'] = "wrong action";
-            exit(json_encode($this->error));
+            $this->_error['error'] = 1;
+            $this->_error['message'] = "wrong action";
+            exit(json_encode($this->_error));
         }
     }
 
@@ -470,7 +478,7 @@ class ProductController extends AdminAppController {
         }
 
         $this->Product->delete($id);
-        exit(json_encode($this->error));
+        exit(json_encode($this->_error));
     }
 
     //======================================================

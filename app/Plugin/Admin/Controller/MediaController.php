@@ -6,7 +6,7 @@ class MediaController extends AdminAppController {
     protected $_error = array(
         "error" => 0,
         "message" => "",
-        "files" => array(),
+        "file" => array(),
     );
 
     public function beforeFilter() {
@@ -42,7 +42,7 @@ class MediaController extends AdminAppController {
                     $targetDir .= "product/";
                 }
 
-                require_once APP . 'Vendor' . DS . "Zebra/Zebra_Image.php";
+                require_once APP . 'Vendor' . DIRECTORY_SEPARATOR . "Zebra/Zebra_Image.php";
                 $image = new Zebra_Image();
 
                 $image->source_path = $targetDir . $filename . "." . $extension;
@@ -181,7 +181,7 @@ class MediaController extends AdminAppController {
             if ($action == 'product') {
                 $action = "";
             } else {
-                $action = DS . $action;
+                $action = DIRECTORY_SEPARATOR . $action;
             }
         }
 
@@ -208,7 +208,7 @@ class MediaController extends AdminAppController {
 
         $targetDir = $this->_targetDir = ROOT . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'uploads' . $action;
 
-        $cleanupTargetDir = true; // Remove old files
+        $cleanupTargetDir = true; // Remove old file
         $maxFileAge = 5 * 3600; // Temp file age in seconds
         @set_time_limit(0);
 
@@ -339,27 +339,22 @@ class MediaController extends AdminAppController {
             rename("{$filePath}.part", $target);
         }
 
-        $url150 = $this->base . "/uploads/$action/" . $filename . "_150.png";
-
         $this->_error['error'] = 0;
         $this->_error['message'] = 'Success';
-        $this->_error['files'] = array(
+        $this->_error['file'] = array(
             'original' => $original,
             'target' => $name,
             'filename' => $filename,
-            'url' => $this->base . "/uploads/$action/" . $name,
-            'url150' => "",
             'extension' => $extension,
-            "width" => 150,
-            "height" => 150,
+            'url' => $this->base . "/uploads/$action/" . $name,
+            'urlsmall' => "",
         );
 
-        $image_size = getimagesize($target);
-        $this->_error['files']['width'] = $image_size[0];
-        $this->_error['files']['width'] = $image_size[1];
+        $size = getimagesize($target);
+        $this->_error['file']['width'] = $size[0];
+        $this->_error['file']['height'] = $size[1];
 
-
-        require_once APP . 'Vendor' . DS . "Zebra/Zebra_Image.php";
+        require_once APP . 'Vendor' . DIRECTORY_SEPARATOR . "Zebra/Zebra_Image.php";
         $image = new Zebra_Image();
 
         $image->source_path = $target;
@@ -370,27 +365,27 @@ class MediaController extends AdminAppController {
         $image->enlarge_smaller_images = true;
         $image->preserve_time = true;
 
-        // resize the image to exactly 100x100 pixels by using the "crop from center" method
-        // (read more in the overview section or in the documentation)
-        //  and if there is an error, check what the error is about
+        $image->target_path = $targetDir . DIRECTORY_SEPARATOR . $filename . "_medium.png";
+        
+        $width = $this->_media_size['product']['medium'];
+        $height = $this->_media_size['product']['medium'];
 
-        $size = getimagesize($target);
-
-        $image->target_path = $targetDir . DIRECTORY_SEPARATOR . $filename . "_500.png";
-
-        if (!$image->resize(500, 500, ZEBRA_IMAGE_BOXED, -1)) {
+        if (!$image->resize($width, $height, ZEBRA_IMAGE_BOXED, -1)) {
             $this->_error['error'] = 1;
-            $this->_error['message'] = "Resize to 500 wrong";
+            $this->_error['message'] = "Resize to $width wrong";
         }
         
-        $image->target_path = $targetDir . DIRECTORY_SEPARATOR . $filename . "_150.png";
-        if (!$image->resize(200, 200, ZEBRA_IMAGE_BOXED, -1)) {
-
+        $image->target_path = $targetDir . DIRECTORY_SEPARATOR . $filename . "_small.png";
+        
+        $width = $this->_media_size['product']['small'];
+        $height = $this->_media_size['product']['small'];
+        
+        if (!$image->resize($width, $height, ZEBRA_IMAGE_BOXED, -1)) {
             $this->_error['error'] = 1;
-            $this->_error['message'] = "Resize to 200 wrong";
+            $this->_error['message'] = "Resize to $width wrong";
         }
 
-        $this->_error['files']['url150'] = $url150;
+        $this->_error['file']['urlsmall'] = $this->base . "/uploads/$action/" . $filename . "_small.png";
         exit($this->_json($this->_error));
     }
 
@@ -430,7 +425,7 @@ class MediaController extends AdminAppController {
 
         $targetDir = $this->_targetDir = ROOT . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'img/template';
 
-        $cleanupTargetDir = true; // Remove old files
+        $cleanupTargetDir = true; // Remove old file
         $maxFileAge = 5 * 3600; // Temp file age in seconds
         @set_time_limit(0);
 
@@ -562,7 +557,7 @@ class MediaController extends AdminAppController {
 
         $this->_error['error'] = 0;
         $this->_error['message'] = 'Success';
-        $this->_error['files'] = array(
+        $this->_error['file'] = array(
             'original' => $original,
             'target' => $name,
             'filename' => $filename,

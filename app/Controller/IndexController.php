@@ -12,11 +12,14 @@ class IndexController extends AppController {
     }
 
     public function index() {
-
+        
         // here could use file cache
         $this->loadModel('Product');
         $data = $this->Product->find('all', array(
-            "conditions" => array("type" => "product", "is_featured" => 1, "quantity >" => 0),
+            "conditions" => array(
+                "type" => "product",
+                "is_featured" => 1,
+                "quantity >" => 0),
             "order" => array("modified" => "DESC"),
             "limit" => 8,
             "page" => 0
@@ -26,7 +29,7 @@ class IndexController extends AppController {
             foreach ($data as $key => $value) {
                 if (!empty($value['Product']['featured'])) {
                     $value['Product']['featured'] = unserialize($value['Product']['featured']);
-                    $data[$key]['Product']['image'] = $value['Product']['featured']['150w'][0];
+                    $data[$key]['Product']['image'] = pathinfo($value['Product']['featured'][0], PATHINFO_FILENAME) . "_small.png";
                 }
             }
         }

@@ -17,7 +17,7 @@
                         <div class="span4">
                             <div class="thumbnail" style="background-image:none;background-color:white;">
                                 <a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i]['Product']['slug']; ?>">
-                                    <img src="<?php echo $this->webroot; ?>uploads/product/<?php echo $data[$i]['Product']['image']; ?>" alt="<?php echo $data[$i]['Product']['name']; ?>" style="width:100%;">
+                                    <img src="<?php echo $data[$i]['Product']['image']; ?>" alt="<?php echo $data[$i]['Product']['name']; ?>" style="width:100%;">
                                 </a>
                                 <div class="caption">
                                     <a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i]['Product']['slug']; ?>" class="prop-title" style="text-transform: uppercase"><?php echo $data[$i]['Product']['name']; ?></a>
@@ -32,7 +32,7 @@
                     <?php if (isset($data[$i + 1])) : ?>
                         <div class="span4">
                             <div class="thumbnail" style="background-image:none;background-color:white;">
-                                <a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i + 1]['Product']['slug']; ?>"><img src="<?php echo $this->webroot; ?>uploads/product/<?php echo $data[$i + 1]['Product']['image']; ?>" alt="<?php echo $data[$i + 1]['Product']['name']; ?>"  style="width:100%;"></a>
+                                <a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i + 1]['Product']['slug']; ?>"><img src="<?php echo $data[$i + 1]['Product']['image']; ?>" alt="<?php echo $data[$i + 1]['Product']['name']; ?>"  style="width:100%;"></a>
                                 <div class="caption">
                                     <a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i + 1]['Product']['slug']; ?>" class="prop-title" style="text-transform: uppercase"><?php echo $data[$i + 1]['Product']['name']; ?></a>
                                     <p class="price">$<?php echo $data[$i + 1]['Product']['price']; ?></p>
@@ -47,7 +47,7 @@
                         <div class="span4">
                             <div class="thumbnail" style="background-image:none;background-color:white;">
                                 <a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i + 2]['Product']['slug']; ?>">
-                                    <img src="<?php echo $this->webroot; ?>uploads/product/<?php echo $data[$i + 2]['Product']['image']; ?>" alt="<?php echo $data[$i]['Product']['name']; ?>"  style="">
+                                    <img src="<?php echo $data[$i + 2]['Product']['image']; ?>" alt="<?php echo $data[$i]['Product']['name']; ?>"  style="">
                                 </a>
                                 <div class="caption">
                                     <a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i + 2]['Product']['slug']; ?>" class="prop-title" style="text-transform: uppercase"><?php echo $data[$i + 2]['Product']['name']; ?></a>
