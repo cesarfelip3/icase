@@ -103,7 +103,7 @@ if (isset($this->params['slug'])) {
                 </div>    
                 <div style="clear:both"></div>
                 <div id="slogansearch" class="desktop">
-                    <div id="slogan">Custom Phone Cases</div>
+                    <div id="slogan">Personalizing your life one item at time!</div>
                     <div id="search"><abbr title="Phone" id="call-phone">
                             <div class="searchwrapper">    
                                 <form name="form1" action='<?php echo $this->webroot; ?>search/a'>
