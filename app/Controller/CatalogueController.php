@@ -26,6 +26,12 @@ class CatalogueController extends AppController {
                 $this->_error['message'] = "Your keywords are empty";
                 exit(json_encode($this->_error));
             }
+            
+            if (!preg_match ("/^[0-9a-zA-Z ]{1,}$/i", $keywords)) {
+                $this->_error['error'] = 1;
+                $this->_error['message'] = "Invalid keywords";
+                exit(json_encode($this->_error));
+            }
 
             $keywords = @preg_replace("/ +/i", " ", $keywords);
             $keywords = $keywords;
@@ -52,6 +58,13 @@ class CatalogueController extends AppController {
         $keywords = @preg_replace("/ +/i", " ", $keywords);
         $keywords = $keywords;
         $keywords = explode(" ", $keywords);
+        
+        foreach ($keywords as $keyword) {
+            if (!preg_match ("/^[0-9a-zA-Z]{1,}$/i", $keyword)) {
+                $this->set ('data', null);
+                return;
+            }
+        }
 
         foreach ($keywords as $keyword) {
             $conditions['or'][] = array('name LIKE' => "%{$keyword}%");
@@ -71,9 +84,12 @@ class CatalogueController extends AppController {
         );
 
         $pages = $this->Product->find('count', array("conditions" => $cond));
-
-        //$log = $this->Product->getDataSource()->getLog(false, false);
-        //print_r ($log);
+        
+        $pagenation = 0;
+        if ($pages > 24) {
+            $pages = ceil ($pages / 24);
+            $pagenation = 1;
+        }
 
         if (!empty($data)) {
             foreach ($data as $key => $value) {
@@ -86,6 +102,8 @@ class CatalogueController extends AppController {
             "data" => $data,
             "page" => $page,
             "pages" => $pages,
+            "pagenation" => $pagenation,
+            "keywords" => implode(" ", $keywords),
             "limit" => 24
         );
 

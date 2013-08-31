@@ -80,3 +80,20 @@
         <?php endif; ?>
     </div>
 </div>
+<?php if (!empty ($data) && $pagenation == 1) : ?>
+<div class="row-fluid">
+    <div class="span11">
+        <div class="pagination pull-right">
+            <ul>
+                <li><a href="<?php echo $this->webroot . "search/$keywords?page=" . ($page > 1 ? $page - 1 : 0); ?>">Prev</a></li>
+                <?php $min = $page - 5; $max = $page + 5; ?>
+                <?php $min = $min < 0 ? 0 : $min; $max = $max > $pages ? $pages : $max; ?>
+                <?php for ($i = $min; $i < $max; ++$i) : ?>
+                    <li <?php if ($i == $page) echo 'class="active"'; ?>><a href="<?php echo $this->webroot . "search/$keywords?page=$i"; ?>"><?php echo $i + 1; ?></a></li>
+                <?php endfor; ?>
+                <li><a href="<?php echo $this->webroot . "search/$keywords?page=" . ($page < $pages - 1 ? $page + 1 : $pages - 1); ?>">Next</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
