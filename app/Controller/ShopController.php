@@ -83,7 +83,7 @@ class ShopController extends AppController {
                         }
                         
                         $discount = (100 - $coupon['Coupon']['discount']) / 100;
-                        $amount = round($discount * $amount, 2, PHP_ROUND_HALF_DOWN);
+                        //$amount = round($discount * $amount, 2, PHP_ROUND_HALF_DOWN);
                     }
                 }
             }
@@ -131,6 +131,10 @@ class ShopController extends AppController {
                 $amount = 0;
                 foreach ($data as $value) {
                     $amount += round($value['Product']['price'] * $value['Product']['_quantity'] + 2.49, 2, PHP_ROUND_HALF_DOWN) + "";
+                }
+                
+                if (isset ($discount)) {
+                    $amount += round ($amount + $discount, 2, PHP_ROUND_HALF_DOWN);
                 }
 
                 $payment_data = array(
