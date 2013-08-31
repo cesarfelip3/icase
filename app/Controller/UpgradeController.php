@@ -2,13 +2,20 @@
 
 App::uses('AppController', 'Controller');
 
-class BugFixController extends AppController {
+class UpgradeController extends AppController {
 
     public $uses = false;
+    public $upgrade = false;
+    public $version = 0.1;
+    
 
     public function beforeFilter() {
         $this->Auth->allow();
         parent::beforeFilter();
+        
+        if ($upgrade == false) {
+            exit;
+        }
     }
 
     public function test() {
