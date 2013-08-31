@@ -495,7 +495,7 @@ class CreatorController extends AppController {
             $this->_error['files'] = array(
                 'original' => $original,
                 'target' => $name,
-                'url' => $this->base . "/uploads/user/" . $name,
+                'url' => $this->base . "/uploads/user/uploads/" . $name,
                 'extension' => $extension,
                     //'mime' => $mime
             );
