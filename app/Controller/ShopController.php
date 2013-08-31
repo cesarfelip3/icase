@@ -55,38 +55,6 @@ class ShopController extends AppController {
 
             $guids = $this->_checkout($action);
 
-            $coupon = $this->request->data('coupon');
-            if (empty($coupon)) {
-                
-            } else {
-                if (isset ($coupon['name']) && !empty($coupon['name'])) {
-                    $coupon = $coupon['name'];
-
-                    $this->loadModel('Coupon');
-                    $coupon = $this->Coupon->find('first', array(
-                        "conditions" => array(
-                            "name" => $coupon
-                        )
-                    ));
-
-                    if (!empty($coupon)) {
-                        if ($coupon['Coupon']['quantity'] < 1) {
-                            $this->_error['error'] = 1;
-                            $this->_error['message'] = "Sorry, your coupon is out";
-                            exit(json_encode($this->_error));
-                        }
-
-                        if ($coupon['Coupon']['expired'] > time()) {
-                            $this->_error['error'] = 1;
-                            $this->_error['message'] = "Sorry, your coupon is out";
-                            exit(json_encode($this->_error));
-                        }
-                        
-                        $discount = (100 - $coupon['Coupon']['discount']) / 100;
-                        //$amount = round($discount * $amount, 2, PHP_ROUND_HALF_DOWN);
-                    }
-                }
-            }
 
             $this->loadModel('Product');
 
@@ -132,9 +100,49 @@ class ShopController extends AppController {
                 foreach ($data as $value) {
                     $amount += round($value['Product']['price'] * $value['Product']['_quantity'] + 2.49, 2, PHP_ROUND_HALF_DOWN) + "";
                 }
-                
-                if (isset ($discount)) {
-                    $amount += round ($amount * $discount, 2, PHP_ROUND_HALF_DOWN);
+
+
+                $coupon = $this->request->data('coupon');
+                if (empty($coupon)) {
+                    
+                } else {
+                    if (isset($coupon['name']) && !empty($coupon['name'])) {
+                        $coupon = $coupon['name'];
+
+                        $this->loadModel('Coupon');
+                        $coupon = $this->Coupon->find('first', array(
+                            "conditions" => array(
+                                "name" => $coupon
+                            )
+                        ));
+
+                        if (!empty($coupon)) {
+                            if ($coupon['Coupon']['quantity'] < 1) {
+                                $this->Product->rollback();
+                                $this->_error['error'] = 1;
+                                $this->_error['message'] = "Sorry, your coupon is out";
+                                exit(json_encode($this->_error));
+                            }
+
+                            if ($coupon['Coupon']['expired'] > time()) {
+                                $this->Product->rollback();
+                                $this->_error['error'] = 1;
+                                $this->_error['message'] = "Sorry, your coupon is out";
+                                exit(json_encode($this->_error));
+                            }
+
+                            $this->Coupon->id = $coupon['Coupon']['id'];
+                            $this->Coupon->set(array("quantity" => $coupon['Coupon']['quantity'] - 1));
+                            $this->Coupon->save();
+
+                            $discount = (100 - $coupon['Coupon']['discount']) / 100;
+                            //$amount = round($discount * $amount, 2, PHP_ROUND_HALF_DOWN);
+                        }
+                    }
+                }
+
+                if (isset($discount)) {
+                    $amount += round($amount * $discount, 2, PHP_ROUND_HALF_DOWN);
                 }
 
                 $payment_data = array(
