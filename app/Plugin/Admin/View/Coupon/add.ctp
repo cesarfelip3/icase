@@ -126,9 +126,9 @@ $admin_coupon = $base . "coupon";
             $("#btn-save").button('reset');
 
             var result = $.parseJSON(data);
-            console.log(result);
+            //console.log(result);
             if (result.error == 1) {
-                console.log(result.element);
+                //console.log(result.element);
                 $(result.element).next(".help-inline").html(result.message);
                 $(result.element).parent().parent().addClass('error');
                 showAlert(result.message);

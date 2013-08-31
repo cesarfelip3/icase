@@ -191,14 +191,14 @@ $js_pluploader = array(
     uploader.bind('FileUploaded', function(up, file, response) {
         plupload.each(response, function(value, key) {
 
-            console.log(key);
-            console.log(value);
+            //console.log(key);
+            //console.log(value);
 
             if (key == "response") {
                 var result = jQuery.parseJSON(value);
-                console.log(result);
+                //console.log(result);
                 if (result.error == 0) {
-                    console.log(result.files.url);
+                    //console.log(result.files.url);
                     $("#box-template-image").html('<div class="span8"><a class="featured-thumbnail"><img src="' + result.files.url + '" style="width:60px" /></a></div>');
                     $('input[name="user[image]"]').val(result.files.target);
                 }
@@ -265,17 +265,17 @@ $js_pluploader = array(
     uploader2.bind('FileUploaded', function(up, file, response) {
         plupload.each(response, function(value, key) {
 
-            //console.log(key);
-            //console.log(value);
+            ////console.log(key);
+            ////console.log(value);
 
             if (key == "response") {
                 var result = jQuery.parseJSON(value);
-                //console.log(result);
+                ////console.log(result);
                 if (result.error == 0) {
-                    //console.log(result.files.url);
+                    ////console.log(result.files.url);
                     $("#box-featured-image").append('<div class="thumbnail" style="width:24%;float:left;margin-left:5px;margin-bottom:10px;"><a class="featured-thumbnail"><img src="' + result.files.url150 + '" style="" /></a><div class="caption"><p><a class="btn btn-success" data-image="' + result.files.target + '" onclick="featured_image_delete(this);">Delete</a></p></div></div>');
                     $("input[name='user[featured]']").val($("input[name='user[featured]']").val() + "-" + result.files.target);
-                    //console.log ($("input[name='user[featured]']").val());
+                    ////console.log ($("input[name='user[featured]']").val());
                     init();
                 }
                 //jQuery('#progress-bar').css('width', "0%");
@@ -295,7 +295,7 @@ $js_pluploader = array(
 
     function featured_image_delete(id)
     {
-        //console.log (jQuery(id).parent().parent());
+        ////console.log (jQuery(id).parent().parent());
         jQuery(id).parent().parent().parent().remove();
 
         var image = $(id).data('image');
@@ -305,6 +305,6 @@ $js_pluploader = array(
         images = images.replace(image, "");
 
         $('input[name="user[featured]"]').val(images);
-        console.log(image + ":" + images);
+        //console.log(image + ":" + images);
     }
 </script>

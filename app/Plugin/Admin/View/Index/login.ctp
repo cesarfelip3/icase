@@ -61,7 +61,7 @@ $admin_product = $base . "product";
                                                 $("#btn-signup").button("loading");
                                             }
                                         }).done(function(data) {
-                                            console.log(data);
+                                            //console.log(data);
                                             $("#btn-signup").button("reset");
 
                                             var result = $.parseJSON(data);

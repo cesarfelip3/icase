@@ -192,7 +192,7 @@ $js_themes = array(
     }
 
     function cart_count() {
-        console.log($.shoppingcart.total());
+        //console.log($.shoppingcart.total());
         $("#cart-indicator-value").html("(" + $.shoppingcart.total() + ")");
     }
 

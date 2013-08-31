@@ -125,7 +125,7 @@ if (isset($this->params['slug'])) {
                     {
                         var keywords = $("input[name=search]").val();
 
-                        console.log(keywords);
+                        //console.log(keywords);
 
                         keywords = $.trim(keywords);
                         if (keywords == '') {

@@ -82,7 +82,7 @@ $reset_url = $this->webroot . "auth/reset";
                                     $("#btn-signin").button("loading");
                                 }
                             }).done(function(data) {
-                                console.log(data);
+                                //console.log(data);
                                 $("#btn-signin").button("reset");
 
                                 var result = $.parseJSON(data);
