@@ -65,7 +65,7 @@ $checkout_cart_url = $this->webroot . "shop/checkout/?action=cart";
 
                             var count = $("#product-quantity").val();
                             count = $.trim (count);
-                            console.log (count);
+                            //console.log (count);
                             
                             if (count.match(/^[1-9][0-9]{0,}$/)) {
                                 count = parseInt(count);
@@ -74,9 +74,9 @@ $checkout_cart_url = $this->webroot . "shop/checkout/?action=cart";
                                     alert("Sorry, we don't have enough products in stock")
                                     return;
                                 }
-                                console.log (count);
+                                //console.log (count);
                                 $.shoppingcart.set(orderId, count);
-                                console.log ($.shoppingcart.get());
+                                //console.log ($.shoppingcart.get());
                             } else {
                                 alert("Please input a valid quantity");
                                 return false;

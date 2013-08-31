@@ -618,7 +618,7 @@ $signup_url = $this->webroot . "signup";
                         $("textarea[name='bill[address]']").val($("textarea[name='deliver[address]']").val ());
                         $("input[name='bill[city]']").val ($("input[name='deliver[city]']").val ());
                         
-                        //console.log ($("input[name='deliver[address]']").val());
+                        ////console.log ($("input[name='deliver[address]']").val());
                         $("input[name='bill[zipcode]']").val ($("input[name='deliver[zipcode]']").val ());
                         $("select[name='bill[state]']").val($("select[name='deliver[state]']").val());
                     });

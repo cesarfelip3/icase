@@ -127,7 +127,7 @@
                             break;
                         case 'plus' :
                             i = jQuery(this).next().text();
-                            console.log(i);
+                            //console.log(i);
                             i = parseInt(jQuery.trim(i));
                             i++;
                             if (i > parseInt($(this).data('quantity'))) {

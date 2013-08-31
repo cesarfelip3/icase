@@ -140,9 +140,10 @@ mememaker.reload = function(json)
 {
     mememaker.canvas.loadFromJSON(json,
             function() {
+                showAlert2 ("Loading content......");
                 mememaker.canvas.renderAll();
                 var objects = mememaker.canvas.getObjects();
-                console.log(objects);
+                //console.log(objects);
 
                 $(objects).each(
                         function(index, el) {
@@ -151,7 +152,7 @@ mememaker.reload = function(json)
                                 return;
                             }
 
-                            console.log(el.type);
+                            //console.log(el.type);
 
                             if (el.type == "text") {
                                 el.on(
@@ -172,7 +173,10 @@ mememaker.reload = function(json)
                             }
 
 
-                        });
+                });
+                
+                hideAlert ();
+                
             });
 
 
@@ -196,7 +200,7 @@ mememaker.tools.init = function(id, previewUrl, modal) {
             function(evt) {
                 var action = jQuery(this).data('action');
 
-                console.log(action);
+                //console.log(action);
                 switch (action) {
                     case 'new':
                         mememaker.tools.new ();
@@ -506,7 +510,7 @@ mememaker.tools.addpic = function(url) {
 
         //oImg.scaleToWidth(300);
         //oImg.center();
-        console.log(oImg);
+        //console.log(oImg);
 
         mememaker.canvas.add(oImg);
         oImg.center();
@@ -578,7 +582,7 @@ mememaker.tools.preview = function() {
             }
     );
 
-    console.log(mememaker.overlayImage);
+    //console.log(mememaker.overlayImage);
     mememaker.tools.newtemplate(mememaker.overlayImage);
     if (mememaker.tools.generate == null) {
         return;
@@ -589,7 +593,7 @@ mememaker.tools.preview = function() {
 mememaker.tools.generate = null;
 
 mememaker.tools.backgroundcolor = function(color) {
-    //console.log (color);
+    ////console.log (color);
     mememaker.canvas.backgroundColor = color;
     mememaker.canvas.renderAll();
 }
@@ -881,7 +885,7 @@ mememaker.draweditor.init = function(id) {
 
     jQuery('#draw-mode-selector').on('change', function() {
 
-        console.log(this.value);
+        //console.log(this.value);
         if (this.value === 'hline') {
             if (fabric.PatternBrush) {
                 var vLinePatternBrush = new fabric.PatternBrush(mememaker.canvas);
@@ -902,7 +906,7 @@ mememaker.draweditor.init = function(id) {
                     return patternCanvas;
                 };
             }
-            console.log(vLinePatternBrush);
+            //console.log(vLinePatternBrush);
             mememaker.canvas.freeDrawingBrush = vLinePatternBrush;
         }
         else if (this.value === 'vline') {

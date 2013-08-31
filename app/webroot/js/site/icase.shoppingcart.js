@@ -71,7 +71,7 @@
         }
 
         orders = JSON.stringify(orders);
-        console.log(orders);
+        //console.log(orders);
         storage.set(this.cookie_orders, orders);
     }
 
@@ -129,7 +129,7 @@
         } else {
             orders = JSON.stringify(orders);
         }
-        console.log (orders);
+        //console.log (orders);
         storage.set(this.cookie_orders, orders);
     }
 
@@ -163,7 +163,7 @@
         } else {
             orders = JSON.stringify(orders);
         }
-        console.log (orders);
+        //console.log (orders);
         storage.set(this.cookie_orders, orders);
     }
 
@@ -183,13 +183,13 @@
     }
 
     ShoppingCart.prototype.setuuid = function(uuid) {
-        //console.log (uuid);
+        ////console.log (uuid);
         storage.set(this.cookie_uuid, uuid);
     }
 
     ShoppingCart.prototype.getuuid = function() {
         var uuid = storage.get(this.cookie_uuid);
-        //console.log (uuid);
+        ////console.log (uuid);
 
         if (uuid == null || uuid == 'undefined') {
             return null;

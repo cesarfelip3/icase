@@ -197,7 +197,7 @@ $js_pluploader = array(
 
                         uploader.bind('FilesAdded', function(up, files) {
 
-                            console.log("hello");
+                            //console.log("hello");
                             if (uploader.files.length == 2) {
                                 uploader.removeFile(uploader.files[0]);
                             }
@@ -218,14 +218,14 @@ $js_pluploader = array(
                         uploader.bind('FileUploaded', function(up, file, response) {
                             plupload.each(response, function(value, key) {
 
-                                console.log(key);
-                                console.log(value);
+                                //console.log(key);
+                                //console.log(value);
 
                                 if (key == "response") {
                                     var result = jQuery.parseJSON(value);
-                                    console.log(result);
+                                    //console.log(result);
                                     if (result.error == 0) {
-                                        console.log(result.files.url);
+                                        //console.log(result.files.url);
                                         showAlert2("Loading image....");
                                         mememaker.tools.addpic(result.files.url);
                                     }
@@ -357,15 +357,15 @@ $js_case = array(
 
             }
         }).done(function(data) {
-
-            //console.log (data);
+            hideAlert();
+            ////console.log (data);
             var result = $.parseJSON(data);
-            //console.log(data);
+            ////console.log(data);
 
             if (result.error == 1) {
 
             } else {
-                //console.log (result.data.json);
+                ////console.log (result.data.json);
                 $("#current-item").data('overlay', result.data.overlay);
                 $("#current-item").data('name', result.data.name);
                 $("#current-item").val(result.data.product);
@@ -373,10 +373,10 @@ $js_case = array(
                 mememaker.reload(result.data.json);
             }
 
-            hideAlert();
+            
 
         }).fail(function() {
-            //$("#template-list").prev().children(":first-child").hide(0);
+            showAlert ("Faild");
         });
     }
 
@@ -445,8 +445,8 @@ $js_case = array(
 
     function preview(preview)
     {
-        console.log('preview callback');
-        console.log(jQuery("#current-item").val());
+        //console.log('preview callback');
+        //console.log(jQuery("#current-item").val());
 
         if (jQuery.trim(jQuery("#current-item").val()) == "") {
             return;
