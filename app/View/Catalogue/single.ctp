@@ -1,20 +1,23 @@
-
+<?php
+$checkout_cart_url = $this->webroot . "shop/checkout/?action=cart";
+?>
 <div class="body-text">
     <div class="container-fluid">
         <!-- 2 columns -->
         <div class="row-fluid">
             <div class="span6">
-                <p><img src="<?php echo $this->webroot . "uploads/product/" . str_replace (".", "_500.", $data['featured']['origin'][0]); ?> ?>"></p>
+                <div style="background-color:white;border-radius: 5px;border:1px solid #ccc;padding:10px;"><img src="<?php echo $this->webroot . "uploads/product/" . pathinfo($data['featured']['origin'][0], PATHINFO_FILENAME) . "_500.png"; ?>" ></div>
             </div>
             <div class="span6">
                 <h3><strong><span style="text-transform: uppercase;"><?php echo $data['name']; ?></span></strong> </h3>
                 <hr class="black">
                 <p class="asking-price">$<?php echo $data['price']; ?></p>
-                <hr class="black">
+                <hr />
                 <div data-lstyle="case_description" data-l="case_description" class="case-desc case_description" style="height:200px;overflow: auto;"><?php echo $data['description']; ?></div>
-                <hr class="black"><br>
-
-                <a class="btn btn-danger" id="btn-cart" data-guid="<?php echo $data['guid']; ?>" data-file="">Add To Cart</a>
+                <hr />
+                <input type="text" value="1" class="input-mini" id="product-quantity" />
+                <span class="label label-warning"><?php if ($data['quantity'] != 65535) echo $data['quantity']; else echo "UNLIMITED"; ?> LEFT</span><br/>
+                <a class="btn btn-warning" id="btn-cart" data-guid="<?php echo $data['guid']; ?>" data-file="" data-max="<?php echo $data['quantity']; ?>">Add To Cart</a>
 
                 <div class="social_wrapper">
                     <!-- AddThis Button BEGIN -->
@@ -60,11 +63,26 @@
                             var orderId = null;
                             orderId = jQuery(this).data('guid');
 
-                            $.shoppingcart.set(orderId);
+                            var count = $("#product-quantity").val();
+                            count = $.trim (count);
+                            //console.log (count);
                             
-                            window.location.href = "<?php echo $this->webroot; ?>shop/checkout?action=cart";
-                            //window.open("<?php echo $this->webroot; ?>shop/checkout?action=cart", "_self");
-                            //window.focus();
+                            if (count.match(/^[1-9][0-9]{0,}$/)) {
+                                count = parseInt(count);
+                                
+                                if (count > parseInt($(this).data('max'))) {
+                                    alert("Sorry, we don't have enough products in stock")
+                                    return;
+                                }
+                                //console.log (count);
+                                $.shoppingcart.set(orderId, count);
+                                //console.log ($.shoppingcart.get());
+                            } else {
+                                alert("Please input a valid quantity");
+                                return false;
+                            }
+
+                            window.location.href = "<?php echo $checkout_cart_url; ?>";
                         });
             });
 
