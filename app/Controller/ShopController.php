@@ -134,7 +134,7 @@ class ShopController extends AppController {
                 }
                 
                 if (isset ($discount)) {
-                    $amount += round ($amount + $discount, 2, PHP_ROUND_HALF_DOWN);
+                    $amount += round ($amount * $discount, 2, PHP_ROUND_HALF_DOWN);
                 }
 
                 $payment_data = array(
