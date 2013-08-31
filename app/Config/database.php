@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This is core configuration file.
  *
@@ -23,10 +24,10 @@
  * You can specify multiple configurations for production, development and testing.
  *
  * datasource => The name of a supported datasource; valid options are as follows:
- *		Database/Mysql 		- MySQL 4 & 5,
- *		Database/Sqlite		- SQLite (PHP5 only),
- *		Database/Postgres	- PostgreSQL 7 and higher,
- *		Database/Sqlserver	- Microsoft SQL Server 2005 and higher
+ * 		Database/Mysql 		- MySQL 4 & 5,
+ * 		Database/Sqlite		- SQLite (PHP5 only),
+ * 		Database/Postgres	- PostgreSQL 7 and higher,
+ * 		Database/Sqlserver	- Microsoft SQL Server 2005 and higher
  *
  * You can add custom database datasources (or override existing datasources) by adding the
  * appropriate file to app/Model/Datasource/Database. Datasources should be named 'MyDatasource.php',
@@ -54,41 +55,52 @@
  * For MySQL to connect via socket specify the `unix_socket` parameter instead of `host` and `port`
  */
 class DATABASE_CONFIG {
-/*
-    
-	public $default = array(
-		'datasource' => 'Database/Mysql',
-		'persistent' => false,
-		'host' => 'localhost',
-		'login' => 'beautahf_site',
-		'password' => '_%!TU-I#p1Q,',
-		'database' => 'beautahf_site',
-		'prefix' => '',
-		//'encoding' => 'utf8',
-	);
- * 
- * 
- */
-    
-        public $default = array(
-		'datasource' => 'Database/Mysql',
-		'persistent' => false,
-		'host' => 'localhost',
-		'login' => 'root',
-		'password' => 'root',
-		'database' => 'icase',
-		'prefix' => '',
-		//'encoding' => 'utf8',
-	);
+    /*
 
-	public $test = array(
-		'datasource' => 'Database/Mysql',
-		'persistent' => false,
-		'host' => 'localhost',
-		'login' => 'user',
-		'password' => 'password',
-		'database' => 'test_database_name',
-		'prefix' => '',
-		//'encoding' => 'utf8',
-	);
+      public $default = array(
+      'datasource' => 'Database/Mysql',
+      'persistent' => false,
+      'host' => 'localhost',
+      'login' => 'beautahf_site',
+      'password' => '_%!TU-I#p1Q,',
+      'database' => 'beautahf_site',
+      'prefix' => '',
+      //'encoding' => 'utf8',
+      );
+     * 
+     * 
+     */
+    /*
+      public $default = array(
+      "datasource" => 'Database/Mysql',
+      "persistent" => false,
+      "host" => "localhost",
+      "login" => "shirtsge_icase",
+      "password" => "rWcS*=Xe},-r",
+      "database" => "shirtsge_icase",
+      "prefix" => "",
+      //"encoding" => "utf8",
+      ); */
+
+    public $default = array(
+        'datasource' => 'Database/Mysql',
+        'persistent' => false,
+        'host' => 'localhost',
+        'login' => 'root',
+        'password' => 'root',
+        'database' => 'icase2',
+        'prefix' => '',
+            //'encoding' => 'utf8',
+    );
+    public $test = array(
+        'datasource' => 'Database/Mysql',
+        'persistent' => false,
+        'host' => 'localhost',
+        'login' => 'user',
+        'password' => 'password',
+        'database' => 'test_database_name',
+        'prefix' => '',
+            //'encoding' => 'utf8',
+    );
+
 }
