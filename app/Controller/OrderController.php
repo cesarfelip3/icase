@@ -30,13 +30,19 @@ class OrderController extends AppController {
 
         if (empty($guid)) {
             $this->_error['error'] = 1;
-            $this->_error['message'] = "";
+            $this->_error['message'] = "Wrong order ID";
             exit(json_encode($this->_error));
         }
 
         $this->loadModel("Order");
         $order = $this->Order->find("first", array("conditions" => array("guid" => $guid)));
 
+        if (empty($order)) {
+            $this->_error['error'] = 1;
+            $this->_error['message'] = "Order doesn't exist";
+            exit(json_encode($this->_error));
+        }
+        
         if (!empty($order)) {
             $order = $order['Order'];
             $this->loadModel("UserBillInfo");
