@@ -1,5 +1,17 @@
-iCase Version 2.0
+iCase
 ==================
+
+Version 0.1
+
+It's delivered to http://beautahfulcreations.com
+
+Version 0.2
+
+It's development version, not for any production server.
+
+Now version 2.0 => master, so I removed version 2.0 and am working on master.
+That's better way, if we want to make a new site with new theme, we just branch it to another version.
+Keeping master to be the updated one.
 
 2013.09.01
 
@@ -15,6 +27,7 @@ Upgrade From 0.1 to 0.2
 2. remove product/featured (150w/origin) - too complex and poor reusability
 3. Not tested yet
 4. Routers for "admin" plugin, so it's safe, avoid /admin leaked
+5. Added Maintainance Page - switch to maintainace easily
 
 SEO basic --
 
