@@ -34,7 +34,7 @@ $checkout_cart_url = $this->webroot . "shop/checkout/?action=cart";
                 <div class="thumwrapper">
                     <?php if (!empty($data['featured']['150w'])) : ?>
                         <?php foreach ($data['featured']['150w'] as $image) : ?>
-                            <img src="<?php echo $this->webroot . "uploads/product/" . $image; ?>">
+                            <img src="<?php echo $this->webroot . "uploads/product/" . $image; ?>" style="width:100px;height:auto;">
                         <?php endforeach; ?>
                     <?php endif; ?>
                 </div>
