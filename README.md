@@ -1,16 +1,16 @@
-iCase
-========
+iCase Version 0.1
+==================
+
+2013.09.01
+
+It's delivered, and in maintainance.
+Example site, http://www.beautahfulcreation.com
 
 
 Update
 ========
 
-1. Admin / Order / Email Notification
-2. Email / Content
-3. Admin / Product / Add - Image - crop hint?
 
-5. Media Location (optional)
-4. Error Handler (final)
 
 SEO basic --
 
