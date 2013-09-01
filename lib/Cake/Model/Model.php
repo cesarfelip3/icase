@@ -95,7 +95,6 @@ class Model extends Object implements CakeEventListener {
  * Holds physical schema/database name for this model. Automatically set during Model creation.
  *
  * @var string
- * @access public
  */
 	public $schemaName = null;
 
@@ -465,8 +464,8 @@ class Model extends Object implements CakeEventListener {
  * - `limit`: The maximum number of associated rows you want returned.
  * - `offset`: The number of associated rows to skip over (given the current
  *   conditions and order) before fetching and associating.
- * - `finderQuery`, `deleteQuery`, `insertQuery`: A complete SQL query CakePHP
- *   can use to fetch, delete, or create new associated model records. This should
+ * - `finderQuery`, A complete SQL query CakePHP
+ *   can use to fetch associated model records. This should
  *   be used in situations that require very custom results.
  *
  * @var array
@@ -556,7 +555,7 @@ class Model extends Object implements CakeEventListener {
 		'belongsTo' => array('className', 'foreignKey', 'conditions', 'fields', 'order', 'counterCache'),
 		'hasOne' => array('className', 'foreignKey', 'conditions', 'fields', 'order', 'dependent'),
 		'hasMany' => array('className', 'foreignKey', 'conditions', 'fields', 'order', 'limit', 'offset', 'dependent', 'exclusive', 'finderQuery', 'counterQuery'),
-		'hasAndBelongsToMany' => array('className', 'joinTable', 'with', 'foreignKey', 'associationForeignKey', 'conditions', 'fields', 'order', 'limit', 'offset', 'unique', 'finderQuery', 'deleteQuery', 'insertQuery')
+		'hasAndBelongsToMany' => array('className', 'joinTable', 'with', 'foreignKey', 'associationForeignKey', 'conditions', 'fields', 'order', 'limit', 'offset', 'unique', 'finderQuery')
 	);
 
 /**
@@ -948,7 +947,7 @@ class Model extends Object implements CakeEventListener {
  * unbound models that are not made permanent will reset with the next call to Model::find()
  *
  * @param array $params Set of bindings to unbind (indexed by binding type)
- * @param boolean $reset  Set to false to make the unbinding permanent
+ * @param boolean $reset Set to false to make the unbinding permanent
  * @return boolean Success
  * @link http://book.cakephp.org/2.0/en/models/associations-linking-models-together.html#creating-and-destroying-associations-on-the-fly
  */
@@ -1638,9 +1637,10 @@ class Model extends Object implements CakeEventListener {
 		}
 
 		if (!empty($options['fieldList'])) {
-			$this->whitelist = $options['fieldList'];
 			if (!empty($options['fieldList'][$this->alias]) && is_array($options['fieldList'][$this->alias])) {
 				$this->whitelist = $options['fieldList'][$this->alias];
+			} elseif (Hash::dimensions($options['fieldList']) < 2) {
+				$this->whitelist = $options['fieldList'];
 			}
 		} elseif ($options['fieldList'] === null) {
 			$this->whitelist = array();
@@ -2361,7 +2361,10 @@ class Model extends Object implements CakeEventListener {
 			$options['fieldList'][$this->alias][] = $key;
 			return $options;
 		}
-		if (!empty($options['fieldList']) && is_array($options['fieldList'])) {
+		if (!empty($options['fieldList']) &&
+			is_array($options['fieldList']) &&
+			Hash::dimensions($options['fieldList']) < 2
+		) {
 			$options['fieldList'][] = $key;
 		}
 		return $options;
@@ -2712,7 +2715,7 @@ class Model extends Object implements CakeEventListener {
 		$this->id = $this->getID();
 
 		$query = $this->buildQuery($type, $query);
-		if (is_null($query)) {
+		if ($query === null) {
 			return null;
 		}
 
@@ -2724,7 +2727,7 @@ class Model extends Object implements CakeEventListener {
  *
  * Model::_readDataSource() is used by all find() calls to read from the data source and can be overloaded to allow
  * caching of datasource calls.
- * 
+ *
  * {{{
  * protected function _readDataSource($type, $query) {
  * 		$cacheName = md5(json_encode($query));
@@ -2738,7 +2741,7 @@ class Model extends Object implements CakeEventListener {
  * 		return $results;
  * }
  * }}}
- * 
+ *
  * @param string $type Type of find operation (all / first / count / neighbors / list / threaded)
  * @param array $query Option fields (conditions / fields / joins / limit / offset / order / page / group / callbacks)
  * @return array

@@ -174,7 +174,7 @@ class Cache {
 		}
 		$cacheClass = $class . 'Engine';
 		if (!is_subclass_of($cacheClass, 'CacheEngine')) {
-			throw new CacheException(__d('cake_dev', 'Cache engines must use CacheEngine as a base class.'));
+			throw new CacheException(__d('cake_dev', 'Cache engines must use %s as a base class.', 'CacheEngine'));
 		}
 		self::$_engines[$name] = new $cacheClass();
 		if (!self::$_engines[$name]->init($config)) {
@@ -538,9 +538,8 @@ class Cache {
 		}
 		if (isset(self::$_groups[$group])) {
 			return array($group => self::$_groups[$group]);
-		} else {
-			throw new CacheException(__d('cake_dev', 'Invalid cache group %s', $group));
 		}
+		throw new CacheException(__d('cake_dev', 'Invalid cache group %s', $group));
 	}
 
 }

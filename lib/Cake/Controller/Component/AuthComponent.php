@@ -352,7 +352,7 @@ class AuthComponent extends Component {
 
 		if (!$controller->request->is('ajax')) {
 			$this->flash($this->authError);
-			$this->Session->write('Auth.redirect', $controller->request->here());
+			$this->Session->write('Auth.redirect', $controller->request->here(false));
 			$controller->redirect($this->loginAction);
 			return false;
 		}
@@ -495,7 +495,7 @@ class AuthComponent extends Component {
 				throw new CakeException(__d('cake_dev', 'Authorization adapter "%s" was not found.', $class));
 			}
 			if (!method_exists($className, 'authorize')) {
-				throw new CakeException(__d('cake_dev', 'Authorization objects must implement an authorize method.'));
+				throw new CakeException(__d('cake_dev', 'Authorization objects must implement an %s method.', 'authorize()'));
 			}
 			$settings = array_merge($global, (array)$settings);
 			$this->_authorizeObjects[] = new $className($this->_Collection, $settings);
@@ -717,12 +717,11 @@ class AuthComponent extends Component {
  * @return string Redirect URL
  */
 	public function redirectUrl($url = null) {
-		if (!is_null($url)) {
+		if ($url !== null) {
 			$redir = $url;
 			$this->Session->write('Auth.redirect', $redir);
 		} elseif ($this->Session->check('Auth.redirect')) {
 			$redir = $this->Session->read('Auth.redirect');
-			$redir = is_string($redir) ? ltrim($redir, '/') : $redir;
 			$this->Session->delete('Auth.redirect');
 
 			if (Router::normalize($redir) == Router::normalize($this->loginAction)) {
@@ -733,7 +732,10 @@ class AuthComponent extends Component {
 		} else {
 			$redir = '/';
 		}
-		return Router::normalize($redir);
+		if (is_array($redir)) {
+			return Router::url($redir + array('base' => false));
+		}
+		return $redir;
 	}
 
 /**
@@ -782,7 +784,7 @@ class AuthComponent extends Component {
 				throw new CakeException(__d('cake_dev', 'Authentication adapter "%s" was not found.', $class));
 			}
 			if (!method_exists($className, 'authenticate')) {
-				throw new CakeException(__d('cake_dev', 'Authentication objects must implement an authenticate method.'));
+				throw new CakeException(__d('cake_dev', 'Authentication objects must implement an %s method.', 'authenticate()'));
 			}
 			$settings = array_merge($global, (array)$settings);
 			$this->_authenticateObjects[] = new $className($this->_Collection, $settings);

@@ -88,8 +88,8 @@ class Object {
 		$data = isset($extra['data']) ? $extra['data'] : null;
 		unset($extra['data']);
 
-		if (is_string($url) && strpos($url, Router::baseURL()) === 0) {
-			$url = Router::normalize(str_replace(Router::baseURL(), '', $url));
+		if (is_string($url) && strpos($url, Router::fullBaseUrl()) === 0) {
+			$url = Router::normalize(str_replace(Router::fullBaseUrl(), '', $url));
 		}
 		if (is_string($url)) {
 			$request = new CakeRequest($url);
@@ -112,9 +112,9 @@ class Object {
  * Calls a method on this object with the given parameters. Provides an OO wrapper
  * for `call_user_func_array`
  *
- * @param string $method  Name of the method to call
- * @param array $params  Parameter list to use when calling $method
- * @return mixed  Returns the result of the method call
+ * @param string $method Name of the method to call
+ * @param array $params Parameter list to use when calling $method
+ * @return mixed Returns the result of the method call
  */
 	public function dispatchMethod($method, $params = array()) {
 		switch (count($params)) {

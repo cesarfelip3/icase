@@ -302,6 +302,40 @@ class CakeNumberTest extends CakeTestCase {
 	}
 
 /**
+ * Test currency format with places and fraction exponents.
+ * Places should only matter for non fraction values and vice versa.
+ *
+ * @return void
+ */
+	public function testCurrencyWithFractionAndPlaces() {
+		$result = $this->Number->currency('1.23', 'GBP', array('places' => 3));
+		$expected = '£1.230';
+		$this->assertEquals($expected, $result);
+
+		$result = $this->Number->currency('0.23', 'GBP', array('places' => 3));
+		$expected = '23p';
+		$this->assertEquals($expected, $result);
+
+		$result = $this->Number->currency('0.001', 'GBP', array('places' => 3));
+		$expected = '0p';
+		$this->assertEquals($expected, $result);
+
+		$this->Number->addFormat('BHD', array('before' => 'BD ', 'fractionSymbol' => ' fils',
+			'fractionExponent' => 3));
+		$result = $this->Number->currency('1.234', 'BHD', array('places' => 2));
+		$expected = 'BD 1.23';
+		$this->assertEquals($expected, $result);
+
+		$result = $this->Number->currency('0.234', 'BHD', array('places' => 2));
+		$expected = '234 fils';
+		$this->assertEquals($expected, $result);
+
+		$result = $this->Number->currency('0.001', 'BHD', array('places' => 2));
+		$expected = '1 fils';
+		$this->assertEquals($expected, $result);
+	}
+
+/**
  * Test adding currency format options to the number helper
  *
  * @return void
@@ -620,12 +654,29 @@ class CakeNumberTest extends CakeTestCase {
  */
 	public function testReadableSizeLocalized() {
 		$restore = setlocale(LC_NUMERIC, 0);
-		setlocale(LC_NUMERIC, 'de_DE');
+
+		$this->skipIf(setlocale(LC_NUMERIC, 'de_DE') === false, "The German locale isn't available.");
+
 		$result = $this->Number->toReadableSize(1321205);
-		$this->assertRegExp('/1[,.]26 MB/', $result);
+		$this->assertEquals('1,26 MB', $result);
 
 		$result = $this->Number->toReadableSize(1024 * 1024 * 1024 * 512);
-		$this->assertRegExp('/512[,.]00 GB/', $result);
+		$this->assertEquals('512,00 GB', $result);
+		setlocale(LC_NUMERIC, $restore);
+	}
+
+/**
+ * test precision() with locales
+ *
+ * @return void
+ */
+	public function testPrecisionLocalized() {
+		$restore = setlocale(LC_NUMERIC, 0);
+
+		$this->skipIf(setlocale(LC_NUMERIC, 'de_DE') === false, "The German locale isn't available.");
+
+		$result = $this->Number->precision(1.234);
+		$this->assertEquals('1,234', $result);
 		setlocale(LC_NUMERIC, $restore);
 	}
 
@@ -649,6 +700,30 @@ class CakeNumberTest extends CakeTestCase {
 
 		$result = $this->Number->toPercentage(0, 4);
 		$expected = '0.0000%';
+		$this->assertEquals($expected, $result);
+
+		$result = $this->Number->toPercentage(45, 0, array('multiply' => false));
+		$expected = '45%';
+		$this->assertEquals($expected, $result);
+
+		$result = $this->Number->toPercentage(45, 2, array('multiply' => false));
+		$expected = '45.00%';
+		$this->assertEquals($expected, $result);
+
+		$result = $this->Number->toPercentage(0, 0, array('multiply' => false));
+		$expected = '0%';
+		$this->assertEquals($expected, $result);
+
+		$result = $this->Number->toPercentage(0, 4, array('multiply' => false));
+		$expected = '0.0000%';
+		$this->assertEquals($expected, $result);
+
+		$result = $this->Number->toPercentage(0.456, 0, array('multiply' => true));
+		$expected = '46%';
+		$this->assertEquals($expected, $result);
+
+		$result = $this->Number->toPercentage(0.456, 2, array('multiply' => true));
+		$expected = '45.60%';
 		$this->assertEquals($expected, $result);
 	}
 
