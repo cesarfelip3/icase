@@ -49,13 +49,15 @@ class AdminAppController extends Controller {
             "medium" => 500,
         )
     );
+    
+    protected $_basename = "dashboard";
 
     public function beforeFilter() {
 
         AuthComponent::$sessionKey = "Auth.Admin";
 
         $this->layout = "admin";
-        $this->_base_plugin = $this->base . DS . "dashboard" . DS; //$this->request->params['plugin'] . DS;
+        $this->_base_plugin = $this->base . DS . $this->_basename . DS; //$this->request->params['plugin'] . DS;
         $this->set('base', $this->_base_plugin);
         
 
