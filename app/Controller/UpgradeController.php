@@ -5,7 +5,7 @@ App::uses('AppController', 'Controller');
 class UpgradeController extends AppController {
 
     public $uses = false;
-    public $upgrade = true;
+    public $upgrade = false;
     public $version = 0.2;
 
     public function beforeFilter() {
