@@ -73,6 +73,18 @@ class JsonView extends View {
 	}
 
 /**
+ * Skip loading helpers if this is a _serialize based view.
+ *
+ * @return void
+ */
+	public function loadHelpers() {
+		if (isset($this->viewVars['_serialize'])) {
+			return;
+		}
+		parent::loadHelpers();
+	}
+
+/**
  * Render a JSON view.
  *
  * ### Special parameters
@@ -119,12 +131,20 @@ class JsonView extends View {
 	protected function _serialize($serialize) {
 		if (is_array($serialize)) {
 			$data = array();
-			foreach ($serialize as $key) {
-				$data[$key] = $this->viewVars[$key];
+			foreach ($serialize as $alias => $key) {
+				if (is_numeric($alias)) {
+					$alias = $key;
+				}
+				$data[$alias] = $this->viewVars[$key];
 			}
 		} else {
 			$data = isset($this->viewVars[$serialize]) ? $this->viewVars[$serialize] : null;
 		}
+
+		if (version_compare(PHP_VERSION, '5.4.0', '>=') && Configure::read('debug')) {
+			return json_encode($data, JSON_PRETTY_PRINT);
+		}
+
 		return json_encode($data);
 	}
 

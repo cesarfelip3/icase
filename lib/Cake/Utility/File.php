@@ -395,7 +395,7 @@ class File {
  * @link http://book.cakephp.org/2.0/en/core-utility-libraries/file-folder.html#File::pwd
  */
 	public function pwd() {
-		if (is_null($this->path)) {
+		if ($this->path === null) {
 			$this->path = $this->Folder->slashTerm($this->Folder->pwd()) . $this->name;
 		}
 		return $this->path;
@@ -557,9 +557,14 @@ class File {
 		}
 		if (function_exists('finfo_open')) {
 			$finfo = finfo_open(FILEINFO_MIME);
-			list($type, $charset) = explode(';', finfo_file($finfo, $this->pwd()));
+			$finfo = finfo_file($finfo, $this->pwd());
+			if (!$finfo) {
+				return false;
+			}
+			list($type, $charset) = explode(';', $finfo);
 			return $type;
-		} elseif (function_exists('mime_content_type')) {
+		}
+		if (function_exists('mime_content_type')) {
 			return mime_content_type($this->pwd());
 		}
 		return false;
