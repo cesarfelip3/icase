@@ -8,6 +8,9 @@ Example site, http://www.beautahfulcreation.com
 
 Every change to the source, may influence production server, don't change it if it's not necessary!!
 
+This version is the first version published...
+Every upgrade or changes will be only applied on this version, the reason is different version is for different site, so they are not same...
+
 
 Update
 ========
