@@ -5,13 +5,14 @@ App::uses('AppController', 'Controller');
 class UpgradeController extends AppController {
 
     public $uses = false;
-    public $upgrade = false;
+    public $upgrade = true;
+    public $version = 0.2;
 
     public function beforeFilter() {
         $this->Auth->allow();
         parent::beforeFilter();
         
-        if (!$upgrade) {
+        if (!$this->upgrade) {
             $this->redirect (array ("controller" => "index", "action" => "index"));
         }
     }
@@ -88,7 +89,7 @@ class UpgradeController extends AppController {
                     if (!empty($value['Product']['featured'])) {
                         $images = unserialize($value['Product']['featured']);
                         
-                        if (!isset ($image['origin'])) {
+                        if (!isset ($images['origin'])) {
                             continue;
                         }
                         
