@@ -6,6 +6,8 @@ iCase Version 0.1
 It's delivered, and in maintainance.
 Example site, http://www.beautahfulcreation.com
 
+Every change to the source, may influence production server, don't change it if it's not necessary!!
+
 
 Update
 ========
@@ -13,16 +15,17 @@ Update
 2013.09.01
 
 1. I saw the image of some product wasn't resized correctly on example site, is it a bug?
+2. SEO - image alt - done
 
 
 SEO basic --
 
-1. page title
-2. meta keywords
-3. meta description
-4. img alt
-5. a title
-6. URL name 
+1. page title - done
+2. meta keywords - ?
+3. meta description - done
+4. img alt - done
+5. a title - ?
+6. URL name - done
 
     1). http://domain.com/ #must full domain name
 
@@ -31,16 +34,6 @@ SEO basic --
     3). http://domain.com/products/category-url-key-C[id]/product-url-key-P[id]
 
 7. Content
-
-Test
-========
-
-2013.08.25
-
-1. AppController
-2. AuthController
-3. IndexController
-4. ShopController - cart, checkout
 
 Discussion
 =============
