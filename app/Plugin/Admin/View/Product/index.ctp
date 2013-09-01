@@ -75,24 +75,23 @@ $product_delete = $base . "product" . DS . "delete";
                             </tr>
                         </thead>
                         <tbody>
-                            
-                            <?php 
-                            $i = $page * $limit;
-                            if (!empty ($data)) : 
-                                foreach ($data as $value) : ?>
+                            <?php if (!empty ($data)) : ?>
+                            <?php $i = $page * $limit; ?>
+                            <?php foreach ($data as $value) : ?>
+                            <?php $value = $value['Product']; ?>
                             <tr>
                                 <td><?php echo ++$i; ?></td>
-                                <td><?php echo $value['Product']['name']; ?></td>
-                                <td><?php echo $value['Product']['type']; ?></td>
-                                <td><a class="thumbnail"><img src='<?php echo  $value['Product']['image']; ?>' style="width:32px" /></a></td>
-                                <td>$<?php echo $value['Product']['price']; ?></td>
-                               <td><?php echo $value['Product']['quantity']; ?></td>
-                                <!-- <td>$<?php echo $value['Product']['tax']; ?></td>
-                                <td><?php echo $value['Product']['discount']; ?>%</td>-->
-                                <td><?php echo date ("Y-m-d H:i:s", $value['Product']['created']); ?></td>
+                                <td><?php echo $value['name']; ?></td>
+                                <td><?php echo $value['type']; ?></td>
+                                <td><a class="thumbnail"><img src='<?php echo  $value['image']; ?>' style="width:32px" /></a></td>
+                                <td>$<?php echo $value['price']; ?></td>
+                               <td><?php echo $value['quantity']; ?></td>
+                                <!-- <td>$<?php echo $value['tax']; ?></td>
+                                <td><?php echo $value['discount']; ?>%</td>-->
+                                <td><?php echo date ("Y-m-d H:i:s", $value['created']); ?></td>
                                 <td class="actions">
-                                    <a class="btn btn-small btn-danger" onclick="del('<?php echo $value['Product']['id']; ?>')">Remove</a>
-                                    <a class="btn btn-small btn-primary" href="<?php echo $product_edit; ?>?id=<?php echo $value['Product']['guid']; ?>" target="new">View Details</a>
+                                    <a class="btn btn-small btn-danger" onclick="del('<?php echo $value['id']; ?>')">Remove</a>
+                                    <a class="btn btn-small btn-primary" href="<?php echo $product_edit; ?>?id=<?php echo $value['guid']; ?>" target="new">View Details</a>
                                 </td>
                             </tr>
                             <?php endforeach; endif; ?>

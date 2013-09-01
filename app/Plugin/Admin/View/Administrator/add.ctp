@@ -1,17 +1,17 @@
 <?php
-$action_home = $base;
-$action_administrator = $base . "administrator";
+$action_admin_index = $base;
+$action_index = $base . "administrator";
 $action_add = $base . "administrator/add/";
 ?>
 <div class="secondary-masthead">
     <div class="container">
         <ul class="breadcrumb">
             <li>
-                <a href="<?php echo $action_home; ?>">Admin</a> 
+                <a href="<?php echo $action_admin_index; ?>">Admin</a> 
                 <span class="divider">/</span>
             </li>
             <li class="active">
-                <a href="<?php echo $action_administrator; ?>">Administrators</a> 
+                <a href="<?php echo $action_index; ?>">Administrators</a> 
                 <span class="divider">/</span>
             </li>
             <li class="active">Add</li>

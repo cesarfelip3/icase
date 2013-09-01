@@ -73,22 +73,22 @@ $action_delete = $base . "administrator" . DS . "delete";
                             </tr>
                         </thead>
                         <tbody>
-                            <?php 
-                            $i = $page * $limit;
-                            if (!empty ($data)) : 
-                                foreach ($data as $value) : ?>
+                            <?php if (!empty ($data)) : ?>
+                            <?php $i = $page * $limit; ?>
+                            <?PHP foreach ($data as $value) : ?>
+                            <?php $value = $value['Product']; ?>
                             <tr>
                                 <td><?php echo ++$i; ?></td>
-                                <td><?php echo $value['Admin']['name']; ?></td>
-                                <td><?php echo $value['Admin']['email']; ?></td>
-                                <td><?php echo $value['Admin']['type']; ?></td>
-                                <td><?php echo $value['Admin']['firstname'] . " " . $value['Admin']['lastname']; ?></td>
-                                <td><?php echo $value['Admin']['phone']; ?></td>
-                                <td><?php echo $value['Admin']['country'] . DS . $value['Admin']['state'] . DS . $value['Admin']['city'] . DS . $value['Admin']['address']; ?></td>
-                                <td><?php echo date ("Y-m-d H:i:s ", $value['Admin']['created']) . DS . date (" Y-m-d H:i:s", $value['Admin']['modified']); ?></td>
+                                <td><?php echo $value['name']; ?></td>
+                                <td><?php echo $value['email']; ?></td>
+                                <td><?php echo $value['type']; ?></td>
+                                <td><?php echo $value['firstname'] . " " . $value['lastname']; ?></td>
+                                <td><?php echo $value['phone']; ?></td>
+                                <td><?php echo $value['country'] . DS . $value['state'] . DS . $value['city'] . DS . $value['address']; ?></td>
+                                <td><?php echo date ("Y-m-d H:i:s ", $value['created']) . DS . date (" Y-m-d H:i:s", $value['modified']); ?></td>
                                 <td class='actions'>
-                                    <a class="btn btn-small btn-danger" onclick="del('<?php echo $value['Admin']['id']; ?>')">Remove</a>
-                                    <a class="btn btn-small btn-primary" href="<?php echo $action_edit; ?>?id=<?php echo $value['Admin']['guid']; ?>" target="new">View Admin</a>
+                                    <a class="btn btn-small btn-danger" onclick="del('<?php echo $value['id']; ?>')">Remove</a>
+                                    <a class="btn btn-small btn-primary" href="<?php echo $action_edit; ?>?id=<?php echo $value['guid']; ?>" target="new">View Admin</a>
                                 </td>
                             </tr>
                             <?php endforeach; endif; ?>

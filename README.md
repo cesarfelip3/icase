@@ -1,6 +1,9 @@
 iCase Version 2.0
 ==================
 
+2013.09.01
+
+1. Verify all action urls in admin, and re-construct them, so they are more easier to test
 
 Update
 ========
@@ -12,9 +15,6 @@ Upgrade From 0.1 to 0.2
 2. remove product/featured (150w/origin) - too complex and poor reusability
 3. Not tested yet
 4. Routers for "admin" plugin, so it's safe, avoid /admin leaked
-
-
-
 
 SEO basic --
 
@@ -33,15 +33,6 @@ SEO basic --
 
 7. Content
 
-Test
-========
-
-2013.08.25
-
-1. AppController
-2. AuthController
-3. IndexController
-4. ShopController - cart, checkout
 
 Discussion
 =============
@@ -58,6 +49,23 @@ About Media (uploaded) -
 5. creator/user image - /uploads/user (when user deleted, should be removed)
 
 6. misc - /uploads (all images should be removed on cron job)
+
+About name convention -
+
+javascript - 
+
+1. global - g_function_name
+2. others - function_name
+3. PHP - action in javascript - $action_{action name} (same controller) / $action_{controller}_{action name} (not same)
+
+PHP (View) - 
+
+1. $data, $key, $value (common name)
+2. $data (multi-array) : $value = $value['Model']; performance??
+2. more data types, ${data type}, ....
+3. 
+
+
 
 Security
 ============
