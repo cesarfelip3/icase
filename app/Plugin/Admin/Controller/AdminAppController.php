@@ -55,8 +55,9 @@ class AdminAppController extends Controller {
         AuthComponent::$sessionKey = "Auth.Admin";
 
         $this->layout = "admin";
-        $this->_base_plugin = $this->base . DS . $this->request->params['plugin'] . DS;
+        $this->_base_plugin = $this->base . DS . "dashboard" . DS; //$this->request->params['plugin'] . DS;
         $this->set('base', $this->_base_plugin);
+        
 
         if ($this->Auth->loggedIn()) {
             $user = array(

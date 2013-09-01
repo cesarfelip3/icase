@@ -79,8 +79,8 @@
                                     <li class="dropdown">
                                         <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-group"></i> Members <b class="caret"></b></a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="<?php echo $this->webroot; ?>admin/member/">Manage Customers</a></li>
-                                            <li><a href="<?php echo $this->webroot; ?>admin/administrator/">Manage Admins</a></li>
+                                            <li><a href="<?php echo $base; ?>member/">Manage Customers</a></li>
+                                            <li><a href="<?php echo $base; ?>administrator/">Manage Admins</a></li>
                                         </ul>
                                     </li>
                                 </ul>

@@ -1,3 +1,9 @@
+<?php
+
+$action_order_status = $base . "?action=orders";
+$action_stock_status = $base . "?action=stock";
+$action_member_status = $base . "?action=register";
+?>
 
 <div class="main-area dashboard">
     <div class="container">
@@ -65,7 +71,7 @@
     function init_orders ()
     {
         jQuery.ajax({
-            url: "<?php echo $base; ?>/?action=orders",
+            url: "<?php echo $action_order_status; ?>",
             type: "GET",
             beforeSend: function(xhr) {
                 showAlert2 ("Loading...");
@@ -90,7 +96,7 @@
     function init_stock ()
     {
         jQuery.ajax({
-            url: "<?php echo $base; ?>/?action=stock",
+            url: "<?php echo $action_stock_status; ?>",
             type: "GET",
             beforeSend: function(xhr) {
                 showAlert2 ("Loading...");
@@ -109,7 +115,7 @@
     function init_users ()
     {
         jQuery.ajax({
-            url: "<?php echo $base; ?>/?action=register",
+            url: "<?php echo $action_member_status; ?>",
             type: "GET",
             beforeSend: function(xhr) {
                 showAlert2 ("Loading...");

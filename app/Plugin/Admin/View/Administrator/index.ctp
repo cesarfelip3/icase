@@ -1,7 +1,7 @@
 <?php
-$member_add = $base . "administrator" . DS . "add";
-$member_edit = $base . "administrator" . DS . "edit";
-$member_delete = $base . "administrator" . DS . "delete";
+$action_add = $base . "administrator" . DS . "add";
+$action_edit = $base . "administrator" . DS . "edit";
+$action_delete = $base . "administrator" . DS . "delete";
 ?>
 <div class="secondary-masthead">
     <div class="container">
@@ -40,7 +40,7 @@ $member_delete = $base . "administrator" . DS . "delete";
         </div>
         <div class="row">
             <div class="span12 listing-buttons">
-                <a href="<?php echo $this->webroot; ?>admin/administrator/add" class="btn btn-primary">New Administrator</a>
+                <a href="<?php echo $action_add; ?>" class="btn btn-primary">New Administrator</a>
             </div>
             <div class="span12">
                 <div class="slate">
@@ -88,7 +88,7 @@ $member_delete = $base . "administrator" . DS . "delete";
                                 <td><?php echo date ("Y-m-d H:i:s ", $value['Admin']['created']) . DS . date (" Y-m-d H:i:s", $value['Admin']['modified']); ?></td>
                                 <td class='actions'>
                                     <a class="btn btn-small btn-danger" onclick="del('<?php echo $value['Admin']['id']; ?>')">Remove</a>
-                                    <a class="btn btn-small btn-primary" href="<?php echo $member_edit; ?>?id=<?php echo $value['Admin']['guid']; ?>" target="new">View Admin</a>
+                                    <a class="btn btn-small btn-primary" href="<?php echo $action_edit; ?>?id=<?php echo $value['Admin']['guid']; ?>" target="new">View Admin</a>
                                 </td>
                             </tr>
                             <?php endforeach; endif; ?>
@@ -100,9 +100,9 @@ $member_delete = $base . "administrator" . DS . "delete";
                 <?php echo $this->element("pagination", array ("plugin"=>"Admin", "page"=>$page, "form" => "#form-filter")); ?>
             </div>
             <div class="span6 listing-buttons pull-right">
-<!--                <a href="<?php echo $member_add; ?>" class="btn btn-primary">New Admin</a>-->
+<!--                <a href="<?php echo $action_add; ?>" class="btn btn-primary">New Admin</a>-->
             </div>
         </div>
     </div>
 </div>
-<?php echo $this->element("action_del", array ("plugin"=>"Admin", "actionUrl" => $base . "administrator/delete/", "form" => "#form-filter", "message" => "Are you sure to remove this administrator")); ?>
+<?php echo $this->element("action_del", array ("plugin"=>"Admin", "actionUrl" => $action_delete, "form" => "#form-filter", "message" => "Are you sure to remove this administrator")); ?>

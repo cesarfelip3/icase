@@ -1,16 +1,19 @@
 <?php
-$admin_home = $base;
-$admin_administrator = $base . "administrator";
+$action_home = $base;
+$action_administrator = $base . "administrator";
+$action_add = $base . "administrator/add/";
+$action_edit = $base . "administrator/edit/";
+$action_order_fetch = $base . "order/fetch/";
 ?>
 <div class="secondary-masthead">
     <div class="container">
         <ul class="breadcrumb">
             <li>
-                <a href="<?php echo $admin_home; ?>">Admin</a> 
+                <a href="<?php echo $action_home; ?>">Admin</a> 
                 <span class="divider">/</span>
             </li>
             <li class="active">
-                <a href="<?php echo $admin_administrator; ?>">Administrators</a> 
+                <a href="<?php echo $action_administrator; ?>">Administrators</a> 
                 <span class="divider">/</span>
             </li>
             <li class="active">Edit</li>
@@ -99,14 +102,14 @@ $admin_administrator = $base . "administrator";
 <script type='text/javascript'>
     $(document).ready(
             function() {
-                //order_load ('<?php echo $data['guid']; ?>');
+                
             }
     );
 
     function save(action) {
 
         jQuery.ajax({
-            url: "<?php echo $base; ?>administrator/edit/?action=" + action,
+            url: "<?php echo $action_edit; ?>?action=" + action,
             data: $("#form-new").serialize(),
             type: "POST",
             beforeSend: function(xhr) {
@@ -132,7 +135,7 @@ $admin_administrator = $base . "administrator";
     function order_load (id) {
 
         jQuery.ajax({
-            url: "<?php echo $base; ?>order/fetch/?action=user&id=" + id,
+            url: "<?php echo $action_order_fetch; ?>?action=user&id=" + id,
             type: "GET",
             beforeSend: function(xhr) {
             }
@@ -141,186 +144,5 @@ $admin_administrator = $base . "administrator";
 
         }).fail(function() {
         });
-    }
-</script>
-<?php
-$js_pluploader = array(
-    "http://bp.yahooapis.com/2.4.21/browserplus-min.js",
-    "pluploader/plupload.js",
-    //"pluploader/plupload.gears.js",
-    //"pluploader/plupload.flash.js",
-    "pluploader/plupload.browserplus.js",
-    "pluploader/plupload.html4.js",
-    "pluploader/plupload.html5.js"
-);
-?>
-
-<?php echo $this->Html->script($js_pluploader); ?>
-
-<script type="text/javascript">
-    // Custom example logic
-
-    function PL(id) {
-        return document.getElementById(id);
-    }
-
-    var uploader = new plupload.Uploader({
-        runtimes: 'gears,html5,browserplus',
-        browse_button: 'btn-select-template-image',
-        container: 'template-image-uploader',
-        max_file_size: '10mb',
-        url: '<?php echo $base; ?>media/uploadimage',
-        multi_selection: false,
-        //resize: {width: 640, height: 240, quality: 100},
-        //flash_swf_url: 'js/uploader/plupload.flash.swf',
-        //silverlight_xap_url : 'js/uploader/plupload.silverlight.xap',
-        filters: [
-            {title: "Image Files", extensions: "png,jpeg,jpg,gif"}
-        ]
-    });
-
-    uploader.bind('Init', function(up, params) {
-        //$('filelist').innerHTML = "<div>Current runtime: " + params.runtime + "</div>";
-    });
-
-    uploader.init();
-
-    uploader.bind('FilesEdited', function(up, files) {
-
-        if (uploader.files.length == 2) {
-            uploader.removeFile(uploader.files[0]);
-        }
-
-        for (var i in files) {
-            document.getElementById('template-image-list').innerHTML = '<div id="' + files[i].id + '">' + files[i].name + ' (' + plupload.formatSize(files[i].size) + ') <b></b></div>';
-        }
-        jQuery('#template-image-progress-bar').css('width', "0%");
-        //uploader.start();
-    });
-
-    uploader.bind('UploadProgress', function(up, file) {
-        //$(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
-        jQuery('#template-image-progress-bar').css('width', file.percent + "%");
-
-    });
-
-    uploader.bind('FileUploaded', function(up, file, response) {
-        plupload.each(response, function(value, key) {
-
-            //console.log(key);
-            //console.log(value);
-
-            if (key == "response") {
-                var result = jQuery.parseJSON(value);
-                //console.log(result);
-                if (result.error == 0) {
-                    //console.log(result.files.url);
-                    $("#box-template-image").html('<div class="span8"><a class="featured-thumbnail"><img src="' + result.files.url + '" style="width:60px" /></a></div>');
-                    $('input[name="user[image]"]').val(result.files.target);
-                }
-                //jQuery('#progress-bar').css('width', "0%");
-            }
-        });
-
-        //alert($.parseJSON(response.response).result);
-    });
-
-    function template_image_start_upload()
-    {
-        uploader.start();
-        $("#template-image-list").html("");
-        $("#box-template-image").html("");
-    }
-
-</script>
-
-<script type="text/javascript">
-    var total = 0;
-
-    var uploader2 = new plupload.Uploader({
-        runtimes: 'gears,html5,browserplus',
-        browse_button: 'btn-select-featured-image',
-        container: 'featured-image-uploader',
-        max_file_size: '10mb',
-        url: '<?php echo $base; ?>media/uploadimage',
-        multi_selection: true,
-        //resize: {width: 640, height: 240, quality: 100},
-        //flash_swf_url: 'js/uploader/plupload.flash.swf',
-        //silverlight_xap_url : 'js/uploader/plupload.silverlight.xap',
-        filters: [
-            {title: "Image Files", extensions: "png,jpeg,jpg,gif"}
-        ]
-    });
-
-    uploader2.bind('Init', function(up, params) {
-        document.getElementById('featured-image-list').innerHTML = "";
-    });
-
-    uploader2.init();
-
-    uploader2.bind('FilesEdited', function(up, files) {
-
-        document.getElementById('featured-image-list').innerHTML = "";
-        if (uploader2.files.length == 2) {
-            //uploader2.removeFile(uploader2.files[0]);
-        }
-
-        for (var i in files) {
-            document.getElementById('featured-image-list').innerHTML += '<div id="' + files[i].id + '">' + files[i].name + ' (' + plupload.formatSize(files[i].size) + ') <b></b></div>';
-        }
-        jQuery('#featured-image-progress-bar').css('width', "0%");
-        //uploader.start();
-    });
-
-    uploader2.bind('UploadProgress', function(up, file) {
-        //$(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
-        jQuery('#featured-image-progress-bar').css('width', file.percent + "%");
-
-    });
-
-    uploader2.bind('FileUploaded', function(up, file, response) {
-        plupload.each(response, function(value, key) {
-
-            ////console.log(key);
-            ////console.log(value);
-
-            if (key == "response") {
-                var result = jQuery.parseJSON(value);
-                ////console.log(result);
-                if (result.error == 0) {
-                    ////console.log(result.files.url);
-                    $("#box-featured-image").append('<div class="thumbnail" style="width:24%;float:left;margin-left:5px;margin-bottom:10px;"><a class="featured-thumbnail"><img src="' + result.files.url150 + '" style="" /></a><div class="caption"><p><a class="btn btn-success" data-image="' + result.files.target + '" onclick="featured_image_delete(this);">Delete</a></p></div></div>');
-                    $("input[name='user[featured]']").val($("input[name='user[featured]']").val() + "-" + result.files.target);
-                    ////console.log ($("input[name='user[featured]']").val());
-                    init();
-                }
-                //jQuery('#progress-bar').css('width', "0%");
-            }
-        });
-
-        //alert($.parseJSON(response.response).result);
-    });
-
-    function featured_image_start_upload()
-    {
-        uploader2.start();
-        $('#box-featured-image').html("");
-        $('#featured-image-list').html("");
-        $('input[name="user[featured]"]').val("");
-    }
-
-    function featured_image_delete(id)
-    {
-        ////console.log (jQuery(id).parent().parent());
-        jQuery(id).parent().parent().parent().remove();
-
-        var image = $(id).data('image');
-        var images = $('input[name="user[featured]"]').val();
-
-        image = "-" + image;
-        images = images.replace(image, "");
-
-        $('input[name="user[featured]"]').val(images);
-        //console.log(image + ":" + images);
     }
 </script>
