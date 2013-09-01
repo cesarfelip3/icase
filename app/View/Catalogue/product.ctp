@@ -6,7 +6,7 @@ $checkout_cart_url = $this->webroot . "shop/checkout/?action=cart";
         <!-- 2 columns -->
         <div class="row-fluid">
             <div class="span6">
-                <div style="background-color:white;border-radius: 5px;border:1px solid #ccc;padding:10px;"><img src="<?php echo $this->webroot . "uploads/product/" . pathinfo($data['featured']['origin'][0], PATHINFO_FILENAME) . "_500.png"; ?>" ></div>
+                <div style="background-color:white;border-radius: 5px;border:1px solid #ccc;padding:10px;"><img src="<?php echo $this->webroot . "uploads/product/" . pathinfo($data['featured']['origin'][0], PATHINFO_FILENAME) . "_500.png"; ?>" alt="<?php echo $data['name'] . ", custom mobile phone case"; ?>"></div>
             </div>
             <div class="span6">
                 <h3><strong><span style="text-transform: uppercase;"><?php echo $data['name']; ?></span></strong> </h3>
@@ -34,7 +34,7 @@ $checkout_cart_url = $this->webroot . "shop/checkout/?action=cart";
                 <div class="thumwrapper">
                     <?php if (!empty($data['featured']['150w'])) : ?>
                         <?php foreach ($data['featured']['150w'] as $image) : ?>
-                            <img src="<?php echo $this->webroot . "uploads/product/" . $image; ?>" style="width:100px;height:auto;">
+                            <img src="<?php echo $this->webroot . "uploads/product/" . $image; ?>" style="width:50px;height:auto;" alt="<?php echo $data['name'] . ", custom mobile phone case"; ?>">
                         <?php endforeach; ?>
                     <?php endif; ?>
                 </div>

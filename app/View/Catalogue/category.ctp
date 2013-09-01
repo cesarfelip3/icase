@@ -47,7 +47,7 @@
                         <div class="span4">
                             <div class="thumbnail" style="background-image:none;background-color:white;">
                                 <a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i + 2]['Product']['slug']; ?>">
-                                    <img src="<?php echo $this->webroot; ?>uploads/product/<?php echo $data[$i + 2]['Product']['image']; ?>" alt="<?php echo $data[$i]['Product']['name']; ?>"  style="">
+                                    <img src="<?php echo $this->webroot; ?>uploads/product/<?php echo $data[$i + 2]['Product']['image']; ?>" alt="<?php echo $data[$i + 2]['Product']['name']; ?>"  style="">
                                 </a>
                                 <div class="caption">
                                     <a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i + 2]['Product']['slug']; ?>" class="prop-title" style="text-transform: uppercase"><?php echo $data[$i + 2]['Product']['name']; ?></a>

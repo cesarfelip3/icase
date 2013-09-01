@@ -10,6 +10,9 @@ Example site, http://www.beautahfulcreation.com
 Update
 ========
 
+2013.09.01
+
+1. I saw the image of some product wasn't resized correctly on example site, is it a bug?
 
 
 SEO basic --
