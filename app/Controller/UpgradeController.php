@@ -16,6 +16,12 @@ class UpgradeController extends AppController {
             $this->redirect (array ("controller" => "index", "action" => "index"));
         }
     }
+    
+    public function clean()
+    {
+        $this->loadModel ("Product");
+        $this->Product->deleteAll (array ("type" => "product"));
+    }
 
     public function to02() {
 
