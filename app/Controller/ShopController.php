@@ -155,15 +155,21 @@ class ShopController extends AppController {
                 $payment_gateway = "AuthorizeNet";
                 $payment_result = null;
                 $result = $this->_pay($payment_gateway, $payment_data, $payment_result);
+                
+                $result = $this->Payment->authorizenet (array (
+                    $payment_data,
+                    $payment_result
+                ));
 
                 //$result = true;
                 if ($result == false) {
                     $this->Product->rollback();
-                    exit(json_encode($this->_error));
+                    unset ($payment_result['data']);
+                    exit(json_encode($payment_result));
                 } else {
                     $result = array(
-                        "transactionId" => $payment_result->transaction_id,
-                        "transactionType" => $payment_result->transaction_type
+                        "trans_id" => $payment_result['data']['trans_id'],
+                        "trans_type" => $payment_result['data']['trans_type']
                     );
                 }
 
@@ -247,8 +253,8 @@ class ShopController extends AppController {
                         "amount" => round($value['Product']['price'] * $value['Product']['_quantity'], 2, PHP_ROUND_HALF_DOWN),
                         "quantity" => $data[$i]['Product']['_quantity'],
                         "attachement" => $value['Product']['file'],
-                        "transaction_id" => $result['transactionId'],
-                        "transaction_type" => $result['transactionType'],
+                        "transaction_id" => $result['trans_id'],
+                        "transaction_type" => $result['trans_type'],
                         "payment_gateway" => $payment_gateway,
                         "status" => "paid",
                         "created" => time(),

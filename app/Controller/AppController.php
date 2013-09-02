@@ -38,7 +38,8 @@ class AppController extends Controller {
                 )
             )
         ),
-        'Captcha'
+        'Captcha',
+        'Payment',
     );
 
     /*

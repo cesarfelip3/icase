@@ -34,6 +34,7 @@ Upgrade From 0.1 to 0.2
 6. Bootstrap for plugin, simply define some global constant here
 7. Component for plugin
 8. Model - debug
+9. Payment Gateway - move to component, so we can add more payment method there
 
 SEO basic --
 
