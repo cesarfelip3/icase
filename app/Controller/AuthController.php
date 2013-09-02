@@ -290,6 +290,7 @@ class AuthController extends AppController {
     public function captcha ()
     {
         $this->Captcha->image();
+        exit;
     }
 
 }

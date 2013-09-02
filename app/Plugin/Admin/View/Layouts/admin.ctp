@@ -29,10 +29,10 @@
                             <a href="<?php echo $this->webroot; ?>" target="new"><i class="icon-globe"></i> View Website</a>
                         </li>
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-user"></i> <?php echo $identity['name']; ?> <b class="caret"></b>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-user"></i> <?php echo $_identity['name']; ?> <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="<?php echo $base; ?>administrator/profile/?id=<?php echo $identity['guid']; ?>">Your Profile</a></li>
+                                <li><a href="<?php echo $base; ?>administrator/profile/?id=<?php echo $_identity['guid']; ?>">Your Profile</a></li>
 <!--                                <li class="active"><a href="form.html">Account Settings</a></li>-->
                                 <li class="divider"></li>
                                 <li><a href="<?php echo $base; ?>index/logout">Logout</a></li>

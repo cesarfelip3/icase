@@ -28,6 +28,9 @@ Upgrade From 0.1 to 0.2
 3. Not tested yet
 4. Routers for "admin" plugin, so it's safe, avoid /admin leaked
 5. Added Maintainance Page - switch to maintainace easily
+6. Bootstrap for plugin, simply define some global constant here
+7. Component for plugin
+8. Model - debug
 
 SEO basic --
 

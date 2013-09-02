@@ -97,6 +97,7 @@ class IndexController extends AdminAppController {
 
     public function captcha() {
         $this->Captcha->image();
+        exit;
     }
 
 }

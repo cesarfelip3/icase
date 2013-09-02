@@ -1,8 +1,8 @@
 <?php
 
-$action_order_status = $base . "?action=orders";
-$action_stock_status = $base . "?action=stock";
-$action_member_status = $base . "?action=register";
+$action_order_status = $base . "admin/order/";
+$action_stock_status = $base . "admin/stock/";
+$action_member_status = $base . "admin/member/";
 ?>
 
 <div class="main-area dashboard">

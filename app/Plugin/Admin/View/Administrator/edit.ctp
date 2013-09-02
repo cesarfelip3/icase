@@ -23,9 +23,9 @@ $action_order_fetch = $base . "order/fetch/";
 <div class="main-area dashboard">
     <div class="container">
         <form class="form-horizontal" id="form-new">
-            <input type="hidden" name="user[featured]" value="" />
-            <input type="hidden" name="user[image]" value="" />
-            <input type="hidden" name="user[guid]" value='' />
+            <input type="hidden" name="data[featured]" value="" />
+            <input type="hidden" name="data[image]" value="" />
+            <input type="hidden" name="data[guid]" value='' />
             <div class="alert alert-info hide">
                 <a class="close" data-dismiss="alert" href="#">x</a>
                 <h4 class="alert-heading">Information</h4>
@@ -40,21 +40,21 @@ $action_order_fetch = $base . "order/fetch/";
                             <div class="control-group">
                                 <label class="control-label" for="focusedInput">User Name</label>
                                 <div class="controls">
-                                    <input class="input-medium focused" id="focusedInput" type="text" name="user[name]" value="<?php echo $data['name']; ?>" readonly='readonly' >
+                                    <input class="input-medium focused" id="focusedInput" type="text" name="data[name]" value="<?php echo $data['name']; ?>" readonly='readonly' >
                                     <span class="help-inline"></span>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label" for="focusedInput">Email</label>
                                 <div class="controls">
-                                    <input class="input-medium focused" id="focusedInput" type="text" name="user[email]" value="<?php echo $data['email']; ?>" >
+                                    <input class="input-medium focused" id="focusedInput" type="text" name="data[email]" value="<?php echo $data['email']; ?>" >
                                     <span class="help-inline"></span>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label" for="focusedInput">Password</label>
                                 <div class="controls">
-                                    <input class="input-medium focused" id="focusedInput" type="password" name="user[password]" >
+                                    <input class="input-medium focused" id="focusedInput" type="password" name="data[password]" >
                                     <span class="help-inline"></span>
                                 </div>
                             </div>
@@ -62,7 +62,7 @@ $action_order_fetch = $base . "order/fetch/";
                                 <label class="control-label" for="optionsCheckbox2">Active</label>
                                 <div class="controls">
                                     <label class="checkbox">
-                                        <input type="checkbox" id="optionsCheckbox2" name="user[active]" value="1" checked="checked">
+                                        <input type="checkbox" id="optionsCheckbox2" name="data[active]" value="1" checked="checked">
                                         Yes
                                         <span class="help-inline"></span>
                                     </label>

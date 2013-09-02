@@ -71,7 +71,7 @@ Cache::config('default', array('engine' => 'File'));
 //CakePlugin::load(array('ActiveAdmin' => array('routes' => true)));
 CakePlugin::loadAll(
         array (
-            "Admin" => array ("routes" => true)
+            "Admin" => array ("routes" => true, "bootstrap" => true)
         ));
 /**
  * You can attach event listeners to the request lifecycle as Dispatcher Filter . By Default CakePHP bundles two filters:

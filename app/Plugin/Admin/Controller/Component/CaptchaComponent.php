@@ -1,10 +1,10 @@
 <?php  
-
 require_once APP . 'Vendor' . DS . 'Captcha/php-captcha.inc.php';
 
 class CaptchaComponent extends Component 
 { 
     var $controller; 
+    var $session = "captcha_user";
   
 //    function startup( &$controller ) { 
 //        $this->controller = &$controller; 
@@ -16,17 +16,15 @@ class CaptchaComponent extends Component
          
         $aFonts = array( 
             $imagesPath.'VeraBd.ttf', 
-            $imagesPath.'VeraBl.ttf', 
-            $imagesPath.'VeraMoBd.ttf' 
+            $imagesPath.'VeraIt.ttf', 
+            $imagesPath.'Vera.ttf' 
         ); 
          
         $oVisualCaptcha = new PhpCaptcha($aFonts, 200, 60); 
-        $oVisualCaptcha->UseColour(false); 
+        $oVisualCaptcha->session = $this->session;
+        $oVisualCaptcha->UseColour(true); 
         //$oVisualCaptcha->SetOwnerText('Source: '.FULL_BASE_URL); 
-        $oVisualCaptcha->DisplayShadow(false);
         $oVisualCaptcha->SetNumChars(5); 
-        $oVisualCaptcha->SetNumLines(2);
-        
         $oVisualCaptcha->Create(); 
     } 
      
@@ -40,9 +38,9 @@ class CaptchaComponent extends Component
             $userCode = strtoupper($userCode); 
         } 
          
-        if (!empty($_SESSION[CAPTCHA_SESSION_ID]) && $userCode == $_SESSION[CAPTCHA_SESSION_ID]) { 
+        if (!empty($_SESSION[$this->session]) && $userCode == $_SESSION[$this->session]) { 
             // clear to prevent re-use 
-            unset($_SESSION[CAPTCHA_SESSION_ID]); 
+            unset($_SESSION[$this->session]); 
              
             return true; 
         } 

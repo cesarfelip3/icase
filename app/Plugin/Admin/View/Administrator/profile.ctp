@@ -20,9 +20,9 @@ $admin_administrator = $base . "administrator";
 <div class="main-area dashboard">
     <div class="container">
         <form class="form-horizontal" id="form-new">
-            <input type="hidden" name="user[featured]" value="" />
-            <input type="hidden" name="user[image]" value="" />
-            <input type="hidden" name="user[guid]" value='' />
+            <input type="hidden" name="data[featured]" value="" />
+            <input type="hidden" name="data[image]" value="" />
+            <input type="hidden" name="data[guid]" value='' />
             <div class="alert alert-info hide">
                 <a class="close" data-dismiss="alert" href="#">x</a>
                 <h4 class="alert-heading">Information</h4>
@@ -37,21 +37,21 @@ $admin_administrator = $base . "administrator";
                             <div class="control-group">
                                 <label class="control-label" for="focusedInput">User Name</label>
                                 <div class="controls">
-                                    <input class="input-medium focused" id="focusedInput" type="text" name="user[name]" value="<?php echo $data['name']; ?>" readonly='readonly' >
+                                    <input class="input-medium focused" id="focusedInput" type="text" name="data[name]" value="<?php echo $data['name']; ?>" readonly='readonly' >
                                     <span class="help-inline"></span>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label" for="focusedInput">Email</label>
                                 <div class="controls">
-                                    <input class="input-medium focused" id="focusedInput" type="text" name="user[email]" value="<?php echo $data['email']; ?>" >
+                                    <input class="input-medium focused" id="focusedInput" type="text" name="data[email]" value="<?php echo $data['email']; ?>" >
                                     <span class="help-inline"></span>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label" for="focusedInput">Password</label>
                                 <div class="controls">
-                                    <input class="input-medium focused" id="focusedInput" type="password" name="user[password]" >
+                                    <input class="input-medium focused" id="focusedInput" type="password" name="data[password]" >
                                     <span class="help-inline"></span>
                                 </div>
                             </div>
@@ -59,7 +59,7 @@ $admin_administrator = $base . "administrator";
                                 <label class="control-label" for="optionsCheckbox2">Active</label>
                                 <div class="controls">
                                     <label class="checkbox">
-                                        <input type="checkbox" id="optionsCheckbox2" name="user[active]" value="1" checked="checked">
+                                        <input type="checkbox" id="optionsCheckbox2" name="data[active]" value="1" checked="checked">
                                         Yes
                                         <span class="help-inline"></span>
                                     </label>
@@ -216,7 +216,7 @@ $js_pluploader = array(
                 if (result.error == 0) {
                     //console.log(result.files.url);
                     $("#box-template-image").html('<div class="span8"><a class="featured-thumbnail"><img src="' + result.files.url + '" style="width:60px" /></a></div>');
-                    $('input[name="user[image]"]').val(result.files.target);
+                    $('input[name="data[image]"]').val(result.files.target);
                 }
                 //jQuery('#progress-bar').css('width', "0%");
             }
@@ -290,8 +290,8 @@ $js_pluploader = array(
                 if (result.error == 0) {
                     ////console.log(result.files.url);
                     $("#box-featured-image").append('<div class="thumbnail" style="width:24%;float:left;margin-left:5px;margin-bottom:10px;"><a class="featured-thumbnail"><img src="' + result.files.url150 + '" style="" /></a><div class="caption"><p><a class="btn btn-success" data-image="' + result.files.target + '" onclick="featured_image_delete(this);">Delete</a></p></div></div>');
-                    $("input[name='user[featured]']").val($("input[name='user[featured]']").val() + "-" + result.files.target);
-                    ////console.log ($("input[name='user[featured]']").val());
+                    $("input[name='data[featured]']").val($("input[name='data[featured]']").val() + "-" + result.files.target);
+                    ////console.log ($("input[name='data[featured]']").val());
                     init();
                 }
                 //jQuery('#progress-bar').css('width', "0%");
@@ -306,7 +306,7 @@ $js_pluploader = array(
         uploader2.start();
         $('#box-featured-image').html("");
         $('#featured-image-list').html("");
-        $('input[name="user[featured]"]').val("");
+        $('input[name="data[featured]"]').val("");
     }
 
     function featured_image_delete(id)
@@ -315,12 +315,12 @@ $js_pluploader = array(
         jQuery(id).parent().parent().parent().remove();
 
         var image = $(id).data('image');
-        var images = $('input[name="user[featured]"]').val();
+        var images = $('input[name="data[featured]"]').val();
 
         image = "-" + image;
         images = images.replace(image, "");
 
-        $('input[name="user[featured]"]').val(images);
+        $('input[name="data[featured]"]').val(images);
         //console.log(image + ":" + images);
     }
 </script>

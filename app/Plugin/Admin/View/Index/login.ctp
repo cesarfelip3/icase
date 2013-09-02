@@ -28,9 +28,9 @@ $admin_product = $base . "product";
                                 <label class="control-label" for="disabledInput">Captcha</label>
                                 <div class="controls">
                                     <img id="captcha" src="<?php echo $base . 'index/captcha'; ?>" alt="" /> 
-                                <a href="javascript:void(0);" onclick="javascript:document.images.captcha.src = '<?php echo $base; ?>index/captcha'; ?>?' + Math.round(Math.random(0) * 1000) + 1">Reload image</a>
-                                <br/>
-                                <input type="text" name="signin[captcha]" />
+                                    <a href="javascript:void(0);" onclick="javascript:document.images.captcha.src = '<?php echo $base; ?>index/captcha/?' + Math.round(Math.random(0) * 1000) + 1">Reload image</a>
+                                    <br/>
+                                    <input type="text" name="signin[captcha]" />
                                 </div>
                             </div>
                             <div class="control-group">
@@ -47,30 +47,26 @@ $admin_product = $base . "product";
     </div>
 </div>
 <script type="text/javascript">
-                                    $(document).ready(
+    function save()
+    {
+        jQuery.ajax({
+            url: "<?php echo $base; ?>index/login",
+            data: $("#user-form").serialize(),
+            type: "POST",
+            beforeSend: function(xhr) {
+                $("#btn-signup").button("loading");
+            }
+        }).done(function(data) {
+            //console.log(data);
+            $("#btn-signup").button("reset");
 
-                                            );
+            var result = $.parseJSON(data);
+            if (result.error == 1) {
 
-                                    function save()
-                                    {
-                                        jQuery.ajax({
-                                            url: "<?php echo $base; ?>index/login",
-                                            data: $("#user-form").serialize(),
-                                            type: "POST",
-                                            beforeSend: function(xhr) {
-                                                $("#btn-signup").button("loading");
-                                            }
-                                        }).done(function(data) {
-                                            //console.log(data);
-                                            $("#btn-signup").button("reset");
-
-                                            var result = $.parseJSON(data);
-                                            if (result.error == 1) {
-
-                                            } else {
-                                                window.location.href = "";
-                                            }
-                                        }).fail(function() {
-                                        });
-                                    }
+            } else {
+                window.location.href = "";
+            }
+        }).fail(function() {
+        });
+    }
 </script>

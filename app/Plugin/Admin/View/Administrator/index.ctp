@@ -76,7 +76,7 @@ $action_delete = $base . "administrator" . DS . "delete";
                             <?php if (!empty ($data)) : ?>
                             <?php $i = $page * $limit; ?>
                             <?PHP foreach ($data as $value) : ?>
-                            <?php $value = $value['Product']; ?>
+                            <?php $value = $value['Admin']; ?>
                             <tr>
                                 <td><?php echo ++$i; ?></td>
                                 <td><?php echo $value['name']; ?></td>

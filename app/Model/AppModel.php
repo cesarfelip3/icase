@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Application model for Cake.
  *
@@ -20,7 +21,6 @@
  * @since         CakePHP(tm) v 0.2.9
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
-
 App::uses('Model', 'Model');
 
 /**
@@ -32,23 +32,29 @@ App::uses('Model', 'Model');
  * @package       app.Model
  */
 class AppModel extends Model {
+
     protected $_datasource;
-    
-    public function beginTransaction ()
-    {
+
+    public function beginTransaction() {
         $this->_datasource = $this->getDataSource();
-        $this->_datasource->begin ();
+        $this->_datasource->begin();
     }
-    
-    public function commitTransaction ()
-    {
+
+    public function commitTransaction() {
         $this->_datasource = $this->getDataSource();
-        $this->_datasource->commit ();
+        $this->_datasource->commit();
     }
-    
-    public function rollTransaction ()
-    {
+
+    public function rollTransaction() {
         $this->_datasource = $this->getDataSource();
-        $this->_datasource->rollback ();
+        $this->_datasource->rollback();
     }
+
+    public function _debug () {
+        $log = $this->getDataSource()->getLog(false, false);
+        print_r ("<textarea style='width:600px;height:300px'>");
+        print_r($log);
+        print_r ("</textarea>");
+    }
+
 }

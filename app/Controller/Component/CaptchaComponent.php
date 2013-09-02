@@ -5,6 +5,7 @@ require_once APP . 'Vendor' . DS . 'Captcha/php-captcha.inc.php';
 class CaptchaComponent extends Component 
 { 
     var $controller; 
+    var $session = "captcha_admin";
   
 //    function startup( &$controller ) { 
 //        $this->controller = &$controller; 
@@ -21,6 +22,7 @@ class CaptchaComponent extends Component
         ); 
          
         $oVisualCaptcha = new PhpCaptcha($aFonts, 200, 60); 
+        $oVisualCaptcha->session = $this->session;
         $oVisualCaptcha->UseColour(true); 
         //$oVisualCaptcha->SetOwnerText('Source: '.FULL_BASE_URL); 
         $oVisualCaptcha->SetNumChars(5); 
@@ -37,9 +39,9 @@ class CaptchaComponent extends Component
             $userCode = strtoupper($userCode); 
         } 
          
-        if (!empty($_SESSION[CAPTCHA_SESSION_ID]) && $userCode == $_SESSION[CAPTCHA_SESSION_ID]) { 
+        if (!empty($_SESSION[$this->session]) && $userCode == $_SESSION[$this->session]) { 
             // clear to prevent re-use 
-            unset($_SESSION[CAPTCHA_SESSION_ID]); 
+            unset($_SESSION[$this->session]); 
              
             return true; 
         } 

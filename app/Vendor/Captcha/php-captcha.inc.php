@@ -87,6 +87,8 @@
       var $sFileType;
       var $sCode = '';
       
+      var $session = CAPTCHA_SESSION_ID;
+      
       function PhpCaptcha(
          $aFonts, // array of TrueType fonts to use - specify full path
          $iWidth = CAPTCHA_WIDTH, // width of image
@@ -255,9 +257,9 @@
          
          // save code in session variable
          if ($this->bCaseInsensitive) {
-            $_SESSION[CAPTCHA_SESSION_ID] = strtoupper($this->sCode);
+            $_SESSION[$this->session] = strtoupper($this->sCode);
          } else {
-            $_SESSION[CAPTCHA_SESSION_ID] = $this->sCode;
+            $_SESSION[$this->session] = $this->sCode;
          }
       }
       
@@ -392,9 +394,9 @@
             $sUserCode = strtoupper($sUserCode);
          }
          
-         if (!empty($_SESSION[CAPTCHA_SESSION_ID]) && $sUserCode == $_SESSION[CAPTCHA_SESSION_ID]) {
+         if (!empty($_SESSION[$this->session]) && $sUserCode == $_SESSION[$this->session]) {
             // clear to prevent re-use
-            unset($_SESSION[CAPTCHA_SESSION_ID]);
+            unset($_SESSION[$this->session]);
             
             return true;
          }
@@ -417,8 +419,8 @@
          $this->SetAudioPath($sAudioPath);
          
          // retrieve code if already set by previous instance of visual PhpCaptcha
-         if (isset($_SESSION[CAPTCHA_SESSION_ID])) {
-            $this->sCode = $_SESSION[CAPTCHA_SESSION_ID];
+         if (isset($_SESSION[$this->session])) {
+            $this->sCode = $_SESSION[$this->session];
          }
       }
       
