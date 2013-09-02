@@ -1,7 +1,7 @@
 <?php
-$member_add = $base . "member" . DS . "add";
-$member_edit = $base . "member" . DS . "edit";
-$member_delete = $base . "member" . DS . "delete";
+$action_add = $base . "member/add";
+$action_edit = $base . "member/edit";
+$action_delete = $base . "member/delete";
 ?>
 <div class="secondary-masthead">
     <div class="container">
@@ -40,7 +40,7 @@ $member_delete = $base . "member" . DS . "delete";
         </div>
         <div class="row">
             <div class="span12 listing-buttons">
-                <a href="<?php echo $this->webroot; ?>admin/member/add" class="btn btn-primary">New Customer</a>
+                <a href="<?php echo $action_add; ?>" class="btn btn-primary">New Customer</a>
             </div>
             <div class="span12">
                 <div class="slate">
@@ -62,36 +62,33 @@ $member_delete = $base . "member" . DS . "delete";
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Username</th>
-                                <th>Email</th>
-                                <th>Type</th>
-                                <th>Name</th>
-                                <th>Phone</th>
-                                <th>Country/State/City/Address</th>
-                                <th>Created / Modified</th>
+                                <?php foreach ($header as $value) : ?>
+                                <th>
+                                    <?php echo $value; ?>
+                                </th>
+                                <?php endforeach; ?>
                                 <th class="actions">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php 
-                            $i = $page * $limit;
-                            if (!empty ($data)) : 
-                                foreach ($data as $value) : ?>
+                            <?php if (!empty ($data)) : ?>
+                            <?php $i = $page * $limit; ?>
+                            <?php foreach ($data as $value) : ?>
+                            <?php $value = $value['User']; ?>
                             <tr>
                                 <td><?php echo ++$i; ?></td>
-                                <td><?php echo $value['User']['name']; ?></td>
-                                <td><?php echo $value['User']['email']; ?></td>
-                                <td><?php echo $value['User']['type']; ?></td>
-                                <td><?php echo $value['User']['firstname'] . " " . $value['User']['lastname']; ?></td>
-                                <td><?php echo $value['User']['phone']; ?></td>
-                                <td><?php echo $value['User']['country'] . DS . $value['User']['state'] . DS . $value['User']['city'] . DS . $value['User']['address']; ?></td>
-                                <td><?php echo date ("Y-m-d H:i:s ", $value['User']['created']) . DS . date (" Y-m-d H:i:s", $value['User']['modified']); ?></td>
+                                <?php foreach ($header as $key => $val) : ?>
+                                <td>
+                                    <?php echo $key == "created" || $key == "modified" ? date ("Y-m-d H:i:s ", $value[$key]) : $value[$key]; ?>
+                                </td>
+                                <?php endforeach; ?>
                                 <td class='actions'>
-                                    <a class="btn btn-small btn-danger" onclick="del('<?php echo $value['User']['id']; ?>')">Remove</a>
-                                    <a class="btn btn-small btn-primary" href="<?php echo $member_edit; ?>?id=<?php echo $value['User']['guid']; ?>" target="new">View User</a>
+                                    <a class="btn btn-small btn-danger" onclick="del('<?php echo $value['id']; ?>')">Remove</a>
+                                    <a class="btn btn-small btn-primary" href="<?php echo $action_edit; ?>?id=<?php echo $value['guid']; ?>" target="new">View User</a>
                                 </td>
                             </tr>
-                            <?php endforeach; endif; ?>
+                            <?php endforeach;?>
+                            <?php endif; ?>
                         </tbody>
                     </table>
                 </div>
@@ -99,10 +96,7 @@ $member_delete = $base . "member" . DS . "delete";
             <div class="span6">
                 <?php echo $this->element("pagination", array ("plugin"=>"Admin", "page"=>$page, "form" => "#form-filter")); ?>
             </div>
-            <div class="span6 listing-buttons pull-right">
-<!--                <a href="<?php echo $member_add; ?>" class="btn btn-primary">New User</a>-->
-            </div>
         </div>
     </div>
 </div>
-<?php echo $this->element("action_del", array ("plugin"=>"Admin", "actionUrl" => $base . "member/delete/", "form" => "#form-filter", "message" => "Are you sure to remove this customer")); ?>
+<?php echo $this->element("action_del", array ("plugin"=>"Admin", "actionUrl" => $action_delete, "form" => "#form-filter", "message" => "Are you sure to remove this customer")); ?>

@@ -22,10 +22,7 @@ $action_order_fetch = $base . "order/fetch/";
 </div>
 <div class="main-area dashboard">
     <div class="container">
-        <form class="form-horizontal" id="form-new">
-            <input type="hidden" name="data[featured]" value="" />
-            <input type="hidden" name="data[image]" value="" />
-            <input type="hidden" name="data[guid]" value='' />
+        <form class="form-horizontal" id="form-data">
             <div class="alert alert-info hide">
                 <a class="close" data-dismiss="alert" href="#">x</a>
                 <h4 class="alert-heading">Information</h4>
@@ -40,21 +37,21 @@ $action_order_fetch = $base . "order/fetch/";
                             <div class="control-group">
                                 <label class="control-label" for="focusedInput">User Name</label>
                                 <div class="controls">
-                                    <input class="input-medium focused" id="focusedInput" type="text" name="data[name]" value="<?php echo $data['name']; ?>" readonly='readonly' >
+                                    <input class="input-medium focused" id="focusedInput" type="text" name="form[name]" value="<?php echo $data['name']; ?>" readonly='readonly' >
                                     <span class="help-inline"></span>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label" for="focusedInput">Email</label>
                                 <div class="controls">
-                                    <input class="input-medium focused" id="focusedInput" type="text" name="data[email]" value="<?php echo $data['email']; ?>" >
+                                    <input class="input-medium focused" id="focusedInput" type="text" name="form[email]" value="<?php echo $data['email']; ?>" >
                                     <span class="help-inline"></span>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label" for="focusedInput">Password</label>
                                 <div class="controls">
-                                    <input class="input-medium focused" id="focusedInput" type="password" name="data[password]" >
+                                    <input class="input-medium focused" id="focusedInput" type="password" name="form[password]" >
                                     <span class="help-inline"></span>
                                 </div>
                             </div>
@@ -62,7 +59,7 @@ $action_order_fetch = $base . "order/fetch/";
                                 <label class="control-label" for="optionsCheckbox2">Active</label>
                                 <div class="controls">
                                     <label class="checkbox">
-                                        <input type="checkbox" id="optionsCheckbox2" name="data[active]" value="1" checked="checked">
+                                        <input type="checkbox" id="optionsCheckbox2" name="form[active]" value="1" checked="checked">
                                         Yes
                                         <span class="help-inline"></span>
                                     </label>
@@ -71,7 +68,7 @@ $action_order_fetch = $base . "order/fetch/";
                             <div class="control-group warning">
                                 <label class="control-label" for="inputWarning"></label>
                                 <div class="controls">
-                                    <a href='javascript:' class='btn btn-primary' data-loading-text="Saving..." onclick="save('create');" id="btn-save">Save</a>
+                                    <a href='javascript:' class='btn btn-primary' data-loading-text="Saving..." onclick="save();" id="btn-save">Save</a>
                                     <span class="help-inline"></span>
                                 </div>
                             </div>
@@ -86,31 +83,13 @@ $action_order_fetch = $base . "order/fetch/";
         </form>
     </div>
 </div>
-<div class="navbar navbar-fixed-bottom hide">
-    <div class="navbar-inner">
-        <div class="container" style="width: auto; padding: 0 20px;">
-            <a class="brand" href="#">Title</a>
-            <ul class="nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">Link</a></li>
-                <li><a href="#">Link</a></li>
-            </ul>
-        </div>
-    </div>
-</div>
 <!-- -->
 <script type='text/javascript'>
-    $(document).ready(
-            function() {
-                
-            }
-    );
-
-    function save(action) {
+    function save() {
 
         jQuery.ajax({
-            url: "<?php echo $action_edit; ?>?action=" + action,
-            data: $("#form-new").serialize(),
+            url: "<?php echo $action_edit; ?>",
+            data: $("#form-data").serialize(),
             type: "POST",
             beforeSend: function(xhr) {
                 $("#btn-save").button('loading');
@@ -120,27 +99,13 @@ $action_order_fetch = $base . "order/fetch/";
 
             var result = $.parseJSON(data);
             if (result.error == 1) {
-                $(".help-inline").html("");
-                $(result.element).next(".help-inline").html(result.message);
-                $(result.element).parent().parent().addClass('error');
+//                $(".help-inline").html("");
+//                $(result.element).next(".help-inline").html(result.message);
+//                $(result.element).parent().parent().addClass('error');
                 showAlert(result.message);
             } else {
                 //window.location.href = "";
             }
-
-        }).fail(function() {
-        });
-    }
-    
-    function order_load (id) {
-
-        jQuery.ajax({
-            url: "<?php echo $action_order_fetch; ?>?action=user&id=" + id,
-            type: "GET",
-            beforeSend: function(xhr) {
-            }
-        }).done(function(data) {
-            $("#box-orders .body").html (data);
 
         }).fail(function() {
         });

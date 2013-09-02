@@ -15,7 +15,7 @@ class MemberController extends AdminAppController {
     }
 
     public function index() {
-        
+
         $page = $this->request->query('page');
         $limit = $this->request->query('limit');
 
@@ -73,9 +73,9 @@ class MemberController extends AdminAppController {
                 'limit' => $limit,
                 'page' => $page + 1,
                 'conditions' => $conditions,
-                'fields' => array("User.*")
-                    )
-            );
+                "order" => "modified DESC"
+            ));
+            
             foreach ($data as $key => $value) {
 
                 if ($value['User']['type'] == 'user') {
@@ -96,7 +96,22 @@ class MemberController extends AdminAppController {
             "orders > 0" => "Has Orders"
         );
 
+        $header = array(
+            "name" => "User",
+            "email" => "Email",
+            "type" => "Type",
+            "firstname" => "First name",
+            "lastname" => "Last name",
+            "phone" => "Phone",
+            "country" => "Country",
+            "state" => "State",
+            "city" => "City",
+            "created" => "Created",
+            "modified" => "Modified"
+        );
+
         $this->set(array(
+            "header" => $header,
             "data" => $data,
             "page" => $page,
             "limit" => $limit,
@@ -114,42 +129,41 @@ class MemberController extends AdminAppController {
         if ($this->request->is('ajax') && $this->request->is('post')) {
             $this->autoRender = false;
 
-            $data = $this->request->data('user');
-            $action = $this->request->query('action');
+            $data = $this->request->data('form');
 
             if (empty($data['name'])) {
-                $this->error['error'] = 1;
-                $this->error['element'] = 'input[name="user[name]"]';
-                $this->error['message'] = 'Customer name is required';
-                exit(json_encode($this->error));
+                $this->_error['error'] = 1;
+                $this->_error['element'] = 'input[name="form[name]"]';
+                $this->_error['message'] = 'Customer name is required';
+                exit(json_encode($this->_error));
             }
 
-            if (preg_match("/^[a-z]{1,}|[a-z]{1,}[0-9]{1,}$/i", $data['name']) == false) {
-                $this->error['error'] = 1;
-                $this->error['element'] = 'input[name="user[name]"]';
-                $this->error['message'] = 'Invalid name, [a-z]...[0-9]...';
-                exit(json_encode($this->error));
+            if (!$this->_validate("username", $data['name'])) {
+                $this->_error['error'] = 1;
+                $this->_error['element'] = 'input[name="form[name]"]';
+                $this->_error['message'] = 'Invalid name, lowercase and number only';
+                exit(json_encode($this->_error));
             }
 
             if (empty($data['email'])) {
-                $this->error['error'] = 1;
-                $this->error['element'] = 'input[name="user[email]"]';
-                $this->error['message'] = 'Email is required';
-                exit(json_encode($this->error));
+                $this->_error['error'] = 1;
+                $this->_error['element'] = 'input[name="form[email]"]';
+                $this->_error['message'] = 'Email is required';
+                exit(json_encode($this->_error));
             }
 
-            if (preg_match("/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/i", $data['email']) == false) {
-                $this->error['error'] = 1;
-                $this->error['element'] = 'input[name="user[email]"]';
-                $this->error['message'] = 'Invalid email address';
-                exit(json_encode($this->error));
+            if (!$this->_validate("email", $data['email'])) {
+                $this->_error['error'] = 1;
+                $this->_error['element'] = 'input[name="form[email]"]';
+                $this->_error['message'] = 'Invalid email address';
+                exit(json_encode($this->_error));
             }
 
             if (empty($data['password'])) {
-                $this->error['error'] = 1;
-                $this->error['element'] = 'input[name="user[password]"]';
-                $this->error['message'] = 'Password is required';
-                exit(json_encode($this->error));
+                $this->_error['error'] = 1;
+                $this->_error['element'] = 'input[name="form[password]"]';
+                $this->_error['message'] = 'Password is required';
+                exit(json_encode($this->_error));
             }
 
             if (!isset($data['active'])) {
@@ -157,7 +171,12 @@ class MemberController extends AdminAppController {
             }
 
             $this->loadModel('User');
-            $result = $this->User->find('first', array("conditions" => array("OR" => array("name" => $data['name'], "email" => $data['email']))));
+            $result = $this->User->find('first', array(
+                "conditions" => array(
+                    "OR" => array(
+                        "name" => $data['name'],
+                        "email" => $data['email']))
+            ));
 
             if (!empty($result)) {
                 $this->error['error'] = 1;
@@ -166,7 +185,6 @@ class MemberController extends AdminAppController {
                 exit(json_encode($this->error));
             }
 
-            $data['name'] = strtolower($data['name']);
             $passwordHasher = new SimplePasswordHasher();
             $data['password'] = $passwordHasher->hash($data['password']);
 
@@ -186,39 +204,45 @@ class MemberController extends AdminAppController {
     }
 
     public function edit() {
-        
+
         if ($this->request->is('ajax') && $this->request->is('post')) {
             $this->autoRender = false;
 
-            $data = $this->request->data('user');
-            $action = $this->request->query('action');
+            $data = $this->request->data('form');
 
             if (empty($data['name'])) {
-                $this->error['error'] = 1;
-                $this->error['element'] = 'input[name="user[name]"]';
-                $this->error['message'] = 'Customer name is required';
-                exit(json_encode($this->error));
+                $this->_error['error'] = 1;
+                $this->_error['element'] = 'input[name="form[name]"]';
+                $this->_error['message'] = 'Customer name is required';
+                exit(json_encode($this->_error));
             }
 
-            if (preg_match("/^[a-z]{1,}|[a-z]{1,}[0-9]{1,}$/i", $data['name']) == false) {
-                $this->error['error'] = 1;
-                $this->error['element'] = 'input[name="user[name]"]';
-                $this->error['message'] = 'Invalid name, [a-z]...[0-9]...';
-                exit(json_encode($this->error));
+            if (!$this->_validate("username", $data['name'])) {
+                $this->_error['error'] = 1;
+                $this->_error['element'] = 'input[name="form[name]"]';
+                $this->_error['message'] = 'Invalid name, lowercase and number only';
+                exit(json_encode($this->_error));
             }
 
             if (empty($data['email'])) {
-                $this->error['error'] = 1;
-                $this->error['element'] = 'input[name="user[email]"]';
-                $this->error['message'] = 'Email is required';
-                exit(json_encode($this->error));
+                $this->_error['error'] = 1;
+                $this->_error['element'] = 'input[name="form[email]"]';
+                $this->_error['message'] = 'Email is required';
+                exit(json_encode($this->_error));
             }
 
-            if (preg_match("/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/i", $data['email']) == false) {
-                $this->error['error'] = 1;
-                $this->error['element'] = 'input[name="user[email]"]';
-                $this->error['message'] = 'Invalid email address';
-                exit(json_encode($this->error));
+            if (!$this->_validate("email", $data['email'])) {
+                $this->_error['error'] = 1;
+                $this->_error['element'] = 'input[name="form[email]"]';
+                $this->_error['message'] = 'Invalid email address';
+                exit(json_encode($this->_error));
+            }
+
+            if (empty($data['password'])) {
+                $this->_error['error'] = 1;
+                $this->_error['element'] = 'input[name="form[password]"]';
+                $this->_error['message'] = 'Password is required';
+                exit(json_encode($this->_error));
             }
 
             if (!isset($data['active'])) {
@@ -226,7 +250,12 @@ class MemberController extends AdminAppController {
             }
 
             $this->loadModel('User');
-            $result = $this->User->find('first', array("conditions" => array("OR" => array("name" => $data['name'], "email" => $data['email']))));
+            $result = $this->User->find('first', array(
+                "conditions" => array(
+                    "OR" => array(
+                        "name" => $data['name'],
+                        "email" => $data['email']))
+            ));
 
             if (empty($result)) {
                 $this->error['error'] = 1;
@@ -235,45 +264,49 @@ class MemberController extends AdminAppController {
                 exit(json_encode($this->error));
             }
 
-            $data['name'] = strtolower($data['name']);
-            
-            if (!empty ($data['password'])) {
+            if (!empty($data['password'])) {
                 $passwordHasher = new SimplePasswordHasher();
                 $data['password'] = $passwordHasher->hash($data['password']);
             }
 
             $data['modified'] = time();
-            $data['type'] = "register";
 
-            if (isset ($data['guid'])) {
-                unset ($data['guid']);
+            if (isset($data['guid'])) {
+                unset($data['guid']);
             }
-            
+
             $this->User->id = $result['User']['id'];
             $this->User->set($data);
-            $this->User->save ();
+            $this->User->save();
 
             $this->error['error'] = 0;
             $this->error['element'] = 'input';
             exit(json_encode($this->error));
         }
-        
-        $guid = $this->request->query ('id');
-        if (empty ($guid)) {
-            $this->redirect ($this->base . "/admin/member/");
+
+        $guid = $this->request->query('id');
+        if (empty($guid)) {
+            $this->redirect(array(
+                "plugin" => "admin",
+                "controller" => "member",
+                "action" => "index"
+            ));
             //exit;
         }
-        
+
         $this->loadModel('User');
         $data = $this->User->find('first', array("conditions" => array("guid" => $guid)));
-        
-        if (empty ($data)) {
-            $this->redirect (array ("plugin"=>"admin", "controller"=>"member", "action"=>"index"));
+
+        if (empty($data)) {
+            $this->redirect(array(
+                "plugin" => "admin",
+                "controller" => "member",
+                "action" => "index"
+            ));
         }
-        
+
         $data = $data['User'];
-        $this->set ('data', $data);
-        
+        $this->set('data', $data);
     }
 
     public function delete() {
@@ -281,7 +314,7 @@ class MemberController extends AdminAppController {
         $this->loadModel('User');
 
         $this->User->delete($id);
-        exit (json_encode($this->error));
+        exit(json_encode($this->error));
     }
 
 }

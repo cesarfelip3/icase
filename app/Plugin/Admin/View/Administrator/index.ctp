@@ -62,13 +62,9 @@ $action_delete = $base . "administrator" . DS . "delete";
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Username</th>
-                                <th>Email</th>
-                                <th>Type</th>
-                                <th>Name</th>
-                                <th>Phone</th>
-                                <th>Country/State/City/Address</th>
-                                <th>Created / Modified</th>
+                                <?php foreach ($header as $value) : ?>
+                                <th><?php echo $value; ?></th>
+                                <?php endforeach; ?>
                                 <th class="actions">Actions</th>
                             </tr>
                         </thead>
@@ -79,13 +75,11 @@ $action_delete = $base . "administrator" . DS . "delete";
                             <?php $value = $value['Admin']; ?>
                             <tr>
                                 <td><?php echo ++$i; ?></td>
-                                <td><?php echo $value['name']; ?></td>
-                                <td><?php echo $value['email']; ?></td>
-                                <td><?php echo $value['type']; ?></td>
-                                <td><?php echo $value['firstname'] . " " . $value['lastname']; ?></td>
-                                <td><?php echo $value['phone']; ?></td>
-                                <td><?php echo $value['country'] . DS . $value['state'] . DS . $value['city'] . DS . $value['address']; ?></td>
-                                <td><?php echo date ("Y-m-d H:i:s ", $value['created']) . DS . date (" Y-m-d H:i:s", $value['modified']); ?></td>
+                                <?php foreach ($header as $key => $val) : ?>
+                                <td>
+                                    <?php echo $key == "created" || $key == "modified" ? date ("Y-m-d H:i:s ", $value[$key]) : $value[$key]; ?>
+                                </td>
+                                <?php endforeach; ?>
                                 <td class='actions'>
                                     <a class="btn btn-small btn-danger" onclick="del('<?php echo $value['id']; ?>')">Remove</a>
                                     <a class="btn btn-small btn-primary" href="<?php echo $action_edit; ?>?id=<?php echo $value['guid']; ?>" target="new">View Admin</a>
@@ -98,9 +92,6 @@ $action_delete = $base . "administrator" . DS . "delete";
             </div>
             <div class="span6">
                 <?php echo $this->element("pagination", array ("plugin"=>"Admin", "page"=>$page, "form" => "#form-filter")); ?>
-            </div>
-            <div class="span6 listing-buttons pull-right">
-<!--                <a href="<?php echo $action_add; ?>" class="btn btn-primary">New Admin</a>-->
             </div>
         </div>
     </div>

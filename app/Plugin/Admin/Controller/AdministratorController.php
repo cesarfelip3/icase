@@ -91,8 +91,16 @@ class AdministratorController extends AdminAppController {
 
         $filters = array(
         );
+        
+        $header = array (
+            "name" => "User",
+            "email" => "Email",
+            "created" => "Created",
+            "modified" => "Modified",
+        );
 
         $this->set(array(
+            "header" => $header,
             "data" => $data,
             "page" => $page,
             "limit" => $limit,
@@ -110,40 +118,39 @@ class AdministratorController extends AdminAppController {
         if ($this->request->is('ajax') && $this->request->is('post')) {
             $this->autoRender = false;
 
-            $data = $this->request->data('data');
-            $action = $this->request->query('action');
+            $data = $this->request->data('form');
 
             if (empty($data['name'])) {
                 $this->_error['error'] = 1;
-                $this->_error['element'] = 'input[name="data[name]"]';
-                $this->_error['message'] = 'Customer name is required';
+                $this->_error['element'] = 'input[name="form[name]"]';
+                $this->_error['message'] = 'Administrator name is required';
                 exit(json_encode($this->_error));
             }
 
-            if ($this->_validate("username", $data['name']) == false) {
+            if (!$this->_validate("username", $data['name'])) {
                 $this->_error['error'] = 1;
-                $this->_error['element'] = 'input[name="data[name]"]';
-                $this->_error['message'] = 'Invalid name, [a-z]...[0-9]...';
+                $this->_error['element'] = 'input[name="form[name]"]';
+                $this->_error['message'] = 'Invalid name, lowercase and number only';
                 exit(json_encode($this->_error));
             }
 
             if (empty($data['email'])) {
                 $this->_error['error'] = 1;
-                $this->_error['element'] = 'input[name="data[email]"]';
+                $this->_error['element'] = 'input[name="form[email]"]';
                 $this->_error['message'] = 'Email is required';
                 exit(json_encode($this->_error));
             }
 
-            if ($this->_validate("email", $data['email']) == false) {
+            if (!$this->_validate("email", $data['email'])) {
                 $this->_error['error'] = 1;
-                $this->_error['element'] = 'input[name="data[email]"]';
+                $this->_error['element'] = 'input[name="form[email]"]';
                 $this->_error['message'] = 'Invalid email address';
                 exit(json_encode($this->_error));
             }
 
             if (empty($data['password'])) {
                 $this->_error['error'] = 1;
-                $this->_error['element'] = 'input[name="data[password]"]';
+                $this->_error['element'] = 'input[name="form[password]"]';
                 $this->_error['message'] = 'Password is required';
                 exit(json_encode($this->_error));
             }
@@ -173,7 +180,7 @@ class AdministratorController extends AdminAppController {
             $data['guid'] = uniqid();
             $data['created'] = time();
             $data['modified'] = time();
-            $data['type'] = "register";
+            $data['type'] = "registered";
 
             $this->Admin->create();
             $this->Admin->save($data);
@@ -189,33 +196,32 @@ class AdministratorController extends AdminAppController {
         if ($this->request->is('ajax') && $this->request->is('post')) {
             $this->autoRender = false;
 
-            $data = $this->request->data('data');
-            $action = $this->request->query('action');
+            $data = $this->request->data('form');
 
             if (empty($data['name'])) {
                 $this->_error['error'] = 1;
-                $this->_error['element'] = 'input[name="data[name]"]';
-                $this->_error['message'] = 'Customer name is required';
+                $this->_error['element'] = 'input[name="form[name]"]';
+                $this->_error['message'] = 'Administrator name is required';
                 exit(json_encode($this->_error));
             }
 
-            if ($this->_validate("username", $data['name']) == false) {
+            if (!$this->_validate("username", $data['name'])) {
                 $this->_error['error'] = 1;
-                $this->_error['element'] = 'input[name="data[name]"]';
+                $this->_error['element'] = 'input[name="form[name]"]';
                 $this->_error['message'] = 'Invalid name, [a-z]...[0-9]...';
                 exit(json_encode($this->_error));
             }
 
             if (empty($data['email'])) {
                 $this->_error['error'] = 1;
-                $this->_error['element'] = 'input[name="data[email]"]';
+                $this->_error['element'] = 'input[name="form[email]"]';
                 $this->_error['message'] = 'Email is required';
                 exit(json_encode($this->_error));
             }
 
-            if ($this->_validate("email", $data['email']) == false) {
+            if (!$this->_validate("email", $data['email'])) {
                 $this->_error['error'] = 1;
-                $this->_error['element'] = 'input[name="data[email]"]';
+                $this->_error['element'] = 'input[name="form[email]"]';
                 $this->_error['message'] = 'Invalid email address';
                 exit(json_encode($this->_error));
             }
@@ -245,7 +251,7 @@ class AdministratorController extends AdminAppController {
             }
 
             $data['modified'] = time();
-            $data['type'] = "register";
+            $data['type'] = "registered";
 
             if (isset($data['guid'])) {
                 unset($data['guid']);
@@ -295,7 +301,11 @@ class AdministratorController extends AdminAppController {
         $id = $this->request->query('id');
         $this->loadModel('Admin');
 
-        $count = $this->Admin->find('count', array("conditions" => array('active' => 1)));
+        $count = $this->Admin->find('count', array(
+            "conditions" => array(
+                'active' => 1)
+        ));
+        
         if ($count <= 1) {
             $this->_error['error'] = 1;
             $this->_error['message'] = "This is the last admin account, you can't delete it.";
@@ -315,28 +325,28 @@ class AdministratorController extends AdminAppController {
 
             if (empty($data['name'])) {
                 $this->_error['error'] = 1;
-                $this->_error['element'] = 'input[name="data[name]"]';
-                $this->_error['message'] = 'Customer name is required';
+                $this->_error['element'] = 'input[name="form[name]"]';
+                $this->_error['message'] = 'Administrator name is required';
                 exit(json_encode($this->_error));
             }
 
             if (preg_match("/^[a-z]{1,}|[a-z]{1,}[0-9]{1,}$/i", $data['name']) == false) {
                 $this->_error['error'] = 1;
-                $this->_error['element'] = 'input[name="data[name]"]';
+                $this->_error['element'] = 'input[name="form[name]"]';
                 $this->_error['message'] = 'Invalid name, [a-z]...[0-9]...';
                 exit(json_encode($this->_error));
             }
 
             if (empty($data['email'])) {
                 $this->_error['error'] = 1;
-                $this->_error['element'] = 'input[name="data[email]"]';
+                $this->_error['element'] = 'input[name="form[email]"]';
                 $this->_error['message'] = 'Email is required';
                 exit(json_encode($this->_error));
             }
 
             if (preg_match("/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/i", $data['email']) == false) {
                 $this->_error['error'] = 1;
-                $this->_error['element'] = 'input[name="data[email]"]';
+                $this->_error['element'] = 'input[name="form[email]"]';
                 $this->_error['message'] = 'Invalid email address';
                 exit(json_encode($this->_error));
             }
@@ -363,7 +373,7 @@ class AdministratorController extends AdminAppController {
             }
 
             $data['modified'] = time();
-            $data['type'] = "register";
+            $data['type'] = "registered";
 
             if (isset($data['guid'])) {
                 unset($data['guid']);

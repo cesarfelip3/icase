@@ -28,7 +28,7 @@ $admin_product = $base . "product";
                                 <label class="control-label" for="disabledInput">Captcha</label>
                                 <div class="controls">
                                     <img id="captcha" src="<?php echo $base . 'index/captcha'; ?>" alt="" /> 
-                                    <a href="javascript:void(0);" onclick="javascript:document.images.captcha.src = '<?php echo $base; ?>index/captcha/?' + Math.round(Math.random(0) * 1000) + 1">Reload image</a>
+                                    <a tabindex="-1" href="javascript:void(0);" onclick="javascript:document.images.captcha.src = '<?php echo $base; ?>index/captcha/?' + Math.round(Math.random(0) * 1000) + 1">Reload image</a>
                                     <br/>
                                     <input type="text" name="signin[captcha]" />
                                 </div>

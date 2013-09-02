@@ -18,6 +18,7 @@ Keeping master to be the updated one.
 1. AdminAppController.php
 2. AdminController.php
 3. AdministratorController.php
+4. MemberController.php - on working....
 
 
 Update
