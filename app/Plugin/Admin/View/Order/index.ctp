@@ -36,11 +36,7 @@
         </div>
         <form id="form-edit" method="POST">
             <div class="row">
-                <div class="span12 listing-buttons">
-<!--                    <a class="btn btn-primary" href="javascript:">Settings</a>-->
-<!--                    <a class="btn btn-primary" onclick="save('edit/?id=0')" href="javascript:">Update Selected</a>-->
-                </div>
-                <div class="span12">
+                <div class="span8">
                     <div class="slate">
                         <div class="page-header">
                             <div class="btn-group pull-right hide">
@@ -68,24 +64,37 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $i = 0; ?>
+                                <?php $i = $page * $limit; ?>
                                 <?php if (!empty($data)) : ?>
-                                    <?php foreach ($data as $value) : ?>
+                                    <?php foreach ($data as $value) : $value=$value['Order'];?>
                                         <tr>
-                                            <td><input type="checkbox" name="order[selected][]" value="<?php echo $value['Order']['id']; ?>" /></td>
-                                            <td><a href="<?php echo $base; ?>order/view/?id=<?php echo $value['Order']['guid']; ?>" style="font-size:14px;">#<?php echo $value['Order']['guid']; ?> - <?php echo $value['Order']['title']; ?></a> <span class="label label-info"><?php echo $value['Order']['status']; ?></span><br /><span class="meta" style="color:black;font-size:14px;"><?php echo date("F j, Y, g:i a", $value['Order']['created']); ?></span></td>
-                                            <td class="value">
-                                                <?php echo $value['Order']['quantity']; ?>
+                                            <td>
+                                                <?php echo ++$i; ?>
+                                            </td>
+                                            <td>
+                                                <a href="<?php echo $base; ?>order/view/?id=<?php echo $value['guid']; ?>" style="font-size:14px;">
+                                                    <span style="color:#888">#<?php echo $value['guid']; ?></span><br/>
+                                                    <?php echo $value['title']; ?>
+                                                </a>
+                                                <br/>
+                                                <span class="label label-info"><?php echo $value['status']; ?></span>
+                                                <br/>
+                                                <span class="meta" style="color:black;font-size:14px;">
+                                                    <?php echo date("F j, Y, g:i a", $value['created']); ?>
+                                                </span>
                                             </td>
                                             <td class="value">
-                                                $<?php echo $value['Order']['amount']; ?>
+                                                <?php echo $value['quantity']; ?>
+                                            </td>
+                                            <td class="value">
+                                                $<?php echo $value['amount']; ?>
                                             </td>
                                             <td class="value" style="text-transform: capitalize;">
-                                                <?php echo $value['Order']['status']; ?>
+                                                <?php echo $value['status']; ?>
                                             </td>
                                             <td class="actions">
-<!--                                                <a class="btn btn-small btn-primary" onclick="save('edit/?id=<?php echo $value['Order']['id']; ?>')" href="javascript:">Update</a>-->
-                                                <a class="btn btn-small btn-primary" href="<?php echo $base; ?>order/view/?id=<?php echo $value['Order']['guid']; ?>">View Order</a>
+<!--                                                <a class="btn btn-small btn-primary" onclick="save('edit/?id=<?php echo $value['id']; ?>')" href="javascript:">Update</a>-->
+                                                <a class="btn btn-small btn-primary" href="<?php echo $base; ?>order/view/?id=<?php echo $value['guid']; ?>">View</a>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -94,6 +103,10 @@
                         </table>
                     </div>
                 </div>
+                <div class="span4" id="box-order-new">
+                </div>
+            </div>
+            <div class="row">
                 <div class="span6">
                     <?php echo $this->element("pagination", array("plugin" => "Admin", "page" => $page, "form" => "#form-filter")); ?>
                 </div>
@@ -105,6 +118,11 @@
     </div>
 </div>
 <script>
+$(document).ready (
+    function () {
+        order_load ();
+});
+    
 function save(action, button) {
         
         var data = "";
@@ -145,5 +163,23 @@ function save(action, button) {
 
         }).fail(function() {
         });
-    }    
+    }
+    
+    function order_load () 
+    {
+        jQuery.ajax({
+            url: "<?php echo $base; ?>order/fetch?action=new",
+            type: "GET",
+            beforeSend: function(xhr) {
+                showAlert2 ("Loading......");
+            }
+        }).done(function(data) {
+
+            hideAlert ();
+            $("#box-order-new").html (data);
+
+        }).fail(function() {
+            hideAlert ();
+        });
+     }
 </script>

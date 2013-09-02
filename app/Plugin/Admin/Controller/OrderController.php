@@ -26,7 +26,7 @@ class OrderController extends AdminAppController {
         $limit = $this->request->query('limit');
 
         if (empty($limit)) {
-            $limit = 25;
+            $limit = 15;
         }
 
         if (empty($page)) {
@@ -115,24 +115,42 @@ class OrderController extends AdminAppController {
         ));
     }
 
-    public function add() {
-        
-    }
-
     public function view() {
         $id = $this->request->query('id');
 
         $this->loadModel('Order');
-        $order = $this->Order->find('first', array('conditions' => array('guid' => $id)));
+        $order = $this->Order->find('first', array(
+            'conditions' => array(
+                'guid' => $id)
+        ));
+
+        if (empty($order['Order']['group_guid'])) {
+            $group = null;
+        } else {
+            $group = $this->Order->find('all', array(
+                "conditions" => array(
+                    "group_guid" => $order['Order']['group_guid']
+                )
+            ));
+            
+            if (count ($group) <= 1) {
+                $group = null;
+            }
+        }
 
         $this->loadModel('UserDeliverInfo');
-        $deliver = $this->UserDeliverInfo->find('first', array('conditions' => array('guid' => $order['Order']['deliver_guid'])));
+        $deliver = $this->UserDeliverInfo->find('first', array(
+            'conditions' => array(
+                'guid' => $order['Order']['deliver_guid'])));
 
         $this->loadModel('UserBillInfo');
-        $bill = $this->UserBillInfo->find('first', array('conditions' => array('guid' => $order['Order']['bill_guid'])));
+        $bill = $this->UserBillInfo->find('first', array(
+            'conditions' => array(
+                'guid' => $order['Order']['bill_guid'])));
 
         $this->set(
                 array(
+                    "group" => $group,
                     "data" => $order['Order'],
                     "status" => $this->status,
                     "deliver" => $deliver['UserDeliverInfo'],
@@ -261,7 +279,7 @@ class OrderController extends AdminAppController {
             $this->error['message'] = $e->getMessage();
             exit(json_encode($this->error));
         }
-        
+
         exit(json_encode($this->error));
     }
 
@@ -293,6 +311,24 @@ class OrderController extends AdminAppController {
 
             $this->layout = false;
             $this->render('fetch.user');
+        }
+
+        if ($action == 'new' && $this->request->is('ajax')) {
+            $this->loadModel('Order');
+            $orders = $this->Order->find('all', array(
+                "order" => "modified DESC",
+                'conditions' => array(
+                    'status' => 'paid',
+            )));
+
+            if (!empty($orders)) {
+                $this->set('data', $orders);
+            } else {
+                $this->set('data', null);
+            }
+
+            $this->layout = false;
+            $this->render('fetch.new');
         }
     }
 

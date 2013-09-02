@@ -80,16 +80,27 @@
                             <thead>
                                 <tr>
                                     <th>Orders</th>
-                                    <th class="value">Value</th>
+                                    <th>Amount</th>
+                                    <th>QTY</th>
                                     <th class="value">Status</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><a href=""><?php echo $data['title']; ?></a> <span class="label label-info"><?php echo $data['status']; ?></span></td>
-                                    <td class="value">
+                                    <td>
+                                        <a href="">
+                                            <?php echo $data['title']; ?>
+                                        </a><br/>
+                                        <span class="label label-info">
+                                            <?php echo $data['status']; ?>
+                                        </span>
+                                    </td>
+                                    <td>
                                         $<?php echo $data['amount']; ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $data['quantity']; ?>
                                     </td>
                                     <td>
                                         <select class="input-medium" name="order[<?php echo $data['id']; ?>][status]" onchange="save('edit/?id=<?php echo $data['id']; ?>')">
@@ -99,18 +110,64 @@
                                         </select>
                                     </td>
                                     <td>
-
-                                        <a class="btn btn-primary" onclick="send_email();" data-loading-text="Saving..." id="btn-sendemail">Send Email Now</a>
+                                        <a class="btn btn-primary" onclick="send_email();" data-loading-text="Saving..." id="btn-sendemail">Send Email</a>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
+                    <div class="slate">
+                        <div class="page-header">
+                            <h2>Ordered Items (in same transaction)</h2>
+                        </div>
+                        <table class="orders-table table">
+                            <thead>
+                                <tr>
+                                    <th>Orders</th>
+                                    <th>Amount</th>
+                                    <th>QTY</th>
+                                    <th class="value">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if (!empty ($group)) : ?>
+                                <?php foreach ($group as $value) : $value = $value['Order']; ?>
+                                <tr>
+                                    <td>
+                                        <a href="">
+                                            <?php echo $value['title']; ?>
+                                        </a><br/>
+                                        <span class="label label-info">
+                                            <?php echo $value['status']; ?>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        $<?php echo $value['amount']; ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $value['quantity']; ?>
+                                    </td>
+                                    <td>
+                                        <select class="input-medium" name="order[<?php echo $value['id']; ?>][status]" onchange="save('edit/?id=<?php echo $data['id']; ?>')">
+                                            <?php foreach ($status as $key => $state) : ?>
+                                                <option value="<?php echo $key; ?>" <?php if ($value['status'] == $key) echo 'selected="selected"'; ?>><?php echo $state; ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <?php endforeach; ?>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
+                        <div class="well">
+                            <p>There items were ordered and paid in one transaction for the same user. You should deliver all items at same time.</p>
+                        </div>
+                    </div>
                 </div>
                 <div class="span5">
                     <div class="input-prepend">
                         <span class="add-on" style="width:80px;">Email</span>
-                        <input class="input-medium" id="prependedInput" type="text" value="<?php echo $data['notification_email']; ?>" name="email[email]">
+                        <input class="input-xlarge" id="prependedInput" type="text" value="<?php echo $data['notification_email']; ?>" name="email[email]">
                     </div>
                     <div class="input-prepend">
                         <span class="add-on" style="width:80px;">Subject</span>

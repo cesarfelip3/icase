@@ -22,6 +22,9 @@ Version 0.2
 2. Front / Code Review / Bug Fix / Reusability / Test
 
 3. i18n - Brazil Language / Time zone / Location
+4. Order - group orders for one user
+
+
 
 2013.09.02
 
@@ -34,18 +37,17 @@ Version 0.2
 Update
 ========
 
-
 Upgrade From 0.1 to 0.2
 
-1. all product/images - small/medium/origin -named changed from _150 to _small, _500 to _medium
-2. remove product/featured (150w/origin) - too complex and poor reusability
-3. Not tested yet
-4. Routers for plugin, so it's safe, avoid /admin leaked
-5. Added Maintainance Page - switch to maintainace easily
-6. Bootstrap for plugin, simply define some global constant here
-7. Component for plugin
-8. Model - debug
-9. Payment Gateway - move to component, so we can add more payment method there
+1.  all product/images - small/medium/origin -named changed from _150 to _small, _500 to _medium
+2.  remove product/featured (150w/origin) - too complex and poor reusability
+3.  Routers for plugin, so it's safe, avoid /admin leaked
+4.  Added Maintainance Page - switch to maintainace easily
+5.  Bootstrap for plugin, simply define some global constant here
+6.  Component for plugin
+7.  Model - debug
+8.  Payment Gateway - move to component, so we can add more payment method there
+9.  Order table scheme changed
 
 SEO basic --
 
@@ -67,6 +69,13 @@ SEO basic --
 
 Discussion
 =============
+
+About Order - 
+
+If one user order multi different items, as one item will be in one order <db>, so there will be many orders for one user, if we can group these orders by this user, could be better...
+
+
+
 
 To save the space, and utilize the resource of server - 
 
@@ -95,8 +104,6 @@ PHP (View) -
 2. $data (multi-array) : $value = $value['Model']; performance??
 2. more data types, ${data type}, ....
 3. 
-
-
 
 Security
 ============
