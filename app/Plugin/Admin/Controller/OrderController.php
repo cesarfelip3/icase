@@ -102,8 +102,8 @@ class OrderController extends AdminAppController {
             "status='fail'" => "Failed"
         );
 
-        print_r ($data);
-        exit;
+        //print_r ($data);
+        //exit;
 
         $this->set(array(
             "data" => $data,
