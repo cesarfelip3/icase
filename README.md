@@ -13,6 +13,16 @@ Now version 2.0 => master, so I removed version 2.0 and am working on master.
 That's better way, if we want to make a new site with new theme, we just branch it to another version.
 Keeping master to be the updated one.
 
+Road Map
+==============
+
+Version 0.2
+
+1. Admin / Code Review / Bug Fix / Reusability / Test
+2. Front / Code Review / Bug Fix / Reusability / Test
+
+3. i18n - Brazil Language / Time zone / Location
+
 2013.09.02
 
 1. AdminAppController.php
