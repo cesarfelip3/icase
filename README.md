@@ -19,7 +19,8 @@ Update
 
 1. I saw the image of some product wasn't resized correctly on example site, is it a bug?
 2. SEO - image alt - done
-3. Orders - in a cart, should deliver these orders one time...
+3. Orders - in a cart, should deliver these orders one time
+4. CakePHP - core.php - if (debug == 0) model will never refreshed, if debug > 0 will refresh...
 
 
 SEO basic --
