@@ -26,8 +26,8 @@ class CatalogueController extends AppController {
                 $this->_error['message'] = "Your keywords are empty";
                 exit(json_encode($this->_error));
             }
-            
-            if (!preg_match ("/^[0-9a-zA-Z ]{1,}$/i", $keywords)) {
+
+            if (!preg_match("/^[0-9a-zA-Z ]{1,}$/i", $keywords)) {
                 $this->_error['error'] = 1;
                 $this->_error['message'] = "Invalid keywords";
                 exit(json_encode($this->_error));
@@ -58,17 +58,19 @@ class CatalogueController extends AppController {
         $keywords = @preg_replace("/ +/i", " ", $keywords);
         $keywords = $keywords;
         $keywords = explode(" ", $keywords);
-        
+
         foreach ($keywords as $keyword) {
-            if (!preg_match ("/^[0-9a-zA-Z]{1,}$/i", $keyword)) {
-                $this->set ('data', null);
+            if (!preg_match("/^[0-9a-zA-Z]{1,}$/i", $keyword)) {
+                $this->set('data', null);
                 return;
             }
         }
 
         foreach ($keywords as $keyword) {
-            $conditions['or'][] = array('name LIKE' => "%{$keyword}%");
-            $conditions['or'][] = array('description LIKE' => "%{$keyword}%");
+            $conditions['or'][] = array(
+                'name LIKE' => "%{$keyword}%",
+                'description LIKE' => "%{$keyword}%"
+            );
         }
 
         $cond = array("AND" => array("type" => "product", $conditions));
@@ -84,17 +86,19 @@ class CatalogueController extends AppController {
         );
 
         $pages = $this->Product->find('count', array("conditions" => $cond));
-        
+
         $pagenation = 0;
         if ($pages > 24) {
-            $pages = ceil ($pages / 24);
+            $pages = ceil($pages / 24);
             $pagenation = 1;
         }
 
         if (!empty($data)) {
             foreach ($data as $key => $value) {
-                $value['Product']['featured'] = unserialize($value['Product']['featured']);
-                $data[$key] = $value;
+                if (!empty($value['Product']['featured'])) {
+                    $value['Product']['featured'] = unserialize($value['Product']['featured']);
+                    $data[$key]['Product']['image'] = $this->webroot . "uploads/product/" . pathinfo ($value['Product']['featured'][0], PATHINFO_FILENAME) . "_small.png";
+                }
             }
         }
 
@@ -126,6 +130,13 @@ class CatalogueController extends AppController {
         $data = $data['Product'];
 
         $data['featured'] = unserialize($data['featured']);
+        if (is_array ($data['featured'])) {
+            foreach ($data['featured'] as $key => $value) {
+                $data['featured'][$key] = $this->webroot . "uploads/product/" . pathinfo ($value, PATHINFO_FILENAME) . "_small.png";
+            }
+            
+            $data['image'] = $this->webroot . "uploads/product/" . pathinfo($data['featured'][0], PATHINFO_FILENAME) . "_medium.png";
+        }
 
         $this->set("_title", $this->_meta['_title'] . "|" . $slug);
         $this->set("_description", $data['seo_description']);
@@ -167,10 +178,10 @@ class CatalogueController extends AppController {
         if (empty($data)) {
             $this->redirect(array("controller" => "index", "action" => "index"));
         }
-        
-        $page = $this->request->query ('page');
-        
-        if (empty ($page)) {
+
+        $page = $this->request->query('page');
+
+        if (empty($page)) {
             $page = 0;
         } else {
             $page = intval($page);
@@ -181,13 +192,13 @@ class CatalogueController extends AppController {
         $this->set('category_guid', $data['Category']['guid']);
 
         /*
-        if (!empty($data) && $data['Category']['level'] > 0) {
-            $parent = $this->Category->find('first', array("conditions" => array("guid" => $data['Category']['parent_guid'])));
-            $this->set('breadcrumbs', array(
-                $parent,
-                $data,
-            ));
-        }*/
+          if (!empty($data) && $data['Category']['level'] > 0) {
+          $parent = $this->Category->find('first', array("conditions" => array("guid" => $data['Category']['parent_guid'])));
+          $this->set('breadcrumbs', array(
+          $parent,
+          $data,
+          ));
+          } */
 
         $this->loadModel('Product');
 
@@ -211,7 +222,7 @@ class CatalogueController extends AppController {
             'page' => $page + 1,
             'fields' => array("Product.*")
         ));
-        
+
         $pages = $this->Product->find('count', array(
             'joins' => array(
                 array(
@@ -235,8 +246,7 @@ class CatalogueController extends AppController {
             foreach ($data as $key => $value) {
                 if (!empty($value['Product']['featured'])) {
                     $value['Product']['featured'] = unserialize($value['Product']['featured']);
-                    $data[$key]['Product']['image'] = $value['Product']['featured']['150w'][0];
-                    
+                    $data[$key]['Product']['image'] = $this->webroot . "uploads/product/" . pathinfo ($value['Product']['featured'][0], PATHINFO_FILENAME) . "_small.png";
                 }
             }
         }
@@ -253,9 +263,9 @@ class CatalogueController extends AppController {
         if ($this->request->is('ajax')) {
             $this->layout = false;
             $guid = $this->request->query('id');
-            $current = $this->request->query ('cur');
+            $current = $this->request->query('cur');
 
-            if (empty($guid) || empty ($current)) {
+            if (empty($guid) || empty($current)) {
                 $this->set('slug', null);
                 $this->set('data', null);
                 $this->render("category.ajax");

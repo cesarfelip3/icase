@@ -25,7 +25,7 @@
                     <div class="span3">
                         <div class="thumbnail" style="background-image:none;background-color:white;">
                             <a href="<?php echo $this->webroot . "product/" . $value['Product']['slug']; ?>">
-                                <img src="<?php echo $this->webroot . "uploads/product/" . $value['Product']['image']; ?>" alt="<?php echo $value['Product']['name']; ?>" style="width:100%;" alt="<?php echo $value['Product']['name']; ?>">
+                                <img src="<?php echo $value['Product']['image']; ?>" alt="<?php echo $value['Product']['name']; ?>" style="width:100%;" alt="<?php echo $value['Product']['name']; ?>">
                             </a>
                             <div class="caption">
                                 <a href="<?php echo $this->webroot . "product/" . $value['Product']['slug']; ?>" class="prop-title" style="text-transform: uppercase;"><?php echo $value['Product']['name']; ?></a>
@@ -48,7 +48,7 @@
                     <div class="span3">
                         <div class="thumbnail" style="background-image:none;background-color:white;">
                             <a href="<?php echo $this->webroot . "product/" . $value['Product']['slug']; ?>">
-                                <img src="<?php echo $this->webroot . "uploads/product/" . $value['Product']['image']; ?>" alt="<?php echo $value['Product']['name']; ?>" style="width:100%;;" alt="<?php echo $value['Product']['name']; ?>">
+                                <img src="<?php echo $value['Product']['image']; ?>" alt="<?php echo $value['Product']['name']; ?>" style="width:100%;;" alt="<?php echo $value['Product']['name']; ?>">
                             </a>
                             <div class="caption">
                                 <a href="<?php echo $this->webroot . "product/" . $value['Product']['slug']; ?>" class="prop-title" style="text-transform: uppercase;"><?php echo $value['Product']['name']; ?></a>

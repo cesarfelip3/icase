@@ -83,9 +83,11 @@ class ProductController extends AdminAppController {
 
                 if ($value['Product']['type'] == 'product') {
                     $value['Product']['featured'] = unserialize($value['Product']['featured']);
-                    $value['Product']['image'] = $value['Product']['featured']['150w'][0];
+
+                    $filename = pathinfo($value['Product']['featured'][0], PATHINFO_FILENAME); // . "_small.png"; 
+                    $value['Product']['image'] = $filename . "_small.png";
                     $value['Product']['image'] = $this->webroot . "uploads/product/" . $value['Product']['image'];
-                } 
+                }
 
                 $data[$key] = $value;
             }
@@ -181,18 +183,16 @@ class ProductController extends AdminAppController {
                 $data['featured'] = trim($data['featured'], "-");
                 $images = explode("-", $data['featured']);
 
-                $data['featured'] = array();
-                $data['featured']['origin'] = $images;
-                $data['image'] = $images[0];
-
-                $data['featured']['150w'] = array();
+                $data['featured'] = $images;
+                if (!empty($images)) {
+                    $data['image'] = $images[0];
+                }
 
                 foreach ($images as $value) {
+                    $filename = pathinfo($value, PATHINFO_FILENAME);
                     @copy(APP . 'webroot/uploads/' . $value, APP . 'webroot/uploads/product/' . $value);
-                    $value = pathinfo($value, PATHINFO_FILENAME) . ".png";
-                    $data['featured']['150w'][] = str_replace(".", "_150.", $value);
-                    @copy(APP . 'webroot/uploads/' . str_replace(".", "_150.", $value), APP . 'webroot/uploads/product/' . str_replace(".", "_150.", $value));
-                    @copy(APP . 'webroot/uploads/' . str_replace(".", "_500.", $value), APP . 'webroot/uploads/product/' . str_replace(".", "_500.", $value));
+                    @copy(APP . 'webroot/uploads/' . $value . "_small.png", APP . 'webroot/uploads/product/' . $value . "_small.png");
+                    @copy(APP . 'webroot/uploads/' . $value . "_medium.png", APP . 'webroot/uploads/product/' . $value . "_medium.png");
                 }
 
                 $data['featured'] = serialize($data['featured']);
@@ -276,7 +276,7 @@ class ProductController extends AdminAppController {
             $data['created'] = date("F j, Y, g:i a", $data['created']);
             $data['modified'] = date("F j, Y, g:i a", $data['modified']);
         }
-        
+
         $id = $data['id'];
         if (preg_match("/\-P$id/", trim($data['slug']))) {
             $data['slug'] = str_replace("-P" . $data['id'], "", $data['slug']);
@@ -363,53 +363,48 @@ class ProductController extends AdminAppController {
 
                 if (!empty($element)) {
 
-
                     if (!empty($data['featured'])) {
-                        if (!empty($element['Product']['featured'])) {
-                            $images = unserialize($element['Product']['featured']);
-                            foreach ($images['origin'] as $value) {
-                                @unlink(APP . 'webroot/uploads/product/' . $value);
 
-                                if (file_exists(APP . "webroot/uploads/product/" . pathinfo($value, PATHINFO_FILENAME) . "_150.png")) {
-                                    $value = pathinfo($value, PATHINFO_FILENAME) . ".png";
-                                }
-                                @unlink(APP . 'webroot/uploads/product/' . str_replace(".", "_500.", $value));
-                                @unlink(APP . 'webroot/uploads/product/' . str_replace(".", "_150.", $value));
-                            }
-                        }
                         $data['featured'] = trim($data['featured'], "-");
                         $images = explode("-", $data['featured']);
 
-                        $data['featured'] = array();
-                        $data['featured']['origin'] = $images;
-                        $data['image'] = $images[0];
-
-                        $data['featured']['150w'] = array();
-
-                        foreach ($images as $value) {
-                            @copy(APP . 'webroot/uploads/' . $value, APP . 'webroot/uploads/product/' . $value);
-                            $value = pathinfo($value, PATHINFO_FILENAME) . ".png";
-                            $data['featured']['150w'][] = str_replace(".", "_150.", $value);
-                            @copy(APP . 'webroot/uploads/' . str_replace(".", "_150.", $value), APP . 'webroot/uploads/product/' . str_replace(".", "_150.", $value));
-                            @copy(APP . 'webroot/uploads/' . str_replace(".", "_500.", $value), APP . 'webroot/uploads/product/' . str_replace(".", "_500.", $value));
-                        }
-
-                        $data['featured'] = serialize($data['featured']);
-
-                        if ($data['featured'] == $element['Product']['featured']) {
+                        $data['featured'] = $images;
+                        if (serialize($images) == $element['Product']['featured']) {
                             unset($data['featured']);
                         } else {
-                            
+
+                            if (!empty($images)) {
+                                $data['image'] = $images[0];
+                            }
+
+                            foreach ($images as $value) {
+                                $filename = pathinfo($value, PATHINFO_FILENAME);
+                                @copy(APP . 'webroot/uploads/' . $value, APP . 'webroot/uploads/product/' . $value);
+                                @copy(APP . 'webroot/uploads/' . $filename . "_small.png", APP . 'webroot/uploads/product/' . $filename . "_small.png");
+                                @copy(APP . 'webroot/uploads/' . $filename . "_medium.png", APP . 'webroot/uploads/product/' . $filename . "_medium.png");
+                            }
+
+                            $data['featured'] = serialize($data['featured']);
+
+                            if (!empty($element['Product']['featured'])) {
+                                $images = unserialize($element['Product']['featured']);
+                                foreach ($images as $value) {
+                                    $filename = pathinfo($value, PATHINFO_FILENAME);
+                                    @unlink(WWW_ROOT . 'uploads/product/' . $value);
+                                    @unlink(WWW_ROOT . 'uploads/product/' . $filename . "_small.png");
+                                    @unlink(WWW_ROOT . 'uploads/product/' . $filename . "_medium.png");
+                                }
+                            }
                         }
                     }
 
 
                     $data['modified'] = time();
                     $this->Product->id = $data['id'];
-                    
+
                     $data['slug'] = trim($data['slug'], "-");
                     $data['slug'] = $data['slug'] . "-P" . $data['id'];
-                    unset ($data['id']);
+                    unset($data['id']);
                     $this->Product->set($data);
                     $this->Product->save();
 

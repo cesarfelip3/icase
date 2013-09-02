@@ -5,23 +5,20 @@ App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
 App::uses('CakeEmail', 'Network/Email');
 
 class AppController extends Controller {
-    
+
     protected $_error = array(
         "error" => 1,
         "message" => "",
         "files" => array(),
         "data" => array(),
     );
-    
     protected $_identity = null;
-    
-    protected $_meta = array (
+    protected $_meta = array(
         "_sitedomain" => "",
         "_identity" => "",
         "_title" => "",
         "_description" => ""
     );
-    
     public $components = array(
         'Session',
         'Auth' => array(
@@ -44,6 +41,30 @@ class AppController extends Controller {
         'Captcha'
     );
 
+    /*
+     * Media - when the site is running long time, there are lots of images<flash or else>
+     * located on server, but some of them maybe not use any longer. We have to consider the 
+     * performance of server, or space usage of server too. The idea is : it's necessary to 
+     * delete all these images unused by cron job.
+     * 
+     * Also all media uploaded to server are random size, for the site, we use smaller size 
+     * for thumbnails, and medium size for single snapshot. 
+     * 
+     * All there values used across front and end, so I put them here.
+     * 
+     */
+    protected $_media_location = array(
+        "main" => "uploads/",
+        "product" => "uploads/product/",
+        "order" => "uploads/order/",
+        "user" => "uploads/user/",
+        "user.uploads" => "uploads/user/uploads/",
+    );
+    protected $_media_size = array(
+        "small" => 200,
+        "medium" => 500,
+    );
+
     public function beforeFilter() {
 
         $this->_meta['_sitedomain'] = env("SERVER_NAME");
@@ -61,7 +82,7 @@ class AppController extends Controller {
 
     public function layoutInit() {
 
-        if (!($this->request->is('ajax') || $this->request->is ('post'))) {
+        if (!($this->request->is('ajax') || $this->request->is('post'))) {
             $categories = Cache::read("category_top");
 
             if (empty($categories)) {
@@ -85,7 +106,7 @@ class AppController extends Controller {
     //=================================================
     protected function _email($from, $to, $subject, $content, $template, $vars = array()) {
         $Email = new CakeEmail();
-        $Email->config ('smtp');
+        $Email->config('smtp');
         $Email->template($template);
         $Email->viewVars($vars);
         $Email->emailFormat('html');
@@ -94,19 +115,18 @@ class AppController extends Controller {
         $Email->subject($subject);
         $Email->send();
     }
-    
-    protected function _validate ($type, $value)
-    {
+
+    protected function _validate($type, $value) {
         $ret = false;
         switch ($type) {
-            case "email" : 
+            case "email" :
                 $ret = @preg_match("/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/i", $value);
                 break;
-            case "username" : 
+            case "username" :
                 $ret = @preg_match("/^[a-z]{1,}|[a-z]{1,}[0-9]{1,}$/i", $value);
                 break;
         }
-        
+
         return $ret;
     }
 

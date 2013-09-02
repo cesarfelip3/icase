@@ -26,7 +26,7 @@ class IndexController extends AppController {
             foreach ($data as $key => $value) {
                 if (!empty($value['Product']['featured'])) {
                     $value['Product']['featured'] = unserialize($value['Product']['featured']);
-                    $data[$key]['Product']['image'] = $value['Product']['featured']['150w'][0];
+                    $data[$key]['Product']['image'] = $this->webroot . "uploads/product/" . pathinfo ($value['Product']['featured'][0], PATHINFO_FILENAME) . "_small.png";
                 }
             }
         }

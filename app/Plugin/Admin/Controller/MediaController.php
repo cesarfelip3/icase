@@ -339,7 +339,7 @@ class MediaController extends AdminAppController {
             rename("{$filePath}.part", $target);
         }
 
-        $url150 = $this->base . "/uploads/$action/" . $filename . "_150.png";
+        $url150 = $this->base . "/uploads/$action/" . $filename . "_small.png";
 
         $this->_error['error'] = 0;
         $this->_error['message'] = 'Success';
@@ -349,17 +349,13 @@ class MediaController extends AdminAppController {
             'filename' => $filename,
             'url' => $this->base . "/uploads/$action/" . $name,
             'url150' => "",
-            'extension' => $extension,
-            "width" => 150,
-            "height" => 150,
         );
 
-        $image_size = getimagesize($target);
-        $this->_error['files']['width'] = $image_size[0];
-        $this->_error['files']['width'] = $image_size[1];
+        $size = getimagesize($target);
+        $this->_error['files']['width'] = $size[0];
+        $this->_error['files']['height'] = $size[1];
 
-
-        require_once APP . 'Vendor' . DS . "Zebra/Zebra_Image.php";
+        require_once APP . 'Vendor' . DIRECTORY_SEPARATOR . "Zebra/Zebra_Image.php";
         $image = new Zebra_Image();
 
         $image->source_path = $target;
@@ -370,27 +366,35 @@ class MediaController extends AdminAppController {
         $image->enlarge_smaller_images = true;
         $image->preserve_time = true;
 
-        // resize the image to exactly 100x100 pixels by using the "crop from center" method
-        // (read more in the overview section or in the documentation)
-        //  and if there is an error, check what the error is about
+        $image->target_path = $targetDir . DIRECTORY_SEPARATOR . $filename . "_medium.png";
 
-        $size = getimagesize($target);
+        $width = $this->_media_size['product']['medium'];
+        $height = $this->_media_size['product']['medium'];
 
-        $image->target_path = $targetDir . DIRECTORY_SEPARATOR . $filename . "_500.png";
-
-        if (!$image->resize(500, 500, ZEBRA_IMAGE_BOXED, -1)) {
+        if (!$image->resize($width, $height, ZEBRA_IMAGE_BOXED, -1)) {
             $this->_error['error'] = 1;
-            $this->_error['message'] = "Resize to 500 wrong";
+            $this->_error['message'] = "Resize to $width wrong";
+        }
+
+        $image->target_path = $targetDir . DIRECTORY_SEPARATOR . $filename . "_small.png";
+
+        $width = $this->_media_size['product']['small'];
+        $height = $this->_media_size['product']['small'];
+
+        if (!$image->resize($width, $height, ZEBRA_IMAGE_BOXED, -1)) {
+            $this->_error['error'] = 1;
+            $this->_error['message'] = "Resize to $width wrong";
+        }
+
+        if (!empty($action)) {
+            $url150 = $this->base . "/uploads/$action/" . $filename . "_small.png";
+        } else {
+            $url150 = $this->base . "/uploads/" . $filename . "_small.png";
         }
         
-        $image->target_path = $targetDir . DIRECTORY_SEPARATOR . $filename . "_150.png";
-        if (!$image->resize(200, 200, ZEBRA_IMAGE_BOXED, -1)) {
-
-            $this->_error['error'] = 1;
-            $this->_error['message'] = "Resize to 200 wrong";
-        }
-
+        $this->_error['error'] = 0;
         $this->_error['files']['url150'] = $url150;
+
         exit($this->_json($this->_error));
     }
 
