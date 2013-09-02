@@ -22,6 +22,9 @@ Update
 3. Orders - Display all items in one cart at ADMIN, should be delivered at same time
 4. Orders - Display Transaction ID at admin, to verify payment
 5. CakePHP - core.php - if (debug == 0) model will never refreshed, if debug > 0 will refresh...
+6. Media - Now ccompatiable with master branch, so we can upgrade master to version 0.1 too!
+
+DON'T PULL ON SERVER - NEED CHANGE IMAGES AND DB......
 
 
 SEO basic --
