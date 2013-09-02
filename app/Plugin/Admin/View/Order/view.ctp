@@ -80,31 +80,51 @@
                             <thead>
                                 <tr>
                                     <th>Orders</th>
-                                    <th class="value">Value</th>
-                                    <th class="value">Status</th>
-                                    <th></th>
+                                    <th>QTY</th>
+                                    <th>Value</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php if (!empty ($group)) : ?>
+                                <?php foreach ($group as $value) : $value = $value['Order']; ?>
                                 <tr>
-                                    <td><a href=""><?php echo $data['title']; ?></a> <span class="label label-info"><?php echo $data['status']; ?></span></td>
-                                    <td class="value">
-                                        $<?php echo $data['amount']; ?>
+                                    <td>
+                                        <a href="<?php echo $base . "product/edit/?id=" . $value['product_guid']; ?>" target="new">
+                                            <?php echo $value['title']; ?>
+                                        </a>
+                                        <br/>
+                                        <span class="label label-info">
+                                            <?php echo $value['status']; ?>
+                                        </span>
                                     </td>
                                     <td>
-                                        <select class="input-medium" name="order[<?php echo $data['id']; ?>][status]" onchange="save('edit/?id=<?php echo $data['id']; ?>')">
+                                        <?php echo $value['quantity']; ?>
+                                    </td>
+                                    <td>
+                                        $<?php echo $value['amount']; ?>
+                                    </td>
+                                    <td>
+                                        <select class="input-medium" name="order[status][<?php echo $value['id']; ?>]" onchange="save('edit/?id=<?php echo $value['id']; ?>')">
                                             <?php foreach ($status as $key => $state) : ?>
-                                                <option value="<?php echo $key; ?>" <?php if ($data['status'] == $key) echo 'selected="selected"'; ?>><?php echo $state; ?></option>
+                                                <option value="<?php echo $key; ?>" <?php if ($value['status'] == $key) echo 'selected="selected"'; ?>><?php echo $state; ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </td>
-                                    <td>
-
-                                        <a class="btn btn-primary" onclick="send_email();" data-loading-text="Saving..." id="btn-sendemail">Send Email Now</a>
+                                </tr>
+                                <?php endforeach; ?>
+                                <?php else : ?>
+                                <tr>
+                                    <td colspan="3">
+                                        <em>No orders yet</em>
                                     </td>
                                 </tr>
+                                <?php endif; ?>
                             </tbody>
                         </table>
+                    </div>
+                    <div class="well">
+                        Update : all these ordered items were in same transaction by same user, and paid with one time shipment fee. You have to deliver all these ordered items at same time.
                     </div>
                 </div>
                 <div class="span5">
@@ -122,6 +142,9 @@
 <div>
 <b>Track Your Shipment:</b> <a href="https://tools.usps.com/go/TrackConfirmAction.action?tLabels=9405510200986104431161">9405510200986104431161</a><br></div>
                         </textarea>
+                    </div>
+                    <div style="padding:10px;height:50px;">
+                        <p><a class="btn btn-primary pull-right" onclick="send_email();" data-loading-text="Saving..." id="btn-sendemail">Send Email</a></p>
                     </div>
                     <div class="well">
                         Edit email content to meet your requirement.

@@ -152,6 +152,7 @@ class ShopController extends AppController {
                         "cc_expired" => $bill['cc_expired']
                 ));
 
+                
                 $payment_gateway = "AuthorizeNet";
                 $payment_result = null;
                 $result = $this->_pay($payment_gateway, $payment_data, $payment_result);
@@ -166,6 +167,14 @@ class ShopController extends AppController {
                         "transactionType" => $payment_result->transaction_type
                     );
                 }
+                
+                 
+                /*
+                $payment_gateway = "test";
+                $result = array (
+                    "transactionId" => "test",
+                    "transactionType" => "test",
+                );*/
 
                 // create user - guest
                 $user_guid = null;
@@ -234,6 +243,7 @@ class ShopController extends AppController {
                 $m2o = array();
                 $j = 0;
 
+                $group_guid = uniqid();
                 foreach ($data as $value) {
                     $orders[$i] = array(
                         "guid" => uniqid(),
@@ -241,6 +251,7 @@ class ShopController extends AppController {
                         "product_guid" => $value['Product']['guid'],
                         "deliver_guid" => $deliver_guid,
                         "bill_guid" => $bill_guid,
+                        "group_guid" => $group_guid,
                         "notification_email" => $deliver['email'],
                         "title" => $value['Product']['name'],
                         "type" => $value['Product']['type'],

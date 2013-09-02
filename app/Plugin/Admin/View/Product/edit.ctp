@@ -196,6 +196,13 @@ $admin_product = $base . "product";
             </div>
         </form>
     </div>
+    <?php if (!empty($data['featured2'])) : $images = $data['featured2']['origin']; ?>
+        <div>
+            <div class="thumbnail">
+                <img src="<?php echo $this->webroot . "uploads/product/" . $images[0]; ?>" style="">
+            </div>
+        </div>
+    <?php endif; ?>
     <div id="box-crop" class="hide">
         <div style="padding:10px;height:50px;">
             <a href="javascript:" class="btn btn-info pull-right" onclick="featured_image_crop_ajax()">Crop</a>

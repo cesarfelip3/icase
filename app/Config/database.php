@@ -59,9 +59,9 @@ class DATABASE_CONFIG {
 		'datasource' => 'Database/Mysql',
 		'persistent' => false,
 		'host' => 'localhost',
-		'login' => 'shirtsge_icase',
-		'password' => 'ouiqnl',
-		'database' => 'shirtsge_icase',
+		'login' => 'root',
+		'password' => 'root',
+		'database' => 'icase',
 		'prefix' => '',
 		//'encoding' => 'utf8',
 	);
