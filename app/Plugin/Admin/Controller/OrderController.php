@@ -153,9 +153,17 @@ class OrderController extends AdminAppController {
 
         $this->loadModel('UserBillInfo');
         $bill = $this->UserBillInfo->find('first', array('conditions' => array('guid' => $order['Order']['bill_guid'])));
+        
+        $this->loadModel('EmailHistory');
+        $emails = $this->EmailHistory->find ('all', array (
+            "conditions" => array (
+                "object_guid" => $order['Order']['group_guid']
+            )
+        ));
 
         $this->set(
                 array(
+                    "emails" => $emails,
                     "group" => $group,
                     "data" => $order['Order'],
                     "status" => $this->status,
@@ -244,10 +252,6 @@ class OrderController extends AdminAppController {
         }
     }
 
-    public function delete() {
-        
-    }
-
     public function notify() {
 
         $guid = $this->request->query('id');
@@ -314,20 +318,71 @@ class OrderController extends AdminAppController {
             $this->error['message'] = $e->getMessage();
             exit(json_encode($this->error));
         }
+        
+        $this->loadModel ('EmailHistory');
+        $this->EmailHistory->create();
+        $this->EmailHistory->save (array (
+            "guid" => uniqid(),
+            "object_guid" => $data[0]['Order']['group_guid'],
+            "from" => serialize($from),
+            "to" => $to,
+            "subject" => $subject,
+            "content" => $content,
+            "created" => time (),
+        ));
 
         exit(json_encode($this->error));
     }
-
-    protected function email($from, $to, $subject, $content, $template, $vars = array()) {
-        $Email = new CakeEmail();
-        $Email->config('smtp');
-        $Email->template($template);
-        $Email->viewVars($vars);
-        $Email->emailFormat('html');
-        $Email->from($from);
-        $Email->to($to);
-        $Email->subject($subject);
-        $Email->send();
+    
+    public function delete () 
+    {
+        $id = $this->request->query ('id');
+        $action = $this->request->query ('action');
+        
+        if ($action == "email") {
+            $this->loadModel ("EmailHistory");
+            $this->EmailHistory->id = $id;
+            $this->EmailHistory->delete ();
+        }
+        
+        if ($action == "order") {
+            $this->loadModel ("Order");
+            $order = $this->Order->find ('first', array (
+                "conditions" => array (
+                    "id" => $id,
+                )
+            ));
+            
+            if (empty ($order)) {
+                
+            } else {
+                $bill = $order['Order']['bill_guid'];
+                $deliver = $order['Order']['deliver_guid'];
+                
+                $group = $this->Order->find ('first', array (
+                    "conditions" => array (
+                        "group_guid" => $order['Order']['group_guid']
+                    )
+                ));
+                
+                if (count ($group) > 1) {
+                    exit (json_encode($this->error));
+                }
+                
+                $this->loadModel ('UserBillInfo');
+                $this->UserBillInfo->deleteAll (array ("guid" => $bill));
+                
+                $this->loadModel ('UserDeliverInfo');
+                $this->UserDeliverInfo->deleteAll (array ("guid" => $deliver));
+                
+                $this->Order->id = $id;
+                $this->Order->delete ();
+                
+                exit (json_encode($this->error));
+            }
+        }
+        
+        exit(json_encode($this->error));
     }
 
     public function fetch() {
@@ -347,6 +402,18 @@ class OrderController extends AdminAppController {
             $this->layout = false;
             $this->render('fetch.user');
         }
+    }
+
+    protected function email($from, $to, $subject, $content, $template, $vars = array(), $debug=false) {
+        $Email = new CakeEmail();
+        $Email->config('smtp');
+        $Email->template($template);
+        $Email->viewVars($vars);
+        $Email->emailFormat('html');
+        $Email->from($from);
+        $Email->to($to);
+        $Email->subject($subject);
+        $Email->send();
     }
 
 }

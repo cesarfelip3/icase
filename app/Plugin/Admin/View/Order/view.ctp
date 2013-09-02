@@ -173,6 +173,46 @@
                     <div class="well">
                         Edit email content to meet your requirement.
                     </div>
+                    
+                    <div class='slate'>
+                       <div class="page-header">
+                            <h2>Email History</h2>
+                            
+                        </div> 
+                        <table class="table">
+                            <tbody>
+                                <?php if (!empty ($emails)) : $i = 0; ?>
+                                <?php foreach ($emails as $value) : $value = $value['EmailHistory']; ?>
+                                <?php foreach (unserialize($value['from']) as $key => $val) {$from = $key . "-" . $val;} ?>
+                                <tr>
+                                    <td>
+                                        <span style="font-size:14px"><?php echo $value['subject']; ?></span><br/><br/>
+                                        <b>From:&nbsp;&nbsp;</b><?php echo $from; ?><br/>
+                                        <b>To:&nbsp;&nbsp;</b><?php echo $value['to']; ?><br/>
+                                        <b>Date:&nbsp;&nbsp;</b><?php echo date ("d/m/Y H:i:s", $value['created']); ?><br/>
+                                    </td>
+                                </tr>
+                                <tr style='background-color:#ebc;color:black;'>
+                                    <td>
+                                        <div>
+                                            <?php echo $value['content']; ?>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><a href='javascript:' class='btn btn-info' onclick='delete_email(this, "<?php echo $value['id']; ?>");' data-loading-text="Deleting..." >Delete</a></td>
+                                </tr>
+                                <?php endforeach; ?>
+                                <?php else : ?>
+                                <tr>
+                                    <td colspan="4">
+                                        <em>No emails yet</em>
+                                    </td>
+                                </tr>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </form>
@@ -270,6 +310,34 @@
 
         }).fail(function() {
             $("#btn-snedemail").button('reset');
+        });
+     }
+     
+     function delete_email (button, id)
+     {
+         jQuery.ajax({
+            url: "<?php echo $base; ?>order/delete/?action=email&id=" + id,
+            type: "GET",
+            beforeSend: function(xhr) {
+                $(button).button('loading');
+            }
+        }).done(function(data) {
+            $(button).button('reset');
+
+            var result = $.parseJSON(data);
+            //console.log(result);
+            if (result.error == 1) {
+                ////console.log(result.element);
+                //$(result.element).next(".help-inline").html(result.message);
+                //$(result.element).parent().parent().addClass('error');
+                showAlert(result.message);
+            } else {
+                //$(result.element).parent().parent().removeClass('error');
+                //$(result.element).next(".help-inline").html("");
+                window.location.href = "";
+            }
+
+        }).fail(function() {
         });
      }
 </script>

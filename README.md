@@ -26,7 +26,10 @@ Update
 
 DON'T PULL ON SERVER - NEED CHANGE IMAGES AND DB......
 
-7. Order - Save shipment ID - 
+7. Order - Shipment Track 
+8. Email History - Order
+
+9. Order - Delete
 
 
 SEO basic --

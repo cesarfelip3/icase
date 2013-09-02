@@ -92,7 +92,7 @@
                                                 <?php echo $value['Order']['status']; ?>
                                             </td>
                                             <td class="actions">
-<!--                                                <a class="btn btn-small btn-primary" onclick="save('edit/?id=<?php echo $value['Order']['id']; ?>')" href="javascript:">Update</a>-->
+                                                <a class="btn btn-small btn-danger" onclick="delete_order (this, '<?php echo $value['Order']['id']; ?>')" href="javascript:" data-loading-text="Deleting..." >Remove</a>
                                                 <a class="btn btn-small btn-primary" href="<?php echo $base; ?>order/view/?id=<?php echo $value['Order']['guid']; ?>">View Order</a>
                                             </td>
                                         </tr>
@@ -153,5 +153,42 @@ function save(action, button) {
 
         }).fail(function() {
         });
-    }    
+    } 
+    
+    function delete_order (button, id)
+     {
+         var r=confirm("Are u sure you want to delete this order?")
+        if (r==true)
+        {
+            
+        }
+        else
+        {
+            return;
+        }
+         jQuery.ajax({
+            url: "<?php echo $base; ?>order/delete/?action=order&id=" + id,
+            type: "GET",
+            beforeSend: function(xhr) {
+                $(button).button('loading');
+            }
+        }).done(function(data) {
+            $(button).button('reset');
+
+            var result = $.parseJSON(data);
+            //console.log(result);
+            if (result.error == 1) {
+                ////console.log(result.element);
+                //$(result.element).next(".help-inline").html(result.message);
+                //$(result.element).parent().parent().addClass('error');
+                showAlert(result.message);
+            } else {
+                //$(result.element).parent().parent().removeClass('error');
+                //$(result.element).next(".help-inline").html("");
+                //window.location.href = "";
+            }
+
+        }).fail(function() {
+        });
+     }
 </script>
