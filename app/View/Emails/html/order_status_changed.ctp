@@ -1,25 +1,27 @@
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title></title>
     </head>
     <body>
-        <p>Dear <?php echo $bill['name']; ?>,</p>
+        Dear <?php echo $bill['name']; ?>,<br/>
         <?php echo $email_content; ?>
-        <p>Shipped To:</p>
-        <p><?php echo $deliver['address']; ?></p>
-        <p><?php echo $deliver['city']; ?> <?php echo $deliver['state']; ?> <?php echo $deliver['phone']; ?> <?php echo $deliver['country']; ?></p>
-        <p>This shipment includes the following items:</p>
+        <br/>Shipped To:<br/>
+        Address: <?php echo $deliver['address']; ?><br/>
+        Location: <?php echo $deliver['city']; ?> <?php echo $deliver['state']; ?>  <?php echo $deliver['country']; ?><br/>
+        Phone: <?php echo $deliver['phone']; ?><br/>
+        This shipment includes the following items:</p>
         <?php foreach ($orders as $value) : $value = $value['Order']; ?>
         <div>
-            <p>ID : #<?php echo $value['guid']; ?></p>
-            <p>Name : <?php echo $value['title']; ?></p>
-            <p>QYT : <?php echo $value['quantity']; ?></p>
+            <span>ID : #<?php echo $value['guid']; ?></span><br/>
+            <span>Name : <?php echo $value['title']; ?></span><br/>
+            <span>QYT : <?php echo $value['quantity']; ?></span><br/>
         </div>
+        <br/>
         <?php endforeach; ?>
-        <p>Take care! If you have any questions, please contact us below:</p>
-        <p>Beautahful Creations LLC.</p>
-        <p><b>Email: </b><a href="mailto:orders@beautahfulcreations.com"><b>orders@beautahfulcreations.com</b></a></p>
-        <p><b>Website: </b><a href="http://www.beautahfulcreations.com/">http://www.beautahfulcreations.com</a></p>
+        <p>Take care! If you have any questions, please contact us below:<br/>
+        Beautahful Creations LLC.<br/>
+        <b>Email: </b><a href="mailto:orders@beautahfulcreations.com"><b>orders@beautahfulcreations.com</b></a><br/>
+        <b>Website: </b><a href="http://www.beautahfulcreations.com/">http://www.beautahfulcreations.com</a></p>
     </body>
 </html>

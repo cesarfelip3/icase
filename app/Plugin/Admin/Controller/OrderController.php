@@ -72,13 +72,12 @@ class OrderController extends AdminAppController {
         $data = $this->Order->find('all', array(
             'limit' => $limit,
             'page' => $page + 1,
-            'order' => array (
+            'order' => array(
                 "modified DESC",
                 "group_guid DESC",
             ),
             'conditions' => $conditions,
-               
-         ));
+        ));
 
         if (!empty($data)) {
             $total = $this->Order->find("count", array("conditions" => $conditions));
@@ -121,9 +120,9 @@ class OrderController extends AdminAppController {
 
     public function view() {
         $id = $this->request->query('id');
-        
-        if (empty ($id)) {
-            $this->redirect (array (
+
+        if (empty($id)) {
+            $this->redirect(array(
                 "plugin" => "admin",
                 "controller" => "order",
                 "action" => "index"
@@ -132,9 +131,9 @@ class OrderController extends AdminAppController {
 
         $this->loadModel('Order');
         $order = $this->Order->find('first', array('conditions' => array('guid' => $id)));
-        
-        if (empty ($order)) {
-            print_r ("This order doesn't exist any more!");
+
+        if (empty($order)) {
+            print_r("This order doesn't exist any more!");
             exit;
         }
 
@@ -236,17 +235,17 @@ class OrderController extends AdminAppController {
                 }
                 exit(json_encode($this->error));
             }
-            
+
             if ($this->request->is('post')) {
-                $data = $this->request->data ('order');
+                $data = $this->request->data('order');
                 //print_r ($data['status']);
-                
+
                 foreach ($data['status'] as $key => $value) {
                     $this->Order->id = $key;
-                    $this->Order->set (array (
+                    $this->Order->set(array(
                         "status" => $value
                     ));
-                    $this->Order->save ();
+                    $this->Order->save();
                 }
             }
 
@@ -268,9 +267,15 @@ class OrderController extends AdminAppController {
                 "guid" => $guid)
         ));
         
+        if (empty ($data)) {
+            $this->error['error'] = 1;
+            $this->error['message'] = "No orders";
+            exit(json_encode($this->error));
+        }
+
         if (empty($data['Order']['group_guid'])) {
             $group = $data;
-            $data = array ();
+            $data = array();
             $data[] = $group;
         } else {
             $data = $this->Order->find('all', array(
@@ -280,19 +285,25 @@ class OrderController extends AdminAppController {
                 )
             ));
         }
-        
-        $email = $this->request->data('email');
 
+        $email = $this->request->data('email');
+        
         $this->loadModel('UserBillInfo');
-        $bill = $this->UserBillInfo->find('first', array("conditions" => array("guid" => $data['Order']['bill_guid'])));
+        $bill = $this->UserBillInfo->find('first', array(
+            "conditions" => array(
+                "guid" => $data[0]['Order']['bill_guid'])
+        ));
 
         $this->loadModel('UserDeliverInfo');
-        $deliver = $this->UserDeliverInfo->find('first', array("conditions" => array("guid" => $data['Order']['deliver_guid'])));
+        $deliver = $this->UserDeliverInfo->find('first', array(
+            "conditions" => array(
+                "guid" => $data[0]['Order']['deliver_guid'])
+        ));
         $deliver = $deliver['UserDeliverInfo'];
 
         if (empty($email)) {
             $this->error['error'] = 1;
-            $this->error['message'] = "";
+            $this->error['message'] = "Invalid email";
             exit(json_encode($this->error));
         }
 
