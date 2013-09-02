@@ -105,7 +105,7 @@
                                         $<?php echo $value['amount']; ?>
                                     </td>
                                     <td>
-                                        <select class="input-medium" name="order[status][<?php echo $value['id']; ?>]" onchange="save('edit/?id=<?php echo $value['id']; ?>')">
+                                        <select class="input-medium" name="order[status][<?php echo $value['id']; ?>]">
                                             <?php foreach ($status as $key => $state) : ?>
                                                 <option value="<?php echo $key; ?>" <?php if ($value['status'] == $key) echo 'selected="selected"'; ?>><?php echo $state; ?></option>
                                             <?php endforeach; ?>
@@ -122,6 +122,30 @@
                                 <?php endif; ?>
                             </tbody>
                         </table>
+                    </div>
+                    <div class="slate">
+                        <div class="page-header">
+                            <h2>Shipment</h2>
+                        </div>
+                        <div class="input-prepend">
+                            <span class="add-on" style="width:80px;">Type</span>
+                            <input class="input-xlarge" id="prependedInput" type="text" value="<?php echo $data['shipment_type']; ?>" name="order[shipment_type]">
+                        </div>
+                        <div class="input-prepend">
+                            <span class="add-on" style="width:80px;">Track</span>
+                            <input class="input-xlarge" id="prependedInput" type="text" value="<?php echo $data['shipment_track']; ?>" name="order[shipment_track]">
+                        </div>
+                        <div class="input-prepend">
+                            <span class="add-on" style="width:80px;">Track URL</span>
+                            <input class="input-xlarge" id="prependedInput" type="text" value="<?php echo $data['shipment_trackurl']; ?>" name="order[shipment_trackurl]">
+                        </div>
+                        <div class="input-prepend">
+                            <span class="add-on" style="width:80px;">Fee</span>
+                            <input class="input-xlarge" id="prependedInput" type="text" value="2.49" name="order[shipment_fee]">
+                        </div>
+                        <div class="input-prepend">
+                            <a href="javascript:" class="btn btn-info" onclick='save(this);' data-loading-text="Saving..." >Update</a>
+                        </div>
                     </div>
                     <div class="well">
                         Update : all these ordered items were in same transaction by same user, and paid with one time shipment fee. You have to deliver all these ordered items at same time.
@@ -186,24 +210,11 @@
     </div>
 </div>
 <script>
-    function save(action, button) {
-
-        var data = "";
-        if (action.substring(0, 4) == "edit") {
-            data = $("#form-edit").serialize();
-        }
-
-        if (action == "add") {
-            data = $("#form-new").serialize();
-        }
-
-        if (action == "delete") {
-            data = $("#form-edit").serialize();
-        }
+    function save(button) {
 
         jQuery.ajax({
-            url: "<?php echo $base; ?>order/" + action,
-            data: data,
+            url: "<?php echo $base; ?>order/edit",
+            data: $("#form-edit").serialize(),
             type: "POST",
             beforeSend: function(xhr) {
                 $(button).button('loading');

@@ -26,6 +26,8 @@ Update
 
 DON'T PULL ON SERVER - NEED CHANGE IMAGES AND DB......
 
+7. Order - Save shipment ID - 
+
 
 SEO basic --
 

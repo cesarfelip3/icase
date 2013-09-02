@@ -217,33 +217,24 @@ class OrderController extends AdminAppController {
     }
 
     public function edit() {
-        $id = $this->request->query('id');
-
+        
         if ($this->request->is('ajax')) {
             $this->autoRender = false;
             $data = $this->request->data('order');
             $this->loadModel('Order');
 
-            if ($id == 0) {
-                if (isset($data['selected'])) {
-
-                    foreach ($data['selected'] as $key => $value) {
-                        $this->Order->id = $value;
-                        $this->Order->set(array("status" => $data[$value]['status']));
-                        $this->Order->save();
-                    }
-                }
-                exit(json_encode($this->error));
-            }
-
             if ($this->request->is('post')) {
                 $data = $this->request->data('order');
-                //print_r ($data['status']);
+                
 
                 foreach ($data['status'] as $key => $value) {
                     $this->Order->id = $key;
                     $this->Order->set(array(
-                        "status" => $value
+                        "status" => $value,
+                        'shipment_track' => trim($data['shipment_track']),
+                        'shipment_fee' => trim($data['shipment_fee']),
+                        'shipment_type' => trim($data['shipment_type']),
+                        "shipment_trackurl" => trim ($data['shipment_trackurl'])
                     ));
                     $this->Order->save();
                 }

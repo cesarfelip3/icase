@@ -23,6 +23,18 @@
             <td><?php echo $order['status']; ?></td>
         </tr>
         <tr>
+            <td>Shipment</td>
+            <td><?php echo $order['shipment_type']; ?></td>
+        </tr>
+        <tr>
+            <td>Shipment Track</td>
+            <td><?php echo $order['shipment_track']; ?></td>
+        </tr>
+        <tr>
+            <td>Shipment Track URL</td>
+            <td><?php echo $order['shipment_trackurl']; ?></td>
+        </tr>
+        <tr>
             <td>Modified</td>
             <td><?php echo date ("m/d/y g:i:s A", $order['modified']); ?></td>
         </tr>
