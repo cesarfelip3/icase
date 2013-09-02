@@ -35,6 +35,32 @@ class AdminAppController extends Controller {
         'Captcha'
     );
 
+    /*
+     * Media - when the site is running long time, there are lots of images<flash or else>
+     * located on server, but some of them maybe not use any longer. We have to consider the 
+     * performance of server, or space usage of server too. The idea is : it's necessary to 
+     * delete all these images unused by cron job.
+     * 
+     * Also all media uploaded to server are random size, for the site, we use smaller size 
+     * for thumbnails, and medium size for single snapshot. 
+     * 
+     * All there values used across front and end, so I put them here.
+     * 
+     */
+    protected $_media_location = array(
+        "main" => "uploads/",
+        "product" => "uploads/product/",
+        "order" => "uploads/order/",
+        "user" => "uploads/user/",
+        "user.uploads" => "uploads/user/uploads/",
+    );
+    protected $_media_size = array(
+        "product" => array(
+            "small" => 200,
+            "medium" => 500,
+        )
+    );
+
     public function beforeFilter() {
 
         AuthComponent::$sessionKey = "Auth.Admin";
@@ -101,10 +127,10 @@ class AdminAppController extends Controller {
             $img = imagecreatefrompng($image_file);
         }
 
-        if (empty ($img)) {
+        if (empty($img)) {
             return false;
         }
-        
+
         $b_top = 0;
         $b_btm = 0;
         $b_lft = 0;
@@ -146,7 +172,6 @@ class AdminAppController extends Controller {
                 imagesx($img) - ($b_lft + $b_rt), imagesy($img) - ($b_top + $b_btm));
 
         imagecopy($newimg, $img, 0, 0, $b_lft, $b_top, imagesx($newimg), imagesy($newimg));
-
     }
 
 }

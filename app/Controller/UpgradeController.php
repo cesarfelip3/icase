@@ -5,14 +5,14 @@ App::uses('AppController', 'Controller');
 class UpgradeController extends AppController {
 
     public $uses = false;
-    public $upgrade = false;
+    public $upgrade = true;
     public $version = 0.1;
 
     public function beforeFilter() {
         $this->Auth->allow();
         parent::beforeFilter();
 
-        if ($upgrade == false) {
+        if ($this->upgrade == false) {
             exit;
         }
     }

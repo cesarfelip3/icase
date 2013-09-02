@@ -178,11 +178,11 @@ $admin_product = $base . "product";
                                 <a href="javascript:" id="btn-upload-featured-image" class="btn btn-block btn-info" onclick="featured_image_start_upload();">Upload</a>
                             </p>
                             <div id="box-featured-image" class="row-fluid">
-                                <?php if (!empty ($data['featured2'])) : $images = $data['featured2']['origin']; ?>
+                                <?php if (!empty ($data['featured2'])) : $images = $data['featured2']; ?>
                                 <?php foreach ($images as $key => $image) : ?>
                                 <div class="thumbnail" style="width:20%;float:left;margin-left:5px;margin-bottom:10px;">
                                     <a class="featured-thumbnail">
-                                        <img src="<?php echo $this->webroot . "uploads/product/" . $data['featured2']['150w'][$key]; ?>" style=""></a>
+                                        <img src="<?php echo $this->webroot . "uploads/product/" . pathinfo ($image, PATHINFO_FILENAME) . "_small.png"; ?>" style=""></a>
                                     <div class="caption">
                                         <p><a href="javascript:" data-image="<?php echo $image; ?>" onclick="featured_image_delete(this);">Delete</a></p>
                                     </div>
@@ -196,7 +196,7 @@ $admin_product = $base . "product";
             </div>
         </form>
     </div>
-    <?php if (!empty($data['featured2'])) : $images = $data['featured2']['origin']; ?>
+    <?php if (!empty($data['featured2'])) : $images = $data['featured2']; ?>
         <div>
             <div class="thumbnail">
                 <img src="<?php echo $this->webroot . "uploads/product/" . $images[0]; ?>" style="">

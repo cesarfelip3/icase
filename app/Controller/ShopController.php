@@ -693,7 +693,11 @@ class ShopController extends AppController {
                 } else {
                     if (!empty($data[$i]['Product']['featured'])) {
                         $data[$i]['Product']['featured'] = unserialize($data[$i]['Product']['featured']);
-                        $data[$i]['Product']['file'] = $data[$i]['Product']['featured']['150w'][0];
+                        if (!empty ($data[$i]['Product']['featured'])) {
+                            $data[$i]['Product']['file'] = pathinfo ($data[$i]['Product']['featured'][0], PATHINFO_FILENAME) . "_small.png";
+                        } else {
+                            $data[$i]['Product']['file'] = "";
+                        }
                     } else {
                         $data[$i]['Product']['file'] = "";
                     }

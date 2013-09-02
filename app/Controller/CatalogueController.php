@@ -97,7 +97,7 @@ class CatalogueController extends AppController {
             foreach ($data as $key => $value) {
                 if (!empty($value['Product']['featured'])) {
                     $value['Product']['featured'] = unserialize($value['Product']['featured']);
-                    $data[$key]['Product']['image'] = $this->webroot . "uploads/product/" . pathinfo ($value['Product']['featured'][0], PATHINFO_FILENAME) . "_small.png";
+                    $data[$key]['Product']['image'] = $this->webroot . "uploads/product/" . pathinfo($value['Product']['featured'][0], PATHINFO_FILENAME) . "_small.png";
                 }
             }
         }
@@ -130,12 +130,12 @@ class CatalogueController extends AppController {
         $data = $data['Product'];
 
         $data['featured'] = unserialize($data['featured']);
-        if (is_array ($data['featured'])) {
-            foreach ($data['featured'] as $key => $value) {
-                $data['featured'][$key] = $this->webroot . "uploads/product/" . pathinfo ($value, PATHINFO_FILENAME) . "_small.png";
-            }
-            
+        if (is_array($data['featured'])) {
+
             $data['image'] = $this->webroot . "uploads/product/" . pathinfo($data['featured'][0], PATHINFO_FILENAME) . "_medium.png";
+            foreach ($data['featured'] as $key => $value) {
+                $data['featured'][$key] = $this->webroot . "uploads/product/" . pathinfo($value, PATHINFO_FILENAME) . "_small.png";
+            }
         }
 
         $this->set("_title", $this->_meta['_title'] . "|" . $slug);
@@ -246,7 +246,7 @@ class CatalogueController extends AppController {
             foreach ($data as $key => $value) {
                 if (!empty($value['Product']['featured'])) {
                     $value['Product']['featured'] = unserialize($value['Product']['featured']);
-                    $data[$key]['Product']['image'] = $this->webroot . "uploads/product/" . pathinfo ($value['Product']['featured'][0], PATHINFO_FILENAME) . "_small.png";
+                    $data[$key]['Product']['image'] = $this->webroot . "uploads/product/" . pathinfo($value['Product']['featured'][0], PATHINFO_FILENAME) . "_small.png";
                 }
             }
         }

@@ -191,8 +191,11 @@ class ProductController extends AdminAppController {
                 foreach ($images as $value) {
                     $filename = pathinfo($value, PATHINFO_FILENAME);
                     @copy(APP . 'webroot/uploads/' . $value, APP . 'webroot/uploads/product/' . $value);
-                    @copy(APP . 'webroot/uploads/' . $value . "_small.png", APP . 'webroot/uploads/product/' . $value . "_small.png");
-                    @copy(APP . 'webroot/uploads/' . $value . "_medium.png", APP . 'webroot/uploads/product/' . $value . "_medium.png");
+                    @copy(APP . 'webroot/uploads/' . $filename . "_small.png", APP . 'webroot/uploads/product/' . $filename . "_small.png");
+                    @copy(APP . 'webroot/uploads/' . $filename . "_medium.png", APP . 'webroot/uploads/product/' . $filename . "_medium.png");
+                    @unlink(WWW_ROOT . "uploads/" . $value);
+                    @unlink(APP . 'webroot/uploads/' . $filename . "_small.png");
+                    @unlink(APP . 'webroot/uploads/' . $filename . "_medium.png");
                 }
 
                 $data['featured'] = serialize($data['featured']);
@@ -268,7 +271,7 @@ class ProductController extends AdminAppController {
             $data['featured'] = unserialize($data['featured']);
             $data['featured2'] = $data['featured'];
             if (!empty($data['featured'])) {
-                $data['featured'] = implode("-", $data['featured']['origin']);
+                $data['featured'] = implode("-", $data['featured']);
             } else {
                 $data['featured'] = "";
             }
@@ -382,6 +385,10 @@ class ProductController extends AdminAppController {
                                 @copy(APP . 'webroot/uploads/' . $value, APP . 'webroot/uploads/product/' . $value);
                                 @copy(APP . 'webroot/uploads/' . $filename . "_small.png", APP . 'webroot/uploads/product/' . $filename . "_small.png");
                                 @copy(APP . 'webroot/uploads/' . $filename . "_medium.png", APP . 'webroot/uploads/product/' . $filename . "_medium.png");
+
+                                @unlink(WWW_ROOT . "uploads/" . $value);
+                                @unlink(APP . 'webroot/uploads/' . $filename . "_small.png");
+                                @unlink(APP . 'webroot/uploads/' . $filename . "_medium.png");
                             }
 
                             $data['featured'] = serialize($data['featured']);
@@ -448,18 +455,22 @@ class ProductController extends AdminAppController {
         $id = $this->request->query('id');
         $this->loadModel('Product');
 
-        $data = $this->Product->find('first', array("conditions" => array("id" => $id, 'type' => 'product')));
+        $data = $this->Product->find('first', array(
+            "conditions" => array(
+                "id" => $id,
+                'type' => 'product')
+        ));
+        
         if (!empty($data)) {
 
             if (!empty($data['Product']['featured'])) {
 
                 $data['Product']['featured'] = unserialize($data['Product']['featured']);
-                foreach ($data['Product']['featured']['origin'] as $value) {
-                    if (file_exists(APP . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'uploads' . DS . "product" . DS . $value)) {
-                        @unlink(APP . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'uploads' . DS . "product" . DS . $value);
-                        $value = @str_replace(".", "_150.", $value);
-                        @unlink(APP . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'uploads' . DS . "product" . DS . $value);
-                    }
+                foreach ($data['Product']['featured'] as $value) {
+                    $filename = pathinfo($value, PATHINFO_FILENAME);
+                    @unlink(WWW_ROOT . 'uploads/product/' . $value);
+                    @unlink(WWW_ROOT . 'uploads/product/' . $filename . "_small.png");
+                    @unlink(WWW_ROOT . 'uploads/product/' . $filename . "_medium.png");
                 }
             }
         }
