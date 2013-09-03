@@ -27,6 +27,7 @@ class CronController extends AppController {
             closedir($handle);
         }
 
+        $changes = 0;
         foreach ($images as $image) {
             $file = WWW_ROOT . "uploads/" . $image;
 
@@ -34,14 +35,17 @@ class CronController extends AppController {
 
                 if (preg_match("/.(png|jpg|jpeg)$/i", $image)) {
                     $time = fileatime($file);
-                    print_r($file . "<br/>");
-                    if ($time > time() + 1000 * 60 * 60 * 24 * 1) {
+                    print_r($image . "<br/>");
+                    if ($time > time() + 1000 * 60 * 60 * 24 * 7) {
                         //@unlink ($file);
                         print_r($file . "<br/>");
+                        $changes++;
                     }
                 }
             }
         }
+        
+        print_r ("$changes unused images found in 7 days and deleted<br/>");
         
         exit;
     }
