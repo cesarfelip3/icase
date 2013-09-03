@@ -7,9 +7,12 @@
         Dear <?php echo $bill['name']; ?>,<br/>
         <?php echo $email_content; ?>
         <br/>
+        <?php if (!empty ($deliver)) : ?>
         Address: <?php echo $deliver['address']; ?><br/>
         Location: <?php echo $deliver['city']; ?> <?php echo $deliver['state']; ?>  <?php echo $deliver['country']; ?><br/>
         Phone: <?php echo $deliver['phone']; ?><br/><br/>
+        <?php endif; ?>
+        <?php if (!empty ($orders)) : ?>
         Including the following items:<br/><br/>
         <?php foreach ($orders as $value) : $value = $value['Order']; ?>
         <div>
@@ -19,6 +22,7 @@
         </div>
         <br/>
         <?php endforeach; ?>
+        <?php endif; ?>
         <p>Take care! If you have any questions, please contact us below:<br/>
         Beautahful Creations LLC.<br/>
         <b>Email: </b><a href="mailto:orders@beautahfulcreations.com"><b>orders@beautahfulcreations.com</b></a><br/>

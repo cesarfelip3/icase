@@ -310,6 +310,15 @@ class OrderController extends AdminAppController {
                 $subject = $email['subject'];
                 $content = $email['content'];
                 $template = "order_status_changed";
+                
+                if (!isset ($email['with_order'])) {
+                    $data = array ();
+                }
+                
+                if (!isset ($email['with_deliver'])) {
+                    $deliver = array ();
+                }
+                
                 $vars = array("orders" => $data, "bill" => $bill['UserBillInfo'], 'email_content' => $content, 'deliver' => $deliver);
                 $this->email($from, $to, $subject, $content, $template, $vars);
             }

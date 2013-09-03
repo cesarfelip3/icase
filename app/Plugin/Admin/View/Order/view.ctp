@@ -167,6 +167,14 @@
 <b>Track Your Shipment:</b> <a href="https://tools.usps.com/go/TrackConfirmAction.action?tLabels=9405510200986104431161">9405510200986104431161</a><br/>Shipped To:</div>
                         </textarea>
                     </div>
+                    <div style="padding-top:10px;">
+                        <label class="checkbox">
+                            <input type="checkbox" checked="true" name="email[with_order]" value="1" />Include Order Info
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" checked="true" name="email[with_deliver]" value="1" />Include Deliver Info
+                        </label>
+                    </div>
                     <div style="padding:10px;height:50px;">
                         <p><a class="btn btn-primary pull-right" onclick="send_email();" data-loading-text="Saving..." id="btn-sendemail">Send Email</a></p>
                     </div>
