@@ -66,24 +66,43 @@ class CreatorController extends AppController {
                 exit(json_encode($this->_error));
             }
             
+            @preg_match_all ("/\/uploads\/(.*?\.[a-z]{3,4})\"/i", $json, $matches);
+            if (!empty ($matches)) {
+                $images = $matches[1];
+                foreach ($images as $image) {
+                    @copy (WWW_ROOT . "uploads/" . $image, WWW_ROOT . "uploads/user/uploads/" . $image);
+                    $json = str_replace ("uploads/" . $image, "uploads/user/uploads/" . $image, $json);
+                }
+                
+                foreach ($images as $image) {
+                    @unlink (WWW_ROOT . "uploads/" . $image);
+                }
+            }
+            
+            //print_r ($json);
+            //exit;
+
             $this->loadModel('Product');
-            $product = $this->Product->find('first', array (
-                "conditions" => array (
+            $product = $this->Product->find('first', array(
+                "conditions" => array(
                     "guid" => $product_guid
             )));
-            
-            if (empty ($product) || $product['Product']['type'] != 'template') {
+
+            if (empty($product) || $product['Product']['type'] != 'template') {
                 $this->_error['error'] = 1;
                 $this->_error['message'] = 'Wrong template';
                 exit(json_encode($this->_error));
             }
 
             $this->loadModel('Creation');
-            $data = $this->Creation->find('first', array("conditions" => array("guid" => $guid)));
+            $data = $this->Creation->find('first', array(
+                "conditions" => array(
+                    "guid" => $guid)
+            ));
 
             if (!empty($data)) {
                 $this->Creation->id = $data['Creation']['id'];
-                $this->Creation->set(array("data" => $json, "type" => "progress", "product_guid"=>$product_guid, "name" => $product['Product']['name'], "modified" => time()));
+                $this->Creation->set(array("data" => $json, "type" => "progress", "product_guid" => $product_guid, "name" => $product['Product']['name'], "modified" => time()));
                 $this->Creation->save();
 
                 $this->_error['error'] = 0;
@@ -146,9 +165,9 @@ class CreatorController extends AppController {
                 if (empty($product)) {
                     $this->_error['error'] = 1;
                     $this->_error['message'] = "Wrong template";
-                    exit (json_encode($this->_error));
+                    exit(json_encode($this->_error));
                 }
-                
+
                 $product['Product']['image'] = unserialize($product['Product']['image']);
                 $overlay = $this->webroot . "img/template/" . $product['Product']['image']['foreground'];
 
@@ -292,7 +311,6 @@ class CreatorController extends AppController {
 
         //$image = file_get_contents($final);
         //$image = substr_replace($image, pack("cnn", 1, 300, 300), 13, 5);
-
         //file_put_contents($final, $image);
     }
 

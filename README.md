@@ -58,14 +58,9 @@ To save the space, and utilize the resource of server -
 
 About Media (uploaded) - 
 
-1. product/template image - /img/template
-2. product/product image - /uploads/product (when product deleted, should be removed)
+1. uploads/ - images uploaded from creator
+2. uploads/ - images uploaded from admin/product
 
-3. creator/preview image - /uploads/preview (all images should be removed on cron job)
-4. creator/order image - /uploads/order
-5. creator/user image - /uploads/user (when user deleted, should be removed)
-
-6. misc - /uploads (all images should be removed on cron job)
 
 Security
 ============
