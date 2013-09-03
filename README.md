@@ -24,8 +24,6 @@ Update
 5. CakePHP - core.php - if (debug == 0) model will never refreshed, if debug > 0 will refresh...
 6. Media - Now ccompatiable with master branch, so we can upgrade master to version 0.1 too!
 
-DON'T PULL ON SERVER - NEED CHANGE IMAGES AND DB......
-
 7. Order - Shipment Track 
 8. Email History - Order
 9. Order - Delete
@@ -33,6 +31,10 @@ DON'T PULL ON SERVER - NEED CHANGE IMAGES AND DB......
 
 11.Move creator/save - images from uploads to user/uploads
 12.Cron Job to clean images in "uploads/" folder...
+
+13.Move images to /order and /user
+
+DON'T PULL ON SERVER
 
 
 SEO basic --
