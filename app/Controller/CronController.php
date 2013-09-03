@@ -40,6 +40,7 @@ class CronController extends AppController {
                         //@unlink ($file);
                         print_r($image . "<br/>");
                         $changes++;
+                        @unlink (WWW_ROOT . "uploads/" . $image);
                     }
                 }
             }
