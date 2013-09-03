@@ -8,8 +8,8 @@
             <?php for ($i = 0; $i < count($data); $i += 4) : ?>
                 <div class="row-fluid" style='margin-top:20px;'>
                     <?php if (isset($data[$i])) : ?>
-                        <div class="span3 set-equal-heights-js">
-                            <div class="thumbnail">
+                        <div class="span3">
+                            <div class="thumbnail" style="background-image:none;background-color:white;">
                                 <a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i]['Product']['slug']; ?>"><img src="<?php echo $data[$i]['Product']['image']; ?>" alt="Placeholder" class=""></a>
                                 <div class="caption">
                                     <a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i]['Product']['slug']; ?>" class="prop-title" target="new" style="text-transform: uppercase"><?php echo $data[$i]['Product']['name']; ?></a>
@@ -24,8 +24,8 @@
                         </div>
                     <?php endif; ?>
                     <?php if (isset($data[$i + 1])) : ?>
-                        <div class="span3 set-equal-heights-js">
-                            <div class="thumbnail">
+                        <div class="span3">
+                            <div class="thumbnail" style="background-image:none;background-color:white;">
                                 <a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i + 1]['Product']['slug']; ?>"><img src="<?php echo $data[$i + 1]['Product']['image']; ?>" alt="Placeholder" class=""></a>
                                 <div class="caption">
                                     <a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i + 1]['Product']['slug']; ?>" class="prop-title" style="text-transform: uppercase"><?php echo $data[$i + 1]['Product']['name']; ?></a>
@@ -40,8 +40,8 @@
                         </div>
                     <?php endif; ?>
                     <?php if (isset($data[$i + 2])) : ?>
-                        <div class="span3 set-equal-heights-js">
-                            <div class="thumbnail">
+                        <div class="span3">
+                            <div class="thumbnail" style="background-image:none;background-color:white;">
                                 <a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i + 2]['Product']['slug']; ?>"><img src="<?php echo $data[$i + 2]['Product']['image']; ?>" alt="Placeholder" class=""></a>
                                 <div class="caption">
                                     <a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i + 2]['Product']['slug']; ?>" class="prop-title" style="text-transform: uppercase"><?php echo $data[$i + 2]['Product']['name']; ?></a>
@@ -56,8 +56,8 @@
                         </div>
                     <?php endif; ?>
                     <?php if (isset($data[$i + 3])) : ?>
-                        <div class="span3 set-equal-heights-js">
-                            <div class="thumbnail">
+                        <div class="span3">
+                            <div class="thumbnail" style="background-image:none;background-color:white;">
                                 <a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i + 3]['Product']['slug']; ?>"><img src="<?php echo $data[$i + 3]['Product']['image']; ?>" alt="Placeholder" class=""></a>
                                 <div class="caption">
                                     <a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i + 3]['Product']['slug']; ?>" class="prop-title" style="text-transform: uppercase"><?php echo $data[$i + 3]['Product']['name']; ?></a>
