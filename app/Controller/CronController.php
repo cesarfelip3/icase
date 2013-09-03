@@ -33,14 +33,15 @@ class CronController extends AppController {
 
             if (file_exists($file) && is_file($file)) {
 
-                if (preg_match("/.(png|jpg|jpeg|gif)$/i", $image)) {
+                if (preg_match("/\.(png|jpg|jpeg|gif)$/i", $image)) {
                     $time = fileatime($file);
                     
-                    if ($time + 1000 * 60 * 60 * 24 * 7 >= time()) {
+                    if ($time + 1000 * 60 * 60 * 24 * 7 < time()) {
                         //@unlink ($file);
                         print_r($image . "<br/>");
                         $changes++;
-                        @unlink (WWW_ROOT . "uploads/" . $image);
+                        //@unlink (WWW_ROOT . "uploads/" . $image);
+                        
                     }
                 }
             }
