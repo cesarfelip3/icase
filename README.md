@@ -28,10 +28,10 @@ DON'T PULL ON SERVER - NEED CHANGE IMAGES AND DB......
 
 7. Order - Shipment Track 
 8. Email History - Order
-
 9. Order - Delete
+10.Upgraded <Server>
 
-10. Upgraded <Server>
+11.Cron Job to clean images in "uploads/" folder...
 
 
 SEO basic --
