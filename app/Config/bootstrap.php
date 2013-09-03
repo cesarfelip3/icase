@@ -108,6 +108,6 @@ CakeLog::config('error', array(
     'file' => 'error',
 ));
 
-//Configure::write('Dispatcher.filters', array(
-//    'CacheDispatcher'
-//));
+Configure::write('Dispatcher.filters', array(
+    'CacheDispatcher'
+));
