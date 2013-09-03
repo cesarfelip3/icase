@@ -47,7 +47,7 @@ class CronController extends AppController {
             }
         }
         
-        print_r ("$changes unused images found in 7 days and deleted<br/>");
+        print_r ("$changes unused images found more than 7 days and deleted<br/>");
         
         exit;
     }
