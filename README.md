@@ -31,7 +31,8 @@ DON'T PULL ON SERVER - NEED CHANGE IMAGES AND DB......
 9. Order - Delete
 10.Upgraded <Server>
 
-11.Cron Job to clean images in "uploads/" folder...
+11.Move creator/save - images from uploads to user/uploads
+12.Cron Job to clean images in "uploads/" folder...
 
 
 SEO basic --
@@ -60,6 +61,9 @@ About Media (uploaded) -
 
 1. uploads/ - images uploaded from creator
 2. uploads/ - images uploaded from admin/product
+
+3. preview/ - images in ceator/preview
+4. preview/ - ordered => uploads/order, user => user
 
 
 Security
