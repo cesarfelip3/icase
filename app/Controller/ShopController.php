@@ -267,18 +267,11 @@ class ShopController extends AppController {
                     );
 
                     if ($value['Product']['type'] == 'template') {
-                        
-                        $source = WWW_ROOT . "uploads/preview/" . $value['Product']['file'];
-                        $source_user = WWW_ROOT . "uploads/preview/" . str_replace(".", "_user.", $value['Product']['file']);
-                        
-                        $target_user = WWW_ROOT . "uploads/user/";
-                        $target_order = WWW_ROOT . "uploads/order/";
-                        
-                        @copy($source, $target_user . $value['Product']['file']);
-                        @copy($source_user, $target_user . str_replace(".", "_user.", $value['Product']['file']));
+                        @copy(APP . "webroot" . DS . "uploads" . DS . "preview" . DS . $value['Product']['file'], APP . "webroot" . DS . "uploads" . DS . "user" . DS . $value['Product']['file']);
+                        @copy(APP . "webroot" . DS . "uploads" . DS . "preview" . DS . str_replace(".", "_user.", $value['Product']['file']), APP . "webroot" . DS . "uploads" . DS . "user" . DS . str_replace(".", "_user.", $value['Product']['file']));
 
-                        @copy($source, $target_order . $value['Product']['file']);
-                        @copy($source_user, $target_order . str_replace(".", "_user.", $value['Product']['file']));
+                        @copy(APP . "webroot" . DS . "uploads" . DS . "preview" . DS . $value['Product']['file'], APP . "webroot" . DS . "uploads" . DS . "order" . DS . $value['Product']['file']);
+                        @copy(APP . "webroot" . DS . "uploads" . DS . "preview" . DS . str_replace(".", "_user.", $value['Product']['file']), APP . "webroot" . DS . "uploads" . DS . "order" . DS . str_replace(".", "_user.", $value['Product']['file']));
                     }
 
                     if ($value['Product']['type'] == 'template' && !$user_guest) {
