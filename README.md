@@ -31,6 +31,8 @@ DON'T PULL ON SERVER - NEED CHANGE IMAGES AND DB......
 
 9. Order - Delete
 
+10. Upgraded <Server>
+
 
 SEO basic --
 
