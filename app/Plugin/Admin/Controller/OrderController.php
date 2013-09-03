@@ -26,7 +26,7 @@ class OrderController extends AdminAppController {
         $limit = $this->request->query('limit');
 
         if (empty($limit)) {
-            $limit = 15;
+            $limit = 25;
         }
 
         if (empty($page)) {
@@ -72,11 +72,12 @@ class OrderController extends AdminAppController {
         $data = $this->Order->find('all', array(
             'limit' => $limit,
             'page' => $page + 1,
-            'order' => 'modified DESC',
+            'order' => array(
+                "modified DESC",
+                "group_guid DESC",
+            ),
             'conditions' => $conditions,
-            'fields' => array("Order.*")
-                )
-        );
+        ));
 
         if (!empty($data)) {
             $total = $this->Order->find("count", array("conditions" => $conditions));
@@ -100,6 +101,8 @@ class OrderController extends AdminAppController {
             "status='fail'" => "Failed"
         );
 
+        //print_r ($data);
+        //exit;
 
         $this->set(array(
             "data" => $data,
@@ -118,38 +121,49 @@ class OrderController extends AdminAppController {
     public function view() {
         $id = $this->request->query('id');
 
+        if (empty($id)) {
+            $this->redirect(array(
+                "plugin" => "admin",
+                "controller" => "order",
+                "action" => "index"
+            ));
+        }
+
         $this->loadModel('Order');
-        $order = $this->Order->find('first', array(
-            'conditions' => array(
-                'guid' => $id)
-        ));
+        $order = $this->Order->find('first', array('conditions' => array('guid' => $id)));
+
+        if (empty($order)) {
+            print_r("This order doesn't exist any more!");
+            exit;
+        }
 
         if (empty($order['Order']['group_guid'])) {
             $group = null;
         } else {
             $group = $this->Order->find('all', array(
+                "order" => "title DESC",
                 "conditions" => array(
-                    "group_guid" => $order['Order']['group_guid']
+                    "group_guid" => $order['Order']['group_guid'],
                 )
             ));
-            
-            if (count ($group) <= 1) {
-                $group = null;
-            }
         }
 
         $this->loadModel('UserDeliverInfo');
-        $deliver = $this->UserDeliverInfo->find('first', array(
-            'conditions' => array(
-                'guid' => $order['Order']['deliver_guid'])));
+        $deliver = $this->UserDeliverInfo->find('first', array('conditions' => array('guid' => $order['Order']['deliver_guid'])));
 
         $this->loadModel('UserBillInfo');
-        $bill = $this->UserBillInfo->find('first', array(
-            'conditions' => array(
-                'guid' => $order['Order']['bill_guid'])));
+        $bill = $this->UserBillInfo->find('first', array('conditions' => array('guid' => $order['Order']['bill_guid'])));
+        
+        $this->loadModel('EmailHistory');
+        $emails = $this->EmailHistory->find ('all', array (
+            "conditions" => array (
+                "object_guid" => $order['Order']['group_guid']
+            )
+        ));
 
         $this->set(
                 array(
+                    "emails" => $emails,
                     "group" => $group,
                     "data" => $order['Order'],
                     "status" => $this->status,
@@ -211,35 +225,31 @@ class OrderController extends AdminAppController {
     }
 
     public function edit() {
-        $id = $this->request->query('id');
-
+        
         if ($this->request->is('ajax')) {
             $this->autoRender = false;
             $data = $this->request->data('order');
             $this->loadModel('Order');
 
-            if ($id == 0) {
-                if (isset($data['selected'])) {
+            if ($this->request->is('post')) {
+                $data = $this->request->data('order');
+                
 
-                    foreach ($data['selected'] as $key => $value) {
-                        $this->Order->id = $value;
-                        $this->Order->set(array("status" => $data[$value]['status']));
-                        $this->Order->save();
-                    }
+                foreach ($data['status'] as $key => $value) {
+                    $this->Order->id = $key;
+                    $this->Order->set(array(
+                        "status" => $value,
+                        'shipment_track' => trim($data['shipment_track']),
+                        'shipment_fee' => trim($data['shipment_fee']),
+                        'shipment_type' => trim($data['shipment_type']),
+                        "shipment_trackurl" => trim ($data['shipment_trackurl'])
+                    ));
+                    $this->Order->save();
                 }
-                exit(json_encode($this->error));
             }
 
-            $this->Order->id = $id;
-
-            $this->Order->set(array("status" => $data[$id]['status']));
-            $this->Order->save();
             exit(json_encode($this->error));
         }
-    }
-
-    public function delete() {
-        
     }
 
     public function notify() {
@@ -247,19 +257,48 @@ class OrderController extends AdminAppController {
         $guid = $this->request->query('id');
 
         $this->loadModel('Order');
-        $data = $this->Order->find('first', array("conditions" => array("guid" => $guid)));
-        $email = $this->request->data('email');
+        $data = $this->Order->find('first', array(
+            "conditions" => array(
+                "guid" => $guid)
+        ));
+        
+        if (empty ($data)) {
+            $this->error['error'] = 1;
+            $this->error['message'] = "No orders";
+            exit(json_encode($this->error));
+        }
 
+        if (empty($data['Order']['group_guid'])) {
+            $group = $data;
+            $data = array();
+            $data[] = $group;
+        } else {
+            $data = $this->Order->find('all', array(
+                "order" => "modified DESC",
+                "conditions" => array(
+                    "group_guid" => $data['Order']['group_guid'],
+                )
+            ));
+        }
+
+        $email = $this->request->data('email');
+        
         $this->loadModel('UserBillInfo');
-        $bill = $this->UserBillInfo->find('first', array("conditions" => array("guid" => $data['Order']['bill_guid'])));
+        $bill = $this->UserBillInfo->find('first', array(
+            "conditions" => array(
+                "guid" => $data[0]['Order']['bill_guid'])
+        ));
 
         $this->loadModel('UserDeliverInfo');
-        $deliver = $this->UserDeliverInfo->find('first', array("conditions" => array("guid" => $data['Order']['deliver_guid'])));
+        $deliver = $this->UserDeliverInfo->find('first', array(
+            "conditions" => array(
+                "guid" => $data[0]['Order']['deliver_guid'])
+        ));
         $deliver = $deliver['UserDeliverInfo'];
 
         if (empty($email)) {
             $this->error['error'] = 1;
-            $this->error['message'] = "";
+            $this->error['message'] = "Invalid email";
             exit(json_encode($this->error));
         }
 
@@ -271,7 +310,7 @@ class OrderController extends AdminAppController {
                 $subject = $email['subject'];
                 $content = $email['content'];
                 $template = "order_status_changed";
-                $vars = array("orders" => $data['Order'], "bill" => $bill['UserBillInfo'], 'email_content' => $content, 'deliver' => $deliver);
+                $vars = array("orders" => $data, "bill" => $bill['UserBillInfo'], 'email_content' => $content, 'deliver' => $deliver);
                 $this->email($from, $to, $subject, $content, $template, $vars);
             }
         } catch (Exception $e) {
@@ -279,20 +318,71 @@ class OrderController extends AdminAppController {
             $this->error['message'] = $e->getMessage();
             exit(json_encode($this->error));
         }
+        
+        $this->loadModel ('EmailHistory');
+        $this->EmailHistory->create();
+        $this->EmailHistory->save (array (
+            "guid" => uniqid(),
+            "object_guid" => $data[0]['Order']['group_guid'],
+            "from" => serialize($from),
+            "to" => $to,
+            "subject" => $subject,
+            "content" => $content,
+            "created" => time (),
+        ));
 
         exit(json_encode($this->error));
     }
-
-    protected function email($from, $to, $subject, $content, $template, $vars = array()) {
-        $Email = new CakeEmail();
-        $Email->config('smtp');
-        $Email->template($template);
-        $Email->viewVars($vars);
-        $Email->emailFormat('html');
-        $Email->from($from);
-        $Email->to($to);
-        $Email->subject($subject);
-        $Email->send();
+    
+    public function delete () 
+    {
+        $id = $this->request->query ('id');
+        $action = $this->request->query ('action');
+        
+        if ($action == "email") {
+            $this->loadModel ("EmailHistory");
+            $this->EmailHistory->id = $id;
+            $this->EmailHistory->delete ();
+        }
+        
+        if ($action == "order") {
+            $this->loadModel ("Order");
+            $order = $this->Order->find ('first', array (
+                "conditions" => array (
+                    "id" => $id,
+                )
+            ));
+            
+            if (empty ($order)) {
+                
+            } else {
+                $bill = $order['Order']['bill_guid'];
+                $deliver = $order['Order']['deliver_guid'];
+                
+                $group = $this->Order->find ('first', array (
+                    "conditions" => array (
+                        "group_guid" => $order['Order']['group_guid']
+                    )
+                ));
+                
+                if (count ($group) > 1) {
+                    exit (json_encode($this->error));
+                }
+                
+                $this->loadModel ('UserBillInfo');
+                $this->UserBillInfo->deleteAll (array ("guid" => $bill));
+                
+                $this->loadModel ('UserDeliverInfo');
+                $this->UserDeliverInfo->deleteAll (array ("guid" => $deliver));
+                
+                $this->Order->id = $id;
+                $this->Order->delete ();
+                
+                exit (json_encode($this->error));
+            }
+        }
+        
+        exit(json_encode($this->error));
     }
 
     public function fetch() {
@@ -312,26 +402,18 @@ class OrderController extends AdminAppController {
             $this->layout = false;
             $this->render('fetch.user');
         }
+    }
 
-        if ($action == 'new' && $this->request->is('ajax')) {
-            $this->loadModel('Order');
-            $orders = $this->Order->find('all', array(
-                "order" => "modified DESC",
-                'conditions' => array(
-                    'status' => 'paid',
-            )));
-
-            if (!empty($orders)) {
-                $this->set('data', $orders);
-            } else {
-                $this->set('data', null);
-            }
-
-            $this->layout = false;
-            $this->render('fetch.new');
-        }
+    protected function email($from, $to, $subject, $content, $template, $vars = array(), $debug=false) {
+        $Email = new CakeEmail();
+        $Email->config('smtp');
+        $Email->template($template);
+        $Email->viewVars($vars);
+        $Email->emailFormat('html');
+        $Email->from($from);
+        $Email->to($to);
+        $Email->subject($subject);
+        $Email->send();
     }
 
 }
-
-?>

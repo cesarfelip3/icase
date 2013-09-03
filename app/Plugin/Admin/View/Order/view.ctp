@@ -1,4 +1,3 @@
-
 <div class="secondary-masthead">
     <div class="container">
         <ul class="breadcrumb">
@@ -80,53 +79,9 @@
                             <thead>
                                 <tr>
                                     <th>Orders</th>
-                                    <th>Amount</th>
                                     <th>QTY</th>
-                                    <th class="value">Status</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <a href="">
-                                            <?php echo $data['title']; ?>
-                                        </a><br/>
-                                        <span class="label label-info">
-                                            <?php echo $data['status']; ?>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        $<?php echo $data['amount']; ?>
-                                    </td>
-                                    <td>
-                                        <?php echo $data['quantity']; ?>
-                                    </td>
-                                    <td>
-                                        <select class="input-medium" name="order[<?php echo $data['id']; ?>][status]" onchange="save('edit/?id=<?php echo $data['id']; ?>')">
-                                            <?php foreach ($status as $key => $state) : ?>
-                                                <option value="<?php echo $key; ?>" <?php if ($data['status'] == $key) echo 'selected="selected"'; ?>><?php echo $state; ?></option>
-                                            <?php endforeach; ?>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <a class="btn btn-primary" onclick="send_email();" data-loading-text="Saving..." id="btn-sendemail">Send Email</a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="slate">
-                        <div class="page-header">
-                            <h2>Ordered Items (in same transaction)</h2>
-                        </div>
-                        <table class="orders-table table">
-                            <thead>
-                                <tr>
-                                    <th>Orders</th>
-                                    <th>Amount</th>
-                                    <th>QTY</th>
-                                    <th class="value">Status</th>
+                                    <th>Value</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -134,21 +89,22 @@
                                 <?php foreach ($group as $value) : $value = $value['Order']; ?>
                                 <tr>
                                     <td>
-                                        <a href="">
+                                        <a href="<?php echo $base . "product/edit/?id=" . $value['product_guid']; ?>" target="new">
                                             <?php echo $value['title']; ?>
-                                        </a><br/>
+                                        </a>
+                                        <br/>
                                         <span class="label label-info">
                                             <?php echo $value['status']; ?>
                                         </span>
                                     </td>
                                     <td>
-                                        $<?php echo $value['amount']; ?>
-                                    </td>
-                                    <td>
                                         <?php echo $value['quantity']; ?>
                                     </td>
                                     <td>
-                                        <select class="input-medium" name="order[<?php echo $value['id']; ?>][status]" onchange="save('edit/?id=<?php echo $data['id']; ?>')">
+                                        $<?php echo $value['amount']; ?>
+                                    </td>
+                                    <td>
+                                        <select class="input-medium" name="order[status][<?php echo $value['id']; ?>]">
                                             <?php foreach ($status as $key => $state) : ?>
                                                 <option value="<?php echo $key; ?>" <?php if ($value['status'] == $key) echo 'selected="selected"'; ?>><?php echo $state; ?></option>
                                             <?php endforeach; ?>
@@ -156,18 +112,48 @@
                                     </td>
                                 </tr>
                                 <?php endforeach; ?>
+                                <?php else : ?>
+                                <tr>
+                                    <td colspan="3">
+                                        <em>No orders yet</em>
+                                    </td>
+                                </tr>
                                 <?php endif; ?>
                             </tbody>
                         </table>
-                        <div class="well">
-                            <p>There items were ordered and paid in one transaction for the same user. You should deliver all items at same time.</p>
+                    </div>
+                    <div class="slate">
+                        <div class="page-header">
+                            <h2>Shipment</h2>
                         </div>
+                        <div class="input-prepend">
+                            <span class="add-on" style="width:80px;">Type</span>
+                            <input class="input-xlarge" id="prependedInput" type="text" value="<?php echo $data['shipment_type']; ?>" name="order[shipment_type]">
+                        </div>
+                        <div class="input-prepend">
+                            <span class="add-on" style="width:80px;">Track</span>
+                            <input class="input-xlarge" id="prependedInput" type="text" value="<?php echo $data['shipment_track']; ?>" name="order[shipment_track]">
+                        </div>
+                        <div class="input-prepend">
+                            <span class="add-on" style="width:80px;">Track URL</span>
+                            <input class="input-xlarge" id="prependedInput" type="text" value="<?php echo $data['shipment_trackurl']; ?>" name="order[shipment_trackurl]">
+                        </div>
+                        <div class="input-prepend">
+                            <span class="add-on" style="width:80px;">Fee</span>
+                            <input class="input-xlarge" id="prependedInput" type="text" value="2.49" name="order[shipment_fee]">
+                        </div>
+                        <div class="input-prepend">
+                            <a href="javascript:" class="btn btn-info" onclick='save(this);' data-loading-text="Saving..." >Update</a>
+                        </div>
+                    </div>
+                    <div class="well">
+                        Update : all these ordered items were in same transaction by same user, and paid with one time shipment fee. You have to deliver all these ordered items at same time.
                     </div>
                 </div>
                 <div class="span5">
                     <div class="input-prepend">
                         <span class="add-on" style="width:80px;">Email</span>
-                        <input class="input-xlarge" id="prependedInput" type="text" value="<?php echo $data['notification_email']; ?>" name="email[email]">
+                        <input class="input-medium" id="prependedInput" type="text" value="<?php echo $data['notification_email']; ?>" name="email[email]">
                     </div>
                     <div class="input-prepend">
                         <span class="add-on" style="width:80px;">Subject</span>
@@ -180,8 +166,51 @@
 <b>Track Your Shipment:</b> <a href="https://tools.usps.com/go/TrackConfirmAction.action?tLabels=9405510200986104431161">9405510200986104431161</a><br></div>
                         </textarea>
                     </div>
+                    <div style="padding:10px;height:50px;">
+                        <p><a class="btn btn-primary pull-right" onclick="send_email();" data-loading-text="Saving..." id="btn-sendemail">Send Email</a></p>
+                    </div>
                     <div class="well">
                         Edit email content to meet your requirement.
+                    </div>
+                    
+                    <div class='slate'>
+                       <div class="page-header">
+                            <h2>Email History</h2>
+                            
+                        </div> 
+                        <table class="table">
+                            <tbody>
+                                <?php if (!empty ($emails)) : $i = 0; ?>
+                                <?php foreach ($emails as $value) : $value = $value['EmailHistory']; ?>
+                                <?php foreach (unserialize($value['from']) as $key => $val) {$from = $key . "-" . $val;} ?>
+                                <tr>
+                                    <td>
+                                        <span style="font-size:14px"><?php echo $value['subject']; ?></span><br/><br/>
+                                        <b>From:&nbsp;&nbsp;</b><?php echo $from; ?><br/>
+                                        <b>To:&nbsp;&nbsp;</b><?php echo $value['to']; ?><br/>
+                                        <b>Date:&nbsp;&nbsp;</b><?php echo date ("d/m/Y H:i:s", $value['created']); ?><br/>
+                                    </td>
+                                </tr>
+                                <tr style='background-color:#ebc;color:black;'>
+                                    <td>
+                                        <div>
+                                            <?php echo $value['content']; ?>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><a href='javascript:' class='btn btn-info' onclick='delete_email(this, "<?php echo $value['id']; ?>");' data-loading-text="Deleting..." >Delete</a></td>
+                                </tr>
+                                <?php endforeach; ?>
+                                <?php else : ?>
+                                <tr>
+                                    <td colspan="4">
+                                        <em>No emails yet</em>
+                                    </td>
+                                </tr>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -220,24 +249,11 @@
     </div>
 </div>
 <script>
-    function save(action, button) {
-
-        var data = "";
-        if (action.substring(0, 4) == "edit") {
-            data = $("#form-edit").serialize();
-        }
-
-        if (action == "add") {
-            data = $("#form-new").serialize();
-        }
-
-        if (action == "delete") {
-            data = $("#form-edit").serialize();
-        }
+    function save(button) {
 
         jQuery.ajax({
-            url: "<?php echo $base; ?>order/" + action,
-            data: data,
+            url: "<?php echo $base; ?>order/edit",
+            data: $("#form-edit").serialize(),
             type: "POST",
             beforeSend: function(xhr) {
                 $(button).button('loading');
@@ -293,6 +309,34 @@
 
         }).fail(function() {
             $("#btn-snedemail").button('reset');
+        });
+     }
+     
+     function delete_email (button, id)
+     {
+         jQuery.ajax({
+            url: "<?php echo $base; ?>order/delete/?action=email&id=" + id,
+            type: "GET",
+            beforeSend: function(xhr) {
+                $(button).button('loading');
+            }
+        }).done(function(data) {
+            $(button).button('reset');
+
+            var result = $.parseJSON(data);
+            //console.log(result);
+            if (result.error == 1) {
+                ////console.log(result.element);
+                //$(result.element).next(".help-inline").html(result.message);
+                //$(result.element).parent().parent().addClass('error');
+                showAlert(result.message);
+            } else {
+                //$(result.element).parent().parent().removeClass('error');
+                //$(result.element).next(".help-inline").html("");
+                window.location.href = "";
+            }
+
+        }).fail(function() {
         });
      }
 </script>

@@ -48,6 +48,8 @@ Upgrade From 0.1 to 0.2
 7.  Model - debug
 8.  Payment Gateway - move to component, so we can add more payment method there
 9.  Order table scheme changed
+10. Email History - from 0.1
+11. Order Logic fixed - from 0.1
 
 SEO basic --
 
