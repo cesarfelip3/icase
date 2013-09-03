@@ -72,4 +72,11 @@ Security
 ============
 http://htmlpurifier.org/docs
 
+Performance
+=============
+
+js, css, image - very slow, CDN
+PHP - server issue???
+
+
 
