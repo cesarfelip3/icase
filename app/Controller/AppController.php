@@ -40,6 +40,7 @@ class AppController extends Controller {
         ),
         'Captcha'
     );
+    public $helpers = array('Cache');
 
     /*
      * Media - when the site is running long time, there are lots of images<flash or else>

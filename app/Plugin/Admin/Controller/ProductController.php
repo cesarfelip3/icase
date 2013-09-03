@@ -227,6 +227,7 @@ class ProductController extends AdminAppController {
             $data['slug'] = $data['slug'] . "-P" . $id;
             $this->Product->set(array("slug" => $data['slug']));
             $this->Product->save();
+            
 
             $this->error['data'] = $this->Product->id;
 

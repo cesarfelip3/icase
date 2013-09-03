@@ -26,6 +26,7 @@
  */
 // Setup a 'default' cache configuration for use in the application.
 Cache::config('default', array('engine' => 'File'));
+
 /**
  * The settings below can be used to set additional paths to models, views and controllers.
  *
@@ -94,15 +95,19 @@ Configure::write('Dispatcher.filters', array(
  * Configures default file logging options
  */
 App::uses('CakeLog', 'Log');
+
 CakeLog::config('debug', array(
     'engine' => 'FileLog',
     'types' => array('notice', 'info', 'debug'),
     'file' => 'debug',
 ));
+
 CakeLog::config('error', array(
     'engine' => 'FileLog',
     'types' => array('warning', 'error', 'critical', 'alert', 'emergency'),
     'file' => 'error',
 ));
 
-
+Configure::write('Dispatcher.filters', array(
+    'CacheDispatcher'
+));

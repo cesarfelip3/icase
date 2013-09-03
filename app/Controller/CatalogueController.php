@@ -5,6 +5,10 @@ App::uses('AppController', 'Controller');
 class CatalogueController extends AppController {
 
     public $uses = false;
+    public $cacheAction = array(
+        'category' => array('callbacks' => true, 'duration' => 3600000),
+        'product' => array('callbacks' => true, 'duration' => 3600000),
+    );
 
     public function beforeFilter() {
         $this->Auth->allow();
