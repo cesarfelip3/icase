@@ -35,7 +35,7 @@ class CronController extends AppController {
                 if (preg_match("/.(png|jpg|jpeg)$/i", $image)) {
                     $time = fileatime($file);
                     print_r($file . "<br/>");
-                    if ($time > time() + 1000 * 60 * 60 * 24 * 3) {
+                    if ($time > time() + 1000 * 60 * 60 * 24 * 1) {
                         //@unlink ($file);
                         print_r($file . "<br/>");
                     }
