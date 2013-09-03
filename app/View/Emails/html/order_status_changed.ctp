@@ -6,11 +6,11 @@
     <body>
         Dear <?php echo $bill['name']; ?>,<br/>
         <?php echo $email_content; ?>
-        <br/>Shipped To:<br/>
+        <br/>
         Address: <?php echo $deliver['address']; ?><br/>
         Location: <?php echo $deliver['city']; ?> <?php echo $deliver['state']; ?>  <?php echo $deliver['country']; ?><br/>
         Phone: <?php echo $deliver['phone']; ?><br/><br/>
-        This shipment includes the following items:<br/><br/>
+        Including the following items:<br/><br/>
         <?php foreach ($orders as $value) : $value = $value['Order']; ?>
         <div>
             <span>ID : #<?php echo $value['guid']; ?></span><br/>

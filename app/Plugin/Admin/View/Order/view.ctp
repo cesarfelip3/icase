@@ -164,7 +164,7 @@
                         <textarea class="ckeditor" cols="80" id="editor1" name="email[content]" rows="10">
 <div>Thank you for your order from BeaUTAHful Creations<b>! </b>We wanted to let you know that your order was shipped via USPS, USPS Priority Mail on 7/27/2013.  You can track your package at any time using the link below.</div>
 <div>
-<b>Track Your Shipment:</b> <a href="https://tools.usps.com/go/TrackConfirmAction.action?tLabels=9405510200986104431161">9405510200986104431161</a><br></div>
+<b>Track Your Shipment:</b> <a href="https://tools.usps.com/go/TrackConfirmAction.action?tLabels=9405510200986104431161">9405510200986104431161</a><br/>Shipped To:</div>
                         </textarea>
                     </div>
                     <div style="padding:10px;height:50px;">
