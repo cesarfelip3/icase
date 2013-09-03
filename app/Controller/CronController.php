@@ -18,7 +18,7 @@ class CronController extends AppController {
         print_r("Stage 1 : Clean unused images......<br/>");
         //print_r(WWW_ROOT . $this->_media_location['product'] . "<br/>");
 
-        if (($handle = opendir(WWW_ROOT . $this->_media_location['product'] . ".")) != false) {
+        if (($handle = opendir(WWW_ROOT . "uploads/" . ".")) != false) {
             while (false !== ($entry = readdir($handle))) {
                 if ($entry != "." && $entry != "..") {
                     $images[] = $entry;
