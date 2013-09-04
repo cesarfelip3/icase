@@ -22,7 +22,10 @@ class CategoryController extends AdminAppController {
     }
 
     public function index() {
+        
+    }
 
+    public function categorylist() {
         if ($this->request->is('ajax')) {
 
             $this->layout = false;

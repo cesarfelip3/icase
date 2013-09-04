@@ -241,7 +241,7 @@ $admin_product = $base . "product";
 
     function category_load() {
         jQuery.ajax({
-            url: "<?php echo $base; ?>category",
+            url: "<?php echo $base; ?>category/categorylist",
             type: "GET",
             beforeSend: function(xhr) {
                 showAlert2("Loading category data now......");

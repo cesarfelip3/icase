@@ -156,8 +156,8 @@ endif;
                 var list = JSON.parse(json);
                 
                 for (var i = 0; i < list.length; ++i) {
-                    var object = list[i];
-                    if (object.id == guid) {
+                    var obj = list[i];
+                    if (obj.id == guid) {
                         return;
                     }
                 }
