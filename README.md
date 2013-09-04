@@ -28,7 +28,8 @@ Version 0.2
 1. AdminAppController.php
 2. AdminController.php
 3. AdministratorController.php
-4. MemberController.php - on working....
+4. MemberController.php
+5. ProductController.php - ....
 
 
 Update
@@ -48,6 +49,7 @@ Upgrade From 0.1 to 0.2
 10. Email History - from 0.1
 11. Order Logic fixed - from 0.1
 12. Cache - Views - from 0.1
+14. Product - Category Filter
 
 SEO basic --
 
