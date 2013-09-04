@@ -126,8 +126,6 @@ $action_category_index = $base . "category";
         });
     }
     
-    
-    
     function categoryfilter_restore()
     {
         <?php if (!empty ($filter_categories)) : ?>
