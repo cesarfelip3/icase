@@ -8,6 +8,7 @@ class CatalogueController extends AppController {
     public $cacheAction = array(
         'category' => array('callbacks' => true, 'duration' => 3600000),
         'product' => array('callbacks' => true, 'duration' => 3600000),
+        'categorylist' => array('callbacks' => true, 'duration' => 3600000),
     );
 
     public function beforeFilter() {
@@ -312,7 +313,8 @@ class CatalogueController extends AppController {
             }
             //$this->set('slug', $slug);
             $this->set('data', $return);
-            $this->render("category.ajax");
+            $this->layout = "ajax";
+            
             return;
         }
     }
