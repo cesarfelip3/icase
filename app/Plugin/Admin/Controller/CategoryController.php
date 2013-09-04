@@ -13,6 +13,9 @@ class CategoryController extends AdminAppController {
             'duration' => 3600000),
         'categoryfilter' => array(
             'callbacks' => true,
+            'duration' => 3600000),
+        'categorylist' => array(
+            'callbacks' => true,
             'duration' => 3600000)
     );
 
