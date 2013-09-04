@@ -157,7 +157,7 @@ endif;
                 
                 for (var i = 0; i < list.length; ++i) {
                     var object = list[i];
-                    if (object.id == id) {
+                    if (object.id == guid) {
                         return;
                     }
                 }
