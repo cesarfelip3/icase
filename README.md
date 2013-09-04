@@ -36,6 +36,9 @@ Update
 
 DON'T PULL ON SERVER
 
+14.PULLED on SERVER
+15.Cache - Ajax
+
 
 SEO basic --
 
