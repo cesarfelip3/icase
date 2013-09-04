@@ -327,7 +327,7 @@ class CatalogueController extends AppController {
             }
             //$this->set('slug', $slug);
             $this->set('data', $return);
-            $this->render("category.ajax");
+            $this->layout = "ajax";
             return;
         }
     }
