@@ -154,6 +154,14 @@ endif;
                 json = JSON.stringify(list);
             } else {
                 var list = JSON.parse(json);
+                
+                for (var i = 0; i < list.length; ++i) {
+                    var object = list[i];
+                    if (object.id == id) {
+                        return;
+                    }
+                }
+                
                 list[list.length] = object;
                 json = JSON.stringify(list);
             }
