@@ -7,6 +7,14 @@ class CategoryController extends AdminAppController {
         'element' => '',
         'message' => '',
     );
+    public $cacheAction = array(
+        'index' => array(
+            'callbacks' => true,
+            'duration' => 3600000),
+        'categoryfilter' => array(
+            'callbacks' => true,
+            'duration' => 3600000)
+    );
 
     public function beforeFilter() {
         $this->Auth->deny();

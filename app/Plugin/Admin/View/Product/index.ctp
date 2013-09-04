@@ -78,7 +78,9 @@ $action_category_index = $base . "category";
                                 <li><a href="">PDF</a></li>
                             </ul>
                         </div>
-                        <h2>Products</h2>
+                        <h2>Products
+                        <div style='display:inline' class='pull-right'>
+                            <span class='label label-success'><?php echo $page + 1; ?> / <?php echo $pages; ?></span>                 </div></h2>
                     </div>
                     <table class="orders-table table">
                         <thead>

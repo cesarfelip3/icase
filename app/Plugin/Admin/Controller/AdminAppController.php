@@ -35,7 +35,7 @@ class AdminAppController extends Controller {
         ),
         'Admin.Captcha'
     );
-    
+    public $helpers = array('Cache');
     protected $_media_location = array(
         "main" => "uploads/",
         "product" => "uploads/product/",
