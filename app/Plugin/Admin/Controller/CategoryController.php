@@ -99,7 +99,7 @@ class CategoryController extends AdminAppController {
             //exit;
 
             $this->set('data', $return);
-            $this->render('index.ajax');
+            $this->layout = "ajax";
         }
     }
 
@@ -107,7 +107,6 @@ class CategoryController extends AdminAppController {
 
         if ($this->request->is('ajax')) {
 
-            $this->layout = false;
             $action = $this->request->query('action');
             $id = $this->request->query('id');
 
@@ -174,8 +173,10 @@ class CategoryController extends AdminAppController {
             //print_r($return);
             //exit;
 
+            //$this->layout = false;
+            $this->layout = 'ajax';
             $this->set('data', $return);
-            $this->render('product.filter.ajax');
+            //$this->render('categoryfilter');
         }
     }
 
