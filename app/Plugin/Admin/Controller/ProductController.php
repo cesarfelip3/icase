@@ -37,13 +37,15 @@ class ProductController extends AdminAppController {
         $start = $this->request->query('start');
         $end = $this->request->query('end');
 
-        $conditions = array("type" => "product");
+        $filter_categories = $this->request->query('category');
+
+        $conditions = array("Product.type" => "product");
 
         if (!empty($start) && !empty($end)) {
             $duration = array(
                 "AND" => array(
-                    array("created >=" => strtotime($start)),
-                    array("created <=" => strtotime($end))
+                    array("Product.created >=" => strtotime($start)),
+                    array("Product.created <=" => strtotime($end))
             ));
             $conditions = array_merge($conditions, $duration);
         }
@@ -51,8 +53,8 @@ class ProductController extends AdminAppController {
         if (!empty($keyword)) {
             $search = array(
                 "OR" => array(
-                    array("name LIKE " => "%" . $keyword . "%"),
-                    array("description LIKE " => "%" . $keyword . "%"))
+                    array("Product.name LIKE " => "%" . $keyword . "%"),
+                    array("Product.description LIKE " => "%" . $keyword . "%"))
             );
             $conditions = array_merge($conditions, $search);
         }
@@ -61,36 +63,83 @@ class ProductController extends AdminAppController {
             $conditions = array($conditions, array($filter));
         }
 
+        $categories = array();
+        if (!empty($filter_categories)) {
+            foreach ($filter_categories as $value) {
+                if (!empty($value)) {
+                    $categories['CategoryToObject.category_guid'][] = $value;
+                }
+            }
+        }
 
-        //=========================================================
-        $this->loadModel('Product');
-        $total = $this->Product->find("count", array("conditions" => $conditions));
+        if (!empty($categories)) {
+            $conditions = array_merge($conditions, $categories);
 
-        if ($total <= 0) {
-            $data = array();
-        } else {
+            $this->loadModel('Product');
+
             $data = $this->Product->find('all', array(
-                'limit' => $limit,
-                'page' => $page + 1,
+                'joins' => array(
+                    array(
+                        'table' => 'category_to_object',
+                        'alias' => 'CategoryToObject',
+                        'type' => 'inner',
+                        'foreignKey' => false,
+                        'conditions' => array('CategoryToObject.object_guid = Product.guid')
+                    ),
+                ),
                 'conditions' => $conditions,
                 'order' => 'modified DESC',
+                'limit' => $limit,
+                'page' => $page + 1,
                 'fields' => array("Product.*")
-                    )
+            ));
+            
+            //$this->Product->_debug ();
+
+            $total = $this->Product->find('count', array(
+                'joins' => array(
+                    array(
+                        'table' => 'category_to_object',
+                        'alias' => 'CategoryToObject',
+                        'type' => 'inner',
+                        'foreignKey' => false,
+                        'conditions' => array('CategoryToObject.object_guid = Product.guid')
+                    ),
+                ),
+                'conditions' => $conditions)
             );
+            
+            $this->set ('filter_categories', $filter_categories);
+        } else {
+            $this->loadModel('Product');
+            $total = $this->Product->find("count", array("conditions" => $conditions));
 
-            foreach ($data as $key => $value) {
-
-                if ($value['Product']['type'] == 'product') {
-                    $value['Product']['featured'] = unserialize($value['Product']['featured']);
-                    $value['Product']['image'] = $value['Product']['featured'][0];
-
-                    $filename = pathinfo($value['Product']['image'], PATHINFO_FILENAME);
-                    $small = $filename . "_small.png";
-                    $value['Product']['image'] = $this->webroot . $this->_media_location['product'] . $small;
-                }
-
-                $data[$key] = $value;
+            if ($total <= 0) {
+                $data = array();
+            } else {
+                $data = $this->Product->find('all', array(
+                    'limit' => $limit,
+                    'page' => $page + 1,
+                    'conditions' => $conditions,
+                    'order' => 'modified DESC',
+                    'fields' => array("Product.*")
+                        )
+                );
             }
+        }
+
+        foreach ($data as $key => $value) {
+
+            if ($value['Product']['type'] == 'product') {
+                $value['Product']['featured'] = unserialize($value['Product']['featured']);
+                $value['Product']['image'] = $value['Product']['featured'][0];
+
+                $filename = pathinfo($value['Product']['image'], PATHINFO_FILENAME);
+                $small = $filename . "_small.png";
+                $value['Product']['image'] = $this->webroot . $this->_media_location['product'] . $small;
+            }
+
+            $data[$key] = $value;
         }
 
         //=========================================================
@@ -103,7 +152,18 @@ class ProductController extends AdminAppController {
             "quantity=0" => "Empty Stocks"
         );
 
+        $header = array(
+            "name" => "Name",
+            "type" => "Type",
+            "image" => "Picture",
+            "price" => "Price",
+            "quantity" => "Quantity",
+            "created" => "Created",
+            "modified" => "Modified"
+        );
+
         $this->set(array(
+            "header" => $header,
             "data" => $data,
             "page" => $page,
             "limit" => $limit,
@@ -289,7 +349,7 @@ class ProductController extends AdminAppController {
         if (preg_match("/\-P$id/", trim($data['slug']))) {
             $data['slug'] = str_replace("-P" . $data['id'], "", $data['slug']);
         }
-        
+
         $this->set(array('data' => $data));
     }
 
@@ -481,6 +541,59 @@ class ProductController extends AdminAppController {
         exit(json_encode($this->_error));
     }
 
+    public function categoryfilter() {
+
+        $level = $this->request->query('level');
+        $guid = $this->request->query('id');
+
+        $level = intval($level);
+
+        $this->loadModel('Category');
+
+        if ($level == 0) {
+            $conditions = array(
+                'level' => $level);
+        } else {
+            $conditions = array(
+                'level' => $level,
+                'parent_guid' => $guid);
+        }
+
+        $data = $this->Category->find('all', array(
+            "conditions" => $conditions,
+            "order" => array('order ASC')
+        ));
+
+        if (empty($data)) {
+            exit("");
+        }
+
+        $this->layout = false;
+        $this->set('level', $level);
+        $this->set('data', $data);
+        $this->render("categoryfilter.ajax");
+    }
+
+    protected function _categoryList($data, &$return) {
+        if (!empty($data)) {
+            foreach ($data as $value) {
+
+                $result = $this->Category->find('all', array(
+                    "conditions" => array('parent_guid' => $value['Category']['guid']),
+                    "order" => array('order ASC')
+                        )
+                );
+
+                if (!empty($result)) {
+                    $return[] = $value;
+                    $this->_categoryList($result, $return);
+                } else {
+                    $return[] = $value;
+                }
+            }
+        }
+    }
+
     //======================================================
     public function install() {
 
@@ -557,5 +670,4 @@ class ProductController extends AdminAppController {
     }
 
 }
-
 ?>

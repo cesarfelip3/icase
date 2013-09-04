@@ -30,7 +30,9 @@ $action_delete = $base . "member/delete";
                         <select name='filter'>
                             <option value=""> - Filter - </option>
                             <?php foreach ($filters as $key=>$value) :?>
-                            <option value="<?php echo $key; ?>" <?php if ($key == $filter) echo 'selected="selected"'; ?>><?php echo $value; ?></option>
+                            <option value="<?php echo $key; ?>" <?php if ($key == $filter) echo 'selected="selected"'; ?>>
+                                <?php echo $value; ?>
+                            </option>
                             <?php endforeach; ?>
                         </select>
                         <input type="submit" class="btn btn-primary" name="action" value="Filter" />

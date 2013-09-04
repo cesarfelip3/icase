@@ -22,9 +22,6 @@ Version 0.2
 2. Front / Code Review / Bug Fix / Reusability / Test
 
 3. i18n - Brazil Language / Time zone / Location
-4. Order - group orders for one user
-
-
 
 2013.09.02
 
@@ -50,6 +47,7 @@ Upgrade From 0.1 to 0.2
 9.  Order table scheme changed
 10. Email History - from 0.1
 11. Order Logic fixed - from 0.1
+12. Cache - Views - from 0.1
 
 SEO basic --
 

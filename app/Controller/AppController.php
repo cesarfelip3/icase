@@ -41,7 +41,7 @@ class AppController extends Controller {
         'Captcha',
         'Payment',
     );
-
+    public $helpers = array('Cache');
     /*
      * Media - when the site is running long time, there are lots of images<flash or else>
      * located on server, but some of them maybe not use any longer. We have to consider the 

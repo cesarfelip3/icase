@@ -5,6 +5,17 @@ App::uses('AppController', 'Controller');
 class CatalogueController extends AppController {
 
     public $uses = false;
+    public $cacheAction = array(
+        'category' => array(
+            'callbacks' => true,
+            'duration' => 3600000),
+        'product' => array(
+            'callbacks' => true,
+            'duration' => 3600000),
+        'categorylist' => array(
+            'callbacks' => true,
+            'duration' => 3600000)
+    );
 
     public function beforeFilter() {
         $this->Auth->allow();
@@ -92,9 +103,9 @@ class CatalogueController extends AppController {
         }
 
         if (!empty($data)) {
-            
+
             $media_location_product = $this->webroot . $this->_media_location['product'];
-            
+
             foreach ($data as $key => $value) {
                 if (!empty($value['Product']['featured'])) {
                     $value['Product']['featured'] = unserialize($value['Product']['featured']);
@@ -131,14 +142,14 @@ class CatalogueController extends AppController {
 
         $data = $data['Product'];
 
-        if (!empty ($data['featured'])) {
+        if (!empty($data['featured'])) {
             $data['featured'] = unserialize($data['featured']);
-            
+
             $filename = pathinfo($data['image'], PATHINFO_FILENAME);
-            $data['image'] =  $this->webroot . $this->_media_location['product'] . $filename . "_medium.png";
-            
+            $data['image'] = $this->webroot . $this->_media_location['product'] . $filename . "_medium.png";
+
             foreach ($data['featured'] as $key => $image) {
-                $image = pathinfo ($image, PATHINFO_FILENAME) . "_small.png";
+                $image = pathinfo($image, PATHINFO_FILENAME) . "_small.png";
                 $data['featured'][$key] = $this->webroot . $this->_media_location['product'] . $image;
             }
         }
@@ -249,7 +260,7 @@ class CatalogueController extends AppController {
 
         if (!empty($data)) {
             $media_location_product = $this->webroot . $this->_media_location['product'];
-            
+
             foreach ($data as $key => $value) {
                 if (!empty($value['Product']['featured'])) {
                     $value['Product']['featured'] = unserialize($value['Product']['featured']);

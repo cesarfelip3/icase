@@ -5,6 +5,11 @@ App::uses('AppController', 'Controller');
 class IndexController extends AppController {
 
     public $uses = false;
+    public $cacheAction = array(
+        'index' => array(
+            'callbacks' => true, 
+            'duration' => 3600000),
+    );
 
     public function beforeFilter() {
         $this->Auth->allow();

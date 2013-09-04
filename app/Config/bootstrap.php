@@ -69,10 +69,11 @@ Cache::config('default', array('engine' => 'File'));
  *
  */
 //CakePlugin::load(array('ActiveAdmin' => array('routes' => true)));
-CakePlugin::loadAll(
-        array (
-            "Admin" => array ("routes" => true, "bootstrap" => true)
-        ));
+CakePlugin::loadAll(array(
+    "Admin" => array(
+        "routes" => true,
+        "bootstrap" => true)
+));
 /**
  * You can attach event listeners to the request lifecycle as Dispatcher Filter . By Default CakePHP bundles two filters:
  *
@@ -97,15 +98,19 @@ Configure::write('Dispatcher.filters', array(
  * Configures default file logging options
  */
 App::uses('CakeLog', 'Log');
+
 CakeLog::config('debug', array(
     'engine' => 'FileLog',
     'types' => array('notice', 'info', 'debug'),
     'file' => 'debug',
 ));
+
 CakeLog::config('error', array(
     'engine' => 'FileLog',
     'types' => array('warning', 'error', 'critical', 'alert', 'emergency'),
     'file' => 'error',
 ));
 
-
+Configure::write('Dispatcher.filters', array(
+    'CacheDispatcher'
+));
