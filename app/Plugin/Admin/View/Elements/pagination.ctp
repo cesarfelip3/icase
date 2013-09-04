@@ -24,7 +24,7 @@
             $(".pagination a").click (
                 function () {
                     var page = $(this).data('page');
-                    $('input[name=page]').val (page);
+                    $('input[name=page]').val (parseInt(page));
                     $("<?php echo $form; ?>").submit();
                 });
         }

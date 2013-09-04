@@ -16,8 +16,8 @@ class ProductController extends AdminAppController {
 
     public function index() {
 
-        $page = $this->request->query('page');
-        $limit = $this->request->query('limit');
+        $page = $this->request->data('page');
+        $limit = $this->request->data('limit');
 
         if (empty($limit)) {
             $limit = 25;
@@ -31,13 +31,13 @@ class ProductController extends AdminAppController {
             $page = 0;
         }
 
-        $keyword = $this->request->query('keyword');
-        $filter = $this->request->query('filter');
+        $keyword = $this->request->data('keyword');
+        $filter = $this->request->data('filter');
 
-        $start = $this->request->query('start');
-        $end = $this->request->query('end');
+        $start = $this->request->data('start');
+        $end = $this->request->data('end');
 
-        $filter_categories = $this->request->query('category');
+        $filter_categories = $this->request->data('category');
 
         $conditions = array("Product.type" => "product");
 
@@ -64,12 +64,16 @@ class ProductController extends AdminAppController {
         }
 
         $categories = array();
+
         if (!empty($filter_categories)) {
+            $filter_categories = json_decode($filter_categories);
             foreach ($filter_categories as $value) {
-                if (!empty($value)) {
-                    $categories['CategoryToObject.category_guid'][] = $value;
+                if (!empty($value->id)) {
+                    $categories['CategoryToObject.category_guid'][] = $value->id;
                 }
             }
+        } else {
+            $filter_categories = "";
         }
 
         if (!empty($categories)) {
@@ -93,7 +97,7 @@ class ProductController extends AdminAppController {
                 'page' => $page + 1,
                 'fields' => array("Product.*")
             ));
-            
+
             //$this->Product->_debug ();
 
             $total = $this->Product->find('count', array(
@@ -108,8 +112,8 @@ class ProductController extends AdminAppController {
                 ),
                 'conditions' => $conditions)
             );
-            
-            $this->set ('filter_categories', $filter_categories);
+
+            $this->set('filter_categories', $filter_categories);
         } else {
             $this->loadModel('Product');
             $total = $this->Product->find("count", array("conditions" => $conditions));
@@ -172,7 +176,8 @@ class ProductController extends AdminAppController {
             "start" => $start,
             "end" => $end,
             "filter" => $filter,
-            "filters" => $filters
+            "filters" => $filters,
+            "filter_categories" => empty ($filter_categories) ? $filter_categories : json_encode($filter_categories),
         ));
     }
 
@@ -670,4 +675,5 @@ class ProductController extends AdminAppController {
     }
 
 }
+
 ?>

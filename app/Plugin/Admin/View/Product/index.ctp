@@ -22,7 +22,7 @@ $action_category_index = $base . "category";
         </div>
         <div class="row">
             <div class="span12">
-                <form class="form-inline" id='form-filter' method='GET'>
+                <form class="form-inline" id='form-filter' method='POST'>
                     <div class="slate">
                         <input type='hidden' name='page' value='<?php echo $page; ?>' />
                         <input type="text" class="input-large" placeholder="Keyword..." name='keyword' value='<?php echo $keyword; ?>'>
@@ -34,9 +34,17 @@ $action_category_index = $base . "category";
                                 <option value="<?php echo $key; ?>" <?php if ($key == $filter) echo 'selected="selected"'; ?>><?php echo $value; ?></option>
                             <?php endforeach; ?>
                         </select>
-                        <input type="submit" class="btn btn-primary" name="action" value="Filter" />
+                        <input type="button" onclick='load(0);' class="btn btn-primary" name="action" value="Filter" />
+                        <input type="hidden" name="category" value='<?php echo $filter_categories; ?>' />
                     </div>
-                    <div class="slate" id="box-filter-category">
+                    <div class="slate" id="box-filter-category-select">
+                        <h4>
+                            <?php if (!empty ($filter_categories)) : $filter_categories = json_decode($filter_categories); ?>
+                            <?php foreach ($filter_categories as $value) : ?>
+                            <div style="display:inline">&nbsp;<span class="label label-important"><?php echo $value->name; ?></span>&nbsp;<a href="javascript:" style="text-decoration: none;" class="btn-filter-category-remove" data-guid="<?php echo $value->id; ?>"><i class="icon-remove-circle"></i></a>&nbsp;&nbsp;</div>
+                            <?php endforeach; ?>
+                            <?php endif; ?>
+                        </h4>
                     </div>
                 </form>
             </div>
@@ -46,7 +54,17 @@ $action_category_index = $base . "category";
                 <a href="<?php echo $action_category_index; ?>" class="btn btn-primary">Edit Category</a>
                 <a href="<?php echo $action_add; ?>" class="btn btn-primary">New Product</a>
             </div>
-            <div class="span12">
+            <div class="span3">
+                <div class="slate">
+                    <div class="page-header">
+                        <h2>Category</h2>
+                    </div>
+                    <div id="box-filter-category" style="overflow: auto;">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="span9">
                 <div class="slate">
                     <div class="page-header">
                         <div class="btn-group pull-right hide">
@@ -96,8 +114,10 @@ $action_category_index = $base . "category";
                     </table>
                 </div>
             </div>
-            <div class="span6">
-                <?php echo $this->element("pagination", array ("plugin"=>"Admin", "page"=>$page, "form" => "#form-filter")); ?>
+            <div class="span12">
+                <div class='pull-right'>
+                    <?php echo $this->element("pagination", array ("plugin"=>"Admin", "page"=>$page, "form" => "#form-filter")); ?>
+                </div>
             </div>
         </div>
     </div>
@@ -110,19 +130,28 @@ $action_category_index = $base . "category";
             categoryfilter ("", 0);
         });
         
+    function load (page)
+    {
+        $("input[name=page]").val (page);
+        $("#form-filter").submit ();
+        
+    }
     function categoryfilter (id, level)
     {
         jQuery.ajax({
-            url: "<?php echo $base; ?>product/categoryfilter/?id=" + id + "&level=" + level,
+            url: "<?php echo $base; ?>category/categoryfilter",
             type: "GET",
             beforeSend: function(xhr) {
+                showAlert2 ("Loading categories......");
             }
         }).done(function(data) {
             //var html = $("#box-filter-category").html();
             if (data != "") {
-                $("#box-filter-category").append (data);
+                $("#box-filter-category").html (data);
             }
+            hideAlert ();
         }).fail(function() {
+            showAlert ("Failed");
         });
     }
     

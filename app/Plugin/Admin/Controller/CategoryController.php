@@ -89,6 +89,82 @@ class CategoryController extends AdminAppController {
         }
     }
 
+    public function categoryfilter() {
+
+        if ($this->request->is('ajax')) {
+
+            $this->layout = false;
+            $action = $this->request->query('action');
+            $id = $this->request->query('id');
+
+            $this->loadModel('Category');
+            $categories = $this->Category->find('all', array(
+                "conditions" => array('level' => 0),
+                "order" => array('order ASC')
+            ));
+
+            $return = array();
+            if (!empty($categories)) {
+
+                foreach ($categories as $category) {
+                    $result = $this->Category->find('all', array(
+                        "conditions" => array('parent_guid' => $category['Category']['guid']),
+                        "order" => array('order ASC')
+                            )
+                    );
+
+                    if (!empty($result)) {
+                        $return[] = $category;
+                        $this->_categoryList($result, $return);
+                    } else {
+                        $return[] = $category;
+                    }
+                }
+            }
+
+            if (!empty($action)) {
+                switch ($action) {
+                    case "checkbox":
+                        $this->set('checkbox', true);
+                        break;
+                }
+            }
+
+            if (!empty($id)) {
+                $this->loadModel('CategoryToObject');
+                $data = $this->CategoryToObject->find('all', array("conditions" => array("object_guid" => $id)));
+                foreach ($return as $key => $value) {
+
+                    $value['Category']['selected'] = false;
+                    foreach ($data as $category) {
+                        if ($value['Category']['guid'] == $category['CategoryToObject']['category_guid']) {
+                            $value['Category']['selected'] = true;
+                        }
+                    }
+                    $return[$key] = $value;
+                }
+            }
+
+            foreach ($return as $key => $value) {
+
+                $id = $value['Category']['id'];
+
+                //print_r ($value['Category']['slug']);
+
+                if (preg_match("/\-C$id/", trim($value['Category']['slug']))) {
+                    $value['Category']['slug'] = str_replace("-C" . $value['Category']['id'], "", $value['Category']['slug']);
+                }
+                $return[$key] = $value;
+            }
+
+            //print_r($return);
+            //exit;
+
+            $this->set('data', $return);
+            $this->render('product.filter.ajax');
+        }
+    }
+
     public function add() {
         $data = $this->request->data('category');
         if (empty($data['name'])) {
