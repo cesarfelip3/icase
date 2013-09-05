@@ -20,8 +20,10 @@
                                     <img src="<?php echo $data[$i]['Product']['image']; ?>" alt="<?php echo $data[$i]['Product']['name']; ?>" style="width:100%;">
                                 </a>
                                 <div class="caption">
-                                    <a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i]['Product']['slug']; ?>" class="prop-title" style="text-transform: uppercase"><?php echo $data[$i]['Product']['name']; ?></a>
+                                    <div style="height:70px">
+                                    <a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i]['Product']['slug']; ?>" style="text-transform: uppercase"><?php echo $data[$i]['Product']['name']; ?></a>
                                     <p class="price">$<?php echo $data[$i]['Product']['price']; ?></p>
+                                    </div>
                                     <ul class="list-btns">
                                         <li><a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i]['Product']['slug']; ?>">View Details</a></li>
                                     </ul>
@@ -34,8 +36,10 @@
                             <div class="thumbnail" style="background-image:none;background-color:white;">
                                 <a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i + 1]['Product']['slug']; ?>"><img src="<?php echo $data[$i + 1]['Product']['image']; ?>" alt="<?php echo $data[$i + 1]['Product']['name']; ?>"  style="width:100%;"></a>
                                 <div class="caption">
-                                    <a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i + 1]['Product']['slug']; ?>" class="prop-title" style="text-transform: uppercase"><?php echo $data[$i + 1]['Product']['name']; ?></a>
+                                    <div style="height:70px">
+                                    <a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i + 1]['Product']['slug']; ?>" style="text-transform: uppercase"><?php echo $data[$i + 1]['Product']['name']; ?></a>
                                     <p class="price">$<?php echo $data[$i + 1]['Product']['price']; ?></p>
+                                    </div>
                                     <ul class="list-btns">
                                         <li><a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i + 1]['Product']['slug']; ?>">View Details</a></li>
                                     </ul>
@@ -50,8 +54,10 @@
                                     <img src="<?php echo $data[$i + 2]['Product']['image']; ?>" alt="<?php echo $data[$i + 2]['Product']['name']; ?>"  style="">
                                 </a>
                                 <div class="caption">
-                                    <a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i + 2]['Product']['slug']; ?>" class="prop-title" style="text-transform: uppercase"><?php echo $data[$i + 2]['Product']['name']; ?></a>
+                                    <div style="height:70px">
+                                    <a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i + 2]['Product']['slug']; ?>" style="text-transform: uppercase"><?php echo $data[$i + 2]['Product']['name']; ?></a>
                                     <p class="price">$<?php echo $data[$i + 2]['Product']['price']; ?></p>
+                                    </div>
                                     <ul class="list-btns">
                                         <li><a href="<?php echo $this->webroot; ?>product/<?php echo $data[$i + 2]['Product']['slug']; ?>">View Details</a></li>
                                     </ul>

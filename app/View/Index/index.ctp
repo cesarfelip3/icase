@@ -28,8 +28,10 @@
                                 <img src="<?php echo $value['Product']['image']; ?>" alt="<?php echo $value['Product']['name']; ?>" style="width:100%;" alt="<?php echo $value['Product']['name']; ?>">
                             </a>
                             <div class="caption">
-                                <a href="<?php echo $this->webroot . "product/" . $value['Product']['slug']; ?>" class="prop-title" style="text-transform: uppercase;"><?php echo $value['Product']['name']; ?></a>
+                                <div style="height:80px">
+                                <a href="<?php echo $this->webroot . "product/" . $value['Product']['slug']; ?>" style="text-transform: uppercase;"><?php echo $value['Product']['name']; ?></a>
                                 <p class="price">$<?php echo $value['Product']['price']; ?></p>
+                                </div>
                                 <ul class="list-btns">
                                     <li ><a class="buynow" href="<?php echo $this->webroot . "product/" . $value['Product']['slug']; ?>">View Details</a></li>
                                 </ul>
@@ -51,8 +53,10 @@
                                 <img src="<?php echo $value['Product']['image']; ?>" alt="<?php echo $value['Product']['name']; ?>" style="width:100%;;" alt="<?php echo $value['Product']['name']; ?>">
                             </a>
                             <div class="caption">
-                                <a href="<?php echo $this->webroot . "product/" . $value['Product']['slug']; ?>" class="prop-title" style="text-transform: uppercase;"><?php echo $value['Product']['name']; ?></a>
+                                <div style="height:80px;">
+                                <a href="<?php echo $this->webroot . "product/" . $value['Product']['slug']; ?>" style="text-transform: uppercase;"><?php echo $value['Product']['name']; ?></a>
                                 <p class="price">$<?php echo $value['Product']['price']; ?></p>
+                                </div>
                                 <ul class="list-btns">
                                     <li ><a class="buynow" href="<?php echo $this->webroot . "product/" . $value['Product']['slug']; ?>">View Details</a></li>
                                 </ul>
