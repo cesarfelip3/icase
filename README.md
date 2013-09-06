@@ -38,6 +38,7 @@ DON'T PULL ON SERVER
 
 14.PULLED on SERVER
 15.Cache - Ajax
+16.ico/ - changed "/base/icon"
 
 
 SEO basic --
