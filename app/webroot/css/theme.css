@@ -2256,7 +2256,7 @@ text-shadow: 0 1px 1px rgba(82, 36, 0, 0.75);
 ul#user-nav{ float:right; }
 ul#user-nav li{ display:inline; margin-left:10px}
 .sec_logo_phone{ float:right; margin-top:27px}
-hr.black{  background: url("../img/dotted.png") repeat-x scroll left center transparent;
+hr.black{  
     border: 0 none;
     height: 1px;
     margin: 0;
