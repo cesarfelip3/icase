@@ -213,7 +213,9 @@ class ExceptionRenderer {
 		}
 		$url = $this->controller->request->here();
 		$this->controller->response->statusCode($error->getCode());
-		$this->controller->set(array(
+                
+                
+                $this->controller->set(array(
 			'name' => h($message),
 			'url' => h($url),
 			'error' => $error,

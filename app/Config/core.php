@@ -56,6 +56,8 @@ Configure::write('Error', array(
     'trace' => true
 ));
 
+//Configure::write('Error.handler', 'AppError::handleError');
+
 /**
  * Configure the Exception handler used for uncaught exceptions. By default,
  * ErrorHandler::handleException() is used. It will display a HTML page for the exception, and
@@ -78,6 +80,8 @@ Configure::write('Exception', array(
     'renderer' => 'ExceptionRenderer',
     'log' => true
 ));
+
+//Configure::write('Exception.handler', 'AppError::handleException');
 
 /**
  * Application wide charset encoding

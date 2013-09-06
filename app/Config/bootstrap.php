@@ -111,3 +111,5 @@ CakeLog::config('error', array(
 Configure::write('Dispatcher.filters', array(
     'CacheDispatcher'
 ));
+
+App::uses('AppError', 'Lib');
