@@ -33,11 +33,11 @@ if (isset($this->params['slug'])) {
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->	
         <!-- Your Favoriate Icons -->
-        <link rel="shortcut icon" href="ico/favicon.ico">
-        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
+        <link rel="shortcut icon" href="<?php echo $this->webroot; ?>img/favicon.ico">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo $this->webroot; ?>ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?php echo $this->webroot; ?>ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?php echo $this->webroot; ?>ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="<?php echo $this->webroot; ?>ico/apple-touch-icon-57-precomposed.png">
         <!--
                 NOTE: All the javascripts have been moved to the bottom of the page to load the content faster.
         -->
