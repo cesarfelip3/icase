@@ -271,7 +271,8 @@ class CreatorController extends AppController {
                 $png1 = unserialize($data['Product']['image']);
                 $png1 = $png1['foreground'];
 
-                $png1 = APP . "webroot" . DS . "img" . DS . "template" . DS . $png1;
+                $fn = pathinfo ($png1, PATHINFO_FILENAME);
+                $png1 = APP . "webroot" . DS . "img" . DS . "template" . DS . $fn . "_user.png";
 
                 $jpeg = $targetDir . DIRECTORY_SEPARATOR . $filename;
                 ;
