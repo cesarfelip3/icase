@@ -21,7 +21,7 @@ $checkout_url = $this->webroot . "shop/checkout?action=cart";
     <div class="container-fluid qbox creator-parts" style="margin:0 !important; box-shadow:none;font-size:14px;background:#EEE;padding:10px;">
         <div class="row-fluid">
             <div class="span12">
-                <p style="font-size:14px;">The black line represent the front of your case and red line the comers. Please make sure your background extend to the red line.</p>
+                <p style="font-size:14px;">The black line represent the front of your case and red line the corners. Please make sure your background extend to the red line.</p>
             </div>
             <div style="display:block;width:100%;height:30px">
                 <div class="pull-left tools" id="uploader" style="padding:0px;margin:0px;">
