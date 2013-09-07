@@ -205,9 +205,6 @@ class OrderController extends AdminAppController {
     protected function _overlayImage($overlay, $jpeg, $final) {
 
         $final = APP . "webroot" . DS . "uploads" . DS . "preview" . DS . $final;
-        if (file_exists($final)) {
-            return;
-        }
 
         $png = imagecreatefrompng($overlay);
         $jpeg = imagecreatefromjpeg($jpeg);
@@ -219,22 +216,6 @@ class OrderController extends AdminAppController {
         imagecopyresampled($out, $png, 0, 0, 0, 0, 1850, 1850, 1850, 1850);
 
         imagejpeg($out, $final, 100);
-
-        require_once APP . 'Vendor' . DS . "Zebra/Zebra_Image.php";
-        $image = new Zebra_Image();
-
-        $image->source_path = $final;
-        $image->target_path = $final;
-
-        $image->jpeg_quality = 100;
-
-        $image->preserve_aspect_ratio = true;
-        $image->enlarge_smaller_images = true;
-        $image->preserve_time = true;
-
-        if (!$image->resize(150, 0, ZEBRA_IMAGE_CROP_CENTER)) {
-            
-        }
         
         $image = file_get_contents($final);
         $image = substr_replace($image, pack("cnn", 1, 300, 300), 13, 5);
