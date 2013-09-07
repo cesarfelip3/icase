@@ -11,10 +11,12 @@
 </div>
 <div class="main-area dashboard">
     <div class="container">
-        <div class="alert alert-info hide">
+        <?php if (isset($error)) : ?>
+        <div class="alert alert-info">
             <a class="close" data-dismiss="alert" href="#">x</a>
-            <h4 class="alert-heading">Information</h4>
+            <h4 class="alert-heading"><?php echo $error; ?></h4>
         </div>
+        <?php endif; ?>
         <div class="row">
             <div class="span12">
                 <div class="slate">

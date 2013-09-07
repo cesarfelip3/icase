@@ -275,7 +275,6 @@ class CreatorController extends AppController {
                 $png1 = APP . "webroot" . DS . "img" . DS . "template" . DS . $fn . "_user.png";
 
                 $jpeg = $targetDir . DIRECTORY_SEPARATOR . $filename;
-                ;
 
                 try {
                     $this->_overlayImage($png1, $jpeg, pathinfo($filename, PATHINFO_FILENAME) . "_user.jpeg");
@@ -298,18 +297,15 @@ class CreatorController extends AppController {
     protected function _overlayImage($overlay, $jpeg, $final) {
 
         $final = APP . "webroot" . DS . "uploads" . DS . "preview" . DS . $final;
-        if (file_exists($final)) {
-            return;
-        }
 
         $png = imagecreatefrompng($overlay);
         $jpeg = imagecreatefromjpeg($jpeg);
 
         //list($width, $height) = getimagesize('./image.jpg');
         //list($newwidth, $newheight) = getimagesize('./mark.png');
-        $out = imagecreatetruecolor(780, 780);
-        imagecopyresampled($out, $jpeg, 0, 0, 0, 0, 780, 780, 780, 780);
-        imagecopyresampled($out, $png, 0, 0, 0, 0, 780, 780, 780, 780);
+        $out = imagecreatetruecolor(1850, 1850);
+        imagecopyresampled($out, $jpeg, 0, 0, 0, 0, 1850, 1850, 1850, 1850);
+        imagecopyresampled($out, $png, 0, 0, 0, 0, 1850, 1850, 1850, 1850);
 
         imagejpeg($out, $final, 100);
 

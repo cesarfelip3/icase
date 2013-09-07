@@ -180,7 +180,8 @@ class OrderController extends AdminAppController {
                 $png1 = $png1['foreground'];
 
                 $filename = pathinfo($png1, PATHINFO_FILENAME);
-                $png2 = $filename . "_overlay.png";
+                $png1 = $filename . "_user.png";
+                $png2 = $filename . "_admin.png";
 
                 $jpeg = $order['Order']['attachement'];
                 $filename = pathinfo($jpeg, PATHINFO_FILENAME);
@@ -192,15 +193,16 @@ class OrderController extends AdminAppController {
             $jpeg = APP . "webroot" . DS . "uploads" . DS . "preview" . DS . $jpeg;
 
             try {
-                $this->overlayImage($png1, $jpeg, $filename . "_user.jpeg");
-                $this->overlayImage($png2, $jpeg, $filename . "_admin.jpeg");
+                $this->_overlayImage($png1, $jpeg, $filename . "_user.jpeg");
+                $this->_overlayImage($png2, $jpeg, $filename . "_admin.jpeg");
             } catch (Exception $e) {
-                $this->Session->setFlash($e->getMessage());
+                //$this->Session->setFlash($e->getMessage());
+                $this->set('error', $e->getMessage());
             }
         }
     }
 
-    protected function overlayImage($overlay, $jpeg, $final) {
+    protected function _overlayImage($overlay, $jpeg, $final) {
 
         $final = APP . "webroot" . DS . "uploads" . DS . "preview" . DS . $final;
         if (file_exists($final)) {
@@ -212,9 +214,9 @@ class OrderController extends AdminAppController {
 
         //list($width, $height) = getimagesize('./image.jpg');
         //list($newwidth, $newheight) = getimagesize('./mark.png');
-        $out = imagecreatetruecolor(780, 780);
-        imagecopyresampled($out, $jpeg, 0, 0, 0, 0, 780, 780, 780, 780);
-        imagecopyresampled($out, $png, 0, 0, 0, 0, 780, 780, 780, 780);
+        $out = imagecreatetruecolor(1850, 1850);
+        imagecopyresampled($out, $jpeg, 0, 0, 0, 0, 1850, 1850, 1850, 1850);
+        imagecopyresampled($out, $png, 0, 0, 0, 0, 1850, 1850, 1850, 1850);
 
         imagejpeg($out, $final, 100);
 
