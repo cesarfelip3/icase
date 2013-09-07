@@ -574,10 +574,10 @@ mememaker.tools.zoomout = function() {
 
     //this.canvasScale = this.canvasScale / 1.2;
 
-    mememaker.canvas.setHeight(1689);
-    mememaker.canvas.setWidth(1689);
+    mememaker.canvas.setHeight(1850);
+    mememaker.canvas.setWidth(1850);
     
-    var ratio = 1689 / 780;
+    var ratio = 1850 / 780;
     
     var objects = mememaker.canvas.getObjects();
     for (var i in objects) {
@@ -610,7 +610,7 @@ mememaker.tools.zoomreset = function() {
     mememaker.canvas.setHeight(780);
     mememaker.canvas.setWidth(780);
     
-    var ratio = 780 / 1689;
+    var ratio = 780 / 1850;
     
     var objects = mememaker.canvas.getObjects();
     for (var i in objects) {
