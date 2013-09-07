@@ -6,7 +6,7 @@
         <span class="Apple-converted-space"> </span></span>Date <?php echo date("", time()); ?><span class="s1"><br>
         <br>
     </span>Shipping address<span class="s1"><br>
-    </span><?php echo $bill['name']; ?><span class="s1"><br>
+    </span><?php echo $deliver['firstname'] . " " . $deliver['lastname']; ?><span class="s1"><br>
     </span><?php echo $deliver['address']; ?><span class="s1"><br>
     </span><?php echo $deliver['country']; ?><span class="s1"><br>
         <br>
