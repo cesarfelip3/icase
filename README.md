@@ -40,6 +40,8 @@ DON'T PULL ON SERVER
 15.Cache - Ajax
 16.ico/ - changed "/base/icon"
 
+17.zoom canvas and save large image <so don't lose quality>, that really makes sense, so we can use small canvas to fit screen size..
+
 
 SEO basic --
 
