@@ -6,7 +6,7 @@
         <span class="Apple-converted-space"> </span></span>Date <?php echo date("", time()); ?><span class="s1"><br>
         <br>
     </span>Shipping address<span class="s1"><br>
-    </span><?php echo $bill['firstname'] . " " . $bill['lastname']; ?><span class="s1"><br>
+    </span><?php echo $bill['name']; ?><span class="s1"><br>
     </span><?php echo $deliver['address']; ?><span class="s1"><br>
     </span><?php echo $deliver['country']; ?><span class="s1"><br>
         <br>
@@ -29,11 +29,11 @@
                     <?php if (!empty($orders)) : $i = 1; ?>
                     <?php foreach ($orders as $key => $value) : ?>
                         <tr>
-                            <td>#<?php echo $value['Order']['guid']; ?></td>
-                            <td><?php echo $value['Order']['title']; ?></td>
-                            <td><?php echo $value['Order']['amount']; ?></td>
+                            <td>#<?php echo $value['guid']; ?></td>
+                            <td><?php echo $value['title']; ?></td>
+                            <td><?php echo $value['amount']; ?></td>
                             <td>
-                                    <?php echo $value['Order']['quantity']; ?>
+                                    <?php echo $value['quantity']; ?>
                             </td>
                         </tr>
                     <?php endforeach; ?>
