@@ -272,7 +272,7 @@ class CreatorController extends AppController {
                 $png1 = $png1['foreground'];
 
                 $fn = pathinfo ($png1, PATHINFO_FILENAME);
-                $png1 = APP . "webroot" . DS . "img" . DS . "template" . DS . $png1;
+                $png1 = APP . "webroot" . DS . "img" . DS . "template" . DS . $fn . "_user.png";
 
                 $jpeg = $targetDir . DIRECTORY_SEPARATOR . $filename;
 
@@ -303,9 +303,9 @@ class CreatorController extends AppController {
 
         //list($width, $height) = getimagesize('./image.jpg');
         //list($newwidth, $newheight) = getimagesize('./mark.png');
-        $out = imagecreatetruecolor(780, 780);
-        imagecopyresampled($out, $jpeg, 0, 0, 0, 0, 780, 780, 780, 780);
-        imagecopyresampled($out, $png, 0, 0, 0, 0, 780, 780, 780, 780);
+        $out = imagecreatetruecolor(1850, 1850);
+        imagecopyresampled($out, $jpeg, 0, 0, 0, 0, 1850, 1850, 1850, 1850);
+        imagecopyresampled($out, $png, 0, 0, 0, 0, 1850, 1850, 1850, 1850);
 
         imagejpeg($out, $final, 100);
 
