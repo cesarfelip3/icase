@@ -50,6 +50,8 @@ Upgrade From 0.1 to 0.2
 11. Order Logic fixed - from 0.1
 12. Cache - Views - from 0.1
 14. Product - Category Filter
+15. Resize canvas and generate original size - from 0.1
+16. Email template fixed - order/customer - from 0.1
 
 SEO basic --
 

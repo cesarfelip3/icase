@@ -569,8 +569,76 @@ mememaker.tools.resize = function(plus, evt) {
     mememaker.canvas.setDimensions({width: 460, height: mememaker.canvas.getHeight() + height});
 }
 
+mememaker.tools.zoomout = function() {
+    // TODO limit max cavas zoom out
+
+    //this.canvasScale = this.canvasScale / 1.2;
+
+    mememaker.canvas.setHeight(1850);
+    mememaker.canvas.setWidth(1850);
+    
+    var ratio = 1850 / 780;
+    
+    var objects = mememaker.canvas.getObjects();
+    for (var i in objects) {
+        var scaleX = objects[i].scaleX;
+        var scaleY = objects[i].scaleY;
+        var left = objects[i].left;
+        var top = objects[i].top;
+
+        var tempScaleX = scaleX * ratio;
+        var tempScaleY = scaleY * ratio;
+        var tempLeft = left * ratio;
+        var tempTop = top * ratio;
+
+        objects[i].scaleX = tempScaleX;
+        objects[i].scaleY = tempScaleY;
+        objects[i].left = tempLeft;
+        objects[i].top = tempTop;
+
+        objects[i].setCoords();
+    }
+
+    mememaker.canvas.renderAll();
+}
+
+mememaker.tools.zoomreset = function() {
+    // TODO limit max cavas zoom out
+
+    //this.canvasScale = this.canvasScale / 1.2;
+
+    mememaker.canvas.setHeight(780);
+    mememaker.canvas.setWidth(780);
+    
+    var ratio = 780 / 1850;
+    
+    var objects = mememaker.canvas.getObjects();
+    for (var i in objects) {
+        var scaleX = objects[i].scaleX;
+        var scaleY = objects[i].scaleY;
+        var left = objects[i].left;
+        var top = objects[i].top;
+
+        var tempScaleX = scaleX * ratio;
+        var tempScaleY = scaleY * ratio;
+        var tempLeft = left * ratio;
+        var tempTop = top * ratio;
+
+        objects[i].scaleX = tempScaleX;
+        objects[i].scaleY = tempScaleY;
+        objects[i].left = tempLeft;
+        objects[i].top = tempTop;
+
+        objects[i].setCoords();
+    }
+
+    mememaker.canvas.renderAll();
+}
+
 mememaker.tools.preview = function() {
     // it will convert canvas to base64
+    
+    mememaker.tools.zoomout();
     mememaker.canvas.deactivateAll();
 
     mememaker.canvas.overlayImage = null;
@@ -582,6 +650,7 @@ mememaker.tools.preview = function() {
             }
     );
 
+    mememaker.tools.zoomreset();
     //console.log(mememaker.overlayImage);
     mememaker.tools.newtemplate(mememaker.overlayImage);
     if (mememaker.tools.generate == null) {

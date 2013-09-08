@@ -249,7 +249,7 @@ class CreatorController extends AppController {
                 $png1 = unserialize($data['Product']['image']);
                 $png1 = $png1['foreground'];
 
-                $png1 = APP . "webroot" . DS . "img" . DS . "template" . DS . $png1;
+                $png1 = APP . "webroot" . DS . "img" . DS . "template" . DS . str_replace (".", "_user.", $png1);
 
                 $jpeg = $targetDir . DIRECTORY_SEPARATOR . $filename;
                 ;
@@ -284,9 +284,9 @@ class CreatorController extends AppController {
 
         //list($width, $height) = getimagesize('./image.jpg');
         //list($newwidth, $newheight) = getimagesize('./mark.png');
-        $out = imagecreatetruecolor(780, 780);
-        imagecopyresampled($out, $jpeg, 0, 0, 0, 0, 780, 780, 780, 780);
-        imagecopyresampled($out, $png, 0, 0, 0, 0, 780, 780, 780, 780);
+        $out = imagecreatetruecolor(1850, 1850);
+        imagecopyresampled($out, $jpeg, 0, 0, 0, 0, 1850, 1850, 1850, 1850);
+        imagecopyresampled($out, $png, 0, 0, 0, 0, 1850, 1850, 1850, 1850);
 
         imagejpeg($out, $final, 100);
 
