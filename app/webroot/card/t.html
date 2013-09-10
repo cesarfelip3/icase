@@ -1,0 +1,42 @@
+
+            <div class="row-fluid">
+                <div style="display:block;width:100%;height:30px" class="tools">
+                    <div class="pull-left" id="uploader" style="padding:0px;margin:0px;">
+                        <div id="filelist" style="display:none;padding:0px;margin:0px;"></div>
+                        <a href="javascript:"><i class="icon-picture icon-2x"></i> From Computer</a> 
+                        <a href="javascript:"><i class="icon-picture icon-2x"></i> From Service</a>
+                        <a href="javascript:" data-action="new" title="remove"><i class="icon-remove-sign icon-2x"></i> <span>clear canvas</span></a>
+                        <a href="javascript:" data-action="preview" title="remove"><i class="icon-eye-open icon-2x"></i> preview</a>
+                        <a href="javascript:" data-action="save" title="remove"><i class="icon-save icon-2x"></i> save</a>
+                    </div>
+                    <div class="pull-right">
+                        <a id="btn-order" onclick="order();" style="background-color:orange;padding:2px;padding-left:12px; padding-right:10px; color:white;text-shadow: none;" href="javascript:">
+                            <i class="icon-shopping-cart icon-2x"></i> 
+                            <span>Order Now</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div style="clear:both;border-top:1px solid #bbb;width:100%;margin-top:5px;margin-bottom:5px;"></div>
+            <div class="row-fluid">
+                <div class="span12">
+                    <div class="tools">
+                        <div style="padding:5px;">
+                            <a href="javascript:" data-action="backward" title="backward"><i class="icon-chevron-down icon-2x"></i> backward</a>
+                            <a href="javascript:" data-action="forward" title="forward"><i class="icon-chevron-up icon-2x"></i> forward</a>
+                            <a href="javascript:" data-action="back" title="bottom"><i class="icon-circle-arrow-down icon-2x"></i> back</a>
+                            <a href="javascript:" data-action="front" title="top"><i class="icon-circle-arrow-up icon-2x"></i> front</a>
+                            <a href="javascript:" data-action="flipx"><i class="icon-resize-horizontal icon-2x"></i> <b>flip 90</b></a>
+                            <a href="javascript:" data-action="flipy" style="margin-left:5px;"><i class="icon-resize-vertical icon-2x"></i> <b>flip 180</b></a>
+                            <a href="javascript:" data-action="remove" title="remove"><i class="icon-remove-sign icon-2x"></i> remove</a>
+                            <a href="javascript:" data-action="group" title="group"><i class="icon-resize-small icon-2x"></i> group</a>
+                            <a href="javascript:" data-action="addtext" title="remove"><i class="icon-font icon-2x"></i> new text</a>
+                            <a href="javascript:" data-action="draw" title="remove"><i class="icon-pencil icon-2x"></i> draw</a>
+                            <a id="canvas-background-color" style="width:20px;height:40px;background-color:#ccc;border:1px solid black;" href="javascript:">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+            
+            
+                        <div class="ajax-loading-indicator" style="position: absolute;padding:20px;"><a href="javascript:" style="font-size:14px;"><i class="icon-refresh icon-spin"></i> Loading Canvas...</a></div>

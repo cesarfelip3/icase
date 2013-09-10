@@ -1,0 +1,386 @@
+
+body {
+    padding-top: 60px;
+    padding-bottom: 40px;
+    background-color:#888;
+}
+
+hr {border-color:#E9E9E9}
+
+/* ========================================== */
+.thumbnails li {
+    width:auto;
+    margin:0px;
+    padding:0px;
+}
+
+.thumbnail {
+    box-shadow: none;
+    margin:0px;
+    padding:0px;
+}
+
+.thumbnail a img {
+    border:1px solid white;
+}
+
+.thumbnail a:hover img {
+    border-radius: 5px;
+}
+
+.thumbnail a:active img {
+    border:1px solid white;
+    border-radius: 5px;
+}
+
+.caption {
+    font-size:12px;
+}
+
+/* ========================================== */
+#box-toolbar-bg {
+    border:1px solid #ccc;
+    box-shadow: 1px;
+    background-color:white;
+}
+
+#box-toolbar-bg ul {
+    list-style: none;
+    margin:0px;
+    padding:0px;
+
+}
+
+#box-toolbar-bg li {
+    width:42px;
+    height:42px;
+    margin:0px;
+    float:left;
+}
+
+#box-toolbar-bg li.divider {
+    border-right:1px solid #ccc;
+}
+
+.icon-bgcolor {
+    background-image:url('../img/toolbar.png');
+    background-position:-294px 0px;
+    width:42px;
+    height:42px;
+    margin:0px;
+    display:block;
+}
+
+.icon-delete {
+    background-image:url('../img/toolbar.png');
+    background-position:-294px -42px;
+    width:42px;
+    height:42px;
+    margin:0px;
+    display:block;
+}
+
+.icon-confirm {
+    background-image:url('../img/toolbar.png');
+    background-position:0px -42px;
+    width:42px;
+    height:42px;
+    margin:0px;
+    display:block;
+}
+
+#box-toolbar-bg li:hover {
+    background-color:#EEE;
+}
+
+/* ========================================== */
+#box-toolbar-zoom {
+    border:1px solid #ccc;
+    box-shadow: 1px;
+    background-color:#ddd;
+    top:400px;
+    position: absolute;
+    border-radius: 5px 5px;
+}
+
+#box-toolbar-zoom ul {
+    list-style: none;
+    margin:0px;
+    padding:0px;
+}
+
+#box-toolbar-zoom li {
+    width:20px;
+    height:20px;
+    margin:0px;
+    padding:5px;
+}
+
+#box-toolbar-zoom li.divider {
+
+}
+
+.icon-zoomin {
+    background-image:url('../img/sidebar.png');
+    background-position:-20px 0px;
+    width:20px;
+    height:20px;
+    margin:0px;
+    display:block;
+}
+
+.icon-zoomout {
+    background-image:url('../img/sidebar.png');
+    background-position:-40px 0px;
+    width:20px;
+    height:20px;
+    margin:0px;
+    display:block;
+}
+
+.icon-zoomreset {
+    background-image:url('../img/sidebar.png');
+    background-position:0px 0px;
+    width:20px;
+    height:20px;
+    margin:0px;
+    display:block;
+}
+
+.icon-undo {
+    background-image:url('../img/sidebar.png');
+    background-position:-20px -20px;
+    width:20px;
+    height:20px;
+    margin:0px;
+    display:block;
+}
+
+#box-toolbar-zoom li:hover {
+    background-color:#ccc;
+}
+
+#box-toolbar-zoom li.disabled {
+    filter: alpha(opacity=20);
+    opacity: .2;
+}
+
+/* ========================================== */
+#box-toolbar-texteditor {
+    border:1px solid #ccc;
+    box-shadow: 1px;
+    background-color:white;
+}
+
+#box-toolbar-texteditor ul {
+    list-style: none;
+    margin:0px;
+    padding:0px;
+
+}
+
+#box-toolbar-texteditor>ul>li {
+    width:42px;
+    height:42px;
+    margin:0px;
+    float:left;
+}
+
+#box-toolbar-texteditor>ul>li:hover {
+    background-color:#EEE;
+}
+
+#box-toolbar-texteditor>ul>li.divider {
+    border-right:1px solid #ccc;
+}
+
+.icon-edittext {
+    background-image:url('../img/toolbar.png');
+    background-position:-462px 0px;
+    width:42px;
+    height:42px;
+    margin:0px;
+    display:block;
+}
+
+.icon-fonttype {
+    background-image:url('../img/toolbar.png');
+    background-position:-210px 0px;
+    width:42px;
+    height:42px;
+    margin:0px;
+    display:block;
+}
+
+.icon-fontsize {
+    background-image:url('../img/toolbar.png');
+    background-position:-252px 0px;
+    width:42px;
+    height:42px;
+    margin:0px;
+    display:block;
+}
+
+.icon-fontcolor {
+    background-image:url('../img/toolbar.png');
+    background-position:-294px 0px;
+    width:42px;
+    height:42px;
+    margin:0px;
+    display:block;
+}
+
+.icon-fontweight {
+    background-image:url('../img/toolbar.png');
+    background-position:-84px 0px;
+    width:42px;
+    height:42px;
+    margin:0px;
+    display:block;
+}
+
+.icon-fontitaly {
+    background-image:url('../img/toolbar.png');
+    background-position:-126px 0px;
+    width:42px;
+    height:42px;
+    margin:0px;
+    display:block;
+}
+
+.icon-fontunderline {
+    background-image:url('../img/toolbar.png');
+    background-position:-168px 0px;
+    width:42px;
+    height:42px;
+    margin:0px;
+    display:block;
+}
+
+.icon-text-left {
+    background-image:url('../img/toolbar.png');
+    background-position:-336px 0px;
+    width:42px;
+    height:42px;
+    margin:0px;
+    display:block;
+}
+
+.icon-text-center {
+    background-image:url('../img/toolbar.png');
+    background-position:-378px 0px;
+    width:42px;
+    height:42px;
+    margin:0px;
+    display:block;
+}
+
+.icon-text-right {
+    background-image:url('../img/toolbar.png');
+    background-position:-420px 0px;
+    width:42px;
+    height:42px;
+    margin:0px;
+    display:block;
+}
+
+.icon-forward {
+    background-image:url('../img/toolbar.png');
+    background-position:-336px -42px;
+    width:42px;
+    height:42px;
+    margin:0px;
+    display:block;
+}
+
+.icon-backward {
+    background-image:url('../img/toolbar.png');
+    background-position:-420px -42px;
+    width:42px;
+    height:42px;
+    margin:0px;
+    display:block;
+}
+
+/* ========================================*/
+#box-toolbar-texteditor li:hover ul {
+    display:block;
+}
+
+#box-toolbar-texteditor li ul {
+    position: absolute;
+    display:none;
+    background-color: #FFFFFF;
+    border: 1px solid #e5e5e5;
+    box-shadow: 1px 1px 4px 0 rgba(102,102,102,0.2);
+    padding:15px;
+    margin:0px -1px;
+    list-style: auto;
+}
+
+#li-font-type ul {
+    width:600px;
+}
+
+#li-font-type ul li {
+    cursor: pointer;
+    background-color:white;
+    width:195px;
+    border-left:5px solid #FFFFFF;
+    margin:0px;
+    padding:0px;
+    height:auto;
+    display:block;
+    float:left;
+    overflow: hidden;
+}
+
+#li-font-type ul li:hover {
+    background-color:#EEE;
+    border-left:5px solid red;
+}
+
+#li-font-type ul li p {
+    background-image: url('../img/font_previews.png');
+    background-repeat: no-repeat;
+    height: 20px;
+    margin: 2px 0;
+    line-height: 10px;
+}
+
+#li-font-type li:hover {
+    border-left:5px solid red;
+}
+
+/* ============================ */
+#li-font-size ul {
+    width:200px;
+}
+
+#li-font-size ul li {
+    float:left;
+    width:40px;
+    float:left;
+    text-align:center;
+    margin:auto;
+}
+
+/* ============================== */
+#li-font-color ul {
+    width:320px;
+}
+
+#li-font-color ul li {
+    height:30px;
+    width:30px;
+    float:left;
+}
+
+#li-font-color ul li>a {
+    height:30px;
+    width:30px;
+    display:block;
+    background-color:red;
+    border:1px solid white;
+}
+
