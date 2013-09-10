@@ -14,7 +14,7 @@
 
         <!--        <link rel="stylesheet" href="css/bootstrap-responsive.min.css">-->
         <link rel="stylesheet" href="js/colorpicker2/css/bootstrap-colorpicker.css">
-        <!--        <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">-->
+        <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
         <link rel="stylesheet" href="css/main.css">
         <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 
@@ -64,43 +64,43 @@
                     </div>
                 </div>
                 <div class="span6">
-                    <div style="height:50px;" class="pull-right tools">
+                    <div style="height:50px;" class="pull-right tools" id="box-toolbar-main">
                         <ul class="thumbnails">
                             <li>
-                                <div class="thumbnail" style="border:none;">
-                                    <a href="javascript:" class="thumbnail" data-action="background" style="border:none;text-shadow: none;box-shadow: none;"><img src="img/background.png" /></a>
+                                <div class="thumbnail" style="border:none;text-align:center;margin:auto;">
+                                    <a href="javascript:" class="thumbnail" data-action="background" style="border:none;text-shadow: none;box-shadow: none;color:red"><i class="icon-desktop icon-2x"></i></a>
                                     <div class="caption">
                                         Background
                                     </div>
                                 </div>
                             </li>
                             <li>
-                                <div class="thumbnail" style="border:none;">
-                                    <a href="javascript:" class="thumbnail" data-action="addgrid" style="border:none;text-shadow: none;box-shadow: none;"><img src="img/snapgridoff.png" /></a>
+                                <div class="thumbnail" style="border:none;text-align:center;margin:auto;">
+                                    <a href="javascript:" class="thumbnail" data-action="addgrid" style="border:none;text-shadow: none;box-shadow: none;"><i class="icon-building icon-2x"></i></a>
                                     <div class="caption">
                                         Snap to grid
                                     </div>
                                 </div>
                             </li>
                             <li>
-                                <div class="thumbnail" style="border:none;">
-                                    <a href="javascript:" class="thumbnail" data-action="addtext" title="add text" style="border:none;text-shadow: none;box-shadow: none;"><img src="img/addtext.png" /></a>
+                                <div class="thumbnail" style="border:none;text-align:center;margin:auto;">
+                                    <a href="javascript:" class="thumbnail" data-action="addtext" title="add text" style="border:none;text-shadow: none;box-shadow: none;"><i class="icon-font icon-2x"></i></a>
                                     <div class="caption">
                                         Add text
                                     </div>
                                 </div>
                             </li>
                             <li>
-                                <div class="thumbnail" style="border:none;" id="uploader">
-                                    <a href="javascript:" class="thumbnail" id="btn-upload-image" style="border:none;text-shadow: none;box-shadow: none;"><img src="img/addimage.png" /></a>
+                                <div class="thumbnail" style="border:none;text-align:center;margin:auto;" id="uploader">
+                                    <a href="javascript:" class="thumbnail" id="btn-upload-image" style="border:none;text-shadow: none;box-shadow: none;"><i class="icon-picture icon-2x"></i></a>
                                     <div class="caption">
                                         Add image
                                     </div>
                                 </div>
                             </li>
                             <li>
-                                <div class="thumbnail" style="border:none;">
-                                    <a href="javascript:" class="thumbnail" style="border:none;text-shadow: none;box-shadow: none;"><img src="img/addshape.png" /></a>
+                                <div class="thumbnail" style="border:none;text-align:center;margin:auto;">
+                                    <a href="javascript:" class="thumbnail" style="border:none;text-shadow: none;box-shadow: none;"><i class="icon-th-large icon-2x"></i></a>
                                     <div class="caption">
                                         Add shape
                                     </div>
@@ -108,6 +108,15 @@
                             </li>
                         </ul>
                     </div>
+                </div>
+            </div>
+            <div style="clear:both;border:1px solid #eee;margin-top:15px;"></div>
+            <div class="row-fluid">
+                <div class="span6">
+                    <a href="javascript:"><i class="icon-remove icon-2x"></i> remove</a>
+                </div>
+                <div class="span6">
+                    
                 </div>
             </div>
             <!-- canvas -->
@@ -139,16 +148,16 @@
                 <div style="position:absolute;" class="tools" id="box-toolbar-zoom">
                     <ul style="list-style:none;">
                         <li>
-                            <a href="javascript:" data-action="zoomin"><i class="icon-zoomin"></i></a>
+                            <a href="javascript:" data-action="zoomin"><i class="icon-zoom-in icon-2x"></i></a>
                         </li>
                         <li class="disabled">
-                            <a href="javascript:" data-action="zoomout"><i class="icon-zoomout"></i></a>
+                            <a href="javascript:" data-action="zoomout"><i class="icon-zoom-out icon-2x"></i></a>
                         </li>
                         <li class="disabled">
-                            <a href="javascript:"><i class="icon-zoomreset"></i></a>
+                            <a href="javascript:"><i class="icon-screenshot icon-2x"></i></a>
                         </li>
                         <li class="disabled">
-                            <a href="javascript:"><i class="icon-undo"></i></a>
+                            <a href="javascript:"><i class="icon-undo icon-2x"></i></a>
                         </li>
                     </ul>
                 </div>
