@@ -16,7 +16,7 @@
     }
 
     var Tools = function() {
-        
+
     }
 
     var TextEditor = function() {
@@ -35,6 +35,8 @@
         container: '#box-canvas',
         canvasId: 'c1',
         canvas: null,
+        grid: null,
+        gridsize: 20,
         backgroundColor: 'white',
         defaultText: null,
         canvasScale: 0,
@@ -42,6 +44,7 @@
         height: 780,
         mousex: 0,
         mousey: 0,
+        selected : false,
         // methods
         init: null,
         // object member
@@ -66,6 +69,7 @@
         flip: null,
         addtext: null,
         addpic: null,
+        addgrid: null,
         backgroundcolor: null,
         newtemplate: null,
         // server API
@@ -135,8 +139,8 @@
             fill: 'black',
             //stroke: 'white',
             //strokeWidth: 0,
-//            originX: 'left',
-//            originY: 'top',
+            //originX: 'left',
+            //originY: 'top',
 //            left: this.lastTextX,
 //            top: this.lastTextY
         }
@@ -145,11 +149,11 @@
     Mememaker.prototype.init = function(id, backgroundcolor, scale) {
         this.canvasId = id;
         this.canvasScale = scale;
-        
+
         this.canvas = canvas = new fabric.Canvas(this.canvasId);
         this.width = canvas.getWidth();
         this.height = canvas.getHeight();
-        
+
         canvas.backgroundColor = this.backgroundColor = backgroundcolor;
         canvas.selection = true;
         canvas.controlsAboveOverlay = true;
@@ -163,7 +167,7 @@
 //============================================
 
     Tools.prototype.owner = $.mememaker;
-    
+
     Tools.prototype.new = function(backgroundcolor) {
         canvas.backgroundColor = this.backgroundColor = backgroundcolor;
         canvas.clear();
@@ -357,9 +361,17 @@
         var text = new fabric.Text($.mememaker.defaultText.text, $.mememaker.defaultText.property);
 
         text.text = "CLICK TO EDIT\nHello world";
+        text.originX = 'left';
+        text.originY = 'top';
         canvas.add(text);
-        text.center();
-        text.scaleToWidth(300);
+        
+        //text.width = canvas.width / 2;
+        text.left = canvas.width / 2 - text.getBoundingRectWidth() / 2;
+        text.top = canvas.height / 2 - text.getBoundingRectHeight() / 2;
+        text.hasRotatingPoint = false;
+        //text.center();
+        
+        //text.scaleToWidth(300);
 
         canvas.renderAll();
 
@@ -367,6 +379,7 @@
         text.on(
                 'selected',
                 function(options) {
+                    $.mememaker.selected = true;
                     $.mememaker.texteditor.textselected();
                 }
         )
@@ -395,6 +408,80 @@
             //hideAlert();
 
         });
+    }
+
+    Tools.prototype.addgrid = function() {
+
+        var width = canvas.width;
+        var height = canvas.height;
+
+        if ($.mememaker.grid != null) {
+            for (var i = 0; i < $.mememaker.grid.length; ++i) {
+                $.mememaker.grid[i].remove ();
+            }
+            $.mememaker.grid = null;
+            return;
+        } 
+
+        var lines = [];
+        var j = 0;
+        var line = null;
+        var rect = [];
+        var size = $.mememaker.gridsize;
+        
+        console.log(width + ":" + height);
+
+        for (var i = 0; i < Math.ceil(width / 20); ++i) {
+            rect[0] = i * size;
+            rect[1] = 0;
+            
+            rect[2] = i * size;
+            rect[3] = height;
+            
+            line = null;
+            line = new fabric.Line(rect, {
+                stroke: '#999',
+                opacity: 0.5,
+            });
+            
+            line.selectable = false;
+            canvas.add (line);
+            line.sendToBack();
+            
+            lines[j++] = line;
+        }
+
+        for (i = 0; i < Math.ceil(height / 20); ++i) {
+            rect[0] = 0;
+            rect[1] = i * size;
+            
+            rect[2] = width;
+            rect[3] = i * size;
+            
+            line = null;
+            line = new fabric.Line(rect, {
+                stroke: '#999',
+                opacity: 0.5,
+            });
+            line.selectable = false;
+            canvas.add (line);
+            line.sendToBack();
+            
+            lines[j++] = line;
+        }
+
+//        for (i = 0; i < lines.length; ++i) {
+//            $.mememaker.grid = new fabric.Group(lines, {left: 0, top: 0});
+//            $.mememaker.grid.originX = 'left';
+//            $.mememaker.grid.originY = 'left';
+//        }
+//        
+//        canvas.add($.mememaker.grid);
+//        $.mememaker.grid.selectable = false;
+//        $.mememaker.grid.sendToBack();
+        
+        $.mememaker.grid = lines;
+        canvas.renderAll();
     }
 
     Tools.prototype.resize = function(height, plus) {
@@ -442,12 +529,12 @@
 
         //var scale = $.mememaker.canvasScale;
 
-        canvas.setDimensions ({"width":canvas.getWidth() * scale, "height":canvas.getHeight() * scale});
+        canvas.setDimensions({"width": canvas.getWidth() * scale, "height": canvas.getHeight() * scale});
         //canvas.setHeight(canvas.getHeight() * scale);
         //canvas.setWidth(canvas.getWidth() * scale);
-        
-        console.log (canvas.getWidth());
-        console.log (canvas.getHeight());
+
+        console.log(canvas.getWidth());
+        console.log(canvas.getHeight());
 
         var objects = canvas.getObjects();
         for (var i in objects) {
@@ -475,9 +562,9 @@
     // Server API
     Tools.prototype.preview = function() {
         // it will convert canvas to base64
-        
+
         var scale = $.mememaker.canvasScale;
-        this.zoom (scale);
+        this.zoom(scale);
         canvas.deactivateAll();
 
         var preview = canvas.toDataURL(
@@ -487,7 +574,7 @@
                 }
         );
 
-        this.zoom (1 / scale);
+        this.zoom(1 / scale);
         if (this.preview_callback == null) {
             return;
         }
@@ -513,21 +600,21 @@
     // text editor
     //===========================================
 
-/*
-    TextEditor.prototype.textselected = function() {
-
-        var el = canvas.getActiveObject();
-
-        if (el == null || el == undefined) {
-            return;
-        }
-
-        if (el.type != "text") {
-            return;
-        }
-
-        this.textselected_callback(el);
-    }*/ 
+    /*
+     TextEditor.prototype.textselected = function() {
+     
+     var el = canvas.getActiveObject();
+     
+     if (el == null || el == undefined) {
+     return;
+     }
+     
+     if (el.type != "text") {
+     return;
+     }
+     
+     this.textselected_callback(el);
+     }*/
 
     TextEditor.prototype.fill = function(color) {
         var el = canvas.getActiveObject();

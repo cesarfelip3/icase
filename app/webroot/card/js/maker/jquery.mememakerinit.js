@@ -13,6 +13,7 @@
 
     Init.prototype = {
         init: null,
+        selected: false,
         toolsinit: null,
         texteditorinit: null,
         imageeditorinit: null,
@@ -23,10 +24,47 @@
         $(document).mousemove(function(event) {
             $.mememaker.mousex = event.pageX;
             $.mememaker.mousey = event.pageY;
-
-            //console.log ($.mememaker.mousex);
-            //console.log ($.mememaker.mousey);
         });
+
+        $(document).mouseup(function(event) {
+
+            $.mememaker.selected = false;
+
+            var el = $.mememaker.canvas.getActiveObject();
+            //console.log (el);
+
+            if (el == undefined || el == null) {
+                return;
+            }
+
+            if ($.mememaker.grid != null && !$.mememaker.selected) {
+
+                var left = Math.ceil(el.left);
+                var top = Math.ceil(el.top);
+                
+                console.log ("1. " + (left % 20) + ":" + top);
+
+                if ((left % 20) / 20 > 0.5) {
+                    left += 20 - (left % 20);
+                } else {
+                    left -= (left % 20);
+                }
+
+                if ((top % 20) / 20 > 0.5) {
+                    top += 20 - (top % 20);
+                } else {
+                    top -= (top % 20);
+                }
+                
+                el.left = left;
+                el.top = top;
+                
+                console.log ("2. " + el.left + ":" + el.top);
+                
+                $.mememaker.canvas.renderAll();
+            }
+        });
+
         $.mememaker.init(id, backgroundcolor, 1850 / 780);
     }
 
@@ -49,19 +87,19 @@
             if (el.type != "text") {
                 return;
             }
-            
+
             var top = $.mememaker.mousey;
             var left = $.mememaker.mousex;
             var height = el.height;
             var width = el.width;
-            
+
             top = top + height;
-            left = Math.abs(left - (600 - width) / 2); 
-            $(".text-editor").show ();
-            $(".text-editor").css ('top', top + "px");
-            $(".text-editor").css ('left', left + "px");
-            
-            $("#text-content").val (el.text);
+            left = Math.abs(left - (600 - width) / 2);
+            $(".text-editor").show();
+            $(".text-editor").css('top', top + "px");
+            $(".text-editor").css('left', left + "px");
+
+            $("#text-content").val(el.text);
             console.log('selected');
             console.log(el);
         }
@@ -121,6 +159,9 @@
                             } else {
                                 $(this).css('color', $(this).data('color'));
                             }
+                            break;
+                        case 'addgrid':
+                            $.mememaker.tools.addgrid();
                             break;
                         case 'save':
                             $.mememaker.save();
