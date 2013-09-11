@@ -148,7 +148,9 @@
         this.canvasId = id;
         this.canvasScale = scale;
 
-        this.canvas = canvas = new fabric.Canvas(this.canvasId);
+        this.canvas = canvas = new window.fabric.Canvas(this.canvasId);
+        console.log (fabric);
+        
         this.width = canvas.getWidth();
         this.height = canvas.getHeight();
 
@@ -811,6 +813,8 @@
         }
         
         el.useNative = true;
+        el.originX = 'left';
+        el.originY = 'top';
         
         if (property == "underline") {
             if (el.textDecoration == 'underline') {
