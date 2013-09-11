@@ -45,6 +45,10 @@
                 return;
             }
             
+            if (el.lockMovementX == true) {
+                return;
+            }
+            
             if ($.mememaker.grid != null) {
 
                 var left = Math.ceil(el.left);
