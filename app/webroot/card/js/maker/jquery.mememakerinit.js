@@ -28,11 +28,6 @@
 
         });
 
-        $(document).mousedown(function(event) {
-
-
-        });
-
         $(document).mouseup(function(event) {
 
             var el = $.mememaker.canvas.getActiveObject();
