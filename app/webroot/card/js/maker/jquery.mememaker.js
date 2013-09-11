@@ -49,9 +49,11 @@
         selected: false,
         activex: 0,
         activey: 0,
+        sender: null,
         // methods
         init: null,
         position: null,
+        in: null,
         // object member
         tools: null,
         texteditor: null,
@@ -178,6 +180,26 @@
         pos[0] = r.left;
         pos[1] = r.top;
         return pos;
+    }
+    
+    Mememaker.prototype.in = function(el) {
+        if (el === undefined || el === null) {
+            return;
+        }
+        
+        var left = el.left + this.left;
+        var top = el.top + this.top;
+        
+        var right = left + el.getBoundingRectWidth();
+        var bottom = top + el.getBoundingRectHeight();
+        
+        if (this.mousex > left && this.mousex < right) {
+            if (this.mousey > top && this.mousey < bottom) {
+                return true;
+            }
+        }
+        
+        return false;
     }
 
 

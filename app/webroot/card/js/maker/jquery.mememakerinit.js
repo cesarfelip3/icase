@@ -24,12 +24,16 @@
         $(document).mousemove(function(event) {
             $.mememaker.mousex = event.pageX;
             $.mememaker.mousey = event.pageY;
+            
+        });
+        
+        $(document).mousedown (function (event) {
+           
+            
         });
 
         $(document).mouseup(function(event) {
-
-            //$.mememaker.selected = false;
-
+            
             var el = $.mememaker.canvas.getActiveObject();
             //console.log (el);
 
@@ -37,8 +41,10 @@
                 return;
             }
 
-            console.log($.mememaker.selected);
-
+            if (!$.mememaker.in (el)) {
+                return;
+            }
+            
             if ($.mememaker.grid != null) {
 
                 var left = Math.ceil(el.left);
@@ -157,7 +163,9 @@
                         case 'moveright':
                         case 'moveup':
                         case 'movedown':
+                            $.mememaker.sender = 'move';
                             $.mememaker.tools.move (action);
+                            //$.mememaker.sender = null;
                             break;
                         case 'backward':
                             $.mememaker.tools.backward();
@@ -198,6 +206,7 @@
                             }
                             break;
                         case 'addgrid':
+                            //$.mememaker.canvas.setDimensions ({width:1000, height:1000});
                             $.mememaker.tools.addgrid();
                             break;
                         case 'save':
