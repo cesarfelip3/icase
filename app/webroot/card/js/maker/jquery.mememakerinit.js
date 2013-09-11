@@ -167,6 +167,12 @@
                             $.mememaker.tools.move (action);
                             //$.mememaker.sender = null;
                             break;
+                        case 'lock':
+                            var type = $.mememaker.tools.lock ();
+                            if (type) {
+                                $(".text-editor").hide();
+                            }
+                            break;
                         case 'backward':
                             $.mememaker.tools.backward();
                             break;

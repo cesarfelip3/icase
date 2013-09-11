@@ -332,6 +332,22 @@
         canvas.renderAll();
         
     }
+    
+    Tools.prototype.lock = function () {
+        var el = canvas.getActiveObject();
+
+        if (el === undefined || el === null) {
+            el = canvas.getActiveGroup();
+            if (el === undefined || el === null) {
+                return;
+            }
+        }
+        
+        el.lockMovementX = el.lockMovementX == false ? true : false;
+        el.lockMovementY = el.lockMovementY == false ? true : false;
+        canvas.renderAll();
+        return el.lockMovementX;
+    }
 
     Tools.prototype.backward = function() {
         var el = canvas.getActiveObject();
