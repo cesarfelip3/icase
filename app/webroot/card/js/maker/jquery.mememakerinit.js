@@ -93,17 +93,12 @@
 
     Init.prototype.toolsinit = function(id) {
 
-        /*
-         $("#canvas-background-color").colorpicker().on('changeColor', function(ev) {
-         $.mememaker.tools.backgroundcolor(ev.color.toHex());
-         $(this).css("background-color", ev.color.toHex());
-         });*/
         $.mememaker.tools.init();
         $.mememaker.texteditor.textselected = function() {
 
             var el = $.mememaker.canvas.getActiveObject();
 
-            if (el == null || el == undefined) {
+            if (el === undefined || el === null) {
                 return;
             }
 
@@ -111,16 +106,9 @@
                 return;
             }
 
-            var top = $.mememaker.mousey;
-            var left = $.mememaker.mousex;
             var height = el.getBoundingRectHeight();
-            var width = el.getBoundingRectWidth();
-
-            top = top + height / 2;
-            left = Math.abs(left - (600 - width) / 2);
-
-            top = el.top + height + 10 + $.mememaker.top;
-            left = el.left + $.mememaker.left;
+            var top = el.top + height + 10 + $.mememaker.top;
+            var left = el.left + $.mememaker.left;
 
             top = Math.floor(top);
             left = Math.floor(left);
@@ -130,23 +118,26 @@
             $(".text-editor").css('left', left + "px");
 
             $("#text-content").val(el.text);
-            //console.log('selected');
-            //console.log(el);
+            
         }
 
         $(id + " a").click(
                 function(evt) {
                     var action = $(this).data('action');
-                    if (action == undefined || action == null) {
+                    if (action === undefined || action === null) {
                         return;
                     }
 
-                    //console.log(action);
                     switch (action) {
                         case 'new':
                             $.mememaker.tools.new ("#eb3d2d");
                             break;
                         case 'remove':
+                            if ($.mememaker.tools.exist() == false) {
+                                //alert ("Select an object and try");
+                                return;
+                            }
+                            
                             var r = confirm("You will remove this element, are u sure?")
                             if (r == true)
                             {
@@ -221,7 +212,6 @@
                             }
                             break;
                         case 'addgrid':
-                            //$.mememaker.canvas.setDimensions ({width:1000, height:1000});
                             $.mememaker.tools.addgrid();
                             break;
                         case 'save':
@@ -260,7 +250,6 @@
                             width = Math.ceil(width);
                             
                             if (width <= $.mememaker.width) {
-                                console.log (width);
                                 $("#box-canvas-wrapper").css("width", $.mememaker.width + "px");
                                 $.mememaker.tools.zoomreset();
                                 $.mememakerinit.zoomcount = 0;

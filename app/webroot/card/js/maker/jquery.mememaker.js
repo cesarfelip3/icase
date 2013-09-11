@@ -214,6 +214,19 @@
         canvas.backgroundColor = this.backgroundColor = color;
         canvas.clear();
     }
+    
+    Tools.prototype.exist = function () {
+        var el = canvas.getActiveObject();
+
+        if (el === undefined || el === null) {
+            el = canvas.getActiveGroup();
+            if (el === undefined || el === null) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
 
     Tools.prototype.remove = function() {
         var el = canvas.getActiveObject();
