@@ -583,11 +583,14 @@
         canvas.setOverlayImage(url, canvas.renderAll.bind(canvas));
     }
 
-    Tools.prototype.zoom = function(scale) {
+    Tools.prototype.zoom = function(width) {
 
+        var scale = width / canvas.getWidth();
+        height = scale * canvas.getHeight();
+        
         canvas.setDimensions({
-            "width": canvas.getWidth() * scale,
-            "height": canvas.getHeight() * scale}
+            "width": width,
+            "height": height}
         );
 
         var objects = canvas.getObjects();

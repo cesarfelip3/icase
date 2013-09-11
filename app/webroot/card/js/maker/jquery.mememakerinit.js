@@ -237,10 +237,11 @@
                             
                             var width = $("#box-canvas-wrapper").width();
                             width *= 1.2;
+                            width = Math.ceil(width);
                             $.mememakerinit.zoomcount++;
                             
                             $("#box-canvas-wrapper").css("width", width + "px");
-                            $.mememaker.tools.zoom(1.2);
+                            $.mememaker.tools.zoom(width);
 
                             $(this).parent().next().removeClass('disabled');
                             $(this).parent().next().next().removeClass('disabled');
@@ -250,14 +251,16 @@
                                 return;
                             }
                             
-                            if ($.mememakerinit.zoomcount <= 0) {
+                            if ($.mememakerinit.zoomcount < 0) {
                                 return;
                             }
                             
                             var width = $("#box-canvas-wrapper").width();
                             width *= 1 / 1.2;
+                            width = Math.ceil(width);
                             
                             if (width <= $.mememaker.width) {
+                                console.log (width);
                                 $("#box-canvas-wrapper").css("width", $.mememaker.width + "px");
                                 $.mememaker.tools.zoomreset();
                                 $.mememakerinit.zoomcount = 0;
@@ -268,7 +271,7 @@
                             
                             $.mememakerinit.zoomcount--;
                             $("#box-canvas-wrapper").css("width", width + "px");
-                            $.mememaker.tools.zoom(1 / 1.2);
+                            $.mememaker.tools.zoom(width);
                             break;
                         case 'zoomfit':
                             if ($(this).parent().hasClass('disabled')) {
