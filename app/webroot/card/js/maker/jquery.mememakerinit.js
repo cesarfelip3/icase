@@ -24,16 +24,16 @@
         $(document).mousemove(function(event) {
             $.mememaker.mousex = event.pageX;
             $.mememaker.mousey = event.pageY;
-            
+
         });
-        
-        $(document).mousedown (function (event) {
-           
-            
+
+        $(document).mousedown(function(event) {
+
+
         });
 
         $(document).mouseup(function(event) {
-            
+
             var el = $.mememaker.canvas.getActiveObject();
             //console.log (el);
 
@@ -41,14 +41,14 @@
                 return;
             }
 
-            if (!$.mememaker.in (el)) {
+            if (!$.mememaker.in(el)) {
                 return;
             }
-            
+
             if (el.lockMovementX == true) {
                 return;
             }
-            
+
             if ($.mememaker.grid != null) {
 
                 var left = Math.ceil(el.left);
@@ -117,13 +117,13 @@
 
             top = top + height / 2;
             left = Math.abs(left - (600 - width) / 2);
-            
+
             top = el.top + height + 10 + $.mememaker.top;
-            left = el.left + $.mememaker.left - Math.abs((500 - width) / 2);
-            
-            top = Math.floor (top);
-            left = Math.floor (left);
-            
+            left = el.left + $.mememaker.left;
+
+            top = Math.floor(top);
+            left = Math.floor(left);
+
             $(".text-editor").show();
             $(".text-editor").css('top', top + "px");
             $(".text-editor").css('left', left + "px");
@@ -168,11 +168,11 @@
                         case 'moveup':
                         case 'movedown':
                             $.mememaker.sender = 'move';
-                            $.mememaker.tools.move (action);
+                            $.mememaker.tools.move(action);
                             //$.mememaker.sender = null;
                             break;
                         case 'lock':
-                            var type = $.mememaker.tools.lock ();
+                            var type = $.mememaker.tools.lock();
                             if (type) {
                                 $(".text-editor").hide();
                             }
@@ -205,8 +205,8 @@
                             $("#box-toolbar-bg").show();
                             break;
                         case 'backgroundcolor':
-                            var color = $(this).data ('data');
-                            $.mememaker.tools.backgroundcolor (color);
+                            var color = $(this).data('data');
+                            $.mememaker.tools.backgroundcolor(color);
                             break;
                         case 'backgroundimage':
                             //this.backgroundimage("img/muffin.png");
@@ -242,14 +242,29 @@
                             if (grid) {
                                 $.mememaker.tools.addgrid();
                             }
+
+                            $(this).parent().next().removeClass('disabled');
+                            $(this).parent().next().next().removeClass('disabled');
                             break;
                         case 'zoomout':
+                            if ($(this).parent().hasClass('disabled')) {
+                                return;
+                            }
                             var grid = false;
                             if ($.mememaker.grid != null) {
                                 $.mememaker.tools.addgrid();
                                 grid = true;
                             }
                             var width = $("#box-canvas-wrapper").width();
+                            if (width == $.mememaker.width) {
+                                if (grid) {
+                                    $.mememaker.tools.addgrid();
+                                }
+                                $(this).parent().addClass('disabled');
+                                $(this).parent().next().addClass('disabled');
+                                return;
+                            }
+
                             width *= 1 / 1.2;
                             $("#box-canvas-wrapper").css("width", width + "px");
                             $.mememaker.tools.zoom(1 / 1.2);
@@ -258,7 +273,23 @@
                             }
                             break;
                         case 'zoomfit':
+                            if ($(this).parent().hasClass('disabled')) {
+                                return;
+                            }
+                            var grid = false;
+                            if ($.mememaker.grid != null) {
+                                $.mememaker.tools.addgrid();
+                                grid = true;
+                            }
+
+                            $("#box-canvas-wrapper").css("width", $.mememaker.width + "px");
                             $.mememaker.tools.zoomreset();
+                            if (grid) {
+                                $.mememaker.tools.addgrid();
+                            }
+                            $(this).parent().addClass('disabled');
+                            $(this).parent().prev().addClass('disabled');
+                            break;
                         default:
                             break;
                     }
@@ -317,78 +348,78 @@
 
     Init.prototype.imageeditorinit = function(id) {
 
-/*
-        //http://www.eyecon.ro/bootstrap-slider/
-        this.zoomValue = $("#image-zoom").slider(
-                {
-                    formater: function(value) {
-                        return '' + value / 100;
-                    }
-                }
-        ).on(
-                "slide",
-                function() {
-                    this.zoom(this.zoomValue.getValue());
-                }
-        ).data('slider');
-
-        this.rotateValue = $("#image-rotation").slider(
-                {
-                    formater: function(value) {
-                        return '' + value;
-                    }
-                }
-        ).on(
-                "slide",
-                function() {
-                    this.rotate(this.rotateValue.getValue());
-                }
-        ).data('slider');
-        */
+        /*
+         //http://www.eyecon.ro/bootstrap-slider/
+         this.zoomValue = $("#image-zoom").slider(
+         {
+         formater: function(value) {
+         return '' + value / 100;
+         }
+         }
+         ).on(
+         "slide",
+         function() {
+         this.zoom(this.zoomValue.getValue());
+         }
+         ).data('slider');
+         
+         this.rotateValue = $("#image-rotation").slider(
+         {
+         formater: function(value) {
+         return '' + value;
+         }
+         }
+         ).on(
+         "slide",
+         function() {
+         this.rotate(this.rotateValue.getValue());
+         }
+         ).data('slider');
+         */
     }
 
 
     Init.prototype.draweditorinit = function(id) {
 
-/*
-        $.mememaker.draweditor.changeBrushProperty('color', '#333');
-        //$.mememaker.draweditor.changeBrushType("");
-
-        $.mememaker.draweditor.lineWidth = $("#draw-width").slider(
-                {
-                    formater: function(value) {
-                        return '' + value;
-                    }
-                }
-        ).on(
-                "slide",
-                function() {
-                    $.mememaker.draweditor.changeBrushProperty("linewidth", $.mememaker.draweditor.lineWidth.getValue());
-                }
-        ).data('slider');
-
-        $.mememaker.draweditor.shadowWidth = $("#draw-shadow-width").slider(
-                {
-                    formater: function(value) {
-                        return '' + value;
-                    }
-                }
-        ).on(
-                "slide",
-                function() {
-                    $.mememaker.draweditor.changeBrushProperty("shadowwidth", $.mememaker.draweditor.shadowWidth.getValue());
-                }
-        ).data('slider');
-
-        
+        /*
+         $.mememaker.draweditor.changeBrushProperty('color', '#333');
+         //$.mememaker.draweditor.changeBrushType("");
+         
+         $.mememaker.draweditor.lineWidth = $("#draw-width").slider(
+         {
+         formater: function(value) {
+         return '' + value;
+         }
+         }
+         ).on(
+         "slide",
+         function() {
+         $.mememaker.draweditor.changeBrushProperty("linewidth", $.mememaker.draweditor.lineWidth.getValue());
+         }
+         ).data('slider');
+         
+         $.mememaker.draweditor.shadowWidth = $("#draw-shadow-width").slider(
+         {
+         formater: function(value) {
+         return '' + value;
+         }
+         }
+         ).on(
+         "slide",
+         function() {
+         $.mememaker.draweditor.changeBrushProperty("shadowwidth", $.mememaker.draweditor.shadowWidth.getValue());
+         }
+         ).data('slider');
+         
+         
          $("#draw-fill").colorpicker().on('changeColor', function(ev) {
          $.mememaker.draweditor.changeBrushProperty("color", ev.color.toHex());
          ;
          });
-
-        $('#draw-mode-selector').on('change', function() {
-            $.mememaker.draweditor.changeBrushType(this.value);
-        }); */
+         
+         $('#draw-mode-selector').on('change', function() {
+         $.mememaker.draweditor.changeBrushType(this.value);
+         }); */
     }
 
     $.mememakerinit = new Init();

@@ -33,6 +33,7 @@
 
     Mememaker.prototype = {
         container: '#box-canvas',
+        wrapper: 'box-canvas-wrapper',
         canvasId: 'c1',
         canvas: null,
         grid: null,
@@ -166,7 +167,7 @@
         canvas.controlsAboveOverlay = true;
         canvas.clear();
 
-        var pos = this.position(document.getElementById("box-canvas-wrapper"));
+        var pos = this.position(document.getElementById(this.wrapper));
         this.left = pos[0];
         this.top = pos[1];
         console.log(pos);
@@ -643,9 +644,9 @@
         canvas.setDimensions({"width": canvas.getWidth() * scale, "height": canvas.getHeight() * scale});
         //canvas.setHeight(canvas.getHeight() * scale);
         //canvas.setWidth(canvas.getWidth() * scale);
-
-        console.log(canvas.getWidth());
-        console.log(canvas.getHeight());
+        
+        //console.log(canvas.getWidth());
+        //console.log(canvas.getHeight());
 
         var objects = canvas.getObjects();
         for (var i in objects) {
@@ -668,6 +669,49 @@
         }
 
         canvas.renderAll();
+        
+        var pos = $.mememaker.position(document.getElementById($.mememaker.wrapper));
+        $.mememaker.left = pos[0];
+        $.mememaker.top = pos[1];
+    }
+    
+    Tools.prototype.zoomreset = function() {
+
+        //var scale = $.mememaker.canvasScale;
+
+        var scale = $.mememaker.width / canvas.getWidth();
+        canvas.setDimensions({"width": $.mememaker.width, "height": $.mememaker.height});
+        //canvas.setHeight(canvas.getHeight() * scale);
+        //canvas.setWidth(canvas.getWidth() * scale);
+        
+        //console.log(canvas.getWidth());
+        //console.log(canvas.getHeight());
+
+        var objects = canvas.getObjects();
+        for (var i in objects) {
+            var scaleX = objects[i].scaleX;
+            var scaleY = objects[i].scaleY;
+            var left = objects[i].left;
+            var top = objects[i].top;
+
+            var tempScaleX = scaleX * scale;
+            var tempScaleY = scaleY * scale;
+            var tempLeft = left * scale;
+            var tempTop = top * scale;
+
+            objects[i].scaleX = tempScaleX;
+            objects[i].scaleY = tempScaleY;
+            objects[i].left = tempLeft;
+            objects[i].top = tempTop;
+
+            objects[i].setCoords();
+        }
+
+        canvas.renderAll();
+        
+        var pos = $.mememaker.position(document.getElementById($.mememaker.wrapper));
+        $.mememaker.left = pos[0];
+        $.mememaker.top = pos[1];
     }
 
     // Server API
