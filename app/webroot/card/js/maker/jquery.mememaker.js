@@ -167,7 +167,7 @@
         var pos = this.position(document.getElementById("box-canvas-wrapper"));
         this.left = pos[0];
         this.top = pos[1];
-        console.log (pos);
+        console.log(pos);
     }
 
     Mememaker.prototype.position = function(el) {
@@ -275,6 +275,40 @@
         }
 
         cloneImages(0, texts, images, el);
+    }
+    
+    Tools.prototype.move = function (direct) {
+        if (direct === undefined || direct == null) {
+            return;
+        }
+        
+        var el = canvas.getActiveObject();
+
+        if (el === undefined || el === null) {
+            el = canvas.getActiveGroup();
+            if (el === undefined || el === null) {
+                return;
+            }
+        }
+        
+        if (direct == 'moveleft') {
+            el.left--;
+        }
+        
+        if (direct == 'moveright') {
+            el.left++;
+        }
+        
+        if (direct == 'moveup') {
+            el.top--;
+        }
+        
+        if (direct == 'movedown') {
+            el.top++;
+        }
+        
+        canvas.renderAll();
+        
     }
 
     Tools.prototype.backward = function() {
@@ -395,6 +429,8 @@
         text.on(
                 'selected',
                 function(options) {
+                    console.log (options);
+                    
                     $.mememaker.selected = true;
                     $.mememaker.activex = text.left;
                     $.mememaker.activey = text.top;
@@ -426,6 +462,25 @@
             //hideAlert();
 
         });
+    }
+
+    Tools.prototype.addshape = function(type) {
+
+        if (type === undefined || type === null) {
+            return;
+        }
+        
+        if (type == 'circle') {
+            
+        }
+        
+        if (type == 'rect') {
+            
+        }
+        
+        if (type == 'ellipse') {
+            
+        }
     }
 
     Tools.prototype.addgrid = function() {

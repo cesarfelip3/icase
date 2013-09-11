@@ -72,6 +72,29 @@ hr {border-color:#E9E9E9}
     font-size:12px;
 }
 
+/* =================================*/
+#box-toolbar-move {
+    position:absolute;
+    left:1020px;
+    width:76px;
+    text-align:center;
+    margin:auto;
+    background-color:#EEE;
+    opacity: 0.6;
+}
+
+#box-toolbar-move a {
+    color:#999;
+    text-decoration: none;
+}
+
+#box-toolbar-move a:hover {
+    color:orangered;
+}
+
+#box-toolbar-move a:active {
+    color:#bf7130;
+}
 /* ========================================== */
 #box-toolbar-bg {
     border:1px solid #ccc;

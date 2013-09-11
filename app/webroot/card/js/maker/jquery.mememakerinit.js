@@ -153,6 +153,12 @@
                         case 'group':
                             $.mememaker.tools.group();
                             break;
+                        case 'moveleft':
+                        case 'moveright':
+                        case 'moveup':
+                        case 'movedown':
+                            $.mememaker.tools.move (action);
+                            break;
                         case 'backward':
                             $.mememaker.tools.backward();
                             break;
