@@ -234,9 +234,9 @@
                                 $.mememaker.tools.addgrid();
                                 grid = true;
                             }
-                            var width = $("#box-canvas-container").width();
+                            var width = $("#box-canvas-wrapper").width();
                             width *= 1.2;
-                            $("#box-canvas-container").css("width", width + "px");
+                            $("#box-canvas-wrapper").css("width", width + "px");
                             $.mememaker.tools.zoom(1.2);
 
                             if (grid) {
@@ -249,9 +249,9 @@
                                 $.mememaker.tools.addgrid();
                                 grid = true;
                             }
-                            var width = $("#box-canvas-container").width();
+                            var width = $("#box-canvas-wrapper").width();
                             width *= 1 / 1.2;
-                            $("#box-canvas-container").css("width", width + "px");
+                            $("#box-canvas-wrapper").css("width", width + "px");
                             $.mememaker.tools.zoom(1 / 1.2);
                             if (grid) {
                                 $.mememaker.tools.addgrid();
