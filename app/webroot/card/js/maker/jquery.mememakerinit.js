@@ -12,6 +12,7 @@
     };
 
     Init.prototype = {
+        zoomcount: 0,
         init: null,
         selected: false,
         toolsinit: null,
@@ -35,7 +36,7 @@
         $(document).mouseup(function(event) {
 
             var el = $.mememaker.canvas.getActiveObject();
-            //console.log (el);
+            ////console.log (el);
 
             if (el === undefined || el === null) {
                 return;
@@ -54,7 +55,7 @@
                 var left = Math.ceil(el.left);
                 var top = Math.ceil(el.top);
 
-                console.log("1. " + (left % 20) + ":" + top);
+                //console.log("1. " + (left % 20) + ":" + top);
 
                 if ((left % 20) / 20 > 0.5) {
                     left += 20 - (left % 20);
@@ -71,7 +72,7 @@
                 el.left = left;
                 el.top = top;
 
-                console.log("2. " + el.left + ":" + el.top);
+                //console.log("2. " + el.left + ":" + el.top);
 
                 $.mememaker.canvas.renderAll();
             }
@@ -97,7 +98,7 @@
          $.mememaker.tools.backgroundcolor(ev.color.toHex());
          $(this).css("background-color", ev.color.toHex());
          });*/
-
+        $.mememaker.tools.init();
         $.mememaker.texteditor.textselected = function() {
 
             var el = $.mememaker.canvas.getActiveObject();
@@ -129,8 +130,8 @@
             $(".text-editor").css('left', left + "px");
 
             $("#text-content").val(el.text);
-            console.log('selected');
-            console.log(el);
+            //console.log('selected');
+            //console.log(el);
         }
 
         $(id + " a").click(
@@ -140,7 +141,7 @@
                         return;
                     }
 
-                    console.log(action);
+                    //console.log(action);
                     switch (action) {
                         case 'new':
                             $.mememaker.tools.new ("#eb3d2d");
@@ -228,20 +229,18 @@
                             break;
                         case 'reload':
                             break;
-                        case 'zoomin':
-                            var grid = false;
-                            if ($.mememaker.grid != null) {
-                                $.mememaker.tools.addgrid();
-                                grid = true;
+                        case 'zoomin':                            
+                            if ($.mememakerinit.zoomcount >= 5) {
+                                alert ("You reach the maxium zoom level");
+                                return;
                             }
+                            
                             var width = $("#box-canvas-wrapper").width();
                             width *= 1.2;
+                            $.mememakerinit.zoomcount++;
+                            
                             $("#box-canvas-wrapper").css("width", width + "px");
                             $.mememaker.tools.zoom(1.2);
-
-                            if (grid) {
-                                $.mememaker.tools.addgrid();
-                            }
 
                             $(this).parent().next().removeClass('disabled');
                             $(this).parent().next().next().removeClass('disabled');
@@ -250,43 +249,37 @@
                             if ($(this).parent().hasClass('disabled')) {
                                 return;
                             }
-                            var grid = false;
-                            if ($.mememaker.grid != null) {
-                                $.mememaker.tools.addgrid();
-                                grid = true;
+                            
+                            if ($.mememakerinit.zoomcount <= 0) {
+                                return;
                             }
+                            
                             var width = $("#box-canvas-wrapper").width();
-                            if (width == $.mememaker.width) {
-                                if (grid) {
-                                    $.mememaker.tools.addgrid();
-                                }
+                            width *= 1 / 1.2;
+                            
+                            if (width <= $.mememaker.width) {
+                                $("#box-canvas-wrapper").css("width", $.mememaker.width + "px");
+                                $.mememaker.tools.zoomreset();
+                                $.mememakerinit.zoomcount = 0;
                                 $(this).parent().addClass('disabled');
                                 $(this).parent().next().addClass('disabled');
                                 return;
                             }
-
-                            width *= 1 / 1.2;
+                            
+                            $.mememakerinit.zoomcount--;
                             $("#box-canvas-wrapper").css("width", width + "px");
                             $.mememaker.tools.zoom(1 / 1.2);
-                            if (grid) {
-                                $.mememaker.tools.addgrid();
-                            }
                             break;
                         case 'zoomfit':
                             if ($(this).parent().hasClass('disabled')) {
                                 return;
                             }
-                            var grid = false;
-                            if ($.mememaker.grid != null) {
-                                $.mememaker.tools.addgrid();
-                                grid = true;
-                            }
+                            
+                            $.mememakerinit.zoomcount = 0;
 
                             $("#box-canvas-wrapper").css("width", $.mememaker.width + "px");
                             $.mememaker.tools.zoomreset();
-                            if (grid) {
-                                $.mememaker.tools.addgrid();
-                            }
+                            
                             $(this).parent().addClass('disabled');
                             $(this).parent().prev().addClass('disabled');
                             break;
