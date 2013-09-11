@@ -28,21 +28,23 @@
 
         $(document).mouseup(function(event) {
 
-            $.mememaker.selected = false;
+            //$.mememaker.selected = false;
 
             var el = $.mememaker.canvas.getActiveObject();
             //console.log (el);
 
-            if (el == undefined || el == null) {
+            if (el === undefined || el === null) {
                 return;
             }
 
-            if ($.mememaker.grid != null && !$.mememaker.selected) {
+            console.log($.mememaker.selected);
+
+            if ($.mememaker.grid != null) {
 
                 var left = Math.ceil(el.left);
                 var top = Math.ceil(el.top);
-                
-                console.log ("1. " + (left % 20) + ":" + top);
+
+                console.log("1. " + (left % 20) + ":" + top);
 
                 if ((left % 20) / 20 > 0.5) {
                     left += 20 - (left % 20);
@@ -55,14 +57,24 @@
                 } else {
                     top -= (top % 20);
                 }
-                
+
                 el.left = left;
                 el.top = top;
-                
-                console.log ("2. " + el.left + ":" + el.top);
-                
+
+                console.log("2. " + el.left + ":" + el.top);
+
                 $.mememaker.canvas.renderAll();
             }
+
+            if (el.type == 'text') {
+                if ($.mememaker.activex != el.left || $.mememaker.activey != el.top) {
+                    $.mememaker.texteditor.textselected();
+                    //$.mememaker.selected = false;
+                    $.mememaker.activex = el.left;
+                    $.mememaker.activey = el.top;
+                }
+            }
+
         });
 
         $.mememaker.init(id, backgroundcolor, 1850 / 780);
@@ -90,11 +102,18 @@
 
             var top = $.mememaker.mousey;
             var left = $.mememaker.mousex;
-            var height = el.height;
-            var width = el.width;
+            var height = el.getBoundingRectHeight();
+            var width = el.getBoundingRectWidth();
 
-            top = top + height;
+            top = top + height / 2;
             left = Math.abs(left - (600 - width) / 2);
+            
+            top = el.top + height + 10 + $.mememaker.top;
+            left = el.left + $.mememaker.left - Math.abs((500 - width) / 2);
+            
+            top = Math.floor (top);
+            left = Math.floor (left);
+            
             $(".text-editor").show();
             $(".text-editor").css('top', top + "px");
             $(".text-editor").css('left', left + "px");
@@ -117,7 +136,19 @@
                             $.mememaker.tools.new ("#eb3d2d");
                             break;
                         case 'remove':
-                            $.mememaker.tools.remove();
+                            var r = confirm("You will remove this element, are u sure?")
+                            if (r == true)
+                            {
+
+                            }
+                            else
+                            {
+                                return;
+                            }
+                            var type = $.mememaker.tools.remove();
+                            if (type == 'text') {
+                                $(".text-editor").hide();
+                            }
                             break;
                         case 'group':
                             $.mememaker.tools.group();
@@ -169,17 +200,33 @@
                         case 'reload':
                             break;
                         case 'zoomin':
+                            var grid = false;
+                            if ($.mememaker.grid != null) {
+                                $.mememaker.tools.addgrid();
+                                grid = true;
+                            }
                             var width = $("#box-canvas-container").width();
                             width *= 1.2;
                             $("#box-canvas-container").css("width", width + "px");
-                            console.log(width);
                             $.mememaker.tools.zoom(1.2);
+
+                            if (grid) {
+                                $.mememaker.tools.addgrid();
+                            }
                             break;
                         case 'zoomout':
+                            var grid = false;
+                            if ($.mememaker.grid != null) {
+                                $.mememaker.tools.addgrid();
+                                grid = true;
+                            }
                             var width = $("#box-canvas-container").width();
                             width *= 1 / 1.2;
                             $("#box-canvas-container").css("width", width + "px");
                             $.mememaker.tools.zoom(1 / 1.2);
+                            if (grid) {
+                                $.mememaker.tools.addgrid();
+                            }
                             break;
                         case 'zoomfit':
                             $.mememaker.tools.zoomreset();

@@ -14,7 +14,8 @@
 
         <!--        <link rel="stylesheet" href="css/bootstrap-responsive.min.css">-->
         <link rel="stylesheet" href="js/colorpicker2/css/bootstrap-colorpicker.css">
-        <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+        <!-- link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet" -->
+        <link href="css/font-awesome.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="css/main.css">
         <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 
@@ -55,16 +56,16 @@
             </div>
         </div>
         <!-- content -->
-        <div class="container well" style="box-shadow:none;font-size:14px;background:white;width:934px;">
-            <div class="row-fluid" style="margin-bottom:5px;">
-                <div class="span6" style="padding-top:10px;">
+        <div class="container" id="box-container">
+            <div class="row-fluid" style="height:70px;">
+                <div class="span6">
                     <h5 style="padding:0px;margin:0px;">Click the text and images to personalise your business card.</h5>
                     <div style="font-size:13px;line-height: 15px;">
                         (You can add new images and text areas by dragging and dropping the image and text icons to the right onto your business card)
                     </div>
                 </div>
                 <div class="span6">
-                    <div style="height:50px;" class="pull-right tools" id="box-toolbar-main">
+                    <div class="pull-right tools" id="box-toolbar-main">
                         <ul class="thumbnails">
                             <li>
                                 <div class="thumbnail" style="border:none;text-align:center;margin:auto;">
@@ -110,24 +111,22 @@
                     </div>
                 </div>
             </div>
-            <div style="clear:both;border:1px solid #eee;margin-top:15px;"></div>
-            <div class="row-fluid">
+            <div style="height:1px;background-color:#ccc"></div>
+            <div class="row-fluid" style="height:40px;">
                 <div class="span6">
-                    <a href="javascript:"><i class="icon-remove icon-2x"></i> remove</a>
                 </div>
                 <div class="span6">
                     
                 </div>
             </div>
             <!-- canvas -->
-            <div class="progress" style="height:2px;display:block;width:100%;margin-top:10px;"><div class="bar bar-warning" id="progress-bar" style="width: 0%; height:2px;"></div></div>
             <input type="hidden" id="current-item" style="display:none;" />
             <input type="hidden" name="canvas_guid" id="canvas_guid" style="display:none;" value="" data-reload="" />
-            <div class="row-fluid" style="background-image:url(img/stripes_bg.png);">
+            <div class="row-fluid" id="box-editing">
                 <div class="span12" style="padding:10px;overflow:auto;">
-                    <div style="clear:both;"></div>
+                    <div style="clear:both;height:0px;"></div>
                     <div style="display:block;text-align:center;margin:auto;">
-                        <div id="box-canvas-container" style="width:480px;height:580px;text-align:center;margin:auto;">
+                        <div id="box-canvas-wrapper" style="width:480px;height:580px;text-align:center;margin:auto;">
                             <canvas style="-moz-user-select: none; cursor: crosshair;" width="480" height="580" id="c1"></canvas>
                         </div>
                     </div>
@@ -147,6 +146,16 @@
                 </div>
                 <div style="position:absolute;" class="tools" id="box-toolbar-zoom">
                     <ul style="list-style:none;">
+                        <li style="border-bottom:1px solid #333">
+                            <a href="javascript:" data-action="remove" title="trash"><i class="icon-trash icon-2x"></i></a>
+                        </li>
+                        <li>
+                            <a href="javascript:" data-action="backward" title="backword"><i class="icon-file-alt icon-2x"></i></a>
+                        </li>
+                        <li>
+                            <a href="javascript:" data-action="forward" title="forward"><i class="icon-file icon-2x"></i></a>
+                        </li>
+                        <li style="height:10px;"></li>
                         <li>
                             <a href="javascript:" data-action="zoomin"><i class="icon-zoom-in icon-2x"></i></a>
                         </li>
@@ -164,7 +173,7 @@
                 <div style="position:absolute;top:200px;" class="tools text-editor hide" id="box-toolbar-texteditor">
                     <ul style="list-style:none;">
                         <li class="divider" style='background-color:#eee'>
-                            <a href="javascript:" data-action="backgroundcolor"><i class="icon-edittext"></i></a>
+                            <a href="javascript:" data-action="backgroundcolor"><i class="icon-pencil icon-2x"></i></a>
                             <ul style='width:585px;height:150px;background-color:white;position:absolute;padding:10px;border:1px solid #ccc;display:block;'>
                                 <li>
                                     <textarea style='width:565px;border:1px solid #ccc;height:140px;resize:none;border-radius: 0px;' id="text-content"></textarea>
@@ -172,7 +181,7 @@
                             </ul>
                         </li>
                         <li class="divider" id='li-font-type' >
-                            <a href="javascript:" data-action="clearbackground"><i class="icon-fonttype"></i></a>
+                            <a href="javascript:" data-action="clearbackground"><i class="icon-font icon-2x"></i></a>
                             <ul>
                                 <li title="American Typewriter"><p style="background-position:10px 0px"></p></li>
                                 <li title="Daniel"><p style="background-position:10px -20px"></p></li>
@@ -202,7 +211,7 @@
                             </ul>
                         </li>
                         <li class="divider" id='li-font-size'>
-                            <a href="javascript:" data-action="backgroundcolor"><i class="icon-fontsize"></i></a>
+                            <a href="javascript:" data-action="backgroundcolor"><i class="icon-text-width icon-2x"></i></a>
                             <ul>
                                 <li>
                                     <a href='javascript:'>1</a>
@@ -243,7 +252,7 @@
                             </ul>
                         </li>
                         <li class="divider" id="li-font-color">
-                            <a href="javascript:" data-action="clearbackground"><i class="icon-fontcolor"></i></a>
+                            <a href="javascript:" data-action="clearbackground"><i class="icon-unchecked icon-2x"></i></a>
                             <ul>
                                 <li>
                                     <a href='javascript:' style="background-color:blue;"></a>
@@ -284,34 +293,34 @@
                             </ul>
                         </li>
                         <li class="divider">
-                            <a href="javascript:" data-action="backgroundcolor"><i class="icon-fontweight"></i></a>
+                            <a href="javascript:" data-action="backgroundcolor"><i class="icon-bold icon-2x"></i></a>
                         </li>
                         <li class="divider">
-                            <a href="javascript:" data-action="clearbackground"><i class="icon-fontitaly"></i></a>
+                            <a href="javascript:" data-action="clearbackground"><i class="icon-italic icon-2x"></i></a>
                         </li>
                         <li class="divider">
-                            <a href="javascript:" data-action="backgroundcolor"><i class="icon-fontunderline"></i></a>
+                            <a href="javascript:" data-action="backgroundcolor"><i class="icon-underline icon-2x"></i></a>
                         </li>
                         <li class="divider">
-                            <a href="javascript:" data-action="clearbackground"><i class="icon-text-left"></i></a>
+                            <a href="javascript:" data-action="clearbackground"><i class="icon-align-left icon-2x"></i></a>
                         </li>
                         <li class="divider">
-                            <a href="javascript:" data-action="backgroundcolor"><i class="icon-text-center"></i></a>
+                            <a href="javascript:" data-action="backgroundcolor"><i class="icon-align-center icon-2x"></i></a>
                         </li>
                         <li class="divider">
-                            <a href="javascript:" data-action="clearbackground"><i class="icon-text-right"></i></a>
+                            <a href="javascript:" data-action="clearbackground"><i class="icon-align-right icon-2x"></i></a>
                         </li>
-                        <li class="divider">
-                            <a href="javascript:" data-action="backgroundcolor"><i class="icon-forward"></i></a>
+                        <li class="divider hide">
+                            <a href="javascript:" data-action="backgroundcolor"><i class="icon-file icon-2x"></i></a>
                         </li>
-                        <li class="divider">
-                            <a href="javascript:" data-action="clearbackground"><i class="icon-backward"></i></a>
+                        <li class="divider hide">
+                            <a href="javascript:" data-action="clearbackground"><i class="icon-file-alt icon-2x"></i></a>
                         </li>
-                        <li class="divider">
-                            <a href="javascript:" data-action="backgroundcolor"><i class="icon-delete"></i></a>
+                        <li class="divider hide">
+                            <a href="javascript:" data-action="backgroundcolor"><i class="icon-trash icon-2x"></i></a>
                         </li>
-                        <li>
-                            <a href="javascript:" onclick="jQuery('#box-toolbar-texteditor').hide();"><i class="icon-confirm"></i></a>
+                        <li style="text-align:center;vertical-align: center;margin:auto;">
+                            <a href="javascript:" onclick="jQuery('#box-toolbar-texteditor').hide();"><i class="icon-ok icon-2x"></i></a>
                         </li>
                     </ul>
                 </div>

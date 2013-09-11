@@ -42,11 +42,16 @@
         canvasScale: 0,
         width: 780,
         height: 780,
+        left: 0,
+        top: 0,
         mousex: 0,
         mousey: 0,
-        selected : false,
+        selected: false,
+        activex: 0,
+        activey: 0,
         // methods
         init: null,
+        position: null,
         // object member
         tools: null,
         texteditor: null,
@@ -159,6 +164,20 @@
         canvas.controlsAboveOverlay = true;
         canvas.clear();
 
+        var pos = this.position(document.getElementById("box-canvas-wrapper"));
+        this.left = pos[0];
+        this.top = pos[1];
+        console.log (pos);
+    }
+
+    Mememaker.prototype.position = function(el) {
+        var pos = null;
+        pos = [0, 0];
+
+        var r = el.getBoundingClientRect();
+        pos[0] = r.left;
+        pos[1] = r.top;
+        return pos;
     }
 
 
@@ -176,9 +195,9 @@
     Tools.prototype.remove = function() {
         var el = canvas.getActiveObject();
 
-        if (el == null || el == undefined) {
+        if (el === undefined || el === null) {
             el = canvas.getActiveGroup();
-            if (el == null || el == undefined) {
+            if (el === undefined || el === null) {
                 return;
             }
 
@@ -188,15 +207,16 @@
                 canvas.remove(el.item(i));
             }
 
-            return;
+            return el.type;
         }
 
         canvas.remove(el);
+        return el.type;
     }
 
     Tools.prototype.group = function() {
         var el = canvas.getActiveGroup();
-        if (el == null || el == undefined) {
+        if (el === undefined || el === null) {
             return;
         }
 
@@ -260,27 +280,23 @@
     Tools.prototype.backward = function() {
         var el = canvas.getActiveObject();
 
-        if (el == null || el == undefined) {
+        if (el === undefined || el === null) {
             el = canvas.getActiveGroup();
-            if (el == null || el == undefined) {
+            if (el === undefined || el === null) {
                 return;
             }
-
-            //alert (el);
-            el.sendBackwards();
-
-            return;
         }
 
         el.sendBackwards();
+        canvas.renderAll();
     };
 
     Tools.prototype.forward = function() {
         var el = canvas.getActiveObject();
 
-        if (el === null || el === undefined) {
+        if (el === undefined || el === null) {
             el = canvas.getActiveGroup();
-            if (el === null || el === undefined) {
+            if (el === undefined || el === null) {
                 return;
             }
 
@@ -296,9 +312,9 @@
     Tools.prototype.toBack = function() {
         var el = canvas.getActiveObject();
 
-        if (el === null || el === undefined) {
+        if (el === undefined || el === null) {
             el = canvas.getActiveGroup();
-            if (el === null || el === undefined) {
+            if (el === undefined || el === null) {
                 return;
             }
 
@@ -314,9 +330,9 @@
     Tools.prototype.toFront = function() {
         var el = canvas.getActiveObject();
 
-        if (el === null || el === undefined) {
+        if (el === undefined || el === null) {
             el = canvas.getActiveGroup();
-            if (el === null || el === undefined) {
+            if (el === undefined || el === null) {
                 return;
             }
 
@@ -332,9 +348,9 @@
     Tools.prototype.flip = function(x) {
         var el = canvas.getActiveObject();
 
-        if (el === null || el === undefined) {
+        if (el === undefined || el === null) {
             el = canvas.getActiveGroup();
-            if (el === null || el === undefined) {
+            if (el === undefined || el === null) {
                 return;
             }
 
@@ -364,22 +380,24 @@
         text.originX = 'left';
         text.originY = 'top';
         canvas.add(text);
-        
+
         //text.width = canvas.width / 2;
         text.left = canvas.width / 2 - text.getBoundingRectWidth() / 2;
         text.top = canvas.height / 2 - text.getBoundingRectHeight() / 2;
         text.hasRotatingPoint = false;
         //text.center();
-        
+
         //text.scaleToWidth(300);
 
         canvas.renderAll();
 
-        console.log(text);
+        //console.log(text);
         text.on(
                 'selected',
                 function(options) {
                     $.mememaker.selected = true;
+                    $.mememaker.activex = text.left;
+                    $.mememaker.activey = text.top;
                     $.mememaker.texteditor.textselected();
                 }
         )
@@ -417,56 +435,56 @@
 
         if ($.mememaker.grid != null) {
             for (var i = 0; i < $.mememaker.grid.length; ++i) {
-                $.mememaker.grid[i].remove ();
+                $.mememaker.grid[i].remove();
             }
             $.mememaker.grid = null;
             return;
-        } 
+        }
 
         var lines = [];
         var j = 0;
         var line = null;
         var rect = [];
         var size = $.mememaker.gridsize;
-        
+
         console.log(width + ":" + height);
 
         for (var i = 0; i < Math.ceil(width / 20); ++i) {
             rect[0] = i * size;
             rect[1] = 0;
-            
+
             rect[2] = i * size;
             rect[3] = height;
-            
+
             line = null;
             line = new fabric.Line(rect, {
                 stroke: '#999',
                 opacity: 0.5,
             });
-            
+
             line.selectable = false;
-            canvas.add (line);
+            canvas.add(line);
             line.sendToBack();
-            
+
             lines[j++] = line;
         }
 
         for (i = 0; i < Math.ceil(height / 20); ++i) {
             rect[0] = 0;
             rect[1] = i * size;
-            
+
             rect[2] = width;
             rect[3] = i * size;
-            
+
             line = null;
             line = new fabric.Line(rect, {
                 stroke: '#999',
                 opacity: 0.5,
             });
             line.selectable = false;
-            canvas.add (line);
+            canvas.add(line);
             line.sendToBack();
-            
+
             lines[j++] = line;
         }
 
@@ -479,7 +497,7 @@
 //        canvas.add($.mememaker.grid);
 //        $.mememaker.grid.selectable = false;
 //        $.mememaker.grid.sendToBack();
-        
+
         $.mememaker.grid = lines;
         canvas.renderAll();
     }
@@ -605,7 +623,7 @@
      
      var el = canvas.getActiveObject();
      
-     if (el == null || el == undefined) {
+     if (el === undefined || el === null) {
      return;
      }
      
@@ -634,7 +652,7 @@
     TextEditor.prototype.changeFontFamily = function(fontFamily) {
         var el = canvas.getActiveObject();
 
-        if (el == null || el == undefined) {
+        if (el === undefined || el === null) {
             return;
         }
 
@@ -649,7 +667,7 @@
     TextEditor.prototype.changeText = function(value) {
         var el = canvas.getActiveObject();
 
-        if (el == null || el == undefined) {
+        if (el === undefined || el === null) {
             return;
         }
 
@@ -668,7 +686,7 @@
 
         var el = canvas.getActiveObject();
 
-        if (el == null || el == undefined) {
+        if (el === undefined || el === null) {
             return;
         }
 
@@ -702,7 +720,7 @@
     ImageEditor.prototype.imageselected = function() {
         var el = canvas.getActiveObject();
 
-        if (el == null || el == undefined) {
+        if (el === undefined || el === null) {
             return;
         }
 
@@ -718,7 +736,7 @@
     ImageEditor.prototype.zoom = function(value) {
         var el = canvas.getActiveObject();
 
-        if (el == null || el == undefined) {
+        if (el === undefined || el === null) {
             return;
         }
 
@@ -737,7 +755,7 @@
     ImageEditor.prototype.rotate = function(value) {
         var el = canvas.getActiveObject();
 
-        if (el == null || el == undefined) {
+        if (el === undefined || el === null) {
             return;
         }
 
