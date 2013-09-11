@@ -15,6 +15,11 @@ hr {border-color:#E9E9E9}
     user-select: none; 
 }
 
+.clear {
+    clear:both;
+    height:0px;
+}
+
 #box-container {
     box-shadow:none;
     font-size:14px;
@@ -74,13 +79,13 @@ hr {border-color:#E9E9E9}
 
 /* =================================*/
 #box-toolbar-move {
-    position:absolute;
-    left:1020px;
-    width:76px;
-    text-align:center;
-    margin:auto;
-    background-color:#EEE;
-    opacity: 0.6;
+    /*text-align:center;
+    margin:auto;*/
+    background-color:#eee;
+    opacity: 0.5;
+    margin:0px;
+    padding:0px;
+    width:96px;
 }
 
 #box-toolbar-move a {
@@ -95,6 +100,25 @@ hr {border-color:#E9E9E9}
 #box-toolbar-move a:active {
     color:#bf7130;
 }
+
+#box-toolbar-move ul {
+    width:96px;
+    list-style: none;
+    top:0px;
+    float:left;
+    margin:0px;
+    padding:0px;
+}
+
+#box-toolbar-move ul li {
+    float:left;
+    width:30px;
+    height:30px;
+    margin:auto;
+    text-align: center;
+    border:1px solid #ccc;
+}
+
 /* ========================================== */
 #box-toolbar-bg {
     border:1px solid #ccc;
@@ -106,7 +130,6 @@ hr {border-color:#E9E9E9}
     list-style: none;
     margin:0px;
     padding:0px;
-
 }
 
 #box-toolbar-bg li {
@@ -133,11 +156,11 @@ hr {border-color:#E9E9E9}
 
 #li-backgroundcolor ul {
     width:320px;
-    position:absolute;
     border:1px solid #ccc;
     background-color:white;
     top:40px;
     left:0px;
+    position: absolute;
     padding:10px;
 }
 
