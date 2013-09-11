@@ -7,6 +7,14 @@ body {
 
 hr {border-color:#E9E9E9}
 
+.unselectable { 
+    -webkit-user-select: none; 
+    -khtml-user-select: none; 
+    -moz-user-select: none; 
+    -o-user-select: none; 
+    user-select: none; 
+}
+
 #box-container {
     box-shadow:none;
     font-size:14px;
@@ -79,10 +87,17 @@ hr {border-color:#E9E9E9}
 }
 
 #box-toolbar-bg li {
-    width:42px;
-    height:42px;
-    margin:0px;
+    width:30px;
+    height:30px;
     float:left;
+    padding:5px;
+    text-align:center;
+    margin:auto;
+}
+
+#box-toolbar-bg li a {
+    text-decoration: none;
+    color:#bf7130;
 }
 
 #box-toolbar-bg li.divider {
