@@ -47,8 +47,8 @@
 
             if ($.mememaker.grid != null) {
 
-                var left = Math.ceil(el.left);
-                var top = Math.ceil(el.top);
+                var left = Math.ceil(el.left - el.getBoundingRectWidth() / 2);
+                var top = Math.ceil(el.top - el.getBoundingRectHeight() / 2);
 
                 //console.log("1. " + (left % 20) + ":" + top);
 
@@ -64,8 +64,8 @@
                     top -= (top % 20);
                 }
 
-                el.left = left;
-                el.top = top;
+                el.left = left + el.getBoundingRectWidth() / 2;
+                el.top = top + el.getBoundingRectHeight() / 2;
 
                 //console.log("2. " + el.left + ":" + el.top);
 
@@ -103,11 +103,11 @@
             
 
             var height = el.getBoundingRectHeight();
-            var top = el.top + height + 10 + $.mememaker.top;
-            var left = el.left + $.mememaker.left;
+            var top = el.top + height / 2 + 10 + $.mememaker.top;
+            var left = el.left - el.getBoundingRectWidth() / 2 + $.mememaker.left;
 
             top = Math.floor(top);
-            left = Math.floor(left);
+            left = Math.ceil(left);
 
             $(".text-editor").show();
             $(".text-editor").css('top', top + "px");
@@ -123,6 +123,8 @@
                     if (action === undefined || action === null) {
                         return;
                     }
+                    
+                    console.log (action);
 
                     switch (action) {
                         case 'new':
@@ -305,12 +307,15 @@
 
         $(id + " a").click(
                 function() {
-                    switch ($(this).data('action')) {
-                        case "bold":
-                            $.mememaker.texteditor.changeFontProperty("weight");
-                            break;
+                    var action = $(this).data('action');
+                    console.log (action);
+                    switch (action) {
+                        case "weight":
                         case "italic":
-                            $.mememaker.texteditor.changeFontProperty("italic");
+                        case "underline":
+                            $.mememaker.texteditor.changeFontProperty(action);
+                            break;
+                        default:
                             break;
                     }
                 }

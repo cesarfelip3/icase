@@ -132,9 +132,8 @@
     Mememaker.prototype.defaultText = {
         text: 'Your Text Is Here',
         property: {
-            fontFamily: 'Impact',
-            fontWeight: 'bold',
-            fontSize: 40,
+            fontFamily: 'Arial',
+            fontSize: 30,
             fill: 'black',
             //stroke: 'white',
             //strokeWidth: 0,
@@ -183,8 +182,8 @@
             return;
         }
 
-        var left = el.left + this.left;
-        var top = el.top + this.top;
+        var left = el.left - el.getBoundingRectWidth() / 2 + this.left;
+        var top = el.top - el.getBoundingRectHeight() / 2 + this.top;
 
         var right = left + el.getBoundingRectWidth();
         var bottom = top + el.getBoundingRectHeight();
@@ -437,15 +436,15 @@
         var text = new fabric.Text($.mememaker.defaultText.text, $.mememaker.defaultText.property);
 
         text.text = "CLICK TO EDIT";
-        text.originX = 'left';
-        text.originY = 'top'; // default rotation will never work as it's left/top
+        //text.originX = 'left';
+        //text.originY = 'top'; // default rotation will never work as it's left/top
         canvas.add(text);
 
-        text.left = canvas.width / 2 - text.getBoundingRectWidth() / 2;
-        text.top = canvas.height / 2 - text.getBoundingRectHeight() / 2;
-        text.hasRotatingPoint = false; // so disable default rotation control
+        //text.left = canvas.width / 2 - text.getBoundingRectWidth() / 2;
+        //text.top = canvas.height / 2 - text.getBoundingRectHeight() / 2;
+        //text.hasRotatingPoint = false; // so disable default rotation control
 
-        //text.center();
+        text.center();
         //text.scaleToWidth(300);
 
         canvas.renderAll();
@@ -793,11 +792,13 @@
             return;
         }
 
+        console.log (el);
+        
         if (property == "weight") {
-            if (el.fontWeight == "normal") {
-                el.fontWeight = "bold";
-            } else if (el.fontWeight == "bold") {
-                el.fontWeight = "normal";
+            if (el.fontWeight == "800") {
+                el.fontWeight = "400";
+            } else {
+                el.fontWeight = "800";
             }
         }
 
@@ -808,6 +809,18 @@
                 el.fontStyle = "italic";
             }
         }
+        
+        el.useNative = true;
+        
+        if (property == "underline") {
+            if (el.textDecoration == 'underline') {
+                el.textDecoration = null;
+            } else {
+                el.textDecoration = 'underline';
+                //el.lineHeight = lineheight;
+            }
+        }
+        
         canvas.renderAll();
     }
 
