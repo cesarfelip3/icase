@@ -813,8 +813,8 @@
         }
         
         el.useNative = true;
-        el.originX = 'left';
-        el.originY = 'top';
+        //el.originX = 'left';
+        //el.originY = 'top';
         
         if (property == "underline") {
             if (el.textDecoration == 'underline') {

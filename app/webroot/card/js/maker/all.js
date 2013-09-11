@@ -17,6 +17,7 @@ else {
   fabric.window = fabric.document.createWindow();
 }
 
+
 /**
  * True when in environment that supports touch events
  * @type boolean
@@ -9273,3 +9274,5 @@ fabric.util.object.extend(fabric.Object.prototype, /** @lends fabric.Object.prot
 
 })(typeof exports !== 'undefined' ? exports : this);
 
+
+console.log (fabric);
