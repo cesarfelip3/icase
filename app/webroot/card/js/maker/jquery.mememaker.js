@@ -602,7 +602,8 @@
             var tempLeft = left * scale;
             var tempTop = top * scale;
             
-            if (objects[i].type == 'line' && objects[i].selectable === false) {
+            if (objects[i].type == 'line' && objects[i].selectable === false 
+            && objects[i].get('opacity') == 0.5) {
                 continue;
             }
 
@@ -616,9 +617,7 @@
 
         canvas.renderAll();
 
-        var pos = $.mememaker.position(document.getElementById($.mememaker.wrapperId));
-        $.mememaker.left = pos[0];
-        $.mememaker.top = pos[1];
+        this.container.update ();
     }
 
     Tools.prototype.zoomreset = function() {
@@ -643,7 +642,8 @@
             var tempLeft = left * scale;
             var tempTop = top * scale;
             
-            if (objects[i].type == 'line' && objects[i].selectable === false) {
+            if (objects[i].type == 'line' && objects[i].selectable === false
+            && objects[i].get('opacity') == 0.5) {
                 continue;
             }
 
@@ -657,9 +657,7 @@
 
         canvas.renderAll();
 
-        var pos = $.mememaker.position(document.getElementById(this.container.wrapperId));
-        $.mememaker.left = pos[0];
-        $.mememaker.top = pos[1];
+        this.container.update ();
     }
 
     // Server API
