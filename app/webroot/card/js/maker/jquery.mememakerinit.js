@@ -105,6 +105,7 @@
             if (el.type != "text") {
                 return;
             }
+            
 
             var height = el.getBoundingRectHeight();
             var top = el.top + height + 10 + $.mememaker.top;
