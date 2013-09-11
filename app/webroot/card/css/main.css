@@ -127,6 +127,40 @@ hr {border-color:#E9E9E9}
     border-right:1px solid #ccc;
 }
 
+#box-toolbar-bg li:hover ul{
+    display:block;
+}
+
+#li-backgroundcolor ul {
+    width:320px;
+    position:absolute;
+    border:1px solid #ccc;
+    background-color:white;
+    top:40px;
+    left:0px;
+    padding:10px;
+}
+
+#li-backgroundcolor ul li {
+    height:24px;
+    width:24px;
+    float:left;
+    padding:5px;
+}
+
+#li-backgroundcolor ul li.disabled:hover {
+    background-color:white;
+}
+
+#li-backgroundcolor ul li>a {
+    height:24px;
+    width:24px;
+    display:block;
+    background-color:red;
+    border:1px solid white;
+}
+
+
 .icon-bgcolor {
     background-image:url('../img/toolbar.png');
     background-position:-294px 0px;

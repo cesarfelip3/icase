@@ -144,19 +144,7 @@
                         <a href="javascript:" data-action="movedown"><i class="icon-arrow-down icon-2x"></i></a>
                     </div>
                 </div>
-                <div style="position:absolute;" class="tools unselectable hide" id="box-toolbar-bg">
-                    <ul style="list-style:none;">
-                        <li class="divider">
-                            <a href="javascript:" data-action="backgroundcolor"><i class="icon-unchecked icon-2x"></i></a>
-                        </li>
-                        <li class="divider">
-                            <a href="javascript:" data-action="clearbackground"><i class="icon-trash icon-2x"></i></a>
-                        </li>
-                        <li>
-                            <a href="javascript:" onclick="jQuery('#box-toolbar-bg').hide();"><i class="icon-ok icon-2x"></i></a>
-                        </li>
-                    </ul>
-                </div>
+                
                 <div style="position:absolute;" class="tools unselectable" id="box-toolbar-zoom">
                     <ul style="list-style:none;">
                         <li style="border-bottom:1px solid #333">
@@ -184,6 +172,90 @@
                         </li>
                         <li class="disabled">
                             <a href="javascript:"><i class="icon-undo icon-2x"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <div style="position:absolute;" class="tools unselectable hide" id="box-toolbar-bg">
+                    <ul style="list-style:none;">
+                        <li class="divider" id="li-backgroundcolor">
+                            <a href="javascript:"><i class="icon-unchecked icon-2x"></i></a>
+                            <ul class="hide" >
+                                <li>
+                                    <a href='javascript:' data-action="backgroundcolor" data-data="blue" style="background-color:blue;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="backgroundcolor" data-data="red" style="background-color:red;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="backgroundcolor" data-data="blue" style="background-color:blue;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="backgroundcolor" data-data="red" style="background-color:red;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="backgroundcolor" data-data="blue" style="background-color:blue;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="backgroundcolor" data-data="red" style="background-color:red;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="backgroundcolor" data-data="blue" style="background-color:blue;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="backgroundcolor" data-data="red" style="background-color:red;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="backgroundcolor" data-data="blue" style="background-color:blue;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="backgroundcolor" data-data="red" style="background-color:red;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="backgroundcolor" data-data="blue" style="background-color:blue;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="backgroundcolor" data-data="red" style="background-color:red;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="backgroundcolor" data-data="blue" style="background-color:blue;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="backgroundcolor" data-data="red" style="background-color:red;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="backgroundcolor" data-data="blue" style="background-color:blue;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="backgroundcolor" data-data="red" style="background-color:red;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="backgroundcolor" data-data="blue" style="background-color:blue;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="backgroundcolor" data-data="red" style="background-color:red;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="backgroundcolor" data-data="blue" style="background-color:blue;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="backgroundcolor" data-data="red" style="background-color:red;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="backgroundcolor" data-data="blue" style="background-color:blue;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="backgroundcolor" data-data="red" style="background-color:red;"></a>
+                                </li>
+                                <li style="width:auto;" class="disabled">
+                                    <input type="text" class="colorpicker" />
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="divider">
+                            <a href="javascript:" data-action="backgroundcolor" data-data="#ffffff"><i class="icon-trash icon-2x"></i></a>
+                        </li>
+                        <li>
+                            <a href="javascript:" onclick="jQuery('#box-toolbar-bg').hide();"><i class="icon-ok icon-2x"></i></a>
                         </li>
                     </ul>
                 </div>
@@ -272,40 +344,10 @@
                             <a href="javascript:" data-action="clearbackground"><i class="icon-unchecked icon-2x"></i></a>
                             <ul>
                                 <li>
-                                    <a href='javascript:' style="background-color:blue;"></a>
+                                    <a href='javascript:' data-color="blue" style="background-color:blue;"></a>
                                 </li>
                                 <li>
-                                    <a href='javascript:'></a>
-                                </li>
-                                <li>
-                                    <a href='javascript:'></a>
-                                </li>
-                                <li>
-                                    <a href='javascript:'></a>
-                                </li>
-                                <li>
-                                    <a href='javascript:'></a>
-                                </li>
-                                <li>
-                                    <a href='javascript:'></a>
-                                </li>
-                                <li>
-                                    <a href='javascript:'></a>
-                                </li>
-                                <li>
-                                    <a href='javascript:'></a>
-                                </li>
-                                <li>
-                                    <a href='javascript:'></a>
-                                </li>
-                                <li>
-                                    <a href='javascript:'></a>
-                                </li>
-                                <li>
-                                    <a href='javascript:'></a>
-                                </li>
-                                <li>
-                                    <a href='javascript:'></a>
+                                    <a href='javascript:' data-color="blue" style="background-color:blue;"></a>
                                 </li>
                             </ul>
                         </li>
@@ -458,7 +500,17 @@
                         });
 
                         maker_init();
-                        
+                        $(".colorpicker").spectrum({
+                            color: "yellow",
+                            show: function () {
+                                $(this).parent().parent().css('display', 'block');
+                            },
+                            change: function (color) {
+                                var color = color.toHexString();
+                                $.mememaker.tools.backgroundcolor(color);
+                                $(this).parent().parent().attr('style', '');
+                            }
+                        });
 
                     }
             );
@@ -772,14 +824,16 @@
 
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
+        <script src='js/spectrum/spectrum.js'></script>
+        <link rel='stylesheet' href='js/spectrum/spectrum.css' />
         <!-- bootstrap slider -->
-        <link rel="stylesheet" href="js/inputslider/css/slider.css" media="screen" type="text/css" />
-        <script type="text/javascript" src="js/inputslider/js/bootstrap-slider.js"></script>
+<!--        <link rel="stylesheet" href="js/inputslider/css/slider.css" media="screen" type="text/css" />
+        <script type="text/javascript" src="js/inputslider/js/bootstrap-slider.js"></script>-->
         <!-- colorpicker -->
         <!--        <script type="text/javascript" src="js/colorpicker2/js/bootstrap-colorpicker.js"></script>
                 <script type="text/javascript" src="js/colorpicker2/js/docs.js"></script>-->
         <!-- fabric.js -->
-        <!-- script src="http://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.2.0/fabric.all.min.js"></script -->
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.2.0/fabric.all.min.js"></script>
         <script>window.fabric || document.write('<script src="js/maker/fabric.all.min.js"><\/script>')</script> 
         <script src="js/maker/jquery.mememaker.js"></script>
         <script src="js/maker/jquery.mememakerinit.js"></script>

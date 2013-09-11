@@ -204,6 +204,10 @@
                         case 'background':
                             $("#box-toolbar-bg").show();
                             break;
+                        case 'backgroundcolor':
+                            var color = $(this).data ('data');
+                            $.mememaker.tools.backgroundcolor (color);
+                            break;
                         case 'backgroundimage':
                             //this.backgroundimage("img/muffin.png");
                             break;
@@ -313,6 +317,7 @@
 
     Init.prototype.imageeditorinit = function(id) {
 
+/*
         //http://www.eyecon.ro/bootstrap-slider/
         this.zoomValue = $("#image-zoom").slider(
                 {
@@ -339,11 +344,13 @@
                     this.rotate(this.rotateValue.getValue());
                 }
         ).data('slider');
+        */
     }
 
 
     Init.prototype.draweditorinit = function(id) {
 
+/*
         $.mememaker.draweditor.changeBrushProperty('color', '#333');
         //$.mememaker.draweditor.changeBrushType("");
 
@@ -373,15 +380,15 @@
                 }
         ).data('slider');
 
-        /*
+        
          $("#draw-fill").colorpicker().on('changeColor', function(ev) {
          $.mememaker.draweditor.changeBrushProperty("color", ev.color.toHex());
          ;
-         });*/
+         });
 
         $('#draw-mode-selector').on('change', function() {
             $.mememaker.draweditor.changeBrushType(this.value);
-        });
+        }); */
     }
 
     $.mememakerinit = new Init();
