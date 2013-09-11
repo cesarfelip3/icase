@@ -22,6 +22,17 @@
     };
 
     Init.prototype.init = function(id, backgroundcolor) {
+
+        function doSomething() {
+            $.mememaker.update ();
+        }
+
+        var resizeTimer;
+        $(window).resize(function() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(doSomething, 100);
+        });
+
         $(document).mousemove(function(event) {
             $.mememaker.mousex = event.pageX;
             $.mememaker.mousey = event.pageY;
@@ -100,7 +111,7 @@
             if (el.type != "text") {
                 return;
             }
-            
+
 
             var height = el.getBoundingRectHeight();
             var top = el.top + height / 2 + 10 + $.mememaker.top;
@@ -114,7 +125,7 @@
             $(".text-editor").css('left', left + "px");
 
             $("#text-content").val(el.text);
-            
+
         }
 
         $(id + " a").click(
@@ -123,8 +134,8 @@
                     if (action === undefined || action === null) {
                         return;
                     }
-                    
-                    console.log (action);
+
+                    console.log(action);
 
                     switch (action) {
                         case 'new':
@@ -135,7 +146,7 @@
                                 //alert ("Select an object and try");
                                 return;
                             }
-                            
+
                             var r = confirm("You will remove this element, are u sure?")
                             if (r == true)
                             {
@@ -217,17 +228,17 @@
                             break;
                         case 'reload':
                             break;
-                        case 'zoomin':                            
+                        case 'zoomin':
                             if ($.mememakerinit.zoomcount >= 5) {
-                                alert ("You reach the maxium zoom level");
+                                alert("You reach the maxium zoom level");
                                 return;
                             }
-                            
+
                             var width = $("#box-canvas-wrapper").width();
                             width *= 1.2;
                             width = Math.ceil(width);
                             $.mememakerinit.zoomcount++;
-                            
+
                             $("#box-canvas-wrapper").css("width", width + "px");
                             $.mememaker.tools.zoom(width);
 
@@ -238,15 +249,15 @@
                             if ($(this).parent().hasClass('disabled')) {
                                 return;
                             }
-                            
+
                             if ($.mememakerinit.zoomcount < 0) {
                                 return;
                             }
-                            
+
                             var width = $("#box-canvas-wrapper").width();
                             width *= 1 / 1.2;
                             width = Math.ceil(width);
-                            
+
                             if (width <= $.mememaker.width) {
                                 $("#box-canvas-wrapper").css("width", $.mememaker.width + "px");
                                 $.mememaker.tools.zoomreset();
@@ -255,7 +266,7 @@
                                 $(this).parent().next().addClass('disabled');
                                 return;
                             }
-                            
+
                             $.mememakerinit.zoomcount--;
                             $("#box-canvas-wrapper").css("width", width + "px");
                             $.mememaker.tools.zoom(width);
@@ -264,12 +275,12 @@
                             if ($(this).parent().hasClass('disabled')) {
                                 return;
                             }
-                            
+
                             $.mememakerinit.zoomcount = 0;
 
                             $("#box-canvas-wrapper").css("width", $.mememaker.width + "px");
                             $.mememaker.tools.zoomreset();
-                            
+
                             $(this).parent().addClass('disabled');
                             $(this).parent().prev().addClass('disabled');
                             break;
@@ -308,7 +319,7 @@
         $(id + " a").click(
                 function() {
                     var action = $(this).data('action');
-                    console.log (action);
+                    console.log(action);
                     switch (action) {
                         case "weight":
                         case "italic":
