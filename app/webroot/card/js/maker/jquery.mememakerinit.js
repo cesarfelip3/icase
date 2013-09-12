@@ -139,6 +139,10 @@
                 $(this).parent().parent().attr('style', '');
             }
         })
+        
+        $.mememaker.tools.addpic_callback = function () {
+            hideAlert ();
+        }
 
         $(id + " a").click(
                 function(evt) {

@@ -460,8 +460,11 @@
             oImg.center();
             oImg.scaleToWidth(Math.ceil(canvas.getWidth() * 2 / 3));
             canvas.renderAll();
+            this.addpic_callback ();
         });
     }
+    
+    Tools.prototype.addpic_callback;
 
     Tools.prototype.selected = function() {
         canvas.on('object:selected', function(e) {
