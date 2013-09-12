@@ -4,11 +4,22 @@ private-card
 Update
 =========
 
-1. background
-2. text
-3. image
-4. shape
+2013.09.11 - 2013.09.21
 
-5. undo - to json / from json - done
+2013.09.13 - rest
+
+2. Shape controls - fill 
+3. preview 
+4. save
+5. reload
+6. undo
+
+2-6. 1 day
+
+7. font type - 2 day
+
+
+
+
 
 
