@@ -214,6 +214,46 @@ hr {border-color:#E9E9E9}
 }
 
 /* ========================================== */
+#box-toolbar-shape {
+    border:1px solid #ccc;
+    box-shadow: 1px;
+    background-color:white;
+}
+
+#box-toolbar-shape ul {
+    list-style: none;
+    margin:0px;
+    padding:0px;
+}
+
+#box-toolbar-shape li {
+    width:30px;
+    height:30px;
+    float:left;
+    padding:5px;
+    text-align:center;
+    margin:auto;
+}
+
+#box-toolbar-shape li a {
+    text-decoration: none;
+    color:#bf7130;
+}
+
+#box-toolbar-shape li.divider {
+    border-right:1px solid #ccc;
+}
+
+#box-toolbar-shape li:hover ul{
+    display:block;
+}
+
+#box-toolbar-shape li:hover {
+    background-color:#eee;
+}
+
+
+/* ========================================== */
 #box-toolbar-zoom {
     border:1px solid #EEE;
     box-shadow: 1px;

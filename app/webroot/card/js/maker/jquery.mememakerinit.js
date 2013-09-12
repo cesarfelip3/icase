@@ -221,6 +221,14 @@
                         case 'background':
                             $("#box-toolbar-bg").show();
                             break;
+                        case 'addshape':
+                            $("#box-toolbar-shape").show ();
+                            break;
+                        case 'shape-rect':
+                        case 'shape-circle':
+                        case 'shape-tri':
+                            $.mememaker.tools.addshape ($(this).data('data'));
+                            break;
                         case 'backgroundcolor':
                             var color = $(this).data('data');
                             $.mememaker.tools.backgroundcolor(color);

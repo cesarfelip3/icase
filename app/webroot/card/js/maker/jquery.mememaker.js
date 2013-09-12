@@ -150,8 +150,8 @@
         this.canvasScale = scale;
 
         this.canvas = canvas = new window.fabric.Canvas(this.canvasId);
-        console.log (fabric);
-        
+        console.log(fabric);
+
         this.width = canvas.getWidth();
         this.height = canvas.getHeight();
 
@@ -216,8 +216,8 @@
         canvas.backgroundColor = this.backgroundColor = color;
         canvas.clear();
     }
-    
-    Tools.prototype.exist = function () {
+
+    Tools.prototype.exist = function() {
         var el = canvas.getActiveObject();
 
         if (el === undefined || el === null) {
@@ -226,7 +226,7 @@
                 return false;
             }
         }
-        
+
         return true;
     }
 
@@ -461,10 +461,10 @@
             oImg.center();
             oImg.scaleToWidth(Math.ceil(canvas.getWidth() * 2 / 3));
             canvas.renderAll();
-            $.mememaker.tools.addpic_callback ();
+            $.mememaker.tools.addpic_callback();
         });
     }
-    
+
     Tools.prototype.selected = function() {
         canvas.on('object:selected', function(e) {
             var el = e.target;
@@ -489,17 +489,44 @@
             return;
         }
 
-        if (type == 'circle') {
+        var el;
 
+        if (type == 'circle') {
+            el = new fabric.Circle({
+                radius: Math.ceil(canvas.width * 2 / 5 / 2),
+                fill: 'green',
+            });
         }
 
         if (type == 'rect') {
+            el = new fabric.Rect({
+                //left: 100,
+                //top: 100,
+                fill: '#ccc',
+                width: Math.ceil(canvas.width * 2 / 5),
+                height: Math.ceil(canvas.width * 2 / 5),
+            });
 
+            //rect.center();
+        }
+
+        if (type == 'tri') {
+            el = new fabric.Triangle({
+                width: Math.ceil(canvas.width * 2 / 5), 
+                height: Math.ceil(canvas.width * 2 / 5), 
+                fill: 'blue', 
+            });
         }
 
         if (type == 'ellipse') {
 
         }
+
+        el.left = canvas.width / 2;
+        el.top = canvas.width / 2;
+        canvas.add(el);
+
+        //canvas.renderAll();
     }
 
     Tools.prototype.addgrid = function() {
@@ -516,12 +543,12 @@
         var line = null;
         var rect = [];
         var size = $.mememaker.gridsize;
-        
+
         for (j = 0; j < 5; ++j) {
             width *= 1.2;
             height *= 1.2;
         }
-        
+
         j = 0;
 
         for (var i = 0; i < Math.ceil(width / 20); ++i) {
@@ -603,7 +630,7 @@
 
         var scale = width / canvas.getWidth();
         height = scale * canvas.getHeight();
-        
+
         canvas.setDimensions({
             "width": width,
             "height": height}
@@ -620,9 +647,9 @@
             var tempScaleY = scaleY * scale;
             var tempLeft = left * scale;
             var tempTop = top * scale;
-            
-            if (objects[i].type == 'line' && objects[i].selectable === false 
-            && objects[i].get('opacity') == 0.5) {
+
+            if (objects[i].type == 'line' && objects[i].selectable === false
+                    && objects[i].get('opacity') == 0.5) {
                 continue;
             }
 
@@ -636,7 +663,7 @@
 
         canvas.renderAll();
 
-        this.container.update ();
+        this.container.update();
     }
 
     Tools.prototype.zoomreset = function() {
@@ -645,9 +672,9 @@
 
         var scale = this.container.width / canvas.getWidth();
         canvas.setDimensions({
-            "width": $.mememaker.width, 
+            "width": $.mememaker.width,
             "height": $.mememaker.height});
-        
+
 
         var objects = canvas.getObjects();
         for (var i in objects) {
@@ -660,9 +687,9 @@
             var tempScaleY = scaleY * scale;
             var tempLeft = left * scale;
             var tempTop = top * scale;
-            
+
             if (objects[i].type == 'line' && objects[i].selectable === false
-            && objects[i].get('opacity') == 0.5) {
+                    && objects[i].get('opacity') == 0.5) {
                 continue;
             }
 
@@ -676,7 +703,7 @@
 
         canvas.renderAll();
 
-        this.container.update ();
+        this.container.update();
     }
 
     // Server API
@@ -796,8 +823,8 @@
             return;
         }
 
-        console.log (el);
-        
+        console.log(el);
+
         if (property == "weight") {
             if (el.fontWeight == "800") {
                 el.fontWeight = "400";
@@ -813,11 +840,11 @@
                 el.fontStyle = "italic";
             }
         }
-        
+
         el.useNative = true;
         //el.originX = 'left';
         //el.originY = 'top';
-        
+
         if (property == "underline") {
             if (el.textDecoration == 'underline') {
                 el.textDecoration = null;
@@ -826,10 +853,10 @@
                 //el.lineHeight = lineheight;
             }
         }
-        
+
         canvas.renderAll();
     }
-    
+
     TextEditor.prototype.changeFontSize = function(size) {
 
         var el = canvas.getActiveObject();
@@ -841,18 +868,18 @@
         if (el.type != "text") {
             return;
         }
-        
-        size = parseInt (size);
-        
+
+        size = parseInt(size);
+
         if (size <= 0) {
             return;
         }
-        
+
         el.fontSize = size;
         canvas.renderAll();
         return;
     }
-    
+
     TextEditor.prototype.changeFontColor = function(color) {
 
         var el = canvas.getActiveObject();
@@ -864,12 +891,12 @@
         if (el.type != "text") {
             return;
         }
-        
+
         el.fill = color;
         canvas.renderAll();
         return;
     }
-    
+
     TextEditor.prototype.changeFontAlign = function(align) {
 
         var el = canvas.getActiveObject();
@@ -881,12 +908,12 @@
         if (el.type != "text") {
             return;
         }
-        
+
         el.textAlign = align;
         canvas.renderAll();
         return;
     }
-    
+
 
 
     //==================================================================
