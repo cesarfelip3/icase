@@ -165,7 +165,9 @@
                         </div>
                     </div>
                 </div>
-                
+                <div id="box-alert" style="height:20px;width:914px;position:absolute;background:none;border-radius: 0px;box-shadow: none;">
+                    <p class="body"></p>
+                </div>
                 <div class="progress hide" style="height:10px;width:914px;position:absolute;background:none;border-radius: 0px;box-shadow: none;"><div class="bar bar-warning" id="progress-bar" style="width: 0%; height:8px;"></div></div>
                 <div style="position:absolute;opacity: 0.8;" class="tools unselectable" id="box-toolbar-zoom">
                     <ul style="list-style:none;">
@@ -553,6 +555,7 @@
                                 //showAlert2("Loading image....");
                                 $("#progress-bar").css ("width", "0px");
                                 $("#progress-bar").parent().hide ();
+                                showAlert2 ("Loading image......");
                                 $.mememaker.tools.addpic(result.files.url);
                             }
                         }
@@ -851,6 +854,28 @@
                 });
             }
 
+        </script>
+        
+        <script>
+            function showAlert(message)
+            {
+                $("#box-alert .body").html(message);
+                $("#box-alert").show();
+                window.setTimeout(function() {
+                    $("#box-alert").hide(100)
+                }, 5000);
+            }
+
+            function showAlert2(message)
+            {
+                $("#box-alert .body").html(message);
+                $("#box-alert").show();
+            }
+
+            function hideAlert(message)
+            {
+                $("#box-alert").hide();
+            }
         </script>
 
         <!-- preview modal -->
