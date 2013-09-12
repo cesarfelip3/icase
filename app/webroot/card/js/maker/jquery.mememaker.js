@@ -68,6 +68,7 @@
         flip: null,
         addtext: null,
         addpic: null,
+        addpic_callback: null,
         addgrid: null,
         backgroundcolor: null,
         overlayimage: null,
@@ -460,12 +461,10 @@
             oImg.center();
             oImg.scaleToWidth(Math.ceil(canvas.getWidth() * 2 / 3));
             canvas.renderAll();
-            this.addpic_callback ();
+            $.mememaker.tools.addpic_callback ();
         });
     }
     
-    Tools.prototype.addpic_callback;
-
     Tools.prototype.selected = function() {
         canvas.on('object:selected', function(e) {
             var el = e.target;
