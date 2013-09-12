@@ -268,7 +268,7 @@
                                     <a href='javascript:' data-action="backgroundcolor" data-data="red" style="background-color:red;"></a>
                                 </li>
                                 <li style="width:auto;" class="disabled">
-                                    <input type="text" class="colorpicker" />
+                                    <input type="text"id="bg-color-picker" />
                                 </li>
                             </ul>
                         </li>
@@ -284,17 +284,17 @@
                     <ul style="list-style:none;">
                         <li class="divider" style='background-color:#eee'>
                             <a href="javascript:" data-action="backgroundcolor"><i class="icon-pencil icon-2x"></i></a>
-                            <ul style='width:585px;height:150px;background-color:white;position:absolute;padding:10px;border:1px solid #ccc;display:block;'>
+                            <ul style='width:442px;height:150px;background-color:white;position:absolute;padding:10px;border:1px solid #ccc;display:block;left:-5px;'>
                                 <li>
-                                    <textarea style='width:565px;border:1px solid #ccc;height:140px;resize:none;border-radius: 0px;' id="text-content"></textarea>
+                                    <textarea style='width:385px;border:1px solid #ccc;height:140px;resize:none;border-radius: 0px;' id="text-content"></textarea>
                                 </li>
                             </ul>
                         </li>
                         <li class="divider" id='li-font-type' >
                             <a href="javascript:" data-action="clearbackground"><i class="icon-font icon-2x"></i></a>
                             <ul>
-                                <li title="American Typewriter"><p style="background-position:10px 0px"></p></li>
-                                <li title="Daniel"><p style="background-position:10px -20px"></p></li>
+                                <li title="American Typewriter" data-data="American Typewriter"><p style="background-position:10px 0px;font-family: American Typewriter">American Typewriter</p></li>
+                                <li title="Daniel" data-data="Daniel"><p style="background-position:10px -20px;font-family: Daniel">Daniel</p></li>
                                 <li title="League Gothic"><p style="background-position:10px -40px"></p></li>
                                 <li title="Arial" class="selected"><p style="background-position:10px -60px"></p></li>
                                 <li title="Georgia"><p style="background-position:10px -80px"></p></li>
@@ -324,40 +324,49 @@
                             <a href="javascript:" data-action="backgroundcolor"><i class="icon-text-width icon-2x"></i></a>
                             <ul>
                                 <li>
-                                    <a href='javascript:'>1</a>
+                                    <a href='javascript:' data-action="size" data-data="9">9</a>
                                 </li>
                                 <li>
-                                    <a href='javascript:'>1</a>
+                                    <a href='javascript:' data-action="size" data-data="10">10</a>
                                 </li>
                                 <li>
-                                    <a href='javascript:'>1</a>
+                                    <a href='javascript:' data-action="size" data-data="11">11</a>
                                 </li>
                                 <li>
-                                    <a href='javascript:'>1</a>
+                                    <a href='javascript:' data-action="size" data-data="12">12</a>
                                 </li>
                                 <li>
-                                    <a href='javascript:'>1</a>
+                                    <a href='javascript:' data-action="size" data-data="13">13</a>
                                 </li>
                                 <li>
-                                    <a href='javascript:'>1</a>
+                                    <a href='javascript:' data-action="size" data-data="14">14</a>
                                 </li>
                                 <li>
-                                    <a href='javascript:'>1</a>
+                                    <a href='javascript:' data-action="size" data-data="18">18</a>
                                 </li>
                                 <li>
-                                    <a href='javascript:'>1</a>
+                                    <a href='javascript:' data-action="size" data-data="24">24</a>
                                 </li>
                                 <li>
-                                    <a href='javascript:'>1</a>
+                                    <a href='javascript:' data-action="size" data-data="36">36</a>
                                 </li>
                                 <li>
-                                    <a href='javascript:'>1</a>
+                                    <a href='javascript:' data-action="size" data-data="48">48</a>
                                 </li>
                                 <li>
-                                    <a href='javascript:'>1</a>
+                                    <a href='javascript:' data-action="size" data-data="64">64</a>
                                 </li>
                                 <li>
-                                    <a href='javascript:'>1</a>
+                                    <a href='javascript:' data-action="size" data-data="72">72</a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="size" data-data="96">96</a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="size" data-data="144">144</a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="size" data-data="288">288</a>
                                 </li>
                             </ul>
                         </li>
@@ -365,10 +374,73 @@
                             <a href="javascript:" data-action="clearbackground"><i class="icon-unchecked icon-2x"></i></a>
                             <ul>
                                 <li>
-                                    <a href='javascript:' data-color="blue" style="background-color:blue;"></a>
+                                    <a href='javascript:' data-action="color" data-data="blue" style="background-color:blue;"></a>
                                 </li>
                                 <li>
-                                    <a href='javascript:' data-color="blue" style="background-color:blue;"></a>
+                                    <a href='javascript:' data-action="color" data-data="red" style="background-color:red;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="color" data-data="blue" style="background-color:blue;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="color" data-data="red" style="background-color:red;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="color" data-data="blue" style="background-color:blue;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="color" data-data="red" style="background-color:red;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="color" data-data="blue" style="background-color:blue;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="color" data-data="red" style="background-color:red;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="color" data-data="blue" style="background-color:blue;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="color" data-data="red" style="background-color:red;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="color" data-data="blue" style="background-color:blue;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="color" data-data="red" style="background-color:red;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="color" data-data="blue" style="background-color:blue;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="color" data-data="red" style="background-color:red;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="color" data-data="blue" style="background-color:blue;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="color" data-data="red" style="background-color:red;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="color" data-data="blue" style="background-color:blue;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="color" data-data="red" style="background-color:red;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="color" data-data="blue" style="background-color:blue;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="color" data-data="red" style="background-color:red;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="color" data-data="blue" style="background-color:blue;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="color" data-data="red" style="background-color:red;"></a>
+                                </li>
+                                <li style="width:auto;" class="disabled">
+                                    <input type="text" id="font-color-picker" />
                                 </li>
                             </ul>
                         </li>
@@ -382,13 +454,13 @@
                             <a href="javascript:" data-action="underline"><i class="icon-underline icon-2x"></i></a>
                         </li>
                         <li class="divider">
-                            <a href="javascript:" data-action="textleft"><i class="icon-align-left icon-2x"></i></a>
+                            <a href="javascript:" data-action="align" data-data="left"><i class="icon-align-left icon-2x"></i></a>
                         </li>
                         <li class="divider">
-                            <a href="javascript:" data-action="textcenter"><i class="icon-align-center icon-2x"></i></a>
+                            <a href="javascript:" data-action="align" data-data="center"><i class="icon-align-center icon-2x"></i></a>
                         </li>
                         <li class="divider">
-                            <a href="javascript:" data-action="textright"><i class="icon-align-right icon-2x"></i></a>
+                            <a href="javascript:" data-action="align" data-data="right"><i class="icon-align-right icon-2x"></i></a>
                         </li>
                         <li class="divider hide">
                             <a href="javascript:" data-action="backgroundcolor"><i class="icon-caret-left icon-2x"></i></a>
@@ -399,8 +471,11 @@
                         <li class="divider hide">
                             <a href="javascript:" data-action="backgroundcolor"><i class="icon-trash icon-2x"></i></a>
                         </li>
-                        <li style="text-align:center;vertical-align: center;margin:auto;">
-                            <a href="javascript:" onclick="jQuery('#box-toolbar-texteditor').hide();"><i class="icon-ok icon-2x"></i></a>
+                        <li>
+                            <a href="javascript:" data-action="confirm"><i class="icon-ok icon-2x"></i></a>
+                        </li>
+                        <li>
+                            <a href="javascript:" data-action="close"><i class="icon-remove icon-2x"></i></a>
                         </li>
                     </ul>
                 </div>
@@ -520,18 +595,7 @@
                             //return 'Are you sure you want to leave? Your design isn\'t saved yet.';
                         });
 
-                        maker_init();
-                        $(".colorpicker").spectrum({
-                            color: "yellow",
-                            show: function () {
-                                $(this).parent().parent().css('display', 'block');
-                            },
-                            change: function (color) {
-                                var color = color.toHexString();
-                                $.mememaker.tools.backgroundcolor(color);
-                                $(this).parent().parent().attr('style', '');
-                            }
-                        });
+                        maker_init();;
 
                     }
             );

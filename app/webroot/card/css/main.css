@@ -176,11 +176,9 @@ hr {border-color:#E9E9E9}
 }
 
 #li-backgroundcolor ul li>a {
-    height:24px;
-    width:24px;
+    height:30px;
+    width:30px;
     display:block;
-    background-color:red;
-    border:1px solid white;
 }
 
 
@@ -451,7 +449,7 @@ hr {border-color:#E9E9E9}
 
 #box-toolbar-texteditor li ul {
     position: absolute;
-    top:42px;
+    top:40px;
     display:none;
     background-color: #FFFFFF;
     border: 1px solid #e5e5e5;
@@ -462,7 +460,8 @@ hr {border-color:#E9E9E9}
 }
 
 #li-font-type ul {
-    width:600px;
+    width:500px;
+    left:-10px;
 }
 
 #li-font-type ul li {
@@ -483,6 +482,7 @@ hr {border-color:#E9E9E9}
     border-left:5px solid red;
 }
 
+
 #li-font-type ul li p {
     background-image: url('../img/font_previews.png');
     background-repeat: no-repeat;
@@ -498,33 +498,52 @@ hr {border-color:#E9E9E9}
 /* ============================ */
 #li-font-size ul {
     width:200px;
+    left:-10px;
 }
 
 #li-font-size ul li {
-    float:left;
-    width:40px;
     float:left;
     text-align:center;
     margin:auto;
 }
 
+#li-font-size ul li>a {
+    padding:5px;
+    width:30px;
+    display:block;
+    color:orange;
+}
+
+#li-font-size ul li:hover {
+    background-color:#eee;
+}
+
+#li-font-size ul li:hover a {
+    color:orange;
+}
+
 /* ============================== */
 #li-font-color ul {
     width:320px;
+    left:-10px;
 }
 
 #li-font-color ul li {
     height:30px;
     width:30px;
     float:left;
+    padding:5px;
+}
+
+#li-font-color ul li:hover {
+    background-color:#eee;
 }
 
 #li-font-color ul li>a {
     height:30px;
     width:30px;
     display:block;
-    background-color:red;
-    border:1px solid white;
 }
+
 
 /* =================== */

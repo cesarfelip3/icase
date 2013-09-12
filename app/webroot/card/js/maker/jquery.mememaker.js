@@ -827,6 +827,64 @@
         
         canvas.renderAll();
     }
+    
+    TextEditor.prototype.changeFontSize = function(size) {
+
+        var el = canvas.getActiveObject();
+
+        if (el === undefined || el === null) {
+            return;
+        }
+
+        if (el.type != "text") {
+            return;
+        }
+        
+        size = parseInt (size);
+        
+        if (size <= 0) {
+            return;
+        }
+        
+        el.fontSize = size;
+        canvas.renderAll();
+        return;
+    }
+    
+    TextEditor.prototype.changeFontColor = function(color) {
+
+        var el = canvas.getActiveObject();
+
+        if (el === undefined || el === null) {
+            return;
+        }
+
+        if (el.type != "text") {
+            return;
+        }
+        
+        el.fill = color;
+        canvas.renderAll();
+        return;
+    }
+    
+    TextEditor.prototype.changeFontAlign = function(align) {
+
+        var el = canvas.getActiveObject();
+
+        if (el === undefined || el === null) {
+            return;
+        }
+
+        if (el.type != "text") {
+            return;
+        }
+        
+        el.textAlign = align;
+        canvas.renderAll();
+        return;
+    }
+    
 
 
     //==================================================================

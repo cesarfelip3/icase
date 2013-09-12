@@ -24,7 +24,7 @@
     Init.prototype.init = function(id, backgroundcolor) {
 
         function doSomething() {
-            $.mememaker.update ();
+            $.mememaker.update();
         }
 
         var resizeTimer;
@@ -127,6 +127,18 @@
             $("#text-content").val(el.text);
 
         }
+
+        $("#bg-color-picker").spectrum({
+            color: "yellow",
+            show: function() {
+                $(this).parent().parent().css('display', 'block');
+            },
+            change: function(color) {
+                var color = color.toHexString();
+                $.mememaker.tools.backgroundcolor(color);
+                $(this).parent().parent().attr('style', '');
+            }
+        })
 
         $(id + " a").click(
                 function(evt) {
@@ -299,6 +311,19 @@
                     $.mememaker.texteditor.changeFontFamily($(this).val());
                 }
         )
+
+
+        $("#font-color-picker").spectrum({
+            color: "yellow",
+            show: function() {
+                $(this).parent().parent().css('display', 'block');
+            },
+            change: function(color) {
+                var color = color.toHexString();
+                $.mememaker.texteditor.changeFontColor(color);
+                $(this).parent().parent().attr('style', '');
+            }
+        })
         /*
          $("#text-fill").colorpicker().on('changeColor', function(ev) {
          $.mememaker.texteditor.fill(ev.color.toHex());
@@ -325,6 +350,31 @@
                         case "italic":
                         case "underline":
                             $.mememaker.texteditor.changeFontProperty(action);
+                            break;
+                        case "size":
+                            var size = $(this).data('data');
+                            size = parseInt(size);
+                            $.mememaker.texteditor.changeFontSize(size);
+                            break;
+                        case "color":
+                            var color = $(this).data('data');
+                            $.mememaker.texteditor.changeFontColor(color);
+                            break;
+                        case "align":
+                            var align = $(this).data('data');
+                            $.mememaker.texteditor.changeFontAlign(align);
+                            break;
+                        case "confirm":
+                            var text = $("#text-content").val ();
+                            if ($.trim(text) == "") {
+                                alert ("Empty typo, if you insist, remove element instead");
+                                return;
+                            }
+                            $.mememaker.texteditor.changeText (text);
+                            $.mememaker.texteditor.textselected ();
+                            break;
+                        case "close":
+                            $("#box-toolbar-texteditor").hide ();
                             break;
                         default:
                             break;
