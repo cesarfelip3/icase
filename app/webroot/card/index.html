@@ -101,7 +101,7 @@
                             </li>
                             <li>
                                 <div class="thumbnail" style="border:none;text-align:center;margin:auto;">
-                                    <a href="javascript:" class="thumbnail" style="border:none;text-shadow: none;box-shadow: none;"><i class="icon-th-large icon-2x"></i></a>
+                                    <a href="javascript:" class="thumbnail" data-action="addshape" style="border:none;text-shadow: none;box-shadow: none;"><i class="icon-th-large icon-2x"></i></a>
                                     <div class="caption">
                                         Add shape
                                     </div>
@@ -112,9 +112,8 @@
                 </div>
             </div>
             <div style="height:1px;background-color:#ccc"></div>
-            <div class="row-fluid" style="height:40px;">
+            <div class="row-fluid" style="height:40px;" id="box-elements-container">
                 <div class="span6">
-                   
                 </div>
                 <div class="span6">
                     
@@ -280,6 +279,22 @@
                         </li>
                         <li>
                             <a href="javascript:" onclick="jQuery('#box-toolbar-bg').hide();"><i class="icon-ok icon-2x"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <div style="position:absolute;" class="tools unselectable hide" id="box-toolbar-shape">
+                    <ul style="list-style:none;">
+                        <li class="divider" id="li-backgroundcolor">
+                            <a href="javascript:" data-action="shape-circle" data-data="circle"><i class="icon-circle icon-2x"></i></a>
+                        </li>
+                        <li class="divider">
+                            <a href="javascript:" data-action="shape-rect" data-data="rect"><i class="icon-stop icon-2x"></i></a>
+                        </li>
+                        <li class="divider">
+                            <a href="javascript:" data-action="shape-tri" data-data="tri"><i class="icon-play icon-2x"></i></a>
+                        </li>
+                        <li>
+                            <a href="javascript:" onclick="jQuery('#box-toolbar-shape').hide();"><i class="icon-ok icon-2x"></i></a>
                         </li>
                     </ul>
                 </div>
