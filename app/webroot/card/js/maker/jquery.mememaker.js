@@ -479,7 +479,7 @@
 
             if (el.type == 'image') {
                 if (el.lockMovementX == true) {
-                    el.selectable = false;
+                    //el.selectable = false;
                 }
             }
         });
@@ -546,7 +546,7 @@
         var rect = [];
         var size = $.mememaker.gridsize;
 
-        for (j = 0; j < 5; ++j) {
+        for (j = 0; j < 4; ++j) {
             width *= 1.2;
             height *= 1.2;
         }

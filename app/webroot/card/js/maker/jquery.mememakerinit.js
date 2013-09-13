@@ -55,10 +55,10 @@
             }
 
             if (el.type == 'image') {
-                el.clipTo = function(ctx) {
+                //el.clipTo = function(ctx) {
                     //ctx.arc(0, 0, 60, 0, Math.PI * 2, true);
-                    ctx.rect(0,0,150,100);
-                };
+                    //ctx.rect(0,0,150,100);
+                //};
             }
         })
 
@@ -278,7 +278,7 @@
                         case 'reload':
                             break;
                         case 'zoomin':
-                            if ($.mememakerinit.zoomcount >= 5) {
+                            if ($.mememakerinit.zoomcount >= 4) {
                                 alert("You reach the maxium zoom level");
                                 return;
                             }

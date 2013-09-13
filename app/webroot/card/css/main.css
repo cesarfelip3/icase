@@ -1,4 +1,8 @@
-
+/*
+ * theme - grey city
+ * @author hellomaya
+ * @date 2013.09.13
+ */
 body {
     padding-top: 60px;
     padding-bottom: 40px;
@@ -32,6 +36,11 @@ hr {border-color:#E9E9E9}
 
 #box-editing {
     background-image:url(../img/bg.png);
+    background-color:#999999;
+}
+
+#box-canvas-wrapper {
+    border:1px dashed orangered;
 }
 /* ========================================== */
 
@@ -122,8 +131,8 @@ hr {border-color:#E9E9E9}
 /* ========================================== */
 #box-toolbar-bg {
     border:1px solid #ccc;
-    box-shadow: 1px;
-    background-color:white;
+    background-color:#eee;
+    opacity: 0.7;
 }
 
 #box-toolbar-bg ul {
@@ -154,19 +163,22 @@ hr {border-color:#E9E9E9}
     display:block;
 }
 
+#box-toolbar-bg li:hover a {
+    color:orangered;
+}
+
 #li-backgroundcolor ul {
     width:320px;
-    border:1px solid #ccc;
     background-color:white;
     top:40px;
-    left:0px;
+    left:1px;
     position: absolute;
     padding:10px;
 }
 
 #li-backgroundcolor ul li {
-    height:24px;
-    width:24px;
+    height:30px;
+    width:30px;
     float:left;
     padding:5px;
 }
@@ -181,6 +193,9 @@ hr {border-color:#E9E9E9}
     display:block;
 }
 
+#li-backgroundcolor ul li:hover {
+    background-color:#ccc;
+}
 
 .icon-bgcolor {
     background-image:url('../img/toolbar.png');
@@ -208,16 +223,11 @@ hr {border-color:#E9E9E9}
     margin:0px;
     display:block;
 }
-
-#box-toolbar-bg li:hover {
-    background-color:#EEE;
-}
-
 /* ========================================== */
 #box-toolbar-shape {
     border:1px solid #ccc;
-    box-shadow: 1px;
-    background-color:white;
+    background-color:#eee;
+    opacity: 0.7;
 }
 
 #box-toolbar-shape ul {
@@ -249,18 +259,17 @@ hr {border-color:#E9E9E9}
 }
 
 #box-toolbar-shape li:hover {
-    background-color:#eee;
+    background-color:#ccc;
 }
 
 
 /* ========================================== */
 #box-toolbar-zoom {
-    border:1px solid #EEE;
-    box-shadow: 1px;
-    background-color:#ddd;
+    background-color:#eeeeee;
     top:300px;
     position: absolute;
     border-radius: 0px;
+    opacity:0.5;
 }
 
 #box-toolbar-zoom ul {
@@ -281,8 +290,8 @@ hr {border-color:#E9E9E9}
 
 }
 
-#box-toolbar-zoom li:hover {
-    background-color:#ccc;
+#box-toolbar-zoom li:hover a {
+    color:orangered;
 }
 
 #box-toolbar-zoom li.disabled {
@@ -290,8 +299,8 @@ hr {border-color:#E9E9E9}
     opacity: .2;
 }
 
-#box-toolbar-zoom li.disabled:hover {
-    background-color:#ddd;
+#box-toolbar-zoom li.disabled:hover a {
+    color:#666;
 }
 
 #box-toolbar-zoom li a {
@@ -339,10 +348,10 @@ hr {border-color:#E9E9E9}
 
 /* ========================================== */
 #box-toolbar-texteditor {
-    border:1px solid #e6674f;
-    box-shadow: 1px;
-    background-color:white;
-    opacity: 0.9;
+    border:2px solid #999;
+    background-color:#ccc;
+    opacity: 0.8;
+    width:492px;
 }
 
 #box-toolbar-texteditor>ul {
@@ -366,12 +375,12 @@ hr {border-color:#E9E9E9}
     color:#666;
 }
 
-#box-toolbar-texteditor>ul>li:hover {
-    background-color:#EEE;
+#box-toolbar-texteditor>ul>li:hover a {
+    color:orangered;
 }
 
 #box-toolbar-texteditor>ul>li.divider {
-    border-right:1px solid #4186d3;
+    border-right:1px solid #333;
 }
 
 .icon-edittext {
@@ -491,7 +500,7 @@ hr {border-color:#E9E9E9}
     position: absolute;
     top:40px;
     display:none;
-    background-color: #FFFFFF;
+    background-color:#eee;
     border: 1px solid #e5e5e5;
     box-shadow: 1px 1px 4px 0 rgba(102,102,102,0.2);
     padding:15px;
@@ -499,14 +508,23 @@ hr {border-color:#E9E9E9}
     list-style: none;
 }
 
+#li-text-content ul {
+    width:478px;
+    height:150px;
+    background-color:#eee;
+    position:absolute;
+    padding:10px;
+    display:block;
+    left:-5px;
+}
+
 #li-font-type ul {
-    width:500px;
+    width:600px;
     left:-10px;
 }
 
 #li-font-type ul li {
     cursor: pointer;
-    background-color:white;
     width:195px;
     border-left:5px solid #FFFFFF;
     margin:0px;
@@ -518,7 +536,7 @@ hr {border-color:#E9E9E9}
 }
 
 #li-font-type ul li:hover {
-    background-color:#EEE;
+    background-color:white;
     border-left:5px solid red;
 }
 

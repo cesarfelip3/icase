@@ -298,11 +298,11 @@
                         </li>
                     </ul>
                 </div>
-                <div style="position:absolute;top:200px;width:500px;" class="text-editor unselectable hide" id="box-toolbar-texteditor">
-                    <ul style="list-style:none;width:500px;">
-                        <li class="divider" style='background-color:#eee'>
+                <div style="position:absolute;top:200px;" class="text-editor unselectable hide" id="box-toolbar-texteditor">
+                    <ul style="list-style:none;">
+                        <li class="divider" style='background-color:#eee' id="li-text-content">
                             <a href="javascript:" data-action="backgroundcolor"><i class="icon-pencil icon-2x"></i></a>
-                            <ul style='width:478px;height:150px;background-color:white;position:absolute;padding:10px;border:1px solid #ccc;display:block;left:-5px;'>
+                            <ul style='display:block;'>
                                 <li>
                                     <textarea style='width:455px;border:1px solid #ccc;height:140px;resize:none;border-radius: 0px;' id="text-content"></textarea>
                                 </li>
@@ -480,16 +480,7 @@
                         <li class="divider">
                             <a href="javascript:" data-action="align" data-data="right"><i class="icon-align-right icon-2x"></i></a>
                         </li>
-                        <li class="divider hide">
-                            <a href="javascript:" data-action="backgroundcolor"><i class="icon-caret-left icon-2x"></i></a>
-                        </li>
-                        <li class="divider hide">
-                            <a href="javascript:" data-action="clearbackground"><i class="icon-file-alt icon-2x"></i></a>
-                        </li>
-                        <li class="divider hide">
-                            <a href="javascript:" data-action="backgroundcolor"><i class="icon-trash icon-2x"></i></a>
-                        </li>
-                        <li>
+                        <li class="divider">
                             <a href="javascript:" data-action="confirm"><i class="icon-ok icon-2x"></i></a>
                         </li>
                         <li>
