@@ -20,9 +20,10 @@ $checkout_url = $this->webroot . "shop/checkout?action=cart";
 <div class="body-text">
     <div class="container-fluid qbox creator-parts" style="margin:0 !important; box-shadow:none;font-size:14px;background:#EEE;padding:10px;">
         <div class="row-fluid">
-            <div class="span12 hide">
-                <p style="font-size:14px;">The black line represent the front of your case and red line the corners. Please make sure your background extend to the red line.</p>
-            </div>
+            
+                <p style="font-size:14px;">Place critical image area inside colored lines for best results. (Your uploaded image should cover the entire product area)</p>
+
+            
             <div style="display:block;width:100%;height:30px">
                 <div class="pull-left tools" id="uploader" style="padding:0px;margin:0px;">
                     <div id="filelist" style="display:none;padding:0px;margin:0px;"></div>
@@ -60,7 +61,7 @@ $checkout_url = $this->webroot . "shop/checkout?action=cart";
                 </div>
             </div> 
         </div>
-        <!-- canvas -->
+               <!-- canvas -->
         <div class="progress" style="height:2px;display:block;width:100%;margin-top:10px;"><div class="bar bar-warning" id="progress-bar" style="width: 0%; height:2px;"></div></div>
         <input type="hidden" id="current-item" style="display:none;" />
         <input type="hidden" name="canvas_guid" id="canvas_guid" style="display:none;" value="<?php echo $canvas_guid; ?>" data-reload="<?php echo $canvas_load; ?>" />
