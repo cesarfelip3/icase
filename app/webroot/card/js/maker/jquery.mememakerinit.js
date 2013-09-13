@@ -38,9 +38,16 @@
             $.mememaker.mousey = event.pageY;
 
         });
+        
+        $(document).mousedown(function(event) {
+            $.mememaker.mousex = event.pageX;
+            $.mememaker.mousey = event.pageY;
+        })
 
         $(document).mouseup(function(event) {
-
+            $.mememaker.mousex = event.pageX;
+            $.mememaker.mousey = event.pageY;
+            
             var el = $.mememaker.canvas.getActiveObject();
             ////console.log (el);
 
@@ -118,7 +125,7 @@
             var left = el.left - el.getBoundingRectWidth() / 2 + $.mememaker.left;
 
             top = Math.floor(top);
-            left = Math.ceil(left);
+            left = Math.ceil(left - (500 - el.getBoundingRectWidth ()) / 2);
 
             $(".text-editor").show();
             $(".text-editor").css('top', top + "px");
