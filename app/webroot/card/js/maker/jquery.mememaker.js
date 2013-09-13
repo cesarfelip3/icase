@@ -160,7 +160,6 @@
         //canvas.controlsAboveOverlay = true;
         canvas.allowTouchScrolling = true;
         canvas.clear();
-
         this.update();
     }
 
@@ -208,8 +207,11 @@
     //Tools.prototype.container = $.mememaker;
 
     Tools.prototype.init = function() {
-        this.selected();
+        //console.log ('tools init');
         this.container = $.mememaker;
+        this.selected();
+        
+        this.addgrid();
     }
 
     Tools.prototype.new = function(color) {
@@ -540,10 +542,6 @@
         var width = canvas.width;
         var height = canvas.height;
 
-        if (this.removegrid()) {
-            return;
-        }
-
         var lines = [];
         var j = 0;
         var line = null;
@@ -571,6 +569,7 @@
             });
 
             line.selectable = false;
+            line.visible = false;
             canvas.add(line);
             line.sendToBack();
 
@@ -590,13 +589,27 @@
                 opacity: 0.5,
             });
             line.selectable = false;
+            line.visible = false;
             canvas.add(line);
             line.sendToBack();
 
             lines[j++] = line;
         }
-
+    
         this.container.grid = lines;
+        canvas.renderAll();
+    }
+    
+    Tools.prototype.showgrid = function ()
+    {
+        if (this.container.grid == null) {
+            return false;
+        }
+        
+        for (i in this.container.grid) {
+            this.container.grid[i].visible = !this.container.grid[i].visible; //true;
+        }
+        
         canvas.renderAll();
     }
 
@@ -606,9 +619,11 @@
         }
 
         for (var i = 0; i < this.container.grid.length; ++i) {
-            this.container.grid[i].remove();
+            this.container.grid[i].visible = false;
         }
-
+        canvas.renderAll();
+        return;
+    
         this.container.grid = null;
         return true;
     }

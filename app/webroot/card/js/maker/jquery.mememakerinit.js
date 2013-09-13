@@ -124,6 +124,7 @@
 
     Init.prototype.toolsinit = function(id) {
 
+        console.log ("toolsinit");
         $.mememaker.tools.init();
         $.mememaker.texteditor.textselected = function() {
 
@@ -276,7 +277,7 @@
                             }
                             break;
                         case 'addgrid':
-                            $.mememaker.tools.addgrid();
+                            $.mememaker.tools.showgrid();
                             break;
                         case 'save':
                             $.mememaker.save();
