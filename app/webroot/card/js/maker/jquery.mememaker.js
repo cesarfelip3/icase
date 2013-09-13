@@ -149,15 +149,16 @@
         this.canvasId = id;
         this.canvasScale = scale;
 
-        this.canvas = canvas = new window.fabric.Canvas(this.canvasId);
+        this.canvas = canvas = new fabric.Canvas(this.canvasId);
         console.log(fabric);
 
         this.width = canvas.getWidth();
         this.height = canvas.getHeight();
 
         canvas.backgroundColor = this.backgroundColor = backgroundcolor;
-        canvas.selection = true;
-        canvas.controlsAboveOverlay = true;
+        //canvas.selection = true;
+        //canvas.controlsAboveOverlay = true;
+        canvas.allowTouchScrolling = true;
         canvas.clear();
 
         this.update();
@@ -168,15 +169,14 @@
         pos = [0, 0];
 
         var r = el.getBoundingClientRect();
-        pos[0] = r.left;
-        pos[1] = r.top;
-        return pos;
+        return r;
     }
 
     Mememaker.prototype.update = function() {
         var pos = this.position(document.getElementById(this.wrapperId));
-        this.left = pos[0];
-        this.top = pos[1];
+        this.left = pos.left;
+        this.top = pos.top;
+        
         console.log('canvas postion : ' + this.left + ":" + this.top);
     }
 
@@ -441,13 +441,17 @@
         text.text = "CLICK TO EDIT";
         //text.originX = 'left';
         //text.originY = 'top'; // default rotation will never work as it's left/top
+        text.left = canvas.width / 2;
+        text.top = canvas.height / 2;
         canvas.add(text);
 
         //text.left = canvas.width / 2 - text.getBoundingRectWidth() / 2;
         //text.top = canvas.height / 2 - text.getBoundingRectHeight() / 2;
         //text.hasRotatingPoint = false; // so disable default rotation control
 
-        text.center();
+        //text.center();
+        text.selectable = true;
+        text.setCoords();
         //text.scaleToWidth(300);
 
         canvas.renderAll();
@@ -638,6 +642,7 @@
             "height": height}
         );
 
+        canvas.calcOffset ();
         var objects = canvas.getObjects();
         for (var i in objects) {
             var scaleX = objects[i].scaleX;
@@ -662,7 +667,6 @@
 
             objects[i].setCoords();
         }
-
         canvas.renderAll();
 
         this.container.update();

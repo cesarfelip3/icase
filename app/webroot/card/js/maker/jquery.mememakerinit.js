@@ -56,8 +56,8 @@
 
             if (el.type == 'image') {
                 //el.clipTo = function(ctx) {
-                    //ctx.arc(0, 0, 60, 0, Math.PI * 2, true);
-                    //ctx.rect(0,0,150,100);
+                //ctx.arc(0, 0, 60, 0, Math.PI * 2, true);
+                //ctx.rect(0,0,150,100);
                 //};
             }
         })
@@ -168,6 +168,12 @@
         $.mememaker.tools.addpic_callback = function() {
             hideAlert();
         }
+
+        $("#box-editing .span12").scroll(function() {
+            console.log ('scroll');
+            $.mememaker.canvas.calcOffset();
+            $.mememaker.update ();
+        });
 
         $(id + " a").click(
                 function(evt) {
