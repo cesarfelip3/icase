@@ -42,7 +42,8 @@
         $(document).mousedown(function(event) {
             $.mememaker.mousex = event.pageX;
             $.mememaker.mousey = event.pageY;
-
+            $.mememaker.update ();
+            
             var el = $.mememaker.canvas.getActiveObject();
             ////console.log (el);
 
@@ -65,6 +66,7 @@
         $(document).mouseup(function(event) {
             $.mememaker.mousex = event.pageX;
             $.mememaker.mousey = event.pageY;
+            $.mememaker.update ();
 
             var el = $.mememaker.canvas.getActiveObject();
             ////console.log (el);
