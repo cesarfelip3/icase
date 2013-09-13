@@ -158,7 +158,7 @@
         canvas.backgroundColor = this.backgroundColor = backgroundcolor;
         //canvas.selection = true;
         //canvas.controlsAboveOverlay = true;
-        canvas.allowTouchScrolling = true;
+        //canvas.allowTouchScrolling = true;
         canvas.clear();
         this.update();
     }
