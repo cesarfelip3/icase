@@ -478,7 +478,9 @@
             }
 
             if (el.type == 'image') {
-
+                if (el.lockMovementX == true) {
+                    el.selectable = false;
+                }
             }
         });
     }

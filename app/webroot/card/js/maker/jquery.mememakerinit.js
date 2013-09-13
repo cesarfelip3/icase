@@ -38,16 +38,34 @@
             $.mememaker.mousey = event.pageY;
 
         });
-        
+
         $(document).mousedown(function(event) {
             $.mememaker.mousex = event.pageX;
             $.mememaker.mousey = event.pageY;
+
+            var el = $.mememaker.canvas.getActiveObject();
+            ////console.log (el);
+
+            if (el === undefined || el === null) {
+                return;
+            }
+
+            if (!$.mememaker.in(el)) {
+                return;
+            }
+
+            if (el.type == 'image') {
+                el.clipTo = function(ctx) {
+                    //ctx.arc(0, 0, 60, 0, Math.PI * 2, true);
+                    ctx.rect(0,0,150,100);
+                };
+            }
         })
 
         $(document).mouseup(function(event) {
             $.mememaker.mousex = event.pageX;
             $.mememaker.mousey = event.pageY;
-            
+
             var el = $.mememaker.canvas.getActiveObject();
             ////console.log (el);
 
@@ -125,7 +143,7 @@
             var left = el.left - el.getBoundingRectWidth() / 2 + $.mememaker.left;
 
             top = Math.floor(top);
-            left = Math.ceil(left - (500 - el.getBoundingRectWidth ()) / 2);
+            left = Math.ceil(left - (500 - el.getBoundingRectWidth()) / 2);
 
             $(".text-editor").show();
             $(".text-editor").css('top', top + "px");
@@ -146,9 +164,9 @@
                 $(this).parent().parent().attr('style', '');
             }
         })
-        
-        $.mememaker.tools.addpic_callback = function () {
-            hideAlert ();
+
+        $.mememaker.tools.addpic_callback = function() {
+            hideAlert();
         }
 
         $(id + " a").click(
@@ -229,12 +247,12 @@
                             $("#box-toolbar-bg").show();
                             break;
                         case 'addshape':
-                            $("#box-toolbar-shape").show ();
+                            $("#box-toolbar-shape").show();
                             break;
                         case 'shape-rect':
                         case 'shape-circle':
                         case 'shape-tri':
-                            $.mememaker.tools.addshape ($(this).data('data'));
+                            $.mememaker.tools.addshape($(this).data('data'));
                             break;
                         case 'backgroundcolor':
                             var color = $(this).data('data');
@@ -384,16 +402,16 @@
                             $.mememaker.texteditor.changeFontAlign(align);
                             break;
                         case "confirm":
-                            var text = $("#text-content").val ();
+                            var text = $("#text-content").val();
                             if ($.trim(text) == "") {
-                                alert ("Empty typo, if you insist, remove element instead");
+                                alert("Empty typo, if you insist, remove element instead");
                                 return;
                             }
-                            $.mememaker.texteditor.changeText (text);
-                            $.mememaker.texteditor.textselected ();
+                            $.mememaker.texteditor.changeText(text);
+                            $.mememaker.texteditor.textselected();
                             break;
                         case "close":
-                            $("#box-toolbar-texteditor").hide ();
+                            $("#box-toolbar-texteditor").hide();
                             break;
                         default:
                             break;

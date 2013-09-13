@@ -8,6 +8,7 @@ Update
 
 2013.09.13 - rest
 
+1. image editor - crop
 2. Shape controls - fill 
 3. preview 
 4. save
