@@ -32,8 +32,11 @@
         height: 780,
         left: 0,
         top: 0,
-        grid: null,
-        gridsize: 20,
+        grid {
+            lines: null,
+            size: 20,
+            visible: false
+        },
         backgroundColor: 'white',
         defaultText: null,
         mousex: 0,
@@ -546,7 +549,7 @@
         var j = 0;
         var line = null;
         var rect = [];
-        var size = $.mememaker.gridsize;
+        var size = $.mememaker.grid.size;
 
         for (j = 0; j < 4; ++j) {
             width *= 1.2;
@@ -596,18 +599,20 @@
             lines[j++] = line;
         }
     
-        this.container.grid = lines;
+        this.container.grid.lines = lines;
         canvas.renderAll();
     }
     
     Tools.prototype.showgrid = function ()
     {
-        if (this.container.grid == null) {
+        if (this.container.grid.lines == null) {
             return false;
         }
         
+        this.container.grid.visible = !this.container.grid.visible;
+        
         for (i in this.container.grid) {
-            this.container.grid[i].visible = !this.container.grid[i].visible; //true;
+            this.container.grid.lines[i].visible = !this.container.grid.lines[i].visible; //true;
         }
         
         canvas.renderAll();

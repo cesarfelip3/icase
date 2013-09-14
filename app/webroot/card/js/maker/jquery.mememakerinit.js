@@ -83,7 +83,7 @@
                 return;
             }
 
-            if ($.mememaker.grid != null) {
+            if ($.mememaker.grid.visible) {
 
                 var left = Math.ceil(el.left - el.getBoundingRectWidth() / 2);
                 var top = Math.ceil(el.top - el.getBoundingRectHeight() / 2);
