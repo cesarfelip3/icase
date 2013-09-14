@@ -230,7 +230,7 @@ class CreatorController extends AppController {
             $imageData = $_POST['image-data'];
             $extension = $_POST['image-extension'];
 
-            if (!is_array(strtolower($extension), array('png', 'jpg', 'jpeg', 'gif'))) {
+            if (!in_array(strtolower($extension), array('png', 'jpg', 'jpeg', 'gif'))) {
                 $this->_error['error'] = 1;
                 $this->_error['message'] = 'open write handler faild';
                 $this->set('data', $data);
@@ -404,7 +404,7 @@ class CreatorController extends AppController {
         $fileName = preg_replace('/[^\w\._]+/', '_', $fileName);
 
         $extension = pathinfo($fileName, PATHINFO_EXTENSION);
-        if (!is_array(strtolower($extension), array('png', 'jpg', 'jpeg', 'gif'))) {
+        if (!in_array(strtolower($extension), array('png', 'jpg', 'jpeg', 'gif'))) {
             $this->_error['error'] = 1;
             $this->_error['message'] = 'invalid image extension';
             //$this->set('data', $data);
