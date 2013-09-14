@@ -68,20 +68,20 @@ class CreatorController extends AppController {
 
                 exit(json_encode($this->_error));
             }
-            
-            @preg_match_all ("/\/uploads\/(.*?\.[a-z]{3,4})\"/i", $json, $matches);
-            if (!empty ($matches)) {
+
+            @preg_match_all("/\/uploads\/(.*?\.[a-z]{3,4})\"/i", $json, $matches);
+            if (!empty($matches)) {
                 $images = $matches[1];
                 foreach ($images as $image) {
-                    @copy (WWW_ROOT . "uploads/" . $image, WWW_ROOT . "uploads/user/uploads/" . $image);
-                    $json = str_replace ("uploads/" . $image, "uploads/user/uploads/" . $image, $json);
+                    @copy(WWW_ROOT . "uploads/" . $image, WWW_ROOT . "uploads/user/uploads/" . $image);
+                    $json = str_replace("uploads/" . $image, "uploads/user/uploads/" . $image, $json);
                 }
-                
+
                 foreach ($images as $image) {
-                    @unlink (WWW_ROOT . "uploads/" . $image);
+                    @unlink(WWW_ROOT . "uploads/" . $image);
                 }
             }
-            
+
             //print_r ($json);
             //exit;
 
@@ -214,7 +214,10 @@ class CreatorController extends AppController {
             $product = $this->request->data('product');
             $data = array();
             if (empty($product)) {
+                $this->_error['error'] = 1;
+                $this->_error['message'] = 'open write handler faild';
                 $this->set('data', $data);
+                $this->set('error', $this->_error);
                 return;
             }
 
@@ -226,6 +229,14 @@ class CreatorController extends AppController {
 
             $imageData = $_POST['image-data'];
             $extension = $_POST['image-extension'];
+
+            if (!is_array(strtolower($extension), array('png', 'jpg', 'jpeg', 'gif'))) {
+                $this->_error['error'] = 1;
+                $this->_error['message'] = 'open write handler faild';
+                $this->set('data', $data);
+                $this->set('error', $this->_error);
+                return;
+            }
 
             $imageData = str_replace("data:image/" . $extension . ";base64,", "", $imageData);
 
@@ -271,7 +282,7 @@ class CreatorController extends AppController {
                 $png1 = unserialize($data['Product']['image']);
                 $png1 = $png1['foreground'];
 
-                $fn = pathinfo ($png1, PATHINFO_FILENAME);
+                $fn = pathinfo($png1, PATHINFO_FILENAME);
                 $png1 = APP . "webroot" . DS . "img" . DS . "template" . DS . $fn . "_user.png";
 
                 $jpeg = $targetDir . DIRECTORY_SEPARATOR . $filename;
@@ -391,6 +402,14 @@ class CreatorController extends AppController {
         $fileName = isset($_REQUEST["name"]) ? $_REQUEST["name"] : '';
 
         $fileName = preg_replace('/[^\w\._]+/', '_', $fileName);
+
+        $extension = pathinfo($fileName, PATHINFO_EXTENSION);
+        if (!is_array(strtolower($extension), array('png', 'jpg', 'jpeg', 'gif'))) {
+            $this->_error['error'] = 1;
+            $this->_error['message'] = 'invalid image extension';
+            //$this->set('data', $data);
+            exit(json_encode($this->_error));
+        }
 
         if ($chunks < 2 && file_exists($targetDir . DIRECTORY_SEPARATOR . $fileName)) {
             $ext = strrpos($fileName, '.');

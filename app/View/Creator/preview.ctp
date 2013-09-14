@@ -1,7 +1,7 @@
 <div class="row-fluid">
     <?php if ($error['error'] != 0) : ?>
         <div class="span12">
-
+            <?php echo $error['message']; ?>
         </div>
     <?php else : ?>
         <div class="span5">
