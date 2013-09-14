@@ -227,6 +227,13 @@ class MediaController extends AdminAppController {
         $fileName = isset($_REQUEST["name"]) ? $_REQUEST["name"] : '';
 
         $fileName = preg_replace('/[^\w\._]+/', '_', $fileName);
+        $extension = pathinfo($fileName, PATHINFO_EXTENSION);
+        if (!in_array(strtolower($extension), array('png', 'jpg', 'jpeg', 'gif'))) {
+            $this->_error['error'] = 1;
+            $this->_error['message'] = 'invalid image extension';
+            //$this->set('data', $data);
+            exit(json_encode($this->_error));
+        }
 
         if ($chunks < 2 && file_exists($targetDir . DIRECTORY_SEPARATOR . $fileName)) {
             $ext = strrpos($fileName, '.');
@@ -453,6 +460,13 @@ class MediaController extends AdminAppController {
         $fileName = isset($_REQUEST["name"]) ? $_REQUEST["name"] : '';
 
         $fileName = preg_replace('/[^\w\._]+/', '_', $fileName);
+        $extension = pathinfo($fileName, PATHINFO_EXTENSION);
+        if (!in_array(strtolower($extension), array('png', 'jpg', 'jpeg', 'gif'))) {
+            $this->_error['error'] = 1;
+            $this->_error['message'] = 'invalid image extension';
+            //$this->set('data', $data);
+            exit(json_encode($this->_error));
+        }
 
         if ($chunks < 2 && file_exists($targetDir . DIRECTORY_SEPARATOR . $fileName)) {
             $ext = strrpos($fileName, '.');
