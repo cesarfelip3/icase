@@ -603,5 +603,39 @@ hr {border-color:#E9E9E9}
     display:block;
 }
 
+/* ========================================== */
+#box-toolbar-imageeditor {
+    border:2px solid #999;
+    background-color:#ccc;
+    opacity: 0.8;
+    width:130px;
+}
 
-/* =================== */
+#box-toolbar-imageeditor>ul {
+    list-style: none;
+    margin:0px;
+    padding:0px;
+
+}
+
+#box-toolbar-imageeditor>ul>li {
+    width:30px;
+    height:30px;
+    float:left;
+    padding:5px;
+    margin:auto;
+    text-align: center;
+}
+
+#box-toolbar-imageeditor>ul>li a {
+    text-decoration: none;
+    color:#666;
+}
+
+#box-toolbar-imageeditor>ul>li:hover a {
+    color:orangered;
+}
+
+#box-toolbar-imageeditor>ul>li.divider {
+    border-right:1px solid #333;
+}

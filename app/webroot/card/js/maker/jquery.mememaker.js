@@ -32,10 +32,18 @@
         height: 780,
         left: 0,
         top: 0,
-        grid {
+        grid: {
             lines: null,
             size: 20,
             visible: false
+        },
+        crop: {
+            on: false,
+            select: false,
+            disable: false,
+            selector: null,
+            mousex: 0,
+            mousey: 0,
         },
         backgroundColor: 'white',
         defaultText: null,
@@ -75,6 +83,7 @@
         addgrid: null,
         backgroundcolor: null,
         overlayimage: null,
+        move_callback: null,
         // server API
         zoom: null,
         preview: null,
@@ -178,7 +187,7 @@
         var pos = this.position(document.getElementById(this.wrapperId));
         this.left = pos.left;
         this.top = pos.top;
-        
+
         console.log('canvas postion : ' + this.left + ":" + this.top);
     }
 
@@ -213,7 +222,7 @@
         //console.log ('tools init');
         this.container = $.mememaker;
         this.selected();
-        
+
         this.addgrid();
     }
 
@@ -484,14 +493,22 @@
                 $.mememaker.activex = el.left;
                 $.mememaker.activey = el.top;
                 $.mememaker.texteditor.textselected();
+                return;
             }
 
             if (el.type == 'image') {
                 if (el.lockMovementX == true) {
                     //el.selectable = false;
                 }
+
+                $.mememaker.selected = true;
+                $.mememaker.activex = el.left;
+                $.mememaker.activey = el.top;
+                $.mememaker.imageeditor.imageselected();
             }
         });
+
+        //canvas.on('object:moving', this.move_callback);
     }
 
     Tools.prototype.addshape = function(type) {
@@ -523,9 +540,9 @@
 
         if (type == 'tri') {
             el = new fabric.Triangle({
-                width: Math.ceil(canvas.width * 2 / 5), 
-                height: Math.ceil(canvas.width * 2 / 5), 
-                fill: 'blue', 
+                width: Math.ceil(canvas.width * 2 / 5),
+                height: Math.ceil(canvas.width * 2 / 5),
+                fill: 'blue',
             });
         }
 
@@ -549,7 +566,7 @@
         var j = 0;
         var line = null;
         var rect = [];
-        var size = $.mememaker.grid.size;
+        var size = this.container.grid.size;
 
         for (j = 0; j < 4; ++j) {
             width *= 1.2;
@@ -598,23 +615,24 @@
 
             lines[j++] = line;
         }
-    
+
         this.container.grid.lines = lines;
         canvas.renderAll();
     }
-    
-    Tools.prototype.showgrid = function ()
+
+    Tools.prototype.showgrid = function()
     {
         if (this.container.grid.lines == null) {
             return false;
         }
-        
+
+        console.log(this.container.grid.lines);
         this.container.grid.visible = !this.container.grid.visible;
-        
-        for (i in this.container.grid) {
+
+        for (i in this.container.grid.lines) {
             this.container.grid.lines[i].visible = !this.container.grid.lines[i].visible; //true;
         }
-        
+
         canvas.renderAll();
     }
 
@@ -628,7 +646,7 @@
         }
         canvas.renderAll();
         return;
-    
+
         this.container.grid = null;
         return true;
     }
@@ -662,7 +680,7 @@
             "height": height}
         );
 
-        canvas.calcOffset ();
+        canvas.calcOffset();
         var objects = canvas.getObjects();
         for (var i in objects) {
             var scaleX = objects[i].scaleX;
@@ -946,20 +964,8 @@
     // image editor 
     //==================================================================
 
-    ImageEditor.prototype.imageselected = function() {
-        var el = canvas.getActiveObject();
-
-        if (el === undefined || el === null) {
-            return;
-        }
-
-        if (el.type != "image") {
-            return;
-        }
-
-        $($.mememaker.texteditor.containerId).hide(0);
-        $($.mememaker.draweditor.containerId).hide(0);
-        $(this.containerId).show(0);
+    ImageEditor.prototype.init = function() {
+        this.container = $.mememaker;
     }
 
     ImageEditor.prototype.zoom = function(value) {
@@ -996,6 +1002,173 @@
         el.originY = "center";
         el.angle = value;
         canvas.renderAll();
+    }
+
+    ImageEditor.prototype.cropstart = function() {
+        var el = canvas.getActiveObject();
+
+        if (el === undefined || el === null) {
+            return;
+        }
+
+        if (el.type != "image") {
+            return false;
+        }
+
+        this.container.crop.on = true;
+        this.container.crop.select = false;
+        this.container.crop.disable = false;
+        el.lockMovementX = el.lockMovementY = true;
+        el.lockRotation = true;
+
+        //this.cropResize();
+    }
+
+    ImageEditor.prototype.cropselect = function(event) {
+        if (this.container.crop.on == false) {
+            return;
+        }
+
+        var el = canvas.getActiveObject();
+
+        if (el === undefined || el === null) {
+            return;
+        }
+
+        if (el.type != "image") {
+            return false;
+        }
+
+        if (!this.container.in(el)) {
+            return false;
+        }
+        
+        console.log ('crop select');
+
+        if (this.container.crop.selector == null) {
+            var el = new fabric.Rect({
+                //left: 100,
+                //top: 100,
+                fill: 'transparent',
+                originX: 'left',
+                originY: 'top',
+                stroke: 'orangered',
+                strokeDashArray: [2, 2],
+                opacity: 1,
+                width: 1,
+                height: 1
+            });
+
+            el.visible = false;
+            this.container.crop.selector = el;
+            canvas.add(this.container.crop.selector);
+        }
+
+        this.container.crop.select = true;
+        this.container.crop.selector.left = event.pageX - $.mememaker.left;
+        this.container.crop.selector.top = event.pageY - $.mememaker.top;
+        //el.selectable = false;
+        this.container.crop.selector.visible = true;
+        canvas.bringToFront(this.container.crop.selector);
+
+        $.mememaker.crop.mousex = event.pageX;
+        $.mememaker.crop.mousey = event.pageY;
+        return true;
+    }
+    
+    ImageEditor.prototype.cropunselect = function(event) {
+
+        if (this.container.crop.on == false) {
+            return;
+        }
+        
+        this.container.crop.select = false;
+    }
+
+    ImageEditor.prototype.cropresize = function(event) {
+
+        if (this.container.crop.on == false) {
+            return false;
+        }
+        
+        if (this.container.crop.select == false) {
+            return false;
+        }
+
+        var el = canvas.getActiveObject();
+
+        if (el === undefined || el === null) {
+            return false;
+        }
+
+        if (el.type != "image") {
+            return false;
+        }
+
+        if (!this.container.in(el)) {
+            return false;
+        }
+        
+        if (this.container.crop.selector == null) {
+            return false;
+        }
+
+        if (event.pageX - $.mememaker.crop.mousex > 0) {
+            this.container.crop.selector.width = event.pageX - $.mememaker.crop.mousex;
+        }
+
+        if (event.pageY - $.mememaker.crop.mousey > 0) {
+            this.container.crop.selector.height = event.pageY - $.mememaker.crop.mousey;
+        }
+
+        //canvas.add(this.container.crop.selector);
+    }
+
+    ImageEditor.prototype.cropend = function() {
+        if (this.container.crop.on == false) {
+            return false;
+        }
+
+        var el = canvas.getActiveObject();
+        console.log (el);
+        
+        if (el === undefined || el === null) {
+            return false;
+        }
+
+        if (el.type != "image") {
+            return false;
+        }
+
+        var left = this.container.crop.selector.left - el.left;// - object.left
+        var top = this.container.crop.selector.top - el.top;
+        
+        var width = this.container.crop.selector.width;
+        var height = this.container.crop.selector.height;
+        
+        left *= 1 / el.scaleX;
+        top *= 1 / el.scaleY;
+        
+        width *= 1 / el.scaleX;
+        height *= 1 / el.scaleY;
+        
+        console.log ("crop:left=" + left + ":" + top + ":" + width + ":" + height);
+        el.clipTo = function(ctx) {
+            ctx.rect(left, top, width, height); //0, 0, 100, 100);//, top, width, height);
+        };
+        canvas.renderAll();
+        this.cropcancel();
+    }
+
+    ImageEditor.prototype.cropcancel = function() {
+        if (this.container.crop.on == false) {
+            return;
+        }
+        this.container.crop.on = false;
+        this.container.crop.selector.remove();
+        this.container.crop.selector = null;
+        
+        $.mememaker.tools.lock();
     }
 
     //==================================================================
