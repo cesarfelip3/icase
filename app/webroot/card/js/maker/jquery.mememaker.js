@@ -480,6 +480,7 @@
             oImg.scaleToWidth(Math.ceil(canvas.getWidth() * 2 / 3));
             canvas.renderAll();
             $.mememaker.tools.addpic_callback();
+            console.log(oImg);
         });
     }
 
@@ -1042,8 +1043,8 @@
         if (!this.container.in(el)) {
             return false;
         }
-        
-        console.log ('crop select');
+
+        console.log('crop select');
 
         if (this.container.crop.selector == null) {
             var el = new fabric.Rect({
@@ -1075,13 +1076,13 @@
         $.mememaker.crop.mousey = event.pageY;
         return true;
     }
-    
+
     ImageEditor.prototype.cropunselect = function(event) {
 
         if (this.container.crop.on == false) {
             return;
         }
-        
+
         this.container.crop.select = false;
     }
 
@@ -1090,7 +1091,7 @@
         if (this.container.crop.on == false) {
             return false;
         }
-        
+
         if (this.container.crop.select == false) {
             return false;
         }
@@ -1108,7 +1109,7 @@
         if (!this.container.in(el)) {
             return false;
         }
-        
+
         if (this.container.crop.selector == null) {
             return false;
         }
@@ -1130,8 +1131,8 @@
         }
 
         var el = canvas.getActiveObject();
-        console.log (el);
-        
+        console.log(el);
+
         if (el === undefined || el === null) {
             return false;
         }
@@ -1142,21 +1143,45 @@
 
         var left = this.container.crop.selector.left - el.left;// - object.left
         var top = this.container.crop.selector.top - el.top;
-        
+
         var width = this.container.crop.selector.width;
         var height = this.container.crop.selector.height;
-        
+
         left *= 1 / el.scaleX;
         top *= 1 / el.scaleY;
-        
+
         width *= 1 / el.scaleX;
         height *= 1 / el.scaleY;
-        
-        console.log ("crop:left=" + left + ":" + top + ":" + width + ":" + height);
+
         el.clipTo = function(ctx) {
             ctx.rect(left, top, width, height); //0, 0, 100, 100);//, top, width, height);
         };
+
+        this.container.crop.selector.visible = false;
         canvas.renderAll();
+
+        var ctx = canvas.getContext('2d');
+        var data = ctx.getImageData(this.container.crop.selector.left, this.container.crop.selector.top, this.container.crop.selector.width, this.container.crop.selector.height);
+
+        var c = document.createElement('canvas');
+        
+        c.setAttribute('id', '_temp_canvas');
+        c.width = this.container.crop.selector.width;
+        c.height = this.container.crop.selector.height;
+
+        c.getContext('2d').putImageData(data, 0, 0);
+        
+        fabric.Image.fromURL(c.toDataURL(), function(img) {
+            img.left = el.left;
+            img.top = el.top;
+            canvas.add(img);
+            img.bringToFront();
+            el.selectable = false;
+            el.visible = false;
+            c = null;
+            $('#_temp_canvas').remove();
+            canvas.renderAll();
+        })
         this.cropcancel();
     }
 
@@ -1167,8 +1192,30 @@
         this.container.crop.on = false;
         this.container.crop.selector.remove();
         this.container.crop.selector = null;
-        
+
         $.mememaker.tools.lock();
+    }
+
+    ImageEditor.prototype.crop2 = function() {
+        fabric.Image.filters.crop2 = fabric.util.createClass({
+            type: 'Redify',
+            applyTo: function(canvasEl) {
+                var context = canvasEl.getContext('2d');
+                var imageData = context.getImageData(0, 0, canvasEl.width, canvasEl.height);
+                var data = imageData.data;
+
+                for (var i = 0, len = data.length; i < len; i += 4) {
+                    data[i + 1] = 0;
+                    data[i + 2] = 0;
+                }
+
+                context.putImageData(imageData, 0, 0);
+            }
+        });
+
+        fabric.Image.filters.crop2.fromObject = function(object) {
+            return new fabric.Image.filters.crop2(object);
+        };
     }
 
     //==================================================================
