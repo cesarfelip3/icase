@@ -35,7 +35,8 @@
         grid: {
             lines: null,
             size: 20,
-            visible: false
+            visible: false,
+            close: false,
         },
         crop: {
             on: false,
@@ -826,23 +827,42 @@
         canvas.renderAll();
     }
 
-    Tools.prototype.hidegrid = function() {
+    Tools.prototype.hidegrid = function(hide) {
         if (this.container.grid.lines == null) {
             return false;
         }
-        
+
         if (this.container.grid.visible == false) {
             return false;
         }
 
         console.log(this.container.grid.lines);
-        this.container.grid.visible = false;
+        //this.container.grid.visible = false;
 
         for (i in this.container.grid.lines) {
             this.container.grid.lines[i].visible = false;
         }
 
         canvas.renderAll();
+    }
+
+    Tools.prototype.closegrid = function() {
+
+        if (this.container.grid.close) {
+            for (i in this.container.grid.lines) {
+                this.container.grid.lines[i].visible = !this.container.grid.lines[i].visible;
+            }
+            this.container.grid.close = false;
+        }
+
+        if (this.container.grid.visible == false) {
+            return;
+        }
+
+        this.container.grid.close = true;
+        for (i in this.container.grid.lines) {
+            this.container.grid.lines[i].visible = !this.container.grid.lines[i].visible;
+        }
     }
 
     Tools.prototype.backgroundcolor = function(color) {
@@ -953,7 +973,7 @@
 
         //var width = this.canvas.width;
         //this.zoomreset();
-        this.hidegrid();
+        this.closegrid();
         canvas.deactivateAll();
 
         var preview = canvas.toDataURL(
@@ -962,8 +982,8 @@
                     quality: 1
                 }
         );
-           
-        this.showgrid();
+
+        this.closegrid();
         //this.zoom(width);
         if (this.preview_callback != null) {
             this.preview_callback(preview);
