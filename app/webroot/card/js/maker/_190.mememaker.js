@@ -330,7 +330,7 @@
                 return;
             }
 
-            if (images[j] != null) {
+            if (images[j] !== null) {
                 images[j].clone(
                         function(el) {
                             items[j] = el;
@@ -346,7 +346,7 @@
     }
 
     Tools.prototype.move = function(direct) {
-        if (direct === undefined || direct == null) {
+        if (direct === undefined || direct === null) {
             return;
         }
 
@@ -388,8 +388,8 @@
             }
         }
 
-        el.lockMovementX = el.lockMovementX == false ? true : false;
-        el.lockMovementY = el.lockMovementY == false ? true : false;
+        el.lockMovementX = el.lockMovementX === false ? true : false;
+        el.lockMovementY = el.lockMovementY === false ? true : false;
         canvas.renderAll();
         return el.lockMovementX;
     }
@@ -813,7 +813,7 @@
 
     Tools.prototype.showgrid = function()
     {
-        if (this.container.grid.lines == null) {
+        if (this.container.grid.lines === null) {
             return false;
         }
 
@@ -828,11 +828,11 @@
     }
 
     Tools.prototype.hidegrid = function(hide) {
-        if (this.container.grid.lines == null) {
+        if (this.container.grid.lines === null) {
             return false;
         }
 
-        if (this.container.grid.visible == false) {
+        if (this.container.grid.visible === false) {
             return false;
         }
 
@@ -854,7 +854,7 @@
             return;
         }
         
-        if (this.container.grid.visible == false) {
+        if (this.container.grid.visible === false) {
             return;
         }
         
@@ -982,7 +982,7 @@
 
         this.closegrid();
         //this.zoom(width);
-        if (this.preview_callback != null) {
+        if (this.preview_callback !== null) {
             this.preview_callback(preview);
         }
     }
@@ -1029,7 +1029,7 @@
     TextEditor.prototype.fill = function(color) {
         var el = canvas.getActiveObject();
 
-        if (el === undefined || el == null) {
+        if (el === undefined || el === null) {
             return;
         }
 
@@ -1244,7 +1244,7 @@
     }
 
     ImageEditor.prototype.cropselect = function(event) {
-        if (this.container.crop.on == false) {
+        if (this.container.crop.on === false) {
             return;
         }
 
@@ -1264,7 +1264,7 @@
 
         console.log('crop select');
 
-        if (this.container.crop.selector == null) {
+        if (this.container.crop.selector === null) {
             var el = new fabric.Rect({
                 //left: 100,
                 //top: 100,
@@ -1300,7 +1300,7 @@
 
     ImageEditor.prototype.cropunselect = function(event) {
 
-        if (this.container.crop.on == false) {
+        if (this.container.crop.on === false) {
             return;
         }
 
@@ -1309,11 +1309,11 @@
 
     ImageEditor.prototype.cropresize = function(event) {
 
-        if (this.container.crop.on == false) {
+        if (this.container.crop.on === false) {
             return false;
         }
 
-        if (this.container.crop.select == false) {
+        if (this.container.crop.select === false) {
             return false;
         }
 
@@ -1331,7 +1331,7 @@
             return false;
         }
 
-        if (this.container.crop.selector == null) {
+        if (this.container.crop.selector === null) {
             return false;
         }
 
@@ -1353,7 +1353,7 @@
     }
 
     ImageEditor.prototype.cropend = function() {
-        if (this.container.crop.on == false) {
+        if (this.container.crop.on === false) {
             return false;
         }
 
@@ -1414,7 +1414,7 @@
     }
 
     ImageEditor.prototype.cropcancel = function() {
-        if (this.container.crop.on == false) {
+        if (this.container.crop.on === false) {
             return;
         }
         this.container.crop.on = false;
