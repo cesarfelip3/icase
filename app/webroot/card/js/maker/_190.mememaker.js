@@ -44,7 +44,7 @@
             disable: false,
             selector: null,
             mousex: 0,
-            mousey: 0,
+            mousey: 0
         },
         undo: {
             on: false,
@@ -52,10 +52,10 @@
             prev: null,
             stack: [],
             index: 0,
-            history: 10,
+            history: 10
         },
         base: {
-            id: 0,
+            id: 0
         },
         backgroundColor: 'white',
         defaultText: null,
@@ -68,7 +68,7 @@
         // methods
         init: null,
         position: null,
-        in: null,
+        inEl: null,
         generateId: null,
         // object member
         tools: null,
@@ -204,7 +204,7 @@
         //console.log('canvas postion : ' + this.left + ":" + this.top);
     }
 
-    Mememaker.prototype.in = function(el) {
+    Mememaker.prototype.inEl = function(el) {
         if (el === undefined || el === null) {
             return;
         }
@@ -458,9 +458,9 @@
         }
 
         if (x == 0) {
-            el.flipX = el.flipX == true ? false : true;
+            el.flipX = el.flipX === true ? false : true;
         } else {
-            el.flipY = el.flipY == true ? false : true;
+            el.flipY = el.flipY === true ? false : true;
         }
 
         canvas.renderAll();
@@ -639,7 +639,7 @@
             }
 
             if (el.type == 'image') {
-                if (el.lockMovementX == true) {
+                if (el.lockMovementX === true) {
                     //el.selectable = false;
                 }
 
@@ -1585,7 +1585,7 @@
     }
 
     DrawEditor.prototype.enable = function() {
-        enable = canvas.isDrawingMode == true ? false : true;
+        enable = canvas.isDrawingMode === true ? false : true;
         if (enable) {
             canvas.discardActiveObject();
             canvas.discardActiveGroup();

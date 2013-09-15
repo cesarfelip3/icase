@@ -62,7 +62,7 @@
                 return;
             }
 
-            if (!$.mememaker.in(el)) {
+            if (!$.mememaker.inEl(el)) {
                 return;
             }
 
