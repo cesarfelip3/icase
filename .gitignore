@@ -9,3 +9,5 @@ tmp/*
 /app/webroot/uploads/
 /nbproject
 database.php
+icase.js
+/*.sql

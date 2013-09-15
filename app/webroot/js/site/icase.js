@@ -23,7 +23,7 @@ var mememaker = {
     tools: {
         container: '.tools',
         init: null,
-        new : null,
+        newcanvas : null,
         info: null,
         remove: null,
         group: null,
@@ -203,7 +203,7 @@ mememaker.tools.init = function(id, previewUrl, modal) {
                 //console.log(action);
                 switch (action) {
                     case 'new':
-                        mememaker.tools.new ();
+                        mememaker.tools.newcanvas ();
                         break;
                     case 'info':
                         break;
@@ -266,7 +266,7 @@ mememaker.tools.init = function(id, previewUrl, modal) {
     );
 }
 
-mememaker.tools.new = function() {
+mememaker.tools.newcanvas = function() {
     mememaker.lastTextX = 150;
     mememaker.lastTextY = 10;
     mememaker.lastImageX = 10;
