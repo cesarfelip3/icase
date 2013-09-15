@@ -826,19 +826,23 @@
         canvas.renderAll();
     }
 
-    Tools.prototype.removegrid = function() {
-        if (this.container.grid == null) {
+    Tools.prototype.hidegrid = function() {
+        if (this.container.grid.lines == null) {
+            return false;
+        }
+        
+        if (this.container.grid.visible == false) {
             return false;
         }
 
-        for (var i = 0; i < this.container.grid.length; ++i) {
-            this.container.grid[i].visible = false;
-        }
-        canvas.renderAll();
-        return;
+        console.log(this.container.grid.lines);
+        this.container.grid.visible = false;
 
-        this.container.grid = null;
-        return true;
+        for (i in this.container.grid.lines) {
+            this.container.grid.lines[i].visible = false;
+        }
+
+        canvas.renderAll();
     }
 
     Tools.prototype.backgroundcolor = function(color) {
@@ -949,7 +953,7 @@
 
         //var width = this.canvas.width;
         //this.zoomreset();
-        this.showgrid();
+        this.hidegrid();
         canvas.deactivateAll();
 
         var preview = canvas.toDataURL(
