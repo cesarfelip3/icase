@@ -850,7 +850,7 @@
 
         if (this.container.grid.close) {
             for (i in this.container.grid.lines) {
-                this.container.grid.lines[i].visible = !this.container.grid.lines[i].visible;
+                this.container.grid.lines[i].visible = true;
             }
             this.container.grid.close = false;
         }
@@ -861,7 +861,7 @@
 
         this.container.grid.close = true;
         for (i in this.container.grid.lines) {
-            this.container.grid.lines[i].visible = !this.container.grid.lines[i].visible;
+            this.container.grid.lines[i].visible = false;
         }
     }
 
