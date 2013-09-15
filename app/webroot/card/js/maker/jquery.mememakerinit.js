@@ -226,7 +226,7 @@
 
                     switch (action) {
                         case 'new':
-                            $.mememaker.tools.new ("#eb3d2d");
+                            $.mememaker.tools.newcanvas ("#eb3d2d");
                             break;
                         case 'remove':
                             if ($.mememaker.tools.exist() == false) {

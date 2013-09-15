@@ -10,4 +10,6 @@ tmp/*
 /nbproject
 database.php
 icase.js
+jquery.mememaker.js
+jquery.mememakerinit.js
 /*.sql

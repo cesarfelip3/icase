@@ -82,7 +82,7 @@
         container: null,
         //
         init: null,
-        new : null,
+        newcanvas : null,
         remove: null,
         group: null,
         backward: null,
@@ -243,7 +243,7 @@
         this.addgrid();
     }
 
-    Tools.prototype.new = function(color) {
+    Tools.prototype.newcanvas = function(color) {
         canvas.backgroundColor = this.backgroundColor = color;
         canvas.clear();
     }
