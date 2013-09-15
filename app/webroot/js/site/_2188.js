@@ -324,6 +324,7 @@ mememaker.tools.group = function() {
             images[i] = null;
         }
     }
+   
 
     function cloneImages(j, items, images, gr)
     {
