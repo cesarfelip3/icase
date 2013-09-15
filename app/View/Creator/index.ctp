@@ -248,7 +248,7 @@ $js_pluploader = array(
 <?php
 $js_case = array(
     "http://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.2.0/fabric.all.min.js",
-    "site/icase.casecreator.js"
+    "site/icase.min.js"
         )
 ?>
 
