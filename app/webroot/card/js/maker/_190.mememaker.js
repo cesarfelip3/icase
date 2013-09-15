@@ -36,7 +36,7 @@
             lines: null,
             size: 20,
             visible: false,
-            close: false,
+            close: false
         },
         crop: {
             on: false,
@@ -75,7 +75,7 @@
         texteditor: null,
         imageeditor: null,
         draweditor: null
-    }
+    };
 
     Tools.prototype = {
         containerId: '.tools',
@@ -103,8 +103,8 @@
         preview_callback: null,
         save: null,
         save_callback: null,
-        reload: null,
-    }
+        reload: null
+    };
 
     TextEditor.prototype = {
         containerId: ".text-editor",
@@ -118,8 +118,8 @@
         changeText: null,
         changeFontProperty: null,
         textselected: null,
-        textselected_callback: null,
-    }
+        textselected_callback: null
+    };
 
     ImageEditor.prototype = {
         containerId: ".image-editor",
@@ -134,8 +134,8 @@
         rotate: null,
         flipX: null,
         flipY: null,
-        imageselected: null,
-    }
+        imageselected: null
+    };
 
     DrawEditor.prototype = {
         containerId: ".draw-editor",
@@ -148,7 +148,7 @@
         init: null,
         fill: null,
         enable: null
-    }
+    };
 
     Mememaker.prototype.tools = new Tools();
     Mememaker.prototype.texteditor = new TextEditor();
@@ -160,7 +160,7 @@
         property: {
             fontFamily: 'Arial',
             fontSize: 30,
-            fill: 'black',
+            fill: 'black'
             //stroke: 'white',
             //strokeWidth: 0,
             //originX: 'left',
