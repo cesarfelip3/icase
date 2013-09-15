@@ -168,7 +168,7 @@
 //            left: this.lastTextX,
 //            top: this.lastTextY
         }
-    }
+    };
 
     Mememaker.prototype.init = function(id, backgroundcolor, scale) {
         this.canvasId = id;
@@ -186,7 +186,7 @@
         //canvas.allowTouchScrolling = true;
         canvas.clear();
         this.update();
-    }
+    };
 
     Mememaker.prototype.position = function(el) {
         var pos = null;
@@ -194,7 +194,7 @@
 
         var r = el.getBoundingClientRect();
         return r;
-    }
+    };
 
     Mememaker.prototype.update = function() {
         var pos = this.position(document.getElementById(this.wrapperId));
@@ -202,11 +202,11 @@
         this.top = pos.top;
 
         //console.log('canvas postion : ' + this.left + ":" + this.top);
-    }
+    };
 
     Mememaker.prototype.inEl = function(el) {
         if (el === undefined || el === null) {
-            return;
+            return false;
         }
 
         var left = el.left - el.getBoundingRectWidth() / 2 + this.left;
@@ -222,7 +222,7 @@
         }
 
         return false;
-    }
+    };
 
     Mememaker.prototype.generateId = function() {
         return this.base.id++;
@@ -335,8 +335,8 @@
                         function(el) {
                             items[j] = el;
                             cloneImages(j + 1, items, images, gr);
-                        }, null
-                        )
+                        }, null);
+                        
             } else {
                 cloneImages(j + 1, items, images, gr);
             }
@@ -457,7 +457,7 @@
             }
         }
 
-        if (x == 0) {
+        if (x === 0) {
             el.flipX = el.flipX === true ? false : true;
         } else {
             el.flipY = el.flipY === true ? false : true;
@@ -639,10 +639,7 @@
             }
 
             if (el.type == 'image') {
-                if (el.lockMovementX === true) {
-                    //el.selectable = false;
-                }
-
+                
                 $.mememaker.selected = true;
                 $.mememaker.activex = el.left;
                 $.mememaker.activey = el.top;
@@ -713,7 +710,7 @@
         if (type == 'circle') {
             el = new fabric.Circle({
                 radius: Math.ceil(canvas.width * 2 / 5 / 2),
-                fill: 'green',
+                fill: 'green'
             });
         }
 
@@ -723,7 +720,7 @@
                 //top: 100,
                 fill: '#ccc',
                 width: Math.ceil(canvas.width * 2 / 5),
-                height: Math.ceil(canvas.width * 2 / 5),
+                height: Math.ceil(canvas.width * 2 / 5)
             });
 
             //rect.center();
@@ -733,12 +730,8 @@
             el = new fabric.Triangle({
                 width: Math.ceil(canvas.width * 2 / 5),
                 height: Math.ceil(canvas.width * 2 / 5),
-                fill: 'blue',
+                fill: 'blue'
             });
-        }
-
-        if (type == 'ellipse') {
-
         }
 
         el.left = canvas.width / 2;
@@ -776,7 +769,7 @@
             line = null;
             line = new fabric.Line(rect, {
                 stroke: '#999',
-                opacity: 0.5,
+                opacity: 0.5
             });
 
             line.selectable = false;
@@ -784,7 +777,8 @@
             canvas.add(line);
             line.sendToBack();
 
-            lines[j++] = line;
+            lines[j] = line;
+            j += 1;
         }
 
         for (i = 0; i < Math.ceil(height / 20); ++i) {
@@ -797,14 +791,15 @@
             line = null;
             line = new fabric.Line(rect, {
                 stroke: '#999',
-                opacity: 0.5,
+                opacity: 0.5
             });
             line.selectable = false;
             line.visible = false;
             canvas.add(line);
             line.sendToBack();
 
-            lines[j++] = line;
+            lines[j] = line;
+            j += 1;
         }
 
         this.container.grid.lines = lines;
@@ -825,25 +820,7 @@
         }
 
         canvas.renderAll();
-    }
-
-    Tools.prototype.hidegrid = function(hide) {
-        if (this.container.grid.lines === null) {
-            return false;
-        }
-
-        if (this.container.grid.visible === false) {
-            return false;
-        }
-
-        console.log(this.container.grid.lines);
-        //this.container.grid.visible = false;
-
-        for (i in this.container.grid.lines) {
-            this.container.grid.lines[i].visible = false;
-        }
-
-        canvas.renderAll();
+        return true;
     }
 
     Tools.prototype.closegrid = function() {
@@ -904,8 +881,7 @@
             var tempLeft = left * scale;
             var tempTop = top * scale;
 
-            if (objects[i].type == 'line' && objects[i].selectable === false
-                    && objects[i].get('opacity') == 0.5) {
+            if (objects[i].type == 'line' && objects[i].selectable === false && objects[i].get('opacity') === 0.5) {
                 continue;
             }
 
@@ -943,8 +919,7 @@
             var tempLeft = left * scale;
             var tempTop = top * scale;
 
-            if (objects[i].type == 'line' && objects[i].selectable === false
-                    && objects[i].get('opacity') == 0.5) {
+            if (objects[i].type == 'line' && objects[i].selectable === false && objects[i].get('opacity') === 0.5) {
                 continue;
             }
 
@@ -1002,29 +977,11 @@
         canvas.renderAll();
         canvas.calcOffset();
 
-        // optional
-        //canvas.calculateOffset();
     }
 
     //===========================================
     // text editor
     //===========================================
-
-    /*
-     TextEditor.prototype.textselected = function() {
-     
-     var el = canvas.getActiveObject();
-     
-     if (el === undefined || el === null) {
-     return;
-     }
-     
-     if (el.type != "text") {
-     return;
-     }
-     
-     this.textselected_callback(el);
-     }*/
 
     TextEditor.prototype.fill = function(color) {
         var el = canvas.getActiveObject();
@@ -1068,7 +1025,7 @@
         }
 
         el.text = value;
-        if (el.text == "") {
+        if (el.text === "") {
             canvas.remove(el);
         }
         canvas.renderAll();
@@ -1132,7 +1089,7 @@
             return;
         }
 
-        size = parseInt(size);
+        size = parseInt(size, 10);
 
         if (size <= 0) {
             return;
@@ -1227,7 +1184,7 @@
         var el = canvas.getActiveObject();
 
         if (el === undefined || el === null) {
-            return;
+            return false;
         }
 
         if (el.type != "image") {
@@ -1240,32 +1197,33 @@
         el.lockMovementX = el.lockMovementY = true;
         el.lockRotation = true;
 
+        return true;
         //this.cropResize();
     }
 
     ImageEditor.prototype.cropselect = function(event) {
         if (this.container.crop.on === false) {
-            return;
+            return false;
         }
 
         var el = canvas.getActiveObject();
 
         if (el === undefined || el === null) {
-            return;
+            return false;
         }
 
         if (el.type != "image") {
             return false;
         }
 
-        if (!this.container.in(el)) {
+        if (!this.container.inEl(el)) {
             return false;
         }
 
         console.log('crop select');
 
         if (this.container.crop.selector === null) {
-            var el = new fabric.Rect({
+            var rect = new fabric.Rect({
                 //left: 100,
                 //top: 100,
                 fill: 'transparent',
@@ -1278,8 +1236,8 @@
                 height: 1
             });
 
-            el.visible = false;
-            this.container.crop.selector = el;
+            rect.visible = false;
+            this.container.crop.selector = rect;
             canvas.add(this.container.crop.selector);
         }
 
@@ -1327,7 +1285,7 @@
             return false;
         }
 
-        if (!this.container.in(el)) {
+        if (!this.container.inEl(el)) {
             return false;
         }
 
@@ -1348,7 +1306,7 @@
         if (width > 0 && width + this.container.crop.selector.top < limit) {
             this.container.crop.selector.height = event.pageY - $.mememaker.crop.mousey;
         }
-
+        return true;
         //canvas.add(this.container.crop.selector);
     }
 
@@ -1411,6 +1369,7 @@
             canvas.renderAll();
         })
         this.cropcancel();
+        return true;
     }
 
     ImageEditor.prototype.cropcancel = function() {
