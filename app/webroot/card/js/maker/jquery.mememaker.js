@@ -848,21 +848,18 @@
 
     Tools.prototype.closegrid = function() {
 
-        if (this.container.grid.close) {
-            for (i in this.container.grid.lines) {
-                this.container.grid.lines[i].visible = true;
-            }
+        if(this.container.grid.close) {
+            this.showgrid();
             this.container.grid.close = false;
+            return;
         }
-
+        
         if (this.container.grid.visible == false) {
             return;
         }
-
+        
+        this.showgrid ();
         this.container.grid.close = true;
-        for (i in this.container.grid.lines) {
-            this.container.grid.lines[i].visible = false;
-        }
     }
 
     Tools.prototype.backgroundcolor = function(color) {
