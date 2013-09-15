@@ -13,13 +13,18 @@ https://github.com/kangax/fabric.js/issues/781
 
 1.2.11 performance of addgrid is poor
 
+2013.09.14
 
-1. image editor - crop
-2. Shape controls - fill 
-3. preview 
-4. save
-5. reload
-6. undo
+1. image editor - crop - done
+2. Shape controls - fill - closed
+7. fixed - toBack / toFront ...
+3. preview - done
+4. save - done
+5. reload - done
+
+2013.09.16
+
+6. undo/redo
 
 2-6. 1 day
 

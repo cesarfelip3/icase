@@ -3,6 +3,11 @@
 class MakerController {
 
     public $uses = false;
+    public $_error = array(
+        "error" => 0,
+        "message" => "",
+        "data" => array()
+    );
 
     public function beforeFilter() {
         $this->Auth->allow();
@@ -24,6 +29,12 @@ class MakerController {
     }
 
     public function save() {
+
+        $filename = dirname(__FILE__) . "/canvas.json";
+        file_put_contents($filename, $_POST['json']);
+
+        $this->_error['error'] = 0;
+        exit(json_encode($this->_error));
 
         if ($this->request->is('ajax') && $this->request->is('post')) {
             $this->autoRender = false;
@@ -92,6 +103,13 @@ class MakerController {
     }
 
     public function reload() {
+
+        $filename = dirname(__FILE__) . "/canvas.json";
+        $json = file_get_contents($filename, $data['json']);
+        $this->_error['data']['json'] = $json;
+
+        exit(json_encode($this->_error));
+
         if ($this->request->is('ajax')) {
             $this->autoRender = false;
 
@@ -130,88 +148,81 @@ class MakerController {
     }
 
     public function preview() {
-        if ($this->request->is('ajax')) {
-            $this->layout = false;
 
-            error_reporting(0);
-            register_shutdown_function(
-                    function () {
+        error_reporting(0);
+        register_shutdown_function(
+                function () {
 
-                        $last_error = error_get_last();
+                    $last_error = error_get_last();
 
-                        if (!is_null($last_error)) {
-                            $this->_error['error'] = 1;
-                            $this->_error['message'] = $last_error['message'];
-                            exit(json_encode($this->_error));
-                        }
-                    });
+                    if (!is_null($last_error)) {
+                        $this->_error['error'] = 1;
+                        $this->_error['message'] = $last_error['message'];
+                        exit(json_encode($this->_error));
+                    }
+                });
 
-            header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
-            header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-            header("Cache-Control: no-store, no-cache, must-revalidate");
-            header("Cache-Control: post-check=0, pre-check=0", false);
-            header("Pragma: no-cache");
+        header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+        header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+        header("Cache-Control: no-store, no-cache, must-revalidate");
+        header("Cache-Control: post-check=0, pre-check=0", false);
+        header("Pragma: no-cache");
 
-            $product = $this->request->data('product');
-            $data = array();
-            if (empty($product)) {
-                $this->set('data', $data);
-                return;
-            }
-
-            $targetDir = $this->_targetDir = ROOT . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'uploads' . DS . 'preview';
-
-            $cleanupTargetDir = true; // Remove old files
-            $maxFileAge = 5 * 3600; // Temp file age in seconds
-            @set_time_limit(0);
-
-            $imageData = $_POST['image-data'];
-            $extension = $_POST['image-extension'];
-
-            $imageData = str_replace("data:image/" . $extension . ";base64,", "", $imageData);
-
-            $filename = uniqid() . "." . $extension;
-            $file = base64_encode($imageData);
-            $out = @fopen($targetDir . DIRECTORY_SEPARATOR . $filename, "wb");
-
-            if ($out) {
-                fwrite($out, base64_decode($imageData));
-                @fclose($out);
-            } else {
-                $this->_error['error'] = 1;
-                $this->_error['message'] = 'open write handler faild';
-                $this->set(array('data' => $data, 'image' => $this->_error));
-            }
-
-            $this->_error['error'] = 0;
-            $this->_error['message'] = 'success';
-            $this->_error['files'] = array(
-                'original' => "",
-                'target' => $filename,
-                'url' => "uploads/preview/" . $filename,
-                'extension' => $extension,
-                    //'mime' => $mime
-            );
-
-            $path = $targetDir . DIRECTORY_SEPARATOR . $filename;
-            $image = file_get_contents($targetDir . DIRECTORY_SEPARATOR . $filename);
-
-            $image = substr_replace($image, pack("cnn", 1, 300, 300), 13, 5);
-
-            file_put_contents($targetDir . DIRECTORY_SEPARATOR . $filename, $image);
-
-            $this->loadModel('Product');
-            $data = $this->Product->find('first', array(
-                'conditions' => array('guid' => $product, 'type' => 'template')
-            ));
-
-            if (empty($data)) {
-                $this->_error['error'] = 1;
-            }
-
-            $this->set(array('data' => $data['Product'], 'error' => $this->_error));
-            return;
+        if (!defined('WEB_ROOT')) {
+            define('WEB_ROOT', realpath(dirname(__FILE__) . "/../../") . "/");
         }
+        $targetDir = $this->_targetDir = WEB_ROOT . 'uploads';
+
+        $cleanupTargetDir = true; // Remove old files
+        $maxFileAge = 5 * 3600; // Temp file age in seconds
+        @set_time_limit(0);
+
+        $imageData = $_POST['image-data'];
+        $extension = $_POST['image-extension'];
+
+        $imageData = str_replace("data:image/" . $extension . ";base64,", "", $imageData);
+
+        $filename = uniqid() . "." . $extension;
+        $file = base64_encode($imageData);
+        $out = @fopen($targetDir . DIRECTORY_SEPARATOR . $filename, "wb");
+
+        if ($out) {
+            fwrite($out, base64_decode($imageData));
+            @fclose($out);
+        } else {
+            $this->_error['error'] = 1;
+            $this->_error['message'] = 'open write handler faild';
+            $this->set(array('data' => $data, 'image' => $this->_error));
+        }
+
+        $this->_error['error'] = 0;
+        $this->_error['message'] = 'success';
+        $this->_error['files'] = array(
+            'original' => "",
+            'target' => $filename,
+            'url' => "../uploads/" . $filename,
+            'extension' => $extension,
+                //'mime' => $mime
+        );
+
+        $path = $targetDir . DIRECTORY_SEPARATOR . $filename;
+        $image = file_get_contents($targetDir . DIRECTORY_SEPARATOR . $filename);
+
+        $image = substr_replace($image, pack("cnn", 1, 300, 300), 13, 5);
+
+        file_put_contents($targetDir . DIRECTORY_SEPARATOR . $filename, $image);
+
+        /*
+          $this->loadModel('Product');
+          $data = $this->Product->find('first', array(
+          'conditions' => array('guid' => $product, 'type' => 'template')
+          ));
+
+          if (empty($data)) {
+          $this->_error['error'] = 1;
+          } */
+
+        exit(json_encode($this->_error));
     }
 
     public function templates() {
@@ -266,8 +277,8 @@ class MakerController {
         header("Cache-Control: post-check=0, pre-check=0", false);
         header("Pragma: no-cache");
 
-        if (!defined ('WEB_ROOT')) {
-            define ('WEB_ROOT', realpath (dirname (__FILE__) . "/../../") . "/");
+        if (!defined('WEB_ROOT')) {
+            define('WEB_ROOT', realpath(dirname(__FILE__) . "/../../") . "/");
         }
         $targetDir = $this->_targetDir = WEB_ROOT . 'uploads';
 
@@ -409,7 +420,7 @@ class MakerController {
         $this->_error['files'] = array(
             'original' => $original,
             'target' => $name,
-            'url' =>  "../uploads/" . $name,
+            'url' => "../uploads/" . $name,
             'extension' => $extension,
                 //'mime' => $mime
         );
@@ -430,5 +441,20 @@ if (isset($_GET['action'])) {
 
 if ($action == 'upload') {
     $controller = new MakerController ();
-    $controller->upload ();
+    $controller->upload();
+}
+
+if ($action == "save") {
+    $controller = new MakerController ();
+    $controller->save();
+}
+
+if ($action == "reload") {
+    $controller = new MakerController ();
+    $controller->reload();
+}
+
+if ($action == "preview") {
+    $controller = new MakerController ();
+    $controller->preview();
 }

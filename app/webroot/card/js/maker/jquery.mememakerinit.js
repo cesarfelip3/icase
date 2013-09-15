@@ -36,15 +36,15 @@
         $(document).mousemove(function(event) {
             $.mememaker.mousex = event.pageX;
             $.mememaker.mousey = event.pageY;
-            
-            $.mememaker.imageeditor.cropresize (event);
+
+            $.mememaker.imageeditor.cropresize(event);
         });
 
         $(document).mousedown(function(event) {
             $.mememaker.mousex = event.pageX;
             $.mememaker.mousey = event.pageY;
             $.mememaker.update();
-            
+
             $.mememaker.imageeditor.cropselect(event);
         })
 
@@ -52,7 +52,7 @@
             $.mememaker.mousex = event.pageX;
             $.mememaker.mousey = event.pageY;
             $.mememaker.update();
-            
+
             $.mememaker.imageeditor.cropunselect();
 
             var el = $.mememaker.canvas.getActiveObject();
@@ -109,6 +109,29 @@
         $.mememaker.init(id, backgroundcolor, 1850 / 780);
     }
 
+    Init.prototype.reload = function() {
+        jQuery.ajax({
+            url: "process/index.php?action=reload",
+            type: "GET",
+            beforeSend: function(xhr) {
+                showAlert2("Reloading......");
+            }
+        }).done(function(data) {
+
+            var result = $.parseJSON(data);
+            if (result.error == 1) {
+
+            } else {
+                $.mememaker.tools.reload(result.data.json);
+            }
+
+            hideAlert();
+
+        }).fail(function() {
+            showAlert2("failed");
+        });
+    }
+
     Init.prototype.toolsinit = function(id) {
 
         console.log("toolsinit");
@@ -129,9 +152,9 @@
         $.mememaker.tools.addpic_callback = function() {
             hideAlert();
         }
-        
+
         // poor performance...:(
-        $.mememaker.tools.move_callback = function () {
+        $.mememaker.tools.move_callback = function() {
             $(".text-editor").hide();
             $(".image-editor").hide();
         }
@@ -141,6 +164,56 @@
             $.mememaker.canvas.calcOffset();
             $.mememaker.update();
         });
+
+        $.mememaker.tools.save_callback = function(json)
+        {
+            jQuery.ajax({
+                url: "process/index.php?action=save",
+                data: {'json': json},
+                type: "POST",
+                beforeSend: function(xhr) {
+                    showAlert2("Saving......");
+                }
+            }).done(function(data) {
+
+                var result = $.parseJSON(data);
+                if (result.error == 1) {
+                    $("#modal-user").modal();
+                    formuser_load();
+                } else {
+                    $("#canvas_guid").val(result.data.guid);
+                    $("#canvas_guid").data('saved', '1');
+                    alert("Your progress just saved");
+                }
+
+                hideAlert();
+
+            }).fail(function() {
+                showAlert2("Failed");
+            });
+        }
+
+        $.mememaker.tools.preview_callback = function preview(data)
+        {
+            $("#modal-preview").modal();
+            jQuery.ajax({
+                url: "process/index.php?action=preview",
+                data: {"image-extension": "jpeg", "image-data": data},
+                type: "POST",
+                beforeSend: function(xhr) {
+                }
+            }).done(function(data) {
+                var result = jQuery.parseJSON(data);
+                
+                if (result.error == 0) {
+                    var url = result.files.url;
+                    $("#modal-preview .modal-body").html ("<img src='" + url + "' style='width:100%;height:100%' />");
+                }
+                (data);
+            }).fail(function() {
+                jQuery(".ajax-loading-indicator").hide(0);
+            });
+        }
 
         $(id + " a").click(
                 function(evt) {
@@ -193,10 +266,10 @@
                             }
                             break;
                         case 'backward':
-                            $.mememaker.tools.backward();
+                            $.mememaker.tools.toBack();
                             break;
                         case 'forward':
-                            $.mememaker.tools.forward();
+                            $.mememaker.tools.toFront();
                             break;
                         case 'back':
                             $.mememaker.tools.toBack();
@@ -245,10 +318,18 @@
                         case 'addgrid':
                             $.mememaker.tools.showgrid();
                             break;
+                        case 'undo':
+                            $.mememaker.tools.undo();
+                            break;
                         case 'save':
-                            $.mememaker.save();
+                            $.mememakerinit.zoomcount = 0;
+                            $("#box-canvas-wrapper").css("width", $.mememaker.width + "px");
+                            $.mememaker.tools.save();
                             break;
                         case 'reload':
+                            $.mememakerinit.zoomcount = 0;
+                            $("#box-canvas-wrapper").css("width", $.mememaker.width + "px");
+                            $.mememakerinit.reload();
                             break;
                         case 'zoomin':
                             if ($.mememakerinit.zoomcount >= 4) {
@@ -404,7 +485,7 @@
     Init.prototype.imageeditorinit = function(id) {
 
         $.mememaker.imageeditor.init();
-        
+
         $.mememaker.imageeditor.imageselected = function() {
 
             var el = $.mememaker.canvas.getActiveObject();
@@ -440,7 +521,7 @@
                             $.mememaker.imageeditor.cropstart();
                             break;
                         case "cropend":
-                            $.mememaker.imageeditor.cropend ();
+                            $.mememaker.imageeditor.cropend();
                             break;
                         case "close":
                             $.mememaker.imageeditor.cropcancel();
@@ -450,6 +531,13 @@
                             break;
                     }
                 });
+
+
+
+        //var json = $.mememaker.canvas.toJSON();
+        //json = JSON.stringify(json);
+        localStorage.state2 = localStorage.state = JSON.stringify([]);
+        console.log(localStorage.state);
 
     }
 

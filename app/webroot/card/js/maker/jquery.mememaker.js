@@ -45,6 +45,17 @@
             mousex: 0,
             mousey: 0,
         },
+        undo: {
+            on: false,
+            current: null,
+            prev: null,
+            stack: [],
+            index: 0,
+            history: 10,
+        },
+        base: {
+            id: 0,
+        },
         backgroundColor: 'white',
         defaultText: null,
         mousex: 0,
@@ -57,6 +68,7 @@
         init: null,
         position: null,
         in: null,
+        generateId: null,
         // object member
         tools: null,
         texteditor: null,
@@ -188,7 +200,7 @@
         this.left = pos.left;
         this.top = pos.top;
 
-        console.log('canvas postion : ' + this.left + ":" + this.top);
+        //console.log('canvas postion : ' + this.left + ":" + this.top);
     }
 
     Mememaker.prototype.in = function(el) {
@@ -209,6 +221,10 @@
         }
 
         return false;
+    }
+
+    Mememaker.prototype.generateId = function() {
+        return this.base.id++;
     }
 
 
@@ -467,7 +483,7 @@
         text.selectable = true;
         text.setCoords();
         //text.scaleToWidth(300);
-
+        text.id = $.mememaker.generateId();
         canvas.renderAll();
 
     };
@@ -475,13 +491,138 @@
     Tools.prototype.addpic = function(url) {
 
         fabric.Image.fromURL(url, function(oImg) {
-            canvas.add(oImg);
-            oImg.center();
+            oImg.id = $.mememaker.generateId();
+            oImg.padding = 10;
+            oImg.left = canvas.width * 1 / 3;
+            oImg.top = canvas.height * 1 / 3;
             oImg.scaleToWidth(Math.ceil(canvas.getWidth() * 2 / 3));
+            canvas.add(oImg);
             canvas.renderAll();
             $.mememaker.tools.addpic_callback();
             console.log(oImg);
         });
+    }
+
+    Tools.prototype.undo = function() {
+
+        $.mememaker.undo.on = true;
+        $.mememaker.undo.stack = JSON.parse(localStorage.state);
+        //$.mememaker.undo.stack.pop();
+
+        if ($.mememaker.undo.index <= 0) {
+            $.mememaker.undo.on = false;
+            return;
+        }
+
+        console.log($.mememaker.undo.stack);
+
+        $.mememaker.undo.index--;
+        var object = $.mememaker.undo.stack[$.mememaker.undo.index];
+
+        if (object.type == "text") {
+            console.log("currentId=" + $.mememaker.undo.current.id);
+            console.log("objectId=" + object.id);
+            console.log("index=" + $.mememaker.undo.index);
+
+            if ($.mememaker.undo.current.id == object.id) {
+                $.mememaker.undo.current.remove();
+            } else {
+                var objects = canvas.getObjects();
+                for (i in objects) {
+                    if (objects[i].id == object.id) {
+                        objects[i].remove();
+                    }
+                }
+            }
+            var text = new fabric.Text.fromObject(object);
+            canvas.add(text);
+            canvas.renderAll();
+            $.mememaker.undo.on = false;
+            $.mememaker.undo.current = text;
+            localStorage.state = JSON.stringify($.mememaker.undo.stack);
+        }
+
+        if (object.type == 'image') {
+            fabric.Image.fromObject(object, function(img) {
+                if ($.mememaker.undo.current.id == object.id) {
+                    $.mememaker.undo.current.remove();
+                } else {
+                    var objects = canvas.getObjects();
+                    for (i in objects) {
+                        if (objects[i].id == object.id) {
+                            objects[i].remove();
+                        }
+                    }
+                }
+                canvas.add(img);
+                canvas.renderAll();
+                $.mememaker.undo.on = false;
+                $.mememaker.undo.current = img;
+                localStorage.state = JSON.stringify($.mememaker.undo.stack);
+            });
+        }
+
+    }
+
+    Tools.prototype.redo = function() {
+
+        $.mememaker.undo.on = true;
+        $.mememaker.undo.stack = JSON.parse(localStorage.state);
+        //$.mememaker.undo.stack.pop();
+
+        if ($.mememaker.undo.index >= $.mememaker.undo.history) {
+            $.mememaker.undo.on = false;
+            return;
+        }
+
+        console.log($.mememaker.undo.stack);
+
+        $.mememaker.undo.index++;
+        var object = $.mememaker.undo.stack[$.mememaker.undo.index];
+
+        if (object.type == "text") {
+            console.log("currentId=" + $.mememaker.undo.current.id);
+            console.log("objectId=" + object.id);
+            console.log("index=" + $.mememaker.undo.index);
+
+            if ($.mememaker.undo.current.id == object.id) {
+                $.mememaker.undo.current.remove();
+            } else {
+                var objects = canvas.getObjects();
+                for (i in objects) {
+                    if (objects[i].id == object.id) {
+                        objects[i].remove();
+                    }
+                }
+            }
+            var text = new fabric.Text.fromObject(object);
+            canvas.add(text);
+            canvas.renderAll();
+            $.mememaker.undo.on = false;
+            $.mememaker.undo.current = text;
+            localStorage.state = JSON.stringify($.mememaker.undo.stack);
+        }
+
+        if (object.type == 'image') {
+            fabric.Image.fromObject(object, function(img) {
+                if ($.mememaker.undo.current.id == object.id) {
+                    $.mememaker.undo.current.remove();
+                } else {
+                    var objects = canvas.getObjects();
+                    for (i in objects) {
+                        if (objects[i].id == object.id) {
+                            objects[i].remove();
+                        }
+                    }
+                }
+                canvas.add(img);
+                canvas.renderAll();
+                $.mememaker.undo.on = false;
+                $.mememaker.undo.current = img;
+                localStorage.state = JSON.stringify($.mememaker.undo.stack);
+            });
+        }
+
     }
 
     Tools.prototype.selected = function() {
@@ -494,7 +635,6 @@
                 $.mememaker.activex = el.left;
                 $.mememaker.activey = el.top;
                 $.mememaker.texteditor.textselected();
-                return;
             }
 
             if (el.type == 'image') {
@@ -509,7 +649,56 @@
             }
         });
 
-        //canvas.on('object:moving', this.move_callback);
+        canvas.on('object:added', function(e) {
+
+//            localStorage.state2 = localStorage.state;
+//            var json = e.target.toJSON();
+//            localStorage.state = JSON.stringify (json);
+//            $.mememaker.undo.current = e.target;
+//            console.log (json);
+
+
+        });
+
+        canvas.on('object:modified', function(e) {
+            //localStorage.state2 = localStorage.state;
+            console.log("before:modified");
+
+            if ($.mememaker.undo.on) {
+                return;
+            }
+
+            console.log("modifed");
+
+            var json = e.target.toJSON(['id']);
+            $.mememaker.undo.stack = JSON.parse(localStorage.state);
+            $.mememaker.undo.index = $.mememaker.undo.stack.length - 1;
+            if ($.mememaker.undo.index < 0) {
+                $.mememaker.undo.index = 0;
+            }
+
+            $.mememaker.undo.stack.push(json);
+            $.mememaker.undo.index++;
+            if ($.mememaker.undo.index >= $.mememaker.undo.history) {
+                $.mememaker.undo.stack = $.mememaker.undo.stack.slice(1, $.mememaker.undo.hisory - 1);
+            }
+
+            console.log($.mememaker.undo.stack);
+
+            localStorage.state = JSON.stringify($.mememaker.undo.stack);
+            $.mememaker.undo.current = e.target;
+            $.mememaker.undo.stack = null;
+        });
+
+        canvas.on('object:removed', function(e) {
+//            localStorage.state2 = localStorage.state;
+//            var json = e.target.toJSON();
+//            localStorage.state = JSON.stringify(json);
+//            $.mememaker.undo.current = e.target;
+
+            //$.mememaker.undo.stack.push (e.target);
+            //$.mememaker.undo.index++;
+        });
     }
 
     Tools.prototype.addshape = function(type) {
@@ -755,8 +944,12 @@
     Tools.prototype.preview = function() {
         // it will convert canvas to base64
 
-        var scale = $.mememaker.canvasScale;
-        this.zoom(scale);
+        //var scale = $.mememaker.canvasScale;
+        //this.zoom(scale);
+
+        //var width = this.canvas.width;
+        //this.zoomreset();
+        this.showgrid();
         canvas.deactivateAll();
 
         var preview = canvas.toDataURL(
@@ -765,24 +958,28 @@
                     quality: 1
                 }
         );
-
-        this.zoom(1 / scale);
-        if (this.preview_callback == null) {
-            return;
+           
+        this.showgrid();
+        //this.zoom(width);
+        if (this.preview_callback != null) {
+            this.preview_callback(preview);
         }
-        this.preview_callback(preview);
     }
 
     Tools.prototype.save = function()
     {
+        this.zoomreset();
         var json = JSON.stringify(canvas.toJSON());
         this.save_callback(json);
     }
 
     Tools.prototype.reload = function(json)
     {
+        this.zoomreset();
+        canvas.clear();
         canvas.loadFromJSON(json);
         canvas.renderAll();
+        canvas.calcOffset();
 
         // optional
         //canvas.calculateOffset();
@@ -1065,6 +1262,9 @@
             canvas.add(this.container.crop.selector);
         }
 
+        this.container.crop.selector.visible = false;
+        this.container.crop.selector.width = 1;
+        this.container.crop.selector.height = 1;
         this.container.crop.select = true;
         this.container.crop.selector.left = event.pageX - $.mememaker.left;
         this.container.crop.selector.top = event.pageY - $.mememaker.top;
@@ -1114,11 +1314,17 @@
             return false;
         }
 
-        if (event.pageX - $.mememaker.crop.mousex > 0) {
+        var width = event.pageX - $.mememaker.crop.mousex;
+        var limit = el.left + el.getBoundingRectWidth() / 2;
+
+        if (width > 0 && width + this.container.crop.selector.left < limit) {
             this.container.crop.selector.width = event.pageX - $.mememaker.crop.mousex;
         }
 
-        if (event.pageY - $.mememaker.crop.mousey > 0) {
+        width = event.pageY - $.mememaker.crop.mousey;
+        limit = el.top + el.getBoundingRectHeight() / 2;
+
+        if (width > 0 && width + this.container.crop.selector.top < limit) {
             this.container.crop.selector.height = event.pageY - $.mememaker.crop.mousey;
         }
 
@@ -1164,16 +1370,17 @@
         var data = ctx.getImageData(this.container.crop.selector.left, this.container.crop.selector.top, this.container.crop.selector.width, this.container.crop.selector.height);
 
         var c = document.createElement('canvas');
-        
+
         c.setAttribute('id', '_temp_canvas');
         c.width = this.container.crop.selector.width;
         c.height = this.container.crop.selector.height;
 
         c.getContext('2d').putImageData(data, 0, 0);
-        
+
         fabric.Image.fromURL(c.toDataURL(), function(img) {
             img.left = el.left;
             img.top = el.top;
+            img.padding = 10;
             canvas.add(img);
             img.bringToFront();
             el.selectable = false;

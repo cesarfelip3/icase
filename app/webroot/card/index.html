@@ -112,11 +112,27 @@
                 </div>
             </div>
             <div style="height:1px;background-color:#ccc"></div>
-            <div class="row-fluid" style="height:40px;background-color:#eee;" id="box-elements-container">
+            <div class="row-fluid tools" style="height:40px;background-color:#eee;" id="box-controlbar">
                 <div class="span6">
                 </div>
-                <div class="span6">
-                    
+                <div class="span6 pull-right">
+                    <ul class="pull-right">
+                        <li>
+                            <a href="javascript:" data-action="save" title="save your work">
+                                <i class="icon-save icon-2x"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:" data-action="reload" title="reload yoru work">
+                                <i class="icon-upload-alt icon-2x"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:" data-action="preview" title="preview">
+                                <i class="icon-file-text icon-2x"></i>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
             <!-- canvas -->
@@ -194,7 +210,7 @@
                             <a href="javascript:" data-action="zoomfit"><i class="icon-screenshot icon-2x"></i></a>
                         </li>
                         <li class="disabled">
-                            <a href="javascript:"><i class="icon-undo icon-2x"></i></a>
+                            <a href="javascript:" data-action="undo"><i class="icon-undo icon-2x"></i></a>
                         </li>
                     </ul>
                 </div>
@@ -613,16 +629,13 @@
                 $.mememakerinit.imageeditorinit(".image-editor");
                 $.mememakerinit.draweditorinit(".draw-editor");
 
-                //
-                $.mememaker.tools.preview_callback = preview;
-                $.mememaker.tools.save_callback = save_canvas;
                 //$.mememaker.tools.backgroundcolor("red");
 
                 //$(".upper-canvas").css ("left", "20px");
                 //templatelist_load();
 
                 if ($("#canvas_guid").data('reload') == "1") {
-                    reload_canvas();
+                    //reload_canvas();
                 }
 
                 // display all buttons after canvas loaded
@@ -903,7 +916,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <h3 id="myModalLabel">Your Design</h3>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="background:#ccc">
                 <div class="ajax-loading-indicator hide" style=""><a href="javascript:" style="font-size:14px;"><i class="icon-refresh icon-spin"></i> Loading ....</a></div>
             </div>
             <div class="modal-footer">
@@ -943,6 +956,8 @@
         <script src="js/main.js"></script>
         <script src='js/spectrum/spectrum.js'></script>
         <link rel='stylesheet' href='js/spectrum/spectrum.css' />
+        <script src='js/maker/json2.js'></script>
+        <script src='js/maker/jquery.cookie.js'></script>
         <!-- bootstrap slider -->
 <!--        <link rel="stylesheet" href="js/inputslider/css/slider.css" media="screen" type="text/css" />
         <script type="text/javascript" src="js/inputslider/js/bootstrap-slider.js"></script>-->
@@ -951,7 +966,7 @@
                 <script type="text/javascript" src="js/colorpicker2/js/docs.js"></script>-->
         <!-- fabric.js -->
 <!--        <script src="http://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.2.0/fabric.all.min.js"></script>-->
-        <script>window.fabric || document.write('<script src="js/maker/1211.all.min.js"><\/script>')</script> 
+        <script>window.fabric || document.write('<script src="js/maker/1211.all.js"><\/script>')</script> 
         <script src="js/maker/jquery.mememaker.js"></script>
         <script src="js/maker/jquery.mememakerinit.js"></script>
         

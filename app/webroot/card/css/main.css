@@ -34,6 +34,15 @@ hr {border-color:#E9E9E9}
     border-radius: 5px;
 }
 
+#box-controlbar ul {
+    list-style: none;
+}
+
+#box-controlbar ul li {
+    float:left;
+    width:40px;
+}
+
 #box-editing {
     background-image:url(../img/bg.png);
     background-color:#999999;

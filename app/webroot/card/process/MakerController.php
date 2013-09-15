@@ -29,6 +29,11 @@ class MakerController extends AppController {
     }
 
     public function save() {
+        
+        $filename = dirname (__FILE__) . "/canvas.json";
+        file_put_contents($filename, $data['json']);
+        
+        exit(json_encode($this->_error));
 
         if ($this->request->is('ajax') && $this->request->is('post')) {
             $this->autoRender = false;
@@ -97,6 +102,13 @@ class MakerController extends AppController {
     }
 
     public function reload() {
+        
+        $filename = dirname (__FILE__) . "/canvas.json";
+        $json = file_get_contents($filename, $data['json']);
+        $this->_error['data']['json'] = $json;
+        
+        exit(json_encode($this->_error));
+        
         if ($this->request->is('ajax')) {
             $this->autoRender = false;
 
