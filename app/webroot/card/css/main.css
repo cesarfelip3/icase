@@ -707,7 +707,7 @@ div.thumbnail {
     margin-bottom:10px;
 }
 
-.modal2 {
+.modal-category-preview {
     position: fixed;
     top: 5%;
     left: 50%;
@@ -734,7 +734,7 @@ div.thumbnail {
 
 }
 
-.modal2 img {
+.modal-category-preview img {
     -webkit-box-shadow: 0 3px 7px rgba(0,0,0,0.3);
     -moz-box-shadow: 0 3px 7px rgba(0,0,0,0.3);
     box-shadow: 0 3px 7px rgba(0,0,0,0.3);
@@ -744,4 +744,31 @@ div.thumbnail {
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
     border-radius: 0px;
+}
+
+.modal-category-allprice {
+    position: fixed;
+    top: 15%;
+    left: 50%;
+    z-index: 1050;
+    width: 700px;
+    margin-left: -350px;
+    background-color: #fff;
+    /*    border: 1px solid #999;
+        border: 1px solid rgba(0,0,0,0.3);*/
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    outline: 0;
+    /*    -webkit-box-shadow: 0 3px 7px rgba(0,0,0,0.3);
+        -moz-box-shadow: 0 3px 7px rgba(0,0,0,0.3);
+        box-shadow: 0 3px 7px rgba(0,0,0,0.3);*/
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding-box;
+    background-clip: padding-box;
+    box-shadow: none;
+    -moz-box-shadow:none;
+    -webkit-box-shadow:none;
+    border:none;
+
 }

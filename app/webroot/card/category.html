@@ -117,7 +117,7 @@
             <div class="row-fluid">
                 <ul class="breadcrumb" style="height:30px;">
                     <li><strong>A6 Flyer Designs - Prices start from £9</strong></li>
-                    <li class="pull-right"><a class="btn btn-warning btn-no-corner"><i class="icon-gbp icon-large"></i> View All Price</a></li>
+                    <li class="pull-right"><a class="btn btn-warning btn-no-corner" id="btn-all-price"><i class="icon-gbp icon-large"></i> View All Price</a></li>
                 </ul>
             </div>
             <div class="row-fluid" style='padding-top:10px;'>
@@ -220,8 +220,8 @@
             var loaded = false;
             $(document).ready(
                     function() {
-                        init ();
-                        
+                        init();
+
                         jQuery(document).scroll(function() {
                             var top = document.getElementById("box-bottom");
                             var pos = top.getBoundingClientRect();
@@ -237,10 +237,15 @@
                                 $("#li-template-box2").append('<div class="thumbnail"><a href="javascript:"><img src="img/thumb_small_1.jpg"  style=""/></a><div class="caption"><h4>Letter</h4></div></div>');
                                 $("#li-template-box3").append('<div class="thumbnail"><a href="javascript:"><img src="img/thumb_small_1.jpg"  style=""/></a><div class="caption"><h4>Letter</h4></div></div>');
                                 $("#li-template-box4").append('<div class="thumbnail"><a href="javascript:"><img src="img/thumb_small_1.jpg"  style=""/></a><div class="caption"><h4>Letter</h4></div></div>');
-                                
-                                init ();
+
+                                init();
                             }
                         });
+
+                        $("#btn-all-price").click(
+                                function() {
+                                    $("#modal-allprice").modal();
+                                });
                     });
             function init() {
                 $(".thumbnail a").click(
@@ -251,7 +256,7 @@
             }
         </script>
         <!-- preview modal -->
-        <div id="modal-preview" class="modal2 hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div id="modal-preview" class="modal-category-preview hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="well" style="background-color:white;margin:auto;text-align: center;">
                 <div style="background-color:#ccc;padding:20px;">
                     <img src="img/thumb_large.jpg" />
@@ -270,16 +275,14 @@
         </div>
 
         <!-- user modal -->
-        <div id="modal-user" class="modal2 hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div id="modal-allprice" class="modal-category-allprice hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h3 id="myModalLabel">User</h3>
+                <h3 id="myModalLabel">All price</h3>
             </div>
             <div class="modal-body">
-                <div class="ajax-loading-indicator hide" style=""><a href="javascript:" style="font-size:14px;"><i class="icon-refresh icon-spin"></i> Loading ....</a></div>
             </div>
             <div class="modal-footer">
-                <p class="text-error">You have to sign in to save your progress.</p>
             </div>
         </div>
 
