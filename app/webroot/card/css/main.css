@@ -9,7 +9,6 @@ body {
     background-color:#888;
 }
 
-hr {border-color:#E9E9E9}
 
 .unselectable { 
     -webkit-user-select: none; 
@@ -652,12 +651,12 @@ hr {border-color:#E9E9E9}
 /* =================================== */
 .selection ul {
     list-style:none;
+    margin:0;
+    padding:0;
 }
 
 .selection ul>li {
     float:left;
-    margin:auto;
-    text-align:center;
     padding-left:10px;
     padding-right:10px;
 }
@@ -685,6 +684,13 @@ hr {border-color:#E9E9E9}
     color:white;
 }
 
+.thumbnail a {
+    display: block;
+    margin:auto;
+    text-align: center;
+    padding:0px;
+}
+
 .thumbnail a img {
     padding:0px;
     box-shadow: 0px 1px 4px 0px #ccc;
@@ -701,9 +707,9 @@ div.thumbnail {
     margin-bottom:10px;
 }
 
-.modal {
-    position: absolute;
-    top: 10%;
+.modal2 {
+    position: fixed;
+    top: 5%;
     left: 50%;
     z-index: 1050;
     width: 900px;
@@ -728,7 +734,7 @@ div.thumbnail {
 
 }
 
-.modal img {
+.modal2 img {
     -webkit-box-shadow: 0 3px 7px rgba(0,0,0,0.3);
     -moz-box-shadow: 0 3px 7px rgba(0,0,0,0.3);
     box-shadow: 0 3px 7px rgba(0,0,0,0.3);

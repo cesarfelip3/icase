@@ -322,13 +322,10 @@
                             $.mememaker.tools.undo();
                             break;
                         case 'save':
-                            if ($("#box-attribute") !== undefined) {
-                                $("#box-attribute").show();
-                            }
-                            
-                            $.mememakerinit.zoomcount = 0;
-                            $("#box-canvas-wrapper").css("width", $.mememaker.width + "px");
-                            $.mememaker.tools.save();
+                            $("#box-attribute").toggle();
+                            //$.mememakerinit.zoomcount = 0;
+                            //$("#box-canvas-wrapper").css("width", $.mememaker.width + "px");
+                            //$.mememaker.tools.save();
                             break;
                         case 'reload':
                             $.mememakerinit.zoomcount = 0;

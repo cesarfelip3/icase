@@ -961,6 +961,13 @@
             this.preview_callback(preview);
         }
     }
+    
+    Tools.prototype.getstate = function()
+    {
+        this.zoomreset();
+        var json = JSON.stringify(canvas.toJSON());
+        return json;
+    }
 
     Tools.prototype.save = function()
     {

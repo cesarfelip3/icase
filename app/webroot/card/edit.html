@@ -52,7 +52,7 @@
             </div>
         </div>
         <!-- content -->
-        <div class="container unselectable" id="box-container" style="width:1020">
+        <div class="container unselectable" id="box-container">
             <div class="row-fluid" style="height:70px;">
                 <div class="span6">
                     <h5 style="padding:0px;margin:0px;">Click the text and images to personalise your business card.</h5>
@@ -118,7 +118,7 @@
                                 <i class="icon-save icon-2x"></i>
                             </a>
                         </li>
-                        <li>
+                        <li class="hide">
                             <a href="javascript:" data-action="reload" title="reload yoru work">
                                 <i class="icon-upload-alt icon-2x"></i>
                             </a>
@@ -191,7 +191,7 @@
                         <li>
                             <a href="javascript:" data-action="forward" title="forward"><i class="icon-file icon-2x"></i></a>
                         </li>
-                        
+
                         <li>
                             <a href="javascript:" data-action="lock" title="forward"><i class="icon-lock icon-2x"></i></a>
                         </li>
@@ -513,6 +513,67 @@
                         </li>
                     </ul>
                 </div>
+                <div class="row-fluid hide" style="width:914px;position: absolute;background-color:#eee;padding:10px;" id="box-attribute">
+                    <form id="form-edit">
+                        <div class="span3">
+                            <fieldset>
+                                <legend></legend>
+                                <input type="text" placeholder="Type something…">
+                            </fieldset>
+                        </div>
+                        <div class="span3">
+                            <fieldset>
+                                <legend></legend>
+                                <select id="do-t-product">
+                                    <option value="2">Flyers &amp; Leaflets</option>
+                                    <option value="1">Business Cards</option>
+                                    <option value="3">Letterheads</option>
+                                    <option value="4">Compliments Slips</option>
+                                    <option value="5">Posters</option>
+                                    <option value="6">Roller Banners</option>
+                                    <option value="7">Invitations</option>
+                                </select>
+                            </fieldset>
+                        </div>
+                        <div class="span3">
+                            <fieldset>
+                                <legend></legend>
+                                <select>
+                                    <option value="0">All Industry</option>
+                                    <option value="8">automotive,travel &amp; transportation</option>
+                                    <option value="19">baby &amp; kids</option>
+                                    <option value="7">beauty, health care &amp; medical</option>
+                                    <option value="17">birthday &amp; party</option>
+                                    <option value="9">child care &amp; education</option>
+                                    <option value="2">energy &amp; environment</option>
+                                    <option value="1">food &amp; beverage</option>
+                                    <option value="15">gardening, florists &amp; farming</option>
+                                    <option value="14">general</option>
+                                    <option value="18">general</option>
+                                    <option value="3">home maintenance &amp; cleaning</option>
+                                    <option value="6">legal, financial &amp; real estate</option>
+                                    <option value="4">music &amp; arts</option>
+                                    <option value="5">pets &amp; animals</option>
+                                    <option value="20">photo-invites</option>
+                                    <option value="11">retail, sales &amp; fashion</option>
+                                    <option value="12">sports &amp; fitness</option>
+                                    <option value="10">technology &amp; information</option>
+                                    <option value="16">wedding &amp; anniversary</option>
+                                    <option value="13">wedding, events &amp; event planning</option>
+                                </select>
+                            </fieldset>
+                        </div>
+                        <div class="span3">
+                            <fieldset>
+                                <legend></legend>
+                                <select id="do-t-product">
+                                    <option value="2">A6</option>
+                                </select>
+                                <a class="btn pull-right" id="btn-save">Submit</a>
+                            </fieldset>
+                        </div>
+                    </form>
+                </div>
             </div>
             <!-- editor -->
 
@@ -531,6 +592,34 @@
         <script type="text/javascript" src="js/pluploader/plupload.html5.js"></script>
         <script type="text/javascript" src="js/maker/index.min.js"></script>
 
+        <script>
+            $(document).ready(
+                    function() {
+                        $("#btn-save").click(
+                                function() {
+                                    var json = $.mememaker.tools.getstate();
+                                    jQuery.ajax({
+                                        url: "" + id,
+                                        data: {'json': json, 'attribute': $("#form-edit").serialize()},
+                                        type: "POST",
+                                        beforeSend: function(xhr) {
+                                        }
+                                    }).done(function(data) {
+                                        var result = $.parseJSON(data);
+                                        if (result.error == 1) {
+                                            $("#modal-user").modal();
+                                            formuser_load();
+                                        } else {
+                                            $("#canvas_guid").val(result.data.guid);
+                                            $("#canvas_guid").data('saved', '1');
+                                            alert("Your progress just saved");
+                                        }
+                                    }).fail(function() {
+                                        //$("#template-list").prev().children(":first-child").hide(0);
+                                    });
+                                });
+                    });
+        </script>
         <!-- preview modal -->
         <div id="modal-preview" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-header">
@@ -557,7 +646,7 @@
                 <p class="text-error">You have to sign in to save your progress.</p>
             </div>
         </div>
-        
+
         <!-- user modal -->
         <div id="modal-upload-progress" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-body">
@@ -573,14 +662,14 @@
         <script src='js/maker/json2.js'></script>
         <script src='js/maker/jquery.cookie.js'></script>
         <!-- bootstrap slider -->
-<!--        <link rel="stylesheet" href="js/inputslider/css/slider.css" media="screen" type="text/css" />
-        <script type="text/javascript" src="js/inputslider/js/bootstrap-slider.js"></script>-->
+        <!--        <link rel="stylesheet" href="js/inputslider/css/slider.css" media="screen" type="text/css" />
+                <script type="text/javascript" src="js/inputslider/js/bootstrap-slider.js"></script>-->
         <!-- colorpicker -->
         <!--        <script type="text/javascript" src="js/colorpicker2/js/bootstrap-colorpicker.js"></script>
                 <script type="text/javascript" src="js/colorpicker2/js/docs.js"></script>-->
         <script>window.fabric || document.write('<script src="js/maker/1211.all.js"><\/script>')</script> 
         <script src="js/maker/jquery.mememaker.min.js"></script>
-        <script src="js/maker/jquery.mememakerinit.min.js"></script>
-        
+        <script src="js/maker/_191.mememakerinit.js"></script>
+
     </body>
 </html>
