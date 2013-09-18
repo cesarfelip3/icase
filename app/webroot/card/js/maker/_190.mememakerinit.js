@@ -32,6 +32,12 @@
             clearTimeout(this.resize);
             this.resize = setTimeout(onResize, 100);
         });
+        
+        
+        $(window).scroll(function() {
+            $.mememaker.update();
+            console.log ("offset: " + $.mememaker.left + ":" + $.mememaker.top);
+        });
 
         $(document).mousemove(function(event) {
             $.mememaker.mousex = event.pageX;
@@ -422,6 +428,7 @@
             top = Math.floor(top);
             left = Math.ceil(left - (500 - el.getBoundingRectWidth()) / 2);
 
+            top = $.mememaker.offset + top;
             $(".text-editor").show();
             $(".text-editor").css('top', top + "px");
             $(".text-editor").css('left', left + "px");
@@ -505,7 +512,8 @@
             var height = el.getBoundingRectHeight();
             var top = el.top + height / 2 + 10 + $.mememaker.top;
             var left = el.left - el.getBoundingRectWidth() / 2 + $.mememaker.left;
-
+            
+            top = top + $.mememaker.offset;
             top = Math.floor(top);
             left = Math.ceil(left - (100 - el.getBoundingRectWidth()) / 2);
 
