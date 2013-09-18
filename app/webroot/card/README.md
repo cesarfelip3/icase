@@ -26,7 +26,10 @@ for db :
     user_id
     user_name
     name : it's type name/size/industry, for example, Flyer-A6-Beautiful-Helthy
-    content : SVG data
+
+    page_front : SVG for front page design
+    page_back : SVG for back page design
+
     status : draft or publish
     created : created time stamp
     modified : last modified time stamp
@@ -36,12 +39,11 @@ for db :
     
     width : 88mm, for example
     height : 150mm, for exmaple
-
     
     price : the single page design and print price, for front and back for 1 paper
 
-
-
+    thumbnails : save template thumbnails, small one, and large one
+    output : save PDF file name
 
 
 Update
@@ -71,11 +73,14 @@ https://github.com/kangax/fabric.js/issues/781
 
 2-6. 1 day
 
-7. font type - 2 day
+7. font type - do it before close, will download font from website, google them...take time
 
 2013.09.18
 
-8. export to PDF
+8. export to PDF - urgent
+9. edit two side - urgent
+
+10. loading all templates for this user who saved them??? - not sure, feature request
 
 
 

@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.29)
 # Database: card
-# Generation Time: 2013-09-18 07:29:13 +0000
+# Generation Time: 2013-09-18 08:14:34 +0000
 # ************************************************************
 
 
@@ -23,8 +23,6 @@
 # Dump of table creations
 # ------------------------------------------------------------
 
-# content - the canvas will export to SVG or JSON, and save to content field, SVG, JSON all TEXT
-
 DROP TABLE IF EXISTS `creations`;
 
 CREATE TABLE `creations` (
@@ -33,12 +31,16 @@ CREATE TABLE `creations` (
   `user_id` int(11) DEFAULT NULL,
   `user_name` varchar(128) DEFAULT NULL,
   `name` varchar(256) DEFAULT NULL,
-  `content` text,
+  `price` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `page_front` text,
+  `page_back` text,
+  `thumbnails` text,
+  `output` text,
   `industry` varchar(256) DEFAULT NULL,
-  `size` varchar(32) DEFAULT '',
+  `size` varchar(32) NOT NULL DEFAULT 'A6',
   `width` int(11) DEFAULT NULL,
   `height` int(11) DEFAULT NULL,
-  `status` varchar(32) DEFAULT 'draft',
+  `status` varchar(32) NOT NULL DEFAULT 'draft',
   `created` int(11) DEFAULT NULL,
   `modified` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
