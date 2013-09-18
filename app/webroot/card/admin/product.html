@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-
         <meta charset="utf-8">
         <title>Admin Theme 1.0</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,14 +40,12 @@
                 <div class="navbar">
                     <div class="navbar-inner">
                         <div class="container">
-
                             <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
                             <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </a>
-
                             <div class="nav-collapse">
                                 <ul class="nav">
                                     <li>
@@ -110,47 +107,30 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </div>
-
         <div class="secondary-masthead">
-
             <div class="container">
-
                 <ul class="breadcrumb">
                     <li>
                         <a href="#">Admin</a> <span class="divider">/</span>
                     </li>
-                    <li>
-                        <a href="#">Store</a> <span class="divider">/</span>
-                    </li>
-                    <li class="active">Orders</li>
+                    <li class="active">Products</li>
                 </ul>
-
             </div>
-
         </div>
-
         <div class="main-area dashboard">
-
             <div class="container">
-
-                <div class="alert alert-info">
+                <div class="alert alert-info hide">
                     <a class="close" data-dismiss="alert" href="#">x</a>
                     <h4 class="alert-heading">Information</h4>
-                    The orders template can be used to list customer orders.
+                    The listing template can be used to list content that requires editing, such as pages, product catalogue, settings and members.
                 </div>
-
                 <div class="row">
-
                     <div class="span12">
-
                         <div class="slate">
-
                             <form class="form-inline">
-                                <input type="text" class="input-large" placeholder="Order # or Customer Name...">
+                                <input type="text" class="input-large" placeholder="Keyword...">
                                 <select>
                                     <option value=""> - From Date - </option>
                                 </select>
@@ -158,33 +138,19 @@
                                     <option value=""> - To Date - </option>
                                 </select>
                                 <select>
-                                    <option value=""> - Order Status - </option>
+                                    <option value=""> - Filter - </option>
                                 </select>
-                                <button type="submit" class="btn btn-primary">Filter Orders</button>
+                                <button type="submit" class="btn btn-primary">Filter Listings</button>
                             </form>
-
                         </div>
-
                     </div>
-
                 </div>
-
                 <div class="row">
-
                     <div class="span12 listing-buttons">
-
-                        <button class="btn btn-info">Action</button>
-
-                        <button class="btn btn-success">Action</button>
-
-                        <button class="btn btn-primary">Add New Order</button>
-
+                        <a class="btn btn-info" href="product_add.html">Add</a>
                     </div>
-
                     <div class="span12">
-
                         <div class="slate">
-
                             <div class="page-header">
                                 <div class="btn-group pull-right">
                                     <button class="btn dropdown-toggle" data-toggle="dropdown">
@@ -197,108 +163,57 @@
                                         <li><a href="">PDF</a></li>
                                     </ul>
                                 </div>
-                                <h2>Orders</h2>
+                                <h2>Products</h2>
                             </div>
-
-                            <table class="orders-table table">
+                            <table class="table table-strip">
                                 <thead>
                                     <tr>
-                                        <th>Orders</th>
-                                        <th class="value">Value</th>
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>Thumbnail</th>
+                                        <th>Size</th>
+                                        <th>Width</th>
+                                        <th>Height</th>
+                                        <th>Status</th>
+                                        <th>Created</th>
+                                        <th>Modified</th>
                                         <th class="actions">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><a href="vieworder.html">#12345 - John Smith</a> <span class="label label-info">New</span><br /><span class="meta">Today at 13:42</span></td>
-                                        <td class="value">
-                                            $132.00
-                                        </td>
+                                        <td>1</td>
+                                        <td><a href="form.html">Listing title</a> <span class="label label-info">Item Status</span><br /><span class="meta">Added Today</span></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
                                         <td class="actions">
-                                            <a class="btn btn-small btn-primary" href="vieworder.html">View Order</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="vieworder.html">#12345 - John Smith</a> <span class="label label-info">New</span><br /><span class="meta">Today at 13:42</span></td>
-                                        <td class="value">
-                                            $132.00
-                                        </td>
-                                        <td class="actions">
-                                            <a class="btn btn-small btn-primary" href="vieworder.html">View Order</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="vieworder.html">#12345 - John Smith</a> <span class="label label-info">New</span><br /><span class="meta">Today at 13:42</span></td>
-                                        <td class="value">
-                                            $132.00
-                                        </td>
-                                        <td class="actions">
-                                            <a class="btn btn-small btn-primary" href="vieworder.html">View Order</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="vieworder.html">#12345 - John Smith</a> <span class="label label-success">Dispatched</span><br /><span class="meta">Today at 13:42</span></td>
-                                        <td class="value">
-                                            $132.00
-                                        </td>
-                                        <td class="actions">
-                                            <a class="btn btn-small btn-primary" href="vieworder.html">View Order</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="vieworder.html">#12345 - John Smith</a> <span class="label label-important">Refunded</span><br /><span class="meta">Today at 13:42</span></td>
-                                        <td class="value">
-                                            $132.00
-                                        </td>
-                                        <td class="actions">
-                                            <a class="btn btn-small btn-primary" href="vieworder.html">View Order</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="vieworder.html">#12345 - John Smith</a> <span class="label label">Awaiting Payment</span><br /><span class="meta">Today at 13:42</span></td>
-                                        <td class="value">
-                                            $132.00
-                                        </td>
-                                        <td class="actions">
-                                            <a class="btn btn-small btn-primary" href="vieworder.html">View Order</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="vieworder.html">#12345 - John Smith</a> <span class="label label-inverse">Failed</span><br /><span class="meta">Today at 13:42</span></td>
-                                        <td class="value">
-                                            $132.00
-                                        </td>
-                                        <td class="actions">
-                                            <a class="btn btn-small btn-primary" href="vieworder.html">View Order</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="vieworder.html">#12345 - John Smith</a> <span class="label label-warning">Cancelled</span><br /><span class="meta">Today at 13:42</span></td>
-                                        <td class="value">
-                                            $132.00
-                                        </td>
-                                        <td class="actions">
-                                            <a class="btn btn-small btn-primary" href="vieworder.html">View Order</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="vieworder.html">#12345 - John Smith</a> <span class="label label-success">Dispatched</span><br /><span class="meta">Today at 13:42</span></td>
-                                        <td class="value">
-                                            $132.00
-                                        </td>
-                                        <td class="actions">
-                                            <a class="btn btn-small btn-primary" href="vieworder.html">View Order</a>
+                                            <a class="btn btn-small btn-danger" data-toggle="modal" href="#removeItem">Remove</a>
+                                            <a class="btn btn-small btn-primary" href="template_edit.html">Edit</a>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
-
                         </div>
-
                     </div>
-
+                    <div class="modal hide fade" id="removeItem">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">×</button>
+                            <h3>Remove Item</h3>
+                        </div>
+                        <div class="modal-body">
+                            <p>Are you sure you would like to remove this item?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#" class="btn" data-dismiss="modal">Close</a>
+                            <a href="#" class="btn btn-danger">Remove</a>
+                        </div>
+                    </div>
                     <div class="span6">
-
                         <div class="pagination pull-left">
                             <ul>
                                 <li><a href="#">Prev</a></li>
@@ -311,35 +226,13 @@
                                 <li><a href="#">Next</a></li>
                             </ul>
                         </div>
-
                     </div>
-
-                    <div class="span6 listing-buttons pull-right">
-
-                        <button class="btn btn-info">Action</button>
-
-                        <button class="btn btn-success">Action</button>
-
-                        <button class="btn btn-primary">Add New Item</button>
-
+                    <div class="span6 listing-buttons pull-right hide">
+                        <button class="btn btn-info">Add</button>
                     </div>
-
                 </div>
-
-                <div class="row">
-
-                    <div class="span12 footer">
-
-                        <p>&copy; Website Name 2012</p>
-
-                    </div>
-
-                </div>
-
             </div>
-
         </div>
-
         <!-- Le javascript
     ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
@@ -368,10 +261,8 @@
                 d1.push([14, 40]);
                 d1.push([15, 36]);
                 d1.push([16, 34]);
-
                 $.plot($("#placeholder"), [d1], {grid: {backgroundColor: 'white', color: '#999', borderWidth: 1, borderColor: '#DDD'}, colors: ["#f89406"], series: {lines: {show: true, fill: true, fillColor: "rgba(248, 148, 6, 0.5)"}}});
             });
         </script>
-
     </body>
 </html>

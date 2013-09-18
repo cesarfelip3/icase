@@ -82,6 +82,20 @@ https://github.com/kangax/fabric.js/issues/781
 
 10. loading all templates for this user who saved them??? - not sure, feature request
 
+2013.09.18
+
+Admin - 
+
+Template - done
+    List
+    Add
+    Edit
+
+Product - 
+    List - done
+    Add
+    Edit
+
 
 
 
