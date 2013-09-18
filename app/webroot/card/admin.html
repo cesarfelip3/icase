@@ -11,16 +11,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
         <link rel="stylesheet" href="css/bootstrap.min.css">
-
-        <!--        <link rel="stylesheet" href="css/bootstrap-responsive.min.css">-->
-        <link rel="stylesheet" href="js/colorpicker2/css/bootstrap-colorpicker.css">
-        <!-- link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet" -->
         <link href="css/font-awesome.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="css/main.css">
         <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
     </head>
     <body>
         <!--[if lt IE 9]>
@@ -167,79 +161,9 @@
         <script type="text/javascript" src="js/pluploader/plupload.browserplus.js"></script>
         <script type="text/javascript" src="js/pluploader/plupload.html4.js"></script>
         <script type="text/javascript" src="js/pluploader/plupload.html5.js"></script>
-        <script>
-            var loaded = false;
-            $(document).ready(
-                    function() {
-                        init();
-
-                        jQuery(document).scroll(function() {
-                            var top = document.getElementById("box-bottom");
-                            var pos = top.getBoundingClientRect();
-
-                            console.log(pos.top);
-                            console.log(jQuery("#box-bottom").scrollTop());
-                            console.log(jQuery(window).height());
-
-                            if (pos.top <= jQuery(window).height() && !loaded) {
-                                console.log("bottom");
-                                //loaded = true;
-                                $("#li-template-box1").append('<div class="thumbnail"><a href="javascript:"><img src="img/thumb_small_1.jpg"  style=""/></a><div class="caption"><h4>Letter</h4></div></div>');
-                                $("#li-template-box2").append('<div class="thumbnail"><a href="javascript:"><img src="img/thumb_small_1.jpg"  style=""/></a><div class="caption"><h4>Letter</h4></div></div>');
-                                $("#li-template-box3").append('<div class="thumbnail"><a href="javascript:"><img src="img/thumb_small_1.jpg"  style=""/></a><div class="caption"><h4>Letter</h4></div></div>');
-                                $("#li-template-box4").append('<div class="thumbnail"><a href="javascript:"><img src="img/thumb_small_1.jpg"  style=""/></a><div class="caption"><h4>Letter</h4></div></div>');
-
-                                init();
-                            }
-                        });
-                    });
-            function init() {
-                $(".thumbnail a").click(
-                        function(e) {
-                            $("#modal-preview").modal();
-                        });
-
-            }
-        </script>
-        <!-- preview modal -->
-        <div id="modal-preview" class="modal2 hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="well" style="background-color:white;margin:auto;text-align: center;">
-                <div style="background-color:#ccc;padding:20px;">
-                    <img src="img/thumb_large.jpg" />
-                </div>
-                <h4 style='text-align:left;'>Letter  <span><small>Flyer A4</small></span><a class='pull-right btn btn-info btn-no-corner'><i class='icon-share-alt icon-large'></i> See Reverse</a></h4>
-                <hr/>
-                <div style="height:40px;padding:10px;">
-                    <a class="btn btn-warning pull-right btn-no-corner">Let's Customize <i class='icon-pencil icon-large'></i></a>
-                    <a class="btn btn-warning pull-right btn-no-corner"  data-dismiss="modal" aria-hidden="true" style='margin-right:5px;'>Cancel <i class='icon-remove icon-large'></i></a>
-                </div>
-            </div>
-
-            <div>
-                <div class="ajax-loading-indicator hide" style=""><a href="javascript:" style="font-size:14px;"><i class="icon-refresh icon-spin"></i> Loading ....</a></div>
-            </div>
-        </div>
-
-        <!-- user modal -->
-        <div id="modal-user" class="modal2 hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h3 id="myModalLabel">User</h3>
-            </div>
-            <div class="modal-body">
-                <div class="ajax-loading-indicator hide" style=""><a href="javascript:" style="font-size:14px;"><i class="icon-refresh icon-spin"></i> Loading ....</a></div>
-            </div>
-            <div class="modal-footer">
-                <p class="text-error">You have to sign in to save your progress.</p>
-            </div>
-        </div>
-
-        <!-- user modal -->
-        <div id="modal-upload-progress" class="modal2 hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-body">
-            </div>
-        </div>
-
+        
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
         <script src="js/vendor/bootstrap.min.js"></script>
 
         <script src="js/plugins.js"></script>
