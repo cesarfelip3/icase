@@ -32,6 +32,11 @@
             clearTimeout(this.resize);
             this.resize = setTimeout(onResize, 100);
         });
+        
+        $(window).scroll(function() {
+            $.mememaker.update();
+            console.log ("offset: " + $.mememaker.left + ":" + $.mememaker.top);
+        });
 
         $(document).mousemove(function(event) {
             $.mememaker.mousex = event.pageX;

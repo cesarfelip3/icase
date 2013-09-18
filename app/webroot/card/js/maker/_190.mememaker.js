@@ -30,8 +30,11 @@
         canvasScale: 0,
         width: 780,
         height: 780,
+        originx: 0,
+        originy: 0,
         left: 0,
         top: 0,
+        offset: 0,
         grid: {
             lines: null,
             size: 20,
@@ -186,6 +189,8 @@
         //canvas.allowTouchScrolling = true;
         canvas.clear();
         this.update();
+        this.originx = this.left;
+        this.originy = this.top;
     };
 
     Mememaker.prototype.position = function(el) {
@@ -200,6 +205,7 @@
         var pos = this.position(document.getElementById(this.wrapperId));
         this.left = pos.left;
         this.top = pos.top;
+        this.offset = this.originy - this.top;
 
         //console.log('canvas postion : ' + this.left + ":" + this.top);
     };
