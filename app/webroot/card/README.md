@@ -81,6 +81,7 @@ https://github.com/kangax/fabric.js/issues/781
 9. edit two side - urgent - done
 
 10. loading all templates for this user who saved them??? - not sure, feature request
+11. Changed all css to be independent
 
 2013.09.18
 
