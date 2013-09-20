@@ -78,7 +78,7 @@ https://github.com/kangax/fabric.js/issues/781
 2013.09.18
 
 8. export to PDF - urgent
-9. edit two side - urgent
+9. edit two side - urgent - done
 
 10. loading all templates for this user who saved them??? - not sure, feature request
 
