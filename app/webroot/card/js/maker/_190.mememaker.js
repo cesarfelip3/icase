@@ -191,6 +191,8 @@
         this.update();
         this.originx = this.left;
         this.originy = this.top;
+
+        console.log('canvas postion : ' + this.left + ":" + this.top);
     };
 
     Mememaker.prototype.position = function(el) {
@@ -206,8 +208,6 @@
         this.left = pos.left;
         this.top = pos.top;
         this.offset = this.originy - this.top;
-
-        //console.log('canvas postion : ' + this.left + ":" + this.top);
     };
 
     Mememaker.prototype.inEl = function(el) {

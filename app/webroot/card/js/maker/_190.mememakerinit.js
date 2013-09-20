@@ -165,7 +165,7 @@
             $(".image-editor").hide();
         }
 
-        $("#box-editing .span12").scroll(function() {
+        $("#box-editing").scroll(function() {
             console.log('scroll');
             $.mememaker.canvas.calcOffset();
             $.mememaker.update();
@@ -296,9 +296,11 @@
                             $.mememaker.tools.preview();
                             break;
                         case 'background':
+                            $("#box-toolbar-shape").hide();
                             $("#box-toolbar-bg").show();
                             break;
                         case 'addshape':
+                            $("#box-toolbar-bg").hide();
                             $("#box-toolbar-shape").show();
                             break;
                         case 'shape-rect':
