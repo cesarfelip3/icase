@@ -35,6 +35,9 @@
         left: 0,
         top: 0,
         offset: 0,
+        content: {
+            pages: []
+        },
         grid: {
             lines: null,
             size: 20,
@@ -85,7 +88,7 @@
         container: null,
         //
         init: null,
-        newcanvas : null,
+        newcanvas: null,
         remove: null,
         group: null,
         backward: null,
@@ -164,10 +167,10 @@
             fontFamily: 'Arial',
             fontSize: 30,
             fill: 'black'
-            //stroke: 'white',
-            //strokeWidth: 0,
-            //originX: 'left',
-            //originY: 'top',
+                    //stroke: 'white',
+                    //strokeWidth: 0,
+                    //originX: 'left',
+                    //originY: 'top',
 //            left: this.lastTextX,
 //            top: this.lastTextY
         }
@@ -342,7 +345,7 @@
                             items[j] = el;
                             cloneImages(j + 1, items, images, gr);
                         }, null);
-                        
+
             } else {
                 cloneImages(j + 1, items, images, gr);
             }
@@ -645,7 +648,7 @@
             }
 
             if (el.type == 'image') {
-                
+
                 $.mememaker.selected = true;
                 $.mememaker.activex = el.left;
                 $.mememaker.activey = el.top;
@@ -831,17 +834,17 @@
 
     Tools.prototype.closegrid = function() {
 
-        if(this.container.grid.close) {
+        if (this.container.grid.close) {
             this.showgrid();
             this.container.grid.close = false;
             return;
         }
-        
+
         if (this.container.grid.visible === false) {
             return;
         }
-        
-        this.showgrid ();
+
+        this.showgrid();
         this.container.grid.close = true;
     }
 
@@ -967,7 +970,7 @@
             this.preview_callback(preview);
         }
     }
-    
+
     Tools.prototype.getstate = function()
     {
         this.zoomreset();
@@ -990,6 +993,34 @@
         canvas.renderAll();
         canvas.calcOffset();
 
+    }
+
+    Tools.prototype.savepage = function(page) {
+
+        this.zoomreset();
+        $.mememaker.content.pages[page] = JSON.stringify(canvas.toJSON());
+        localStorage.pages = JSON.stringify($.mememaker.content.pages);
+
+    }
+
+    Tools.prototype.loadpage = function(page) {
+        page = intval(page);
+
+        if (page < 0) {
+            return false;
+        }
+
+        if (Number.isNaN(page)) {
+            return false;
+        }
+
+        $.mememaker.content.pages = JSON.parse(localStorage.pages);
+        if ($.mememaker.content.pages.length <= 0 || page >= $.mememaker.content.pages.length) {
+            return false;
+        }
+        
+        this.reload($.mememaker.content.pages[page]);
+        return true;
     }
 
     //===========================================

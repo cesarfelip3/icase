@@ -399,6 +399,22 @@
                             $(this).parent().addClass('disabled');
                             $(this).parent().prev().addClass('disabled');
                             break;
+                        case 'pagefront':
+                            if ($(this).parent().hasClass('disabled')) {
+                                return;
+                            }
+                            $.mememaker.savepage (0);
+                            $.mememaker.loadpage (1);
+                            $(this).parent().addClass('disabled');
+                            break;
+                        case 'pageback' :
+                            if ($(this).parent().hasClass('disabled')) {
+                                return;
+                            }
+                            $.mememaker.savepage (1);
+                            $.mememaker.loadpage (0);
+                            $(this).parent().addClass('disabled');
+                            break;
                         default:
                             break;
                     }

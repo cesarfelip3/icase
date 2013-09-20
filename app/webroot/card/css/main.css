@@ -149,6 +149,10 @@ body {
     text-decoration: none;    
 }
 
+#box-controlbar ul li.disabled a {
+    color:#ccc;
+}
+
 #box-editing {
     background-image:url(../img/bg.png);
     background-color:#aaa;
