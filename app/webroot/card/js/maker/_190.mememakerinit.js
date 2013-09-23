@@ -505,6 +505,10 @@
                         case "close":
                             $("#box-toolbar-texteditor").hide();
                             break;
+                        case "type":
+                            var type = $(this).data('data');
+                            $.mememaker.texteditor.changeFontFamily(type);
+                            break;
                         default:
                             break;
                     }
