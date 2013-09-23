@@ -36,7 +36,7 @@
 
         $(window).scroll(function() {
             $.mememaker.update();
-            console.log("offset: " + $.mememaker.left + ":" + $.mememaker.top);
+            //console.log("offset: " + $.mememaker.left + ":" + $.mememaker.top);
         });
 
         $(document).mousemove(function(event) {
@@ -572,8 +572,6 @@
 
         //var json = $.mememaker.canvas.toJSON();
         //json = JSON.stringify(json);
-        localStorage.state2 = localStorage.state = JSON.stringify([]);
-        console.log(localStorage.state);
 
     }
 

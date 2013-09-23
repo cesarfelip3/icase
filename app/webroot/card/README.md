@@ -70,9 +70,25 @@ https://github.com/kangax/fabric.js/issues/781
 6.  edit two side - done
 7.  font type - a simple version - done - for all default web fonts only
 8.  All css now independent one
-9.  undo/redo - bugs
+9.  undo/redo - almost ready...
 11. database tables - created - done
 10. PDF
+
+Discussion
+===========
+
+about undo/redo - 
+ 
+1. every changes will be saved, including add/remove?
+2. undo, will go back to the last state of canvas, actully remove object changed latestly 
+3. redo, actually will.....
+
+if there any concise algorithm....
+
+array : 1, 2, 3, 4, 5, 6, 7, 8, 9, 10...20
+start : 0
+end : 0
+
 
 
 
