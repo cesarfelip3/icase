@@ -32,11 +32,11 @@
             clearTimeout(this.resize);
             this.resize = setTimeout(onResize, 100);
         });
-        
-        
+
+
         $(window).scroll(function() {
             $.mememaker.update();
-            console.log ("offset: " + $.mememaker.left + ":" + $.mememaker.top);
+            console.log("offset: " + $.mememaker.left + ":" + $.mememaker.top);
         });
 
         $(document).mousemove(function(event) {
@@ -210,10 +210,10 @@
                 }
             }).done(function(data) {
                 var result = jQuery.parseJSON(data);
-                
+
                 if (result.error == 0) {
                     var url = result.files.url;
-                    $("#modal-preview .modal-body").html ("<img src='" + url + "' style='width:100%;height:100%' />");
+                    $("#modal-preview .modal-body").html("<img src='" + url + "' style='width:100%;height:100%' />");
                 }
                 (data);
             }).fail(function() {
@@ -232,7 +232,7 @@
 
                     switch (action) {
                         case 'new':
-                            $.mememaker.tools.newcanvas ("#eb3d2d");
+                            $.mememaker.tools.newcanvas("#eb3d2d");
                             break;
                         case 'remove':
                             if ($.mememaker.tools.exist() == false) {
@@ -333,7 +333,7 @@
                             if ($("#box-attribute") !== undefined) {
                                 $("#box-attribute").show();
                             }
-                            
+
                             $.mememakerinit.zoomcount = 0;
                             $("#box-canvas-wrapper").css("width", $.mememaker.width + "px");
                             $.mememaker.tools.save();
@@ -403,8 +403,8 @@
                             if ($(this).parent().hasClass('disabled')) {
                                 return;
                             }
-                            $.mememaker.savepage (0);
-                            $.mememaker.loadpage (1);
+                            $.mememaker.savepage(0);
+                            $.mememaker.loadpage(1);
                             $(this).parent().next().removeClass('disabled');
                             $(this).parent().addClass('disabled');
                             break;
@@ -412,8 +412,8 @@
                             if ($(this).parent().hasClass('disabled')) {
                                 return;
                             }
-                            $.mememaker.savepage (1);
-                            $.mememaker.loadpage (0);
+                            $.mememaker.savepage(1);
+                            $.mememaker.loadpage(0);
                             $(this).parent().prev().removeClass('disabled');
                             $(this).parent().addClass('disabled');
                             break;
@@ -536,7 +536,7 @@
             var height = el.getBoundingRectHeight();
             var top = el.top + height / 2 + 10 + $.mememaker.top;
             var left = el.left - el.getBoundingRectWidth() / 2 + $.mememaker.left;
-            
+
             top = top + $.mememaker.offset;
             top = Math.floor(top);
             left = Math.ceil(left - (100 - el.getBoundingRectWidth()) / 2);

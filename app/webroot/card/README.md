@@ -59,43 +59,22 @@ https://github.com/kangax/fabric.js/issues/781
 1.2.11 performance of addgrid is poor
 
 2013.09.14
+2013.09.23
 
-1. image editor - crop - done
-2. Shape controls - fill - closed
-7. fixed - toBack / toFront ...
-3. preview - done
-4. save - done
-5. reload - done
+1.  image editor - crop - done
+2.  Shape controls - fill - closed
+7.  fixed - toBack / toFront ...
+3.  preview - done
+4.  save - done
+5.  reload - done
+6.  edit two side - done
+7.  font type - a simple version - done - for all default web fonts only
+8.  All css now independent one
+9.  undo/redo - bugs
+11. database tables - created - done
+10. PDF
 
-2013.09.16
 
-6. undo/redo - bugs
-
-2-6. 1 day
-
-7. font type - do it before close, will download font from website, google them...take time
-
-2013.09.18
-
-8. export to PDF - urgent
-9. edit two side - urgent - done
-
-10. loading all templates for this user who saved them??? - not sure, feature request
-11. Changed all css to be independent
-
-2013.09.18
-
-Admin - 
-
-Template - done
-    List
-    Add
-    Edit
-
-Product - 
-    List - done
-    Add
-    Edit
 
 
 
