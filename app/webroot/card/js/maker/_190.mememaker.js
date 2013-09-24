@@ -970,6 +970,18 @@
         this.zoomreset();
         canvas.clear();
         canvas.loadFromJSON(json);
+        
+        var objects = canvas.getObjects();
+        var j = 0;
+        
+        for (var i in objects) {
+            if (objects[i].type === 'line' && objects[i].selectable === false
+                    && objects[i].get('opacity') === 0.5) {
+                $.mememaker.grid.lines[j] = objects[i];
+                j++;
+                continue;
+            }
+        }
         canvas.renderAll();
         canvas.calcOffset();
 
