@@ -779,6 +779,8 @@
         for (i in this.container.grid.lines) {
             this.container.grid.lines[i].remove();
         }
+        
+        this.container.grid.lines = null;
     }
 
     Tools.prototype.showgrid = function() {
@@ -949,6 +951,7 @@
         canvas.deactivateAll();
 
         var svg = canvas.toSVG();
+        this.addgrid();
         
         return svg;
     }
