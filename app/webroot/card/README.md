@@ -70,7 +70,7 @@ https://github.com/kangax/fabric.js/issues/781
 6.  edit two side - done
 7.  font type - a simple version - done - for all default web fonts only
 8.  All css now independent one
-9.  undo/redo - almost ready...
+9.  undo - done (exclude remove, and redo)
 11. database tables - created - done
 10. PDF
 
