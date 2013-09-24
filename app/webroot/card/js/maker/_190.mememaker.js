@@ -952,6 +952,7 @@
 
         var svg = canvas.toSVG();
         this.addgrid();
+        this.showgrid();
         
         return svg;
     }
