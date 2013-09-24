@@ -2,14 +2,14 @@
 <div class="clear:both;"></div>
 <div class="row-fluid">
     <div class="span9 fullwide">
-        <div class="banner"><img src="<?php echo $this->webroot . "img/banner.jpg" ?>" alt="Placeholder" class=""></div>
+        <div class="banner"><a href="http://beautahfulcreations.com/site/create"><img src="<?php echo $this->webroot . "img/banner.jpg" ?>" alt="Banner" class=""></a></div>
         <div class="threestep">
             <h2>3 steps <span>to create your case</span></h2>
 
             <div class="mob_three_step">
-                <a href="#"><div class="stepone"><b>choose</b><br>a case</div></a>
-                <a href="#"><div class="steptwo"><b>upload </b><br>your image</div></a>
-                <a href="#"><div class="stepthree"><b>We print</b><br>high quality</div></a>
+                <a href="http://beautahfulcreations.com/site/create"><div class="stepone"><b>choose</b><br>a case</div></a>
+                <a href="http://beautahfulcreations.com/site/create"><div class="steptwo"><b>upload </b><br>your image</div></a>
+                <a href="http://beautahfulcreations.com/site/create"><div class="stepthree"><b>We print</b><br>high quality</div></a>
             </div>
             <div class="mob_onlymob">        
                 <img  src="<?php echo $this->webroot . "img/mob_step_mob.png" ?>" alt="" ></div>
