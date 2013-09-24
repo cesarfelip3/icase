@@ -74,6 +74,12 @@ https://github.com/kangax/fabric.js/issues/781
 11. database tables - created - done
 10. PDF
 
+TCPDF
+
+1. use mm to be the default measure unit, so the A4 is 210mm x 297mm
+2. for SVG, remember to do x = 0, y = 0, width = '210', height = '297', mm too
+3. Custom page parameter, then AddPage, example_058.php is the demo
+
 Discussion
 ===========
 

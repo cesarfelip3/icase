@@ -79,7 +79,7 @@ $pdf->SetFont('helvetica', '', 10);
 
 // set page format (read source code documentation for further information)
 $page_format = array(
-    'MediaBox' => array ('llx' => 0, 'lly' => 0, 'urx' => 480, 'ury' => 580),
+    'MediaBox' => array ('llx' => 0, 'lly' => 0, 'urx' => 210, 'ury' => 294),
     //'CropBox' => array ('llx' => 0, 'lly' => 0, 'urx' => 210, 'ury' => 297),
     //'BleedBox' => array ('llx' => 5, 'lly' => 5, 'urx' => 205, 'ury' => 292),
     //'TrimBox' => array ('llx' => 10, 'lly' => 10, 'urx' => 200, 'ury' => 287),
@@ -103,7 +103,7 @@ $pdf->AddPage('P', $page_format, false, false);
 // NOTE: Uncomment the following line to rasterize SVG image using the ImageMagick library.
 //$pdf->setRasterizeVectorImages(true);
 
-$pdf->ImageSVG($file='images/demo.svg', $x=0, $y=0, $w='480px', $h='580px', $link='', $align='', $palign='', $border=0, $fitonpage=true);
+$pdf->ImageSVG($file='images/demo.svg', $x=0, $y=0, $w='210', $h='294', $link='', $align='', $palign='', $border=0, $fitonpage=true);
 
 //$pdf->ImageSVG($file='images/tux.svg', $x=30, $y=100, $w='', $h=100, $link='', $align='', $palign='', $border=0, $fitonpage=false);
 
