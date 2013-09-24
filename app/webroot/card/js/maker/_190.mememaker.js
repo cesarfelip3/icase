@@ -53,7 +53,7 @@
         },
         undo: {
             on: false,
-            refresh: false,
+            refresh: true,
             current: null,
             stack: [],
             index: 0,
@@ -515,10 +515,6 @@
 
     Tools.prototype.undo = function() {
 
-        var index = $.mememaker.undo.index;
-
-        $.mememaker.undo.stack = JSON.parse(localStorage.state);
-
         if ($.mememaker.undo.refresh === true) {
             $.mememaker.undo.index -= 1;
             $.mememaker.undo.index += 20;
@@ -535,6 +531,9 @@
         $.mememaker.undo.index += 20;
         $.mememaker.undo.index %= 20;
 
+        $.mememaker.undo.stack = JSON.parse(localStorage.state);
+
+        console.log("undo: " + $.mememaker.undo.index + ":" + $.mememaker.undo.start);
         var object = $.mememaker.undo.stack[$.mememaker.undo.index];
         var objects = canvas.getObjects();
 
@@ -567,63 +566,6 @@
     }
 
     Tools.prototype.redo = function() {
-
-        $.mememaker.undo.on = true;
-        $.mememaker.undo.stack = JSON.parse(localStorage.state);
-        // $.mememaker.undo.stack.pop();
-
-        if ($.mememaker.undo.index >= $.mememaker.undo.history) {
-            $.mememaker.undo.on = false;
-            return;
-        }
-
-        console.log($.mememaker.undo.stack);
-
-        $.mememaker.undo.index++;
-        var object = $.mememaker.undo.stack[$.mememaker.undo.index];
-
-        if (object.type == "text") {
-            console.log("currentId=" + $.mememaker.undo.current.id);
-            console.log("objectId=" + object.id);
-            console.log("index=" + $.mememaker.undo.index);
-
-            if ($.mememaker.undo.current.id == object.id) {
-                $.mememaker.undo.current.remove();
-            } else {
-                var objects = canvas.getObjects();
-                for (i in objects) {
-                    if (objects[i].id == object.id) {
-                        objects[i].remove();
-                    }
-                }
-            }
-            var text = new fabric.Text.fromObject(object);
-            canvas.add(text);
-            canvas.renderAll();
-            $.mememaker.undo.on = false;
-            $.mememaker.undo.current = text;
-            localStorage.state = JSON.stringify($.mememaker.undo.stack);
-        }
-
-        if (object.type == 'image') {
-            fabric.Image.fromObject(object, function(img) {
-                if ($.mememaker.undo.current.id == object.id) {
-                    $.mememaker.undo.current.remove();
-                } else {
-                    var objects = canvas.getObjects();
-                    for (i in objects) {
-                        if (objects[i].id == object.id) {
-                            objects[i].remove();
-                        }
-                    }
-                }
-                canvas.add(img);
-                canvas.renderAll();
-                $.mememaker.undo.on = false;
-                $.mememaker.undo.current = img;
-                localStorage.state = JSON.stringify($.mememaker.undo.stack);
-            });
-        }
 
     }
 
@@ -664,11 +606,19 @@
             var json = e.target.toJSON(['id']);
             $.mememaker.undo.stack = JSON.parse(localStorage.state);
 
+            if ($.mememaker.undo.index > $.mememaker.undo.start) {
+                $.mememaker.undo.index--;
+                $.mememaker.undo.index += 20;
+                $.mememaker.undo.index %= 20;
+            }
+
             $.mememaker.undo.stack[$.mememaker.undo.index] = json;
             $.mememaker.undo.index += 1;
             $.mememaker.undo.index %= 20;
 
-            if ($.mememaker.undo.index == $.mememaker.undo.start) {
+            console.log("" + $.mememaker.undo.index + ":" + $.mememaker.undo.start);
+
+            if ($.mememaker.undo.index === $.mememaker.undo.start) {
                 $.mememaker.undo.start = $.mememaker.undo.index + 1;
                 $.mememaker.undo.start %= 20;
             }
@@ -684,14 +634,20 @@
             // localStorage.state2 = localStorage.state;
             console.log("before:modified");
 
-            $.mememaker.undo.refresh = true;
-
             var json = e.target.toJSON(['id']);
             $.mememaker.undo.stack = JSON.parse(localStorage.state);
+
+            if ($.mememaker.undo.index === $.mememaker.undo.start) {
+                $.mememaker.undo.index++;
+                $.mememaker.undo.index %= 20;
+                $.mememaker.undo.refresh = true;
+            }
 
             $.mememaker.undo.stack[$.mememaker.undo.index] = json;
             $.mememaker.undo.index += 1;
             $.mememaker.undo.index %= 20;
+
+            console.log("" + $.mememaker.undo.index + ":" + $.mememaker.undo.start);
 
             if ($.mememaker.undo.index == $.mememaker.undo.start) {
                 $.mememaker.undo.start = $.mememaker.undo.index + 1;
@@ -703,13 +659,6 @@
         });
 
         canvas.on('object:removed', function(e) {
-            // localStorage.state2 = localStorage.state;
-            // var json = e.target.toJSON();
-            // localStorage.state = JSON.stringify(json);
-            // $.mememaker.undo.current = e.target;
-
-            // $.mememaker.undo.stack.push (e.target);
-            // $.mememaker.undo.index++;
         });
     }
 
