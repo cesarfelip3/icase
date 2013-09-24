@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+<title>TCPDF Examples</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="language" content="en" />
+<meta name="tcpdf_level" content="0" />
+<meta name="description" content="TCPDF: Open Source PHP Class for generating PDF documents" />
+<meta name="author" content="Nicola Asuni - Tecnick.com s.r.l." />
+<meta name="reply-to" content="" />
+<meta name="keywords" content="TCPDF, open source, class, php, project, tool, utf-8, unicode, pdf" />
+<link rel="stylesheet" type="text/css" href="styles/default.css" media="screen" />
+<link rel="shortcut icon" href="favicon.ico" />
+</head>
+<body>
+<script type="text/javascript">
+//<![CDATA[
+google_ad_client = "pub-2627887748647914";
+google_ad_width = "728";
+google_ad_height = "90";
+google_ad_format = "728x90_as";
+google_ad_channel ="7593282125";
+google_ad_type = "text_image";
+google_color_border = "EFEFEF";
+google_color_bg = "FFFFFF";
+google_color_link = "0060BF";
+google_color_url = "0060BF";
+google_color_text = "000000";
+//]]>
+</script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script><script type="text/javascript">
+//<![CDATA[
+var adblock=true;
+//]]>
+</script>
+<script type="text/javascript" src="http://www.tecnick.com/adframe.js"></script>
+<script type="text/javascript">
+//<![CDATA[
+if(adblock) {document.write('<div style="font-family:helvetica,arial;font-size:small;padding:0 4px 0 4px;background-color:#FFFFCC;color:#003399;border:1px;border-style:solid;border-width:1px;border-color:orange;"><form action="https://www.paypal.com/cgi-bin/webscr" method="post"><div><input type="hidden" name="cmd" value="_donations" /><input type="hidden" name="business" value="paypal@tecnick.com" /><input type="hidden" name="lc" value="US" /><input type="hidden" name="item_name" value="Tecnick.com" /><input type="hidden" name="no_note" value="0" /><input type="hidden" name="currency_code" value="GBP" /><input type="hidden" name="bn" value="PP-DonationsBF:btn_donate_SM.gif:NonHostedGuest" /> It appears that you are using AdBlocking software. The cost of running this website is covered by advertisements. If you like it please feel free to <input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donate_SM.gif" name="submit" alt="Donate to Tecnick.com via PayPal" /> a small amount of money to secure the future of this website.<img alt="" src="https://www.paypal.com/it_IT/i/scr/pixel.gif" width="1" height="1" /></div></form></div>');}
+//]]>
+</script>
+<noscript><div style="font-family:helvetica,arial;font-size:small;padding:0 4px 0 4px;background-color:#FFFFCC;color:#003399;border:1px;border-style:solid;border-width:1px;border-color:orange;"><form action="https://www.paypal.com/cgi-bin/webscr" method="post"><div><input type="hidden" name="cmd" value="_donations" /><input type="hidden" name="business" value="paypal@tecnick.com" /><input type="hidden" name="lc" value="US" /><input type="hidden" name="item_name" value="Tecnick.com" /><input type="hidden" name="no_note" value="0" /><input type="hidden" name="currency_code" value="GBP" /><input type="hidden" name="bn" value="PP-DonationsBF:btn_donate_SM.gif:NonHostedGuest" /> It appears that you are using AdBlocking software. The cost of running this website is covered by advertisements. If you like it please feel free to <input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donate_SM.gif" name="submit" alt="Donate to Tecnick.com via PayPal" /> a small amount of money to secure the future of this website.<img alt="" src="https://www.paypal.com/it_IT/i/scr/pixel.gif" width="1" height="1" /></div></form></div></noscript><div class="headermain">
+<div class="left"><div class="tagline">PHP class for generating PDF documents</div></div>
+<div class="right">
+<div class="headertools">
+<form action="http://www.tcpdf.org/search.php" id="cse-search-box">
+<div id="gsrch">
+<input type="hidden" name="cx" id="cx" value="partner-pub-2627887748647914:4304874910" />
+<input type="hidden" name="cof" id="cof" value="FORID:10" />
+<input type="hidden" name="ie" id="ie" value="UTF-8" />
+<input type="text" name="q" id="q" size="20" title="Google Search" />
+<input type="submit" name="sa" id="gsearch" value="search" />
+</div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+</div>
+<div style="margin-right:10px;">
+<span class="langselector" title="change language">
+<span class="selected" title="English">EN</span>
+<a href="/examples.php?lang=it" class="langselector" title="Italian">IT</a>
+</span>
+</div>
+</div>
+<div id="scrollayer" class="scrollmenu">
+<!--[if lte IE 7]>
+<style type="text/css">
+ul.menu li {text-align:left;behavior:url("../jscripts/IEmen.htc");}
+ul.menu ul {background-color:#003399;margin:0;padding:0;display:none;position:absolute;top:20px;left:0px;}
+ul.menu ul li {width:200px;text-align:left;margin:0;}
+ul.menu ul ul {display:none;position:absolute;top:0px;left:190px;}
+</style>
+<![endif]-->
+<a name="menusection" id="menusection" class="hidden"></a>
+<div class="hidden"><a href="#topofdoc" accesskey="2" title="[2] skip navigation menu">skip navigation menu</a></div>
+<ul class="menu">
+<li><a href="index.php" title="Main Page" accesskey="i">home</a></li>
+<li><a href="docs.php" title="TCPDF Documentation" accesskey="d">docs</a>
+<!--[if lte IE 6]><iframe class="menu"></iframe><![endif]-->
+<ul>
+<li><a href="installation.php" title="TCPDF Installation">installation</a></li>
+<li><a href="fonts.php" title="TCPDF Fonts">fonts</a></li>
+<li><a href="performances.php" title="TCPDF Performances">performances</a></li>
+<li><a href="license.php" title="TCPDF Software License">license</a></li>
+<li><a href="sourcedoc.php" title="TCPDF Source Code Documentation">source docs</a></li>
+</ul>
+</li>
+<li><span class="active">examples</span></li>
+<li><a href="services.php" title="TCPDF Support and Services" accesskey="s">services</a></li>
+<li><a href="download.php" title="Download TCPDF" accesskey="d">download</a></li>
+<li><a href="project.php" title="Website of TCPDF project" accesskey="p">project</a></li>
+</ul>
+</div>
+</div>
+<div class="body">
+<div class="content">
+<a name="topofdoc" id="topofdoc"></a>
+<h1>TCPDF Examples</h1>
+<div class="addthis_toolbox addthis_default_style"><a class="addthis_button_google_plusone"></a><a class="addthis_button_facebook_like"></a><a class="addthis_button_tweet"></a></div><script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=nicolaasuni"></script>
+<div class="container">
+<h2>PDF</h2>
+<ol>
+<li>[<a href="examples/example_001.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_001.phps" title="PHP [new window]" target="_blank">PHP</a>] first example with default Header and Footer</li>
+<li>[<a href="examples/example_002.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_002.phps" title="PHP [new window]" target="_blank">PHP</a>] without Header and Footer</li>
+<li>[<a href="examples/example_003.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_003.phps" title="PHP [new window]" target="_blank">PHP</a>] custom Header and Footer</li>
+<li>[<a href="examples/example_004.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_004.phps" title="PHP [new window]" target="_blank">PHP</a>] text Stretching with Cell()</li>
+<li>[<a href="examples/example_005.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_005.phps" title="PHP [new window]" target="_blank">PHP</a>] Multicell()</li>
+<li>[<a href="examples/example_006.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_006.phps" title="PHP [new window]" target="_blank">PHP</a>] WriteHTML()</li>
+<li>[<a href="examples/example_007.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_007.phps" title="PHP [new window]" target="_blank">PHP</a>] independent columns with WriteHTMLCell()</li>
+<li>[<a href="examples/example_008.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_008.phps" title="PHP [new window]" target="_blank">PHP</a>] external UTF-8 Unicode text file</li>
+<li>[<a href="examples/example_009.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_009.phps" title="PHP [new window]" target="_blank">PHP</a>] Image()</li>
+<li>[<a href="examples/example_010.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_010.phps" title="PHP [new window]" target="_blank">PHP</a>] text on multiple columns</li>
+<li>[<a href="examples/example_011.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_011.phps" title="PHP [new window]" target="_blank">PHP</a>] table with primitive methods</li>
+<li>[<a href="examples/example_012.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_012.phps" title="PHP [new window]" target="_blank">PHP</a>] graphic methods</li>
+<li>[<a href="examples/example_013.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_013.phps" title="PHP [new window]" target="_blank">PHP</a>] graphic transformations</li>
+<li>[<a href="examples/example_014.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_014.phps" title="PHP [new window]" target="_blank">PHP</a>] forms and javascript</li>
+<li>[<a href="examples/example_015.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_015.phps" title="PHP [new window]" target="_blank">PHP</a>] index with Bookmarks()</li>
+<li>[<a href="examples/example_016.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_016.phps" title="PHP [new window]" target="_blank">PHP</a>] document encryption</li>
+<li>[<a href="examples/example_017.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_017.phps" title="PHP [new window]" target="_blank">PHP</a>] independent columns with MultiCell()</li>
+<li>[<a href="examples/example_018.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_018.phps" title="PHP [new window]" target="_blank">PHP</a>] Persian and Arabic language on RTL document</li>
+<li>[<a href="examples/example_019.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_019.phps" title="PHP [new window]" target="_blank">PHP</a>] alternative config file</li>
+<li>[<a href="examples/example_020.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_020.phps" title="PHP [new window]" target="_blank">PHP</a>] complex alignment with Multicell()</li>
+<li>[<a href="examples/example_021.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_021.phps" title="PHP [new window]" target="_blank">PHP</a>] writeHTML() text flow</li>
+<li>[<a href="examples/example_022.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_022.phps" title="PHP [new window]" target="_blank">PHP</a>] CMYK colors</li>
+<li>[<a href="examples/example_023.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_023.phps" title="PHP [new window]" target="_blank">PHP</a>] page groups</li>
+<li>[<a href="examples/example_024.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_024.phps" title="PHP [new window]" target="_blank">PHP</a>] object visibility with setVisibility() and layers with startLayer()</li>
+<li>[<a href="examples/example_025.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_025.phps" title="PHP [new window]" target="_blank">PHP</a>] object transparency with SetAlpha()</li>
+<li>[<a href="examples/example_026.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_026.phps" title="PHP [new window]" target="_blank">PHP</a>] text clipping</li>
+<li>[<a href="examples/example_027.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_027.phps" title="PHP [new window]" target="_blank">PHP</a>] 1D barcodes</li>
+<li>[<a href="examples/example_028.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_028.phps" title="PHP [new window]" target="_blank">PHP</a>] multiple page formats</li>
+<li>[<a href="examples/example_029.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_029.phps" title="PHP [new window]" target="_blank">PHP</a>] Set PDF viewer display preferences with setViewerPreferences()</li>
+<li>[<a href="examples/example_030.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_030.phps" title="PHP [new window]" target="_blank">PHP</a>] colour gradients</li>
+<li>[<a href="examples/example_031.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_031.phps" title="PHP [new window]" target="_blank">PHP</a>] pie chart graphic</li>
+<li>[<a href="examples/example_032.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_032.phps" title="PHP [new window]" target="_blank">PHP</a>] EPS/AI vectorial image with ImageEPS()</li>
+<li>[<a href="examples/example_033.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_033.phps" title="PHP [new window]" target="_blank">PHP</a>] mixed font types (TrueType Unicode, core, CID-0)</li>
+<li>[<a href="examples/example_034.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_034.phps" title="PHP [new window]" target="_blank">PHP</a>] clipping masks</li>
+<li>[<a href="examples/example_035.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_035.phps" title="PHP [new window]" target="_blank">PHP</a>] border styles with SetLineStyle()</li>
+<li>[<a href="examples/example_036.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_036.phps" title="PHP [new window]" target="_blank">PHP</a>] PDF text annotations</li>
+<li>[<a href="examples/example_037.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_037.phps" title="PHP [new window]" target="_blank">PHP</a>] spot colors</li>
+<li>[<a href="examples/example_038.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_038.phps" title="PHP [new window]" target="_blank">PHP</a>] unembedded CID-0 CJK font</li>
+<li>[<a href="examples/example_039.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_039.phps" title="PHP [new window]" target="_blank">PHP</a>] HTML text justification</li>
+<li>[<a href="examples/example_040.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_040.phps" title="PHP [new window]" target="_blank">PHP</a>] booklet mode (double-sided pages)</li>
+<li>[<a href="examples/example_041.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_041.phps" title="PHP [new window]" target="_blank">PHP</a>] file attachment</li>
+<li>[<a href="examples/example_042.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_042.phps" title="PHP [new window]" target="_blank">PHP</a>] image with transparency (alpha channel)</li>
+<li>[<a href="examples/example_043.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_043.phps" title="PHP [new window]" target="_blank">PHP</a>] disk caching</li>
+<li>[<a href="examples/example_044.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_044.phps" title="PHP [new window]" target="_blank">PHP</a>] move, copy and delete pages</li>
+<li>[<a href="examples/example_045.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_045.phps" title="PHP [new window]" target="_blank">PHP</a>] table of contents</li>
+<li>[<a href="examples/example_046.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_046.phps" title="PHP [new window]" target="_blank">PHP</a>] text hyphenation</li>
+<li>[<a href="examples/example_047.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_047.phps" title="PHP [new window]" target="_blank">PHP</a>] transactions and UNDO</li>
+<li>[<a href="examples/example_048.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_048.phps" title="PHP [new window]" target="_blank">PHP</a>] HTML tables with header and rowspan</li>
+<li>[<a href="examples/example_049.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_049.phps" title="PHP [new window]" target="_blank">PHP</a>] call TCPDF methods in HTML</li>
+<li>[<a href="examples/example_050.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_050.phps" title="PHP [new window]" target="_blank">PHP</a>] 2D barcodes (QR-Code, Datamatrix ECC200 and PDF417)</li>
+<li>[<a href="examples/example_051.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_051.phps" title="PHP [new window]" target="_blank">PHP</a>] image as a page background</li>
+<li>[<a href="examples/example_052.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_052.phps" title="PHP [new window]" target="_blank">PHP</a>] digital signature certification</li>
+<li>[<a href="examples/example_053.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_053.phps" title="PHP [new window]" target="_blank">PHP</a>] javascript functions</li>
+<li>[<a href="examples/example_054.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_054.phps" title="PHP [new window]" target="_blank">PHP</a>] XHTML form</li>
+<li>[<a href="examples/example_055.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_055.phps" title="PHP [new window]" target="_blank">PHP</a>] core fonts dump</li>
+<li>[<a href="examples/example_056.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_056.phps" title="PHP [new window]" target="_blank">PHP</a>] crop marks and registration marks</li>
+<li>[<a href="examples/example_057.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_057.phps" title="PHP [new window]" target="_blank">PHP</a>] vertical alignment and metrics on Cell()</li>
+<li>[<a href="examples/example_058.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_058.phps" title="PHP [new window]" target="_blank">PHP</a>] SVG vectorial image with ImageSVG()</li>
+<li>[<a href="examples/example_059.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_059.phps" title="PHP [new window]" target="_blank">PHP</a>] table of contents with HTML templates</li>
+<li>[<a href="examples/example_060.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_060.phps" title="PHP [new window]" target="_blank">PHP</a>] advanced page settings</li>
+<li>[<a href="examples/example_061.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_061.phps" title="PHP [new window]" target="_blank">PHP</a>] XHTML + CSS</li>
+<li>[<a href="examples/example_062.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_062.phps" title="PHP [new window]" target="_blank">PHP</a>] XObject templates</li>
+<li>[<a href="examples/example_063.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_063.phps" title="PHP [new window]" target="_blank">PHP</a>] text stretching and spacing (tracking/kerning)</li>
+<li>[<a href="examples/example_064.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_064.phps" title="PHP [new window]" target="_blank">PHP</a>] no-write page regions</li>
+<li>[<a href="examples/example_065.pdf" title="PDF [new window]" target="_blank">PDF</a>] [<a href="examples/example_065.phps" title="PHP [new window]" target="_blank">PHP</a>] PDF/A-1b (ISO 19005-1:2005) document</li>
+</ol>
+<h2>Barcodes</h2>
+<ol>
+<li>[<a href="examples/barcodes/example_1d_html.html" title="1D  barcode [HTML] [new window]" target="_blank">HTML</a>] [<a href="examples/barcodes/example_1d_html.phps" title="1D  barcode PHP [new window]" target="_blank">PHP</a>] 1D  barcode in HTML format</li>
+<li>[<a href="examples/barcodes/example_1d_png.png" title="1D  barcode [PNG] [new window]" target="_blank">PNG</a>] [<a href="examples/barcodes/example_1d_png.phps" title="1D  barcode PHP [new window]" target="_blank">PHP</a>] 1D  barcode in PNG format</li>
+<li>[<a href="examples/barcodes/example_1d_svg.svg" title="1D  barcode [SVG] [new window]" target="_blank">SVG</a>] [<a href="examples/barcodes/example_1d_svg.phps" title="1D  barcode PHP [new window]" target="_blank">PHP</a>] 1D  barcode in SVG format</li>
+<li>[<a href="examples/barcodes/example_1d_svgi.html" title="1D  barcode [SVGI] [new window]" target="_blank">SVGI</a>] [<a href="examples/barcodes/example_1d_svgi.phps" title="1D  barcode PHP [new window]" target="_blank">PHP</a>] 1D  barcode in SVGI format</li>
+<li>[<a href="examples/barcodes/example_2d_datamatrix_html.html" title="2D datamatrix barcode [HTML] [new window]" target="_blank">HTML</a>] [<a href="examples/barcodes/example_2d_datamatrix_html.phps" title="2D datamatrix barcode PHP [new window]" target="_blank">PHP</a>] 2D datamatrix barcode in HTML format</li>
+<li>[<a href="examples/barcodes/example_2d_datamatrix_png.png" title="2D datamatrix barcode [PNG] [new window]" target="_blank">PNG</a>] [<a href="examples/barcodes/example_2d_datamatrix_png.phps" title="2D datamatrix barcode PHP [new window]" target="_blank">PHP</a>] 2D datamatrix barcode in PNG format</li>
+<li>[<a href="examples/barcodes/example_2d_datamatrix_svg.svg" title="2D datamatrix barcode [SVG] [new window]" target="_blank">SVG</a>] [<a href="examples/barcodes/example_2d_datamatrix_svg.phps" title="2D datamatrix barcode PHP [new window]" target="_blank">PHP</a>] 2D datamatrix barcode in SVG format</li>
+<li>[<a href="examples/barcodes/example_2d_datamatrix_svgi.html" title="2D datamatrix barcode [SVGI] [new window]" target="_blank">SVGI</a>] [<a href="examples/barcodes/example_2d_datamatrix_svgi.phps" title="2D datamatrix barcode PHP [new window]" target="_blank">PHP</a>] 2D datamatrix barcode in SVGI format</li>
+<li>[<a href="examples/barcodes/example_2d_pdf417_html.html" title="2D pdf417 barcode [HTML] [new window]" target="_blank">HTML</a>] [<a href="examples/barcodes/example_2d_pdf417_html.phps" title="2D pdf417 barcode PHP [new window]" target="_blank">PHP</a>] 2D pdf417 barcode in HTML format</li>
+<li>[<a href="examples/barcodes/example_2d_pdf417_png.png" title="2D pdf417 barcode [PNG] [new window]" target="_blank">PNG</a>] [<a href="examples/barcodes/example_2d_pdf417_png.phps" title="2D pdf417 barcode PHP [new window]" target="_blank">PHP</a>] 2D pdf417 barcode in PNG format</li>
+<li>[<a href="examples/barcodes/example_2d_pdf417_svg.svg" title="2D pdf417 barcode [SVG] [new window]" target="_blank">SVG</a>] [<a href="examples/barcodes/example_2d_pdf417_svg.phps" title="2D pdf417 barcode PHP [new window]" target="_blank">PHP</a>] 2D pdf417 barcode in SVG format</li>
+<li>[<a href="examples/barcodes/example_2d_pdf417_svgi.html" title="2D pdf417 barcode [SVGI] [new window]" target="_blank">SVGI</a>] [<a href="examples/barcodes/example_2d_pdf417_svgi.phps" title="2D pdf417 barcode PHP [new window]" target="_blank">PHP</a>] 2D pdf417 barcode in SVGI format</li>
+<li>[<a href="examples/barcodes/example_2d_qrcode_html.html" title="2D qrcode barcode [HTML] [new window]" target="_blank">HTML</a>] [<a href="examples/barcodes/example_2d_qrcode_html.phps" title="2D qrcode barcode PHP [new window]" target="_blank">PHP</a>] 2D qrcode barcode in HTML format</li>
+<li>[<a href="examples/barcodes/example_2d_qrcode_png.png" title="2D qrcode barcode [PNG] [new window]" target="_blank">PNG</a>] [<a href="examples/barcodes/example_2d_qrcode_png.phps" title="2D qrcode barcode PHP [new window]" target="_blank">PHP</a>] 2D qrcode barcode in PNG format</li>
+<li>[<a href="examples/barcodes/example_2d_qrcode_svg.svg" title="2D qrcode barcode [SVG] [new window]" target="_blank">SVG</a>] [<a href="examples/barcodes/example_2d_qrcode_svg.phps" title="2D qrcode barcode PHP [new window]" target="_blank">PHP</a>] 2D qrcode barcode in SVG format</li>
+<li>[<a href="examples/barcodes/example_2d_qrcode_svgi.html" title="2D qrcode barcode [SVGI] [new window]" target="_blank">SVGI</a>] [<a href="examples/barcodes/example_2d_qrcode_svgi.phps" title="2D qrcode barcode PHP [new window]" target="_blank">PHP</a>] 2D qrcode barcode in SVGI format</li>
+</ol>
+</div>
+</div>
+</div>
+<div style="text-align:right;">
+<a href="https://flattr.com/submit/auto?user_id=tcpdf&amp;url=http://www.tcpdf.org&amp;title=TCPDF&amp;description=TCPDF&amp;language=en_GB&amp;tags=tcpdf,php,pdf,programming&amp;category=software"><img src="https://api.flattr.com/button/flattr-badge-large.png" alt="Flattr: TCPDF - PHP class for generating PDF documents." /></a>
+<a href="http://twitter.com/TCPDF" title="Follow us on Twitter"><img src="images/twitter_96x32.png" alt="Follow us on Twitter" width="96" height="32" style="border:none;" /></a>
+<a href="http://www.facebook.com/pages/TCPDF-PHP-class-for-generating-PDF-documents/121945407829271" title="Check out the TCPDF Page on Facebook"><img src="images/credits/facebook_button.png" alt="Check out the TCExam Page on Facebook" width="97" height="32" style="border:none;" /></a>
+<a href="http://sourceforge.net/donate/index.php?group_id=128076"><img src="http://images.sourceforge.net/images/project-support.jpg" width="88" height="32" style="border:none;" alt="Support This Project" /></a>
+<a href="http://sourceforge.net/projects/tcpdf"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=128076&amp;type=12" width="120" height="30" style="border:none;" alt="Get TCPDF - PHP class for PDF at SourceForge.net. Fast, secure and Free Open Source software downloads" /></a>
+<a href="http://www.opensource.org/docs/certification_mark.php" title="This software is OSI Certified Open Source Software. OSI Certified is a certification mark of the Open Source Initiative."><img src="images/credits/osi-certified-90x75.png" id="osilogo" width="90" height="75" style="border:none;" alt="OSI Certified" /></a>
+</div><div class="userbar">
+<div class="minibutton" dir="ltr">
+<span class="langselector" title="change language">
+<span class="selected" title="English">EN</span>
+<a href="/examples.php?lang=it" class="langselector" title="Italian">IT</a>
+</span>
+</div>
+</div>
+<div class="copyright" dir="ltr">Copyright &copy; 2001-2013 Nicola Asuni - <a href="http://www.tecnick.com" title="Tecnick.com s.r.l. Website">Tecnick.com LTD</a> - Tutti i diritti riservati - All Rights Reserved.</div>
+<div class="minibutton" dir="ltr">
+<a href="http://validator.w3.org/check/referer" class="minibutton" title="This Page Is Valid XHTML 1.0 Strict!">W3C <span>XHTML 1.0</span></a>
+<a href="http://jigsaw.w3.org/css-validator/" class="minibutton" title="This document validates as CSS!">W3C <span>CSS 2.0</span></a>
+</div>
+</body>
+</html>
