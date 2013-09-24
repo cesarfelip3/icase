@@ -297,7 +297,11 @@
                             $.mememaker.tools.addtext();
                             break;
                         case 'preview':
-                            $.mememaker.tools.preview();
+                            var svg = $.mememaker.tools.tosvg();
+                            console.log (svg);
+                            $("#modal-preview").modal();
+                            $("#modal-preview .modal-body").html(svg);
+                            //$.mememaker.tools.preview();
                             break;
                         case 'background':
                             $("#box-toolbar-shape").hide();

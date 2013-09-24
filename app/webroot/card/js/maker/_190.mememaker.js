@@ -106,6 +106,7 @@
         move_callback: null,
         // server API
         zoom: null,
+        tosvg: null,
         preview: null,
         preview_callback: null,
         save: null,
@@ -773,6 +774,12 @@
         this.container.grid.lines = lines;
         canvas.renderAll();
     }
+    
+    Tools.prototype.removegrid = function () {
+        for (i in this.container.grid.lines) {
+            this.container.grid.lines[i].remove();
+        }
+    }
 
     Tools.prototype.showgrid = function() {
         if (this.container.grid.lines === null) {
@@ -928,6 +935,22 @@
         if (this.preview_callback !== null) {
             this.preview_callback(preview);
         }
+    }
+    
+    Tools.prototype.tosvg = function() {
+        // it will convert canvas to base64
+
+        // var scale = $.mememaker.canvasScale;
+        // this.zoom(scale);
+
+        // var width = this.canvas.width;
+        // this.zoomreset();
+        this.removegrid();
+        canvas.deactivateAll();
+
+        var svg = canvas.toSVG();
+        
+        return svg;
     }
 
     Tools.prototype.getstate = function() {
