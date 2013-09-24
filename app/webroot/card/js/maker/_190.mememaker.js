@@ -58,7 +58,8 @@
             stack: [],
             index: 0,
             start: 0,
-            history: 10
+            history: 10,
+            callback: null
         },
         base: {
             id: 0
@@ -523,11 +524,10 @@
         }
 
         if ($.mememaker.undo.index <= $.mememaker.undo.start) {
-            return;
+            return false;
         }
 
         $.mememaker.undo.index -= 1;
-
         $.mememaker.undo.index += 20;
         $.mememaker.undo.index %= 20;
 
@@ -551,6 +551,7 @@
                     text.moveTo(i);
                     canvas.renderAll();
                     $.mememaker.undo.on = false;
+                    return true;
                 }
 
                 if (object.type === 'image') {
@@ -560,9 +561,12 @@
                         canvas.renderAll();
                         $.mememaker.undo.on = false;
                     });
+                    return true;
                 }
             }
         }
+
+        return false;
     }
 
     Tools.prototype.redo = function() {
@@ -623,7 +627,7 @@
                 $.mememaker.undo.start %= 20;
             }
 
-            $.mememaker.undo.current = e.target;
+            $.mememaker.undo.callback();
 
             localStorage.state = JSON.stringify($.mememaker.undo.stack);
             console.log($.mememaker.undo.stack);
@@ -653,7 +657,8 @@
                 $.mememaker.undo.start = $.mememaker.undo.index + 1;
                 $.mememaker.undo.start %= 20;
             }
-
+            
+            $.mememaker.undo.callback();
             localStorage.state = JSON.stringify($.mememaker.undo.stack);
             console.log($.mememaker.undo.stack);
         });

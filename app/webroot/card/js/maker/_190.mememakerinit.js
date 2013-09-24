@@ -220,6 +220,10 @@
                 jQuery(".ajax-loading-indicator").hide(0);
             });
         }
+        
+        $.mememaker.undo.callback = function () {
+            $("#btn-undo").parent().removeClass('disabled');
+        }
 
         $(id + " a").click(
                 function(evt) {
@@ -327,7 +331,13 @@
                             $.mememaker.tools.showgrid();
                             break;
                         case 'undo':
-                            $.mememaker.tools.undo();
+                            if ($(this).hasClass('disabled')) {
+                                return;
+                            }
+                            
+                            if ($.mememaker.tools.undo() === false) {
+                                $(this).parent().addClass ('disabled');
+                            };
                             break;
                         case 'save':
                             if ($("#box-attribute") !== undefined) {
