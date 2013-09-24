@@ -72,7 +72,7 @@ https://github.com/kangax/fabric.js/issues/781
 8.  All css now independent one
 9.  undo - done (exclude remove, and redo)
 11. database tables - created - done
-10. PDF
+10. PDF - tested - good
 
 TCPDF
 
