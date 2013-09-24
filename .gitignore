@@ -10,3 +10,4 @@ tmp/*
 /nbproject
 database.php
 /app/webroot/js/site/icase.js
+*.sql
