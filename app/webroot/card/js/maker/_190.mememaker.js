@@ -183,7 +183,6 @@
         this.canvasScale = scale;
 
         this.canvas = canvas = new fabric.Canvas(this.canvasId);
-        console.log(fabric);
 
         this.width = canvas.getWidth();
         this.height = canvas.getHeight();
@@ -192,6 +191,7 @@
         // canvas.selection = true;
         // canvas.controlsAboveOverlay = true;
         // canvas.allowTouchScrolling = true;
+        
         canvas.clear();
         this.update();
         this.originx = this.left;
@@ -199,6 +199,7 @@
 
         $.mememaker.undo.stack = [];
         localStorage.state = JSON.stringify($.mememaker.undo.stack);
+        localStorage.pages = JSON.stringify($.mememaker.content.pages);
 
         console.log('canvas postion : ' + this.left + ":" + this.top);
     };
@@ -252,8 +253,10 @@
         // console.log ('tools init');
         this.container = $.mememaker;
         this.selected();
-
         this.addgrid();
+        
+        this.savepage (0);
+        this.savepage (1);
     }
 
     Tools.prototype.newcanvas = function(color) {
@@ -957,12 +960,6 @@
         return svg;
     }
 
-    Tools.prototype.getstate = function() {
-        this.zoomreset();
-        var json = JSON.stringify(canvas.toJSON());
-        return json;
-    }
-
     Tools.prototype.save = function() {
         this.zoomreset();
         var json = JSON.stringify(canvas.toJSON());
@@ -983,7 +980,6 @@
         this.zoomreset();
         $.mememaker.content.pages[page] = JSON.stringify(canvas.toJSON());
         localStorage.pages = JSON.stringify($.mememaker.content.pages);
-
     }
 
     Tools.prototype.loadpage = function(page) {
@@ -1002,7 +998,8 @@
                 || page >= $.mememaker.content.pages.length) {
             return false;
         }
-
+        
+        canvas.clear();
         this.reload($.mememaker.content.pages[page]);
         return true;
     }
