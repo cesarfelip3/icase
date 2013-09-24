@@ -980,10 +980,11 @@
         this.zoomreset();
         $.mememaker.content.pages[page] = JSON.stringify(canvas.toJSON());
         localStorage.pages = JSON.stringify($.mememaker.content.pages);
+        //$.mememaker.content.pages = null;
     }
 
     Tools.prototype.loadpage = function(page) {
-        page = intval(page);
+        page = parseInt(page);
 
         if (page < 0) {
             return false;
@@ -999,6 +1000,7 @@
             return false;
         }
         
+        console.log ($.mememaker.content.pages);
         canvas.clear();
         this.reload($.mememaker.content.pages[page]);
         return true;

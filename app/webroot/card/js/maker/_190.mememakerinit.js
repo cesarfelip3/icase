@@ -417,8 +417,8 @@
                             if ($(this).parent().hasClass('disabled')) {
                                 return;
                             }
-                            $.mememaker.savepage(0);
-                            $.mememaker.loadpage(1);
+                            $.mememaker.tools.savepage(0);
+                            $.mememaker.tools.loadpage(1);
                             $(this).parent().next().removeClass('disabled');
                             $(this).parent().addClass('disabled');
                             break;
@@ -426,8 +426,8 @@
                             if ($(this).parent().hasClass('disabled')) {
                                 return;
                             }
-                            $.mememaker.savepage(1);
-                            $.mememaker.loadpage(0);
+                            $.mememaker.tools.savepage(1);
+                            $.mememaker.tools.loadpage(0);
                             $(this).parent().prev().removeClass('disabled');
                             $(this).parent().addClass('disabled');
                             break;
