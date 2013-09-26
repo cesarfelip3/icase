@@ -32,10 +32,11 @@
             clearTimeout(this.resize);
             this.resize = setTimeout(onResize, 100);
         });
-        
+
+
         $(window).scroll(function() {
             $.mememaker.update();
-            console.log ("offset: " + $.mememaker.left + ":" + $.mememaker.top);
+            //console.log("offset: " + $.mememaker.left + ":" + $.mememaker.top);
         });
 
         $(document).mousemove(function(event) {
@@ -164,7 +165,7 @@
             $(".image-editor").hide();
         }
 
-        $("#box-editing .span12").scroll(function() {
+        $("#box-editing").scroll(function() {
             console.log('scroll');
             $.mememaker.canvas.calcOffset();
             $.mememaker.update();
@@ -209,15 +210,19 @@
                 }
             }).done(function(data) {
                 var result = jQuery.parseJSON(data);
-                
+
                 if (result.error == 0) {
                     var url = result.files.url;
-                    $("#modal-preview .modal-body").html ("<img src='" + url + "' style='width:100%;height:100%' />");
+                    $("#modal-preview .modal-body").html("<img src='" + url + "' style='width:100%;height:100%' />");
                 }
                 (data);
             }).fail(function() {
                 jQuery(".ajax-loading-indicator").hide(0);
             });
+        }
+        
+        $.mememaker.undo.callback = function () {
+            $("#btn-undo").parent().removeClass('disabled');
         }
 
         $(id + " a").click(
@@ -231,7 +236,7 @@
 
                     switch (action) {
                         case 'new':
-                            $.mememaker.tools.newcanvas ("#eb3d2d");
+                            $.mememaker.tools.newcanvas("#eb3d2d");
                             break;
                         case 'remove':
                             if ($.mememaker.tools.exist() == false) {
@@ -292,12 +297,18 @@
                             $.mememaker.tools.addtext();
                             break;
                         case 'preview':
-                            $.mememaker.tools.preview();
+                            var svg = $.mememaker.tools.tosvg();
+                            console.log (svg);
+                            $("#modal-preview").modal();
+                            $("#modal-preview .modal-body").html(svg);
+                            //$.mememaker.tools.preview();
                             break;
                         case 'background':
+                            $("#box-toolbar-shape").hide();
                             $("#box-toolbar-bg").show();
                             break;
                         case 'addshape':
+                            $("#box-toolbar-bg").hide();
                             $("#box-toolbar-shape").show();
                             break;
                         case 'shape-rect':
@@ -324,13 +335,19 @@
                             $.mememaker.tools.showgrid();
                             break;
                         case 'undo':
-                            $.mememaker.tools.undo();
+                            if ($(this).hasClass('disabled')) {
+                                return;
+                            }
+                            
+                            if ($.mememaker.tools.undo() === false) {
+                                $(this).parent().addClass ('disabled');
+                            };
                             break;
                         case 'save':
                             if ($("#box-attribute") !== undefined) {
                                 $("#box-attribute").show();
                             }
-                            
+
                             $.mememakerinit.zoomcount = 0;
                             $("#box-canvas-wrapper").css("width", $.mememaker.width + "px");
                             $.mememaker.tools.save();
@@ -396,6 +413,24 @@
                             $(this).parent().addClass('disabled');
                             $(this).parent().prev().addClass('disabled');
                             break;
+                        case 'pagefront':
+                            if ($(this).parent().hasClass('disabled')) {
+                                return;
+                            }
+                            $.mememaker.tools.savepage(0);
+                            $.mememaker.tools.loadpage(1);
+                            $(this).parent().next().removeClass('disabled');
+                            $(this).parent().addClass('disabled');
+                            break;
+                        case 'pageback' :
+                            if ($(this).parent().hasClass('disabled')) {
+                                return;
+                            }
+                            $.mememaker.tools.savepage(1);
+                            $.mememaker.tools.loadpage(0);
+                            $(this).parent().prev().removeClass('disabled');
+                            $(this).parent().addClass('disabled');
+                            break;
                         default:
                             break;
                     }
@@ -427,6 +462,7 @@
             top = Math.floor(top);
             left = Math.ceil(left - (500 - el.getBoundingRectWidth()) / 2);
 
+            top = $.mememaker.offset + top;
             $(".text-editor").show();
             $(".text-editor").css('top', top + "px");
             $(".text-editor").css('left', left + "px");
@@ -483,6 +519,10 @@
                         case "close":
                             $("#box-toolbar-texteditor").hide();
                             break;
+                        case "type":
+                            var type = $(this).data('data');
+                            $.mememaker.texteditor.changeFontFamily(type);
+                            break;
                         default:
                             break;
                     }
@@ -511,6 +551,7 @@
             var top = el.top + height / 2 + 10 + $.mememaker.top;
             var left = el.left - el.getBoundingRectWidth() / 2 + $.mememaker.left;
 
+            top = top + $.mememaker.offset;
             top = Math.floor(top);
             left = Math.ceil(left - (100 - el.getBoundingRectWidth()) / 2);
 
@@ -545,8 +586,6 @@
 
         //var json = $.mememaker.canvas.toJSON();
         //json = JSON.stringify(json);
-        localStorage.state2 = localStorage.state = JSON.stringify([]);
-        console.log(localStorage.state);
 
     }
 

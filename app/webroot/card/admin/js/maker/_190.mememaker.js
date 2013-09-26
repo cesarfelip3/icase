@@ -1,7 +1,6 @@
-
 /**
- * Small cutomize tool jquery plugin library, based on jquery and fabric.js
- * Core functionality, all functionality doesn't concern with HTML
+ * Small cutomize tool jquery plugin library, based on jquery and fabric.js Core
+ * functionality, all functionality doesn't concern with HTML
  * 
  * @author http://www.github.com/hellomaya
  * @date 2013.09.06
@@ -35,6 +34,9 @@
         left: 0,
         top: 0,
         offset: 0,
+        content: {
+            pages: []
+        },
         grid: {
             lines: null,
             size: 20,
@@ -51,11 +53,13 @@
         },
         undo: {
             on: false,
+            refresh: true,
             current: null,
-            prev: null,
             stack: [],
             index: 0,
-            history: 10
+            start: 0,
+            history: 10,
+            callback: null
         },
         base: {
             id: 0
@@ -85,7 +89,7 @@
         container: null,
         //
         init: null,
-        newcanvas : null,
+        newcanvas: null,
         remove: null,
         group: null,
         backward: null,
@@ -102,6 +106,7 @@
         move_callback: null,
         // server API
         zoom: null,
+        tosvg: null,
         preview: null,
         preview_callback: null,
         save: null,
@@ -164,12 +169,12 @@
             fontFamily: 'Arial',
             fontSize: 30,
             fill: 'black'
-            //stroke: 'white',
-            //strokeWidth: 0,
-            //originX: 'left',
-            //originY: 'top',
-//            left: this.lastTextX,
-//            top: this.lastTextY
+                    // stroke: 'white',
+                    // strokeWidth: 0,
+                    // originX: 'left',
+                    // originY: 'top',
+                    // left: this.lastTextX,
+                    // top: this.lastTextY
         }
     };
 
@@ -178,19 +183,25 @@
         this.canvasScale = scale;
 
         this.canvas = canvas = new fabric.Canvas(this.canvasId);
-        console.log(fabric);
 
         this.width = canvas.getWidth();
         this.height = canvas.getHeight();
 
         canvas.backgroundColor = this.backgroundColor = backgroundcolor;
-        //canvas.selection = true;
-        //canvas.controlsAboveOverlay = true;
-        //canvas.allowTouchScrolling = true;
+        // canvas.selection = true;
+        // canvas.controlsAboveOverlay = true;
+        // canvas.allowTouchScrolling = true;
+        
         canvas.clear();
         this.update();
         this.originx = this.left;
         this.originy = this.top;
+
+        $.mememaker.undo.stack = [];
+        localStorage.state = JSON.stringify($.mememaker.undo.stack);
+        localStorage.pages = JSON.stringify($.mememaker.content.pages);
+
+        console.log('canvas postion : ' + this.left + ":" + this.top);
     };
 
     Mememaker.prototype.position = function(el) {
@@ -206,8 +217,6 @@
         this.left = pos.left;
         this.top = pos.top;
         this.offset = this.originy - this.top;
-
-        //console.log('canvas postion : ' + this.left + ":" + this.top);
     };
 
     Mememaker.prototype.inEl = function(el) {
@@ -234,19 +243,20 @@
         return this.base.id++;
     }
 
+    // ============================================
+    // tools
+    // ============================================
 
-//============================================
-// tools
-//============================================
-
-    //Tools.prototype.container = $.mememaker;
+    // Tools.prototype.container = $.mememaker;
 
     Tools.prototype.init = function() {
-        //console.log ('tools init');
+        // console.log ('tools init');
         this.container = $.mememaker;
         this.selected();
-
         this.addgrid();
+        
+        this.savepage (0);
+        this.savepage (1);
     }
 
     Tools.prototype.newcanvas = function(color) {
@@ -316,16 +326,12 @@
             }
         }
 
-        function cloneImages(j, items, images, gr)
-        {
+        function cloneImages(j, items, images, gr) {
             if (j >= images.length) {
-                var group = new fabric.Group(
-                        items,
-                        {
-                            'left': gr.left,
-                            'top': gr.top
-                        }
-                );
+                var group = new fabric.Group(items, {
+                    'left': gr.left,
+                    'top': gr.top
+                });
 
                 canvas.discardActiveGroup();
                 for (i = 0; i < items.length; ++i) {
@@ -337,12 +343,11 @@
             }
 
             if (images[j] !== null) {
-                images[j].clone(
-                        function(el) {
-                            items[j] = el;
-                            cloneImages(j + 1, items, images, gr);
-                        }, null);
-                        
+                images[j].clone(function(el) {
+                    items[j] = el;
+                    cloneImages(j + 1, items, images, gr);
+                }, null);
+
             } else {
                 cloneImages(j + 1, items, images, gr);
             }
@@ -453,6 +458,7 @@
         el.bringToFront();
     };
 
+
     Tools.prototype.flip = function(x) {
         var el = canvas.getActiveObject();
 
@@ -473,24 +479,26 @@
     };
 
     Tools.prototype.addtext = function() {
-        var text = new fabric.Text($.mememaker.defaultText.text, $.mememaker.defaultText.property);
+        var text = new fabric.Text($.mememaker.defaultText.text,
+                $.mememaker.defaultText.property);
 
         text.text = "CLICK TO EDIT";
-        //text.originX = 'left';
-        //text.originY = 'top'; // default rotation will never work as it's left/top
+        // text.originX = 'left';
+        // text.originY = 'top'; // default rotation will never work as it's
+        // left/top
         text.left = canvas.width / 2;
         text.top = canvas.height / 2;
+        text.id = $.mememaker.generateId();
         canvas.add(text);
 
-        //text.left = canvas.width / 2 - text.getBoundingRectWidth() / 2;
-        //text.top = canvas.height / 2 - text.getBoundingRectHeight() / 2;
-        //text.hasRotatingPoint = false; // so disable default rotation control
+        // text.left = canvas.width / 2 - text.getBoundingRectWidth() / 2;
+        // text.top = canvas.height / 2 - text.getBoundingRectHeight() / 2;
+        // text.hasRotatingPoint = false; // so disable default rotation control
 
-        //text.center();
+        // text.center();
         text.selectable = true;
         text.setCoords();
-        //text.scaleToWidth(300);
-        text.id = $.mememaker.generateId();
+        // text.scaleToWidth(300);
         canvas.renderAll();
 
     };
@@ -506,129 +514,66 @@
             canvas.add(oImg);
             canvas.renderAll();
             $.mememaker.tools.addpic_callback();
-            console.log(oImg);
+            //console.log(oImg);
         });
     }
 
     Tools.prototype.undo = function() {
 
-        $.mememaker.undo.on = true;
-        $.mememaker.undo.stack = JSON.parse(localStorage.state);
-        //$.mememaker.undo.stack.pop();
-
-        if ($.mememaker.undo.index <= 0) {
-            $.mememaker.undo.on = false;
-            return;
+        if ($.mememaker.undo.refresh === true) {
+            $.mememaker.undo.index -= 1;
+            $.mememaker.undo.index += 20;
+            $.mememaker.undo.index %= 20;
+            $.mememaker.undo.refresh = false;
         }
 
-        console.log($.mememaker.undo.stack);
+        if ($.mememaker.undo.index <= $.mememaker.undo.start) {
+            return false;
+        }
 
-        $.mememaker.undo.index--;
+        $.mememaker.undo.index -= 1;
+        $.mememaker.undo.index += 20;
+        $.mememaker.undo.index %= 20;
+
+        $.mememaker.undo.stack = JSON.parse(localStorage.state);
+
+        console.log("undo: " + $.mememaker.undo.index + ":" + $.mememaker.undo.start);
         var object = $.mememaker.undo.stack[$.mememaker.undo.index];
+        var objects = canvas.getObjects();
 
-        if (object.type == "text") {
-            console.log("currentId=" + $.mememaker.undo.current.id);
-            console.log("objectId=" + object.id);
-            console.log("index=" + $.mememaker.undo.index);
+        for (i in objects) {
+            if (objects[i].id === undefined) {
+                continue;
+            }
 
-            if ($.mememaker.undo.current.id == object.id) {
-                $.mememaker.undo.current.remove();
-            } else {
-                var objects = canvas.getObjects();
-                for (i in objects) {
-                    if (objects[i].id == object.id) {
-                        objects[i].remove();
-                    }
+            if (objects[i].id === object.id) {
+                $.mememaker.undo.on = true;
+                canvas.remove(objects[i]);
+                if (object.type === 'text') {
+                    var text = new fabric.Text.fromObject(object);
+                    canvas.add(text);
+                    text.moveTo(i);
+                    canvas.renderAll();
+                    $.mememaker.undo.on = false;
+                    return true;
+                }
+
+                if (object.type === 'image') {
+                    fabric.Image.fromObject(object, function(img) {
+                        canvas.add(img);
+                        img.moveTo(i);
+                        canvas.renderAll();
+                        $.mememaker.undo.on = false;
+                    });
+                    return true;
                 }
             }
-            var text = new fabric.Text.fromObject(object);
-            canvas.add(text);
-            canvas.renderAll();
-            $.mememaker.undo.on = false;
-            $.mememaker.undo.current = text;
-            localStorage.state = JSON.stringify($.mememaker.undo.stack);
         }
 
-        if (object.type == 'image') {
-            fabric.Image.fromObject(object, function(img) {
-                if ($.mememaker.undo.current.id == object.id) {
-                    $.mememaker.undo.current.remove();
-                } else {
-                    var objects = canvas.getObjects();
-                    for (i in objects) {
-                        if (objects[i].id == object.id) {
-                            objects[i].remove();
-                        }
-                    }
-                }
-                canvas.add(img);
-                canvas.renderAll();
-                $.mememaker.undo.on = false;
-                $.mememaker.undo.current = img;
-                localStorage.state = JSON.stringify($.mememaker.undo.stack);
-            });
-        }
-
+        return false;
     }
 
     Tools.prototype.redo = function() {
-
-        $.mememaker.undo.on = true;
-        $.mememaker.undo.stack = JSON.parse(localStorage.state);
-        //$.mememaker.undo.stack.pop();
-
-        if ($.mememaker.undo.index >= $.mememaker.undo.history) {
-            $.mememaker.undo.on = false;
-            return;
-        }
-
-        console.log($.mememaker.undo.stack);
-
-        $.mememaker.undo.index++;
-        var object = $.mememaker.undo.stack[$.mememaker.undo.index];
-
-        if (object.type == "text") {
-            console.log("currentId=" + $.mememaker.undo.current.id);
-            console.log("objectId=" + object.id);
-            console.log("index=" + $.mememaker.undo.index);
-
-            if ($.mememaker.undo.current.id == object.id) {
-                $.mememaker.undo.current.remove();
-            } else {
-                var objects = canvas.getObjects();
-                for (i in objects) {
-                    if (objects[i].id == object.id) {
-                        objects[i].remove();
-                    }
-                }
-            }
-            var text = new fabric.Text.fromObject(object);
-            canvas.add(text);
-            canvas.renderAll();
-            $.mememaker.undo.on = false;
-            $.mememaker.undo.current = text;
-            localStorage.state = JSON.stringify($.mememaker.undo.stack);
-        }
-
-        if (object.type == 'image') {
-            fabric.Image.fromObject(object, function(img) {
-                if ($.mememaker.undo.current.id == object.id) {
-                    $.mememaker.undo.current.remove();
-                } else {
-                    var objects = canvas.getObjects();
-                    for (i in objects) {
-                        if (objects[i].id == object.id) {
-                            objects[i].remove();
-                        }
-                    }
-                }
-                canvas.add(img);
-                canvas.renderAll();
-                $.mememaker.undo.on = false;
-                $.mememaker.undo.current = img;
-                localStorage.state = JSON.stringify($.mememaker.undo.stack);
-            });
-        }
 
     }
 
@@ -645,7 +590,7 @@
             }
 
             if (el.type == 'image') {
-                
+
                 $.mememaker.selected = true;
                 $.mememaker.activex = el.left;
                 $.mememaker.activey = el.top;
@@ -655,53 +600,74 @@
 
         canvas.on('object:added', function(e) {
 
-//            localStorage.state2 = localStorage.state;
-//            var json = e.target.toJSON();
-//            localStorage.state = JSON.stringify (json);
-//            $.mememaker.undo.current = e.target;
-//            console.log (json);
-
-
-        });
-
-        canvas.on('object:modified', function(e) {
-            //localStorage.state2 = localStorage.state;
-            console.log("before:modified");
+            if (e.target.type == 'line') {
+                return;
+            }
 
             if ($.mememaker.undo.on) {
                 return;
             }
 
-            console.log("modifed");
+            console.log('object:added');
+
+            $.mememaker.undo.refresh = true;
+            var json = e.target.toJSON(['id']);
+            $.mememaker.undo.stack = JSON.parse(localStorage.state);
+
+            if ($.mememaker.undo.index > $.mememaker.undo.start) {
+                $.mememaker.undo.index--;
+                $.mememaker.undo.index += 20;
+                $.mememaker.undo.index %= 20;
+            }
+
+            $.mememaker.undo.stack[$.mememaker.undo.index] = json;
+            $.mememaker.undo.index += 1;
+            $.mememaker.undo.index %= 20;
+
+            console.log("" + $.mememaker.undo.index + ":" + $.mememaker.undo.start);
+
+            if ($.mememaker.undo.index === $.mememaker.undo.start) {
+                $.mememaker.undo.start = $.mememaker.undo.index + 1;
+                $.mememaker.undo.start %= 20;
+            }
+
+            $.mememaker.undo.callback();
+
+            localStorage.state = JSON.stringify($.mememaker.undo.stack);
+            console.log($.mememaker.undo.stack);
+
+        });
+
+        canvas.on('object:modified', function(e) {
+            // localStorage.state2 = localStorage.state;
+            console.log("before:modified");
 
             var json = e.target.toJSON(['id']);
             $.mememaker.undo.stack = JSON.parse(localStorage.state);
-            $.mememaker.undo.index = $.mememaker.undo.stack.length - 1;
-            if ($.mememaker.undo.index < 0) {
-                $.mememaker.undo.index = 0;
+
+            if ($.mememaker.undo.index === $.mememaker.undo.start) {
+                $.mememaker.undo.index++;
+                $.mememaker.undo.index %= 20;
+                $.mememaker.undo.refresh = true;
             }
 
-            $.mememaker.undo.stack.push(json);
-            $.mememaker.undo.index++;
-            if ($.mememaker.undo.index >= $.mememaker.undo.history) {
-                $.mememaker.undo.stack = $.mememaker.undo.stack.slice(1, $.mememaker.undo.hisory - 1);
+            $.mememaker.undo.stack[$.mememaker.undo.index] = json;
+            $.mememaker.undo.index += 1;
+            $.mememaker.undo.index %= 20;
+
+            console.log("" + $.mememaker.undo.index + ":" + $.mememaker.undo.start);
+
+            if ($.mememaker.undo.index == $.mememaker.undo.start) {
+                $.mememaker.undo.start = $.mememaker.undo.index + 1;
+                $.mememaker.undo.start %= 20;
             }
-
-            console.log($.mememaker.undo.stack);
-
+            
+            $.mememaker.undo.callback();
             localStorage.state = JSON.stringify($.mememaker.undo.stack);
-            $.mememaker.undo.current = e.target;
-            $.mememaker.undo.stack = null;
+            console.log($.mememaker.undo.stack);
         });
 
         canvas.on('object:removed', function(e) {
-//            localStorage.state2 = localStorage.state;
-//            var json = e.target.toJSON();
-//            localStorage.state = JSON.stringify(json);
-//            $.mememaker.undo.current = e.target;
-
-            //$.mememaker.undo.stack.push (e.target);
-            //$.mememaker.undo.index++;
         });
     }
 
@@ -722,14 +688,14 @@
 
         if (type == 'rect') {
             el = new fabric.Rect({
-                //left: 100,
-                //top: 100,
+                // left: 100,
+                // top: 100,
                 fill: '#ccc',
                 width: Math.ceil(canvas.width * 2 / 5),
                 height: Math.ceil(canvas.width * 2 / 5)
             });
 
-            //rect.center();
+            // rect.center();
         }
 
         if (type == 'tri') {
@@ -744,7 +710,7 @@
         el.top = canvas.width / 2;
         canvas.add(el);
 
-        //canvas.renderAll();
+        // canvas.renderAll();
     }
 
     Tools.prototype.addgrid = function() {
@@ -811,18 +777,24 @@
         this.container.grid.lines = lines;
         canvas.renderAll();
     }
+    
+    Tools.prototype.removegrid = function () {
+        for (i in this.container.grid.lines) {
+            this.container.grid.lines[i].remove();
+        }
+        
+        this.container.grid.lines = null;
+    }
 
-    Tools.prototype.showgrid = function()
-    {
+    Tools.prototype.showgrid = function() {
         if (this.container.grid.lines === null) {
             return false;
         }
 
-        console.log(this.container.grid.lines);
         this.container.grid.visible = !this.container.grid.visible;
 
         for (i in this.container.grid.lines) {
-            this.container.grid.lines[i].visible = !this.container.grid.lines[i].visible; //true;
+            this.container.grid.lines[i].visible = !this.container.grid.lines[i].visible; // true;
         }
 
         canvas.renderAll();
@@ -831,17 +803,17 @@
 
     Tools.prototype.closegrid = function() {
 
-        if(this.container.grid.close) {
+        if (this.container.grid.close) {
             this.showgrid();
             this.container.grid.close = false;
             return;
         }
-        
+
         if (this.container.grid.visible === false) {
             return;
         }
-        
-        this.showgrid ();
+
+        this.showgrid();
         this.container.grid.close = true;
     }
 
@@ -852,12 +824,14 @@
     }
 
     Tools.prototype.backgroundimage = function(url) {
-        canvas.setBackgroundImage(
-                url,
-                function() {
-                    canvas.renderAll();
-                }, {'originX': 'left', 'originY': 'top', 'left': 0, 'top': 0}
-        )
+        canvas.setBackgroundImage(url, function() {
+            canvas.renderAll();
+        }, {
+            'originX': 'left',
+            'originY': 'top',
+            'left': 0,
+            'top': 0
+        })
     }
 
     Tools.prototype.overlayimage = function(url) {
@@ -871,8 +845,8 @@
 
         canvas.setDimensions({
             "width": width,
-            "height": height}
-        );
+            "height": height
+        });
 
         canvas.calcOffset();
         var objects = canvas.getObjects();
@@ -887,7 +861,8 @@
             var tempLeft = left * scale;
             var tempTop = top * scale;
 
-            if (objects[i].type == 'line' && objects[i].selectable === false && objects[i].get('opacity') === 0.5) {
+            if (objects[i].type == 'line' && objects[i].selectable === false
+                    && objects[i].get('opacity') === 0.5) {
                 continue;
             }
 
@@ -905,13 +880,13 @@
 
     Tools.prototype.zoomreset = function() {
 
-        //var scale = $.mememaker.canvasScale;
+        // var scale = $.mememaker.canvasScale;
 
         var scale = this.container.width / canvas.getWidth();
         canvas.setDimensions({
             "width": $.mememaker.width,
-            "height": $.mememaker.height});
-
+            "height": $.mememaker.height
+        });
 
         var objects = canvas.getObjects();
         for (var i in objects) {
@@ -925,7 +900,8 @@
             var tempLeft = left * scale;
             var tempTop = top * scale;
 
-            if (objects[i].type == 'line' && objects[i].selectable === false && objects[i].get('opacity') === 0.5) {
+            if (objects[i].type == 'line' && objects[i].selectable === false
+                    && objects[i].get('opacity') === 0.5) {
                 continue;
             }
 
@@ -946,55 +922,105 @@
     Tools.prototype.preview = function() {
         // it will convert canvas to base64
 
-        //var scale = $.mememaker.canvasScale;
-        //this.zoom(scale);
+        // var scale = $.mememaker.canvasScale;
+        // this.zoom(scale);
 
-        //var width = this.canvas.width;
-        //this.zoomreset();
+        // var width = this.canvas.width;
+        // this.zoomreset();
         this.closegrid();
         canvas.deactivateAll();
 
-        var preview = canvas.toDataURL(
-                {
-                    format: 'jpeg',
-                    quality: 1
-                }
-        );
+        var preview = canvas.toDataURL({
+            format: 'jpeg',
+            quality: 1
+        });
 
         this.closegrid();
-        //this.zoom(width);
+        // this.zoom(width);
         if (this.preview_callback !== null) {
             this.preview_callback(preview);
         }
     }
     
-    Tools.prototype.getstate = function()
-    {
-        this.zoomreset();
-        var json = JSON.stringify(canvas.toJSON());
-        return json;
+    Tools.prototype.tosvg = function() {
+        // it will convert canvas to base64
+
+        // var scale = $.mememaker.canvasScale;
+        // this.zoom(scale);
+
+        // var width = this.canvas.width;
+        // this.zoomreset();
+        this.removegrid();
+        canvas.deactivateAll();
+
+        var svg = canvas.toSVG();
+        this.addgrid();
+        this.showgrid();
+        
+        return svg;
     }
 
-    Tools.prototype.save = function()
-    {
+    Tools.prototype.save = function() {
         this.zoomreset();
         var json = JSON.stringify(canvas.toJSON());
         this.save_callback(json);
     }
 
-    Tools.prototype.reload = function(json)
-    {
+    Tools.prototype.reload = function(json) {
         this.zoomreset();
         canvas.clear();
         canvas.loadFromJSON(json);
+        
+        var objects = canvas.getObjects();
+        var j = 0;
+        
+        for (var i in objects) {
+            if (objects[i].type === 'line' && objects[i].selectable === false
+                    && objects[i].get('opacity') === 0.5) {
+                $.mememaker.grid.lines[j] = objects[i];
+                j++;
+                continue;
+            }
+        }
         canvas.renderAll();
         canvas.calcOffset();
 
     }
 
-    //===========================================
+    Tools.prototype.savepage = function(page) {
+
+        this.zoomreset();
+        $.mememaker.content.pages[page] = JSON.stringify(canvas.toJSON());
+        localStorage.pages = JSON.stringify($.mememaker.content.pages);
+        //$.mememaker.content.pages = null;
+    }
+
+    Tools.prototype.loadpage = function(page) {
+        page = parseInt(page);
+
+        if (page < 0) {
+            return false;
+        }
+
+        if (Number.isNaN(page)) {
+            return false;
+        }
+
+        $.mememaker.content.pages = JSON.parse(localStorage.pages);
+        if ($.mememaker.content.pages.length <= 0
+                || page >= $.mememaker.content.pages.length) {
+            return false;
+        }
+        
+        console.log ($.mememaker.content.pages);
+        canvas.clear();
+        this.reload($.mememaker.content.pages[page]);
+        return true;
+    }
+
+    // ===========================================
     // text editor
-    //===========================================
+    // ===========================================
 
     TextEditor.prototype.fill = function(color) {
         var el = canvas.getActiveObject();
@@ -1075,15 +1101,15 @@
         }
 
         el.useNative = true;
-        //el.originX = 'left';
-        //el.originY = 'top';
+        // el.originX = 'left';
+        // el.originY = 'top';
 
         if (property == "underline") {
             if (el.textDecoration == 'underline') {
                 el.textDecoration = null;
             } else {
                 el.textDecoration = 'underline';
-                //el.lineHeight = lineheight;
+                // el.lineHeight = lineheight;
             }
         }
 
@@ -1147,11 +1173,9 @@
         return;
     }
 
-
-
-    //==================================================================
-    // image editor 
-    //==================================================================
+    // ==================================================================
+    // image editor
+    // ==================================================================
 
     ImageEditor.prototype.init = function() {
         this.container = $.mememaker;
@@ -1172,8 +1196,8 @@
         el.scale(scale);
         canvas.renderAll();
 
-        //$(".text-editor").hide(10);  
-        //$(".image-editor").show(10);    
+        // $(".text-editor").hide(10);
+        // $(".image-editor").show(10);
     }
 
     ImageEditor.prototype.rotate = function(value) {
@@ -1211,7 +1235,7 @@
         el.lockRotation = true;
 
         return true;
-        //this.cropResize();
+        // this.cropResize();
     }
 
     ImageEditor.prototype.cropselect = function(event) {
@@ -1237,8 +1261,8 @@
 
         if (this.container.crop.selector === null) {
             var rect = new fabric.Rect({
-                //left: 100,
-                //top: 100,
+                // left: 100,
+                // top: 100,
                 fill: 'transparent',
                 originX: 'left',
                 originY: 'top',
@@ -1260,7 +1284,7 @@
         this.container.crop.select = true;
         this.container.crop.selector.left = event.pageX - $.mememaker.left;
         this.container.crop.selector.top = event.pageY - $.mememaker.top;
-        //el.selectable = false;
+        // el.selectable = false;
         this.container.crop.selector.visible = true;
         canvas.bringToFront(this.container.crop.selector);
 
@@ -1310,17 +1334,19 @@
         var limit = el.left + el.getBoundingRectWidth() / 2;
 
         if (width > 0 && width + this.container.crop.selector.left < limit) {
-            this.container.crop.selector.width = event.pageX - $.mememaker.crop.mousex;
+            this.container.crop.selector.width = event.pageX
+                    - $.mememaker.crop.mousex;
         }
 
         width = event.pageY - $.mememaker.crop.mousey;
         limit = el.top + el.getBoundingRectHeight() / 2;
 
         if (width > 0 && width + this.container.crop.selector.top < limit) {
-            this.container.crop.selector.height = event.pageY - $.mememaker.crop.mousey;
+            this.container.crop.selector.height = event.pageY
+                    - $.mememaker.crop.mousey;
         }
         return true;
-        //canvas.add(this.container.crop.selector);
+        // canvas.add(this.container.crop.selector);
     }
 
     ImageEditor.prototype.cropend = function() {
@@ -1352,14 +1378,18 @@
         height *= 1 / el.scaleY;
 
         el.clipTo = function(ctx) {
-            ctx.rect(left, top, width, height); //0, 0, 100, 100);//, top, width, height);
+            ctx.rect(left, top, width, height); // 0, 0, 100, 100);//, top,
+            // width, height);
         };
 
         this.container.crop.selector.visible = false;
         canvas.renderAll();
 
         var ctx = canvas.getContext('2d');
-        var data = ctx.getImageData(this.container.crop.selector.left, this.container.crop.selector.top, this.container.crop.selector.width, this.container.crop.selector.height);
+        var data = ctx.getImageData(this.container.crop.selector.left,
+                this.container.crop.selector.top,
+                this.container.crop.selector.width,
+                this.container.crop.selector.height);
 
         var c = document.createElement('canvas');
 
@@ -1401,7 +1431,8 @@
             type: 'Redify',
             applyTo: function(canvasEl) {
                 var context = canvasEl.getContext('2d');
-                var imageData = context.getImageData(0, 0, canvasEl.width, canvasEl.height);
+                var imageData = context.getImageData(0, 0, canvasEl.width,
+                        canvasEl.height);
                 var data = imageData.data;
 
                 for (var i = 0, len = data.length; i < len; i += 4) {
@@ -1418,18 +1449,18 @@
         };
     }
 
-    //==================================================================
-    // image editor 
-    //==================================================================
+    // ==================================================================
+    // image editor
+    // ==================================================================
     DrawEditor.prototype.changeBrushProperty = function(name, value) {
         switch (name) {
-            case "linewidth" :
+            case "linewidth":
                 canvas.freeDrawingBrush.width = value;
                 break;
-            case "shadowwidth" :
+            case "shadowwidth":
                 canvas.freeDrawingBrush.shadowBlur = value;
                 break;
-            case "color" :
+            case "color":
                 canvas.freeDrawingBrush.color = value;
                 break;
         }
@@ -1494,7 +1525,8 @@
                     var squareWidth = 10, squareDistance = 2;
 
                     var patternCanvas = fabric.document.createElement('canvas');
-                    patternCanvas.width = patternCanvas.height = squareWidth + squareDistance;
+                    patternCanvas.width = patternCanvas.height = squareWidth
+                            + squareDistance;
                     var ctx = patternCanvas.getContext('2d');
 
                     ctx.fillStyle = this.color;
@@ -1522,8 +1554,12 @@
                     });
                     var canvasWidth = rect.getBoundingRectWidth();
 
-                    patternCanvas.width = patternCanvas.height = canvasWidth + squareDistance;
-                    rect.set({left: canvasWidth / 2, top: canvasWidth / 2});
+                    patternCanvas.width = patternCanvas.height = canvasWidth
+                            + squareDistance;
+                    rect.set({
+                        left: canvasWidth / 2,
+                        top: canvasWidth / 2
+                    });
 
                     var ctx = patternCanvas.getContext('2d');
                     rect.render(ctx);
@@ -1547,9 +1583,8 @@
             canvas.freeDrawingBrush = new fabric[name + 'Brush'](canvas);
         }
 
-
         if (canvas.freeDrawingBrush) {
-            //canvas.freeDrawingBrush.color = $("#draw-fill").val();
+            // canvas.freeDrawingBrush.color = $("#draw-fill").val();
             canvas.freeDrawingBrush.width = this.lineWidth.getValue();
             canvas.freeDrawingBrush.shadowBlur = this.shadowWidth.getValue();
         }
@@ -1562,13 +1597,13 @@
             canvas.discardActiveObject();
             canvas.discardActiveGroup();
 
-            //canvas.freeDrawingLineWidth = width;
-            //canvas.freeDrawingColor = $("#draw-fill").val();
+            // canvas.freeDrawingLineWidth = width;
+            // canvas.freeDrawingColor = $("#draw-fill").val();
             canvas.isDrawingMode = true;
             canvas.freeDrawingBrush.width = 1;
             canvas.freeDrawingBrush.color = "#eb34dc";
 
-            //canvas.renderAll();
+            // canvas.renderAll();
 
             $($.mememaker.texteditor.containerId).hide(0);
             $($.mememaker.imageeditor.containerId).hide(0);
