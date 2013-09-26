@@ -1,5 +1,5 @@
-private-card
-============
+Business Card Designer
+=======================
 
 Suggestion for integration:
 
@@ -60,6 +60,7 @@ https://github.com/kangax/fabric.js/issues/781
 
 2013.09.14
 2013.09.23
+2013.09.26
 
 1.  image editor - crop - done
 2.  Shape controls - fill - closed
@@ -73,6 +74,7 @@ https://github.com/kangax/fabric.js/issues/781
 9.  undo - done (exclude remove, and redo)
 11. database tables - created - done
 10. PDF - tested - good
+11. Template - moved
 
 TCPDF
 
@@ -83,18 +85,7 @@ TCPDF
 Discussion
 ===========
 
-about undo/redo - 
- 
-1. every changes will be saved, including add/remove?
-2. undo, will go back to the last state of canvas, actully remove object changed latestly 
-3. redo, actually will.....
-
-if there any concise algorithm....
-
-array : 1, 2, 3, 4, 5, 6, 7, 8, 9, 10...20
-start : 0
-end : 0
-
+undo/redo - complex, no good solution yet.
 
 
 
