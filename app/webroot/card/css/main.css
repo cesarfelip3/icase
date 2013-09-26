@@ -3,12 +3,6 @@
  * @author hellomaya
  * @date 2013.09.13
  */
-body {
-    padding-top: 60px;
-    padding-bottom: 40px;
-    background-color:#888;
-    font-size:14px;
-}
 
 .unselectable { 
     -webkit-user-select: none; 
