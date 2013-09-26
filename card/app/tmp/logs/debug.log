@@ -1,0 +1,171 @@
+2013-09-03 07:52:22 Notice: Notice (8): Undefined offset: 0 in [/Volumes/DOS/work.current/icase/app/Controller/IndexController.php, line 29]
+Trace:
+IndexController::index() - APP/Controller/IndexController.php, line 29
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 486
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 187
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 162
+[main] - APP/webroot/index.php, line 110
+
+2013-09-03 07:52:22 Notice: Notice (8): Undefined offset: 0 in [/Volumes/DOS/work.current/icase/app/Controller/IndexController.php, line 29]
+Trace:
+IndexController::index() - APP/Controller/IndexController.php, line 29
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 486
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 187
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 162
+[main] - APP/webroot/index.php, line 110
+
+2013-09-03 07:52:22 Notice: Notice (8): Undefined offset: 0 in [/Volumes/DOS/work.current/icase/app/Controller/IndexController.php, line 29]
+Trace:
+IndexController::index() - APP/Controller/IndexController.php, line 29
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 486
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 187
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 162
+[main] - APP/webroot/index.php, line 110
+
+2013-09-03 07:52:22 Notice: Notice (8): Undefined offset: 0 in [/Volumes/DOS/work.current/icase/app/Controller/IndexController.php, line 29]
+Trace:
+IndexController::index() - APP/Controller/IndexController.php, line 29
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 486
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 187
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 162
+[main] - APP/webroot/index.php, line 110
+
+2013-09-03 07:52:22 Notice: Notice (8): Undefined offset: 0 in [/Volumes/DOS/work.current/icase/app/Controller/IndexController.php, line 29]
+Trace:
+IndexController::index() - APP/Controller/IndexController.php, line 29
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 486
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 187
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 162
+[main] - APP/webroot/index.php, line 110
+
+2013-09-03 07:52:22 Notice: Notice (8): Undefined offset: 0 in [/Volumes/DOS/work.current/icase/app/Controller/IndexController.php, line 29]
+Trace:
+IndexController::index() - APP/Controller/IndexController.php, line 29
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 486
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 187
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 162
+[main] - APP/webroot/index.php, line 110
+
+2013-09-03 07:52:22 Notice: Notice (8): Undefined offset: 0 in [/Volumes/DOS/work.current/icase/app/Controller/IndexController.php, line 29]
+Trace:
+IndexController::index() - APP/Controller/IndexController.php, line 29
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 486
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 187
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 162
+[main] - APP/webroot/index.php, line 110
+
+2013-09-03 07:52:22 Notice: Notice (8): Undefined offset: 0 in [/Volumes/DOS/work.current/icase/app/Controller/IndexController.php, line 29]
+Trace:
+IndexController::index() - APP/Controller/IndexController.php, line 29
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 486
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 187
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 162
+[main] - APP/webroot/index.php, line 110
+
+2013-09-03 07:52:38 Notice: Notice (8): Undefined offset: 0 in [/Volumes/DOS/work.current/icase/app/Controller/IndexController.php, line 29]
+Trace:
+IndexController::index() - APP/Controller/IndexController.php, line 29
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 486
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 187
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 162
+[main] - APP/webroot/index.php, line 110
+
+2013-09-03 07:52:38 Notice: Notice (8): Undefined offset: 0 in [/Volumes/DOS/work.current/icase/app/Controller/IndexController.php, line 29]
+Trace:
+IndexController::index() - APP/Controller/IndexController.php, line 29
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 486
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 187
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 162
+[main] - APP/webroot/index.php, line 110
+
+2013-09-03 07:52:38 Notice: Notice (8): Undefined offset: 0 in [/Volumes/DOS/work.current/icase/app/Controller/IndexController.php, line 29]
+Trace:
+IndexController::index() - APP/Controller/IndexController.php, line 29
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 486
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 187
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 162
+[main] - APP/webroot/index.php, line 110
+
+2013-09-03 07:52:38 Notice: Notice (8): Undefined offset: 0 in [/Volumes/DOS/work.current/icase/app/Controller/IndexController.php, line 29]
+Trace:
+IndexController::index() - APP/Controller/IndexController.php, line 29
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 486
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 187
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 162
+[main] - APP/webroot/index.php, line 110
+
+2013-09-03 07:52:38 Notice: Notice (8): Undefined offset: 0 in [/Volumes/DOS/work.current/icase/app/Controller/IndexController.php, line 29]
+Trace:
+IndexController::index() - APP/Controller/IndexController.php, line 29
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 486
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 187
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 162
+[main] - APP/webroot/index.php, line 110
+
+2013-09-03 07:52:38 Notice: Notice (8): Undefined offset: 0 in [/Volumes/DOS/work.current/icase/app/Controller/IndexController.php, line 29]
+Trace:
+IndexController::index() - APP/Controller/IndexController.php, line 29
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 486
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 187
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 162
+[main] - APP/webroot/index.php, line 110
+
+2013-09-03 07:52:38 Notice: Notice (8): Undefined offset: 0 in [/Volumes/DOS/work.current/icase/app/Controller/IndexController.php, line 29]
+Trace:
+IndexController::index() - APP/Controller/IndexController.php, line 29
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 486
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 187
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 162
+[main] - APP/webroot/index.php, line 110
+
+2013-09-03 07:52:38 Notice: Notice (8): Undefined offset: 0 in [/Volumes/DOS/work.current/icase/app/Controller/IndexController.php, line 29]
+Trace:
+IndexController::index() - APP/Controller/IndexController.php, line 29
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 486
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 187
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 162
+[main] - APP/webroot/index.php, line 110
+
+2013-09-03 08:39:29 Notice: Notice (8): Undefined offset: 0 in [/Volumes/DOS/work.current/icase/app/Plugin/Admin/Controller/OrderController.php, line 335]
+Trace:
+OrderController::notify() - APP/Plugin/Admin/Controller/OrderController.php, line 335
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 486
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 187
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 162
+[main] - APP/webroot/index.php, line 110
+
+2013-09-03 08:40:20 Notice: Notice (8): Undefined offset: 0 in [/Volumes/DOS/work.current/icase/app/Plugin/Admin/Controller/OrderController.php, line 335]
+Trace:
+OrderController::notify() - APP/Plugin/Admin/Controller/OrderController.php, line 335
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 486
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 187
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 162
+[main] - APP/webroot/index.php, line 110
+
+2013-09-03 08:41:11 Notice: Notice (8): Undefined offset: 0 in [/Volumes/DOS/work.current/icase/app/Plugin/Admin/Controller/OrderController.php, line 335]
+Trace:
+OrderController::notify() - APP/Plugin/Admin/Controller/OrderController.php, line 335
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 486
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 187
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 162
+[main] - APP/webroot/index.php, line 110
+

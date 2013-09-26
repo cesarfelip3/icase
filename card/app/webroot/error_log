@@ -1,0 +1,6 @@
+[16-Aug-2013 18:41:06 America/Denver] PHP Parse error:  syntax error, unexpected ':' in /home3/beautahf/public_html/site/app/Controller/ShopController.php on line 36
+[16-Aug-2013 18:41:16 America/Denver] PHP Parse error:  syntax error, unexpected ':' in /home3/beautahf/public_html/site/app/Controller/ShopController.php on line 36
+[16-Aug-2013 23:15:06 America/Denver] PHP Fatal error:  Cannot call abstract method CacheEngine::read() in /home3/beautahf/public_html/site/app/Controller/AppController.php on line 55
+[17-Aug-2013 00:26:08 America/Denver] PHP Fatal error:  Cannot use string offset as an array in /home3/beautahf/public_html/site/app/Plugin/Admin/Controller/ProductController.php on line 522
+[17-Aug-2013 00:30:47 America/Denver] PHP Fatal error:  Cannot use string offset as an array in /home3/beautahf/public_html/site/app/Plugin/Admin/Controller/ProductController.php on line 526
+[17-Aug-2013 00:32:41 America/Denver] PHP Fatal error:  Cannot use string offset as an array in /home3/beautahf/public_html/site/app/Plugin/Admin/Controller/ProductController.php on line 526

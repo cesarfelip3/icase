@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+
+        <!--        <link rel="stylesheet" href="css/bootstrap-responsive.min.css">-->
+        <link rel="stylesheet" href="js/colorpicker2/css/bootstrap-colorpicker.css">
+        <!-- link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet" -->
+        <link href="css/font-awesome.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="css/main.css">
+        <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+    </head>
+    <body>
+        <!--[if lt IE 9]>
+            <p class="chromeframe">You are using an <strong><i>NO SUPPORTED</i></strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser, we recommand ie9+, google chrome, firefox, safari and opera latest version</a></p>
+        <![endif]-->
+
+        <!-- This code is taken from http://twitter.github.com/bootstrap/examples/hero.html -->
+
+        <div class="navbar navbar-fixed-top navbar-inverse">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="#" style="margin-left:5px;">Online DIY maker</a>
+
+                    <div class="nav-collapse collapse">
+                        <ul class="nav">
+                            <li class="active"><a href="index.html">Home</a></li>
+                            <li class="active"><a href="category.html">Category</a></li>
+                            <li class="active"><a href="admin.html">Admin</a></li>
+                            <li class="active"><a href="add.html">Add</a></li>
+                            <li class="active"><a href="edit.html">Edit</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- content -->
+        <div class="container unselectable" id="box-container">
+            <div class="row-fluid" style="height:70px;">
+                <div class="span6">
+                    <h5 style="padding:0px;margin:0px;">Click the text and images to personalise your business card.</h5>
+                    <div style="font-size:13px;line-height: 15px;">
+                        (You can add new images and text areas by dragging and dropping the image and text icons to the right onto your business card)
+                    </div>
+                </div>
+                <div class="span6">
+                    <div class="pull-right tools" id="box-toolbar-main">
+                        <ul class="thumbnails">
+                            <li>
+                                <div class="thumbnail" style="border:none;text-align:center;margin:auto;">
+                                    <a href="javascript:" class="thumbnail" data-action="background" style="border:none;text-shadow: none;box-shadow: none;color:red"><i class="icon-desktop icon-2x"></i></a>
+                                    <div class="caption">
+                                        Background
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="thumbnail" style="border:none;text-align:center;margin:auto;">
+                                    <a href="javascript:" class="thumbnail" data-action="addgrid" style="border:none;text-shadow: none;box-shadow: none;"><i class="icon-building icon-2x"></i></a>
+                                    <div class="caption">
+                                        Snap to grid
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="thumbnail" style="border:none;text-align:center;margin:auto;">
+                                    <a href="javascript:" class="thumbnail" data-action="addtext" title="add text" style="border:none;text-shadow: none;box-shadow: none;"><i class="icon-font icon-2x"></i></a>
+                                    <div class="caption">
+                                        Add text
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="thumbnail" style="border:none;text-align:center;margin:auto;" id="uploader">
+                                    <a href="javascript:" class="thumbnail" id="btn-upload-image" style="border:none;text-shadow: none;box-shadow: none;"><i class="icon-picture icon-2x"></i></a>
+                                    <div class="caption">
+                                        Add image
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="thumbnail" style="border:none;text-align:center;margin:auto;">
+                                    <a href="javascript:" class="thumbnail" data-action="addshape" style="border:none;text-shadow: none;box-shadow: none;"><i class="icon-th-large icon-2x"></i></a>
+                                    <div class="caption">
+                                        Add shape
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div style="height:1px;background-color:#ccc"></div>
+            <div class="row-fluid tools" style="height:40px;background-color:#eee;" id="box-controlbar">
+                <div class="span6">
+                </div>
+                <div class="span6 pull-right">
+                    <ul class="pull-right">
+                        <li>
+                            <a href="javascript:" data-action="save" title="save your work">
+                                <i class="icon-save icon-2x"></i>
+                            </a>
+                        </li>
+                        <li class="hide">
+                            <a href="javascript:" data-action="reload" title="reload yoru work">
+                                <i class="icon-upload-alt icon-2x"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:" data-action="preview" title="preview">
+                                <i class="icon-file-text icon-2x"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- canvas -->
+            <input type="hidden" id="current-item" style="display:none;" />
+            <input type="hidden" name="canvas_guid" id="canvas_guid" style="display:none;" value="" data-reload="" />
+            <div class="row-fluid" id="box-editing">
+                <div class="span12" style="padding:10px;overflow:auto;width:100%;">
+                    <div class="clear"></div>
+                    <div class="row-fluid" style="width:914px;height:100px;position:absolute;margin:0px;padding:0px;">
+                        <div class="tools unselectable pull-right" id="box-toolbar-move" style="margin-right:10px;">
+                            <ul>
+                                <li></li>
+                                <li>
+                                    <a href="javascript:" data-action="moveup">
+                                        <i class="icon-arrow-up icon-2x"></i>
+                                    </a>
+                                </li>
+                                <li></li>
+                                <li>
+                                    <a href="javascript:" data-action="moveleft" class="pull-left">
+                                        <i class="icon-arrow-left icon-2x"></i>
+                                    </a>
+                                </li>
+                                <li></li>
+                                <li>
+                                    <a href="javascript:" data-action="moveright" class="pull-right">
+                                        <i class="icon-arrow-right icon-2x"></i>
+                                    </a>
+                                </li>
+                                <li></li>
+                                <li>
+                                    <a href="javascript:" data-action="movedown">
+                                        <i class="icon-arrow-down icon-2x"></i>
+                                    </a>
+                                </li>
+                                <li></li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <div class="clear"></div>
+                    <div style="display:block;text-align:center;margin:auto;">
+                        <div id="box-canvas-wrapper" style="width:480px;height:580px;text-align:center;margin:auto;">
+                            <canvas style="-moz-user-select: none; cursor: crosshair;" width="480" height="580" id="c1"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div id="box-alert" class="hide" style="height:20px;width:914px;position:absolute;background:none;border-radius: 0px;box-shadow: none;">
+                    <p class="body" style="color:orange;padding:5px;background-color:white;"></p>
+                </div>
+                <div class="progress hide" style="height:10px;width:914px;position:absolute;background:none;border-radius: 0px;box-shadow: none;"><div class="bar bar-warning" id="progress-bar" style="width: 0%; height:8px;"></div></div>
+                <div style="position:absolute;opacity: 0.8;" class="tools unselectable" id="box-toolbar-zoom">
+                    <ul style="list-style:none;">
+                        <li style="border-bottom:1px solid #333">
+                            <a href="javascript:" data-action="remove" title="trash"><i class="icon-trash icon-2x"></i></a>
+                        </li>
+                        <li>
+                            <a href="javascript:" data-action="backward" title="backword"><i class="icon-file-alt icon-2x"></i></a>
+                        </li>
+                        <li>
+                            <a href="javascript:" data-action="forward" title="forward"><i class="icon-file icon-2x"></i></a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:" data-action="lock" title="forward"><i class="icon-lock icon-2x"></i></a>
+                        </li>
+                        <li style="height:10px;"></li>
+                        <li>
+                            <a href="javascript:" data-action="zoomin"><i class="icon-zoom-in icon-2x"></i></a>
+                        </li>
+                        <li class="disabled">
+                            <a href="javascript:" data-action="zoomout"><i class="icon-zoom-out icon-2x"></i></a>
+                        </li>
+                        <li class="disabled">
+                            <a href="javascript:" data-action="zoomfit"><i class="icon-screenshot icon-2x"></i></a>
+                        </li>
+                        <li class="disabled">
+                            <a href="javascript:" data-action="undo"><i class="icon-undo icon-2x"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <div style="position:absolute;" class="tools unselectable hide" id="box-toolbar-bg">
+                    <ul style="list-style:none;">
+                        <li class="divider" id="li-backgroundcolor">
+                            <a href="javascript:"><i class="icon-unchecked icon-2x"></i></a>
+                            <ul class="hide" >
+                                <li>
+                                    <a href='javascript:' data-action="backgroundcolor" data-data="blue" style="background-color:blue;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="backgroundcolor" data-data="red" style="background-color:red;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="backgroundcolor" data-data="blue" style="background-color:blue;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="backgroundcolor" data-data="red" style="background-color:red;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="backgroundcolor" data-data="blue" style="background-color:blue;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="backgroundcolor" data-data="red" style="background-color:red;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="backgroundcolor" data-data="blue" style="background-color:blue;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="backgroundcolor" data-data="red" style="background-color:red;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="backgroundcolor" data-data="blue" style="background-color:blue;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="backgroundcolor" data-data="red" style="background-color:red;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="backgroundcolor" data-data="blue" style="background-color:blue;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="backgroundcolor" data-data="red" style="background-color:red;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="backgroundcolor" data-data="blue" style="background-color:blue;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="backgroundcolor" data-data="red" style="background-color:red;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="backgroundcolor" data-data="blue" style="background-color:blue;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="backgroundcolor" data-data="red" style="background-color:red;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="backgroundcolor" data-data="blue" style="background-color:blue;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="backgroundcolor" data-data="red" style="background-color:red;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="backgroundcolor" data-data="blue" style="background-color:blue;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="backgroundcolor" data-data="red" style="background-color:red;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="backgroundcolor" data-data="blue" style="background-color:blue;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="backgroundcolor" data-data="red" style="background-color:red;"></a>
+                                </li>
+                                <li style="width:auto;" class="disabled">
+                                    <input type="text" id="bg-color-picker" />
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="divider">
+                            <a href="javascript:" data-action="backgroundcolor" data-data="#ffffff"><i class="icon-trash icon-2x"></i></a>
+                        </li>
+                        <li>
+                            <a href="javascript:" onclick="jQuery('#box-toolbar-bg').hide();"><i class="icon-ok icon-2x"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <div style="position:absolute;" class="tools unselectable hide" id="box-toolbar-shape">
+                    <ul style="list-style:none;">
+                        <li class="divider" id="li-backgroundcolor">
+                            <a href="javascript:" data-action="shape-circle" data-data="circle"><i class="icon-circle icon-2x"></i></a>
+                        </li>
+                        <li class="divider">
+                            <a href="javascript:" data-action="shape-rect" data-data="rect"><i class="icon-stop icon-2x"></i></a>
+                        </li>
+                        <li class="divider">
+                            <a href="javascript:" data-action="shape-tri" data-data="tri"><i class="icon-play icon-2x"></i></a>
+                        </li>
+                        <li>
+                            <a href="javascript:" onclick="jQuery('#box-toolbar-shape').hide();"><i class="icon-ok icon-2x"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <div style="position:absolute;top:200px;" class="image-editor unselectable hide" id="box-toolbar-imageeditor">
+                    <ul style="list-style:none;">
+                        <li class="divider">
+                            <a href="javascript:" data-action="cropstart"><i class="icon-crop icon-2x"></i></a>
+                        </li>
+                        <li class="divider">
+                            <a href="javascript:" data-action="cropend"><i class="icon-ok icon-2x"></i></a>
+                        </li>
+                        <li>
+                            <a href="javascript:" data-action="close"><i class="icon-remove icon-2x"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <div style="position:absolute;top:200px;" class="text-editor unselectable hide" id="box-toolbar-texteditor">
+                    <ul style="list-style:none;">
+                        <li class="divider" style='background-color:#eee' id="li-text-content">
+                            <a href="javascript:" data-action="backgroundcolor"><i class="icon-pencil icon-2x"></i></a>
+                            <ul style='display:block;'>
+                                <li>
+                                    <textarea style='width:455px;border:1px solid #ccc;height:140px;resize:none;border-radius: 0px;' id="text-content"></textarea>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="divider" id='li-font-type' >
+                            <a href="javascript:" data-action="clearbackground"><i class="icon-font icon-2x"></i></a>
+                            <ul>
+                                <li title="American Typewriter" data-data="American Typewriter"><p style="background-position:10px 0px;font-family: American Typewriter">American Typewriter</p></li>
+                                <li title="Daniel" data-data="Daniel"><p style="background-position:10px -20px;font-family: Daniel">Daniel</p></li>
+                                <li title="League Gothic"><p style="background-position:10px -40px"></p></li>
+                                <li title="Arial" class="selected"><p style="background-position:10px -60px"></p></li>
+                                <li title="Georgia"><p style="background-position:10px -80px"></p></li>
+                                <li title="Lobster"><p style="background-position:10px -100px"></p></li>
+                                <li title="Bebas Nueue"><p style="background-position:10px -120px"></p></li>
+                                <li title="Gill Sans"><p style="background-position:10px -140px"></p></li>
+                                <li title="Optima"><p style="background-position:10px -160px"></p></li>
+                                <li title="Bodoni"><p style="background-position:10px -180px"></p></li>
+                                <li title="Gill Sans Light"><p style="background-position:10px -200px"></p></li>
+                                <li title="Overlock"><p style="background-position:10px -220px"></p></li>
+                                <li title="Bradley Hand"><p style="background-position:10px -240px"></p></li>
+                                <li title="Gladifilthefte"><p style="background-position:10px -260px"></p></li>
+                                <li title="Rockwell"><p style="background-position:10px -280px"></p></li>
+                                <li title="Cartoonist Hand"><p style="background-position:10px -300px"></p></li>
+                                <li title="Great Vibes"><p style="background-position:10px -320px"></p></li>
+                                <li title="Sofia"><p style="background-position:10px -340px"></p></li>
+                                <li title="ChunkFive"><p style="background-position:10px -360px"></p></li>
+                                <li title="Helvetica Nueue Condensed"><p style="background-position:10px -380px"></p></li>
+                                <li title="Tangerine"><p style="background-position:10px -400px"></p></li>
+                                <li title="Clarendon"><p style="background-position:10px -420px"></p></li>
+                                <li title="Helvetica Nueue Light"><p style="background-position:10px -440px"></p></li>
+                                <li title="Times"><p style="background-position:10px -460px"></p></li>
+                                <li title="Dancing Script"><p style="background-position:10px -480px"></p></li>
+                            </ul>
+                        </li>
+                        <li class="divider" id='li-font-size'>
+                            <a href="javascript:" data-action="backgroundcolor"><i class="icon-text-width icon-2x"></i></a>
+                            <ul>
+                                <li>
+                                    <a href='javascript:' data-action="size" data-data="9">9</a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="size" data-data="10">10</a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="size" data-data="11">11</a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="size" data-data="12">12</a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="size" data-data="13">13</a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="size" data-data="14">14</a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="size" data-data="18">18</a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="size" data-data="24">24</a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="size" data-data="36">36</a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="size" data-data="48">48</a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="size" data-data="64">64</a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="size" data-data="72">72</a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="size" data-data="96">96</a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="size" data-data="144">144</a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="size" data-data="288">288</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="divider" id="li-font-color">
+                            <a href="javascript:" data-action="clearbackground"><i class="icon-unchecked icon-2x"></i></a>
+                            <ul>
+                                <li>
+                                    <a href='javascript:' data-action="color" data-data="blue" style="background-color:blue;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="color" data-data="red" style="background-color:red;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="color" data-data="blue" style="background-color:blue;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="color" data-data="red" style="background-color:red;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="color" data-data="blue" style="background-color:blue;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="color" data-data="red" style="background-color:red;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="color" data-data="blue" style="background-color:blue;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="color" data-data="red" style="background-color:red;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="color" data-data="blue" style="background-color:blue;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="color" data-data="red" style="background-color:red;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="color" data-data="blue" style="background-color:blue;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="color" data-data="red" style="background-color:red;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="color" data-data="blue" style="background-color:blue;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="color" data-data="red" style="background-color:red;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="color" data-data="blue" style="background-color:blue;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="color" data-data="red" style="background-color:red;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="color" data-data="blue" style="background-color:blue;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="color" data-data="red" style="background-color:red;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="color" data-data="blue" style="background-color:blue;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="color" data-data="red" style="background-color:red;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="color" data-data="blue" style="background-color:blue;"></a>
+                                </li>
+                                <li>
+                                    <a href='javascript:' data-action="color" data-data="red" style="background-color:red;"></a>
+                                </li>
+                                <li style="width:auto;" class="disabled">
+                                    <input type="text" id="font-color-picker" />
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="divider">
+                            <a href="javascript:" data-action="weight"><i class="icon-bold icon-2x"></i></a>
+                        </li>
+                        <li class="divider">
+                            <a href="javascript:" data-action="italic"><i class="icon-italic icon-2x"></i></a>
+                        </li>
+                        <li class="divider">
+                            <a href="javascript:" data-action="underline"><i class="icon-underline icon-2x"></i></a>
+                        </li>
+                        <li class="divider">
+                            <a href="javascript:" data-action="align" data-data="left"><i class="icon-align-left icon-2x"></i></a>
+                        </li>
+                        <li class="divider">
+                            <a href="javascript:" data-action="align" data-data="center"><i class="icon-align-center icon-2x"></i></a>
+                        </li>
+                        <li class="divider">
+                            <a href="javascript:" data-action="align" data-data="right"><i class="icon-align-right icon-2x"></i></a>
+                        </li>
+                        <li class="divider">
+                            <a href="javascript:" data-action="confirm"><i class="icon-ok icon-2x"></i></a>
+                        </li>
+                        <li>
+                            <a href="javascript:" data-action="close"><i class="icon-remove icon-2x"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="row-fluid hide" style="width:914px;position: absolute;background-color:#eee;padding:10px;" id="box-attribute">
+                    <form id="form-edit">
+                        <div class="span3">
+                            <fieldset>
+                                <legend></legend>
+                                <input type="text" placeholder="Type something…">
+                            </fieldset>
+                        </div>
+                        <div class="span3">
+                            <fieldset>
+                                <legend></legend>
+                                <select id="do-t-product">
+                                    <option value="2">Flyers &amp; Leaflets</option>
+                                    <option value="1">Business Cards</option>
+                                    <option value="3">Letterheads</option>
+                                    <option value="4">Compliments Slips</option>
+                                    <option value="5">Posters</option>
+                                    <option value="6">Roller Banners</option>
+                                    <option value="7">Invitations</option>
+                                </select>
+                            </fieldset>
+                        </div>
+                        <div class="span3">
+                            <fieldset>
+                                <legend></legend>
+                                <select>
+                                    <option value="0">All Industry</option>
+                                    <option value="8">automotive,travel &amp; transportation</option>
+                                    <option value="19">baby &amp; kids</option>
+                                    <option value="7">beauty, health care &amp; medical</option>
+                                    <option value="17">birthday &amp; party</option>
+                                    <option value="9">child care &amp; education</option>
+                                    <option value="2">energy &amp; environment</option>
+                                    <option value="1">food &amp; beverage</option>
+                                    <option value="15">gardening, florists &amp; farming</option>
+                                    <option value="14">general</option>
+                                    <option value="18">general</option>
+                                    <option value="3">home maintenance &amp; cleaning</option>
+                                    <option value="6">legal, financial &amp; real estate</option>
+                                    <option value="4">music &amp; arts</option>
+                                    <option value="5">pets &amp; animals</option>
+                                    <option value="20">photo-invites</option>
+                                    <option value="11">retail, sales &amp; fashion</option>
+                                    <option value="12">sports &amp; fitness</option>
+                                    <option value="10">technology &amp; information</option>
+                                    <option value="16">wedding &amp; anniversary</option>
+                                    <option value="13">wedding, events &amp; event planning</option>
+                                </select>
+                            </fieldset>
+                        </div>
+                        <div class="span3">
+                            <fieldset>
+                                <legend></legend>
+                                <select>
+                                    <option value="0"> --- </option>
+                                    <option value="6" data-category="2">A3</option>
+                                    <option value="2" data-category="2">A4</option>
+                                    <option value="3" data-category="2">A5</option><option value="4" data-category="2" selected="selected">A6</option>
+                                    <option value="5" data-category="2">DL</option>
+                                </select>
+                                <a class="btn pull-right" id="btn-save">Submit</a>
+                            </fieldset>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- editor -->
+
+        </div>
+        <!-- end fluid-container -->
+
+        <!-- plupload -->
+        <script type="text/javascript" src="http://bp.yahooapis.com/2.4.21/browserplus-min.js"></script>
+
+        <script type="text/javascript" src="js/pluploader/plupload.js"></script>
+        <script type="text/javascript" src="js/pluploader/plupload.gears.js"></script>
+        <script type="text/javascript" src="js/pluploader/plupload.silverlight.js"></script>
+        <script type="text/javascript" src="js/pluploader/plupload.flash.js"></script>
+        <script type="text/javascript" src="js/pluploader/plupload.browserplus.js"></script>
+        <script type="text/javascript" src="js/pluploader/plupload.html4.js"></script>
+        <script type="text/javascript" src="js/pluploader/plupload.html5.js"></script>
+        <script type="text/javascript" src="js/maker/index.min.js"></script>
+
+        <script>
+            $(document).ready(
+                    function() {
+                        $("#btn-save").click(
+                                function() {
+                                    var json = $.mememaker.tools.getstate();
+                                    jQuery.ajax({
+                                        url: "" + id,
+                                        data: {'json': json, 'attribute': $("#form-edit").serialize()},
+                                        type: "POST",
+                                        beforeSend: function(xhr) {
+                                        }
+                                    }).done(function(data) {
+                                        var result = $.parseJSON(data);
+                                        if (result.error == 1) {
+                                            $("#modal-user").modal();
+                                            formuser_load();
+                                        } else {
+                                            alert("Your progress just saved");
+                                        }
+                                    }).fail(function() {
+                                        //$("#template-list").prev().children(":first-child").hide(0);
+                                    });
+                                });
+                    });
+        </script>
+        <!-- preview modal -->
+        <div id="modal-preview" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabel">Your Design</h3>
+            </div>
+            <div class="modal-body" style="background:#ccc">
+                <div class="ajax-loading-indicator hide" style=""><a href="javascript:" style="font-size:14px;"><i class="icon-refresh icon-spin"></i> Loading ....</a></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+
+        <!-- user modal -->
+        <div id="modal-user" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabel">User</h3>
+            </div>
+            <div class="modal-body">
+                <div class="ajax-loading-indicator hide" style=""><a href="javascript:" style="font-size:14px;"><i class="icon-refresh icon-spin"></i> Loading ....</a></div>
+            </div>
+            <div class="modal-footer">
+                <p class="text-error">You have to sign in to save your progress.</p>
+            </div>
+        </div>
+
+        <!-- user modal -->
+        <div id="modal-upload-progress" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-body">
+            </div>
+        </div>
+
+        <script src="js/vendor/bootstrap.min.js"></script>
+
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+        <script src='js/spectrum/spectrum.js'></script>
+        <link rel='stylesheet' href='js/spectrum/spectrum.css' />
+        <script src='js/maker/json2.js'></script>
+        <script src='js/maker/jquery.cookie.js'></script>
+        <!-- bootstrap slider -->
+        <!--        <link rel="stylesheet" href="js/inputslider/css/slider.css" media="screen" type="text/css" />
+                <script type="text/javascript" src="js/inputslider/js/bootstrap-slider.js"></script>-->
+        <!-- colorpicker -->
+        <!--        <script type="text/javascript" src="js/colorpicker2/js/bootstrap-colorpicker.js"></script>
+                <script type="text/javascript" src="js/colorpicker2/js/docs.js"></script>-->
+        <script>window.fabric || document.write('<script src="js/maker/1211.all.js"><\/script>')</script> 
+        <script src="js/maker/jquery.mememaker.min.js"></script>
+        <script src="js/maker/_191.mememakerinit.js"></script>
+
+    </body>
+</html>
