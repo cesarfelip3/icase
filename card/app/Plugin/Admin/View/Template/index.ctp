@@ -3,6 +3,7 @@ $action_add = $base . "template/add";
 $action_edit = $base . "template/edit";
 $action_delete = $base . "template/delete";
 $action_category_index = $base . "category";
+$action_create = $base . "creator/create";
 ?>
 <div class="secondary-masthead">
     <div class="container">
@@ -22,29 +23,27 @@ $action_category_index = $base . "category";
         </div>
         <div class="row">
             <div class="span12">
-                <form class="form-inline" id='form-filter' method='POST'>
+                <form class="form-inline" id='form-filter' method='GET'>
                     <div class="slate">
                         <input type='hidden' name='page' value='<?php echo $page; ?>' />
                         <input type="text" class="input-large" placeholder="Keyword..." name='keyword' value='<?php echo $keyword; ?>'>
                         <input type='text' class='input-small datepicker' name='start' placeholder='Start Date' readonly='readonly' value="<?php echo $start; ?>" />
                         <input type='text' class='input-small datepicker' name='end' placeholder='End Date' readonly='readonly' value="<?php echo $end; ?>" />
-                        <select name='filter'>
-                            <option value=""> - Filter - </option>
-                            <?php foreach ($filters as $key => $value) : ?>
-                                <option value="<?php echo $key; ?>" <?php if ($key == $filter) echo 'selected="selected"'; ?>><?php echo $value; ?></option>
+                        <select name='filter_category'>
+                            <option value=""> - Category - </option>
+                            <?php foreach ($filter_categories as $key => $value) : ?>
+                            <?php $value = $value['Category']; ?>
+                                <option value="<?php echo $value['guid']; ?>" <?php if ($value['guid'] == $filter_category) echo 'selected="selected"'; ?>><?php echo $value['name']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <select name='filter_industry'>
+                            <option value=""> - Industry - </option>
+                            <?php foreach ($filter_industries as $key => $value) : ?>
+                            <?php $value = $value['Industry']; ?>
+                                <option value="<?php echo $value['guid']; ?>" <?php if ($value['guid'] == $filter_industry) echo 'selected="selected"'; ?>><?php echo $value['name']; ?></option>
                             <?php endforeach; ?>
                         </select>
                         <input type="button" onclick='load(0);' class="btn btn-primary" name="action" value="Filter" />
-                        <input type="hidden" name="category" value='<?php echo $filter_categories; ?>' />
-                    </div>
-                    <div class="slate" id="box-filter-category-select">
-                        <h4>
-                            <?php if (!empty ($filter_categories)) : $filter_categories = json_decode($filter_categories); ?>
-                            <?php foreach ($filter_categories as $value) : ?>
-                            <div style="display:inline">&nbsp;<span class="label label-important"><?php echo $value->name; ?></span>&nbsp;<a href="javascript:" style="text-decoration: none;" class="btn-filter-category-remove" data-guid="<?php echo $value->id; ?>"><i class="icon-remove-circle"></i></a>&nbsp;&nbsp;</div>
-                            <?php endforeach; ?>
-                            <?php endif; ?>
-                        </h4>
                     </div>
                 </form>
             </div>
@@ -54,17 +53,7 @@ $action_category_index = $base . "category";
                 <a href="<?php echo $action_category_index; ?>" class="btn btn-primary">Edit Category</a>
                 <a href="<?php echo $action_add; ?>" class="btn btn-primary">New Template</a>
             </div>
-            <div class="span3">
-                <div class="slate">
-                    <div class="page-header">
-                        <h2>Category</h2>
-                    </div>
-                    <div id="box-filter-category" style="overflow: auto;">
-                        
-                    </div>
-                </div>
-            </div>
-            <div class="span9">
+            <div class="span12">
                 <div class="slate">
                     <div class="page-header">
                         <div class="btn-group pull-right hide">
@@ -100,15 +89,20 @@ $action_category_index = $base . "category";
                             <tr>
                                 <td><?php echo ++$i; ?></td>
                                 <?php foreach ($header as $key => $val) : ?>
-                                <?php if ($key == 'image') : ?>
-                                <td><a class="thumbnail"><img src='<?php echo  $value['image']; ?>' style="width:32px" /></a></td>
+                                <?php if ($key == 'thumbnails') : ?>
+                                <td>
+                                    <?php foreach ($value[$key] as $image) : ?>
+                                    <img src='<?php echo $image; ?>' style="width:32px;border:1px solid #ccc;padding:5px;" />
+                                    <?php endforeach;?>
+                                </td>
                                 <?php else : ?>
                                 <td><?php echo $key == 'created' || $key == 'modified' ? date ("Y-m-d H:i:s", $value[$key]) : $value[$key]; ?></td>
                                 <?php endif; ?>
                                 <?php endforeach; ?>
-                                <td class="actions">
+                                <td class="actions" style="width:300px;">
                                     <a class="btn btn-small btn-danger" onclick="del('<?php echo $value['id']; ?>')">Remove</a>
-                                    <a class="btn btn-small btn-primary" href="<?php echo $action_edit; ?>?id=<?php echo $value['guid']; ?>" target="new">View Details</a>
+                                    <a class="btn btn-small btn-primary" href="<?php echo $action_create; ?>/?action=edit&id=<?php echo $value['guid']; ?>" target="new">Go Design</a>
+                                    <a class="btn btn-small btn-primary" href="<?php echo $action_edit; ?>/?id=<?php echo $value['guid']; ?>" target="new">View Details</a>
                                 </td>
                             </tr>
                             <?php endforeach; endif; ?>
@@ -124,7 +118,7 @@ $action_category_index = $base . "category";
         </div>
     </div>
 </div>
-<?php echo $this->element("action_del", array ("plugin"=>"Admin", "actionUrl" => $action_delete, "form" => "#form-filter", "message" => "Are you sure to remove this product?")); ?>
+<?php echo $this->element("action_del", array ("plugin"=>"Admin", "actionUrl" => $action_delete, "form" => "#form-filter", "message" => "Are you sure to remove this template?")); ?>
 
 <script>
     $(document).ready (

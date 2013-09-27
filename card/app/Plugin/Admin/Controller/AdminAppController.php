@@ -39,13 +39,14 @@ class AdminAppController extends Controller {
     protected $_media_location = array(
         "main" => "uploads/",
         "product" => "uploads/product/",
+        "template" => "uploads/template/",
         "order" => "uploads/order/",
         "user" => "uploads/user/",
         "user.uploads" => "uploads/user/uploads/",
     );
     
     protected $_media_size = array(
-        "product" => array(
+        "template" => array(
             "small" => 200,
             "medium" => 500,
         )

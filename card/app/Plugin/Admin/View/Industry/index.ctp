@@ -67,15 +67,6 @@ $admin_product = $base . "product";
                                     <a href="javascript:" class="btn btn-success" data-loading-text="Saving..." onclick="save('add');" id="btn-save">Create</a>
                                 </div>
                             </div>
-                            <div class="control-group warning">
-                                <label class="control-label" for="inputWarning">Parent</label>
-                                <div class="controls">
-                                    <input type="text" class="input-medium" name="industry[parent]" placeholder="Parent industry" readonly="readonly">
-                                    <input type="hidden" class="input-medium" name="industry[parent_guid]">
-                                    <span class="help-inline"></span>
-                                    <a href="javascript:" class="btn btn-success" onclick="industry_clear();" id="btn-clear">Clear</a>
-                                </div>
-                            </div>
                             <hr/>
                             <div class="control-group warning">
                                 <label class="control-label" for="inputWarning"></label>
@@ -96,7 +87,6 @@ $admin_product = $base . "product";
                         <input type="hidden" name="industry[guid]" />
                         <input type='hidden' name='industry[id]' />
                         <input type='hidden' name='industry[group_guid]' />
-                        <input type='hidden' name='industry[parent_guid]' />
                         <input type='hidden' name='industry[level]' />
                         <fieldset>
                             <div class="control-group">
@@ -235,8 +225,6 @@ $admin_product = $base . "product";
     }
 
     function industry_clear() {
-        $("input[name='industry[parent_guid]']").val("");
-        $("input[name='industry[parent]']").val("");
     }
 
     function industry_load() {

@@ -37,8 +37,8 @@ class MediaController extends AdminAppController {
                 $targetDir = APP . "webroot/uploads/";
 
                 $action = $this->request->query('action');
-                if ($action == 'product_edit') {
-                    $targetDir .= "product/";
+                if ($action == 'template_edit') {
+                    $targetDir .= "template/";
                 }
 
                 require_once APP . 'Vendor' . DIRECTORY_SEPARATOR . "Zebra/Zebra_Image.php";
@@ -177,8 +177,8 @@ class MediaController extends AdminAppController {
 
         $action = $this->request->query("action");
         if (!empty($action)) {
-            if ($action == 'product') {
-                $action = "";
+            if ($action == 'template') {
+                $action = DIRECTORY_SEPARATOR;
             } else {
                 $action = DIRECTORY_SEPARATOR . $action;
             }
@@ -204,8 +204,7 @@ class MediaController extends AdminAppController {
         header("Cache-Control: post-check=0, pre-check=0", false);
         header("Pragma: no-cache");
 
-
-        $targetDir = $this->_targetDir = ROOT . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'uploads' . $action;
+        $targetDir = $this->_targetDir = WWW_ROOT . 'uploads' . trim($action, "/");
 
         $cleanupTargetDir = true; // Remove old file
         $maxFileAge = 5 * 3600; // Temp file age in seconds
@@ -338,6 +337,8 @@ class MediaController extends AdminAppController {
             rename("{$filePath}.part", $target);
         }
 
+        $baseurl = $this->base . "/uploads" . $action;
+        
         $this->_error['error'] = 0;
         $this->_error['message'] = 'Success';
         $this->_error['file'] = array(
@@ -345,9 +346,11 @@ class MediaController extends AdminAppController {
             'target' => $name,
             'filename' => $filename,
             'extension' => $extension,
-            'url' => $this->base . "/uploads/$action/" . $name,
-            'urlsmall' => "",
+            'url' =>  $baseurl . $name,
+            'urlsmall' => $baseurl . $name
         );
+        
+        exit($this->_json($this->_error));
 
         $size = getimagesize($target);
         $this->_error['file']['width'] = $size[0];
@@ -366,8 +369,8 @@ class MediaController extends AdminAppController {
 
         $image->target_path = $targetDir . DIRECTORY_SEPARATOR . $filename . "_medium.png";
         
-        $width = $this->_media_size['product']['medium'];
-        $height = $this->_media_size['product']['medium'];
+        $width = $this->_media_size['template']['medium'];
+        $height = $this->_media_size['template']['medium'];
 
         if (!$image->resize($width, $height, ZEBRA_IMAGE_BOXED, -1)) {
             $this->_error['error'] = 1;
@@ -376,15 +379,15 @@ class MediaController extends AdminAppController {
         
         $image->target_path = $targetDir . DIRECTORY_SEPARATOR . $filename . "_small.png";
         
-        $width = $this->_media_size['product']['small'];
-        $height = $this->_media_size['product']['small'];
+        $width = $this->_media_size['template']['small'];
+        $height = $this->_media_size['template']['small'];
         
         if (!$image->resize($width, $height, ZEBRA_IMAGE_BOXED, -1)) {
             $this->_error['error'] = 1;
             $this->_error['message'] = "Resize to $width wrong";
         }
 
-        $this->_error['file']['urlsmall'] = $this->base . "/uploads/$action/" . $filename . "_small.png";
+        $this->_error['file']['urlsmall'] = $baseurl . $filename . "_small.png";
         exit($this->_json($this->_error));
     }
 

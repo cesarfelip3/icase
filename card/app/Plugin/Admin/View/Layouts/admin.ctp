@@ -9,16 +9,21 @@
         <meta name="description" value="The secrets to baking fresh chewy chocolate chip cookies that make you wish thousands of calories were actually good for you!" />
         <meta name="author" content="">
         <!-- Le styles -->
-        <link href="http://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet" type="text/css">
+<!--        <link href="http://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet" type="text/css">-->
         <link href="<?php echo $this->webroot; ?>plugins/admin/assets/css/bootstrap.css" rel="stylesheet">
         <link href="<?php echo $this->webroot; ?>plugins/admin/assets/css/font-awesome.css" rel="stylesheet">
         <link href="<?php echo $this->webroot; ?>plugins/admin/assets/css/admin.css" rel="stylesheet">
+        
+        <link href="<?php echo $this->webroot; ?>css/font-awesome.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="<?php echo $this->webroot; ?>css/main_admin.css">
+        <link rel='stylesheet' href='<?php echo $this->webroot; ?>js/spectrum/spectrum.css' />
+        
         <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
                 <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
 
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+        <script src="<?php echo $this->webroot; ?>js/vendor/jquery-1.9.1.min.js"></script>
     </head>    
     <body>
         <div class="masthead">

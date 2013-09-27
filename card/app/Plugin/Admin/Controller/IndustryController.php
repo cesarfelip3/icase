@@ -11,10 +11,10 @@ class IndustryController extends AdminAppController {
 //        'index' => array(
 //            'callbacks' => true,
 //            'duration' => 3600000),
-//        'categoryfilter' => array(
+//        'industryfilter' => array(
 //            'callbacks' => true,
 //            'duration' => 3600000),
-//        'categorylist' => array(
+//        'industrylist' => array(
 //            'callbacks' => true,
 //            'duration' => 3600000)
 //    );
@@ -27,7 +27,7 @@ class IndustryController extends AdminAppController {
         
     }
 
-    public function categorylist() {
+    public function industrylist() {
         if ($this->request->is('ajax')) {
 
             $this->layout = false;
@@ -35,26 +35,26 @@ class IndustryController extends AdminAppController {
             $id = $this->request->query('id');
 
             $this->loadModel('Industry');
-            $categories = $this->Industry->find('all', array(
+            $industries = $this->Industry->find('all', array(
                 "conditions" => array('level' => 0),
                 "order" => array('order ASC')
             ));
 
             $return = array();
-            if (!empty($categories)) {
+            if (!empty($industries)) {
 
-                foreach ($categories as $category) {
+                foreach ($industries as $industry) {
                     $result = $this->Industry->find('all', array(
-                        "conditions" => array('parent_guid' => $category['Industry']['guid']),
+                        "conditions" => array('parent_guid' => $industry['Industry']['guid']),
                         "order" => array('order ASC')
                             )
                     );
 
                     if (!empty($result)) {
-                        $return[] = $category;
-                        $this->_categoryList($result, $return);
+                        $return[] = $industry;
+                        $this->_industryList($result, $return);
                     } else {
-                        $return[] = $category;
+                        $return[] = $industry;
                     }
                 }
             }
@@ -73,8 +73,8 @@ class IndustryController extends AdminAppController {
                 foreach ($return as $key => $value) {
 
                     $value['Industry']['selected'] = false;
-                    foreach ($data as $category) {
-                        if ($value['Industry']['guid'] == $category['IndustryToObject']['category_guid']) {
+                    foreach ($data as $industry) {
+                        if ($value['Industry']['guid'] == $industry['IndustryToObject']['industry_guid']) {
                             $value['Industry']['selected'] = true;
                         }
                     }
@@ -102,7 +102,7 @@ class IndustryController extends AdminAppController {
         }
     }
 
-    public function categoryfilter() {
+    public function industryfilter() {
 
         if ($this->request->is('ajax')) {
 
@@ -110,26 +110,26 @@ class IndustryController extends AdminAppController {
             $id = $this->request->query('id');
 
             $this->loadModel('Industry');
-            $categories = $this->Industry->find('all', array(
+            $industries = $this->Industry->find('all', array(
                 "conditions" => array('level' => 0),
                 "order" => array('order ASC')
             ));
 
             $return = array();
-            if (!empty($categories)) {
+            if (!empty($industries)) {
 
-                foreach ($categories as $category) {
+                foreach ($industries as $industry) {
                     $result = $this->Industry->find('all', array(
-                        "conditions" => array('parent_guid' => $category['Industry']['guid']),
+                        "conditions" => array('parent_guid' => $industry['Industry']['guid']),
                         "order" => array('order ASC')
                             )
                     );
 
                     if (!empty($result)) {
-                        $return[] = $category;
-                        $this->_categoryList($result, $return);
+                        $return[] = $industry;
+                        $this->_industryList($result, $return);
                     } else {
-                        $return[] = $category;
+                        $return[] = $industry;
                     }
                 }
             }
@@ -148,8 +148,8 @@ class IndustryController extends AdminAppController {
                 foreach ($return as $key => $value) {
 
                     $value['Industry']['selected'] = false;
-                    foreach ($data as $category) {
-                        if ($value['Industry']['guid'] == $category['IndustryToObject']['category_guid']) {
+                    foreach ($data as $industry) {
+                        if ($value['Industry']['guid'] == $industry['IndustryToObject']['industry_guid']) {
                             $value['Industry']['selected'] = true;
                         }
                     }
@@ -175,22 +175,22 @@ class IndustryController extends AdminAppController {
             //$this->layout = false;
             $this->layout = 'ajax';
             $this->set('data', $return);
-            //$this->render('categoryfilter');
+            //$this->render('industryfilter');
         }
     }
 
     public function add() {
-        $data = $this->request->data('category');
+        $data = $this->request->data('industry');
         if (empty($data['name'])) {
             $this->error['error'] = 1;
-            $this->error['element'] = 'input[name="category[name]"]';
+            $this->error['element'] = 'input[name="industry[name]"]';
             $this->error['message'] = 'Industry name is required';
             exit(json_encode($this->error));
         }
 
         if (empty($data['slug'])) {
             $this->error['error'] = 1;
-            $this->error['element'] = 'input[name="category[name]"]';
+            $this->error['element'] = 'input[name="industry[name]"]';
             $this->error['message'] = 'URL Key is required';
             exit(json_encode($this->error));
         }
@@ -221,7 +221,7 @@ class IndustryController extends AdminAppController {
         }
 
         if ($level == 0) {
-            Cache::delete("category_top");
+            Cache::delete("industry_top");
         }
 
         $this->Industry->create();
@@ -259,17 +259,17 @@ class IndustryController extends AdminAppController {
     }
 
     public function edit() {
-        $data = $this->request->data('category');
+        $data = $this->request->data('industry');
         if (empty($data['name'])) {
             $this->error['error'] = 1;
-            $this->error['element'] = 'input[name="category[name]"]';
+            $this->error['element'] = 'input[name="industry[name]"]';
             $this->error['message'] = 'Industry name is required';
             exit(json_encode($this->error));
         }
 
         if (empty($data['slug'])) {
             $this->error['error'] = 1;
-            $this->error['element'] = 'input[name="category[name]"]';
+            $this->error['element'] = 'input[name="industry[name]"]';
             $this->error['message'] = 'URL Key is required';
             exit(json_encode($this->error));
         }
@@ -285,10 +285,10 @@ class IndustryController extends AdminAppController {
         $data['slug'] = @preg_replace("/\/+/i", "-", $data['slug']);
 
         $this->loadModel('Industry');
-        $data = $this->request->data('category');
+        $data = $this->request->data('industry');
 
         if ($data['level'] == 0) {
-            Cache::delete("category_top");
+            Cache::delete("industry_top");
         }
 
         $this->Industry->id = $data['id'];
@@ -307,9 +307,8 @@ class IndustryController extends AdminAppController {
 
     public function delete() {
         $this->loadModel('Industry');
-        $this->loadModel('IndustryToObject');
 
-        $data = $this->request->data('category');
+        $data = $this->request->data('industry');
 
         $parent = $this->Industry->find('first', array('conditions' => array("guid" => $data['parent_guid'])));
 
@@ -326,13 +325,12 @@ class IndustryController extends AdminAppController {
         $this->Industry->clear();
 
         $result = $this->Industry->find('all', array("conditions" => array("parent_guid" => $data['guid'])));
-        $this->_categoryList($result, $return);
+        $this->_industryList($result, $return);
         $result['Industry'] = $data;
         $return[] = $result;
 
         foreach ($return as $value) {
-            $this->Industry->query("DELETE FROM categories WHERE id={$value['Industry']['id']}");
-            $this->IndustryToObject->query("DELETE FROM category_to_object WHERE category_guid='{$value['Industry']['guid']}'");
+            $this->Industry->query("DELETE FROM pwd_industries WHERE id={$value['Industry']['id']}");
         }
 
         exit(json_encode($this->error));
@@ -340,11 +338,11 @@ class IndustryController extends AdminAppController {
 
     public function clean() {
         $this->loadModel('Industry');
-        $this->Industry->query('TRUNCATE TABLE categories;');
+        $this->Industry->query('TRUNCATE TABLE industries;');
         exit(json_encode($this->error));
     }
 
-    protected function _categoryList($data, &$return) {
+    protected function _industryList($data, &$return) {
         if (!empty($data)) {
             foreach ($data as $value) {
 
@@ -356,7 +354,7 @@ class IndustryController extends AdminAppController {
 
                 if (!empty($result)) {
                     $return[] = $value;
-                    $this->_categoryList($result, $return);
+                    $this->_industryList($result, $return);
                 } else {
                     $return[] = $value;
                 }

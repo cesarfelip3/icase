@@ -12,11 +12,11 @@ if (isset($this->params['slug'])) {
     <!--begin head-->
     <head>
         <meta charset="utf-8">
-        <title><?php echo $_title; ?></title>
+        <title></title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- set content to full screen on iphones -->
         <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="description" content="<?php echo $_description; ?>">
+        <meta name="description" content="">
         <meta name="author" content="">
         <!--[if lte IE 6]>
             <link rel="stylesheet" href="//universal-ie6-css.googlecode.com/files/ie6.1.1.css" media="screen, projection">

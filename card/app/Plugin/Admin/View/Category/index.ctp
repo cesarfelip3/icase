@@ -32,7 +32,7 @@ $admin_product = $base . "product";
             <div class="span5">
                 <div class="slate" id='box-category'>
                     <div class="page-header">
-                        <h2>Categories<a class="btn btn-primary pull-right" id="btn-add">Add New</a><a class="btn btn-primary pull-right" id="btn-edit" style="margin-right:5px;">Edit</a></h2>
+                        <h2>Categories<a class="btn btn-primary pull-right" id="btn-add" style="clear:none;">Add New</a><a class="btn btn-primary pull-right" id="btn-edit" style="margin-right:5px;display:clear:none;">Edit</a></h2>
                     </div>
                     <div class='body' style="height:500px;overflow: auto;">
                     </div>

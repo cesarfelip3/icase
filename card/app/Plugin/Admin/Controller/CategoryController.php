@@ -212,16 +212,18 @@ class CategoryController extends AdminAppController {
                 $level = 0;
             } else {
                 $level = $parent['Category']['level'] + 1;
+                if ($level > 1) {
+                    $this->_error['error'] = 1;
+                    $this->_error['message'] = "Level is less than 2";
+                    exit(json_encode($this->_error));
+                }
+                
                 $group_guid = $parent['Category']['group_guid'];
                 $parent['Category']['children'] += 1;
                 $this->Category->id = $parent['Category']['id'];
                 $this->Category->set('children', $parent['Category']['children']);
                 $this->Category->save();
             }
-        }
-
-        if ($level == 0) {
-            Cache::delete("category_top");
         }
 
         $this->Category->create();
@@ -307,7 +309,6 @@ class CategoryController extends AdminAppController {
 
     public function delete() {
         $this->loadModel('Category');
-        $this->loadModel('CategoryToObject');
 
         $data = $this->request->data('category');
 
@@ -331,8 +332,7 @@ class CategoryController extends AdminAppController {
         $return[] = $result;
 
         foreach ($return as $value) {
-            $this->Category->query("DELETE FROM categories WHERE id={$value['Category']['id']}");
-            $this->CategoryToObject->query("DELETE FROM category_to_object WHERE category_guid='{$value['Category']['guid']}'");
+            $this->Category->query("DELETE FROM pwd_categories WHERE id={$value['Category']['id']}");
         }
 
         exit(json_encode($this->error));

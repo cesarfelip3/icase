@@ -13970,3 +13970,3800 @@ Stack Trace:
 #1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(AdminController), Object(CakeRequest), Object(CakeResponse))
 #2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #3 {main}
+2013-09-27 05:53:44 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/ckeditor.basic/ckeditor.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 05:53:44 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/datepicker/css/datepicker.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 05:53:44 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/datepicker/js/bootstrap-datepicker.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 05:53:59 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/datepicker/js/bootstrap-datepicker.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 05:53:59 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/datepicker/css/datepicker.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 05:53:59 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/ckeditor.basic/ckeditor.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 05:54:00 Error: [MissingActionException] Action IndustryController::industrylist() could not be found.
+Exception Attributes: array (
+  'controller' => 'IndustryController',
+  'action' => 'industrylist',
+)
+Request URL: /icase/card/admin/industry/industrylist
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(IndustryController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-09-27 05:54:11 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/datepicker/js/bootstrap-datepicker.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 05:54:11 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/datepicker/css/datepicker.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 05:54:11 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/ckeditor.basic/ckeditor.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 06:08:56 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/datepicker/js/bootstrap-datepicker.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 06:08:56 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/datepicker/css/datepicker.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 06:08:56 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/ckeditor.basic/ckeditor.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 06:09:05 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/datepicker/js/bootstrap-datepicker.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 06:09:05 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/ckeditor.basic/ckeditor.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 06:09:05 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/datepicker/css/datepicker.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 06:09:19 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/datepicker/css/datepicker.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 06:09:19 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/ckeditor.basic/ckeditor.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 06:09:19 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/datepicker/js/bootstrap-datepicker.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 06:09:27 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/datepicker/css/datepicker.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 06:09:27 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/datepicker/js/bootstrap-datepicker.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 06:09:27 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/ckeditor.basic/ckeditor.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 06:09:33 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/ckeditor.basic/ckeditor.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 06:09:33 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/datepicker/js/bootstrap-datepicker.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 06:09:33 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/datepicker/css/datepicker.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 06:10:00 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/datepicker/css/datepicker.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 06:10:00 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/datepicker/js/bootstrap-datepicker.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 06:10:00 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/ckeditor.basic/ckeditor.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 06:10:01 Error: [MissingActionException] Action IndustryController::industrylist() could not be found.
+Exception Attributes: array (
+  'controller' => 'IndustryController',
+  'action' => 'industrylist',
+)
+Request URL: /icase/card/admin/industry/industrylist
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(IndustryController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-09-27 06:11:44 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/ckeditor.basic/ckeditor.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 06:11:45 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/datepicker/js/bootstrap-datepicker.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 06:11:45 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/datepicker/css/datepicker.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 06:11:45 Error: [MissingActionException] Action IndustryController::industrylist() could not be found.
+Exception Attributes: array (
+  'controller' => 'IndustryController',
+  'action' => 'industrylist',
+)
+Request URL: /icase/card/admin/industry/industrylist
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(IndustryController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-09-27 06:12:16 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/datepicker/css/datepicker.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 06:12:16 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/datepicker/js/bootstrap-datepicker.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 06:12:16 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/ckeditor.basic/ckeditor.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 06:12:16 Error: [MissingActionException] Action IndustryController::industrylist() could not be found.
+Exception Attributes: array (
+  'controller' => 'IndustryController',
+  'action' => 'industrylist',
+)
+Request URL: /icase/card/admin/industry/industrylist
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(IndustryController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-09-27 06:13:04 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/datepicker/js/bootstrap-datepicker.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 06:13:04 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/datepicker/css/datepicker.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 06:13:04 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/ckeditor.basic/ckeditor.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 06:13:04 Error: [MissingActionException] Action IndustryController::industrylist() could not be found.
+Exception Attributes: array (
+  'controller' => 'IndustryController',
+  'action' => 'industrylist',
+)
+Request URL: /icase/card/admin/industry/industrylist
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(IndustryController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-09-27 06:13:09 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/datepicker/js/bootstrap-datepicker.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 06:13:09 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/datepicker/css/datepicker.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 06:13:09 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/ckeditor.basic/ckeditor.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 06:13:09 Error: [MissingActionException] Action IndustryController::industrylist() could not be found.
+Exception Attributes: array (
+  'controller' => 'IndustryController',
+  'action' => 'industrylist',
+)
+Request URL: /icase/card/admin/industry/industrylist
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(IndustryController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-09-27 06:14:42 Error: [MissingActionException] Action IndustryController::industrylist() could not be found.
+Exception Attributes: array (
+  'controller' => 'IndustryController',
+  'action' => 'industrylist',
+)
+Request URL: /icase/card/admin/industry/industrylist
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(IndustryController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-09-27 06:15:03 Error: [MissingViewException] View file "/Volumes/DOS/work.current/icase/card/app/Plugin/Admin/View/Industry/industrylist.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/Volumes/DOS/work.current/icase/card/app/Plugin/Admin/View/Industry/industrylist.ctp',
+)
+Request URL: /icase/card/admin/industry/industrylist
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/View/View.php(459): View->_getViewFileName(NULL)
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Controller/Controller.php(952): View->render(NULL, NULL)
+#2 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(194): Controller->render()
+#3 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(IndustryController), Object(CakeRequest), Object(CakeResponse))
+#4 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2013-09-27 06:17:03 Error: [PDOException] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'card.categories' doesn't exist
+Request URL: /icase/card/admin/industry/delete
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(460): PDOStatement->execute(Array)
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(426): DboSource->_execute('DELETE FROM cat...', Array)
+#2 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(666): DboSource->execute('DELETE FROM cat...', Array, Array)
+#3 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(539): DboSource->fetchAll('DELETE FROM cat...')
+#4 [internal function]: DboSource->query('DELETE FROM cat...')
+#5 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Model.php(3128): call_user_func_array(Array, Array)
+#6 /Volumes/DOS/work.current/icase/card/app/Plugin/Admin/Controller/IndustryController.php(334): Model->query('DELETE FROM cat...')
+#7 [internal function]: IndustryController->delete()
+#8 /Volumes/DOS/work.current/icase/card/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(IndustryController), Array)
+#9 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#10 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(IndustryController), Object(CakeRequest), Object(CakeResponse))
+#11 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2013-09-27 06:19:41 Error: [PDOException] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'card.categories' doesn't exist
+Request URL: /icase/card/admin/category/delete
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(460): PDOStatement->execute(Array)
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(426): DboSource->_execute('DELETE FROM cat...', Array)
+#2 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(666): DboSource->execute('DELETE FROM cat...', Array, Array)
+#3 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(539): DboSource->fetchAll('DELETE FROM cat...')
+#4 [internal function]: DboSource->query('DELETE FROM cat...')
+#5 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Model.php(3128): call_user_func_array(Array, Array)
+#6 /Volumes/DOS/work.current/icase/card/app/Plugin/Admin/Controller/CategoryController.php(334): Model->query('DELETE FROM cat...')
+#7 [internal function]: CategoryController->delete()
+#8 /Volumes/DOS/work.current/icase/card/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(CategoryController), Array)
+#9 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#10 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(CategoryController), Object(CakeRequest), Object(CakeResponse))
+#11 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2013-09-27 06:20:48 Error: [PDOException] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'card.categories' doesn't exist
+Request URL: /icase/card/admin/category/delete
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(460): PDOStatement->execute(Array)
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(426): DboSource->_execute('DELETE FROM cat...', Array)
+#2 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(666): DboSource->execute('DELETE FROM cat...', Array, Array)
+#3 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(539): DboSource->fetchAll('DELETE FROM cat...')
+#4 [internal function]: DboSource->query('DELETE FROM cat...')
+#5 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Model.php(3128): call_user_func_array(Array, Array)
+#6 /Volumes/DOS/work.current/icase/card/app/Plugin/Admin/Controller/CategoryController.php(334): Model->query('DELETE FROM cat...')
+#7 [internal function]: CategoryController->delete()
+#8 /Volumes/DOS/work.current/icase/card/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(CategoryController), Array)
+#9 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#10 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(CategoryController), Object(CakeRequest), Object(CakeResponse))
+#11 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2013-09-27 06:22:33 Error: [PDOException] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'card.categories' doesn't exist
+Request URL: /icase/card/admin/category/delete
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(460): PDOStatement->execute(Array)
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(426): DboSource->_execute('DELETE FROM cat...', Array)
+#2 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(666): DboSource->execute('DELETE FROM cat...', Array, Array)
+#3 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(539): DboSource->fetchAll('DELETE FROM cat...')
+#4 [internal function]: DboSource->query('DELETE FROM cat...')
+#5 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Model.php(3128): call_user_func_array(Array, Array)
+#6 /Volumes/DOS/work.current/icase/card/app/Plugin/Admin/Controller/CategoryController.php(334): Model->query('DELETE FROM cat...')
+#7 [internal function]: CategoryController->delete()
+#8 /Volumes/DOS/work.current/icase/card/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(CategoryController), Array)
+#9 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#10 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(CategoryController), Object(CakeRequest), Object(CakeResponse))
+#11 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2013-09-27 06:25:14 Error: [PDOException] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'card.categories' doesn't exist
+Request URL: /icase/card/admin/category/delete
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(460): PDOStatement->execute(Array)
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(426): DboSource->_execute('DELETE FROM cat...', Array)
+#2 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(666): DboSource->execute('DELETE FROM cat...', Array, Array)
+#3 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(539): DboSource->fetchAll('DELETE FROM cat...')
+#4 [internal function]: DboSource->query('DELETE FROM cat...')
+#5 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Model.php(3128): call_user_func_array(Array, Array)
+#6 /Volumes/DOS/work.current/icase/card/app/Plugin/Admin/Controller/CategoryController.php(333): Model->query('DELETE FROM cat...')
+#7 [internal function]: CategoryController->delete()
+#8 /Volumes/DOS/work.current/icase/card/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(CategoryController), Array)
+#9 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#10 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(CategoryController), Object(CakeRequest), Object(CakeResponse))
+#11 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2013-09-27 12:15:44 Error: [MissingControllerException] Controller class IndexController could not be found.
+Exception Attributes: array (
+  'class' => 'IndexController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:15:45 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/jquery.cookie.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:15:45 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/include/bootstrap.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:15:45 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/css/style.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:15:47 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/libs/jquery.ui.touch-punch.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:15:47 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/include/jquery.fitvids.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:15:47 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/include/jquery.tweet.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:15:47 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/include/jquery.pubsub.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:15:47 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/include/jquery.equal-heights.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:15:47 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/include/jquery.select2.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:15:47 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/menu/jquery.ct.3LevelAccordion.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:15:48 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/bootstrapslider/css/slider.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:15:48 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/config.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:15:48 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/bootstrapslider/js/bootstrap-slider.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:15:48 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/json2.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:15:48 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/site/icase.shoppingcart.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:15:50 Error: [MissingActionException] Action AdminController::order() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminController',
+  'action' => 'order',
+)
+Request URL: /icase/card/admin/admin/order/
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(AdminController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-09-27 12:21:04 Error: [MissingActionException] Action AdminController::order() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminController',
+  'action' => 'order',
+)
+Request URL: /icase/card/admin/admin/order/
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(AdminController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-09-27 12:21:42 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/jcrop/css/jquery.Jcrop.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:21:42 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/jcrop/js/jquery.jcrop.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:22:18 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/jcrop/css/jquery.Jcrop.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:22:18 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/jcrop/js/jquery.jcrop.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:22:36 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/jcrop/css/jquery.Jcrop.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:22:36 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/jcrop/js/jquery.jcrop.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:23:07 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/jcrop/js/jquery.jcrop.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:23:07 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/jcrop/css/jquery.Jcrop.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:24:13 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/jcrop/css/jquery.Jcrop.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:24:13 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/jcrop/js/jquery.jcrop.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:24:26 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/jcrop/js/jquery.jcrop.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:24:26 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/jcrop/css/jquery.Jcrop.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:25:15 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/jcrop/js/jquery.jcrop.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:25:15 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/jcrop/css/jquery.Jcrop.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:26:51 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/jcrop/js/jquery.jcrop.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:26:51 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/jcrop/css/jquery.Jcrop.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:27:10 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/jcrop/css/jquery.Jcrop.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:27:10 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/jcrop/js/jquery.jcrop.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:31:07 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/jcrop/css/jquery.Jcrop.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:31:07 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/jcrop/js/jquery.jcrop.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:32:12 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/jcrop/js/jquery.jcrop.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:32:12 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/jcrop/css/jquery.Jcrop.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:32:36 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/jcrop/css/jquery.Jcrop.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:32:36 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/jcrop/js/jquery.jcrop.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:39:10 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/jcrop/js/jquery.jcrop.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:39:10 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/jcrop/css/jquery.Jcrop.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:39:41 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/jcrop/css/jquery.Jcrop.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:39:41 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/jcrop/js/jquery.jcrop.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:40:51 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/jcrop/css/jquery.Jcrop.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:40:51 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/jcrop/js/jquery.jcrop.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:43:36 Error: [MissingActionException] Action AdminController::order() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminController',
+  'action' => 'order',
+)
+Request URL: /icase/card/admin/admin/order/
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(AdminController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-09-27 12:48:11 Error: [MissingActionException] Action TemplateController::jquery.min.map() could not be found.
+Exception Attributes: array (
+  'controller' => 'TemplateController',
+  'action' => 'jquery.min.map',
+)
+Request URL: /icase/card/admin/template/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(TemplateController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-09-27 12:48:11 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:48:53 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:48:55 Error: [MissingActionException] Action TemplateController::jquery.min.map() could not be found.
+Exception Attributes: array (
+  'controller' => 'TemplateController',
+  'action' => 'jquery.min.map',
+)
+Request URL: /icase/card/admin/template/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(TemplateController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-09-27 12:50:50 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:58:25 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:58:51 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 12:59:52 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:05:56 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:09:54 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:10:30 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:10:44 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:11:28 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:11:57 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:12:45 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:12:54 Error: [MissingControllerException] Controller class Uploads52456836155b3.pngController could not be found.
+Exception Attributes: array (
+  'class' => 'Uploads52456836155b3.pngController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/uploads52456836155b3.png
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:15:02 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:15:33 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:16:38 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:18:51 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:18:58 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:30:54 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'order' in 'order clause'
+Request URL: /icase/card/admin/template/add
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(460): PDOStatement->execute(Array)
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(426): DboSource->_execute('SELECT `Templat...', Array)
+#2 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(666): DboSource->execute('SELECT `Templat...', Array, Array)
+#3 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(1077): DboSource->fetchAll('SELECT `Templat...', false)
+#4 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Model.php(2750): DboSource->read(Object(Template), Array)
+#5 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Model.php(2722): Model->_readDataSource('all', Array)
+#6 /Volumes/DOS/work.current/icase/card/app/Plugin/Admin/Controller/TemplateController.php(255): Model->find('all', Array)
+#7 [internal function]: TemplateController->add()
+#8 /Volumes/DOS/work.current/icase/card/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(TemplateController), Array)
+#9 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#10 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(TemplateController), Object(CakeRequest), Object(CakeResponse))
+#11 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2013-09-27 13:30:54 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/css/style.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:30:57 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/jquery.cookie.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:30:57 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/include/bootstrap.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:30:57 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/menu/jquery.ct.3LevelAccordion.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:30:57 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/include/jquery.select2.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:30:57 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/include/jquery.pubsub.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:30:57 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/include/jquery.equal-heights.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:30:57 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/libs/jquery.ui.touch-punch.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:30:57 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/config.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:30:57 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/include/jquery.fitvids.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:30:57 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/include/jquery.tweet.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:30:57 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/json2.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:30:57 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/site/icase.shoppingcart.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:30:57 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/bootstrapslider/css/slider.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:30:57 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/bootstrapslider/js/bootstrap-slider.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:30:58 Error: [MissingActionException] Action TemplateController::ico() could not be found.
+Exception Attributes: array (
+  'controller' => 'TemplateController',
+  'action' => 'ico',
+)
+Request URL: /icase/card/admin/template/ico/favicon.ico
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(TemplateController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-09-27 13:31:34 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'created' in 'order clause'
+Request URL: /icase/card/admin/template/add
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(460): PDOStatement->execute(Array)
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(426): DboSource->_execute('SELECT `Industr...', Array)
+#2 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(666): DboSource->execute('SELECT `Industr...', Array, Array)
+#3 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(1077): DboSource->fetchAll('SELECT `Industr...', false)
+#4 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Model.php(2750): DboSource->read(Object(Industry), Array)
+#5 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Model.php(2722): Model->_readDataSource('all', Array)
+#6 /Volumes/DOS/work.current/icase/card/app/Plugin/Admin/Controller/TemplateController.php(255): Model->find('all', Array)
+#7 [internal function]: TemplateController->add()
+#8 /Volumes/DOS/work.current/icase/card/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(TemplateController), Array)
+#9 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#10 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(TemplateController), Object(CakeRequest), Object(CakeResponse))
+#11 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2013-09-27 13:31:34 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/css/style.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:31:40 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/libs/jquery.ui.touch-punch.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:31:40 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/include/bootstrap.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:31:40 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/include/jquery.tweet.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:31:40 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/include/jquery.pubsub.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:31:40 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/include/jquery.equal-heights.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:31:40 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/jquery.cookie.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:31:41 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/config.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:31:41 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/include/jquery.select2.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:31:41 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/bootstrapslider/js/bootstrap-slider.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:31:41 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/bootstrapslider/css/slider.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:31:41 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/site/icase.shoppingcart.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:31:41 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/json2.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:53:05 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/css/main.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:53:08 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/css/main.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:53:09 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/js/maker/index.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:53:59 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/css/main.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:53:59 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/css/font-awesome.min.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:54:00 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/js/maker/index.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:54:04 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/css/main.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:54:04 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/js/maker/index.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:54:04 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/css/font-awesome.min.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:54:10 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:54:17 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/css/main.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:54:17 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/css/font-awesome.min.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:54:17 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/js/maker/index.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:54:18 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:55:10 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/js/maker/index.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:55:12 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:55:55 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/css/main_admin.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:55:55 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/js/maker/index.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:55:58 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/js/maker/index.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:55:58 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/css/main_admin.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:56:05 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:56:35 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/js/maker/index.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:56:36 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:57:14 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/js/maker/index.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:57:14 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 13:57:46 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 14:05:54 Error: [MissingActionException] Action AdminController::order() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminController',
+  'action' => 'order',
+)
+Request URL: /icase/card/admin/admin/order/
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(AdminController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-09-27 14:07:14 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 14:08:49 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 14:24:29 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 14:26:16 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 14:44:54 Error: Fatal Error (4): syntax error, unexpected ')' in [/Volumes/DOS/work.current/icase/card/app/Plugin/Admin/Controller/TemplateController.php, line 115]
+2013-09-27 14:44:54 Error: [FatalErrorException] syntax error, unexpected ')'
+Request URL: /icase/card/admin/template
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Error/ErrorHandler.php(205): ErrorHandler::handleFatalError(4, 'syntax error, u...', '/Volumes/DOS/wo...', 115)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', '/Volumes/DOS/wo...', 115, Array)
+#2 /Volumes/DOS/work.current/icase/card/lib/Cake/Core/App.php(931): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', '/Volumes/DOS/wo...', 115, Array)
+#3 /Volumes/DOS/work.current/icase/card/lib/Cake/Core/App.php(904): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-09-27 14:44:54 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/include/bootstrap.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 14:44:54 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/jquery.cookie.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 14:44:54 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/css/style.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 14:44:59 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/include/jquery.tweet.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 14:44:59 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/include/jquery.fitvids.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 14:44:59 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/libs/jquery.ui.touch-punch.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 14:44:59 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/include/jquery.equal-heights.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 14:44:59 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/menu/jquery.ct.3LevelAccordion.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 14:44:59 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/include/jquery.pubsub.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 14:44:59 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/config.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 14:44:59 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/bootstrapslider/js/bootstrap-slider.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 14:44:59 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/include/jquery.select2.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 14:44:59 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/bootstrapslider/css/slider.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 14:44:59 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/json2.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 14:45:00 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/site/icase.shoppingcart.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 14:46:43 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/jcrop/css/jquery.Jcrop.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 14:46:43 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/jcrop/js/jquery.Jcrop.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 14:49:08 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/jcrop/js/jquery.Jcrop.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 14:49:08 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/jcrop/css/jquery.Jcrop.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 14:50:45 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 14:54:22 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 15:25:39 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 15:29:23 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 15:29:59 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 15:30:29 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 15:33:34 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 15:34:03 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 15:40:49 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 17:07:42 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 17:08:28 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 17:13:21 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 17:14:41 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 17:15:36 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 17:16:33 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 17:17:35 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 17:18:59 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 17:19:33 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 17:21:16 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 17:27:13 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 17:30:19 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 17:31:08 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 17:35:07 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 17:42:40 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 17:47:46 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 17:53:15 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 18:00:01 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 18:01:33 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 18:02:42 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 18:04:42 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 18:20:17 Error: [MissingViewException] View file "/Volumes/DOS/work.current/icase/card/app/Plugin/Admin/View/Creator/create.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/Volumes/DOS/work.current/icase/card/app/Plugin/Admin/View/Creator/create.ctp',
+)
+Request URL: /icase/card/admin/creator/create/?action=edit&id=52457966922ff
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/View/View.php(459): View->_getViewFileName(NULL)
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Controller/Controller.php(952): View->render(NULL, NULL)
+#2 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(194): Controller->render()
+#3 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(CreatorController), Object(CakeRequest), Object(CakeResponse))
+#4 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2013-09-27 18:20:18 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/css/style.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 18:20:18 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/jquery.cookie.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 18:20:18 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/include/bootstrap.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 18:20:21 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/libs/jquery.ui.touch-punch.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 18:20:21 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/menu/jquery.ct.3LevelAccordion.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 18:20:21 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/include/jquery.equal-heights.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 18:20:21 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/include/jquery.tweet.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 18:20:21 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/include/jquery.pubsub.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 18:20:21 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/include/jquery.fitvids.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 18:20:21 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/bootstrapslider/css/slider.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 18:20:21 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/config.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 18:20:21 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/site/icase.shoppingcart.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 18:20:21 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/include/jquery.select2.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 18:20:21 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/json2.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 18:20:21 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/bootstrapslider/js/bootstrap-slider.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 18:20:22 Error: [MissingViewException] View file "/Volumes/DOS/work.current/icase/card/app/Plugin/Admin/View/Creator/create.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/Volumes/DOS/work.current/icase/card/app/Plugin/Admin/View/Creator/create.ctp',
+)
+Request URL: /icase/card/admin/creator/create/ico/favicon.ico
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/View/View.php(459): View->_getViewFileName(NULL)
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Controller/Controller.php(952): View->render(NULL, NULL)
+#2 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(194): Controller->render()
+#3 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(CreatorController), Object(CakeRequest), Object(CakeResponse))
+#4 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2013-09-27 18:20:43 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 18:29:19 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 18:52:49 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 18:53:45 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 18:56:28 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 18:57:26 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 18:59:57 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 19:00:37 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 19:03:21 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 19:06:06 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 19:07:17 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 19:08:29 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 19:10:30 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 19:12:34 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 19:14:10 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 19:15:44 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 19:16:10 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 19:16:59 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 19:31:42 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 19:31:45 Error: [MissingActionException] Action CreatorController::reload() could not be found.
+Exception Attributes: array (
+  'controller' => 'CreatorController',
+  'action' => 'reload',
+)
+Request URL: /icase/card/admin/creator/reload/?id=52457966922ff
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(CreatorController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-09-27 19:34:36 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 19:34:39 Error: [MissingActionException] Action CreatorController::reload() could not be found.
+Exception Attributes: array (
+  'controller' => 'CreatorController',
+  'action' => 'reload',
+)
+Request URL: /icase/card/admin/creator/reload/?id=52457966922ff
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(CreatorController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-09-27 19:37:52 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 19:38:42 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 19:41:30 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 19:41:50 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 19:42:29 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 19:42:53 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 19:44:12 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 19:45:53 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 19:46:05 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 19:54:07 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 19:59:59 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 20:01:05 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 20:01:06 Error: [MissingViewException] View file "/Volumes/DOS/work.current/icase/card/app/Plugin/Admin/View/Creator/reload.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/Volumes/DOS/work.current/icase/card/app/Plugin/Admin/View/Creator/reload.ctp',
+)
+Request URL: /icase/card/admin/creator/reload/?id=52457966922ff
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/View/View.php(459): View->_getViewFileName(NULL)
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Controller/Controller.php(952): View->render(NULL, NULL)
+#2 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(194): Controller->render()
+#3 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(CreatorController), Object(CakeRequest), Object(CakeResponse))
+#4 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2013-09-27 20:01:25 Error: [MissingViewException] View file "/Volumes/DOS/work.current/icase/card/app/Plugin/Admin/View/Creator/reload.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/Volumes/DOS/work.current/icase/card/app/Plugin/Admin/View/Creator/reload.ctp',
+)
+Request URL: /icase/card/admin/creator/reload/?id=52457966922ff
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/View/View.php(459): View->_getViewFileName(NULL)
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Controller/Controller.php(952): View->render(NULL, NULL)
+#2 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(194): Controller->render()
+#3 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(CreatorController), Object(CakeRequest), Object(CakeResponse))
+#4 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2013-09-27 20:01:25 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/include/bootstrap.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 20:01:25 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/jquery.cookie.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 20:01:25 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/css/style.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 20:02:57 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 20:03:04 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 20:04:19 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 20:06:05 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 20:06:33 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 20:06:34 Error: Fatal Error (1): Call to a member function find() on a non-object in [/Volumes/DOS/work.current/icase/card/app/Plugin/Admin/Controller/CreatorController.php, line 24]
+2013-09-27 20:06:34 Error: [FatalErrorException] Call to a member function find() on a non-object
+Request URL: /icase/card/admin/creator/reload/?id=52457966922ff
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Error/ErrorHandler.php(205): ErrorHandler::handleFatalError(1, 'Call to a membe...', '/Volumes/DOS/wo...', 24)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', '/Volumes/DOS/wo...', 24, Array)
+#2 /Volumes/DOS/work.current/icase/card/lib/Cake/Core/App.php(931): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', '/Volumes/DOS/wo...', 24, Array)
+#3 /Volumes/DOS/work.current/icase/card/lib/Cake/Core/App.php(904): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-09-27 20:06:58 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 20:07:08 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 20:08:16 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 20:09:07 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 20:09:40 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 20:11:16 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 20:11:41 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 20:12:37 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 20:15:20 Error: Fatal Error (4): syntax error, unexpected ';' in [/Volumes/DOS/work.current/icase/card/app/Plugin/Admin/Controller/CreatorController.php, line 37]
+2013-09-27 20:15:20 Error: [FatalErrorException] syntax error, unexpected ';'
+Request URL: /icase/card/admin/creator/create/?action=edit&id=52457966922ff
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Error/ErrorHandler.php(205): ErrorHandler::handleFatalError(4, 'syntax error, u...', '/Volumes/DOS/wo...', 37)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', '/Volumes/DOS/wo...', 37, Array)
+#2 /Volumes/DOS/work.current/icase/card/lib/Cake/Core/App.php(931): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', '/Volumes/DOS/wo...', 37, Array)
+#3 /Volumes/DOS/work.current/icase/card/lib/Cake/Core/App.php(904): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-09-27 20:15:21 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/css/style.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 20:15:21 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/include/bootstrap.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 20:15:21 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/jquery.cookie.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 20:15:22 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/include/jquery.equal-heights.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 20:15:22 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/libs/jquery.ui.touch-punch.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 20:15:22 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/include/jquery.fitvids.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 20:15:22 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/include/jquery.pubsub.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 20:15:23 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/menu/jquery.ct.3LevelAccordion.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 20:15:22 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/include/jquery.tweet.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 20:15:23 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/bootstrapslider/css/slider.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 20:15:23 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/config.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 20:15:23 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/bootstrapslider/js/bootstrap-slider.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 20:15:23 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/json2.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 20:15:23 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/include/jquery.select2.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 20:15:23 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/site/icase.shoppingcart.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 20:16:58 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 20:18:26 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 20:18:46 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 20:19:50 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 20:21:14 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 20:21:20 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Array' in 'field list'
+Request URL: /icase/card/admin/creator/create/?action=edit&id=52457966922ff
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(460): PDOStatement->execute(Array)
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(426): DboSource->_execute('UPDATE `card`.`...', Array)
+#2 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/Database/Mysql.php(402): DboSource->execute('UPDATE `card`.`...')
+#3 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Model.php(1750): Mysql->update(Object(Template), Array, Array)
+#4 /Volumes/DOS/work.current/icase/card/app/Plugin/Admin/Controller/CreatorController.php(108): Model->save(Array)
+#5 [internal function]: CreatorController->create()
+#6 /Volumes/DOS/work.current/icase/card/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(CreatorController), Array)
+#7 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#8 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(CreatorController), Object(CakeRequest), Object(CakeResponse))
+#9 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#10 {main}
+2013-09-27 20:23:43 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 20:25:35 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 20:26:53 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 20:27:28 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 20:28:40 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 20:29:13 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 20:33:03 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Array' in 'field list'
+Request URL: /icase/card/admin/creator/create/?action=edit&id=52457966922ff
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(460): PDOStatement->execute(Array)
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(426): DboSource->_execute('UPDATE `card`.`...', Array)
+#2 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/Database/Mysql.php(402): DboSource->execute('UPDATE `card`.`...')
+#3 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Model.php(1750): Mysql->update(Object(Template), Array, Array)
+#4 /Volumes/DOS/work.current/icase/card/app/Plugin/Admin/Controller/CreatorController.php(106): Model->save(Array)
+#5 [internal function]: CreatorController->create()
+#6 /Volumes/DOS/work.current/icase/card/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(CreatorController), Array)
+#7 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#8 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(CreatorController), Object(CakeRequest), Object(CakeResponse))
+#9 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#10 {main}
+2013-09-27 20:33:14 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Array' in 'field list'
+Request URL: /icase/card/admin/creator/create/?action=edit&id=52457966922ff
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(460): PDOStatement->execute(Array)
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(426): DboSource->_execute('UPDATE `card`.`...', Array)
+#2 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/Database/Mysql.php(402): DboSource->execute('UPDATE `card`.`...')
+#3 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Model.php(1750): Mysql->update(Object(Template), Array, Array)
+#4 /Volumes/DOS/work.current/icase/card/app/Plugin/Admin/Controller/CreatorController.php(106): Model->save(Array)
+#5 [internal function]: CreatorController->create()
+#6 /Volumes/DOS/work.current/icase/card/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(CreatorController), Array)
+#7 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#8 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(CreatorController), Object(CakeRequest), Object(CakeResponse))
+#9 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#10 {main}
+2013-09-27 20:33:54 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Array' in 'field list'
+Request URL: /icase/card/admin/creator/create/?action=edit&id=52457966922ff
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(460): PDOStatement->execute(Array)
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(426): DboSource->_execute('UPDATE `card`.`...', Array)
+#2 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/Database/Mysql.php(402): DboSource->execute('UPDATE `card`.`...')
+#3 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Model.php(1750): Mysql->update(Object(Template), Array, Array)
+#4 /Volumes/DOS/work.current/icase/card/app/Plugin/Admin/Controller/CreatorController.php(106): Model->save(Array)
+#5 [internal function]: CreatorController->create()
+#6 /Volumes/DOS/work.current/icase/card/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(CreatorController), Array)
+#7 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#8 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(CreatorController), Object(CakeRequest), Object(CakeResponse))
+#9 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#10 {main}
+2013-09-27 20:34:03 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 20:34:24 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 20:34:37 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Array' in 'field list'
+Request URL: /icase/card/admin/creator/create/?action=edit&id=52457966922ff
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(460): PDOStatement->execute(Array)
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(426): DboSource->_execute('UPDATE `card`.`...', Array)
+#2 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/Database/Mysql.php(402): DboSource->execute('UPDATE `card`.`...')
+#3 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Model.php(1750): Mysql->update(Object(Template), Array, Array)
+#4 /Volumes/DOS/work.current/icase/card/app/Plugin/Admin/Controller/CreatorController.php(106): Model->save(Array)
+#5 [internal function]: CreatorController->create()
+#6 /Volumes/DOS/work.current/icase/card/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(CreatorController), Array)
+#7 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#8 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(CreatorController), Object(CakeRequest), Object(CakeResponse))
+#9 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#10 {main}
+2013-09-27 20:37:11 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 20:37:28 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Array' in 'field list'
+Request URL: /icase/card/admin/creator/create/?action=edit&id=52457966922ff
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(460): PDOStatement->execute(Array)
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(426): DboSource->_execute('UPDATE `card`.`...', Array)
+#2 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/Database/Mysql.php(402): DboSource->execute('UPDATE `card`.`...')
+#3 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Model.php(1750): Mysql->update(Object(Template), Array, Array)
+#4 /Volumes/DOS/work.current/icase/card/app/Plugin/Admin/Controller/CreatorController.php(106): Model->save(Array)
+#5 [internal function]: CreatorController->create()
+#6 /Volumes/DOS/work.current/icase/card/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(CreatorController), Array)
+#7 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#8 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(CreatorController), Object(CakeRequest), Object(CakeResponse))
+#9 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#10 {main}
+2013-09-27 20:39:01 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Array' in 'field list'
+Request URL: /icase/card/admin/creator/create/?action=edit&id=52457966922ff
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(460): PDOStatement->execute(Array)
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(426): DboSource->_execute('UPDATE `card`.`...', Array)
+#2 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/Database/Mysql.php(402): DboSource->execute('UPDATE `card`.`...')
+#3 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Model.php(1750): Mysql->update(Object(Template), Array, Array)
+#4 /Volumes/DOS/work.current/icase/card/app/Plugin/Admin/Controller/CreatorController.php(106): Model->save(Array)
+#5 [internal function]: CreatorController->create()
+#6 /Volumes/DOS/work.current/icase/card/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(CreatorController), Array)
+#7 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#8 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(CreatorController), Object(CakeRequest), Object(CakeResponse))
+#9 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#10 {main}
+2013-09-27 20:45:55 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 20:47:04 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 20:56:04 Error: [MissingActionException] Action TemplateController::2147483647() could not be found.
+Exception Attributes: array (
+  'controller' => 'TemplateController',
+  'action' => '2147483647',
+)
+Request URL: /icase/card/admin/template/2147483647
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(TemplateController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-09-27 20:56:04 Error: [MissingActionException] Action TemplateController::52457966922ff() could not be found.
+Exception Attributes: array (
+  'controller' => 'TemplateController',
+  'action' => '52457966922ff',
+)
+Request URL: /icase/card/admin/template/52457966922ff
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(TemplateController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-09-27 20:56:04 Error: [MissingActionException] Action TemplateController::test() could not be found.
+Exception Attributes: array (
+  'controller' => 'TemplateController',
+  'action' => 'test',
+)
+Request URL: /icase/card/admin/template/test
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(TemplateController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-09-27 20:56:04 Error: [MissingActionException] Action TemplateController::template_from_store() could not be found.
+Exception Attributes: array (
+  'controller' => 'TemplateController',
+  'action' => 'template_from_store',
+)
+Request URL: /icase/card/admin/template/template_from_store
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(TemplateController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-09-27 20:56:04 Error: [MissingActionException] Action TemplateController::<p>test<() could not be found.
+Exception Attributes: array (
+  'controller' => 'TemplateController',
+  'action' => '<p>test<',
+)
+Request URL: /icase/card/admin/template/%3Cp%3Etest%3C/p%3E
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(TemplateController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-09-27 20:56:04 Error: [MissingActionException] Action TemplateController::3() could not be found.
+Exception Attributes: array (
+  'controller' => 'TemplateController',
+  'action' => '3',
+)
+Request URL: /icase/card/admin/template/3
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(TemplateController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-09-27 20:56:04 Error: [MissingActionException] Action TemplateController::210() could not be found.
+Exception Attributes: array (
+  'controller' => 'TemplateController',
+  'action' => '210',
+)
+Request URL: /icase/card/admin/template/210
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(TemplateController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-09-27 20:56:04 Error: [MissingActionException] Action TemplateController::297() could not be found.
+Exception Attributes: array (
+  'controller' => 'TemplateController',
+  'action' => '297',
+)
+Request URL: /icase/card/admin/template/297
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(TemplateController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-09-27 20:56:05 Error: [MissingActionException] Action TemplateController::<pre class="cake-error"><a href="javascript:void(0);" onclick="document.getElementById(() could not be found.
+Exception Attributes: array (
+  'controller' => 'TemplateController',
+  'action' => '<pre class="cake-error"><a href="javascript:void(0);" onclick="document.getElementById(',
+)
+Request URL: /icase/card/admin/template/%3Cpre%20class=%22cake-error%22%3E%3Ca%20href=%22javascript:void(0);%22%20onclick=%22document.getElementById(
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(TemplateController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-09-27 20:56:05 Error: [MissingActionException] Action TemplateController::1() could not be found.
+Exception Attributes: array (
+  'controller' => 'TemplateController',
+  'action' => '1',
+)
+Request URL: /icase/card/admin/template/1
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(TemplateController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-09-27 20:56:05 Error: [MissingActionException] Action TemplateController::1380307650() could not be found.
+Exception Attributes: array (
+  'controller' => 'TemplateController',
+  'action' => '1380307650',
+)
+Request URL: /icase/card/admin/template/1380307650
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(TemplateController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-09-27 20:56:05 Error: [MissingActionException] Action TemplateController::1380284774() could not be found.
+Exception Attributes: array (
+  'controller' => 'TemplateController',
+  'action' => '1380284774',
+)
+Request URL: /icase/card/admin/template/1380284774
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(TemplateController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-09-27 20:56:05 Error: [MissingActionException] Action TemplateController::published() could not be found.
+Exception Attributes: array (
+  'controller' => 'TemplateController',
+  'action' => 'published',
+)
+Request URL: /icase/card/admin/template/published
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(TemplateController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-09-27 20:56:05 Error: [MissingActionException] Action TemplateController::["<() could not be found.
+Exception Attributes: array (
+  'controller' => 'TemplateController',
+  'action' => '["<',
+)
+Request URL: /icase/card/admin/template/[%22%3C?xml_version=%5C%221.0%5C%22+encoding%3D%5C%22UTF-8%5C%22+standalone%3D%5C%22no%5C%22+%3F%3E%3C%21DOCTYPE+svg+PUBLIC+%5C%22-%2F%2FW3C%2F%2FDTD+SVG+1.1%2F%2FEN%5C%22+%5C%22http%3A%2F%2Fwww.w3.org%2FGraphics%2FSVG%2F1.1%2FDTD%2Fsvg11.dtd%5C%22%3E%5Cn%3Csvg+xmlns%3D%5C%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%5C%22+xmlns%3Axlink%3D%5C%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%5C%22+version%3D%5C%221.1%5C%22+width%3D%5C%22420%5C%22+height%3D%5C%22594%5C%22+style%3D%5C%22background-color%3A+
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(TemplateController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-09-27 21:12:40 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 21:15:43 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 21:16:07 Error: [MissingActionException] Action TemplateController::create() could not be found.
+Exception Attributes: array (
+  'controller' => 'TemplateController',
+  'action' => 'create',
+)
+Request URL: /icase/card/admin/template/create/?action=new&id=5245d977874a2
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(TemplateController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-09-27 21:16:07 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/css/style.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 21:16:08 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/jquery.cookie.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 21:16:08 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/include/bootstrap.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 21:16:08 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/libs/jquery.ui.touch-punch.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 21:16:08 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/bootstrapslider/css/slider.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 21:16:08 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/bootstrapslider/js/bootstrap-slider.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 21:16:08 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/include/jquery.pubsub.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 21:16:08 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/config.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 21:16:08 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/menu/jquery.ct.3LevelAccordion.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 21:16:08 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/include/jquery.fitvids.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 21:16:08 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/include/jquery.select2.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 21:16:08 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/include/jquery.equal-heights.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 21:16:08 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/include/jquery.tweet.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 21:16:08 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/json2.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 21:16:09 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/site/icase.shoppingcart.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 21:16:09 Error: [MissingActionException] Action TemplateController::create() could not be found.
+Exception Attributes: array (
+  'controller' => 'TemplateController',
+  'action' => 'create',
+)
+Request URL: /icase/card/admin/template/create/ico/favicon.ico
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(TemplateController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-09-27 21:16:33 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 21:17:10 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 21:21:30 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 21:23:03 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 21:26:47 Error: [MissingActionException] Action TemplateController::create() could not be found.
+Exception Attributes: array (
+  'controller' => 'TemplateController',
+  'action' => 'create',
+)
+Request URL: /icase/card/admin/template/create/?action=edit&id=52457966922ff
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(TemplateController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-09-27 21:26:47 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/css/style.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 21:26:48 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/jquery.cookie.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 21:26:48 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/include/bootstrap.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 21:26:48 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/include/jquery.tweet.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 21:26:48 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/include/jquery.pubsub.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 21:26:48 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/include/jquery.equal-heights.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 21:26:48 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/menu/jquery.ct.3LevelAccordion.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 21:26:48 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/include/jquery.fitvids.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 21:26:48 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/libs/jquery.ui.touch-punch.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 21:26:48 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/bootstrapslider/css/slider.css
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 21:26:48 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/include/jquery.select2.min.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 21:26:48 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/json2.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 21:26:48 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/site/icase.shoppingcart.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 21:26:48 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/config.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 21:26:48 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/bootstrapslider/js/bootstrap-slider.js
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 21:29:52 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 21:30:23 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 21:33:20 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 21:34:10 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 21:34:36 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 21:49:30 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-09-27 22:02:28 Error: [MissingActionException] Action AdminController::order() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminController',
+  'action' => 'order',
+)
+Request URL: /icase/card/admin/admin/order/
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(AdminController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}

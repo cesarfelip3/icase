@@ -91,29 +91,18 @@ function maker_init()
 //===========================================================
 // Server API
 //===========================================================
-function save_canvas(json)
-{
-    var id = $("#canvas_guid").val();
-    var name = $("#current-item").data('name');
-    var guid = $("#current-item").val();
-    if ($("#current-item").val() == "") {
-        alert("You don't have to save an empty canvas.");
-        return false;
-    }
+function save_canvas(data)
+{    
     jQuery.ajax({
-        url: "" + id,
-        data: {'json': json, 'name': name, 'product': guid},
+        url: "",
+        data: {'data': data},
         type: "POST",
         beforeSend: function(xhr) {
         }
     }).done(function(data) {
         var result = $.parseJSON(data);
         if (result.error == 1) {
-            $("#modal-user").modal();
-            formuser_load();
         } else {
-            $("#canvas_guid").val(result.data.guid);
-            $("#canvas_guid").data('saved', '1');
             alert("Your progress just saved");
         }
     }).fail(function() {

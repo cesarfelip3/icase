@@ -2,7 +2,7 @@
 
 class Industry extends AppModel {
 
-    public $useTable = 'categories';
+    public $useTable = 'industries';
     public $primaryKey = 'id';
 
     function afterSave($created) {

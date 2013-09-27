@@ -962,8 +962,8 @@
 
     Tools.prototype.save = function() {
         this.zoomreset();
-        var json = JSON.stringify(canvas.toJSON());
-        this.save_callback(json);
+        var data = canvas.toSVG();
+        this.save_callback(data);
     }
 
     Tools.prototype.reload = function(json) {
