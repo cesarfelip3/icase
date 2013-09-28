@@ -459,7 +459,7 @@ $js_case = array(
     {
         showAlert2 ("Dealing with your order now, please wait......");
         jQuery.ajax({
-            url: "<?php echo $preview_url; ?>/?action=order",
+            url: "<?php echo $preview_url; ?>",
             data: {"image-extension": "jpeg", "image-data": preview, "product": jQuery("#current-item").val()},
             type: "POST",
             beforeSend: function(xhr) {
