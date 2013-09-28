@@ -21,6 +21,18 @@
     var DrawEditor = function() {
     };
 
+    // So prototype is the way to make all objects from it share its property and method
+    // If one of this value changed, and then all object's value changed
+    // this.property, only worked for the one
+
+    // So in OO, prototype is the way to make abstract class, or parent class
+    // class b {}; class a extends b {}; n = new a();
+    // Why we need inheriate?
+
+    // var a = function () {}; var b = function (); b.prototype = new a();
+    // var a = {}; var b = function (); b.prototype = new a();
+
+
     Mememaker.prototype = {
         containerId: '#box-canvas',
         wrapperId: 'box-canvas-wrapper',
@@ -29,11 +41,11 @@
         canvasScale: 0,
         width: 780,
         height: 780,
-        originx: 0,
-        originy: 0,
-        left: 0,
-        top: 0,
-        offset: 0,
+        originx: 0, // canvas postion - startup
+        originy: 0, // canvas postion - startup
+        left: 0, // canvas postion - changed
+        top: 0, // canvas postion - changed
+        offset: 0, // 
         content: {
             pages: [],
             index: 0
@@ -979,7 +991,7 @@
             }
             canvas.renderAll();
             canvas.calcOffset();
-            
+
             if (callback) {
                 callback();
             }
@@ -1027,7 +1039,7 @@
 
         $.mememaker.content.index = page;
         canvas.clear();
-        
+
         this.reload($.mememaker.content.pages[page], callback);
         return true;
     }
