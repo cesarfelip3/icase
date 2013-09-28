@@ -269,7 +269,7 @@ class CreatorController extends AppController {
             ));
 
             if (!empty($data)) {
-                
+
                 $png1 = unserialize($data['Product']['image']);
                 $png1 = $png1['foreground'];
 
@@ -296,20 +296,31 @@ class CreatorController extends AppController {
         }
     }
 
-    protected function _overlayImage($overlay, $jpeg, $final, $width=1850, $height=1850) {
+    protected function _overlayImage($overlay, $jpeg, $final, $width = 1850, $height = 1850) {
 
-        $final = APP . "webroot" . DS . "uploads" . DS . "preview" . DS . $final;
-        file_put_contents($final, file_get_contents($jpeg));
-        return;
+        $action = $this->request->query('action');
+        if ($action == 'order') {
 
-        $png = imagecreatefrompng($overlay);
-        $jpeg = imagecreatefromjpeg($jpeg);
+            $basename = pathinfo ($png, PATHINFO_FILENAME);
+            if (preg_match ("/^ipad/i", $basename)) {
+                $width = 3700;
+                $height = 3700;
+            }
+            
+            $png = imagecreatefrompng($overlay);
+            $jpeg = imagecreatefromjpeg($jpeg);
 
-        $out = imagecreatetruecolor($width, $height);
-        imagecopyresampled($out, $jpeg, 0, 0, 0, 0, $width, $height, $width, $height);
-        imagecopyresampled($out, $png, 0, 0, 0, 0, $width, $height, $width, $height);
+            $out = imagecreatetruecolor($width, $height);
+            imagecopyresampled($out, $jpeg, 0, 0, 0, 0, $width, $height, $width, $height);
+            imagecopyresampled($out, $png, 0, 0, 0, 0, $width, $height, $width, $height);
 
-        imagejpeg($out, $final, 100);
+            imagejpeg($out, $final, 100);
+            
+        } else {
+            $final = APP . "webroot" . DS . "uploads" . DS . "preview" . DS . $final;
+            file_put_contents($final, file_get_contents($jpeg));
+            return;
+        }
     }
 
     public function templates() {

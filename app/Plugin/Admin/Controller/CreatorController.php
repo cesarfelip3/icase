@@ -415,7 +415,7 @@ class CreatorController extends AdminAppController {
 
     //======================================================
     public function install() {
-
+        exit;
         $templates = array(
             "iphone5" => array(
                 "name" => "iphone5",

@@ -38,6 +38,8 @@ var mememaker = {
         resize: null,
         preview: null,
         generate: null,
+        preview2: null,
+        generate2: null,
         backgroundcolor: null,
         newtemplate: null,
     },
@@ -570,15 +572,15 @@ mememaker.tools.resize = function(plus, evt) {
     mememaker.canvas.setDimensions({width: 460, height: mememaker.canvas.getHeight() + height});
 }
 
-mememaker.tools.zoomout = function() {
+mememaker.tools.zoomout = function(width) {
     // TODO limit max cavas zoom out
 
     //this.canvasScale = this.canvasScale / 1.2;
 
-    mememaker.canvas.setHeight(1850);
-    mememaker.canvas.setWidth(1850);
+    mememaker.canvas.setHeight(width);
+    mememaker.canvas.setWidth(width);
     
-    var ratio = 1850 / 780;
+    var ratio = width / 780;
     
     var objects = mememaker.canvas.getObjects();
     for (var i in objects) {
@@ -603,7 +605,7 @@ mememaker.tools.zoomout = function() {
     mememaker.canvas.renderAll();
 }
 
-mememaker.tools.zoomreset = function() {
+mememaker.tools.zoomreset = function(width) {
     // TODO limit max cavas zoom out
 
     //this.canvasScale = this.canvasScale / 1.2;
@@ -611,7 +613,7 @@ mememaker.tools.zoomreset = function() {
     mememaker.canvas.setHeight(780);
     mememaker.canvas.setWidth(780);
     
-    var ratio = 780 / 1850;
+    var ratio = 780 / width;
     
     var objects = mememaker.canvas.getObjects();
     for (var i in objects) {
@@ -636,10 +638,10 @@ mememaker.tools.zoomreset = function() {
     mememaker.canvas.renderAll();
 }
 
-mememaker.tools.preview = function() {
+mememaker.tools.preview = function(width) {
     // it will convert canvas to base64
     
-    mememaker.tools.zoomout();
+    mememaker.tools.zoomout(width);
     mememaker.canvas.deactivateAll();
 
     mememaker.canvas.overlayImage = null;
@@ -651,7 +653,7 @@ mememaker.tools.preview = function() {
             }
     );
 
-    mememaker.tools.zoomreset();
+    mememaker.tools.zoomreset(width);
     //console.log(mememaker.overlayImage);
     mememaker.tools.newtemplate(mememaker.overlayImage);
     if (mememaker.tools.generate == null) {
@@ -678,10 +680,10 @@ mememaker.tools.preview2 = function() {
     //mememaker.tools.zoomreset();
     //console.log(mememaker.overlayImage);
    // mememaker.tools.newtemplate(mememaker.overlayImage);
-    if (mememaker.tools.generate == null) {
+    if (mememaker.tools.generate2 == null) {
         return;
     }
-    mememaker.tools.generate(preview);
+    mememaker.tools.generate2(preview);
 }
 
 mememaker.tools.generate = null;

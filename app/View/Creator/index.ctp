@@ -174,71 +174,71 @@ $js_pluploader = array(
 
 <?php echo $this->Html->script($js_pluploader); ?>
 <script type="text/javascript">
-                        function PL(id) {
-                            return document.getElementById(id);
-                        }
+    function PL(id) {
+        return document.getElementById(id);
+    }
 
-                        var uploader = new plupload.Uploader({
-                            runtimes: 'gears,html5,browserplus',
-                            browse_button: 'btn-upload-image',
-                            container: 'uploader',
-                            max_file_size: '10mb',
-                            url: '<?php echo $uploader_url; ?>',
-                            multi_selection: false,
-                            //resize: {width: 640, height: 240, quality: 100},
-                            //flash_swf_url: 'js/uploader/plupload.flash.swf',
-                            //silverlight_xap_url : 'js/uploader/plupload.silverlight.xap',
-                            filters: [
-                                {title: "Image Files", extensions: "png,jpeg,jpg,gif"}
-                            ]
-                        });
+    var uploader = new plupload.Uploader({
+        runtimes: 'gears,html5,browserplus',
+        browse_button: 'btn-upload-image',
+        container: 'uploader',
+        max_file_size: '10mb',
+        url: '<?php echo $uploader_url; ?>',
+        multi_selection: false,
+        //resize: {width: 640, height: 240, quality: 100},
+        //flash_swf_url: 'js/uploader/plupload.flash.swf',
+        //silverlight_xap_url : 'js/uploader/plupload.silverlight.xap',
+        filters: [
+            {title: "Image Files", extensions: "png,jpeg,jpg,gif"}
+        ]
+    });
 
-                        uploader.bind('Init', function(up, params) {
-                            //$('filelist').innerHTML = "<div>Current runtime: " + params.runtime + "</div>";
-                        });
+    uploader.bind('Init', function(up, params) {
+        //$('filelist').innerHTML = "<div>Current runtime: " + params.runtime + "</div>";
+    });
 
-                        uploader.init();
+    uploader.init();
 
-                        uploader.bind('FilesAdded', function(up, files) {
+    uploader.bind('FilesAdded', function(up, files) {
 
-                            //console.log("hello");
-                            if (uploader.files.length == 2) {
-                                uploader.removeFile(uploader.files[0]);
-                            }
+        //console.log("hello");
+        if (uploader.files.length == 2) {
+            uploader.removeFile(uploader.files[0]);
+        }
 
-                            for (var i in files) {
-                                //document.getElementById('filelist').innerHTML = '<div id="' + files[i].id + '">' + files[i].name + ' (' + plupload.formatSize(files[i].size) + ') <b></b></div>';
-                            }
-                            jQuery('#progress-bar').css('width', "0%");
-                            uploader.start();
-                        });
+        for (var i in files) {
+            //document.getElementById('filelist').innerHTML = '<div id="' + files[i].id + '">' + files[i].name + ' (' + plupload.formatSize(files[i].size) + ') <b></b></div>';
+        }
+        jQuery('#progress-bar').css('width', "0%");
+        uploader.start();
+    });
 
-                        uploader.bind('UploadProgress', function(up, file) {
-                            //$(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
-                            jQuery('#progress-bar').css('width', file.percent + "%");
+    uploader.bind('UploadProgress', function(up, file) {
+        //$(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
+        jQuery('#progress-bar').css('width', file.percent + "%");
 
-                        });
+    });
 
-                        uploader.bind('FileUploaded', function(up, file, response) {
-                            plupload.each(response, function(value, key) {
+    uploader.bind('FileUploaded', function(up, file, response) {
+        plupload.each(response, function(value, key) {
 
-                                //console.log(key);
-                                //console.log(value);
+            //console.log(key);
+            //console.log(value);
 
-                                if (key == "response") {
-                                    var result = jQuery.parseJSON(value);
-                                    //console.log(result);
-                                    if (result.error == 0) {
-                                        //console.log(result.files.url);
-                                        showAlert2("Loading image....");
-                                        mememaker.tools.addpic(result.files.url);
-                                    }
-                                    //jQuery('#progress-bar').css('width', "0%");
-                                }
-                            });
+            if (key == "response") {
+                var result = jQuery.parseJSON(value);
+                //console.log(result);
+                if (result.error == 0) {
+                    //console.log(result.files.url);
+                    showAlert2("Loading image....");
+                    mememaker.tools.addpic(result.files.url);
+                }
+                //jQuery('#progress-bar').css('width', "0%");
+            }
+        });
 
-                            //alert($.parseJSON(response.response).result);
-                        });
+        //alert($.parseJSON(response.response).result);
+    });
 
 </script>
 
@@ -280,9 +280,14 @@ $js_case = array(
 
                     jQuery("#modal-preview").modal('hide');
                     cart_count();
-
-                    window.open("<?php echo $checkout_url; ?>", "_blank");
-                    window.focus();
+                    
+                    var name = new String($("#current-item").data('name'));
+                    
+                    if (name.substr(0, 4) == 'iPad') {
+                        $.mememaker.tools.preview (3700);
+                    } else {
+                        $.mememaker.tools.preview (1850);
+                    }
                 }
         )
     }
@@ -291,6 +296,7 @@ $js_case = array(
     {
         mememaker.init('c1');
         mememaker.tools.init(".tools");
+        mememaker.tools.generate2 = preview2;
         mememaker.tools.generate = preview;
 
         mememaker.save_callback = save_canvas;
@@ -450,6 +456,24 @@ $js_case = array(
     }
 
     function preview(preview)
+    {
+        showAlert2 ("Dealing with your order now, please wait......");
+        jQuery.ajax({
+            url: "<?php echo $preview_url; ?>/?action=order",
+            data: {"image-extension": "jpeg", "image-data": preview, "product": jQuery("#current-item").val()},
+            type: "POST",
+            beforeSend: function(xhr) {
+            }
+        }).done(function(data) {
+            hideAlert ();
+            window.open("<?php echo $checkout_url; ?>", "new");
+            window.focus();
+        }).fail(function() {
+            showAlert ("failed");
+        });
+    }
+    
+    function preview2(preview)
     {
         //console.log('preview callback');
         //console.log(jQuery("#current-item").val());
