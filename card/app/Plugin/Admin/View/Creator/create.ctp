@@ -10,6 +10,18 @@
     $guid = $template['guid'];
     $action_reload = $base . "creator/reload";
     $action_upload = $base . "creator/upload";
+    
+    if ($action == 'edit') {
+        $returnUrl = $base . "template/edit/?id=" . $guid;
+    } 
+    
+    if ($action == 'new') {
+        $returnUrl = $base . "template/add/?id=" . $guid;
+    }
+    
+    if ($action == 'list') {
+        $returnUrl = $base . "template";
+    }
 ?>
 <style>
     body {
@@ -551,10 +563,12 @@ function maker_init()
     $.mememakerinit.imageeditorinit(".image-editor");
     $.mememakerinit.draweditorinit(".draw-editor");
     
+    $.mememakerinit.returnurl = "<?php echo $returnUrl; ?>";
+    
     var val = $("input[name=status]").data('action');
     var guid = $("input[name=status").data('guid');
     
-    if (val === 'edit') {
+    if (val === 'edit' || val === 'list') {
         reload (guid);
     }
 }
@@ -565,6 +579,7 @@ function maker_init()
 
 function reload (guid)
 {
+    showAlert2 ("Loading template, please wait......");
     jQuery.ajax({
         url: "<?php echo $action_reload; ?>/?id=" + guid,
         type: "GET",
@@ -572,19 +587,17 @@ function reload (guid)
         }
     }).done(function(data) {
         
-        //try {
-            //var result = JSON.parse(data);
-            var result = JSON.parse(data);
-            localStorage.pages = JSON.stringify(result);
-            $.mememaker.tools.loadpage(0, false);
-            //$.mememaker.tools.reload (result[0], false);
-        //}
-        //catch (e) {
-          //  console.log(e);
-        //}
+        showAlert2 ("Initialize pages, please wait......");
+        var result = JSON.parse(data);
+        localStorage.pages = JSON.stringify(result);
+        $.mememaker.tools.loadpage(0, function () {
+            hideAlert ();
+        });
+        
+        //hideAlert ();
         
     }).fail(function() {
-        
+        showAlert ("Failed");
     });
 }
 

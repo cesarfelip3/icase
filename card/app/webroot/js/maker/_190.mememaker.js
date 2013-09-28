@@ -969,8 +969,10 @@
 
         return preview;
     }
-
+    
     Tools.prototype.save = function() {
+        //this.savepage($.mememaker.content.index);
+        //this.savepage(1);
         this.save_callback(localStorage.pages);
     }
 

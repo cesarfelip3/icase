@@ -142,32 +142,6 @@ class IndustryController extends AdminAppController {
                 }
             }
 
-            if (!empty($id)) {
-                $this->loadModel('IndustryToObject');
-                $data = $this->IndustryToObject->find('all', array("conditions" => array("object_guid" => $id)));
-                foreach ($return as $key => $value) {
-
-                    $value['Industry']['selected'] = false;
-                    foreach ($data as $industry) {
-                        if ($value['Industry']['guid'] == $industry['IndustryToObject']['industry_guid']) {
-                            $value['Industry']['selected'] = true;
-                        }
-                    }
-                    $return[$key] = $value;
-                }
-            }
-
-            foreach ($return as $key => $value) {
-
-                $id = $value['Industry']['id'];
-
-                //print_r ($value['Industry']['slug']);
-
-                if (preg_match("/\-C$id/", trim($value['Industry']['slug']))) {
-                    $value['Industry']['slug'] = str_replace("-C" . $value['Industry']['id'], "", $value['Industry']['slug']);
-                }
-                $return[$key] = $value;
-            }
 
             //print_r($return);
             //exit;
@@ -188,12 +162,12 @@ class IndustryController extends AdminAppController {
             exit(json_encode($this->error));
         }
 
-        if (empty($data['slug'])) {
-            $this->error['error'] = 1;
-            $this->error['element'] = 'input[name="industry[name]"]';
-            $this->error['message'] = 'URL Key is required';
-            exit(json_encode($this->error));
-        }
+//        if (empty($data['slug'])) {
+//            $this->error['error'] = 1;
+//            $this->error['element'] = 'input[name="industry[name]"]';
+//            $this->error['message'] = 'URL Key is required';
+//            exit(json_encode($this->error));
+//        }
 
         $this->loadModel('Industry');
         $level = 0;
@@ -267,12 +241,12 @@ class IndustryController extends AdminAppController {
             exit(json_encode($this->error));
         }
 
-        if (empty($data['slug'])) {
-            $this->error['error'] = 1;
-            $this->error['element'] = 'input[name="industry[name]"]';
-            $this->error['message'] = 'URL Key is required';
-            exit(json_encode($this->error));
-        }
+//        if (empty($data['slug'])) {
+//            $this->error['error'] = 1;
+//            $this->error['element'] = 'input[name="industry[name]"]';
+//            $this->error['message'] = 'URL Key is required';
+//            exit(json_encode($this->error));
+//        }
 
         $data['slug'] = trim($data['slug']);
         $data['name'] = trim($data['name']);

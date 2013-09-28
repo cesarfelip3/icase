@@ -52,7 +52,7 @@ $admin_product = $base . "product";
                                     <span class="help-inline"></span>
                                 </div>
                             </div>
-                            <div class="control-group">
+                            <div class="control-group hide">
                                 <label class="control-label" for="focusedInput">URL Key</label>
                                 <div class="controls">
                                     <input class="input-xlarge focused" id="focusedInput" type="text" name="category[slug]" >
@@ -60,10 +60,10 @@ $admin_product = $base . "product";
                                 </div>
                             </div>
                             <div class="control-group">
-                                <label class="control-label" for="disabledInput">SEO</label>
+                                <label class="control-label" for="disabledInput"></label>
                                 <div class="controls">
-                                    <p><input class="input-xlarge focused" id="focusedInput" type="text" name="category[seo_keywords]" placeholder="keywords" ></p>
-                                    <p><textarea name="category[seo_description]" style="width:280px" rows="3" placeholder="description"></textarea></p>
+<!--                                    <p><input class="input-xlarge focused" id="focusedInput" type="text" name="category[seo_keywords]" placeholder="keywords" ></p>
+                                    <p><textarea name="category[seo_description]" style="width:280px" rows="3" placeholder="description"></textarea></p>-->
                                     <a href="javascript:" class="btn btn-success" data-loading-text="Saving..." onclick="save('add');" id="btn-save">Create</a>
                                 </div>
                             </div>
@@ -106,14 +106,14 @@ $admin_product = $base . "product";
                                     <span class="help-inline"></span>
                                 </div>
                             </div>
-                            <div class="control-group">
+                            <div class="control-group hide">
                                 <label class="control-label" for="focusedInput">URL Key</label>
                                 <div class="controls">
                                     <input class="input-xlarge focused" id="focusedInput" type="text" name="category[slug]" >
                                     <span class="help-inline"></span>
                                 </div>
                             </div>
-                            <div class="control-group">
+                            <div class="control-group hide">
                                 <label class="control-label" for="disabledInput">SEO</label>
                                 <div class="controls">
                                     <p><input class="input-xlarge focused" id="focusedInput" type="text" name="category[seo_keywords]" placeholder="keywords" ></p>

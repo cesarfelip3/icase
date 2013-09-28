@@ -37,6 +37,7 @@ class TemplateController extends AdminAppController {
 
         $filter_category = $this->request->query('filter_category');
         $filter_industry = $this->request->query('filter_industry');
+        $filter_subcategory = $this->request->query('filter_subcategory');
 
         $conditions = array("Template.type" => "template_from_store");
 
@@ -56,6 +57,10 @@ class TemplateController extends AdminAppController {
                     array("Template.description LIKE " => "%" . $keyword . "%"))
             );
             $conditions = array_merge($conditions, $search);
+        }
+        
+        if (!empty($filter_subcategory)) {
+            $filter_category = $filter_subcategory;
         }
 
         if (!empty($filter_category)) {
@@ -83,12 +88,14 @@ class TemplateController extends AdminAppController {
         );
 
         foreach ($data as $key => $value) {
-            $value['Template']['thumbnails'] = unserialize($value['Template']['thumbnails']);
-            foreach ($value['Template']['thumbnails'] as $k => $image) {
-                $image = $this->webroot . $this->_media_location['template'] . $image;
-                $value['Template']['thumbnails'][$k] = $image;
+            if (!empty($value['Template']['thumbnails'])) {
+                $value['Template']['thumbnails'] = unserialize($value['Template']['thumbnails']);
+                foreach ($value['Template']['thumbnails'] as $k => $image) {
+                    $image = $this->webroot . $this->_media_location['template'] . $image;
+                    $value['Template']['thumbnails'][$k] = $image;
+                }
+                $data[$key] = $value;
             }
-            $data[$key] = $value;
         }
 
         $this->loadModel('Industry');
@@ -104,33 +111,7 @@ class TemplateController extends AdminAppController {
             "order" => array("order" => "ASC", "id" => "ASC")
         ));
 
-        $return = array();
-        if (!empty($categories)) {
-
-            foreach ($categories as $category) {
-                $result = $this->Category->find('all', array(
-                    "conditions" => array('parent_guid' => $category['Category']['guid']),
-                    "order" => array('order ASC')
-                        )
-                );
-
-                if (!empty($result)) {
-                    $return[] = $category;
-                    $this->_categoryList($result, $return);
-                } else {
-                    $return[] = $category;
-                }
-            }
-        }
-        
-        foreach ($return as $key => $value) {
-            if ($value['Category']['level'] == 1) {
-                $value['Category']['name'] = "&nbsp;&nbsp;--&nbsp;" . $value['Category']['name'];
-            }
-            $return[$key] = $value;
-        }
-        
-        $filter_categories = $return;
+        $filter_categories = $categories;
 
         //=========================================================
 
@@ -373,6 +354,33 @@ class TemplateController extends AdminAppController {
         $this->set('level', $level);
         $this->set('data', $data);
         $this->render("categoryfilter.ajax");
+    }
+    
+    //=====================================
+    //
+    //=====================================
+    
+    function subcategorylist ()
+    {
+        $id = $this->request->query ('id');
+        
+        if (empty ($id)) {
+            exit ('no');
+        }
+        
+        $this->loadModel('Category');
+        $categories = $this->Category->find('all', array(
+            "conditions" => array("level" => 1, "parent_guid" => $id),
+            "order" => array("order" => "ASC", "id" => "ASC")
+        ));
+        
+        if (empty($categories)) {
+            $categories = array ();
+            exit ('no');
+        }
+
+        $this->layout = 'ajax';
+        $this->set ('data', $categories);
     }
 
     protected function _categoryList($data, &$return) {

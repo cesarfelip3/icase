@@ -16,6 +16,7 @@
         resize: null,
         init: null,
         selected: false,
+        returnurl: "",
         toolsinit: null,
         texteditorinit: null,
         imageeditorinit: null,
@@ -178,8 +179,9 @@
             var json, svg;
             var svg0, svg1;
 
-            json = JSON.parse(data);
-            console.log(json);
+            $.mememaker.tools.savepage(current);
+            json = JSON.parse(localStorage.pages);
+            showAlert2 ("Saving now, please wait......")
 
             $.mememaker.tools.savepage(current);
             $.mememaker.tools.loadpage(0, function() {
@@ -200,12 +202,16 @@
                         beforeSend: function(xhr) {
                         }
                     }).done(function(data) {
+                        hideAlert ();
                         var result = $.parseJSON(data);
                         if (result.error == 1) {
                         } else {
-                            alert("Your progress just saved");
+                            //console.log ($.mememakerinit.returnurl);
+                            //history.back()
+                            window.location.href = $.mememakerinit.returnurl;
                         }
                     }).fail(function() {
+                        showAlert ("Failed");
                     });
                 });
             });

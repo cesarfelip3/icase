@@ -49,7 +49,7 @@ class CategoryController extends AdminAppController {
                         "order" => array('order ASC')
                             )
                     );
-
+                    
                     if (!empty($result)) {
                         $return[] = $category;
                         $this->_categoryList($result, $return);
@@ -66,36 +66,7 @@ class CategoryController extends AdminAppController {
                         break;
                 }
             }
-
-            if (!empty($id)) {
-                $this->loadModel('CategoryToObject');
-                $data = $this->CategoryToObject->find('all', array("conditions" => array("object_guid" => $id)));
-                foreach ($return as $key => $value) {
-
-                    $value['Category']['selected'] = false;
-                    foreach ($data as $category) {
-                        if ($value['Category']['guid'] == $category['CategoryToObject']['category_guid']) {
-                            $value['Category']['selected'] = true;
-                        }
-                    }
-                    $return[$key] = $value;
-                }
-            }
-
-            foreach ($return as $key => $value) {
-
-                $id = $value['Category']['id'];
-
-                //print_r ($value['Category']['slug']);
-
-                if (preg_match("/\-C$id/", trim($value['Category']['slug']))) {
-                    $value['Category']['slug'] = str_replace("-C" . $value['Category']['id'], "", $value['Category']['slug']);
-                }
-                $return[$key] = $value;
-            }
-
-            //print_r($return);
-            //exit;
+            
 
             $this->set('data', $return);
             $this->layout = "ajax";
@@ -188,12 +159,12 @@ class CategoryController extends AdminAppController {
             exit(json_encode($this->error));
         }
 
-        if (empty($data['slug'])) {
-            $this->error['error'] = 1;
-            $this->error['element'] = 'input[name="category[name]"]';
-            $this->error['message'] = 'URL Key is required';
-            exit(json_encode($this->error));
-        }
+//        if (empty($data['slug'])) {
+//            $this->error['error'] = 1;
+//            $this->error['element'] = 'input[name="category[name]"]';
+//            $this->error['message'] = 'URL Key is required';
+//            exit(json_encode($this->error));
+//        }
 
         $this->loadModel('Category');
         $level = 0;
@@ -269,12 +240,12 @@ class CategoryController extends AdminAppController {
             exit(json_encode($this->error));
         }
 
-        if (empty($data['slug'])) {
-            $this->error['error'] = 1;
-            $this->error['element'] = 'input[name="category[name]"]';
-            $this->error['message'] = 'URL Key is required';
-            exit(json_encode($this->error));
-        }
+//        if (empty($data['slug'])) {
+//            $this->error['error'] = 1;
+//            $this->error['element'] = 'input[name="category[name]"]';
+//            $this->error['message'] = 'URL Key is required';
+//            exit(json_encode($this->error));
+//        }
 
         $data['slug'] = trim($data['slug']);
         $data['name'] = trim($data['name']);

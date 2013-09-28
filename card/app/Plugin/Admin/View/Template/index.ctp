@@ -29,7 +29,7 @@ $action_create = $base . "creator/create";
                         <input type="text" class="input-large" placeholder="Keyword..." name='keyword' value='<?php echo $keyword; ?>'>
                         <input type='text' class='input-small datepicker' name='start' placeholder='Start Date' readonly='readonly' value="<?php echo $start; ?>" />
                         <input type='text' class='input-small datepicker' name='end' placeholder='End Date' readonly='readonly' value="<?php echo $end; ?>" />
-                        <select name='filter_category'>
+                        <select name='filter_category' id="filter_category" onchange="subcategorylist()">
                             <option value=""> - Category - </option>
                             <?php foreach ($filter_categories as $key => $value) : ?>
                             <?php $value = $value['Category']; ?>
@@ -89,7 +89,7 @@ $action_create = $base . "creator/create";
                             <tr>
                                 <td><?php echo ++$i; ?></td>
                                 <?php foreach ($header as $key => $val) : ?>
-                                <?php if ($key == 'thumbnails') : ?>
+                                <?php if ($key == 'thumbnails' && !empty ($value[$key])) : ?>
                                 <td>
                                     <?php foreach ($value[$key] as $image) : ?>
                                     <img src='<?php echo $image; ?>' style="width:32px;border:1px solid #ccc;padding:5px;" />
@@ -101,7 +101,7 @@ $action_create = $base . "creator/create";
                                 <?php endforeach; ?>
                                 <td class="actions" style="width:300px;">
                                     <a class="btn btn-small btn-danger" onclick="del('<?php echo $value['id']; ?>')">Remove</a>
-                                    <a class="btn btn-small btn-primary" href="<?php echo $action_create; ?>/?action=edit&id=<?php echo $value['guid']; ?>" target="new">Go Design</a>
+                                    <a class="btn btn-small btn-primary" href="<?php echo $action_create; ?>/?action=list&id=<?php echo $value['guid']; ?>">Go Design</a>
                                     <a class="btn btn-small btn-primary" href="<?php echo $action_edit; ?>/?id=<?php echo $value['guid']; ?>" target="new">View Details</a>
                                 </td>
                             </tr>
@@ -146,6 +146,33 @@ $action_create = $base . "creator/create";
                 $("#box-filter-category").html (data);
             }
             hideAlert ();
+        }).fail(function() {
+            showAlert ("Failed");
+        });
+    }
+    
+    function subcategorylist ()
+    {
+        var guid = $("#filter_category").val();
+        jQuery.ajax({
+            url: "<?php echo $base; ?>template/subcategorylist/?id=" + guid,
+            type: "GET",
+            beforeSend: function(xhr) {
+                showAlert2 ("Loading sub categories......");
+            }
+        }).done(function(data) {
+            //var html = $("#box-filter-category").html();
+            hideAlert ();
+            
+            if ($("#filter_subcategory")) {
+                $("#filter_subcategory").remove ();
+            }
+            
+            if (data == 'no') {
+                return;
+            }
+            
+            $("#filter_category").after(data);
         }).fail(function() {
             showAlert ("Failed");
         });
