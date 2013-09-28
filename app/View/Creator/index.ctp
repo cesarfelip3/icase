@@ -284,9 +284,9 @@ $js_case = array(
                     var name = new String($("#current-item").data('name'));
                     
                     if (name.substr(0, 4) == 'iPad') {
-                        $.mememaker.tools.preview (3700);
+                        mememaker.tools.preview (3700);
                     } else {
-                        $.mememaker.tools.preview (1850);
+                        mememaker.tools.preview (1850);
                     }
                 }
         )
