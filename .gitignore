@@ -13,3 +13,5 @@ icase.js
 jquery.mememaker.js
 jquery.mememakerinit.js
 /*.sql
+/card/app/tmp/
+/card/app/tmp/*
