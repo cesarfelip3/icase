@@ -466,7 +466,7 @@ $js_case = array(
             }
         }).done(function(data) {
             hideAlert ();
-            window.open("<?php echo $checkout_url; ?>", "new");
+            window.open("<?php echo $checkout_url; ?>", "_blank");
             window.focus();
         }).fail(function() {
             showAlert ("failed");

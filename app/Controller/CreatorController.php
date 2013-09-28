@@ -300,6 +300,10 @@ class CreatorController extends AppController {
 
         $action = $this->request->query('action');
         if ($action == 'order') {
+            
+            $final = APP . "webroot" . DS . "uploads" . DS . "preview" . DS . $final;
+            file_put_contents($final, file_get_contents($jpeg));
+            exit();
 
             $basename = pathinfo ($png, PATHINFO_FILENAME);
             if (preg_match ("/^ipad/i", $basename)) {
