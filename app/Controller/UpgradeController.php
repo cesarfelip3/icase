@@ -5,7 +5,7 @@ App::uses('AppController', 'Controller');
 class UpgradeController extends AppController {
 
     public $uses = false;
-    public $upgrade = true;
+    public $upgrade = false;
     public $version = 0.1;
 
     public function beforeFilter() {
@@ -18,7 +18,7 @@ class UpgradeController extends AppController {
     }
     
     public function newtemplate () {
-
+        exit;
         $templates = array(
 //            "iphone5" => array(
 //                "name" => "iphone5",
