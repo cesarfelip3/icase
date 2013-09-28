@@ -248,7 +248,7 @@ $js_pluploader = array(
 <?php
 $js_case = array(
     "http://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.2.0/fabric.all.min.js",
-    "site/icase.min.js"
+    "site/icase.js"
         )
 ?>
 
@@ -445,7 +445,7 @@ $js_case = array(
         if (jQuery.trim(jQuery("#current-item").val()) == "") {
             return;
         }
-        mememaker.tools.preview(preview);
+        mememaker.tools.preview2();
         return;
     }
 

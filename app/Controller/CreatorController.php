@@ -254,7 +254,7 @@ class CreatorController extends AppController {
             }
 
             $this->_error['error'] = 0;
-            $this->_error['message'] = 'success';
+            $this->_error['message'] = '';
             $this->_error['files'] = array(
                 'original' => "",
                 'target' => $filename,
@@ -263,22 +263,13 @@ class CreatorController extends AppController {
                     //'mime' => $mime
             );
 
-            /*
-              $path = $targetDir . DIRECTORY_SEPARATOR . $filename;
-              $image = file_get_contents($targetDir . DIRECTORY_SEPARATOR . $filename);
-
-              $image = substr_replace($image, pack("cnn", 1, 300, 300), 13, 5);
-
-              file_put_contents($targetDir . DIRECTORY_SEPARATOR . $filename, $image);
-
-             */
-
             $this->loadModel('Product');
             $data = $this->Product->find('first', array(
                 'conditions' => array('guid' => $product, 'type' => 'template')
             ));
 
             if (!empty($data)) {
+                
                 $png1 = unserialize($data['Product']['image']);
                 $png1 = $png1['foreground'];
 
@@ -305,24 +296,20 @@ class CreatorController extends AppController {
         }
     }
 
-    protected function _overlayImage($overlay, $jpeg, $final) {
+    protected function _overlayImage($overlay, $jpeg, $final, $width=1850, $height=1850) {
 
         $final = APP . "webroot" . DS . "uploads" . DS . "preview" . DS . $final;
+        file_put_contents($final, file_get_contents($jpeg));
+        return;
 
         $png = imagecreatefrompng($overlay);
         $jpeg = imagecreatefromjpeg($jpeg);
 
-        //list($width, $height) = getimagesize('./image.jpg');
-        //list($newwidth, $newheight) = getimagesize('./mark.png');
-        $out = imagecreatetruecolor(1850, 1850);
-        imagecopyresampled($out, $jpeg, 0, 0, 0, 0, 1850, 1850, 1850, 1850);
-        imagecopyresampled($out, $png, 0, 0, 0, 0, 1850, 1850, 1850, 1850);
+        $out = imagecreatetruecolor($width, $height);
+        imagecopyresampled($out, $jpeg, 0, 0, 0, 0, $width, $height, $width, $height);
+        imagecopyresampled($out, $png, 0, 0, 0, 0, $width, $height, $width, $height);
 
         imagejpeg($out, $final, 100);
-
-        //$image = file_get_contents($final);
-        //$image = substr_replace($image, pack("cnn", 1, 300, 300), 13, 5);
-        //file_put_contents($final, $image);
     }
 
     public function templates() {
