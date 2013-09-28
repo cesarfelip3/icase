@@ -666,7 +666,7 @@ mememaker.tools.preview2 = function() {
     //mememaker.tools.zoomout();
     mememaker.canvas.deactivateAll();
 
-    mememaker.canvas.overlayImage = null;
+    //mememaker.canvas.overlayImage = null;
     mememaker.canvas.renderAll.bind(mememaker.canvas);
     var preview = mememaker.canvas.toDataURL(
             {
@@ -677,7 +677,7 @@ mememaker.tools.preview2 = function() {
 
     //mememaker.tools.zoomreset();
     //console.log(mememaker.overlayImage);
-    mememaker.tools.newtemplate(mememaker.overlayImage);
+   // mememaker.tools.newtemplate(mememaker.overlayImage);
     if (mememaker.tools.generate == null) {
         return;
     }
