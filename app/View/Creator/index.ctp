@@ -284,8 +284,10 @@ $js_case = array(
                     var name = new String($("#current-item").data('name'));
                     
                     if (name.substr(0, 4) == 'iPad') {
+                        console.log (3700);
                         mememaker.tools.preview (3700);
                     } else {
+                        console.log(1850);
                         mememaker.tools.preview (1850);
                     }
                 }
@@ -459,7 +461,7 @@ $js_case = array(
     {
         showAlert2 ("Dealing with your order now, please wait......");
         jQuery.ajax({
-            url: "<?php echo $preview_url; ?>",
+            url: "<?php echo $preview_url; ?>/?action=order",
             data: {"image-extension": "jpeg", "image-data": preview, "product": jQuery("#current-item").val()},
             type: "POST",
             beforeSend: function(xhr) {
