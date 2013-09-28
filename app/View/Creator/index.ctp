@@ -468,8 +468,8 @@ $js_case = array(
             }
         }).done(function(data) {
             hideAlert ();
-            window.open("<?php echo $checkout_url; ?>", "_blank");
-            window.focus();
+            window.location.href = "<?php echo $checkout_url; ?>";
+            //window.focus();
         }).fail(function() {
             showAlert ("failed");
         });
