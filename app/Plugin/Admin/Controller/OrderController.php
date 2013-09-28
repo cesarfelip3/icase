@@ -205,15 +205,24 @@ class OrderController extends AdminAppController {
     protected function _overlayImage($overlay, $jpeg, $final) {
 
         $final = APP . "webroot" . DS . "uploads" . DS . "preview" . DS . $final;
+        
+        $basename = pathinfo($jpeg, PATHINFO_FILENAME);
+        if (preg_match ("/ipad/i", $basename)) {
+            $width = 3700;
+            $height = 3700;
+        } else {
+            $width = 1850;
+            $height = 1850;
+        }
 
         $png = imagecreatefrompng($overlay);
         $jpeg = imagecreatefromjpeg($jpeg);
 
         //list($width, $height) = getimagesize('./image.jpg');
         //list($newwidth, $newheight) = getimagesize('./mark.png');
-        $out = imagecreatetruecolor(1850, 1850);
-        imagecopyresampled($out, $jpeg, 0, 0, 0, 0, 1850, 1850, 1850, 1850);
-        imagecopyresampled($out, $png, 0, 0, 0, 0, 1850, 1850, 1850, 1850);
+        $out = imagecreatetruecolor($width, $height);
+        imagecopyresampled($out, $jpeg, 0, 0, 0, 0, $width, $height, $width, $height);
+        imagecopyresampled($out, $png, 0, 0, 0, 0, $width, $height, $width, $height);
 
         imagejpeg($out, $final, 100);
         
