@@ -5,7 +5,7 @@ App::uses('AppController', 'Controller');
 class UpgradeController extends AppController {
 
     public $uses = false;
-    public $upgrade = false;
+    public $upgrade = true;
     public $version = 0.1;
 
     public function beforeFilter() {
@@ -132,6 +132,7 @@ class UpgradeController extends AppController {
     
     public function to02() {
         set_time_limit(0);
+        exit;
 
         print_r("Upgrading from 0.1 to 0.2......<br/>");
         print_r("Stage 1 : upgrading images of products on server......<br/>");
