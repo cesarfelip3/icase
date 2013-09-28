@@ -17,6 +17,119 @@ class UpgradeController extends AppController {
         }
     }
     
+    public function newtemplate () {
+
+        $templates = array(
+//            "iphone5" => array(
+//                "name" => "iphone5",
+//                "description" => "iphone5 case",
+//                "price" => "34.99",
+//                "image" => array(
+//                    "foreground" => "iphone5_fg.png",
+//                    "background" => "iphone5_bg.png",
+//                ),
+//                "type" => "template",
+//                "status" => "published",
+//                "quantity" => 65535,
+//                "order" => 0,
+//            ),
+//            "iphone4" => array(
+//                "name" => "iphone4",
+//                "description" => "iphone4 case",
+//                "price" => "34.99",
+//                "image" => array(
+//                    "foreground" => "iphone4_fg.png",
+//                    "background" => "iphone4_bg.png",
+//                ),
+//                "type" => "template",
+//                "status" => "published",
+//                "quantity" => 65535,
+//                "order" => 1
+//            ),
+//            "samsung galaxy 3" => array(
+//                "name" => "samsung galaxy 3",
+//                "description" => "iphone5 case",
+//                "price" => "34.99",
+//                "image" => array(
+//                    "foreground" => "samsung galaxy 3-outer.png",
+//                    "background" => "samsung galaxy 3-inner.png",
+//                ),
+//                "type" => "template",
+//                "status" => "published",
+//                "quantity" => 65535,
+//                "order" => 2,
+//            ),
+//            "samsung galaxy 4" => array(
+//                "name" => "samsung galaxy 4",
+//                "description" => "samsung galaxy 4",
+//                "price" => "34.99",
+//                "image" => array(
+//                    "foreground" => "samsung galaxy 4-outer.png",
+//                    "background" => "samsung galaxy 4-inner.png",
+//                ),
+//                "type" => "template",
+//                "status" => "published",
+//                "quantity" => 65535,
+//                "order" => 3
+//            ),
+            "iPad Flip" => array(
+                "name" => "iPad Flip",
+                "description" => "iPad Flip",
+                "price" => "34.99",
+                "image" => array(
+                    "foreground" => "ipad_flip_fg.png",
+                    "background" => "",
+                ),
+                "type" => "template",
+                "status" => "published",
+                "quantity" => 65535,
+                "order" => 4
+            ),
+            "iPad Flip Swivel" => array(
+                "name" => "iPad Flip Swivel",
+                "description" => "iPad Flip Swivel",
+                "price" => "34.99",
+                "image" => array(
+                    "foreground" => "ipad_flip_swivel_fg.png",
+                    "background" => "",
+                ),
+                "type" => "template",
+                "status" => "published",
+                "quantity" => 65535,
+                "order" => 5
+            ),
+            "Keychain" => array(
+                "name" => "Keychain",
+                "description" => "Keychain",
+                "price" => "34.99",
+                "image" => array(
+                    "foreground" => "keychain_fg.png",
+                    "background" => "",
+                ),
+                "type" => "template",
+                "status" => "published",
+                "quantity" => 65535,
+                "order" => 6,
+            ),
+        );
+
+        $this->loadModel("Product");
+        //$this->Product->query("DELETE FROM products WHERE type='template'");
+        foreach ($templates as $template) {
+            $template['guid'] = uniqid();
+            $template['created'] = time();
+            $template['modified'] = time();
+            $template['image'] = serialize($template['image']);
+            $this->Product->create();
+            $this->Product->save($template);
+        }
+
+        $this->autoRender = false;
+
+        //$this->redirect(array("plugin" => "admin", "controller" => "product", "action" => "index"));
+        echo "Successfully all templates created";
+    }
+    
     public function to02() {
         set_time_limit(0);
 
