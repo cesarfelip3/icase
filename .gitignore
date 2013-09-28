@@ -9,5 +9,4 @@ tmp/*
 /app/webroot/uploads/
 /nbproject
 database.php
-/app/webroot/js/site/icase.js
 *.sql
