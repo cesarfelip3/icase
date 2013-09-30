@@ -587,6 +587,11 @@ function reload (guid)
         }
     }).done(function(data) {
         
+        if (data === "nodata") {
+        		hideAlert ();
+        		return;
+        }
+        
         showAlert2 ("Initialize pages, please wait......");
         var result = JSON.parse(data);
         localStorage.pages = JSON.stringify(result);

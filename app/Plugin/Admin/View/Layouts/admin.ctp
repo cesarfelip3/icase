@@ -60,6 +60,7 @@
                                         <ul class="dropdown-menu">
                                             <li><a href="<?php echo $base; ?>product/">Manage Catalogue</a></li>
                                             <li><a href="<?php echo $base; ?>category/">Manage Categories</a></li>
+                                            <li><a href="<?php echo $base; ?>custom/">Manage Custom</a></li>
                                         </ul>
                                     </li>
                                     <li class="dropdown">

@@ -78,7 +78,8 @@ class TemplateController extends AdminAppController {
             'order' => 'modified DESC',
             'limit' => $limit,
             'page' => $page + 1,
-            'fields' => array("Template.*")
+            'order' => "modified DESC",
+            'fields' => array("guid", "category_guid", "industry_guid", "featured", "thumbnails", "type", "status", "created", "modified", "name", "id")
         ));
 
         //$this->Template->_debug ();
@@ -179,7 +180,7 @@ class TemplateController extends AdminAppController {
             }
 
             $data['type'] = 'template_from_store';
-            $data['status'] = isset($data['status']) ? $data['status'] : 'draft';
+            $data['status'] = 'draft';
             $data['is_featured'] = isset($data['is_featured']) ? 1 : 0;
 
             if (empty($data['industry_guid'])) {
@@ -257,7 +258,7 @@ class TemplateController extends AdminAppController {
             }
 
             $data['type'] = 'template_from_store';
-            $data['status'] = isset($data['status']) ? $data['status'] : 'draft';
+            $data['status'] = 'draft';
             $data['is_featured'] = isset($data['is_featured']) ? 1 : 0;
 
             if (empty($data['industry_guid'])) {

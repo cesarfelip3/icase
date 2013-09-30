@@ -91,9 +91,6 @@ $admin_template = $base . "template";
                             <div class="control-group warning">
                                 <label class="control-label" for="inputWarning"></label>
                                 <div class="controls">
-                                    <label class="checkbox">
-                                        <input type="checkbox" class="input-mini" name="template[status]" value="published" checked="true">Published
-                                    </label>
                                     <a href='javascript:' class='btn btn-primary' data-loading-text="Saving..." onclick="save('create');" id="btn-save">Save</a>
                                     <span class="help-inline"></span>
                                 </div>

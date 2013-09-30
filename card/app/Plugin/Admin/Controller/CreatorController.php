@@ -30,8 +30,11 @@ class CreatorController extends AdminAppController {
                 $this->_error['error'] = 1;
                 exit(json_encode($this->_error));
             }
-
+			
             $template = $template['Template'];
+			if (empty($template['content_json'])) {
+				exit ("nodata");
+			}
 
             $this->layout = false;
             $json = unserialize($template['content_json']);
@@ -101,7 +104,7 @@ class CreatorController extends AdminAppController {
 
             $data['featured'] = serialize($featured);
             $data['thumbnails'] = serialize($thumbnails);
-            
+            $data['status'] = 'publish';
 
             $this->Template->clear();
             $this->Template->id = $template['id'];
