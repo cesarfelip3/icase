@@ -13,17 +13,9 @@
     $action_reload = $base . "creator/reload";
     $action_upload = $base . "creator/upload";
     
-    if ($action == 'edit') {
-        $returnUrl = $base . "template/edit/?id=" . $guid;
-    } 
-    
-    if ($action == 'new') {
-        $returnUrl = $base . "template/add/?id=" . $guid;
-    }
-    
     if ($action == 'list') {
-        $returnUrl = $base . "template";
-    }
+        $returnUrl = $this->webroot . "index/index";
+    } 
 ?>
 
 <div class="unselectable" id="box-container">

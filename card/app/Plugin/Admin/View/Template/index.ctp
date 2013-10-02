@@ -29,14 +29,14 @@ $action_create = $base . "creator/create";
                         <input type="text" class="input-large" placeholder="Keyword..." name='keyword' value='<?php echo $keyword; ?>'>
                         <input type='text' class='input-small datepicker' name='start' placeholder='Start Date' readonly='readonly' value="<?php echo $start; ?>" />
                         <input type='text' class='input-small datepicker' name='end' placeholder='End Date' readonly='readonly' value="<?php echo $end; ?>" />
-                        <select name='filter_category' id="filter_category" onchange="subcategorylist()">
+                        <select name='filter_category' id="filter_category" onchange="subcategorylist()" class="input-medium">
                             <option value=""> - Category - </option>
                             <?php foreach ($filter_categories as $key => $value) : ?>
                             <?php $value = $value['Category']; ?>
                                 <option value="<?php echo $value['guid']; ?>" <?php if ($value['guid'] == $filter_category) echo 'selected="selected"'; ?>><?php echo $value['name']; ?></option>
                             <?php endforeach; ?>
                         </select>
-                        <select name='filter_industry'>
+                        <select name='filter_industry' class="input-medium">
                             <option value=""> - Industry - </option>
                             <?php foreach ($filter_industries as $key => $value) : ?>
                             <?php $value = $value['Industry']; ?>

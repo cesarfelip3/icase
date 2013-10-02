@@ -210,7 +210,7 @@
                 </ul>
             </div>
             <div class="row-fluid" id="box-bottom">
-                <div class="span12" style="margin:auto;text-align:center">
+                <div class="span12" style="margin:auto;text-align:center" id="box-ajax-indicator">
                     <i class="icon-refresh icon-spin icon-2x" style="color:orange"></i>
                 </div>
             </div>
@@ -224,28 +224,30 @@
         <script>window.jQuery || document.write('<script src="<?php echo $this->webroot; ?>js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
         <script>
             var loaded = false;
+            var page = 0;
+            var poss;
+            
             $(document).ready(
                     function() {
-                    	
+                    		
+                    		loaded = true;
                     		loaddata();
 
                         jQuery(document).scroll(function() {
                             var top = document.getElementById("box-bottom");
-                            var pos = top.getBoundingClientRect();
+                            pos = top.getBoundingClientRect();
 
-                            console.log(pos.top);
-                            console.log(jQuery("#box-bottom").scrollTop());
-                            console.log(jQuery(window).height());
+                           // console.log(pos.top);
+                            //console.log(jQuery("#box-bottom").scrollTop());
+                            //console.log(jQuery(window).height());
+                            
+                            //alert (pos.top);
 
                             if (pos.top <= jQuery(window).height() && !loaded) {
+                            		//alert ("bottom");
                                 console.log("bottom");
-                                //loaded = true;
-                                $("#li-template-box1").append('<div class="thumbnail"><a href="javascript:"><img src="img/thumb_small_1.jpg"  style=""/></a><div class="caption"><h4>Letter</h4></div></div>');
-                                $("#li-template-box2").append('<div class="thumbnail"><a href="javascript:"><img src="img/thumb_small_1.jpg"  style=""/></a><div class="caption"><h4>Letter</h4></div></div>');
-                                $("#li-template-box3").append('<div class="thumbnail"><a href="javascript:"><img src="img/thumb_small_1.jpg"  style=""/></a><div class="caption"><h4>Letter</h4></div></div>');
-                                $("#li-template-box4").append('<div class="thumbnail"><a href="javascript:"><img src="img/thumb_small_1.jpg"  style=""/></a><div class="caption"><h4>Letter</h4></div></div>');
-
-                                init();
+                                loaddata2 (page++);
+                                
                             }
                         });
 
@@ -271,7 +273,8 @@
                     
 			function init()
 			{
-				$("#box-bottom").hide();
+				$("#box-bottom-indicator").hide();
+				$(".thumbnail a").off ('click');
 				$(".thumbnail a").click(
 					function(e) {
 						var front = $(this).data('image-front');
@@ -284,7 +287,7 @@
 						$("#img-reverse").hide();
 						$("#modal-name").html(name);
 						$("#btn-go-design").data('guid', guid);
-						$("#btn-go-design").attr ('href', "/icase/card/creator/create/?action=list&id=" + guid);
+						$("#btn-go-design").attr ('href', "<?php echo $this->webroot; ?>creator/create/?action=list&id=" + guid);
 						$("#btn-go-design").attr('target', 'new');
 						$("#modal-preview").modal();
 				});
@@ -310,6 +313,7 @@
 		            
 		            if (data == 'no') {
 		            		$("#box-subcategory").parent().hide();
+		            		loaddata();
 		                return;
 		            }
 		            
@@ -322,6 +326,7 @@
 		    
 		    function loaddata () {
 		    	
+		    		$("#box-bottom-indicator").show();
 		        jQuery.ajax({
 		            url: "<?php echo $this->webroot; ?>index/templatelist",
 		            type: "GET",
@@ -331,11 +336,58 @@
 		            }
 		        }).done(function(data) {
 		            if (data == "no") {
+		            		$("#box-ajax-indicator").hide();
 		            		return;
 		            }
 		            
 		            $("#box-content").html (data);
+		            loaded = false;
 		            init();
+		        }).fail(function() {
+		            //showAlert ("Failed");
+		        });
+		    }
+		    
+		    function loaddata2 (page) {
+		    	
+		    		loaded = true;
+		    		$("#box-bottom-indicator").show();
+		    		
+		    		var data = $("#form-filter").serialize();
+		    		console.log (data);
+		    		
+		    		var data = {"action":"nextpage", "page":page, "filter_category":$("#filter_category").val(), "filter_industry":$("#filter_industry").val(), "filter_subcategory":$("#filter_subcategory").val()}
+		    		
+		        jQuery.ajax({
+		            url: "<?php echo $this->webroot; ?>index/templatelist2/",
+		            type: "GET",
+		            data: data,
+		            beforeSend: function(xhr) {
+		            }
+		        }).done(function(data) {
+		        		console.log (data);
+		        		
+		            if (data == "no") {
+		            		//loaded = true;
+		            		$("#box-ajax-indicator").hide();
+		            		return;
+		            }
+		            
+		            var result = JSON.parse (data); 
+		            var html = "";
+		            var j = 0;
+		            
+		            console.log (result);
+		            
+		            for (i in result) {
+		            		html = '<div class="thumbnail" style="margin-bottom:5px;"><a href="javascript:" data-image-front="' + result[i].featured[0] + '" data-image-reverse="' + result[i].featured[1] + '" data-guid="' + result[i].guid + '" data-name="' + result[i].name + '"> <img src="' + result[i].thumbnails[0] + '" style="" /> </a><div class="caption"><h4>' + result[i].name + '</h4></div></div>'
+		            		j = parseInt(i) + 1;
+		            		$("#li-template-box" + j).append(html);
+		            		console.log (j);
+		            };
+		            
+		            loaded = false;
+                    init();
 		        }).fail(function() {
 		            //showAlert ("Failed");
 		        });

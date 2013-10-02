@@ -22,12 +22,12 @@
         imageeditorinit: null,
         draweditorinit: null
     };
-
-    Init.prototype.init = function(id, backgroundcolor) {
+    
+    Init.prototype.init = function (id, backgroundcolor) {
 
         function onResize() {
             $.mememaker.update();
-        }
+        };
 
         $(window).resize(function() {
             clearTimeout(this.resize);
@@ -53,7 +53,7 @@
             $.mememaker.update();
 
             $.mememaker.imageeditor.cropselect(event);
-        })
+        });
 
         $(document).mouseup(function(event) {
             $.mememaker.mousex = event.pageX;
@@ -114,7 +114,7 @@
         });
 
         $.mememaker.init(id, backgroundcolor, 1850 / 780);
-    }
+    };
 
     Init.prototype.reload = function() {
         jQuery.ajax({
@@ -137,7 +137,7 @@
         }).fail(function() {
             showAlert2("failed");
         });
-    }
+    };
 
     Init.prototype.toolsinit = function(id) {
 
@@ -154,34 +154,35 @@
                 $.mememaker.tools.backgroundcolor(color);
                 $(this).parent().parent().attr('style', '');
             }
-        })
-
-        $.mememaker.tools.addpic_callback = function() {
-            hideAlert();
-        }
-
-        // poor performance...:(
-        $.mememaker.tools.move_callback = function() {
-            $(".text-editor").hide();
-            $(".image-editor").hide();
-        }
-
+        });
+        
         $("#box-editing").scroll(function() {
             console.log('scroll');
             $.mememaker.canvas.calcOffset();
             $.mememaker.update();
         });
 
+        $.mememaker.tools.addpic_callback = function() {
+            hideAlert();
+        };
+
+        // poor performance...:(
+        $.mememaker.tools.move_callback = function() {
+            $(".text-editor").hide();
+            $(".image-editor").hide();
+        };
+
         $.mememaker.tools.save_callback = function(data)
         {
             var current = $.mememaker.content.index;
-            var image0, image1;
+            var image0;
+            var image1;
             var json, svg;
             var svg0, svg1;
 
             $.mememaker.tools.savepage(current);
             json = JSON.parse(localStorage.pages);
-            showAlert2 ("Saving now, please wait......")
+            showAlert2 ("Saving now, please wait......");
 
             $.mememaker.tools.savepage(current);
             $.mememaker.tools.loadpage(0, function() {
@@ -215,7 +216,7 @@
                     });
                 });
             });
-        }
+        };
 
         $.mememaker.tools.preview_callback = function preview(data)
         {
@@ -237,11 +238,11 @@
             }).fail(function() {
                 jQuery(".ajax-loading-indicator").hide(0);
             });
-        }
+        };
 
         $.mememaker.undo.callback = function() {
             $("#btn-undo").parent().removeClass('disabled');
-        }
+        };
 
         $(id + " a").click(
                 function(evt) {
@@ -262,7 +263,7 @@
                                 return;
                             }
 
-                            var r = confirm("You will remove this element, are u sure?")
+                            var r = confirm("You will remove this element, are u sure?");
                             if (r == true)
                             {
 
@@ -454,8 +455,7 @@
                     }
                 }
         );
-    }
-
+    };
 
     Init.prototype.texteditorinit = function(id) {
 
@@ -466,11 +466,11 @@
 
             if (el === undefined || el === null) {
                 return;
-            }
+            };
 
             if (el.type != "text") {
                 return;
-            }
+            };
 
 
             var height = el.getBoundingRectHeight();
@@ -487,7 +487,7 @@
 
             $("#text-content").val(el.text);
 
-        }
+        };
 
 
         $("#font-color-picker").spectrum({
@@ -500,7 +500,7 @@
                 $.mememaker.texteditor.changeFontColor(color);
                 $(this).parent().parent().attr('style', '');
             }
-        })
+        });
 
         $(id + " a").click(
                 function() {
@@ -545,9 +545,8 @@
                             break;
                     }
                 }
-        )
-    }
-
+        );
+    };
 
     Init.prototype.imageeditorinit = function(id) {
 
@@ -559,11 +558,11 @@
 
             if (el === undefined || el === null) {
                 return;
-            }
+            };
 
             if (el.type != "image") {
                 return;
-            }
+            };
 
             var height = el.getBoundingRectHeight();
             var top = el.top + height / 2 + 10 + $.mememaker.top;
@@ -578,7 +577,7 @@
             $(".image-editor").css('top', top + "px");
             $(".image-editor").css('left', left + "px");
 
-        }
+        };
 
         $(id + " a").click(
                 function() {
@@ -605,12 +604,12 @@
         //var json = $.mememaker.canvas.toJSON();
         //json = JSON.stringify(json);
 
-    }
+    };
 
 
     Init.prototype.draweditorinit = function(id) {
 
-    }
+    };
 
     $.mememakerinit = new Init();
 

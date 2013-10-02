@@ -318,7 +318,7 @@ class TemplateController extends AdminAppController {
         $id = $this->request->query('id');
         $this->loadModel('Template');
 
-        $data = $this->Template->find('first', array("conditions" => array("id" => $id, 'type' => 'template')));
+        $data = $this->Template->find('first', array("conditions" => array("id" => $id, 'type' => 'template_from_store')));
 
         $this->Template->delete($id);
         exit(json_encode($this->_error));

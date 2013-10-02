@@ -1,9 +1,10 @@
 <?php
-$action_add = $base . "template/add";
-$action_edit = $base . "template/edit";
-$action_delete = $base . "template/delete";
+$action_add = $base . "user_template/add";
+$action_edit = $base . "user_template/edit";
+$action_delete = $base . "user_template/delete";
 $action_category_index = $base . "category";
 $action_create = $base . "creator/create";
+$action_pdf = $base . "user_template/pdf";
 ?>
 <div class="secondary-masthead">
     <div class="container">
@@ -29,14 +30,14 @@ $action_create = $base . "creator/create";
                         <input type="text" class="input-large" placeholder="Keyword..." name='keyword' value='<?php echo $keyword; ?>'>
                         <input type='text' class='input-small datepicker' name='start' placeholder='Start Date' readonly='readonly' value="<?php echo $start; ?>" />
                         <input type='text' class='input-small datepicker' name='end' placeholder='End Date' readonly='readonly' value="<?php echo $end; ?>" />
-                        <select name='filter_category' id="filter_category" onchange="subcategorylist()">
+                        <select name='filter_category' id="filter_category" onchange="subcategorylist()" class="input-medium">
                             <option value=""> - Category - </option>
                             <?php foreach ($filter_categories as $key => $value) : ?>
                             <?php $value = $value['Category']; ?>
                                 <option value="<?php echo $value['guid']; ?>" <?php if ($value['guid'] == $filter_category) echo 'selected="selected"'; ?>><?php echo $value['name']; ?></option>
                             <?php endforeach; ?>
                         </select>
-                        <select name='filter_industry'>
+                        <select name='filter_industry' class="input-medium">
                             <option value=""> - Industry - </option>
                             <?php foreach ($filter_industries as $key => $value) : ?>
                             <?php $value = $value['Industry']; ?>
@@ -101,7 +102,7 @@ $action_create = $base . "creator/create";
                                 <?php endforeach; ?>
                                 <td class="actions" style="width:300px;">
                                     <a class="btn btn-small btn-danger" onclick="del('<?php echo $value['id']; ?>')">Remove</a>
-                                    <a class="btn btn-small btn-primary" href="<?php echo $action_create; ?>/?action=list&id=<?php echo $value['guid']; ?>">Go Design</a>
+                                    <a class="btn btn-small btn-primary" onclick="showPdf('<?php echo $value['guid']; ?>')">PDF</a>
                                     <a class="btn btn-small btn-primary" href="<?php echo $action_edit; ?>/?id=<?php echo $value['guid']; ?>" target="new">View Details</a>
                                 </td>
                             </tr>
@@ -184,4 +185,40 @@ $action_create = $base . "creator/create";
                 
         <?php endif; ?>
     }
+    
+    function showPdf (guid)
+    {
+        jQuery.ajax({
+            url: "<?php echo $action_pdf; ?>?id=" + guid,
+            type: "GET",
+            beforeSend: function(xhr) {
+                showAlert2 ("Loading......");
+            }
+        }).done(function(data) {
+            //var html = $("#box-filter-category").html();
+            hideAlert ();
+            
+            if (data == "no") {
+            		return;
+            }
+            
+            $("#modal-preview .modal-body").html(data);
+            $("#modal-preview").modal();
+        }).fail(function() {
+            showAlert ("Failed");
+        });
+    }
 </script>
+
+<!-- preview modal -->
+<div id="modal-preview" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">PDF</h3>
+    </div>
+    <div class="modal-body" style="background:#ccc">
+        <div class="ajax-loading-indicator hide" style=""><a href="javascript:" style="font-size:14px;"><i class="icon-refresh icon-spin"></i> Loading ....</a></div>
+    </div>
+    <div class="modal-footer">
+    </div>
+</div>

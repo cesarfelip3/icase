@@ -320,7 +320,7 @@ class UserTemplateController extends AdminAppController {
         $id = $this->request->query('id');
         $this->loadModel('Template');
 
-        $data = $this->Template->find('first', array("conditions" => array("id" => $id, 'type' => 'template')));
+        $data = $this->Template->find('first', array("conditions" => array("id" => $id, 'type' => 'template_from_user')));
 
         $this->Template->delete($id);
         exit(json_encode($this->_error));
@@ -358,6 +358,27 @@ class UserTemplateController extends AdminAppController {
         $this->set('data', $data);
         $this->render("categoryfilter.ajax");
     }
+	
+	function pdf ()
+	{
+		$id = $this->request->query('id');
+        $this->loadModel('Template');
+
+        $data = $this->Template->find('first', array("conditions" => array("guid" => $id, 'type' => 'template_from_user'), "fields" => array ("output", "guid", "thumbnails")));
+		
+		if (!empty($data)) {
+			$data = $data['Template'];
+			
+			$data['thumbnails'] = unserialize($data['thumbnails']);
+			$data['output'] = unserialize($data['output']);
+			
+			$this->layout = 'ajax';	
+			$this->set ('data', $data);
+		} else {
+			exit ('no');
+		}
+		
+	}
     
     //=====================================
     //

@@ -19961,3 +19961,339 @@ Stack Trace:
 #1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(IndexController), Object(CakeRequest), Object(CakeResponse))
 #2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #3 {main}
+2013-09-30 19:26:55 Error: [MissingActionException] Action AdminController::order() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminController',
+  'action' => 'order',
+)
+Request URL: /icase/card/admin/admin/order/
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(AdminController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-10-01 16:38:04 Error: [MissingConnectionException] Database connection "Mysql" is missing, or could not be created.
+Exception Attributes: array (
+  'class' => 'Mysql',
+  'message' => 'SQLSTATE[42000] [1049] Unknown database \'card\'',
+  'enabled' => true,
+)
+Request URL: /icase/card/
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(262): Mysql->connect()
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/ConnectionManager.php(107): DboSource->__construct(Array)
+#2 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Model.php(3288): ConnectionManager::getDataSource('default')
+#3 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Model.php(1107): Model->setDataSource('default')
+#4 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Model.php(3310): Model->setSource('categories')
+#5 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Model.php(2750): Model->getDataSource()
+#6 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Model.php(2722): Model->_readDataSource('all', Array)
+#7 /Volumes/DOS/work.current/icase/card/app/Controller/IndexController.php(13): Model->find('all', Array)
+#8 [internal function]: IndexController->index('home')
+#9 /Volumes/DOS/work.current/icase/card/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(IndexController), Array)
+#10 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#11 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(IndexController), Object(CakeRequest), Object(CakeResponse))
+#12 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#13 {main}
+2013-10-01 18:45:27 Error: [MissingConnectionException] Database connection "Mysql" is missing, or could not be created.
+Exception Attributes: array (
+  'class' => 'Mysql',
+  'message' => 'SQLSTATE[42000] [1049] Unknown database \'card\'',
+  'enabled' => true,
+)
+Request URL: /icase/card/
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(262): Mysql->connect()
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/ConnectionManager.php(107): DboSource->__construct(Array)
+#2 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Model.php(3288): ConnectionManager::getDataSource('default')
+#3 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Model.php(1107): Model->setDataSource('default')
+#4 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Model.php(3310): Model->setSource('categories')
+#5 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Model.php(2750): Model->getDataSource()
+#6 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Model.php(2722): Model->_readDataSource('all', Array)
+#7 /Volumes/DOS/work.current/icase/card/app/Controller/IndexController.php(13): Model->find('all', Array)
+#8 [internal function]: IndexController->index('home')
+#9 /Volumes/DOS/work.current/icase/card/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(IndexController), Array)
+#10 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#11 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(IndexController), Object(CakeRequest), Object(CakeResponse))
+#12 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#13 {main}
+2013-10-01 18:47:08 Error: [MissingActionException] Action AdminController::order() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminController',
+  'action' => 'order',
+)
+Request URL: /icase/card/admin/admin/order/
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(AdminController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-10-01 18:47:15 Error: [MissingActionException] Action AdminController::order() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminController',
+  'action' => 'order',
+)
+Request URL: /icase/card/admin/admin/order/
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(AdminController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-10-01 19:53:00 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'statusd' in 'where clause'
+Request URL: /icase/card/index/templatelist2/?action=nextpage&page=0&filter_category=&filter_industry=
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(460): PDOStatement->execute(Array)
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(426): DboSource->_execute('SELECT `Templat...', Array)
+#2 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(666): DboSource->execute('SELECT `Templat...', Array, Array)
+#3 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(1077): DboSource->fetchAll('SELECT `Templat...', false)
+#4 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Model.php(2750): DboSource->read(Object(Template), Array)
+#5 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Model.php(2722): Model->_readDataSource('all', Array)
+#6 /Volumes/DOS/work.current/icase/card/app/Controller/IndexController.php(135): Model->find('all', Array)
+#7 [internal function]: IndexController->templatelist2()
+#8 /Volumes/DOS/work.current/icase/card/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(IndexController), Array)
+#9 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#10 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(IndexController), Object(CakeRequest), Object(CakeResponse))
+#11 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2013-10-01 19:54:03 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'statusd' in 'where clause'
+Request URL: /icase/card/index/templatelist2/?action=nextpage&page=0&filter_category=&filter_industry=
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(460): PDOStatement->execute(Array)
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(426): DboSource->_execute('SELECT `Templat...', Array)
+#2 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(666): DboSource->execute('SELECT `Templat...', Array, Array)
+#3 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(1077): DboSource->fetchAll('SELECT `Templat...', false)
+#4 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Model.php(2750): DboSource->read(Object(Template), Array)
+#5 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Model.php(2722): Model->_readDataSource('all', Array)
+#6 /Volumes/DOS/work.current/icase/card/app/Controller/IndexController.php(135): Model->find('all', Array)
+#7 [internal function]: IndexController->templatelist2()
+#8 /Volumes/DOS/work.current/icase/card/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(IndexController), Array)
+#9 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#10 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(IndexController), Object(CakeRequest), Object(CakeResponse))
+#11 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2013-10-01 19:54:11 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'statusd' in 'where clause'
+Request URL: /icase/card/index/templatelist2/?action=nextpage&page=0&filter_category=&filter_industry=
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(460): PDOStatement->execute(Array)
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(426): DboSource->_execute('SELECT `Templat...', Array)
+#2 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(666): DboSource->execute('SELECT `Templat...', Array, Array)
+#3 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(1077): DboSource->fetchAll('SELECT `Templat...', false)
+#4 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Model.php(2750): DboSource->read(Object(Template), Array)
+#5 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Model.php(2722): Model->_readDataSource('all', Array)
+#6 /Volumes/DOS/work.current/icase/card/app/Controller/IndexController.php(135): Model->find('all', Array)
+#7 [internal function]: IndexController->templatelist2()
+#8 /Volumes/DOS/work.current/icase/card/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(IndexController), Array)
+#9 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#10 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(IndexController), Object(CakeRequest), Object(CakeResponse))
+#11 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2013-10-01 19:55:45 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'statusd' in 'where clause'
+Request URL: /icase/card/index/templatelist2/?action=nextpage&page=0&filter_category=&filter_industry=
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(460): PDOStatement->execute(Array)
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(426): DboSource->_execute('SELECT `Templat...', Array)
+#2 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(666): DboSource->execute('SELECT `Templat...', Array, Array)
+#3 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(1077): DboSource->fetchAll('SELECT `Templat...', false)
+#4 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Model.php(2750): DboSource->read(Object(Template), Array)
+#5 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Model.php(2722): Model->_readDataSource('all', Array)
+#6 /Volumes/DOS/work.current/icase/card/app/Controller/IndexController.php(135): Model->find('all', Array)
+#7 [internal function]: IndexController->templatelist2()
+#8 /Volumes/DOS/work.current/icase/card/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(IndexController), Array)
+#9 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#10 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(IndexController), Object(CakeRequest), Object(CakeResponse))
+#11 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2013-10-01 19:55:58 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'statusd' in 'where clause'
+Request URL: /icase/card/index/templatelist2/?action=nextpage&page=0&filter_category=&filter_industry=
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(460): PDOStatement->execute(Array)
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(426): DboSource->_execute('SELECT `Templat...', Array)
+#2 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(666): DboSource->execute('SELECT `Templat...', Array, Array)
+#3 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(1077): DboSource->fetchAll('SELECT `Templat...', false)
+#4 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Model.php(2750): DboSource->read(Object(Template), Array)
+#5 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Model.php(2722): Model->_readDataSource('all', Array)
+#6 /Volumes/DOS/work.current/icase/card/app/Controller/IndexController.php(135): Model->find('all', Array)
+#7 [internal function]: IndexController->templatelist2()
+#8 /Volumes/DOS/work.current/icase/card/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(IndexController), Array)
+#9 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#10 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(IndexController), Object(CakeRequest), Object(CakeResponse))
+#11 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2013-10-01 19:56:20 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'statusd' in 'where clause'
+Request URL: /icase/card/index/templatelist2/?action=nextpage&page=0&filter_category=&filter_industry=
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(460): PDOStatement->execute(Array)
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(426): DboSource->_execute('SELECT `Templat...', Array)
+#2 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(666): DboSource->execute('SELECT `Templat...', Array, Array)
+#3 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Datasource/DboSource.php(1077): DboSource->fetchAll('SELECT `Templat...', false)
+#4 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Model.php(2750): DboSource->read(Object(Template), Array)
+#5 /Volumes/DOS/work.current/icase/card/lib/Cake/Model/Model.php(2722): Model->_readDataSource('all', Array)
+#6 /Volumes/DOS/work.current/icase/card/app/Controller/IndexController.php(135): Model->find('all', Array)
+#7 [internal function]: IndexController->templatelist2()
+#8 /Volumes/DOS/work.current/icase/card/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(IndexController), Array)
+#9 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#10 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(IndexController), Object(CakeRequest), Object(CakeResponse))
+#11 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2013-10-02 10:43:59 Error: [MissingActionException] Action AdminController::order() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminController',
+  'action' => 'order',
+)
+Request URL: /icase/card/admin/admin/order/
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(AdminController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-10-02 11:13:04 Error: [MissingActionException] Action TemplateController::pdf() could not be found.
+Exception Attributes: array (
+  'controller' => 'TemplateController',
+  'action' => 'pdf',
+)
+Request URL: /icase/card/admin/template/pdf?id=52498f809eaff
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(TemplateController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-10-02 11:13:15 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-02 11:13:46 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-02 11:19:11 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-02 11:19:14 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-02 11:19:18 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-02 11:27:55 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-02 11:31:34 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-02 11:32:29 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-02 11:33:12 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-02 11:34:04 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-02 11:44:26 Error: [MissingControllerException] Controller class UploadsController could not be found.
+Exception Attributes: array (
+  'class' => 'UploadsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/uploads/template/524be6fedb899_0_small.png
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-02 11:44:26 Error: [MissingControllerException] Controller class UploadsController could not be found.
+Exception Attributes: array (
+  'class' => 'UploadsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/uploads/template/524be6fedb899_1_small.png
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-02 11:45:00 Error: [MissingActionException] Action IndexController::img() could not be found.
+Exception Attributes: array (
+  'controller' => 'IndexController',
+  'action' => 'img',
+)
+Request URL: /icase/card/index/img/thumb_small_1.jpg
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(IndexController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-10-02 11:45:00 Error: [MissingActionException] Action IndexController::img() could not be found.
+Exception Attributes: array (
+  'controller' => 'IndexController',
+  'action' => 'img',
+)
+Request URL: /icase/card/index/img/thumb_small.jpg
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(IndexController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-10-02 11:45:00 Error: [MissingActionException] Action IndexController::img() could not be found.
+Exception Attributes: array (
+  'controller' => 'IndexController',
+  'action' => 'img',
+)
+Request URL: /icase/card/index/img/thumb_large.jpg
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(IndexController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}

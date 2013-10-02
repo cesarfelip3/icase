@@ -26,6 +26,12 @@ class IndexController extends AppController {
 	{
 		if (true || $this->request->js('ajax')) {
 			
+			$action = $this->request->query ('action');
+			$page = $this->request->query ('page');
+			
+			$limit = 24;
+			$page = 0;
+			
 			$filter_category = $this->request->query ('filter_category');
 			$filter_subcategory = $this->request->query ('filter_subcategory');
 			$filter_industry = $this->request->query ('filter_industry');
@@ -47,8 +53,8 @@ class IndexController extends AppController {
 			$this->loadModel('Template');
 			$data = $this->Template->find ('all', array (
 				"conditions" => $conditions,
-				"limit" => 24,
-				"page" => 1,
+				"limit" => $limit,
+				"page" => $page,
 				"order" => "modified DESC",
 				'fields' => array("guid", "category_guid", "industry_guid", "featured", "thumbnails", "type", "status", "created", "modified", "name", "id")
 			));
@@ -79,6 +85,82 @@ class IndexController extends AppController {
 			$this->set ('data', $result);
 			
 		}
+	}
+
+	public function templatelist2 ()
+	{
+		if (true || $this->request->js('ajax')) {
+			
+			$action = $this->request->query ('action');
+			$page = $this->request->query ('page');
+			
+			if (!empty ($page)) {
+				$page = intval ($page);
+			} else {
+				$page = 0;
+			}
+			
+			$limit = 4;
+			
+			if ($action == 'nextpage') {
+				$page = $page + 7;
+				$limit = 4;
+			}
+			
+			$filter_category = $this->request->query ('filter_category');
+			$filter_subcategory = $this->request->query ('filter_subcategory');
+			$filter_industry = $this->request->query ('filter_industry');
+			
+			$conditions = array ("type" => "template_from_store", "status" => "publish");
+			
+			if (!empty ($filter_subcategory)) {
+				$filter_category = $filter_subcategory;
+			}	
+			
+			if (!empty ($filter_category)) {
+				$conditions = array_merge ($conditions, array ("category_guid" => $filter_category));	
+			}
+			
+			if (!empty ($filter_industry)) {
+				$conditions = array_merge ($conditions, array ("industry_guid" => $filter_industry));	
+			}
+			
+			$this->loadModel('Template');
+			$data = $this->Template->find ('all', array (
+				"conditions" => $conditions,
+				"limit" => $limit,
+				"page" => $page,
+				"order" => "modified DESC",
+				'fields' => array("guid", "category_guid", "industry_guid", "featured", "thumbnails", "type", "status", "created", "modified", "name", "id")
+			));
+			
+			foreach ($data as $key => $value) {
+				$value = $value['Template'];
+				if ($value['thumbnails']) {
+					$value['thumbnails'] = unserialize($value['thumbnails']);
+					foreach ($value['thumbnails'] as $k => $val) {
+						$val = $this->webroot . "uploads/template/" . $val;
+						$value['thumbnails'][$k] = $val;
+					}
+				}
+				
+				if ($value['featured']) {
+					$value['featured'] = unserialize($value['featured']);
+					foreach ($value['featured'] as $k => $val) {
+						$val = $this->webroot . "uploads/template/" . $val;
+						$value['featured'][$k] = $val;
+					}
+				}
+				
+				$data[$key] = $value;
+			}
+			
+			if (empty($data)) {
+				exit ("no");
+			}
+			exit(json_encode($data));
+			
+		}		
 	}
 	
 	public function subcategorylist ()
