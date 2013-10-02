@@ -14,7 +14,7 @@
     $action_upload = $base . "creator/upload";
     
     if ($action == 'list') {
-        $returnUrl = $this->webroot . "index/index";
+        $returnUrl = "no"; //$this->webroot . "index/index";
     } 
 ?>
 
@@ -569,6 +569,7 @@ function reload (guid)
         }
         
         showAlert2 ("Initialize pages, please wait......");
+        
         var result = JSON.parse(data);
         localStorage.pages = JSON.stringify(result);
         $.mememaker.tools.loadpage(0, function () {

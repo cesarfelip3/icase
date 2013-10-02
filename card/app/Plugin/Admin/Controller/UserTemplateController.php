@@ -234,6 +234,10 @@ class UserTemplateController extends AdminAppController {
         if ($this->request->is('ajax') && $this->request->is('post')) {
             $this->autoRender = false;
 
+			$this->_error['error'] = 1;
+			$this->_error['message'] = "User template isn't allowed to edit";
+			exit (json_encode($this->_error));
+			
             $data = $this->request->data('template');
             $category = $this->request->data('category');
             $action = $this->request->query('action');

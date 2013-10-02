@@ -188,10 +188,10 @@ class IndexController extends AppController {
 	
 	public function test ()
 	{
-		exit;
+		//exit;
 		print_r ("Adding test data......<br/>");
 		$this->loadModel ("Template");
-		$data = $this->Template->find ('first', array ("conditions" => array ("type"=>"template_from_store", "id" => 1)));
+		$data = $this->Template->find ('first', array ("conditions" => array ("type"=>"template_from_store")));
 		$data = $data['Template'];
 		unset($data['id']);
 		

@@ -209,6 +209,10 @@
                         } else {
                             //console.log ($.mememakerinit.returnurl);
                             //history.back()
+                            
+                            if ($.mememakerinit.returnurl === "no") {
+                            		return;
+                            }
                             window.location.href = $.mememakerinit.returnurl;
                         }
                     }).fail(function() {

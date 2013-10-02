@@ -20297,3 +20297,219 @@ Stack Trace:
 #1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(IndexController), Object(CakeRequest), Object(CakeResponse))
 #2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #3 {main}
+2013-10-02 12:33:07 Error: [MissingActionException] Action IndexController::img() could not be found.
+Exception Attributes: array (
+  'controller' => 'IndexController',
+  'action' => 'img',
+)
+Request URL: /icase/card/index/img/thumb_small.jpg
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(IndexController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-10-02 12:33:07 Error: [MissingActionException] Action IndexController::img() could not be found.
+Exception Attributes: array (
+  'controller' => 'IndexController',
+  'action' => 'img',
+)
+Request URL: /icase/card/index/img/thumb_small_1.jpg
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(IndexController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-10-02 12:33:08 Error: [MissingActionException] Action IndexController::img() could not be found.
+Exception Attributes: array (
+  'controller' => 'IndexController',
+  'action' => 'img',
+)
+Request URL: /icase/card/index/img/thumb_large.jpg
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(IndexController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-10-02 12:33:09 Error: [MissingActionException] Action IndexController::img() could not be found.
+Exception Attributes: array (
+  'controller' => 'IndexController',
+  'action' => 'img',
+)
+Request URL: /icase/card/index/img/thumb_small_1.jpg
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(IndexController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-10-02 12:38:35 Error: [MissingActionException] Action IndexController::img() could not be found.
+Exception Attributes: array (
+  'controller' => 'IndexController',
+  'action' => 'img',
+)
+Request URL: /icase/card/index/img/thumb_small_1.jpg
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(IndexController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-10-02 12:38:35 Error: [MissingActionException] Action IndexController::img() could not be found.
+Exception Attributes: array (
+  'controller' => 'IndexController',
+  'action' => 'img',
+)
+Request URL: /icase/card/index/img/thumb_large.jpg
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(IndexController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-10-02 12:38:35 Error: [MissingActionException] Action IndexController::img() could not be found.
+Exception Attributes: array (
+  'controller' => 'IndexController',
+  'action' => 'img',
+)
+Request URL: /icase/card/index/img/thumb_small.jpg
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(IndexController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-10-02 13:19:04 Error: [MissingActionException] Action IndexController::img() could not be found.
+Exception Attributes: array (
+  'controller' => 'IndexController',
+  'action' => 'img',
+)
+Request URL: /icase/card/index/img/thumb_large.jpg
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(IndexController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-10-02 13:19:04 Error: [MissingActionException] Action IndexController::img() could not be found.
+Exception Attributes: array (
+  'controller' => 'IndexController',
+  'action' => 'img',
+)
+Request URL: /icase/card/index/img/thumb_small_1.jpg
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(IndexController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-10-02 13:19:04 Error: [MissingActionException] Action IndexController::img() could not be found.
+Exception Attributes: array (
+  'controller' => 'IndexController',
+  'action' => 'img',
+)
+Request URL: /icase/card/index/img/thumb_small.jpg
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(IndexController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-10-02 13:19:05 Error: [MissingActionException] Action IndexController::img() could not be found.
+Exception Attributes: array (
+  'controller' => 'IndexController',
+  'action' => 'img',
+)
+Request URL: /icase/card/index/img/thumb_large.jpg
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(IndexController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-10-02 13:19:25 Error: [MissingActionException] Action IndexController::img() could not be found.
+Exception Attributes: array (
+  'controller' => 'IndexController',
+  'action' => 'img',
+)
+Request URL: /icase/card/index/img/thumb_small_1.jpg
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(IndexController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-10-02 13:19:25 Error: [MissingActionException] Action IndexController::img() could not be found.
+Exception Attributes: array (
+  'controller' => 'IndexController',
+  'action' => 'img',
+)
+Request URL: /icase/card/index/img/thumb_large.jpg
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(IndexController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-10-02 13:19:25 Error: [MissingActionException] Action IndexController::img() could not be found.
+Exception Attributes: array (
+  'controller' => 'IndexController',
+  'action' => 'img',
+)
+Request URL: /icase/card/index/img/thumb_small.jpg
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(IndexController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-10-02 13:41:24 Error: [MissingActionException] Action IndexController::img() could not be found.
+Exception Attributes: array (
+  'controller' => 'IndexController',
+  'action' => 'img',
+)
+Request URL: /icase/card/index/img/thumb_small_1.jpg
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(IndexController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-10-02 13:41:24 Error: [MissingActionException] Action IndexController::img() could not be found.
+Exception Attributes: array (
+  'controller' => 'IndexController',
+  'action' => 'img',
+)
+Request URL: /icase/card/index/img/thumb_large.jpg
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(IndexController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-10-02 13:41:24 Error: [MissingActionException] Action IndexController::img() could not be found.
+Exception Attributes: array (
+  'controller' => 'IndexController',
+  'action' => 'img',
+)
+Request URL: /icase/card/index/img/thumb_small.jpg
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(IndexController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-10-02 13:41:25 Error: [MissingActionException] Action IndexController::img() could not be found.
+Exception Attributes: array (
+  'controller' => 'IndexController',
+  'action' => 'img',
+)
+Request URL: /icase/card/index/img/thumb_large.jpg
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Volumes/DOS/work.current/icase/card/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(IndexController), Object(CakeRequest), Object(CakeResponse))
+#2 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-10-02 14:10:09 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-02 14:13:02 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/js/vendor/jquery.min.map
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}

@@ -929,7 +929,7 @@
         canvas.renderAll();
 
         this.container.update();
-    }
+    };
 
     // Server API
     Tools.prototype.preview = function() {
@@ -953,28 +953,31 @@
         if (this.preview_callback !== null) {
             this.preview_callback(preview);
         }
-    }
+    };
 
     Tools.prototype.preview2 = function() {
-
-        //this.closegrid();
-        //canvas.deactivateAll();
+        
+        this.removegrid();
+        canvas.deactivateAll();
 
         var preview = canvas.toDataURL({
             format: 'jpeg',
             quality: 1
         });
 
-        //this.closegrid();
+        this.addgrid();
+        if (this.container.grid.visible) {
+            this.showgrid();
+        }
 
         return preview;
-    }
+    };
     
     Tools.prototype.save = function() {
         //this.savepage($.mememaker.content.index);
         //this.savepage(1);
         this.save_callback(localStorage.pages);
-    }
+    };
 
     Tools.prototype.reload = function(json, callback) {
         this.zoomreset();
@@ -998,7 +1001,7 @@
                 callback();
             }
         });
-    }
+    };
 
     Tools.prototype.toSVG = function() {
 
@@ -1012,7 +1015,7 @@
             this.showgrid();
         }
         return svg;
-    }
+    };
 
     Tools.prototype.savepage = function(page) {
 
@@ -1020,7 +1023,7 @@
 
         $.mememaker.content.pages[page] = JSON.stringify(canvas.toJSON());
         localStorage.pages = JSON.stringify($.mememaker.content.pages);
-    }
+    };
 
     Tools.prototype.loadpage = function(page, callback) {
         page = parseInt(page);
@@ -1044,7 +1047,7 @@
 
         this.reload($.mememaker.content.pages[page], callback);
         return true;
-    }
+    };
 
     // ===========================================
     // text editor
@@ -1063,7 +1066,7 @@
 
         el.fill = color;
         canvas.renderAll();
-    }
+    };
 
     TextEditor.prototype.changeFontFamily = function(fontFamily) {
         var el = canvas.getActiveObject();
@@ -1078,7 +1081,7 @@
 
         el.fontFamily = fontFamily;
         canvas.renderAll();
-    }
+    };
 
     TextEditor.prototype.changeText = function(value) {
         var el = canvas.getActiveObject();

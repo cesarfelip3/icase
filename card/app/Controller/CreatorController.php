@@ -70,6 +70,7 @@ class CreatorController extends AppController {
 
 	protected function _save() {
 
+		set_time_limit(0);
 		$action = $this -> request -> query('action');
 		$id = $this -> request -> query('id');
 
@@ -96,11 +97,15 @@ class CreatorController extends AppController {
 			$svg = $_POST['svg'];
 			$json = $_POST['json'];
 			$images = $_POST['image'];
-
-			$data = array();
+			
+			unset ($template['id']);
+			$data = $template;
+			
+			$svg = str_replace ("http://inspireprint.com", )
 			$data['content_json'] = serialize($json);
 			$data['content_svg'] = $svg;
 			$data['guid'] = uniqid();
+			
 			
 			$images = $this -> _toImage($images, "jpeg", $data['guid']);
 
@@ -125,8 +130,6 @@ class CreatorController extends AppController {
 			$filename = pathinfo ($image, PATHINFO_FILENAME);
 			$filename = preg_replace ("/\_[0-9]{1,}/i", "", $filename);
 			
-			unset ($template['id']);
-			$data = $template;
 			$data['output'] = array ();
 			
 			if (!empty ($svg)) {
@@ -161,7 +164,6 @@ class CreatorController extends AppController {
 			$data['parent_guid'] = $template['guid'];
 			$data['created'] = time();
 			$data['modified'] = time();
-			$data['parent_guid'] = $template['guid'];
 
 			$this -> Template -> create();
 			$this -> Template -> save($data);
