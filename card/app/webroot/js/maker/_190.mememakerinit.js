@@ -213,7 +213,7 @@
                             if ($.mememakerinit.returnurl === "no") {
                             		return;
                             }
-                            window.location.href = $.mememakerinit.returnurl;
+                            //window.location.href = $.mememakerinit.returnurl;
                         }
                     }).fail(function() {
                         showAlert ("Failed");
@@ -244,8 +244,12 @@
             });
         };
 
-        $.mememaker.undo.callback = function() {
-            $("#btn-undo").parent().removeClass('disabled');
+        $.mememaker.undo.callback = function(on) {
+        		if (on) {
+        			$("#btn-undo").parent().removeClass('disabled');
+        		} else {
+            		$("#btn-undo").parent().addClass('disabled');
+            	}
         };
 
         $(id + " a").click(

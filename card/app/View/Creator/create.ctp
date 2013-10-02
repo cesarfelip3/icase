@@ -7,7 +7,7 @@
     if ($width <= 350) {
         $width *= 2;
         $height *= 2;
-    }
+    } 
     
     $guid = $template['guid'];
     $action_reload = $base . "creator/reload";
@@ -107,8 +107,8 @@
                 </ul>
             </div>
         </div>
-        <input type="hidden" id="current-item" style="display:none;" />
-        <input type="hidden" name="status" style="display:none;" data-action="<?php echo $action; ?>" data-guid="<?php echo $guid; ?>" />
+        <input type="hidden" id="current-item" id="info-current-item" style="display:none;" />
+        <input type="hidden" name="status" id="info-status" style="display:none;" data-action="<?php echo $action; ?>" data-guid="<?php echo $guid; ?>" />
         <div id="box-editing">
             <div class="hm-row">
                 <div class="hm-row" style="width:934px;height:100px;position:absolute;margin:0px;padding:0px;">
@@ -452,7 +452,7 @@ $js_pluploader = array(
 <script src='<?php echo $this->webroot; ?>js/spectrum/spectrum.js'></script>
 <script src='<?php echo $this->webroot; ?>js/maker/json2.js'></script>
 <script src='<?php echo $this->webroot; ?>js/maker/jquery.cookie.js'></script>
-<script src="<?php echo $this->webroot; ?>js/maker/1211.all.js"></script>
+<script src="<?php echo $this->webroot; ?>js/maker/1299.all.js"></script>
 <script src="<?php echo $this->webroot; ?>js/maker/_190.mememaker.js"></script>
 <script src="<?php echo $this->webroot; ?>js/maker/_190.mememakerinit.js"></script>
 
@@ -541,8 +541,8 @@ function maker_init()
     
     $.mememakerinit.returnurl = "<?php echo $returnUrl; ?>";
     
-    var val = $("input[name=status]").data('action');
-    var guid = $("input[name=status").data('guid');
+    var val = $("#info-status").data('action');
+    var guid = $("#info-status").data('guid');
     
     if (val === 'edit' || val === 'list') {
         reload (guid);
@@ -563,6 +563,7 @@ function reload (guid)
         }
     }).done(function(data) {
         
+        
         if (data === "nodata") {
         		hideAlert ();
         		return;
@@ -573,6 +574,7 @@ function reload (guid)
         var result = JSON.parse(data);
         localStorage.pages = JSON.stringify(result);
         $.mememaker.tools.loadpage(0, function () {
+        		$.mememaker.tools.initReload();
             hideAlert ();
         });
         

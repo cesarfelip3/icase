@@ -52,70 +52,10 @@ class CreatorController extends AdminAppController {
         $action = $this->request->query('action');
         $id = $this->request->query('id');
 
-        if ($this->request->is('ajax') && $this->request->is('post')) {
-            $this->layout = false;
-
-            if (empty($id)) {
-                $this->_error['error'] = 1;
-                $this->_error['message'] = "Invalid ID";
-                exit(json_encode($this->_error));
-            }
-
-            $svg = $_POST['svg'];
-            $json = $_POST['json'];
-            $images = $_POST['image'];
-
-
-            $this->loadModel('Template');
-
-            $template = $this->Template->find('first', array(
-                "conditions" => array("guid" => $id)
-            ));
-
-            if (empty($template)) {
-                $this->_error['error'] = 1;
-                exit(json_encode($this->_error));
-            }
-
-            $template = $template['Template'];
-
-            $data = array();
-            $data['content_json'] = serialize($json);
-            $data['content_svg'] = $svg;
-
-            $images = $this->_toImage($images, "jpeg");
-
-            foreach ($images as $image) {
-                $image = WWW_ROOT . $this->_media_location['template'] . $image;
-                $ret = $this->_resizeImage($image, $template['width'], $template['height']);
-            }
-
-            if (!$ret) {
-                exit(json_encode($this->_error));
-            }
-
-            $thumbnails = array();
-            $featured = array();
-
-            foreach ($images as $image) {
-                $thumbnails[] = str_replace(".jpeg", "_small.png", $image);
-                $featured[] = str_replace(".jpeg", "_medium.png", $image);
-            }
-
-            $data['featured'] = serialize($featured);
-            $data['thumbnails'] = serialize($thumbnails);
-            $data['status'] = 'publish';
-
-            $this->Template->clear();
-            $this->Template->id = $template['id'];
-            $this->Template->save($data);
-            $this->_error['error'] = 0;
-
-            exit(json_encode($this->_error));
-        }
+        $this->_save ();
 
         if (empty($id)) {
-            
+            $this->redirect (array ("plugin" => "admin", "controller" => "template", "action" => "index"));
         }
 
         $this->loadModel('Template');
@@ -125,14 +65,92 @@ class CreatorController extends AdminAppController {
         ));
 
         if (empty($template)) {
-            
+            $this->redirect (array ("plugin" => "admin", "controller" => "template", "action" => "index"));
         }
 
         $this->set('template', $template['Template']);
         $this->set('action', $action);
     }
 
-    public function _toImage($images, $extension) {
+	protected function _save() {
+
+		set_time_limit(0);
+		$action = $this -> request -> query('action');
+		$id = $this -> request -> query('id');
+
+		if ($this -> request -> is('ajax') && $this -> request -> is('post')) {
+			$this -> layout = false;
+
+			if (empty($id)) {
+				$this -> _error['error'] = 1;
+				$this -> _error['message'] = "Invalid ID";
+				exit(json_encode($this -> _error));
+			}
+
+			$this -> loadModel('Template');
+			$template = $this -> Template -> find('first', array("conditions" => array("guid" => $id)));
+
+			if (empty($template)) {
+				$this -> _error['error'] = 1;
+				$this -> _error['message'] = "Invalid ID";
+				exit(json_encode($this -> _error));
+			}
+
+			$template = $template['Template'];
+
+			$svg = $_POST['svg'];
+			$json = $_POST['json'];
+			$images = $_POST['image'];
+			
+			$data = $template;
+			
+			$path = "file://" . WWW_ROOT . "uploads";
+			
+			$svg = str_replace ("http://inspireprint.com" . $this->webroot . "uploads", $path, $svg);
+			
+			//$svg = str_replace ("http://inspireprint.com", )
+			$data['content_json'] = serialize($json);
+			$data['content_svg'] = $svg;
+			
+			$images = $this -> _toImage($images, "jpeg", $data['guid'], $data['guid']);
+
+			foreach ($images as $image) {
+				$image = WWW_ROOT . $this -> _media_location['template'] . $image;
+				$ret = $this -> _resizeImage($image, $template['width'], $template['height']);
+			}
+
+			if (!$ret) {
+				exit(json_encode($this -> _error));
+			}
+
+			$thumbnails = array();
+			$featured = array();
+
+			foreach ($images as $image) {
+				$thumbnails[] = str_replace(".jpeg", "_small.png", $image);
+				$featured[] = str_replace(".jpeg", "_medium.png", $image);
+			}
+			
+			$svg = json_decode($svg);
+			$filename = pathinfo ($image, PATHINFO_FILENAME);
+			$filename = preg_replace ("/\_[0-9]{1,}/i", "", $filename);
+			
+			$data['featured'] = serialize($featured);
+			$data['thumbnails'] = serialize($thumbnails);
+			$data['status'] = 'publish';
+			$data['type'] = 'template_from_store';
+			$data['created'] = time ();
+			$data['modified'] = time ();
+
+			$this -> Template -> id = $data['id'];
+			$this -> Template -> save($data);
+			$this -> _error['error'] = 0;
+
+			exit(json_encode($this -> _error));
+		}
+	}
+
+    public function _toImage($images, $extension, $basename) {
         if ($this->request->is('ajax')) {
             $this->layout = false;
 
@@ -169,7 +187,6 @@ class CreatorController extends AdminAppController {
             $maxFileAge = 5 * 3600; // Temp file age in seconds
             @set_time_limit(0);
 
-            $basename = uniqid();
             $result = array();
 
             foreach ($images as $key => $imageData) {
@@ -210,13 +227,6 @@ class CreatorController extends AdminAppController {
         $image->preserve_time = true;
 
         $filename = pathinfo($target, PATHINFO_FILENAME);
-        $image->target_path = WWW_ROOT . $this->_media_location['template'] . $filename . "_medium.png";
-
-        if (!$image->resize($width * 2, $height * 2, ZEBRA_IMAGE_BOXED, -1)) {
-            $this->_error['error'] = 1;
-            $this->_error['message'] = "Resize to $width x2 wrong";
-            return false;
-        }
 
         $image->target_path = WWW_ROOT . $this->_media_location['template'] . $filename . "_small.png";
 
@@ -226,6 +236,15 @@ class CreatorController extends AdminAppController {
         if (!$image->resize($width, $height, ZEBRA_IMAGE_BOXED, -1)) {
             $this->_error['error'] = 1;
             $this->_error['message'] = "Resize to $width wrong";
+            return false;
+        }
+		
+		
+        $image->target_path = WWW_ROOT . $this->_media_location['template'] . $filename . "_medium.png";
+
+        if (!$image->resize($width * 2, $height * 2, ZEBRA_IMAGE_BOXED, -1)) {
+            $this->_error['error'] = 1;
+            $this->_error['message'] = "Resize to $width x2 wrong";
             return false;
         }
 

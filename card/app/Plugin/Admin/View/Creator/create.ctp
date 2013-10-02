@@ -6,7 +6,7 @@
         $width *= 2;
         $height *= 2;
     }
-    
+	  
     $guid = $template['guid'];
     $action_reload = $base . "creator/reload";
     $action_upload = $base . "creator/upload";
@@ -16,7 +16,7 @@
     } 
     
     if ($action == 'new') {
-        $returnUrl = $base . "template/add/?id=" . $guid;
+        $returnUrl = $base . "template/";
     }
     
     if ($action == 'list') {
@@ -132,7 +132,7 @@
             </div>
         </div>
         <input type="hidden" id="current-item" style="display:none;" />
-        <input type="hidden" name="status" style="display:none;" data-action="<?php echo $action; ?>" data-guid="<?php echo $guid; ?>" />
+        <input type="hidden" name="status" id="info-status" style="display:none;" data-action="<?php echo $action; ?>" data-guid="<?php echo $guid; ?>" />
         <div id="box-editing">
             <div class="hm-row">
                 <div class="hm-row" style="width:934px;height:100px;position:absolute;margin:0px;padding:0px;">
@@ -167,8 +167,8 @@
                     </div>
                 </div>
                 <!-- width=@width, height=@height -->
-                <div id="box-canvas-wrapper" style="width:<?php echo $width . "px"; ?>;height:<?php echo $height . "px"; ?>">
-                    <canvas style="-moz-user-select: none; cursor: crosshair;" width="<?php echo $width; ?>" height="<?php echo $height; ?>" id="c1"></canvas>
+                <div id="box-canvas-wrapper" style="width:<?php echo $width . "px"; ?>;height:<?php echo $height . "px"; ?>;padding:20px;border:1px solid red;background-color:white;">
+                    <canvas style="-moz-user-select: none; cursor: crosshair;border:1px solid green;" width="<?php echo $width; ?>" height="<?php echo $height; ?>;" id="c1"></canvas>
                 </div>
                 <div id="box-alert" class="hide" style="">
                     <p class="body" style="color:orange;padding:5px;background-color:white;"></p>
@@ -476,7 +476,7 @@ $js_pluploader = array(
 <script src='<?php echo $this->webroot; ?>js/spectrum/spectrum.js'></script>
 <script src='<?php echo $this->webroot; ?>js/maker/json2.js'></script>
 <script src='<?php echo $this->webroot; ?>js/maker/jquery.cookie.js'></script>
-<script src="<?php echo $this->webroot; ?>js/maker/1211.all.js"></script>
+<script src="<?php echo $this->webroot; ?>js/maker/1299.all.js"></script>
 <script src="<?php echo $this->webroot; ?>js/maker/_190.mememaker.js"></script>
 <script src="<?php echo $this->webroot; ?>js/maker/_190.mememakerinit.js"></script>
 
@@ -557,20 +557,20 @@ jQuery(document).ready(
     
 function maker_init()
 {
-    $.mememakerinit.init('c1', "#FFFFFF");
-    $.mememakerinit.toolsinit(".tools");
-    $.mememakerinit.texteditorinit(".text-editor");
-    $.mememakerinit.imageeditorinit(".image-editor");
-    $.mememakerinit.draweditorinit(".draw-editor");
-    
+    $.mememakerinit.init('c1', "#FFFFFF");    	
+	$.mememakerinit.toolsinit(".tools");
+	$.mememakerinit.texteditorinit(".text-editor");
+	$.mememakerinit.imageeditorinit(".image-editor");
+	$.mememakerinit.draweditorinit(".draw-editor");
+	    
     $.mememakerinit.returnurl = "<?php echo $returnUrl; ?>";
     
-    var val = $("input[name=status]").data('action');
-    var guid = $("input[name=status").data('guid');
+    var val = $("#info-status").data('action');
+    var guid = $("#info-status").data('guid');
     
     if (val === 'edit' || val === 'list') {
         reload (guid);
-    }
+    } 
 }
 
 //===========================================================
@@ -596,6 +596,9 @@ function reload (guid)
         var result = JSON.parse(data);
         localStorage.pages = JSON.stringify(result);
         $.mememaker.tools.loadpage(0, function () {
+            
+            $.mememaker.tools.initReload();
+            
             hideAlert ();
         });
         

@@ -101,7 +101,13 @@ class CreatorController extends AppController {
 			unset ($template['id']);
 			$data = $template;
 			
-			$svg = str_replace ("http://inspireprint.com", )
+			$path = "file://" . WWW_ROOT . "uploads";
+			
+			$svg = str_replace ("http://inspireprint.com" . $this->webroot . "uploads", $path, $svg);
+			//print_r ($svg);
+			//exit;
+			
+			//$svg = str_replace ("http://inspireprint.com", )
 			$data['content_json'] = serialize($json);
 			$data['content_svg'] = $svg;
 			$data['guid'] = uniqid();
