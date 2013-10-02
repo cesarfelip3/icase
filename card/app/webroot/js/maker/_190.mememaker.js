@@ -633,6 +633,38 @@
 					$.mememaker.activey = el.top;
 					$.mememaker.imageeditor.imageselected();
 				}
+				
+				var object = e.target;
+				console.log('object:added');
+				
+				if (object.type === 'rect' && object.fill === "transparent") {
+					return;
+				}
+				
+				if (object.type === 'line' && object.visible === false) {
+					return;
+				}
+				
+				console.log('object:action');
+				console.log(object);
+
+				if ($.mememaker.undo.action === true) {
+					$.mememaker.undo.state = [$.mememaker.undo.state[$.mememaker.undo.index2]];
+					$.mememaker.undo.list = [$.mememaker.undo.list[$.mememaker.undo.index2]];
+
+					$.mememaker.undo.action = false;
+					console.log($.mememaker.undo.state);
+					$.mememaker.undo.index = 1;
+				}
+				object.saveState();
+
+				$.mememaker.undo.state[$.mememaker.undo.index] = JSON.stringify(object.originalState);
+				$.mememaker.undo.list[$.mememaker.undo.index] = object;
+				$.mememaker.undo.index++;
+				$.mememaker.undo.index2 = $.mememaker.undo.index - 1;
+
+				$.mememaker.undo.refresh = true;
+				$.mememaker.undo.callback();
 			});
 
 			canvas.on('object:added', function(e) {
@@ -995,7 +1027,7 @@
 
 			// var scale = $.mememaker.canvasScale;
 			
-			if (this.container.width === this.container.width) {
+			if (this.container.width === canvas.width) {
 				console.log ("no scale");
 				return;
 			}

@@ -33,7 +33,9 @@ class CreatorController extends AppController {
 			}
 
 			$this -> layout = false;
-			$json = unserialize($template['content_json']);
+			if (!empty ($template['content_json'])) {
+				$json = unserialize($template['content_json']);
+			}
 			exit(json_encode($json));
 		}
 

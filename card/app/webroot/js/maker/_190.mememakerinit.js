@@ -393,9 +393,15 @@
                             var width = $("#box-canvas-wrapper").width();
                             width *= 1.2;
                             width = Math.ceil(width);
+                            
+                            var height = $("#box-canvas-wrapper").height();
+                            height *= 1.2;
+                            height = Math.ceil(height);
+                            
                             $.mememakerinit.zoomcount++;
 
                             $("#box-canvas-wrapper").css("width", width + "px");
+                            $("#box-canvas-wrapper").css("height", height + "px");
                             $.mememaker.tools.zoom(width);
 
                             $(this).parent().next().removeClass('disabled');
@@ -413,9 +419,14 @@
                             var width = $("#box-canvas-wrapper").width();
                             width *= 1 / 1.2;
                             width = Math.ceil(width);
+                            
+                            var height = $("#box-canvas-wrapper").height();
+                            height *= 1 / 1.2;
+                            height = Math.ceil(height);
 
-                            if (width <= $.mememaker.width) {
+                            if (width <= $.mememaker.width + 20) {
                                 $("#box-canvas-wrapper").css("width", $.mememaker.width + "px");
+                                $("#box-canvas-wrapper").css("height", $.mememaker.height + "px");
                                 $.mememaker.tools.zoomreset();
                                 $.mememakerinit.zoomcount = 0;
                                 $(this).parent().addClass('disabled');
@@ -425,6 +436,7 @@
 
                             $.mememakerinit.zoomcount--;
                             $("#box-canvas-wrapper").css("width", width + "px");
+                            $("#box-canvas-wrapper").css("height", height + "px");
                             $.mememaker.tools.zoom(width);
                             break;
                         case 'zoomfit':
@@ -435,6 +447,7 @@
                             $.mememakerinit.zoomcount = 0;
 
                             $("#box-canvas-wrapper").css("width", $.mememaker.width + "px");
+                            $("#box-canvas-wrapper").css("height", $.mememaker.height + "px");
                             $.mememaker.tools.zoomreset();
 
                             $(this).parent().addClass('disabled');

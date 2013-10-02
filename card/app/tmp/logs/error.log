@@ -21295,3 +21295,12 @@ Request URL: /icase/card/uploads/template/524990f1b6e07_0_small.png
 Stack Trace:
 #0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #1 {main}
+2013-10-02 21:48:44 Error: [MissingControllerException] Controller class UploadsController could not be found.
+Exception Attributes: array (
+  'class' => 'UploadsController',
+  'plugin' => NULL,
+)
+Request URL: /icase/card/uploads/template/5249acdb0baf5_0_small.png
+Stack Trace:
+#0 /Volumes/DOS/work.current/icase/card/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}

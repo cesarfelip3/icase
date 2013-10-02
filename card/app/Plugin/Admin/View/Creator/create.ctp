@@ -133,7 +133,7 @@
         </div>
         <input type="hidden" id="current-item" style="display:none;" />
         <input type="hidden" name="status" id="info-status" style="display:none;" data-action="<?php echo $action; ?>" data-guid="<?php echo $guid; ?>" />
-        <div id="box-editing">
+        <div id="box-editing" style="height:<?php echo $height + 100; ?>px;">
             <div class="hm-row">
                 <div class="hm-row" style="width:934px;height:100px;position:absolute;margin:0px;padding:0px;">
                     <div class="tools unselectable pull-right" id="box-toolbar-move" style="margin-right:10px;">
@@ -448,7 +448,7 @@ $js_pluploader = array(
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h3 id="myModalLabel">Your Design</h3>
     </div>
-    <div class="modal-body" style="background:#ccc">
+    <div class="modal-body" style="background:#ccc;margin:auto;text-align:center;">
         <div class="ajax-loading-indicator hide" style=""><a href="javascript:" style="font-size:14px;"><i class="icon-refresh icon-spin"></i> Loading ....</a></div>
     </div>
     <div class="modal-footer">

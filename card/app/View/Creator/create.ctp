@@ -109,7 +109,7 @@
         </div>
         <input type="hidden" id="current-item" id="info-current-item" style="display:none;" />
         <input type="hidden" name="status" id="info-status" style="display:none;" data-action="<?php echo $action; ?>" data-guid="<?php echo $guid; ?>" />
-        <div id="box-editing">
+        <div id="box-editing" style="height:<?php echo $height + 100; ?>px;">
             <div class="hm-row">
                 <div class="hm-row" style="width:934px;height:100px;position:absolute;margin:0px;padding:0px;">
                     <div class="tools unselectable pull-right" id="box-toolbar-move" style="margin-right:10px;">
@@ -143,8 +143,8 @@
                     </div>
                 </div>
                 <!-- width=@width, height=@height -->
-                <div id="box-canvas-wrapper" style="width:<?php echo $width . "px"; ?>;height:<?php echo $height . "px"; ?>">
-                    <canvas style="-moz-user-select: none; cursor: crosshair;" width="<?php echo $width; ?>" height="<?php echo $height; ?>" id="c1"></canvas>
+                <div id="box-canvas-wrapper" style="width:<?php echo $width . "px"; ?>;height:<?php echo $height . "px"; ?>;padding:20px;border:1px solid red;background-color:white;">
+                    <canvas style="-moz-user-select: none; cursor: crosshair;border:1px solid green;" width="<?php echo $width; ?>" height="<?php echo $height; ?>" id="c1"></canvas>
                 </div>
                 <div id="box-alert" class="hide" style="">
                     <p class="body" style="color:orange;padding:5px;background-color:white;"></p>
@@ -424,7 +424,7 @@ $js_pluploader = array(
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h3 id="myModalLabel">Your Design</h3>
     </div>
-    <div class="modal-body" style="background:#ccc">
+    <div class="modal-body" style="background:#ccc;text-align:center;margin:auto;">
         <div class="ajax-loading-indicator hide" style=""><a href="javascript:" style="font-size:14px;"><i class="icon-refresh icon-spin"></i> Loading ....</a></div>
     </div>
     <div class="modal-footer">
