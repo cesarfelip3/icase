@@ -20,3 +20,5 @@ jquery.mememakerinit.js
 /card/app/tmp/cache/models/
 /card/app/tmp/cache/views
 /card/app/tmp/logs/*
+/card/app/webroot/uploads/
+/card/app/webroot/uploads/*
