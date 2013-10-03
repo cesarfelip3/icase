@@ -142,22 +142,25 @@ class CreatorController extends AppController {
 			
 			if (!empty ($svg)) {
 				foreach ($svg as $key => $value) {
-					file_put_contents (WWW_ROOT . $this->_media_location['template'] . $filename . "_$key.svg", $value);	
+					file_put_contents (WWW_ROOT . $this->_media_location['template'] . $filename . "_$key.svg", $value);
+					
+				}
+				
+				$count = count ($svg);
+				$svg = null;
+				$key = 0;
+				$value = null;
+				
+				for ($key = 0; $key < $count; $key++) {
+					if (file_exists(WWW_ROOT . $this->_media_location['template'] . $filename . "_$key.svg")) {
+						$this->_toPDF(WWW_ROOT . $this->_media_location['template'] . $filename . "_$key.svg", $template['width'], $template['height']);
+						$data['output'][] = $filename . "_$key.pdf";	
+					}
 				}
 			}
 			
-			try {
-				foreach ($svg as $key => $value) {
-					$this->_toPDF(WWW_ROOT . $this->_media_location['template'] . $filename . "_$key.svg", $template['width'], $template['height']);
-					$data['output'][] = $filename . "_$key.pdf";
-				}
-			}
-			
-			catch (Exception $e) {
-				$this->_error['error'] = 1;
-				$this->_error['message'] = $e.getMessage();
-				exit($this->_error);
-			}
+			// generate PDF, will be very slow here, even in a good server
+			// don't know why
 			
 			if (!empty ($data['output'])) {
 				$data['output'] = serialize($data['output']);
@@ -308,6 +311,7 @@ class CreatorController extends AppController {
 		
 		// set default monospaced font
 		$pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+		$pdf-> setFontSubsetting(false);
 		
 		// set margins
 		//$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
@@ -360,9 +364,6 @@ class CreatorController extends AppController {
 		//$pdf->setRasterizeVectorImages(true);
 		
 		$pdf->ImageSVG($target, $x=0, $y=0, $w="$width", $h="$height", $link='', $align='', $palign='', $border=0, $fitonpage=true);
-		
-		$pdf->SetFont('helvetica', '', 8);
-		$pdf->SetY(195);
 		
 		//Close and output PDF document
 		$file = str_replace (".svg", ".pdf", $target);
