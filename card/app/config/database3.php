@@ -94,13 +94,13 @@ class DATABASE_CONFIG {
     );
 */
     public $default = array (
-	'datasource' => Database/Mysql',
-	'persistent' => false,
-	'host' => 'localhost',
-	'login' => 'shirtsge_card',
-	'password' => 'r6!1Cl6v7,Xa',
-	'database' => 'shirtsge_card',
-	'prefix' => 'pwd_',
+		'datasource' => 'Database/Mysql',
+		'persistent' => false,
+		'host' => 'localhost',
+		'login' => 'shirtsge_card',
+		'password' => 'r6!1Cl6v7,Xa',
+		'database' => 'shirtsge_card',
+		'prefix' => 'pwd_',
     );
 
 }

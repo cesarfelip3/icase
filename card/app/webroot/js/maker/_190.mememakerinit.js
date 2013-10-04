@@ -457,19 +457,25 @@
                             if ($(this).parent().hasClass('disabled')) {
                                 return;
                             }
+                            
+                            var id = this;
                             $.mememaker.tools.savepage(1);
-                            $.mememaker.tools.loadpage(0);
-                            $(this).parent().next().removeClass('disabled');
-                            $(this).parent().addClass('disabled');
+                            $.mememaker.tools.loadpage(0, function () {
+                            		$(id).parent().next().removeClass('disabled');
+                           	 	$(id).parent().addClass('disabled');
+                            });
                             break;
                         case 'pageback' :
                             if ($(this).parent().hasClass('disabled')) {
                                 return;
                             }
+                            
+                            var id = this;
                             $.mememaker.tools.savepage(0);
-                            $.mememaker.tools.loadpage(1);
-                            $(this).parent().prev().removeClass('disabled');
-                            $(this).parent().addClass('disabled');
+                            $.mememaker.tools.loadpage(1, function () {
+                            		$(id).parent().prev().removeClass('disabled');
+                           	 	$(id).parent().addClass('disabled');
+                            });
                             break;
                         default:
                             break;

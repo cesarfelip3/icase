@@ -14,7 +14,6 @@
 		};
 
 		var Tools = function() {
-
 		};
 
 		var TextEditor = function() {
@@ -232,7 +231,7 @@
 		};
 
 		Mememaker.prototype.update = function() {
-			var pos = this.position(document.getElementById(this.wrapperId));
+			var pos = this.position(document.getElementById(this.canvasId));
 			this.left = pos.left;
 			this.top = pos.top;
 			this.offset = this.originy - this.top;
@@ -294,6 +293,7 @@
             		if (objects[i].type == 'line' && objects[i].visible === false) {
             			$.mememaker.grid.lines[k] = objects[i];
             			objects[i].selectable = false;
+            			objects[i].setCoords();
             			k++;
             		}
             }
@@ -1007,7 +1007,7 @@
 				var tempLeft = left * scale;
 				var tempTop = top * scale;
 
-				if (objects[i].type == 'line' && objects[i].selectable === false && objects[i].get('opacity') === 0.5) {
+				if (objects[i].type == 'line' && objects[i].get('opacity') === 0.5) {
 					continue;
 				}
 
@@ -1128,6 +1128,9 @@
 
 				for (var i in objects) {
 					if (objects[i].type === 'line' && objects[i].get('opacity') === 0.5) {
+						objects[i].selectable = false;
+						objects[i].setCoords();
+						console.log (objects[i]);
 						$.mememaker.grid.lines[j] = objects[i];
 						j++;
 						continue;
@@ -1236,6 +1239,8 @@
 			if (el.text === "") {
 				canvas.remove(el);
 			}
+			
+			el.setCoords();
 			canvas.renderAll();
 		};
 
@@ -1282,6 +1287,7 @@
 				}
 			}
 
+			el.setCoords();
 			canvas.renderAll();
 		};
 
@@ -1304,7 +1310,9 @@
 			}
 
 			el.fontSize = size;
-			canvas.renderAll();
+			el.setCoords();
+
+			canvas.renderAll();			
 			return;
 		};
 

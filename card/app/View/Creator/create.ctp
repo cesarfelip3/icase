@@ -143,7 +143,7 @@
                     </div>
                 </div>
                 <!-- width=@width, height=@height -->
-                <div id="box-canvas-wrapper" style="width:<?php echo $width . "px"; ?>;height:<?php echo $height . "px"; ?>;padding:20px;border:1px solid red;background-color:white;">
+                <div id="box-canvas-wrapper" style="width:<?php echo $width . "px"; ?>;height:<?php echo $height . "px"; ?>;border:1px solid red;background-color:white;padding:20px;">
                     <canvas style="-moz-user-select: none; cursor: crosshair;border:1px solid green;" width="<?php echo $width; ?>" height="<?php echo $height; ?>" id="c1"></canvas>
                 </div>
                 <div id="box-alert" class="hide" style="">
